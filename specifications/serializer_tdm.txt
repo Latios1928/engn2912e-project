@@ -1,0 +1,16 @@
+verilog module
+
+config parameters N, K where K divides N
+
+this module should read N input wires and CLK
+it has K output pins
+
+maintain counter up to T = N/K with sync reset
+
+every T cycles, load parallel from the N inputs to K shift registers (each T bits)
+
+the following cycles, shift out along the K output pins
+
+essentially, the goal is to read N inputs through K output pins through timeshare
+
+should be a .v file in digital folder. think of a fitting name. (can use sv if it would make things cleaner)
