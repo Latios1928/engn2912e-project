@@ -1,0 +1,69 @@
+{
+  "extensionVersion": "1.5.4",
+  "fileName": "/foss/designs/engn2912e-project/analog/mock/tb_pulse_gen.vcd",
+  "markerTime": null,
+  "altMarkerTime": null,
+  "displayTimeUnit": "s",
+  "selectedSignal": {
+    "name": "tb_pulse_gen.dut.pulse",
+    "msb": -1,
+    "lsb": -1
+  },
+  "zoomRatio": 3.0031847133757963,
+  "scrollLeft": 0,
+  "defaultPixelTime": 100,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 9,
+      "name": "tb_pulse_gen.dut.clk_analog",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "clk_analog",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 12,
+      "name": "tb_pulse_gen.dut.rst",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "rst",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 10,
+      "name": "tb_pulse_gen.dut.en",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "en",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 11,
+      "name": "tb_pulse_gen.dut.pulse",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "pulse",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    }
+  ]
+}

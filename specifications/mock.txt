@@ -1,0 +1,101 @@
+I want Verilog modules that simulate a 3-5-1 SNN. The digital (top and sram) might end up sticking around, but the rest are just to mimic what will eventually be analog functionality.
+
+Put digital in the digital folder, analog in the analog folder
+
+I have provided a rough sketch of pins below, with some details on functionality. The pin configurations aren't fixed. We can vary them as necessary.
+
+Let me know if you have any questions.
+
+TOP
+
+input:
+clk
+clk_analog
+data[3]
+addr[4]
+wren
+in[3]
+
+output:
+out[9]
+
+SRAM
+
+input:
+clk
+data[3]
+addr[4]
+wren
+
+output:
+weights[3][9]
+
+(verilog modules to mimic analog functionality)
+
+COMPARATOR
+
+parameters:
+DURATION
+THRESHOLD
+
+inputs:
+clk_analog
+voltage[16]
+
+output:
+active
+
+while voltage > threshold, countdown <= duration; otherwise, countdown counts down
+
+active = countdown > 0
+
+DAC
+
+parameter:
+GAIN
+
+input:
+active
+weight[3]
+
+output:
+current[16]
+
+current = active ? weight * GAIN : 0
+
+NEURON
+
+parameters:
+INDEGREE
+DURATION
+THRESHOLD
+
+inputs:
+clk_analog
+currents[16][INDEGREE]
+
+output:
+active
+
+keeps track of voltage
+every clock cycle, increases voltage by sum of currents
+or if active, sets voltage to 0
+
+houses a comparator, forwards active
+
+SNN
+parameters:
+DURATION
+THRESHOLD
+GAIN
+
+inputs:
+clk_analog
+weights[3][9]
+in[3]
+
+output:
+out[9]
+
+creates a 3-5-1 network of neurons with DACs between
+adjacent layers are fully connected

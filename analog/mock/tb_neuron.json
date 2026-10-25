@@ -1,0 +1,118 @@
+{
+  "extensionVersion": "1.5.4",
+  "fileName": "/foss/designs/engn2912e-project/analog/mock/tb_neuron.vcd",
+  "markerTime": null,
+  "altMarkerTime": null,
+  "displayTimeUnit": "s",
+  "selectedSignal": {
+    "name": "tb_neuron.dut.voltage",
+    "msb": 15,
+    "lsb": 0
+  },
+  "zoomRatio": 3,
+  "scrollLeft": 0,
+  "defaultPixelTime": 1000,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 23,
+      "name": "tb_neuron.dut.clk_analog",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "clk_analog",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 25,
+      "name": "tb_neuron.dut.rst",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "rst",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "signal-group",
+      "groupName": "tb_neuron.dut.currents[31:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "tb_neuron.dut.currents",
+              "netlistId": 24,
+              "signalId": 23,
+              "signalWidth": 32,
+              "msb": 31,
+              "lsb": 16
+            }
+          ],
+          "numberFormat": "decimal",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "tb_neuron.dut.currents[31:16]",
+          "renderType": "multiBit",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "tb_neuron.dut.currents",
+              "netlistId": 24,
+              "signalId": 23,
+              "signalWidth": 32,
+              "msb": 15,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "decimal",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "tb_neuron.dut.currents[15:0]",
+          "renderType": "multiBit",
+          "valueLinkEnable": false
+        }
+      ]
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 26,
+      "name": "tb_neuron.dut.active",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "active",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 32,
+      "name": "tb_neuron.dut.voltage",
+      "numberFormat": "decimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "voltage",
+      "renderType": "multiBit",
+      "valueLinkEnable": false
+    }
+  ]
+}
