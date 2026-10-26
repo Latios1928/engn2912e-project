@@ -29,7 +29,7 @@ C {lab_wire.sym} -600 -130 0 0 {name=p7 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -660 -130 0 0 {name=p8 sig_type=std_logic lab=VDD}
 C {gnd.sym} -600 0 0 0 {name=l1 lab=0}
 C {lab_wire.sym} -660 0 0 0 {name=p10 sig_type=std_logic lab=VSS}
-C {isource.sym} -470 -70 0 0 {name=Iin value="pulse(0 \{ipk\} 0 \{trise\} \{tfall\} \{pulse_width\} \{per\})" spice_ignore=false}
+C {isource.sym} -470 -70 0 0 {name=Iin value="pulse(0 \{ipk\} \{delay\} \{trise\} \{tfall\} \{pulse_width\} \{per\})" spice_ignore=false}
 C {lab_wire.sym} -470 0 0 0 {name=p18 sig_type=std_logic lab=preIN}
 C {lab_wire.sym} -470 -130 0 0 {name=p19 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 230 -70 0 0 {name=p1 sig_type=std_logic lab=VDD}
@@ -51,7 +51,7 @@ value="
 C {code_shown.sym} -1310 60 0 0 {name=TRAN_SIM only_toplevel=false 
 
 value="
-.param vdd=3.3 reset_bias=0.2 ipk=1n trise=1u tfall=1u pulse_width=50u per=1m
+.param vdd=3.3 reset_bias=0.2 ipk=20n delay=100u trise=1u tfall=1u pulse_width=50u per=1m
 .control
 	save all 
 	tran 1u 10m 

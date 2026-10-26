@@ -26,9 +26,10 @@ N 230 130 230 180 {lab=#net1}
 N -0 190 140 190 {lab=#net1}
 N 140 150 140 190 {lab=#net1}
 N 140 150 230 150 {lab=#net1}
+N 40 250 40 280 {lab=VSS}
 C {symbols/nfet_03v3.sym} 0 170 3 0 {name=M1
 L=0.28u
-W=0.22u
+W=2u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -96,3 +97,9 @@ C {lab_wire.sym} 230 50 0 0 {name=p1 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 200 100 0 0 {name=p20 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 200 210 0 0 {name=p21 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} 230 260 0 0 {name=p22 sig_type=std_logic lab=VSS}
+C {capa.sym} 40 220 0 0 {name=C2
+m=1
+value=100f
+footprint=1206
+device="ceramic capacitor"}
+C {lab_wire.sym} 40 280 0 0 {name=p23 sig_type=std_logic lab=VSS}
