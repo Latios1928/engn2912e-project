@@ -1,3 +1,5 @@
 .DS_Store
 *.vvp
 *.vcd
+librelane/*/runs/
+librelane/*/run.log

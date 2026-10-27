@@ -1,0 +1,20 @@
+{
+    "meta": {
+        "version": 2
+    },
+    "DESIGN_NAME": "snn_top",
+    "VERILOG_FILES": [
+        "dir::../../snn_top.v",
+        "dir::../../digital/rf.v",
+        "dir::../../analog/mock/snn.v",
+        "dir::../../analog/mock/neuron.v",
+        "dir::../../analog/mock/comparator.v",
+        "dir::../../analog/mock/dac.v",
+        "dir::../../analog/mock/pulse_gen.v"
+    ],
+    "CLOCK_PORT": ["clk", "clk_analog"],
+    "CLOCK_PERIOD": 20,
+    "FP_SIZING": "relative",
+    "FP_CORE_UTIL": 40,
+    "PL_TARGET_DENSITY_PCT": 50
+}
