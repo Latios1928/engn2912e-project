@@ -5,7 +5,12 @@ analog integrate-and-fire neuron in this folder. Newest run entries are at the
 bottom of the **Run log**; the **Current status** section is always kept in
 sync with the latest results.
 
-Last updated: 2026-10-26
+Last updated: 2026-11-03
+
+> **Note (2026-11-03):** the sections below up to the run log describe the
+> earlier Schmitt-trigger neuron (`neuron_old.sch`). The current `neuron.sch`
+> is the Indiveri et al. 2011 Fig. 4 neuron; its 5 kHz copy is logged in the
+> last run-log entry.
 
 ---
 
@@ -35,6 +40,7 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 | `neuron_testbench.sch` | Pulsed current input → MEM; writes `neuron_tb.raw` / `neuron_tb.txt` |
 | `schmitt_trigger_comparator_testbench.sch` | Triangle-wave input on the comparator alone; measures VTH+ / VTH−; writes `comparator_tb.txt` |
 | `neuron_tb.txt`, `comparator_tb.txt` | `wrdata` output: column pairs of (time, value) |
+| `neuron_5khz.sch` / `.sym`, `neuron_5khz_testbench.sch` | Fig. 4 neuron copy sized for 5 kHz at 5 nA DC input (2026-11-03) |
 
 ---
 
@@ -127,3 +133,11 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 ### 2026-10-26: ipk = 20 nA, delay = 100 µs, M1 W = 2 µm, C2 = 100 fF
 - Fires on the 2nd input pulse and again roughly every 1–2 pulses after that (8 fires in 10 ms).
 - Fires at ≈ 1.955 V. MEM resets to ≈ 0.74–1.01 V in ≈ 7 ns, still well above the 0.2 V target.
+
+### 2026-11-03: `neuron_5khz` (Fig. 4 neuron sized for 5 kHz), run by the AI
+- Files: `neuron_5khz.sch` / `.sym`, `neuron_5khz_testbench.sch`. Same topology as `neuron.sch`; sizes and biases in `../Analog_AI_Documentation.md` entry 28.
+- Stimulus: Iin = 5 nA DC, VDD = 3.3 V, typical corner, 27 °C; `tran 20n 2.4m 0 20n uic` with `.ic v(VMEM)=0 v(spike)=0`.
+- **f = 4.999 kHz** (8 periods, from the xschem-generated netlist). Spike 0 → 3.30 V, ≈ 6.4 µs wide at 1.65 V. VMEM peaks ≈ 1.66 V and resets to < 1 mV. Average power ≈ 0.21 µW.
+- f vs Iin: 2 nA 1.75 kHz · 3 nA 2.86 kHz · 5 nA 5.00 kHz · 7.5 nA 7.54 kHz · 10 nA 9.95 kHz · 20 nA 18.4 kHz.
+- Corners (Iin = 5 nA): tt 0 °C 4.92 kHz; ss 0/27/85 °C 1.79/2.96/4.35 kHz; ff 0 °C 3.27 kHz; tt 85 °C and ff 27/85 °C do not fire (leak > input).
+- The testbench now loads `sm141064.ngspice mimcap_typical`. Without it the MIM caps are unknown subcircuits; the original `neuron_testbench.sch` still lacks this line and the bias `.param`s.
