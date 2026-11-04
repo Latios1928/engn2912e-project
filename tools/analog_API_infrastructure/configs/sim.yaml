@@ -1,0 +1,40 @@
+# Simulation setup for loop.py. Paths are relative to the repo root.
+# The loop netlists the testbench once with xschem, removes its .control block,
+# and runs the analysis below in ngspice batch mode.
+testbench: analog/neuron/neuron_5khz_testbench.sch
+# base_netlist: path/to/netlist.spice   # use instead of testbench to skip xschem
+
+timeout_s: 120        # per simulation
+layout_factor: 1.0    # a_active = sum(W*L of transistors) * layout_factor
+
+# Written to params.spice for every point. A tuned parameter (params.yaml)
+# with the same name overrides the value here.
+fixed:
+  vdd: 3.3
+  iin: 5e-9           # DC input current for f_spike
+  Vlk: 0.420
+  Vamp_bias: 0.535
+  VIp: 0.573
+  VNA: 2.0
+  VKup: 2.277
+  VK: 1.1
+  VKdn: 0.573
+  VT: 1.0
+
+# Dot commands only (no .control), so ngspice -b prints "name = value".
+# The first spikes are skipped: the first period starts from the initial condition.
+analysis: |
+  .tran 20n 2.4m 0 20n uic
+  .meas tran t3  when v(spike)=1.65 rise=3
+  .meas tran t11 when v(spike)=1.65 rise=11
+  .meas tran f_spike param='8/(t11-t3)'
+  .meas tran t_spike trig v(spike) val=1.65 rise=3 targ v(spike) val=1.65 fall=3
+  .meas tran i_avg avg i(V1) from=0.4m to=2.4m
+  .meas tran p_avg param='-i_avg*vdd'
+
+# .meas names to read from the log (spec metrics are added automatically).
+measures: [f_spike, t_spike, p_avg]
+
+# Python expressions over parameter values; a candidate failing one is
+# rejected before simulation. Example: "VKdn < VKup"
+constraints: []
