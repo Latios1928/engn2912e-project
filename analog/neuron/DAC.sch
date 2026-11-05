@@ -27,10 +27,10 @@ N 410 20 410 60 {lab=Vb}
 N 270 -60 270 -10 {lab=#net2}
 N 450 -60 450 -10 {lab=#net3}
 N 100 -60 100 -10 {lab=#net4}
-N 20 -90 60 -90 {lab=w0}
-N 190 -90 230 -90 {lab=w1}
-N 370 -90 410 -90 {lab=w2}
-N 530 -90 580 -90 {lab=w3}
+N 20 -90 60 -90 {lab=w[0]}
+N 190 -90 230 -90 {lab=w[1]}
+N 370 -90 410 -90 {lab=w[2]}
+N 530 -90 580 -90 {lab=w[3]}
 N 100 -90 120 -90 {lab=#net4}
 N 120 -90 120 -50 {lab=#net4}
 N 100 -50 120 -50 {lab=#net4}
@@ -71,8 +71,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 80 20 0 0 {name=M2
-L=0.28u
-W=0.22u
+L=8u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -88,7 +88,7 @@ C {symbols/nfet_03v3.sym} 250 -90 0 0 {name=M3
 L=0.28u
 W=0.22u
 nf=1
-m=1
+m=2
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
 as="'int((nf+2)/2) * W/nf * 0.18u'"
@@ -99,10 +99,10 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 250 20 0 0 {name=M4
-L=0.28u
-W=0.22u
+L=8u
+W=1u
 nf=1
-m=1
+m=2
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
 as="'int((nf+2)/2) * W/nf * 0.18u'"
@@ -116,7 +116,7 @@ C {symbols/nfet_03v3.sym} 430 -90 0 0 {name=M5
 L=0.28u
 W=0.22u
 nf=1
-m=1
+m=3
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
 as="'int((nf+2)/2) * W/nf * 0.18u'"
@@ -127,10 +127,10 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 430 20 0 0 {name=M6
-L=0.28u
-W=0.22u
+L=8u
+W=1u
 nf=1
-m=1
+m=3
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
 as="'int((nf+2)/2) * W/nf * 0.18u'"
@@ -144,7 +144,7 @@ C {symbols/nfet_03v3.sym} 600 -90 0 0 {name=M7
 L=0.28u
 W=0.22u
 nf=1
-m=1
+m=4
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
 as="'int((nf+2)/2) * W/nf * 0.18u'"
@@ -155,10 +155,10 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 600 20 0 0 {name=M8
-L=0.28u
-W=0.22u
+L=8u
+W=1u
 nf=1
-m=1
+m=4
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
 as="'int((nf+2)/2) * W/nf * 0.18u'"
@@ -169,14 +169,14 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {iopin.sym} -162.5 -117.5 0 0 {name=p1 lab=Vb}
-C {ipin.sym} -122.5 -17.5 0 0 {name=p3 lab=w0}
-C {ipin.sym} -122.5 22.5 0 0 {name=p4 lab=w1}
-C {ipin.sym} -122.5 62.5 0 0 {name=p5 lab=w2}
-C {ipin.sym} -122.5 102.5 0 0 {name=p6 lab=w3}
-C {lab_wire.sym} 30 -90 0 0 {name=p7 sig_type=std_logic lab=w0}
-C {lab_wire.sym} 200 -90 0 0 {name=p8 sig_type=std_logic lab=w1}
-C {lab_wire.sym} 380 -90 0 0 {name=p9 sig_type=std_logic lab=w2}
-C {lab_wire.sym} 540 -90 0 0 {name=p10 sig_type=std_logic lab=w3}
+C {ipin.sym} -122.5 -17.5 0 0 {name=p3 lab=w[3:0]}
+C {lab_wire.sym} 30 -90 0 0 {name=p7 sig_type=std_logic lab=w[0]}
+C {lab_wire.sym} 200 -90 0 0 {name=p8 sig_type=std_logic lab=w[1]}
+C {lab_wire.sym} 380 -90 0 0 {name=p9 sig_type=std_logic lab=w[2]}
+C {lab_wire.sym} 540 -90 0 0 {name=p10 sig_type=std_logic lab=w[3]}
 C {gnd.sym} 360 130 0 0 {name=l1 lab=GND}
+T {Branch weights 1:2:3:4 for w[0]..w[3] (m = 1..4 unit cells).
+Unit: switch 0.22u/0.28u, current source 1u/8u. Vb comes from a diode-connected
+1u/8u device fed by the reference current (see DACs-DPI.sch).} -160 170 0 0 0.3 0.3 {}
 C {lab_wire.sym} 7.5 60 0 0 {name=p11 sig_type=std_logic lab=Vb}
 C {ipin.sym} 357.5 -172.5 0 0 {name=p2 lab=Isum}

@@ -66,6 +66,7 @@ value="
 	wrdata /foss/designs/engn2912e-project/analog/neuron/neuron_tb.txt v(mem) v(vout) i(vmem)
 
 	plot v(mem) v(vout) title 'Membrane and spike' ylabel 'V'
+	plot v(VP) v(VN)
 	plot i(VMEM)
 .endc
 "}

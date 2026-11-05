@@ -1,0 +1,4 @@
+case,ok,dv_mem,exp_ratio,gain,gain_op,i_leak,i_ss,iavg2,ipk1,isyn_op,ivdd_on,ivdd_op,lin_rate,mvdec_vdd,mvdec_vtau,mvdec_vthr,pk_ratio,q1,residual,ripple,settle_err,slope_iw,t_rise,tau_epsc,tau_fall,tau_rise,vsum_min,vsum_op,vsyn_op
+nominal_dc,True,,,,1.39931,3.32178e-12,,,,6.99655e-09,,1.19965e-08,,105.468,110.107,106.596,,,,,,0.883476,,,,,,2.50088,2.77527
+nominal_step,True,,0.989436,1.39929,,,6.99646e-09,,,,1.19965e-08,,,,,,,,0.00047478,,2.57273e-06,,0.000734922,,0.00042692,0.000403178,2.49993,,
+nominal_spike,True,0.225735,,,,,,8.38174e-10,4.55192e-10,,,,4.30043,,,,4.34008,1.94132e-13,,2.08604,,,,0.000411762,,,,,

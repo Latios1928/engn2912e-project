@@ -76,7 +76,7 @@ value="
 "}
 C {ammeter.sym} -470 30 0 0 {name=VMEM savecurrent=true spice_ignore=0}
 C {lab_wire.sym} -470 90 0 0 {name=p9 sig_type=std_logic lab=VMEM}
-C {analog/neuron/neuron_5khz.sym} 140 -40 0 0 {name=x1}
+C {neuron_5khz.sym} 140 -40 0 0 {name=x1}
 C {lab_wire.sym} 370 -120 0 0 {name=p1 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} 370 -100 0 0 {name=p2 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 370 -80 0 0 {name=p3 sig_type=std_logic lab=spike}
