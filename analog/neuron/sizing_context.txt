@@ -1,0 +1,16 @@
+
+period:      [190e-6, 210e-6]   # s, at the stimulus below
+t_spike:     [9e-6, 11e-6]      # s, v(spike) above 1.65 V, spikes 3+
+t_refr:      [12e-6, 15e-6]     # s
+v_spike_max: [2.97, null]       # V, ≥ 0.9·VDD
+v_reset:     [null, 0.05]       # V
+p_avg:       [null, 1e-6]       # W
+a_cap:       [null, 700e-12]    # m²
+conditions: {vdd: 3.3, corner: tt, temp: 27, iin_dc: 9.5e-9}
+fixed:      {C2: 1e-12, VT: 1.66}
+W_C1: {lo: 5e-6,  hi: 12e-6, step: 0.1e-6}
+VKdn: {lo: 0.45,  hi: 0.65,  step: 0.002}
+VKup: {lo: 1.8,   hi: 2.6,   step: 0.01}
+VK:   {lo: 0.9,   hi: 1.4,   step: 0.01}
+VNA:  {lo: 1.6,   hi: 2.4,   step: 0.01}
+Vlk:  {lo: 0.30,  hi: 0.45,  step: 0.005}

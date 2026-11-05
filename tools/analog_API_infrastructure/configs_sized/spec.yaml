@@ -1,0 +1,9 @@
+# From analog/neuron/sizing_context.txt. [min, max] in SI units; null = unbounded.
+period:      [190e-6, 210e-6]   # s, mean of spikes 3-7, at iin below
+t_spike:     [9e-6, 11e-6]      # s, v(spike) above 1.65 V, spike 3
+t_refr:      [12e-6, 15e-6]     # s, end of reset (VMEM falls below 10% VDD = 0.33 V) -> VMEM rises 10 mV above v_reset (README def.)
+v_spike_max: [2.97, null]       # V, >= 0.9 VDD
+v_reset:     [null, 0.05]       # V, min VMEM between spikes 3 and 4
+p_avg:       [null, 1e-6]       # W, includes the 31 nW input current
+a_cap:       [null, 700e-12]    # m^2, C1 + C2 (C2 alone = 492 um^2)
+conditions: {vdd: 3.3, corner: tt, temp: 27, iin_dc: 9.5e-9}

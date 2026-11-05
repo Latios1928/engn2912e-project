@@ -5,9 +5,42 @@ to propose device sizes, bias voltages and testbench settings for the analog
 integrate-and-fire neuron (`analog/neuron/`, based on Fig. 4 of Indiveri et
 al. 2011), then checks each proposal against a target spec by running ngspice.
 
-> **Status:** design document / build guide. Only `advisor.py` exists so far
-> (an early draft; see [Fixing `advisor.py`](#fixing-advisorpy)). The rest is
-> to be written by hand, following the milestones below.
+> **Status:** the loop runs end to end with the random proposer (milestones
+> 1–5, plus the milestone 8 comparison script). `advisor.py` is complete and
+> tested against stubbed API replies; no real OpenRouter call has been made yet
+> (milestone 6). The user's original draft is kept as `advisor_draft.py`.
+> See [Quick start](#quick-start).
+
+## Quick start
+
+Run inside the iic-osic-tools container, from this folder:
+
+```bash
+python3 loop.py --proposer random --budget 20      # baseline, no API needed
+python3 loop.py --proposer llm --model <slug> --budget 20
+python3 compare.py                                 # table of all runs in runs/
+```
+
+| File | Role |
+|---|---|
+| `configs/params.yaml` | tunable parameters: `lo`, `hi`, `step`, `init`, and `devices` (netlist fields the parameter sets, `subckt/INSTANCE:field`) |
+| `configs/spec.yaml` | targets, `[min, max]`, `null` = unbounded |
+| `configs/sim.yaml` | testbench `.sch`, fixed `.param` values, analysis/`.meas` block, timeout, constraints |
+| `params.py` | loads the three YAML files (`Param`, `Spec`) |
+| `netlist.py` | netlists the testbench with xschem once, builds `template.spice` (drops `.control`, overridden `.param`s; device fields → `{PARAM}`), writes `params.spice` |
+| `runner.py` | `ngspice -b` in a per-point folder with a timeout (`num_threads=1`) |
+| `metrics.py` | `parse_meas`, `area`, `meets_spec`, `score` |
+| `advisor.py` | OpenRouter client: prompt, `json_schema` structured output (plain-JSON fallback), retries with backoff on 429/5xx, clamp/snap, de-duplication; logs every prompt/reply/token count to the run's `advisor_log.jsonl` |
+| `advisor_draft.py` | the user's original draft, kept unchanged for reference; not imported |
+| `loop.py` | propose → validate → simulate (parallel) → log; random proposer built in, LLM proposer calls `advisor.suggest()` |
+| `compare.py` | sims to first pass and best score per run |
+
+The schematic doesn't need editing: device sizes are replaced in the netlist
+template, so step 3 below is optional. The `init` point (the hand-sized 5 kHz
+design) is simulated first in every run as a reference, even if it is over the
+area budget. For `--proposer llm`, set `OPENROUTER_API_KEY` (and optionally
+`ADVISOR_MODEL`) in the container shell; `advisor.py` uses only the Python
+standard library, so nothing needs installing.
 
 ---
 
@@ -227,7 +260,7 @@ Without this baseline you can't show that the LLM helps.
 
 ---
 
-## 8. Fixing `advisor.py`
+## 8. Fixing `advisor.py` (historical: applies to `advisor_draft.py`)
 
 These bugs in the current draft stop it from importing or working:
 
@@ -271,5 +304,7 @@ Build in this order. Each step has a check that tells you it works.
   `tran` as short as possible (e.g. 3–4 periods) and set a sensible maximum
   step.
 - **AI-usage record:** this README was drafted with AI assistance; see
-  `analog/Analog_AI_Documentation.md`. Code in this folder is written by the
-  project team.
+  `analog/Analog_AI_Documentation.md`. `params.py`, `netlist.py`, `runner.py`,
+  `metrics.py`, `loop.py`, `compare.py`, `configs/` and `advisor.py` were
+  written by the AI at the user's request (2026-11-04). `advisor_draft.py` is
+  the user's own draft, renamed but not edited.

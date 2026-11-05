@@ -5,7 +5,7 @@ analog integrate-and-fire neuron in this folder. Newest run entries are at the
 bottom of the **Run log**; the **Current status** section is always kept in
 sync with the latest results.
 
-Last updated: 2026-11-03
+Last updated: 2026-11-05
 
 > **Note (2026-11-03):** the sections below up to the run log describe the
 > earlier Schmitt-trigger neuron (`neuron_old.sch`). The current `neuron.sch`
@@ -41,6 +41,7 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 | `schmitt_trigger_comparator_testbench.sch` | Triangle-wave input on the comparator alone; measures VTH+ / VTH−; writes `comparator_tb.txt` |
 | `neuron_tb.txt`, `comparator_tb.txt` | `wrdata` output: column pairs of (time, value) |
 | `neuron_5khz.sch` / `.sym`, `neuron_5khz_testbench.sch` | Fig. 4 neuron copy sized for 5 kHz at 5 nA DC input (2026-11-03) |
+| `neuron_sized.sch` / `.sym`, `neuron_sized_testbench.sch` | Fig. 4 neuron copy sized by sweep to `sizing_context.txt` at 9.5 nA DC (2026-11-05) |
 
 ---
 
@@ -141,3 +142,24 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 - f vs Iin: 2 nA 1.75 kHz · 3 nA 2.86 kHz · 5 nA 5.00 kHz · 7.5 nA 7.54 kHz · 10 nA 9.95 kHz · 20 nA 18.4 kHz.
 - Corners (Iin = 5 nA): tt 0 °C 4.92 kHz; ss 0/27/85 °C 1.79/2.96/4.35 kHz; ff 0 °C 3.27 kHz; tt 85 °C and ff 27/85 °C do not fire (leak > input).
 - The testbench now loads `sm141064.ngspice mimcap_typical`. Without it the MIM caps are unknown subcircuits; the original `neuron_testbench.sch` still lacks this line and the bias `.param`s.
+
+### 2026-11-05: `neuron_sized` (sweep to `sizing_context.txt`), run by the AI
+- Files: `neuron_sized.sch` / `.sym`, `neuron_sized_testbench.sch`. Configs: `tools/analog_API_infrastructure/configs_sized/`. Details: `../Analog_AI_Documentation.md` entry 42.
+- Changes vs `neuron_5khz`:
+  - C2 is 22.18 × 22.18 µm (1.00 pF) and C1 is 10 × 10 µm (≈ 0.21 pF).
+  - Biases: Vlk 0.425, VNA 1.93, VKup 2.35, VK 1.22, VKdn 0.588, VT 1.66 V (Vamp_bias 0.535 and VIp 0.573 unchanged).
+- Stimulus: Iin = 9.5 nA DC, VDD = 3.3 V, tt, 27 °C. Analysis: `tran 40n 1.6m 0 40n uic`, measured over spikes 3–7.
+- Results:
+
+| Metric | Target | Result |
+|---|---|---|
+| period | 190–210 µs | 201.4 µs |
+| t_spike (above 1.65 V) | 9–11 µs | 9.29 µs |
+| t_refr (VMEM < 0.33 V → VMEM rises 10 mV above v_reset) | 12–15 µs | 14.69 µs |
+| v_spike_max | ≥ 2.97 V | 3.23 V |
+| v_reset | ≤ 50 mV | 0.9 mV |
+| p_avg | ≤ 1 µW | 0.38 µW |
+| a_cap | ≤ 700 µm² | 592 µm² |
+
+- t_spike and t_refr come from the same C1 discharge, so they move together (t_refr ≈ t_spike + 5.4 µs). This leaves ≈ 0.3 µs of margin on each.
+- Corners and temperature were not run.

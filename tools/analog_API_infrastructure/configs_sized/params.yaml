@@ -1,0 +1,10 @@
+# Sizing run for analog/neuron/sizing_context.txt. SI units.
+# init = the hand-sized 5 kHz design (neuron_5khz), simulated first as a reference.
+# C2 (Cmem) is fixed at 1 pF in neuron_sized.sch (22.18 x 22.18 um); VT is fixed in sim.yaml.
+W_C1: {lo: 5e-6, hi: 12e-6, step: 0.1e-6, init: 6.9e-6, unit: m,
+       devices: ["neuron_sized/XC1:c_width", "neuron_sized/XC1:c_length"]}
+VKdn: {lo: 0.45, hi: 0.65, step: 0.002, init: 0.574, unit: V}
+VKup: {lo: 1.8,  hi: 2.6,  step: 0.01,  init: 2.28,  unit: V}
+VK:   {lo: 0.9,  hi: 1.4,  step: 0.01,  init: 1.1,   unit: V}
+VNA:  {lo: 1.6,  hi: 2.4,  step: 0.01,  init: 2.0,   unit: V}
+Vlk:  {lo: 0.30, hi: 0.45, step: 0.005, init: 0.42,  unit: V}
