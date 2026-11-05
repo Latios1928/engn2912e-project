@@ -322,6 +322,119 @@ No existing schematic (`.sch`/`.sym`) or SPICE file has been edited by the AI. T
   - `loop.py --proposer llm` ran with stubbed simulation and API, and logged every round.
 - **Not verified:** a real OpenRouter call, i.e. whether a given model returns schema-conforming candidates (README milestone 6).
 
+**36. Checking the user's peak-current equation, C·ΔV + I_lk·ΔT** *(Reasoned)*
+- **Asked:** the user derived I_peak = C·ΔV + I_lk·ΔT, which differs from entry 33.
+- **AI explained:**
+  - That expression is a *charge* (coulombs), not a current. It is the correct charge balance, the same as entry 33's Q plus leak charge.
+  - To get a current, divide by the total pulse on-time: I_pk = (C·ΔV + I_lk·ΔT) / (N·t_on), with t_on = pw + (tr + tf)/2.
+  - ΔT is the time VMEM sits above ground, because the leak device has almost no drain-source voltage at VMEM ≈ 0:
+    - one pulse per spike: ΔT ≈ pw, so I_pk = C·ΔV/pw + I_lk;
+    - N pulses: ΔT ≈ (N − 1)·per + pw.
+  - The result is the minimum (exact) value; add margin.
+- **AI checked:** worked numbers against entry 33's table (166.5 nA versus ≈ 220 nA with 1.3× margin; 43.5 nA versus ≈ 50 nA for N = 4).
+- **Not done by AI:** no file was changed and nothing was simulated.
+
+**37. A reasonable number of input pulses per output spike** *(Reasoned)*
+- **Asked:** what pulses-per-spike makes sense for this neuron when the synaptic current varies with the weights and with which inputs fire.
+- **AI explained:**
+  - Because the input charge depends on the weights and on which inputs fire, there is no single N. It should be specified as a range: q(w) = w·q₁ and N(w) = ⌈Q/(w·q₁)⌉.
+- **AI derived** the ratios already built into the behavioural mock (`analog/mock/snn.v`, `neuron.v`, `dac.v`, `pulse_gen.v`: THRESHOLD 1000, GAIN 16, pulse width 2 cycles, spike length DURATION+1 = 5 cycles):
+  - Input layer: N ≈ 5 pulses at w = 7 and ≈ 32 at w = 1.
+  - Hidden and output layers: ≈ 2 presynaptic spikes at w = 7 and ≈ 13 at w = 1 (single synapse).
+  - Mid-weight fan-in gives a layer gain of about 1.
+- **AI recommended:**
+  - N ≈ 2–5 at maximum single-synapse weight and ≈ 15–35 at the least-significant weight, matching the mock so weights validated on the mock carry over.
+  - Explained the limits: too few pulses loses weight resolution and lets the refractory period swallow inputs; too many collapses the firing rate through the layers and lets leak and DAC mismatch dominate.
+- **Worked example:** Q ≈ 1.66 pC gives q₁ ≈ 53 fC (input layer) and ≈ 133 fC (later layers). A 6.4 µs spike then needs I_unit ≈ 21 nA; to keep the mock's 2.5 ratio, the pulse-generator width should be ≈ 2.6 µs.
+- **Not done by AI:** no file was changed and nothing was simulated. The analog spike width and the DAC/DPI charge per spike need measuring.
+
+**38. Choosing q₁, and what sets the spike width** *(Reasoned)*
+- **Asked:** a recommended q₁, and how spike_time is set, given q₁ = I₁·t_spike.
+- **AI recommended:**
+  - q₁ ≈ Q/12.5 ≈ 130 fC for synapses driven by neuron spikes (Q = 1.66 pC). This is the mock's 80/1000 ratio: N = 2 events at w = 7 and 13 at w = 1, and mid-weight fan-in gain ≈ 1.
+  - Input layer: ≈ 53 fC, i.e. a pulse-generator width ≈ 0.4 × t_spike.
+  - t_spike ≈ 10 µs, giving I₁ ≈ 13 nA.
+- **AI checked:**
+  - Leak: weight-1 average current at 5 kHz is ≈ 0.65 nA, comparable to the 0.5 nA leak in `neuron_5khz`, so the AI suggested ≲ 0.1 nA.
+  - I_K must exceed the largest simultaneous synaptic current (fan-in × 7 × I₁).
+- **AI found:**
+  - In `neuron.sch` / `neuron_5khz.sch`, the `spike` output is the C_K node (C1). Its width at a switching level V_sw is ≈ C_K·(VDD − V_sw)/I_Kdn: with 100 fF and 25 nA that is ≈ 6.6 µs, consistent with the simulated ≈ 6.4 µs.
+  - So in this schematic, spike width is set by C_K and VKdn, which also set the refractory period. The two are coupled, unlike the paper, where I_Kup sets the width.
+  - `DAC.sch` has 4 weight inputs (w0–w3) while the mock uses 3 bits.
+  - `DPI.sch` still uses an ideal `capa.sym`.
+- **Options given:**
+  - Take the spike from the first inverter output (`#net2`, plus an inverter) so I_Kup sets the width.
+  - Buffer the C_K node.
+  - Make a clocked fixed-length pulse.
+  - For a DPI synapse, q = I_w·(I_gain/I_τ)·t_spike.
+  - Derive I₁ and I_Kdn from the same reference so q₁ depends on a current ratio.
+- **Not done by AI:** no file was changed and nothing was simulated.
+
+**39. Which capacitor to size for a 10 µs spike** *(Reasoned)*
+- **Asked:** which capacitor to start with to set a 10 µs spike duration.
+- **AI recommended:**
+  - Start with C1 (C_K). The `spike` output is the C_K node, so t_spike ≈ C_K,total·(VDD − V_sw)/I_Kdn. C2 (C_mem) mainly sets the firing rate.
+  - Scaled from the simulated `neuron_5khz` point (≈ 100 fF MIM + ≈ 7 fF parasitics, 6.4 µs at VKdn = 0.573 V) to 10 µs: ≈ 160 fF MIM, W = L ≈ 8.7 µm as a starting point, then trim with VKdn (≈ 14 mV per ±1.5× current).
+- **AI noted:**
+  - `neuron.sch` still has C1 = C2 = 1 × 1 µm (≈ 2 fF) and M6 = 0.22/0.28 µm, unlike the long-channel M6 in `neuron_5khz`.
+  - The refractory period grows with C_K as well.
+  - With the spike taken from the first inverter instead, the knob becomes C_K with VKup.
+- **AI gave:** a `.meas` TRIG/TARG line for the width.
+- **Not done by AI:** no file was changed and nothing was simulated. The 8.7 µm figure is a scaled estimate.
+
+**40. Refractory period versus reset** *(Reasoned)*
+- **Asked:** what the refractory period is, and whether it's just the reset.
+- **AI explained:**
+  - Reset (down-swing) is the fast discharge of VMEM to ground once I_K turns on. It lasts roughly C_mem·ΔV/(I_K − I_in), well under a µs to a few µs.
+  - Refractory is the period after that during which VMEM is *held* at ground. C_K stays above M6's turn-on voltage while I_Kdn slowly discharges it, so I_K keeps sinking any input: ≈ C_K·(VDD − V_on,M6)/I_Kdn.
+  - Inputs during refractory are lost, provided I_K exceeds the input current; it caps the maximum firing rate at about 1/(t_spike + t_reset + t_refr).
+  - In this schematic the refractory period overlaps most of the spike's falling edge, because both come from the same C_K discharge.
+- **AI gave:** a way to measure it in simulation.
+- **Not done by AI:** no file was changed and nothing was simulated.
+
+**41. Is the current target list enough for the sizing assistant?** *(Reasoned)*
+- **Asked:** whether spike width 10 µs, refractory 12–15 µs, threshold 1.66 V, C_mem 1 pF and a 200 µs period are enough to run the sizing loop.
+- **AI said:** not yet.
+- **AI found:**
+  - The width/refractory pair is consistent: both come from the C_K discharge, so their ratio ≈ (VDD − V_on,M6)/(VDD − V_sw) ≈ 1.4–1.5.
+  - The period implies I_in ≈ 9.5 nA DC plus leak, but only once the input condition is defined.
+- **AI listed what is missing:**
+  - the input stimulus (DC or pulsed, q₁/I₁);
+  - tolerances on each target;
+  - VDD, corner and temperature;
+  - the measurement definitions (V_sw level, which spike to measure);
+  - a leak target;
+  - the I_K margin;
+  - spike swing and reset level;
+  - area and power budgets;
+  - which parameters are tunable, with bounds;
+  - which values are fixed (C_mem = 1 pF; VT is a bias, not a sizing result).
+- **AI gave:** an example `spec.yaml` / `params.yaml`.
+- **Not done by AI:** no file was changed and nothing was simulated.
+
+### 2026-11-05
+
+**42. Sizing sweep for `sizing_context.txt`: `neuron_sized`** *(Simulated)*
+- **Asked:** run a sizing sweep on the neuron to the targets in `neuron/sizing_context.txt`, and save the result in a copied schematic.
+- **AI did:**
+  - Copied `neuron_5khz.sch` / `.sym` / `_testbench.sch` to `neuron_sized*`.
+  - Set C2 (C_mem) to 22.18 × 22.18 µm. This is 1.000 pF from the PDK model (1.99 fF/µm²·A + 0.238 fF/µm·P).
+  - Wrote `tools/analog_API_infrastructure/configs_sized/` (spec, params, sim); the original `configs/` is unchanged.
+  - Ran ≈ 670 ngspice points in total: 1-D sensitivity sweeps, a grid, random search, then local refinement. The points were driven through `loop.py`'s `validate` / `simulate` from a scratch script and are logged in `runs/*_sized_sweep*/history.jsonl` (gitignored).
+  - The LLM proposer was not used, so no OpenRouter calls were made.
+- **Measurement definitions** (spikes 3–7; the first two start from the initial condition):
+  - period = mean spike-to-spike time;
+  - t_spike = width of v(spike) above 1.65 V;
+  - v_spike_max = max v(spike), v_reset = min VMEM;
+  - t_refr = VMEM falls below 0.33 V (end of reset) → VMEM rises 10 mV above v_reset (as in the README and entry 40);
+  - p_avg = −i(V1)·VDD.
+- **Definition issue found:** measured from the spike's falling edge instead, refractory is always ≤ 0.9 × spike width whenever v_spike_max ≥ 2.97 V (345 points). The release point (spike ≈ 0.6 V) is set by M6, which is not a tunable, so under that definition the spec is infeasible.
+- **Result:** W_C1 = 10 µm (C1 ≈ 0.21 pF), VKdn = 0.588, VKup = 2.35, VK = 1.22, VNA = 1.93, Vlk = 0.425 V. Fixed: VT = 1.66, Vamp_bias = 0.535, VIp = 0.573 V.
+  - At 9.5 nA DC, tt, 27 °C: period 201.4 µs, t_spike 9.29 µs, t_refr 14.69 µs, v_spike_max 3.23 V, v_reset 0.9 mV, p_avg 0.38 µW, a_cap 592 µm². All targets met.
+  - Re-checked at a 10 ns step and from a fresh xschem netlist of the saved copy; both agree within 0.1 %.
+- **Margins are thin on t_spike and t_refr (≈ 0.3 µs each):** the two move together (t_refr ≈ t_spike + 5.4 µs at this point), which pins t_spike near 9.3 µs.
+- **Not done by AI:** corners and temperature were not checked. The original `neuron_5khz*` files were not modified.
+
 ---
 
 ## Notes on reliability
