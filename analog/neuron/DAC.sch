@@ -5,9 +5,9 @@ V {}
 S {}
 F {}
 E {}
-N 100 -120 270 -120 {lab=Isum}
-N 270 -120 450 -120 {lab=Isum}
-N 450 -120 620 -120 {lab=Isum}
+N 100 -120 270 -120 {lab=X}
+N 270 -120 450 -120 {lab=X}
+N 450 -120 620 -120 {lab=X}
 N 620 -60 620 -10 {lab=#net1}
 N 450 80 620 80 {lab=GND}
 N 270 80 450 80 {lab=GND}
@@ -46,7 +46,9 @@ N 470 20 470 50 {lab=GND}
 N 620 50 640 50 {lab=GND}
 N 620 20 640 20 {lab=GND}
 N 640 20 640 50 {lab=GND}
-N 357.5 -172.5 357.5 -120 {lab=Isum}
+N 357.5 -210 357.5 -180 {lab=Isum}
+N 297.5 -150 317.5 -150 {lab=en}
+N 357.5 -150 480 -150 {lab=GND}
 N 270 -90 290 -90 {lab=#net2}
 N 290 -90 290 -57.5 {lab=#net2}
 N 270 -57.5 290 -57.5 {lab=#net2}
@@ -176,7 +178,26 @@ C {lab_wire.sym} 380 -90 0 0 {name=p9 sig_type=std_logic lab=w[2]}
 C {lab_wire.sym} 540 -90 0 0 {name=p10 sig_type=std_logic lab=w[3]}
 C {gnd.sym} 360 130 0 0 {name=l1 lab=GND}
 T {Branch weights 1:2:3:4 for w[0]..w[3] (m = 1..4 unit cells).
-Unit: switch 0.22u/0.28u, current source 1u/8u. Vb comes from a diode-connected
+Unit: switch 0.22u/0.28u, current source 1u/8u. Men (gate en) passes the branch
+currents to Isum only while en is high (the previous section's spike). Vb comes from a diode-connected
 1u/8u device fed by the reference current (see DACs-DPI.sch).} -160 170 0 0 0.3 0.3 {}
 C {lab_wire.sym} 7.5 60 0 0 {name=p11 sig_type=std_logic lab=Vb}
-C {ipin.sym} 357.5 -172.5 0 0 {name=p2 lab=Isum}
+C {ipin.sym} 357.5 -210 0 0 {name=p2 lab=Isum}
+C {ipin.sym} -122.5 22.5 0 0 {name=p4 lab=en}
+C {lab_wire.sym} 297.5 -150 0 0 {name=p12 sig_type=std_logic lab=en}
+C {lab_wire.sym} 480 -150 0 0 {name=p13 sig_type=std_logic lab=GND}
+C {lab_wire.sym} 200 -120 0 0 {name=p14 sig_type=std_logic lab=X}
+C {symbols/nfet_03v3.sym} 337.5 -150 0 0 {name=Men
+L=0.28u
+W=0.22u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}

@@ -1,0 +1,10 @@
+# Project xschemrc. When xschem is started in this folder it reads this file
+# instead of ~/.xschem/xschemrc, so it first loads the PDK setup that the home
+# file normally loads.
+source $env(PDK_ROOT)/$env(PDK)/libs.tech/xschem/xschemrc
+
+# Put the project root and analog/neuron on the symbol search path, so both
+# "analog/neuron/X.sym" and bare "X.sym" references resolve, whichever of the
+# two folders xschem is started from.
+set proj_root [file dirname [file normalize [info script]]]
+append XSCHEM_LIBRARY_PATH :$proj_root:$proj_root/analog/neuron

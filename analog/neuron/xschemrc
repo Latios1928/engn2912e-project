@@ -1,0 +1,2 @@
+# Used when xschem is started in analog/neuron: same setup as the project root.
+source [file dirname [file normalize [info script]]]/../../xschemrc

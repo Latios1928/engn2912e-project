@@ -11,7 +11,7 @@ Blocks covered so far: **DPI synapse** (`dpi/`).
 
 ## Running
 
-Start xschem from the project root (`/foss/designs/engn2912e-project`), the same way as for `analog/neuron/neuron_5khz_testbench.sch`. The testbenches refer to the device as `analog/neuron/DPI.sym`, which xschem looks up relative to the directory it was started in.
+Start xschem from the project root or from `analog/neuron`. The `xschemrc` files in those two folders put both on the symbol search path, so `analog/neuron/DPI.sym` and bare `DPI.sym` references both resolve. Restart xschem after pulling them, because it reads `xschemrc` only at startup.
 
 Batch runs (from any directory):
 

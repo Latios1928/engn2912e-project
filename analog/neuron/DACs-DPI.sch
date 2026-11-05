@@ -27,6 +27,9 @@ N -130 30 -130 80 {lab=Isyn}
 N -420 -270 -420 -240 {lab=VDD}
 N -420 -180 -420 -140 {lab=VT}
 N -80 -100 -80 50 {lab=Isum}
+N -70 -60 -40 -60 {lab=VDD}
+N -70 90 -40 90 {lab=VDD}
+N -70 230 -40 230 {lab=VDD}
 C {DAC.sym} 110 -60 0 0 {name=x1}
 C {DAC.sym} 110 90 0 0 {name=x2}
 C {DAC.sym} 110 230 0 0 {name=x3}
@@ -202,3 +205,6 @@ Bw32 w2[3] 0 V = vdd*d3*v(spk)*v(g3)
   end
 .endc
 "}
+C {lab_wire.sym} -70 -60 0 0 {name=p30 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} -70 90 0 0 {name=p31 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} -70 230 0 0 {name=p32 sig_type=std_logic lab=VDD}
