@@ -8,6 +8,11 @@ Timeline/Division of Responsibilities
 - [ ] Number of input pulses per fire varies because the reset level varies; recheck once the reset is fixed.
 - [ ] Finish [tools/analog_API_infrastructure/advisor.py](tools/analog_API_infrastructure/advisor.py): it does not run yet (`os.enrivon`, `tuple{`, missing commas in the JSON schema, wrong body in `meets_spec`).
 
+### Mixed-signal ([mixed/README.md](mixed/README.md))
+- [ ] The analog network has no reset: membranes keep 1.0–1.2 V after a 2 ms settle, so scenario latencies depend on the previous one. Add a reset (switch on VMEM) or lengthen `SETTLE`.
+- [ ] Resize [analog/neuron/DAC.sch](analog/neuron/DAC.sch) to binary 1:2:4:8 (m = 4 and 8 on the last two branches) so it matches the mock.
+- [ ] Add scenarios with intermediate weights once the DAC is binary; run corners.
+
 ### Digital
 - [ ] Decide the weight-loading path: pins → `deserializer_tdm` → `rf`, SRAM → `sram_weight_loader`, or `rf` driven directly (current). `serializer_tdm`, `deserializer_tdm` and `sram_weight_loader` are not connected to `snn_top` yet.
 - [ ] Add a unit testbench for `rf` (out-of-range addresses, back-to-back writes).

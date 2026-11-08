@@ -2,7 +2,7 @@
 //
 // in[i] enables pulse generator i, whose pulses reach input neuron i through
 // a DAC. Adjacent layers are fully connected through DACs. Every synapse has
-// its own 3-bit weight, packed in weights as 23 words of 3 bits:
+// its own 4-bit weight, packed in weights as 23 words of 4 bits:
 //
 //   word 0..2    pulse[i]  -> input i      (word i)
 //   word 3..17   input i   -> hidden j     (word 3 + 3*j + i)
@@ -18,13 +18,13 @@ module snn #(
 ) (
     input  wire            clk_analog,
     input  wire            rst,         // synchronous, active high
-    input  wire [23*3-1:0] weights,
+    input  wire [23*4-1:0] weights,
     input  wire [     2:0] in,
     output wire [     8:0] out
 );
   localparam NI = 3;  // input neurons
   localparam NH = 5;  // hidden neurons
-  localparam W = 3;  // weight width
+  localparam W = 4;  // weight width
   localparam W_IN = 0;  // word offsets into weights
   localparam W_IH = NI;
   localparam W_HO = NI + NI * NH;

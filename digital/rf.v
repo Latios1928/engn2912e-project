@@ -8,7 +8,7 @@
 // For the SNN, word w is synapse w in the map documented in analog/mock/snn.v.
 module rf #(
     parameter NUM_WORDS = 23,
-    parameter WIDTH     = 3,
+    parameter WIDTH     = 4,
     parameter AW        = (NUM_WORDS > 1) ? $clog2(NUM_WORDS) : 1
 ) (
     input  wire                       clk,

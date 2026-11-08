@@ -13,7 +13,6 @@ module tb_neuron;
   localparam DURATION = 3;
   localparam THRESHOLD = 100;
   localparam GAIN = 16;
-  localparam [15:0] G = GAIN;
 
   reg                    clk = 1'b0;
   reg                    rst = 1'b1;
@@ -32,7 +31,7 @@ module tb_neuron;
   );
 
   reg         dac_active;
-  reg  [ 2:0] dac_weight;
+  reg  [ 3:0] dac_weight;
   wire [15:0] dac_current;
 
   dac #(
@@ -105,11 +104,11 @@ module tb_neuron;
     end
     expect_int("saturated", saturated, 1);
 
-    for (d = 0; d < 16; d = d + 1) begin
-      {dac_active, dac_weight} = d[3:0];
+    for (d = 0; d < 32; d = d + 1) begin
+      {dac_active, dac_weight} = d[4:0];
       #1;
       checks = checks + 1;
-      if (dac_current !== (dac_active ? {13'd0, dac_weight} * G : 16'd0)) begin
+      if (dac_current !== (dac_active ? {12'd0, dac_weight} * GAIN[15:0] : 16'd0)) begin
         errors = errors + 1;
         $display("dac: active=%b weight=%0d current=%0d", dac_active, dac_weight, dac_current);
       end

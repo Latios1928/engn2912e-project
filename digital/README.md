@@ -24,12 +24,12 @@ reset** (`rf` has no reset, like an SRAM).
 ## Modules
 
 ### `rf` (weight register file)
-- **Parameters:** `NUM_WORDS = 23`, `WIDTH = 3`, `AW = clog2(NUM_WORDS)`.
+- **Parameters:** `NUM_WORDS = 23`, `WIDTH = 4`, `AW = clog2(NUM_WORDS)`.
 - **Ports:** `clk`, `wren`, `addr[AW-1:0]`, `data[WIDTH-1:0]` → `weights[NUM_WORDS*WIDTH-1:0]`.
 - Writes `data` to word `addr` on the rising edge while `wren` is high. Writes to addresses ≥ NUM_WORDS are ignored.
 - Word `w` is at `weights[w*WIDTH +: WIDTH]`; every word is visible at once.
 - **No reset**: every word must be written before it is used.
-- The defaults match the 3-5-1 SNN's 23 synapses, each with a 3-bit weight (map from `../analog/mock/snn.v`):
+- The defaults match the 3-5-1 SNN's 23 synapses, each with a 4-bit binary weight (map from `../analog/mock/snn.v`):
   - words 0–2: input pulse generator i → input neuron i
   - words 3–17: input i → hidden j (word 3 + 3j + i)
   - words 18–22: hidden j → output (word 18 + j)
@@ -113,8 +113,8 @@ iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp digital/rf.v analog/mock/*.v snn_
    - SRAM → `sram_weight_loader` (replacing `rf`), or
    - `rf` driven directly, as now.
 2. **Size mismatch.** `sram_weight_loader` defaults to 16 × 8-bit words.
-   The SNN needs 23 × 3-bit words (`rf` defaults). The loader passes at
-   23 × 3, so this is only a matter of parameters.
+   The SNN needs 23 × 4-bit words (`rf` defaults). The loader passed at
+   23 × 3 and only needs parameters for 23 × 4.
 3. **`rf` has no dedicated testbench.** It is only covered by `tb_snn_top`.
    A small unit test would cover writes to out-of-range addresses and
    back-to-back writes.

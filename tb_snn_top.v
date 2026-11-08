@@ -8,7 +8,7 @@
 //   2. only pulse->input weights, in = 101 -> only input neurons 0 and 2
 //   3. one path in1 -> hid2 -> out, in = 111 -> input 1, hidden 2, output
 //   4. as 3 but hid2 -> out weight 0     -> input 1, hidden 2 only
-// clk and clk_analog run at unrelated periods.
+// clk and clk_analog run at unrelated periods. "Max" weight is 4'hF.
 //
 // Run (from the repo root):
 //   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp digital/rf.v analog/mock/*.v snn_top.v tb_snn_top.v && vvp sim.vvp
@@ -18,7 +18,7 @@ module tb_snn_top;
   reg        clk = 1'b0;
   reg        clk_analog = 1'b0;
   reg        rst = 1'b1;
-  reg  [2:0] data = 0;
+  reg  [3:0] data = 0;
   reg  [4:0] addr = 0;
   reg        wren = 1'b0;
   reg  [2:0] in = 0;
@@ -46,7 +46,7 @@ module tb_snn_top;
   integer errors = 0;
   integer checks = 0;
   integer w;
-  reg [68:0] ws;
+  reg [91:0] ws;
 
   // Word indices (see analog/mock/snn.v).
   function integer w_pulse(input integer i);
@@ -63,33 +63,33 @@ module tb_snn_top;
     $dumpfile("tb_snn_top.vcd");
     $dumpvars(0, tb_snn_top);
 
-    // Register file: word w = w mod 8, plus an out-of-range write that must be ignored.
-    for (w = 0; w < 23; w = w + 1) ws[w*3+:3] = w[2:0];
+    // Register file: word w = w mod 16, plus an out-of-range write that must be ignored.
+    for (w = 0; w < 23; w = w + 1) ws[w*4+:4] = w[3:0];
     load(ws);
-    write_word(5'd31, 3'd7);
+    write_word(5'd31, 4'hF);
     checks = checks + 1;
     if (dut.weights !== ws) begin
       errors = errors + 1;
       $display("rf: weights=%h, expected %h", dut.weights, ws);
     end
 
-    ws = {69{1'b1}};
+    ws = {92{1'b1}};
     load(ws);
     run(3'b000, 9'b0_00000_000, "in = 0");
 
     ws = 0;
-    for (w = 0; w < 3; w = w + 1) ws[w_pulse(w)*3+:3] = 3'd7;
+    for (w = 0; w < 3; w = w + 1) ws[w_pulse(w)*4+:4] = 4'hF;
     load(ws);
     run(3'b101, 9'b0_00000_101, "pulse weights only");
 
     ws = 0;
-    ws[w_pulse(1)*3+:3] = 3'd7;
-    ws[w_ih(1, 2)*3+:3] = 3'd7;
-    ws[w_ho(2)*3+:3] = 3'd7;
+    ws[w_pulse(1)*4+:4] = 4'hF;
+    ws[w_ih(1, 2)*4+:4] = 4'hF;
+    ws[w_ho(2)*4+:4] = 4'hF;
     load(ws);
     run(3'b111, 9'b1_00100_010, "path in1->hid2->out");
 
-    ws[w_ho(2)*3+:3] = 3'd0;
+    ws[w_ho(2)*4+:4] = 4'h0;
     load(ws);
     run(3'b111, 9'b0_00100_010, "hid2->out weight 0");
 
@@ -98,7 +98,7 @@ module tb_snn_top;
     $finish;
   end
 
-  task write_word(input [4:0] a, input [2:0] d);
+  task write_word(input [4:0] a, input [3:0] d);
     begin
       @(negedge clk);
       addr = a;
@@ -109,10 +109,10 @@ module tb_snn_top;
     end
   endtask
 
-  task load(input [68:0] weights);
+  task load(input [91:0] weights);
     integer i;
     begin
-      for (i = 0; i < 23; i = i + 1) write_word(i[4:0], weights[i*3+:3]);
+      for (i = 0; i < 23; i = i + 1) write_word(i[4:0], weights[i*4+:4]);
     end
   endtask
 
