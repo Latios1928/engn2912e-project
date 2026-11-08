@@ -1,0 +1,394 @@
+{
+  "extensionVersion": "1.6.1",
+  "fileName": "/foss/designs/engn2912e-project/mixed/snn_ms_tb_digital.vcd",
+  "markerTime": null,
+  "altMarkerTime": null,
+  "displayTimeUnit": "µs",
+  "selectedSignal": null,
+  "zoomRatio": 0.00006131994674518523,
+  "scrollLeft": 0,
+  "defaultPixelTime": 100000,
+  "displayedSignals": [
+    {
+      "dataType": "signal-group",
+      "groupName": "snn_ms_tb.in[2:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "in",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 13,
+              "signalId": 13,
+              "signalWidth": 3,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "in[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "in",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 13,
+              "signalId": 13,
+              "signalWidth": 3,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "in[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "in",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 13,
+              "signalId": 13,
+              "signalWidth": 3,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "in[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
+    },
+    {
+      "dataType": "signal-group",
+      "groupName": "snn_ms_tb.pulse[2:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 2,
+              "signalId": 2,
+              "signalWidth": 3,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 2,
+              "signalId": 2,
+              "signalWidth": 3,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 2,
+              "signalId": 2,
+              "signalWidth": 3,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
+    },
+    {
+      "dataType": "signal-group",
+      "groupName": "snn_ms_tb.spike[8:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 8,
+              "lsb": 8
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[8] : out",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 7,
+              "lsb": 7
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[7] : hid[4]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 6,
+              "lsb": 6
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[6] : hid[3]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 5,
+              "lsb": 5
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[5] : hid[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 4,
+              "lsb": 4
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[4] : hid[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 3,
+              "lsb": 3
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[3] : hid[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[2] : in[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[1] : in[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "spike",
+              "scopePath": [
+                "snn_ms_tb"
+              ],
+              "netlistId": 0,
+              "signalId": 0,
+              "signalWidth": 9,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "custom",
+          "customName": "spike[0] : in[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
+    }
+  ]
+}

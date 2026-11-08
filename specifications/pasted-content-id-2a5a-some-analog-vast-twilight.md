@@ -73,4 +73,6 @@ New folder `mixed/` at the repo root.
 - `ngspice vlnggen` replaced by `mixed/vlnggen.sh` (ngspice-46 lowercases its Verilator command).
 - The 92-bit weight port is split into `w_at0/23/46/69` (the d_cosim shim handles at most 31 bits per port).
 - Testbench `.param`s are prefixed `p_` (a param named like a net disconnected the biases).
+- The `d_cosim` flow (Steps 2 and 4) was later replaced by SpiceBind: `mixed/snn_ms_tb.v` replaces `snn_digital.v`, `snn_sequencer.v`, `vlnggen.sh` and `instantiate.py`.
+- `mixed/raw2vcd.py` was replaced by xschem's `rawtovcd`.
 - See `mixed/README.md` for results and limitations.

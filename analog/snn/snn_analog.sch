@@ -13,7 +13,7 @@ C {lab_pin.sym} 250 -1220 0 0 {name=l3 sig_type=std_logic lab=w[3:0]}
 C {lab_pin.sym} 250 -1200 0 0 {name=l4 sig_type=std_logic lab=pulse[0]}
 C {DPI.sym} 400 -1070 0 0 {name=xdpi0}
 C {lab_pin.sym} 550 -1090 0 1 {name=l5 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 250 -1090 0 0 {name=l6 sig_type=std_logic lab=Vthr_in}
+C {lab_pin.sym} 250 -1090 0 0 {name=l6 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 550 -1070 0 1 {name=l7 sig_type=std_logic lab=VMEM_0}
 C {lab_pin.sym} 250 -1050 0 0 {name=l8 sig_type=std_logic lab=Isum_0}
 C {lab_pin.sym} 250 -1070 0 0 {name=l9 sig_type=std_logic lab=VT_dpi}
@@ -38,7 +38,7 @@ C {lab_pin.sym} 950 -1220 0 0 {name=l24 sig_type=std_logic lab=w[7:4]}
 C {lab_pin.sym} 950 -1200 0 0 {name=l25 sig_type=std_logic lab=pulse[1]}
 C {DPI.sym} 1100 -1070 0 0 {name=xdpi1}
 C {lab_pin.sym} 1250 -1090 0 1 {name=l26 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 950 -1090 0 0 {name=l27 sig_type=std_logic lab=Vthr_in}
+C {lab_pin.sym} 950 -1090 0 0 {name=l27 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1250 -1070 0 1 {name=l28 sig_type=std_logic lab=VMEM_1}
 C {lab_pin.sym} 950 -1050 0 0 {name=l29 sig_type=std_logic lab=Isum_1}
 C {lab_pin.sym} 950 -1070 0 0 {name=l30 sig_type=std_logic lab=VT_dpi}
@@ -63,7 +63,7 @@ C {lab_pin.sym} 1650 -1220 0 0 {name=l45 sig_type=std_logic lab=w[11:8]}
 C {lab_pin.sym} 1650 -1200 0 0 {name=l46 sig_type=std_logic lab=pulse[2]}
 C {DPI.sym} 1800 -1070 0 0 {name=xdpi2}
 C {lab_pin.sym} 1950 -1090 0 1 {name=l47 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 1650 -1090 0 0 {name=l48 sig_type=std_logic lab=Vthr_in}
+C {lab_pin.sym} 1650 -1090 0 0 {name=l48 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1950 -1070 0 1 {name=l49 sig_type=std_logic lab=VMEM_2}
 C {lab_pin.sym} 1650 -1050 0 0 {name=l50 sig_type=std_logic lab=Isum_2}
 C {lab_pin.sym} 1650 -1070 0 0 {name=l51 sig_type=std_logic lab=VT_dpi}
@@ -98,7 +98,7 @@ C {lab_pin.sym} 250 -140 0 0 {name=l74 sig_type=std_logic lab=w[23:20]}
 C {lab_pin.sym} 250 -120 0 0 {name=l75 sig_type=std_logic lab=spike[2]}
 C {DPI.sym} 400 10 0 0 {name=xdpi3}
 C {lab_pin.sym} 550 -10 0 1 {name=l76 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 250 -10 0 0 {name=l77 sig_type=std_logic lab=Vthr_hid}
+C {lab_pin.sym} 250 -10 0 0 {name=l77 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 550 10 0 1 {name=l78 sig_type=std_logic lab=VMEM_3}
 C {lab_pin.sym} 250 30 0 0 {name=l79 sig_type=std_logic lab=Isum_3}
 C {lab_pin.sym} 250 10 0 0 {name=l80 sig_type=std_logic lab=VT_dpi}
@@ -133,7 +133,7 @@ C {lab_pin.sym} 950 -140 0 0 {name=l103 sig_type=std_logic lab=w[35:32]}
 C {lab_pin.sym} 950 -120 0 0 {name=l104 sig_type=std_logic lab=spike[2]}
 C {DPI.sym} 1100 10 0 0 {name=xdpi4}
 C {lab_pin.sym} 1250 -10 0 1 {name=l105 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 950 -10 0 0 {name=l106 sig_type=std_logic lab=Vthr_hid}
+C {lab_pin.sym} 950 -10 0 0 {name=l106 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1250 10 0 1 {name=l107 sig_type=std_logic lab=VMEM_4}
 C {lab_pin.sym} 950 30 0 0 {name=l108 sig_type=std_logic lab=Isum_4}
 C {lab_pin.sym} 950 10 0 0 {name=l109 sig_type=std_logic lab=VT_dpi}
@@ -168,7 +168,7 @@ C {lab_pin.sym} 1650 -140 0 0 {name=l132 sig_type=std_logic lab=w[47:44]}
 C {lab_pin.sym} 1650 -120 0 0 {name=l133 sig_type=std_logic lab=spike[2]}
 C {DPI.sym} 1800 10 0 0 {name=xdpi5}
 C {lab_pin.sym} 1950 -10 0 1 {name=l134 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 1650 -10 0 0 {name=l135 sig_type=std_logic lab=Vthr_hid}
+C {lab_pin.sym} 1650 -10 0 0 {name=l135 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1950 10 0 1 {name=l136 sig_type=std_logic lab=VMEM_5}
 C {lab_pin.sym} 1650 30 0 0 {name=l137 sig_type=std_logic lab=Isum_5}
 C {lab_pin.sym} 1650 10 0 0 {name=l138 sig_type=std_logic lab=VT_dpi}
@@ -203,7 +203,7 @@ C {lab_pin.sym} 2350 -140 0 0 {name=l161 sig_type=std_logic lab=w[59:56]}
 C {lab_pin.sym} 2350 -120 0 0 {name=l162 sig_type=std_logic lab=spike[2]}
 C {DPI.sym} 2500 10 0 0 {name=xdpi6}
 C {lab_pin.sym} 2650 -10 0 1 {name=l163 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 2350 -10 0 0 {name=l164 sig_type=std_logic lab=Vthr_hid}
+C {lab_pin.sym} 2350 -10 0 0 {name=l164 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 2650 10 0 1 {name=l165 sig_type=std_logic lab=VMEM_6}
 C {lab_pin.sym} 2350 30 0 0 {name=l166 sig_type=std_logic lab=Isum_6}
 C {lab_pin.sym} 2350 10 0 0 {name=l167 sig_type=std_logic lab=VT_dpi}
@@ -238,7 +238,7 @@ C {lab_pin.sym} 3050 -140 0 0 {name=l190 sig_type=std_logic lab=w[71:68]}
 C {lab_pin.sym} 3050 -120 0 0 {name=l191 sig_type=std_logic lab=spike[2]}
 C {DPI.sym} 3200 10 0 0 {name=xdpi7}
 C {lab_pin.sym} 3350 -10 0 1 {name=l192 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 3050 -10 0 0 {name=l193 sig_type=std_logic lab=Vthr_hid}
+C {lab_pin.sym} 3050 -10 0 0 {name=l193 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 3350 10 0 1 {name=l194 sig_type=std_logic lab=VMEM_7}
 C {lab_pin.sym} 3050 30 0 0 {name=l195 sig_type=std_logic lab=Isum_7}
 C {lab_pin.sym} 3050 10 0 0 {name=l196 sig_type=std_logic lab=VT_dpi}
@@ -283,7 +283,7 @@ C {lab_pin.sym} 250 1240 0 0 {name=l227 sig_type=std_logic lab=w[91:88]}
 C {lab_pin.sym} 250 1260 0 0 {name=l228 sig_type=std_logic lab=spike[7]}
 C {DPI.sym} 400 1390 0 0 {name=xdpi8}
 C {lab_pin.sym} 550 1370 0 1 {name=l229 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 250 1370 0 0 {name=l230 sig_type=std_logic lab=Vthr_out}
+C {lab_pin.sym} 250 1370 0 0 {name=l230 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 550 1390 0 1 {name=l231 sig_type=std_logic lab=VMEM_8}
 C {lab_pin.sym} 250 1410 0 0 {name=l232 sig_type=std_logic lab=Isum_8}
 C {lab_pin.sym} 250 1390 0 0 {name=l233 sig_type=std_logic lab=VT_dpi}
@@ -305,19 +305,17 @@ C {iopin.sym} -400 -1170 0 1 {name=p_VSS lab=VSS}
 C {ipin.sym} -400 -1140 0 0 {name=p_w lab=w[91:0]}
 C {ipin.sym} -400 -1110 0 0 {name=p_pulse lab=pulse[2:0]}
 C {ipin.sym} -400 -1080 0 0 {name=p_Vb lab=Vb}
-C {ipin.sym} -400 -1050 0 0 {name=p_Vthr_in lab=Vthr_in}
-C {ipin.sym} -400 -1020 0 0 {name=p_Vthr_hid lab=Vthr_hid}
-C {ipin.sym} -400 -990 0 0 {name=p_Vthr_out lab=Vthr_out}
-C {ipin.sym} -400 -960 0 0 {name=p_VT_dpi lab=VT_dpi}
-C {ipin.sym} -400 -930 0 0 {name=p_VNA lab=VNA}
-C {ipin.sym} -400 -900 0 0 {name=p_Vlk lab=Vlk}
-C {ipin.sym} -400 -870 0 0 {name=p_VK lab=VK}
-C {ipin.sym} -400 -840 0 0 {name=p_VIp lab=VIp}
-C {ipin.sym} -400 -810 0 0 {name=p_VKup lab=VKup}
-C {ipin.sym} -400 -780 0 0 {name=p_VKdn lab=VKdn}
-C {ipin.sym} -400 -750 0 0 {name=p_Vamp_bias lab=Vamp_bias}
-C {ipin.sym} -400 -720 0 0 {name=p_VT lab=VT}
-C {opin.sym} -300 -690 0 0 {name=p_spike lab=spike[8:0]}
+C {ipin.sym} -400 -1050 0 0 {name=p_Vthr lab=Vthr}
+C {ipin.sym} -400 -1020 0 0 {name=p_VT_dpi lab=VT_dpi}
+C {ipin.sym} -400 -990 0 0 {name=p_VNA lab=VNA}
+C {ipin.sym} -400 -960 0 0 {name=p_Vlk lab=Vlk}
+C {ipin.sym} -400 -930 0 0 {name=p_VK lab=VK}
+C {ipin.sym} -400 -900 0 0 {name=p_VIp lab=VIp}
+C {ipin.sym} -400 -870 0 0 {name=p_VKup lab=VKup}
+C {ipin.sym} -400 -840 0 0 {name=p_VKdn lab=VKdn}
+C {ipin.sym} -400 -810 0 0 {name=p_Vamp_bias lab=Vamp_bias}
+C {ipin.sym} -400 -780 0 0 {name=p_VT lab=VT}
+C {opin.sym} -300 -750 0 0 {name=p_spike lab=spike[8:0]}
 T {snn_analog: the 3-5-1 network of analog/mock/snn.v built from DAC -> DPI -> neuron_sized.
 Word k of w is synapse k (4 bits, w[4k+3:4k]): words 0-2 pulse[i] -> input i, 3-17 input i -> hidden j (3 + 3j + i),
 18-22 hidden j -> output (18 + j). spike = {output, hidden[4:0], input[2:0]}.
