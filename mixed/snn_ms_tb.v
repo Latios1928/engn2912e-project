@@ -1,5 +1,6 @@
-// Mixed-signal testbench: rf and the pulse generators run here in Icarus; the
-// 3-5-1 network (snn_analog) is transistor-level in ngspice through SpiceBind.
+// Mixed-signal testbench: the chip top (snn_top.v, with digital/snn_digital.v: rf and pulse_gen)
+// runs in Icarus; the 3-5-1 network snn_analog inside it is transistor-level in
+// ngspice through SpiceBind (see snn_analog_stub.v).
 // Same scenarios as ../mock/tb_snn_top.v:
 //   1. all weights max, in = 000             -> nothing fires
 //   2. only pulse->input weights, in = 101   -> only input neurons 0 and 2
@@ -9,14 +10,6 @@
 // with in = 0. Prints PASS/FAIL and the time of each neuron's first spike.
 `timescale 1ns / 1ns
 
-// Implemented in SPICE (analog/snn/snn_analog.sch); SpiceBind drives its ports.
-module snn_analog (
-    input  wire [91:0] w,
-    input  wire [ 2:0] pulse,
-    output wire [ 8:0] spike
-);
-endmodule
-
 module snn_ms_tb #(
     parameter SCEN_FIRST = 1,
     parameter SCEN_LAST  = 4,
@@ -25,52 +18,30 @@ module snn_ms_tb #(
 );
   localparam [3:0] MAX = 4'hF;
 
-  reg        clk = 1'b0;         // 1 us, rf
-  reg        clk_analog = 1'b0;  // 10 us, pulse generators
+  reg        clk = 1'b0;  // 1 us
   reg        rst = 1'b1;
   reg        wren = 1'b0;
   reg  [4:0] addr = 0;
   reg  [3:0] data = 0;
   reg  [2:0] in = 0;
-  wire [91:0] w;
-  wire [ 2:0] pulse;
-  wire [ 8:0] spike;
+  wire [8:0] spike;
 
   always #500 clk = ~clk;
-  always #5000 clk_analog = ~clk_analog;
 
-  rf #(
-      .NUM_WORDS(23),
-      .WIDTH(4),
-      .AW(5)
-  ) u_rf (
+  snn_top #(
+      .PULSE_PERIOD(200),  // 200 us
+      .PULSE_WIDTH (10)    // 10 us
+  ) dut (
       .clk(clk),
-      .wren(wren),
-      .addr(addr),
+      .rst(rst),
       .data(data),
-      .weights(w)
+      .addr(addr),
+      .wren(wren),
+      .in(in),
+      .out(spike)
   );
 
-  genvar g;
-  generate
-    for (g = 0; g < 3; g = g + 1) begin : g_pulse
-      pulse_gen #(
-          .PERIOD(20),  // 200 us
-          .WIDTH (1)    // 10 us
-      ) u_pulse (
-          .clk_analog(clk_analog),
-          .rst(rst),
-          .en(in[g]),
-          .pulse(pulse[g])
-      );
-    end
-  endgenerate
-
-  snn_analog ana (
-      .w(w),
-      .pulse(pulse),
-      .spike(spike)
-  );
+  wire [2:0] pulse = dut.pulse;  // for the waveform
 
   integer scen = 0;  // for the waveform
   reg [8:0] seen = 0;
@@ -109,13 +80,7 @@ module snn_ms_tb #(
     begin
       load;
       in = 3'b000;
-      rst = 1'b1;
       #(SETTLE * 1000);
-      // Just after a rising edge: pulse_gen's output is combinational in en,
-      // so raising en mid-cycle would make the first pulse too short.
-      @(posedge clk_analog);
-      #1;
-      rst = 1'b0;
       in = in_v;
       seen = 0;
       t_run = $time;
@@ -134,6 +99,9 @@ module snn_ms_tb #(
   initial begin
     $dumpfile("snn_ms_tb_digital.vcd");
     $dumpvars(0, snn_ms_tb);
+
+    repeat (3) @(negedge clk);
+    rst = 1'b0;
 
     for (scen = SCEN_FIRST; scen <= SCEN_LAST; scen = scen + 1)
       case (scen)

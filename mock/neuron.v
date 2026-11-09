@@ -3,8 +3,8 @@
 // Behavioral mock of an integrate-and-fire neuron (will become analog).
 //
 // Every clk_analog cycle, voltage increases by the sum of the INDEGREE input
-// currents, saturating at 16'hFFFF (the mock supply rail). While active,
-// voltage is held at 0 instead. There is no leak.
+// currents, saturating at 16'hFFFF (the mock supply rail), and then drops by
+// LEAK (not below 0). While active, voltage is held at 0 instead.
 //
 // active comes from the internal comparator. Timing: if voltage exceeds
 // THRESHOLD after edge e, active rises at e+1 and voltage is cleared at e+2
@@ -12,6 +12,7 @@
 // active stays high for DURATION+1 cycles.
 module neuron #(
     parameter INDEGREE  = 1,
+    parameter LEAK      = 1,  // charge lost per clk_analog cycle
     parameter DURATION  = 4,
     parameter THRESHOLD = 1000
 ) (
@@ -23,9 +24,11 @@ module neuron #(
   // voltage plus INDEGREE currents: INDEGREE+1 16-bit terms
   localparam SW = 16 + $clog2(INDEGREE + 1);
 
+  localparam [15:0] LEAK_V = LEAK[15:0];
+
   initial begin
-    if (INDEGREE < 1) begin
-      $error("neuron: INDEGREE (%0d) must be >= 1", INDEGREE);
+    if (INDEGREE < 1 || LEAK < 0 || LEAK > 65535) begin
+      $error("neuron: need INDEGREE >= 1 (%0d) and 0 <= LEAK <= 65535 (%0d)", INDEGREE, LEAK);
       $finish;
     end
   end
@@ -42,7 +45,8 @@ module neuron #(
   always @(posedge clk_analog) begin
     if (rst || active) voltage <= 16'd0;
     else if (|sum[SW-1:16]) voltage <= 16'hFFFF;
-    else voltage <= sum[15:0];
+    else if (sum[15:0] > LEAK_V) voltage <= sum[15:0] - LEAK_V;
+    else voltage <= 16'd0;
   end
 
   comparator #(

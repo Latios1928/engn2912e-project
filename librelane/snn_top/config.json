@@ -4,15 +4,12 @@
     },
     "DESIGN_NAME": "snn_top",
     "VERILOG_FILES": [
-        "dir::../../mock/snn_top.v",
+        "dir::../../snn_top.v",
+        "dir::../../digital/snn_digital.v",
         "dir::../../digital/rf.v",
-        "dir::../../mock/snn_mock.v",
-        "dir::../../mock/neuron.v",
-        "dir::../../mock/comparator.v",
-        "dir::../../mock/dac.v",
-        "dir::../../mock/pulse_gen.v"
+        "dir::../../digital/pulse_gen.v"
     ],
-    "CLOCK_PORT": ["clk", "clk_analog"],
+    "CLOCK_PORT": "clk",
     "CLOCK_PERIOD": 20,
     "FP_SIZING": "relative",
     "FP_CORE_UTIL": 40,

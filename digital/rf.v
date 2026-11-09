@@ -7,7 +7,7 @@
 // addresses >= NUM_WORDS are ignored. There is no reset (like an SRAM), so
 // every word must be written before it is used.
 //
-// For the SNN, word w is synapse w in the map documented in mock/snn_mock.v.
+// For the SNN, word w is synapse w in the map documented in mock/snn_analog.v.
 module rf #(
     parameter NUM_WORDS = 23,
     parameter WIDTH     = 4,

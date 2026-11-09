@@ -4,11 +4,7 @@
   "markerTime": null,
   "altMarkerTime": null,
   "displayTimeUnit": "s",
-  "selectedSignal": {
-    "name": "tb_snn_top.dut.clk_analog",
-    "msb": -1,
-    "lsb": -1
-  },
+  "selectedSignal": null,
   "zoomRatio": 4,
   "scrollLeft": 0,
   "defaultPixelTime": 100,
@@ -68,7 +64,7 @@
     {
       "dataType": "netlist-variable",
       "netlistId": 26,
-      "name": "tb_snn_top.dut.weights",
+      "name": "tb_snn_top.dut.w",
       "numberFormat": "hexadecimal",
       "colorIndex": 0,
       "rowHeight": 1,
@@ -76,19 +72,6 @@
       "nameType": "fullPath",
       "customName": "weights",
       "renderType": "multiBit",
-      "valueLinkEnable": false
-    },
-    {
-      "dataType": "netlist-variable",
-      "netlistId": 21,
-      "name": "tb_snn_top.dut.clk_analog",
-      "numberFormat": "binary",
-      "colorIndex": 0,
-      "rowHeight": 1,
-      "verticalScale": 1,
-      "nameType": "fullPath",
-      "customName": "clk_analog",
-      "renderType": "binary",
       "valueLinkEnable": false
     },
     {

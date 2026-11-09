@@ -1,65 +1,74 @@
 `timescale 1ns / 1ns
 
-// Behavioral mock of the 3-5-1 spiking neural network (will become analog).
+// Behavioral stand-in for the analog 3-5-1 spiking neural network
+// (analog/snn/snn_analog.sch): the same module name and ports, so
+// snn_top.v works with either. The pure-digital build (mock/) compiles
+// this file; the mixed-signal build (mixed/) compiles an empty module of the
+// same name instead, which SpiceBind fills with the transistor-level network.
 //
-// in[i] enables pulse generator i, whose pulses reach input neuron i through
-// a DAC. Adjacent layers are fully connected through DACs. Every synapse has
-// its own 4-bit weight, packed in weights as 23 words of 4 bits:
+// Like the analog network, it has no clock or reset input. It generates its
+// own clock (CLK_PERIOD ns) and releases an internal power-on reset after 2
+// cycles; the neurons leak (LEAK per cycle) so that charge dies away on its
+// own.
+//
+// pulse[i] reaches input neuron i through a DAC. Adjacent layers are fully
+// connected through DACs. Every synapse has its own 4-bit weight, packed in w
+// as 23 words of 4 bits:
 //
 //   word 0..2    pulse[i]  -> input i      (word i)
 //   word 3..17   input i   -> hidden j     (word 3 + 3*j + i)
 //   word 18..22  hidden j  -> output       (word 18 + j)
 //
-// out = {output, hidden[4:0], input[2:0]} (active of every neuron).
-module snn_mock #(
+// spike = {output, hidden[4:0], input[2:0]} (active of every neuron).
+module snn_analog #(
     parameter DURATION     = 4,
     parameter THRESHOLD    = 1000,
     parameter GAIN         = 16,
-    parameter PULSE_PERIOD = 16,
-    parameter PULSE_WIDTH  = 2
+    parameter LEAK         = 1,
+    parameter CLK_PERIOD   = 14   // ns, even; arbitrary, and unrelated to the digital clock on purpose
 ) (
-    input  wire            clk_analog,
-    input  wire            rst,         // synchronous, active high
-    input  wire [23*4-1:0] weights,
-    input  wire [     2:0] in,
-    output wire [     8:0] out
+    input  wire [23*4-1:0] w,
+    input  wire [     2:0] pulse,
+    output wire [     8:0] spike
 );
   localparam NI = 3;  // input neurons
   localparam NH = 5;  // hidden neurons
-  localparam W = 4;  // weight width
-  localparam W_IN = 0;  // word offsets into weights
+  localparam WW = 4;  // weight width
+  localparam W_IN = 0;  // word offsets into w
   localparam W_IH = NI;
   localparam W_HO = NI + NI * NH;
 
-  wire [NI-1:0] pulse;
+  // Own clock and power-on reset (the analog network has neither as a port).
+  reg clk_analog;
+  reg [1:0] por;
+  initial begin
+    clk_analog = 1'b0;
+    por = 2'd0;
+  end
+  always #(CLK_PERIOD / 2) clk_analog = ~clk_analog;
+  always @(posedge clk_analog) if (por != 2'd2) por <= por + 2'd1;
+  wire rst = (por != 2'd2);  // high for the first 2 cycles
+
   wire [NI-1:0] act_in;
   wire [NH-1:0] act_hid;
   wire          act_out;
 
-  assign out = {act_out, act_hid, act_in};
+  assign spike = {act_out, act_hid, act_in};
 
   genvar i, j;
   generate
     for (i = 0; i < NI; i = i + 1) begin : g_in
       wire [15:0] cur;
-      pulse_gen #(
-          .PERIOD(PULSE_PERIOD),
-          .WIDTH (PULSE_WIDTH)
-      ) u_pulse (
-          .clk_analog(clk_analog),
-          .rst(rst),
-          .en(in[i]),
-          .pulse(pulse[i])
-      );
       dac #(
           .GAIN(GAIN)
       ) u_dac (
           .active (pulse[i]),
-          .weight (weights[(W_IN+i)*W+:W]),
+          .weight (w[(W_IN+i)*WW+:WW]),
           .current(cur)
       );
       neuron #(
           .INDEGREE (1),
+          .LEAK     (LEAK),
           .DURATION (DURATION),
           .THRESHOLD(THRESHOLD)
       ) u_neuron (
@@ -77,12 +86,13 @@ module snn_mock #(
             .GAIN(GAIN)
         ) u_dac (
             .active (act_in[i]),
-            .weight (weights[(W_IH+NI*j+i)*W+:W]),
+            .weight (w[(W_IH+NI*j+i)*WW+:WW]),
             .current(cur[i*16+:16])
         );
       end
       neuron #(
           .INDEGREE (NI),
+          .LEAK     (LEAK),
           .DURATION (DURATION),
           .THRESHOLD(THRESHOLD)
       ) u_neuron (
@@ -100,12 +110,13 @@ module snn_mock #(
             .GAIN(GAIN)
         ) u_dac (
             .active (act_hid[j]),
-            .weight (weights[(W_HO+j)*W+:W]),
+            .weight (w[(W_HO+j)*WW+:WW]),
             .current(cur[j*16+:16])
         );
       end
       neuron #(
           .INDEGREE (NH),
+          .LEAK     (LEAK),
           .DURATION (DURATION),
           .THRESHOLD(THRESHOLD)
       ) u_neuron (

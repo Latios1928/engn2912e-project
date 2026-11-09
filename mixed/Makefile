@@ -18,7 +18,7 @@ SETTLE     ?= 2000
 RUN        ?= 3000
 
 SPICEBIND := /foss/tools/spicebind
-VSRC := snn_ms_tb.v $(ROOT)/digital/rf.v $(ROOT)/mock/pulse_gen.v
+VSRC := sim.f snn_ms_tb.v snn_analog_stub.v $(ROOT)/snn_top.v $(wildcard $(ROOT)/digital/*.v)
 PFX  := -Psnn_ms_tb
 SCHEMATICS := snn_ms_tb.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
               $(wildcard $(ROOT)/analog/neuron/DAC.s* $(ROOT)/analog/neuron/DPI.s* \
@@ -41,13 +41,13 @@ snn_ms_tb.spice: $(SCHEMATICS)
 no_passwd_shim.so: no_passwd_shim.c
 	gcc -shared -fPIC -o $@ $<
 
-run: snn_ms_tb.spice no_passwd_shim.so
+run: snn_ms_tb.spice no_passwd_shim.so $(VSRC)
 	iverilog -g2012 -Wall -s snn_ms_tb -o snn_ms_tb.vvp \
 	  $(PFX).SCEN_FIRST=$(SCEN_FIRST) $(PFX).SCEN_LAST=$(SCEN_LAST) \
-	  $(PFX).SETTLE=$(SETTLE) $(PFX).RUN=$(RUN) $(VSRC)
+	  $(PFX).SETTLE=$(SETTLE) $(PFX).RUN=$(RUN) -f sim.f
 	@rm -f dump.raw
 	@start=$$(date +%s); \
-	  SPICE_NETLIST=$(MIXED)/snn_ms_tb.spice HDL_INSTANCE=snn_ms_tb.ana VCC=3.3 \
+	  SPICE_NETLIST=$(MIXED)/snn_ms_tb.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
 	  LOGIC_THRESHOLD_LOW=1.64 LOGIC_THRESHOLD_HIGH=1.66 \
 	  LD_PRELOAD=$(MIXED)/no_passwd_shim.so \
 	  vvp -M $(SPICEBIND) -m spicebind_vpi snn_ms_tb.vvp > snn_ms_tb.log 2>&1; \

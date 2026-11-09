@@ -316,7 +316,7 @@ C {ipin.sym} -400 -840 0 0 {name=p_VKdn lab=VKdn}
 C {ipin.sym} -400 -810 0 0 {name=p_Vamp_bias lab=Vamp_bias}
 C {ipin.sym} -400 -780 0 0 {name=p_VT lab=VT}
 C {opin.sym} -300 -750 0 0 {name=p_spike lab=spike[8:0]}
-T {snn_analog: the 3-5-1 network of mock/snn_mock.v built from DAC -> DPI -> neuron_sized.
+T {snn_analog: the 3-5-1 network of mock/snn_analog.v built from DAC -> DPI -> neuron_sized.
 Word k of w is synapse k (4 bits, w[4k+3:4k]): words 0-2 pulse[i] -> input i, 3-17 input i -> hidden j (3 + 3j + i),
 18-22 hidden j -> output (18 + j). spike = {output, hidden[4:0], input[2:0]}.
 Each neuron's DACs share one DPI (Isum_n); the DPI output drives the membrane VMEM_n.

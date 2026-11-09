@@ -3,22 +3,27 @@
 // Self-checking testbench for snn_top.
 //
 // First checks that words written through data/addr/wren land in the right
-// place on the internal weights bus. Then loads a weight set per scenario,
-// resets the network, applies in for RUN clk_analog cycles, and checks which
-// neurons fired at least once against the expected set:
-//   1. all weights max, in = 0          -> nothing fires
+// place on the internal weights bus. Then, for each scenario, loads a weight
+// set, waits SETTLE analog cycles with in = 0 (the network has no reset; the
+// neuron leak drains what the previous scenario left), applies in for RUN
+// analog cycles, and checks which neurons fired at least once against the
+// expected set:
+//   1. all weights max, in = 0             -> nothing fires
 //   2. only pulse->input weights, in = 101 -> only input neurons 0 and 2
 //   3. one path in1 -> hid2 -> out, in = 111 -> input 1, hidden 2, output
-//   4. as 3 but hid2 -> out weight 0     -> input 1, hidden 2 only
-// clk and clk_analog run at unrelated periods. "Max" weight is 4'hF.
+//   4. as 3 but hid2 -> out weight 0       -> input 1, hidden 2 only
+// clk (10 ns) and the network's own clock (14 ns) are unrelated.
+// "Max" weight is 4'hF. The same scenarios run on the transistor-level
+// network in ../mixed/snn_ms_tb.v.
 //
-// Run (from the repo root):
-//   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp ../digital/rf.v *.v && vvp sim.vvp
+// Run (from this folder):
+//   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp -f sim.f && vvp sim.vvp
 module tb_snn_top;
-  localparam RUN = 1000;
+  localparam CLK_PERIOD = 14;  // ns; the CLK_PERIOD default of snn_analog (mock/snn_analog.v)
+  localparam SETTLE = 1500;  // analog cycles; the leak drains at most THRESHOLD (1000) at 1 per cycle
+  localparam RUN = 1000;  // analog cycles
 
   reg        clk = 1'b0;
-  reg        clk_analog = 1'b0;
   reg        rst = 1'b1;
   reg  [3:0] data = 0;
   reg  [4:0] addr = 0;
@@ -28,7 +33,6 @@ module tb_snn_top;
 
   snn_top dut (
       .clk(clk),
-      .clk_analog(clk_analog),
       .rst(rst),
       .data(data),
       .addr(addr),
@@ -38,19 +42,18 @@ module tb_snn_top;
   );
 
   always #5 clk = ~clk;
-  always #7 clk_analog = ~clk_analog;
 
   // Which neurons fired during the current scenario.
   reg [8:0] seen = 0;
   reg       counting = 1'b0;
-  always @(posedge clk_analog) if (counting) seen <= seen | out;
+  always @(out) if (counting) seen = seen | out;
 
   integer errors = 0;
   integer checks = 0;
   integer w;
   reg [91:0] ws;
 
-  // Word indices (see snn_mock.v).
+  // Word indices (see snn_analog.v).
   function integer w_pulse(input integer i);
     w_pulse = i;
   endfunction
@@ -65,14 +68,17 @@ module tb_snn_top;
     $dumpfile("tb_snn_top.vcd");
     $dumpvars(0, tb_snn_top);
 
+    repeat (3) @(negedge clk);
+    rst = 1'b0;
+
     // Register file: word w = w mod 16, plus an out-of-range write that must be ignored.
     for (w = 0; w < 23; w = w + 1) ws[w*4+:4] = w[3:0];
     load(ws);
     write_word(5'd31, 4'hF);
     checks = checks + 1;
-    if (dut.weights !== ws) begin
+    if (dut.w !== ws) begin
       errors = errors + 1;
-      $display("rf: weights=%h, expected %h", dut.weights, ws);
+      $display("rf: weights=%h, expected %h", dut.w, ws);
     end
 
     ws = {92{1'b1}};
@@ -120,15 +126,12 @@ module tb_snn_top;
 
   task run(input [2:0] in_v, input [8:0] expected, input [8*24:1] name);
     begin
-      @(negedge clk_analog);
-      rst = 1'b1;
-      in  = 3'b000;
-      @(negedge clk_analog);
-      rst = 1'b0;
+      in = 3'b000;
+      #(SETTLE * CLK_PERIOD);
       in = in_v;
-      seen = 0;
+      seen = out;
       counting = 1'b1;
-      repeat (RUN) @(negedge clk_analog);
+      #(RUN * CLK_PERIOD);
       counting = 1'b0;
       in = 3'b000;
       checks = checks + 1;
