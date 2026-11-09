@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Behavioral mock of the neuron's threshold comparator (will become analog).
 //
 // While voltage > THRESHOLD, countdown is reloaded with DURATION; otherwise

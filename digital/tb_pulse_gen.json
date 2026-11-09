@@ -1,0 +1,210 @@
+{
+  "extensionVersion": "1.6.1",
+  "fileName": "/foss/designs/engn2912e-project/digital/tb_pulse_gen.vcd",
+  "markerTime": null,
+  "altMarkerTime": null,
+  "displayTimeUnit": "µs",
+  "selectedSignal": null,
+  "zoomRatio": 0.3692995529061103,
+  "scrollLeft": 0,
+  "defaultPixelTime": 100,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 16,
+      "name": "rst",
+      "scopePath": [
+        "tb_pulse_gen",
+        "dut"
+      ],
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "rst",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 3,
+      "name": "clk",
+      "scopePath": [
+        "tb_pulse_gen"
+      ],
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "clk",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "signal-group",
+      "groupName": "tb_pulse_gen.dut.en[2:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "en",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 15,
+              "signalId": 14,
+              "signalWidth": 3,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "en[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "en",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 15,
+              "signalId": 14,
+              "signalWidth": 3,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "en[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "en",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 15,
+              "signalId": 14,
+              "signalWidth": 3,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "en[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
+    },
+    {
+      "dataType": "signal-group",
+      "groupName": "tb_pulse_gen.dut.pulse[2:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 26,
+              "signalId": 24,
+              "signalWidth": 3,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 26,
+              "signalId": 24,
+              "signalWidth": 3,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 26,
+              "signalId": 24,
+              "signalWidth": 3,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
+    }
+  ]
+}

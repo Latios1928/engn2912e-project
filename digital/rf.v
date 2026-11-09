@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Weight register file: NUM_WORDS words of WIDTH bits, one write port, all
 // words read out in parallel on weights (word w at weights[w*WIDTH +: WIDTH]).
 //
@@ -5,10 +7,10 @@
 // addresses >= NUM_WORDS are ignored. There is no reset (like an SRAM), so
 // every word must be written before it is used.
 //
-// For the SNN, word w is synapse w in the map documented in analog/mock/snn.v.
+// For the SNN, word w is synapse w in the map documented in mock/snn_analog.v.
 module rf #(
     parameter NUM_WORDS = 23,
-    parameter WIDTH     = 3,
+    parameter WIDTH     = 4,
     parameter AW        = (NUM_WORDS > 1) ? $clog2(NUM_WORDS) : 1
 ) (
     input  wire                       clk,

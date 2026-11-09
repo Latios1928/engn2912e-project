@@ -1,19 +1,21 @@
+`timescale 1ns / 1ns
+
 // Self-checking testbench for neuron (and the comparator inside it) and dac.
 //
 // A reference model of the neuron spec runs alongside the DUT; voltage and
 // active must match it every cycle. The stimulus covers a normal fire, the
-// DURATION+1-cycle active window with voltage held at 0, zero input, and
-// saturation at 16'hFFFF. The first fire is also checked against a
+// DURATION+1-cycle active window with voltage held at 0, zero input, the
+// leak down to 0, and saturation at 16'hFFFF. The first fire is also checked against a
 // hand-computed cycle and window length. The dac is checked exhaustively.
 //
 // Run:
 //   iverilog -g2012 -Wall -o sim.vvp comparator.v dac.v neuron.v tb_neuron.v && vvp sim.vvp
 module tb_neuron;
+  localparam LEAK = 1;
   localparam INDEGREE = 2;
   localparam DURATION = 3;
   localparam THRESHOLD = 100;
   localparam GAIN = 16;
-  localparam [15:0] G = GAIN;
 
   reg                    clk = 1'b0;
   reg                    rst = 1'b1;
@@ -22,6 +24,7 @@ module tb_neuron;
 
   neuron #(
       .INDEGREE (INDEGREE),
+      .LEAK     (LEAK),
       .DURATION (DURATION),
       .THRESHOLD(THRESHOLD)
   ) dut (
@@ -32,7 +35,7 @@ module tb_neuron;
   );
 
   reg         dac_active;
-  reg  [ 2:0] dac_weight;
+  reg  [ 3:0] dac_weight;
   wire [15:0] dac_current;
 
   dac #(
@@ -55,7 +58,7 @@ module tb_neuron;
     sum = mv;
     for (k = 0; k < INDEGREE; k = k + 1) sum = sum + $signed({16'd0, currents[k*16+:16]});
     if (rst || mc > 0) mv <= 0;
-    else mv <= (sum > 65535) ? 65535 : sum;
+    else mv <= (sum > 65535) ? 65535 : (sum > LEAK) ? sum - LEAK : 0;
     if (rst) mc <= 0;
     else if (mv > THRESHOLD) mc <= DURATION;
     else if (mc > 0) mc <= mc - 1;
@@ -96,6 +99,21 @@ module tb_neuron;
       @(negedge clk);
     end
 
+    // Leak: charge to 5 per cycle for 8 cycles (below THRESHOLD), then no
+    // input. The voltage must fall by LEAK per cycle and stop at 0.
+    currents = {16'd0, 16'd5 + LEAK[15:0]};
+    repeat (8) begin
+      check();
+      @(negedge clk);
+    end
+    expect_int("charged", $signed({16'd0, dut.voltage}), 8 * 5);
+    currents = 0;
+    repeat (8 * 5 / LEAK + 5) begin
+      check();
+      @(negedge clk);
+    end
+    expect_int("leaked to 0", $signed({16'd0, dut.voltage}), 0);
+
     // Sum of voltage and two max currents overflows 16 bits: must saturate.
     currents = {16'hFFFF, 16'hFFFF};
     repeat (10) begin
@@ -105,11 +123,11 @@ module tb_neuron;
     end
     expect_int("saturated", saturated, 1);
 
-    for (d = 0; d < 16; d = d + 1) begin
-      {dac_active, dac_weight} = d[3:0];
+    for (d = 0; d < 32; d = d + 1) begin
+      {dac_active, dac_weight} = d[4:0];
       #1;
       checks = checks + 1;
-      if (dac_current !== (dac_active ? {13'd0, dac_weight} * G : 16'd0)) begin
+      if (dac_current !== (dac_active ? {12'd0, dac_weight} * GAIN[15:0] : 16'd0)) begin
         errors = errors + 1;
         $display("dac: active=%b weight=%0d current=%0d", dac_active, dac_weight, dac_current);
       end
