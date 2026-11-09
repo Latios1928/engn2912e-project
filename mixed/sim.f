@@ -4,5 +4,5 @@
 ../digital/snn_digital.v
 ../digital/rf.v
 ../digital/pulse_gen.v
-snn_analog_stub.v
+../analog/snn/snn_analog.v
 snn_ms_tb.v

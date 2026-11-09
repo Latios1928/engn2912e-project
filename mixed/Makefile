@@ -18,7 +18,7 @@ SETTLE     ?= 2000
 RUN        ?= 3000
 
 SPICEBIND := /foss/tools/spicebind
-VSRC := sim.f snn_ms_tb.v snn_analog_stub.v $(ROOT)/snn_top.v $(wildcard $(ROOT)/digital/*.v)
+VSRC := sim.f snn_ms_tb.v $(ROOT)/analog/snn/snn_analog.v $(ROOT)/snn_top.v $(wildcard $(ROOT)/digital/*.v)
 PFX  := -Psnn_ms_tb
 SCHEMATICS := snn_ms_tb.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
               $(wildcard $(ROOT)/analog/neuron/DAC.s* $(ROOT)/analog/neuron/DPI.s* \

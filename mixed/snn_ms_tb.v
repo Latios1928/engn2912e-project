@@ -1,6 +1,6 @@
 // Mixed-signal testbench: the chip top (snn_top.v, with digital/snn_digital.v: rf and pulse_gen)
 // runs in Icarus; the 3-5-1 network snn_analog inside it is transistor-level in
-// ngspice through SpiceBind (see snn_analog_stub.v).
+// ngspice through SpiceBind (see ../analog/snn/snn_analog.v).
 // Same scenarios as ../mock/tb_snn_top.v:
 //   1. all weights max, in = 000             -> nothing fires
 //   2. only pulse->input weights, in = 101   -> only input neurons 0 and 2

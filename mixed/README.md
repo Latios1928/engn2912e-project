@@ -6,9 +6,9 @@ and input pulse generator) runs as Verilog in Icarus.
 The 3-5-1 network is transistor-level in ngspice
 (`analog/snn/snn_analog.sch`: 23 `DAC`, 9 `DPI`, 9 `neuron_sized`).
 [SpiceBind](https://themperek.github.io/spicebind) couples the two through VPI:
-an empty Verilog module, `snn_analog_stub.v`, stands in for the analog block.
+an empty Verilog module, `../analog/snn/snn_analog.v`, stands in for the analog block.
 The top instantiates `snn_analog` without defining it, so this build compiles the
-stub where `../mock/` compiles its behavioral model.
+black box where `../mock/` compiles its behavioral model.
 
 | In `../mock/snn_analog.v` | In this simulation |
 |---|---|
@@ -90,7 +90,6 @@ Known limitations:
 | File | Purpose |
 |---|---|
 | `snn_ms_tb.v` | Verilog testbench: instantiates `snn_top`, runs the scenarios and checks the spikes |
-| `snn_analog_stub.v` | Empty `snn_analog` that SpiceBind connects to the SPICE network |
 | `sim.f` | File list of this build (compare `../mock/sim.f`) |
 | `snn_ms_tb.sch` | SPICE side: `snn_analog`, supplies, biases, models, `external` sources for Verilog-driven nets |
 | `no_passwd_shim.c` | `LD_PRELOAD` shim for the `libngspice` crash below |

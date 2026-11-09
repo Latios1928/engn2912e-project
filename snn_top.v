@@ -7,9 +7,9 @@
 // input[2:0]}. See digital/snn_digital.v for the other ports.
 //
 // snn_analog is not defined here: the build supplies it, either the
-// behavioral model in mock/ or, in mixed/, an empty module that SpiceBind
-// connects to the transistor-level network. On the chip it is the analog
-// macro.
+// behavioral model in mock/ or, in mixed/, the empty black box
+// analog/snn/snn_analog.v that SpiceBind connects to the transistor-level
+// network. On the chip it is the analog macro (same black box).
 module snn_top #(
     parameter PULSE_PERIOD = 200,  // clk cycles
     parameter PULSE_WIDTH  = 10    // clk cycles
