@@ -13,7 +13,7 @@
 // clk and clk_analog run at unrelated periods. "Max" weight is 4'hF.
 //
 // Run (from the repo root):
-//   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp digital/rf.v analog/mock/*.v snn_top.v tb_snn_top.v && vvp sim.vvp
+//   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp ../digital/rf.v *.v && vvp sim.vvp
 module tb_snn_top;
   localparam RUN = 1000;
 
@@ -50,7 +50,7 @@ module tb_snn_top;
   integer w;
   reg [91:0] ws;
 
-  // Word indices (see analog/mock/snn.v).
+  // Word indices (see snn_mock.v).
   function integer w_pulse(input integer i);
     w_pulse = i;
   endfunction

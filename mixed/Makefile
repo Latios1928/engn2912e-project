@@ -18,7 +18,7 @@ SETTLE     ?= 2000
 RUN        ?= 3000
 
 SPICEBIND := /foss/tools/spicebind
-VSRC := snn_ms_tb.v $(ROOT)/digital/rf.v $(ROOT)/analog/mock/pulse_gen.v
+VSRC := snn_ms_tb.v $(ROOT)/digital/rf.v $(ROOT)/mock/pulse_gen.v
 PFX  := -Psnn_ms_tb
 SCHEMATICS := snn_ms_tb.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
               $(wildcard $(ROOT)/analog/neuron/DAC.s* $(ROOT)/analog/neuron/DPI.s* \

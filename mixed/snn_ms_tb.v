@@ -1,6 +1,6 @@
 // Mixed-signal testbench: rf and the pulse generators run here in Icarus; the
 // 3-5-1 network (snn_analog) is transistor-level in ngspice through SpiceBind.
-// Same scenarios as ../tb_snn_top.v:
+// Same scenarios as ../mock/tb_snn_top.v:
 //   1. all weights max, in = 000             -> nothing fires
 //   2. only pulse->input weights, in = 101   -> only input neurons 0 and 2
 //   3. one path in1 -> hid2 -> out, in = 111 -> input 1, hidden 2, output

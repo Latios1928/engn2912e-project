@@ -11,7 +11,7 @@
 //   word 18..22  hidden j  -> output       (word 18 + j)
 //
 // out = {output, hidden[4:0], input[2:0]} (active of every neuron).
-module snn #(
+module snn_mock #(
     parameter DURATION     = 4,
     parameter THRESHOLD    = 1000,
     parameter GAIN         = 16,

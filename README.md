@@ -1,5 +1,15 @@
-===== ENGN 2912E Final Project =====
-Timeline/Division of Responsibilities 
+# ENGN 2912E Final Project
+
+## Layout
+
+| Folder | Contents |
+|---|---|
+| `analog/` | Analog modules: `neuron/` (DAC, DPI, neuron, testbenches), `snn/` (the 3-5-1 network), `testbenches/` |
+| `digital/` | Digital modules that go into the chip (`rf.v`) |
+| `mock/` | Behavioral mocks of the analog blocks, `snn_top.v`, and the pure-digital end-to-end test |
+| `mixed/` | End-to-end test with as many analog modules as exist; the rest are Verilog |
+| `librelane/` | Physical design of `snn_top` (digital mocks) |
+| `specifications/` | Specs given to the AI, and how it is used |
 
 ## TODO
 

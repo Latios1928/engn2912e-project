@@ -7,7 +7,7 @@ The 3-5-1 network is transistor-level in ngspice
 [SpiceBind](https://themperek.github.io/spicebind) couples the two through VPI:
 an empty Verilog module stands in for the analog block.
 
-| Mock block (`analog/mock/`) | In this simulation |
+| Mock block (`../mock/`) | In this simulation |
 |---|---|
 | `dac.v` | `analog/neuron/DAC.sch` (weights 1:2:3:4, 15 nA unit) |
 | `neuron.v` + `comparator.v` | `analog/neuron/DPI.sch` → `analog/neuron/neuron_sized.sch` |

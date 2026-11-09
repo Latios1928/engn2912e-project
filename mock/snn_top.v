@@ -4,7 +4,7 @@
 // (analog mock, clk_analog).
 //
 // Weights are written one 4-bit word at a time through data/addr/wren; see
-// analog/mock/snn.v for the address of each synapse. in[i] enables input
+// snn_mock.v for the address of each synapse. in[i] enables input
 // pulse generator i, and out is the active signal of all 9 neurons:
 // {output, hidden[4:0], input[2:0]}.
 module snn_top #(
@@ -37,13 +37,13 @@ module snn_top #(
       .weights(weights)
   );
 
-  snn #(
+  snn_mock #(
       .DURATION(DURATION),
       .THRESHOLD(THRESHOLD),
       .GAIN(GAIN),
       .PULSE_PERIOD(PULSE_PERIOD),
       .PULSE_WIDTH(PULSE_WIDTH)
-  ) u_snn (
+  ) u_snn_mock (
       .clk_analog(clk_analog),
       .rst(rst),
       .weights(weights),
