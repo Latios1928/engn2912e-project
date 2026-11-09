@@ -1,35 +1,22 @@
 {
-  "extensionVersion": "1.5.4",
+  "extensionVersion": "1.6.1",
   "fileName": "/foss/designs/engn2912e-project/digital/tb_pulse_gen.vcd",
   "markerTime": null,
   "altMarkerTime": null,
-  "displayTimeUnit": "s",
-  "selectedSignal": {
-    "name": "tb_pulse_gen.dut.pulse",
-    "msb": -1,
-    "lsb": -1
-  },
-  "zoomRatio": 3.0031847133757963,
+  "displayTimeUnit": "µs",
+  "selectedSignal": null,
+  "zoomRatio": 0.3692995529061103,
   "scrollLeft": 0,
   "defaultPixelTime": 100,
   "displayedSignals": [
     {
       "dataType": "netlist-variable",
-      "netlistId": 9,
-      "name": "tb_pulse_gen.dut.clk_analog",
-      "numberFormat": "binary",
-      "colorIndex": 0,
-      "rowHeight": 1,
-      "verticalScale": 1,
-      "nameType": "fullPath",
-      "customName": "clk_analog",
-      "renderType": "binary",
-      "valueLinkEnable": false
-    },
-    {
-      "dataType": "netlist-variable",
-      "netlistId": 12,
-      "name": "tb_pulse_gen.dut.rst",
+      "netlistId": 16,
+      "name": "rst",
+      "scopePath": [
+        "tb_pulse_gen",
+        "dut"
+      ],
       "numberFormat": "binary",
       "colorIndex": 0,
       "rowHeight": 1,
@@ -41,29 +28,183 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 10,
-      "name": "tb_pulse_gen.dut.en",
+      "netlistId": 3,
+      "name": "clk",
+      "scopePath": [
+        "tb_pulse_gen"
+      ],
       "numberFormat": "binary",
       "colorIndex": 0,
       "rowHeight": 1,
       "verticalScale": 1,
       "nameType": "fullPath",
-      "customName": "en",
+      "customName": "clk",
       "renderType": "binary",
       "valueLinkEnable": false
     },
     {
-      "dataType": "netlist-variable",
-      "netlistId": 11,
-      "name": "tb_pulse_gen.dut.pulse",
-      "numberFormat": "binary",
-      "colorIndex": 0,
-      "rowHeight": 1,
-      "verticalScale": 1,
-      "nameType": "fullPath",
-      "customName": "pulse",
-      "renderType": "binary",
-      "valueLinkEnable": false
+      "dataType": "signal-group",
+      "groupName": "tb_pulse_gen.dut.en[2:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "en",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 15,
+              "signalId": 14,
+              "signalWidth": 3,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "en[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "en",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 15,
+              "signalId": 14,
+              "signalWidth": 3,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "en[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "en",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 15,
+              "signalId": 14,
+              "signalWidth": 3,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "en[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
+    },
+    {
+      "dataType": "signal-group",
+      "groupName": "tb_pulse_gen.dut.pulse[2:0]",
+      "collapseState": 2,
+      "children": [
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 26,
+              "signalId": 24,
+              "signalWidth": 3,
+              "msb": 2,
+              "lsb": 2
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[2]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 26,
+              "signalId": 24,
+              "signalWidth": 3,
+              "msb": 1,
+              "lsb": 1
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[1]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        },
+        {
+          "dataType": "custom-variable",
+          "source": [
+            {
+              "name": "pulse",
+              "scopePath": [
+                "tb_pulse_gen",
+                "dut"
+              ],
+              "netlistId": 26,
+              "signalId": 24,
+              "signalWidth": 3,
+              "msb": 0,
+              "lsb": 0
+            }
+          ],
+          "numberFormat": "binary",
+          "colorIndex": 0,
+          "rowHeight": 1,
+          "verticalScale": 1,
+          "nameType": "fullPath",
+          "customName": "pulse[0]",
+          "renderType": "binary",
+          "valueLinkEnable": false
+        }
+      ]
     }
   ]
 }
