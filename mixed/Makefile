@@ -42,7 +42,7 @@ no_passwd_shim.so: no_passwd_shim.c
 	gcc -shared -fPIC -o $@ $<
 
 run: snn_ms_tb.spice no_passwd_shim.so
-	iverilog -g2012 -Wall -Wno-timescale -s snn_ms_tb -o snn_ms_tb.vvp \
+	iverilog -g2012 -Wall -s snn_ms_tb -o snn_ms_tb.vvp \
 	  $(PFX).SCEN_FIRST=$(SCEN_FIRST) $(PFX).SCEN_LAST=$(SCEN_LAST) \
 	  $(PFX).SETTLE=$(SETTLE) $(PFX).RUN=$(RUN) $(VSRC)
 	@rm -f dump.raw

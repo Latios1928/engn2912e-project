@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Behavioral mock of a synapse DAC (will become analog).
 //
 // current = active ? weight * GAIN : 0. Combinational.

@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Behavioral mock of an integrate-and-fire neuron (will become analog).
 //
 // Every clk_analog cycle, voltage increases by the sum of the INDEGREE input

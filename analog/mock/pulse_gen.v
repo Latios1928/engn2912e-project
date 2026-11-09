@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Behavioral mock of the input pulse generator (will become analog).
 //
 // While en is high, pulse is high for the first WIDTH cycles of every PERIOD

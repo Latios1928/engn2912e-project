@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Self-checking testbench for snn_top.
 //
 // First checks that words written through data/addr/wren land in the right

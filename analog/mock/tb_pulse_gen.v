@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Self-checking testbench for pulse_gen.
 //
 // With en high, pulse must be high exactly when (cycles since en rose) mod

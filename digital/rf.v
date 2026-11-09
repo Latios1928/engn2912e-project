@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Weight register file: NUM_WORDS words of WIDTH bits, one write port, all
 // words read out in parallel on weights (word w at weights[w*WIDTH +: WIDTH]).
 //

@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Top level: weight register file (digital, clk) driving the 3-5-1 SNN
 // (analog mock, clk_analog).
 //

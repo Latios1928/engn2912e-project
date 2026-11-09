@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Self-checking testbench for neuron (and the comparator inside it) and dac.
 //
 // A reference model of the neuron spec runs alongside the DUT; voltage and

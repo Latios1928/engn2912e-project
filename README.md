@@ -14,12 +14,10 @@ Timeline/Division of Responsibilities
 - [ ] Add scenarios with intermediate weights once the DAC is binary; run corners.
 
 ### Digital
-- [ ] Decide the weight-loading path: pins → `deserializer_tdm` → `rf`, SRAM → `sram_weight_loader`, or `rf` driven directly (current). `serializer_tdm`, `deserializer_tdm` and `sram_weight_loader` are not connected to `snn_top` yet.
-- [ ] Add a unit testbench for `rf` (out-of-range addresses, back-to-back writes).
-- [ ] `tb_sram_weight_loader`: check that `done` stays low during the aborted pass.
-- [ ] Fix the two Verilator width warnings in `serializer_tdm.v` and `deserializer_tdm.v`. See [digital/README.md](digital/README.md).
+- [ ] Add a unit testbench for `rf` (back-to-back writes; out-of-range writes are already covered by `tb_snn_top`).
 
 ### Physical design
+- [ ] Re-run LibreLane: the checked-in `snn_top` netlist and GDS in [librelane/snn_top/results/](librelane/snn_top/results/) predate the 4-bit weights (`data` is still 3 bits).
 - [ ] Fix the 57 max-slew violations in the LibreLane run of `snn_top`. See [librelane/snn_top/](librelane/snn_top/).
 
 ### Docs

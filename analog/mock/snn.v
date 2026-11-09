@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 // Behavioral mock of the 3-5-1 spiking neural network (will become analog).
 //
 // in[i] enables pulse generator i, whose pulses reach input neuron i through
