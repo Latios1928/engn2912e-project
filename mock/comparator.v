@@ -1,6 +1,7 @@
 `timescale 1ns / 1ns
 
-// Behavioral mock of the neuron's threshold comparator (will become analog).
+// Behavioral model of the neuron's threshold comparator; part of the
+// behavioral snn_analog (snn_analog.v).
 //
 // While voltage > THRESHOLD, countdown is reloaded with DURATION; otherwise
 // it counts down to 0. active = (countdown != 0), so active rises on the

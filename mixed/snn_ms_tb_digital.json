@@ -5,13 +5,13 @@
   "altMarkerTime": null,
   "displayTimeUnit": "µs",
   "selectedSignal": null,
-  "zoomRatio": 0.00006131994674518523,
+  "zoomRatio": 6.131994674518523e-05,
   "scrollLeft": 0,
   "defaultPixelTime": 100000,
   "displayedSignals": [
     {
       "dataType": "signal-group",
-      "groupName": "snn_ms_tb.in[2:0]",
+      "groupName": "snn_ms_tb.in[1:0]",
       "collapseState": 2,
       "children": [
         {
@@ -24,31 +24,7 @@
               ],
               "netlistId": 13,
               "signalId": 13,
-              "signalWidth": 3,
-              "msb": 2,
-              "lsb": 2
-            }
-          ],
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "fullPath",
-          "customName": "in[2]",
-          "renderType": "binary",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "custom-variable",
-          "source": [
-            {
-              "name": "in",
-              "scopePath": [
-                "snn_ms_tb"
-              ],
-              "netlistId": 13,
-              "signalId": 13,
-              "signalWidth": 3,
+              "signalWidth": 2,
               "msb": 1,
               "lsb": 1
             }
@@ -72,7 +48,7 @@
               ],
               "netlistId": 13,
               "signalId": 13,
-              "signalWidth": 3,
+              "signalWidth": 2,
               "msb": 0,
               "lsb": 0
             }
@@ -90,7 +66,7 @@
     },
     {
       "dataType": "signal-group",
-      "groupName": "snn_ms_tb.pulse[2:0]",
+      "groupName": "snn_ms_tb.pulse[1:0]",
       "collapseState": 2,
       "children": [
         {
@@ -103,31 +79,7 @@
               ],
               "netlistId": 2,
               "signalId": 2,
-              "signalWidth": 3,
-              "msb": 2,
-              "lsb": 2
-            }
-          ],
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "fullPath",
-          "customName": "pulse[2]",
-          "renderType": "binary",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "custom-variable",
-          "source": [
-            {
-              "name": "pulse",
-              "scopePath": [
-                "snn_ms_tb"
-              ],
-              "netlistId": 2,
-              "signalId": 2,
-              "signalWidth": 3,
+              "signalWidth": 2,
               "msb": 1,
               "lsb": 1
             }
@@ -151,7 +103,7 @@
               ],
               "netlistId": 2,
               "signalId": 2,
-              "signalWidth": 3,
+              "signalWidth": 2,
               "msb": 0,
               "lsb": 0
             }
@@ -169,7 +121,7 @@
     },
     {
       "dataType": "signal-group",
-      "groupName": "snn_ms_tb.spike[8:0]",
+      "groupName": "snn_ms_tb.spike[4:0]",
       "collapseState": 2,
       "children": [
         {
@@ -182,103 +134,7 @@
               ],
               "netlistId": 0,
               "signalId": 0,
-              "signalWidth": 9,
-              "msb": 8,
-              "lsb": 8
-            }
-          ],
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "custom",
-          "customName": "spike[8] : out",
-          "renderType": "binary",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "custom-variable",
-          "source": [
-            {
-              "name": "spike",
-              "scopePath": [
-                "snn_ms_tb"
-              ],
-              "netlistId": 0,
-              "signalId": 0,
-              "signalWidth": 9,
-              "msb": 7,
-              "lsb": 7
-            }
-          ],
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "custom",
-          "customName": "spike[7] : hid[4]",
-          "renderType": "binary",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "custom-variable",
-          "source": [
-            {
-              "name": "spike",
-              "scopePath": [
-                "snn_ms_tb"
-              ],
-              "netlistId": 0,
-              "signalId": 0,
-              "signalWidth": 9,
-              "msb": 6,
-              "lsb": 6
-            }
-          ],
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "custom",
-          "customName": "spike[6] : hid[3]",
-          "renderType": "binary",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "custom-variable",
-          "source": [
-            {
-              "name": "spike",
-              "scopePath": [
-                "snn_ms_tb"
-              ],
-              "netlistId": 0,
-              "signalId": 0,
-              "signalWidth": 9,
-              "msb": 5,
-              "lsb": 5
-            }
-          ],
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "custom",
-          "customName": "spike[5] : hid[2]",
-          "renderType": "binary",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "custom-variable",
-          "source": [
-            {
-              "name": "spike",
-              "scopePath": [
-                "snn_ms_tb"
-              ],
-              "netlistId": 0,
-              "signalId": 0,
-              "signalWidth": 9,
+              "signalWidth": 5,
               "msb": 4,
               "lsb": 4
             }
@@ -288,7 +144,7 @@
           "rowHeight": 1,
           "verticalScale": 1,
           "nameType": "custom",
-          "customName": "spike[4] : hid[1]",
+          "customName": "spike[4] : out",
           "renderType": "binary",
           "valueLinkEnable": false
         },
@@ -302,7 +158,7 @@
               ],
               "netlistId": 0,
               "signalId": 0,
-              "signalWidth": 9,
+              "signalWidth": 5,
               "msb": 3,
               "lsb": 3
             }
@@ -312,7 +168,7 @@
           "rowHeight": 1,
           "verticalScale": 1,
           "nameType": "custom",
-          "customName": "spike[3] : hid[0]",
+          "customName": "spike[3] : hid[1]",
           "renderType": "binary",
           "valueLinkEnable": false
         },
@@ -326,7 +182,7 @@
               ],
               "netlistId": 0,
               "signalId": 0,
-              "signalWidth": 9,
+              "signalWidth": 5,
               "msb": 2,
               "lsb": 2
             }
@@ -336,7 +192,7 @@
           "rowHeight": 1,
           "verticalScale": 1,
           "nameType": "custom",
-          "customName": "spike[2] : in[2]",
+          "customName": "spike[2] : hid[0]",
           "renderType": "binary",
           "valueLinkEnable": false
         },
@@ -350,7 +206,7 @@
               ],
               "netlistId": 0,
               "signalId": 0,
-              "signalWidth": 9,
+              "signalWidth": 5,
               "msb": 1,
               "lsb": 1
             }
@@ -374,7 +230,7 @@
               ],
               "netlistId": 0,
               "signalId": 0,
-              "signalWidth": 9,
+              "signalWidth": 5,
               "msb": 0,
               "lsb": 0
             }

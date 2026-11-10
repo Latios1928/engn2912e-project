@@ -1,6 +1,7 @@
 `timescale 1ns / 1ns
 
-// Behavioral mock of an integrate-and-fire neuron (will become analog).
+// Behavioral model of an integrate-and-fire neuron (analog/neuron/DPI.sch and
+// neuron_sized.sch); part of the behavioral snn_analog (snn_analog.v).
 //
 // Every clk_analog cycle, voltage increases by the sum of the INDEGREE input
 // currents, saturating at 16'hFFFF (the mock supply rail), and then drops by

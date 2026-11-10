@@ -9,7 +9,7 @@
 //
 // For the SNN, word w is synapse w in the map documented in mock/snn_analog.v.
 module rf #(
-    parameter NUM_WORDS = 23,
+    parameter NUM_WORDS = 8,
     parameter WIDTH     = 4,
     parameter AW        = (NUM_WORDS > 1) ? $clog2(NUM_WORDS) : 1
 ) (

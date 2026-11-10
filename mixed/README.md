@@ -3,8 +3,8 @@
 `snn_top` with every block that has an analog version replaced by it. The
 chip top (`../snn_top.v`, with `../digital/snn_digital.v`: weight register file
 and input pulse generator) runs as Verilog in Icarus.
-The 3-5-1 network is transistor-level in ngspice
-(`analog/snn/snn_analog.sch`: 23 `DAC`, 9 `DPI`, 9 `neuron_sized`).
+The 2-2-1 network is transistor-level in ngspice
+(`analog/snn/snn_analog.sch`: 8 `DAC`, 5 `DPI`, 5 `neuron_sized`).
 [SpiceBind](https://themperek.github.io/spicebind) couples the two through VPI:
 an empty Verilog module, `../analog/snn/snn_analog.v`, stands in for the analog block.
 The top instantiates `snn_analog` without defining it, so this build compiles the
@@ -33,45 +33,45 @@ make clean
 `make run` prints the testbench's lines and fails unless the summary says
 PASS. The full log is `snn_ms_tb.log`. Waveforms: analog in `snn_ms_tb.raw`
 (`.vcd` after `make vcd`, using xschem's `rawtovcd`; every trace is analog,
-so `spike[0..8]` are separate traces), digital in `snn_ms_tb_digital.vcd`.
+so `spike[0..4]` are separate traces), digital in `snn_ms_tb_digital.vcd`.
 
-| # | Weights | `in` | Must fire (`{out, hid[4:0], in[2:0]}`) |
+| # | Weights | `in` | Must fire (`{out, hid[1:0], in[1:0]}`) |
 |---|---|---|---|
-| 1 | all max (code 15) | 000 | nothing |
-| 2 | pulse → input only, max | 101 | `0_00000_101` |
-| 3 | path in1 → hid2 → out, max | 111 | `1_00100_010` |
-| 4 | as 3, hid2 → out = 0 | 111 | `0_00100_010` |
+| 1 | all max (code 15) | 00 | nothing |
+| 2 | pulse → input only, max | 01 | `0_00_01` |
+| 3 | path in1 → hid1 → out, max | 11 | `1_10_10` |
+| 4 | as 3, hid1 → out = 0 | 11 | `0_10_10` |
 
-Each scenario loads its 23 words (46 µs), waits `SETTLE` µs with `in = 0`
+Each scenario loads its 8 words (16 µs), waits `SETTLE` µs with `in = 0`
 (the analog network has no reset pin), then applies `in` for `RUN` µs.
 `clk` is 1 µs; `pulse_gen` makes one 10 µs pulse (10 cycles) every 200 µs
 (200 cycles). It samples `in` at period boundaries, so the first pulse starts
 up to 200 µs after `in` is applied, and the first-spike times below include that. Biases are copied from `analog/neuron/DACs-DPI-neuron.sch` (code
 block SOURCES in `snn_ms_tb.sch`). Maximum time step is 0.1 µs.
 
-## Results (2026-11-09, tt, 27 °C)
+## Results (2026-11-11, tt, 27 °C)
 
-`make run` (all scenarios, about 20 ms simulated) took 224 s and all 4 passed.
+`make run` (all scenarios, about 20 ms simulated) took 96 s and all 4 passed.
 First spike after `in` is applied (these include the wait for the next
 `pulse_gen` period, up to 200 µs):
 
 | Scenario | First spikes |
 |---|---|
 | 1 | none |
-| 2 | in0, in2: 518 µs |
-| 3 | in1: 479 µs → hid2: 788 µs → out: 1076 µs |
-| 4 | in1: 219 µs → hid2: 367 µs; out silent |
+| 2 | in0: 555 µs |
+| 3 | in1: 540 µs → hid1: 839 µs → out: 1118 µs |
+| 4 | in1: 321 µs → hid1: 495 µs; out silent |
 
-Accuracy of the coupling, measured earlier with a pulse generator that started
-its first pulse the moment `in` rose: scenario 3 run alone with a 2 ms settle
-gave 415 / 727 / 1020 µs through SpiceBind against 412 / 722 / 996 µs in pure
-ngspice with ideal sources (within 3 %).
+Accuracy of the coupling, measured earlier on the 3-5-1 network with a pulse
+generator that started its first pulse the moment `in` rose: scenario 3 run
+alone with a 2 ms settle gave 415 / 727 / 1020 µs through SpiceBind against
+412 / 722 / 996 µs in pure ngspice with ideal sources (within 3 %).
 
 Known limitations:
 
 - **Timing depends on history and pulse phase.** Which neurons fire is
-  reliable; first-spike times are less so. With the earlier pulse generator,
-  two full runs differing only by a 50 µs time shift gave 393 / 699 / 986 µs
+  reliable; first-spike times are less so. On the earlier 3-5-1 network with
+  the earlier pulse generator, two full runs differing only by a 50 µs time shift gave 393 / 699 / 986 µs
   and 416 / 729 / 1032 µs for scenario 3, and 287 µs and 153 µs for in1 in
   scenario 4. Do not quote first-spike times from one sequence as exact.
 - **Time step.** Keep 0.1–0.5 µs. At 0.02 µs SpiceBind came out 4–5 % early
@@ -113,4 +113,4 @@ Known limitations:
 - **xschem.** Netlist from the project root with `--rcfile xschemrc`, and check
   the result rather than the exit code (xschem returns 10 after a good
   netlist). The Makefile also stops on `IS MISSING` and on duplicate `.subckt`
-  names (CAD7: same-named subcircuits silently collapse).
+  names (same-named subcircuits silently collapse into one).

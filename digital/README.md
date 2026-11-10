@@ -16,21 +16,21 @@ The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
 - Writes `data` to word `addr` on the rising edge while `wren` is high. Writes to addresses ≥ NUM_WORDS are ignored.
 - Word `w` is at `weights[w*WIDTH +: WIDTH]`; every word is visible at once.
 - **No reset**: every word must be written before it is used.
-- The defaults match the 3-5-1 SNN's 23 synapses, each with a 4-bit binary weight (map from `../mock/snn_analog.v`):
-  - words 0–2: input pulse generator i → input neuron i
-  - words 3–17: input i → hidden j (word 3 + 3j + i)
-  - words 18–22: hidden j → output (word 18 + j)
+- The defaults match the 2-2-1 SNN's 8 synapses, each with a 4-bit binary weight (map from `../mock/snn_analog.v`):
+  - words 0–1: input pulse generator i → input neuron i
+  - words 2–5: input i → hidden j (word 2 + 2j + i)
+  - words 6–7: hidden j → output (word 6 + j)
 
-Weights are loaded directly through `data`/`addr`/`wren`. With 9 neurons and 23
+Weights are loaded directly through `data`/`addr`/`wren`. With 5 neurons and 8
 weights, pin serialization or an SRAM isn't needed.
 
 ## `snn_digital`
 
 - **Parameters:** `PULSE_PERIOD = 200`, `PULSE_WIDTH = 10` (passed to `pulse_gen`).
-- **Ports:** `clk`, `rst`, `data[3:0]`, `addr[4:0]`, `wren`, `in[2:0]` →
-  `w[91:0]`, `pulse[2:0]`.
+- **Ports:** `clk`, `rst`, `data[3:0]`, `addr[2:0]`, `wren`, `in[1:0]` →
+  `w[31:0]`, `pulse[1:0]`.
 - `rf` holds the weights (`w` is its `weights` bus) and `pulse_gen` turns `in`
-  into `pulse`. `w` and `pulse` are the inputs of `snn_analog`; its `spike[8:0]`
+  into `pulse`. `w` and `pulse` are the inputs of `snn_analog`; its `spike[4:0]`
   output goes straight to the chip's `out` pins in `../snn_top.v`.
 - The chip's pins are `clk`, `rst`, `data`, `addr`, `wren`, `in` and `out`, plus
   the analog biases and supplies (which are not Verilog signals).
@@ -38,8 +38,8 @@ weights, pin serialization or an SRAM isn't needed.
 ## `pulse_gen` (input pulse generator)
 
 - **Parameters:** `PERIOD = 200`, `WIDTH = 10` (in `clk` cycles).
-- **Ports:** `clk`, `rst` (synchronous, active high), `en[2:0]` → `pulse[2:0]`.
-- Three channels share one counter. Each period, a channel whose `en` bit was
+- **Ports:** `clk`, `rst` (synchronous, active high), `en[1:0]` → `pulse[1:0]`.
+- Two channels share one counter. Each period, a channel whose `en` bit was
   high at the end of the previous period outputs a pulse of exactly `WIDTH`
   cycles. `en` is sampled only at period boundaries, so a pulse is never cut
   short; the first pulse can start up to `PERIOD` cycles after `en` rises.
@@ -49,7 +49,7 @@ weights, pin serialization or an SRAM isn't needed.
   `PERIOD` and `WIDTH` to the same times in cycles.
 - It needs a reset, so the chip has a `rst` pin; `rf` and the analog network
   have none.
-- The chip's package exposes `in[2:0]` (these `en` bits), not `pulse[2:0]`: the
+- The chip's package exposes `in[1:0]` (these `en` bits), not `pulse[1:0]`: the
   pulse timing is fixed on chip, and `pulse` is an internal net between this
   block and `snn_analog`.
 
@@ -57,7 +57,7 @@ weights, pin serialization or an SRAM isn't needed.
 
 `tb_pulse_gen.v` checks `pulse_gen` against a reference model written from the
 spec, with random `en` changes and a mid-run reset. `rf` and `snn_digital` are
-covered by `../mock/tb_snn_top.v` (including an out-of-range write to `rf`) and
+covered by `../mock/tb_snn_top.v` (including a readback of every `rf` word) and
 by `../mixed/`. From this folder:
 
 ```bash

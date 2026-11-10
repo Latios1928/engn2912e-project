@@ -7,7 +7,7 @@
 //
 // Weights are written one 4-bit word at a time through data/addr/wren; see
 // mock/snn_analog.v for the address of each synapse and the layout of w
-// (23 words of 4 bits, word k at w[4k+3:4k]). in[i] enables input pulse
+// (8 words of 4 bits, word k at w[4k+3:4k]). in[i] enables input pulse
 // channel i. rst resets the pulse generator only.
 module snn_digital #(
     parameter PULSE_PERIOD = 200,  // clk cycles
@@ -16,17 +16,17 @@ module snn_digital #(
     input  wire        clk,
     input  wire        rst,   // synchronous, active high
     input  wire [ 3:0] data,
-    input  wire [ 4:0] addr,
+    input  wire [ 2:0] addr,
     input  wire        wren,
-    input  wire [ 2:0] in,
-    output wire [91:0] w,
-    output wire [ 2:0] pulse
+    input  wire [ 1:0] in,
+    output wire [31:0] w,
+    output wire [ 1:0] pulse
 );
 
   rf #(
-      .NUM_WORDS(23),
+      .NUM_WORDS(8),
       .WIDTH(4),
-      .AW(5)
+      .AW(3)
   ) u_rf (
       .clk(clk),
       .wren(wren),

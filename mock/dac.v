@@ -1,6 +1,7 @@
 `timescale 1ns / 1ns
 
-// Behavioral mock of a synapse DAC (will become analog).
+// Behavioral model of a synapse DAC (analog/neuron/DAC.sch); part of the
+// behavioral snn_analog (snn_analog.v).
 //
 // current = active ? weight * GAIN : 0. Combinational.
 //

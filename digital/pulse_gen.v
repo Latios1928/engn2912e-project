@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-// Input pulse generator: three channels sharing one counter.
+// Input pulse generator: two channels sharing one counter.
 //
 // Every PERIOD clk cycles, each channel whose en bit was high at the end of
 // the previous period outputs a pulse of exactly WIDTH cycles; the others stay
@@ -17,8 +17,8 @@ module pulse_gen #(
 ) (
     input  wire       clk,
     input  wire       rst,    // synchronous, active high
-    input  wire [2:0] en,
-    output reg  [2:0] pulse
+    input  wire [1:0] en,
+    output reg  [1:0] pulse
 );
   localparam CW = (PERIOD > 1) ? $clog2(PERIOD) : 1;
   localparam [CW-1:0] LAST = PERIOD - 1;
@@ -32,20 +32,20 @@ module pulse_gen #(
   end
 
   reg  [CW-1:0] cnt;  // position in the period
-  reg  [   2:0] en_q;  // en as sampled at the start of this period
+  reg  [   1:0] en_q;  // en as sampled at the start of this period
 
   wire [CW-1:0] cnt_n = (cnt == LAST) ? {CW{1'b0}} : cnt + 1'b1;
-  wire [   2:0] en_n = (cnt == LAST) ? en : en_q;
+  wire [   1:0] en_n = (cnt == LAST) ? en : en_q;
 
   always @(posedge clk) begin
     if (rst) begin
       cnt   <= {CW{1'b0}};
-      en_q  <= 3'b000;
-      pulse <= 3'b000;
+      en_q  <= 2'b00;
+      pulse <= 2'b00;
     end else begin
       cnt   <= cnt_n;
       en_q  <= en_n;
-      pulse <= en_n & {3{{1'b0, cnt_n} < W}};
+      pulse <= en_n & {2{{1'b0, cnt_n} < W}};
     end
   end
 
