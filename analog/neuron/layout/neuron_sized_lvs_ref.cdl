@@ -1,0 +1,81 @@
+* LVS reference for the neuron_sized layout (revision 2: dummy rings).
+* Same devices and nets as the xschem netlist of analog/neuron/neuron_sized.sch
+* (spike_amplifier x1 flattened as A1..A5), with these layout-only additions:
+*   - C1, C2: written as the PDK LVS cap device cap_mim_2f0fF
+*     (the schematic uses the simulation model cap_mim_2f0_m3m4_noshield)
+*   - dummy transistors, all terminals on VSS (NMOS) or VDD (PMOS):
+*       EN*/FN*/EP*/FP*  end and flank dummies inside the critical rows
+*       DB_*/DT_*        NMOS dummy rows below / above the critical NMOS row
+*       PB_*/PT_*        PMOS dummy rows below / above the critical PMOS row
+.subckt neuron_sized VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
+* spike amplifier (x1): A1/A2 diff pair, A3 tail, A4/A5 mirror
+MA1 amp_n2 VMEM tail VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MA2 net1 VT tail VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MA3 tail Vamp_bias VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MA4 amp_n2 amp_n2 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MA5 net1 amp_n2 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+* neuron
+MM1 net2 net1 net4 VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MM2 spike net2 net5 VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MM3 net2 net1 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM4 spike net2 net3 VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM5 VMEM net2 net7 VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM6 VMEM spike net6 VSS nfet_03v3 L=5u W=0.22u nf=1
+MM7 net5 VKdn VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM8 net4 VIp VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM9 net7 VNA VDD VDD pfet_03v3 L=1u W=1u nf=1
+MM10 net6 VK VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM11 VMEM Vlk VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM12 net3 VKup VDD VDD pfet_03v3 L=1u W=1u nf=1
+C1 spike VSS cap_mim_2f0fF W=10e-6 L=10e-6 m=1
+C2 VMEM VSS cap_mim_2f0fF W=22.18e-6 L=22.18e-6 m=1
+* dummies in the critical rows
+MEN1 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MFN1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MFN2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MEN2 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MEP1 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MFP1 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MFP2 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MEP2 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+* NMOS dummy rows (below / above the critical row)
+MDB_EN1 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_M11 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_M10 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_FN1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_A1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_A2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_FN2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_A3 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_M8 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_M7 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_EN2 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_EN1 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_M11 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_M10 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_FN1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_A1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_A2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_FN2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_A3 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_M8 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_M7 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_EN2 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+* PMOS dummy rows (below / above the critical row)
+MPB_EP1 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPB_M9 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPB_FP1 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_A4 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_A5 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_FP2 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_M12 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPB_EP2 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_EP1 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_M9 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_FP1 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_A4 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_A5 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_FP2 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_M12 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_EP2 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+.ends

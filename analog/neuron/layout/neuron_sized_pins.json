@@ -1,0 +1,234 @@
+{
+  "cell": "neuron_sized",
+  "units": "um",
+  "origin": "lower-left of PR boundary",
+  "bbox": [
+    0.0,
+    0.0,
+    73.76,
+    44.85
+  ],
+  "pins": [
+    {
+      "name": "VDD",
+      "layer": "Metal2",
+      "label_x": 73.46,
+      "label_y": 33.48,
+      "access": [
+        {
+          "side": "right",
+          "x1": 73.16,
+          "y1": 33.23,
+          "x2": 73.76,
+          "y2": 33.73,
+          "cx": 73.46,
+          "cy": 33.48
+        }
+      ]
+    },
+    {
+      "name": "VIp",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 20.41,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 20.21,
+          "x2": 0.6,
+          "y2": 20.61,
+          "cx": 0.3,
+          "cy": 20.41
+        }
+      ]
+    },
+    {
+      "name": "VK",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 18.01,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 17.81,
+          "x2": 0.6,
+          "y2": 18.21,
+          "cx": 0.3,
+          "cy": 18.01
+        }
+      ]
+    },
+    {
+      "name": "VKdn",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 21.21,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 21.01,
+          "x2": 0.6,
+          "y2": 21.41,
+          "cx": 0.3,
+          "cy": 21.21
+        }
+      ]
+    },
+    {
+      "name": "VKup",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 25.21,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 25.01,
+          "x2": 0.6,
+          "y2": 25.41,
+          "cx": 0.3,
+          "cy": 25.21
+        }
+      ]
+    },
+    {
+      "name": "VMEM",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 7.7,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 7.45,
+          "x2": 0.6,
+          "y2": 7.95,
+          "cx": 0.3,
+          "cy": 7.7
+        }
+      ]
+    },
+    {
+      "name": "VNA",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 22.01,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 21.81,
+          "x2": 0.6,
+          "y2": 22.21,
+          "cx": 0.3,
+          "cy": 22.01
+        }
+      ]
+    },
+    {
+      "name": "VSS",
+      "layer": "Metal1",
+      "label_x": 36.88,
+      "label_y": 0.55,
+      "access": [
+        {
+          "side": "inside",
+          "x1": 0.3,
+          "y1": 0.3,
+          "x2": 73.46,
+          "y2": 44.55,
+          "cx": 36.88,
+          "cy": 22.425
+        }
+      ]
+    },
+    {
+      "name": "VSS",
+      "layer": "Metal2",
+      "label_x": 73.46,
+      "label_y": 11.405,
+      "access": [
+        {
+          "side": "right",
+          "x1": 73.16,
+          "y1": 11.155,
+          "x2": 73.76,
+          "y2": 11.655,
+          "cx": 73.46,
+          "cy": 11.405
+        }
+      ]
+    },
+    {
+      "name": "VT",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 18.81,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 18.61,
+          "x2": 0.6,
+          "y2": 19.01,
+          "cx": 0.3,
+          "cy": 18.81
+        }
+      ]
+    },
+    {
+      "name": "Vamp_bias",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 19.61,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 19.41,
+          "x2": 0.6,
+          "y2": 19.81,
+          "cx": 0.3,
+          "cy": 19.61
+        }
+      ]
+    },
+    {
+      "name": "Vlk",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 17.21,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 17.01,
+          "x2": 0.6,
+          "y2": 17.41,
+          "cx": 0.3,
+          "cy": 17.21
+        }
+      ]
+    },
+    {
+      "name": "spike",
+      "layer": "Metal2",
+      "label_x": 73.46,
+      "label_y": 20.41,
+      "access": [
+        {
+          "side": "right",
+          "x1": 73.16,
+          "y1": 20.21,
+          "x2": 73.76,
+          "y2": 20.61,
+          "cx": 73.46,
+          "cy": 20.41
+        }
+      ]
+    }
+  ]
+}

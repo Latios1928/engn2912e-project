@@ -1,0 +1,65 @@
+* LVS reference for the DAC layout.
+* Same devices and nets as the xschem netlist of analog/neuron/DAC.sch, with these
+* layout-only changes:
+*   - multiplier devices (m=2/3/4) written out as separate unit devices (M3_1, M3_2, ...)
+*   - GND (a global in the schematic) and VDD (DNWELL tie, new) are ports
+*   - dummy transistors: DA_* ring around the current-source array (all GND),
+*     *_DL / *_DR at the ends of each switch row (all terminals on that well's body net)
+.subckt DAC Isum Vb w[3] w[2] w[1] w[0] en VDD GND
+* enable switch
+MMen Isum en X GND nfet_03v3 L=0.28u W=0.22u nf=1
+* branch A (x1): switch M1, source M2, node net4
+MM1_1 X w[0] net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MM2_1 net4 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+* branch B (x2): switch M3, source M4, node net2
+MM3_1 X w[1] net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MM3_2 X w[1] net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MM4_1 net2 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM4_2 net2 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+* branch C (x3): switch M5, source M6, node net3
+MM5_1 X w[2] net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MM5_2 X w[2] net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MM5_3 X w[2] net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MM6_1 net3 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM6_2 net3 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM6_3 net3 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+* branch D (x4): switch M7, source M8, node net1
+MM7_1 X w[3] net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MM7_2 X w[3] net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MM7_3 X w[3] net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MM7_4 X w[3] net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MM8_1 net1 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM8_2 net1 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM8_3 net1 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM8_4 net1 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+* dummies at the ends of the switch rows (all terminals on the well's body net)
+MMEN_DL GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_DR GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MA_DL net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_DR net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_DL net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_DR net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_DL net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_DR net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_DL net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_DR net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy ring around the current-source array (18 devices, all GND)
+MDA_b0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_10 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_16 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_20 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_26 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+.ends

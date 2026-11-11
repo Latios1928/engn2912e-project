@@ -1,0 +1,14 @@
+Geometric coupling report for net NET1  (window 1.0 um; not a capacitance extraction)
+Target area per layer: poly 0.7 um2, M1 62.5 um2, M2 10.9 um2
+
+net           adj-overlap    far-overlap       side-run   detail
+                      um2            um2             um
+-- signals --
+X                   0.960          0.000          18.75   M1 side 18.75 um; M1/M2 0.800 um2; M2/M1 0.160 um2
+W[3]                0.800          0.000          12.54   M1 side 12.54 um; M1/M2 0.800 um2
+VB                  0.000          0.000           4.24   M1 side 2.64 um; M2 side 1.60 um
+NET3                0.480          0.000           0.00   M1/M2 0.160 um2; M2/M1 0.320 um2
+NET2                0.320          0.000           0.00   M2/M1 0.320 um2
+NET4                0.160          0.000           0.00   M2/M1 0.160 um2
+-- supplies (shields) --
+GND                 1.800          0.000         190.64   M1 side 190.64 um; M2/M1 1.800 um2

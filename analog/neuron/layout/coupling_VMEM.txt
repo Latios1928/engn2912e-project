@@ -1,0 +1,24 @@
+Geometric coupling report for net VMEM  (window 1.0 um; not a capacitance extraction)
+Target area per layer: poly 0.5 um2, M1 1.7 um2, M2 56.0 um2, M3 0.3 um2, M4 0.3 um2, M5 507.9 um2, FuseTop 492.0 um2
+
+net           adj-overlap    far-overlap       side-run   detail
+                      um2            um2             um
+-- signals --
+TAIL                0.000          8.564           1.56   M1 side 1.56 um; FuseTop/M1 1.546 um2; FuseTop/M2 2.736 um2; M5/M1 1.546 um2; M5/M2 2.736 um2
+AMP_N2              0.000         49.185           1.56   M1 side 1.56 um; FuseTop/poly 0.647 um2; FuseTop/M1 2.917 um2; FuseTop/M2 21.028 um2; M5/poly 0.647 um2; M5/M1 2.917 um2; M5/M2 21.028 um2
+NET2                0.000          0.000           1.19   M1 side 1.19 um
+SPIKE               0.000          0.000           0.88   M1 side 0.88 um
+VLK                 0.000         14.628           0.57   M1 side 0.57 um; FuseTop/poly 1.410 um2; FuseTop/M1 3.780 um2; FuseTop/M2 2.024 um2; M5/poly 1.410 um2; M5/M1 3.980 um2; M5/M2 2.024 um2
+NET7                0.000         19.826           0.38   M1 side 0.38 um; FuseTop/M1 5.249 um2; FuseTop/M2 4.664 um2; M5/M1 5.249 um2; M5/M2 4.664 um2
+NET6                0.000         12.514           0.00   FuseTop/M1 3.841 um2; FuseTop/M2 2.416 um2; M5/M1 3.841 um2; M5/M2 2.416 um2
+NET1                0.000         11.512           0.00   FuseTop/M1 1.732 um2; FuseTop/M2 4.024 um2; M5/M1 1.732 um2; M5/M2 4.024 um2
+VT                  0.000         17.944           0.00   FuseTop/M1 8.872 um2; M5/M1 9.072 um2
+VK                  0.000         18.148           0.00   FuseTop/poly 1.410 um2; FuseTop/M1 5.220 um2; FuseTop/M2 2.344 um2; M5/poly 1.410 um2; M5/M1 5.420 um2; M5/M2 2.344 um2
+VAMP_BIAS           0.000         17.944           0.00   FuseTop/M1 8.872 um2; M5/M1 9.072 um2
+VIP                 0.000         17.944           0.00   FuseTop/M1 8.872 um2; M5/M1 9.072 um2
+VNA                 0.000         19.256           0.00   FuseTop/poly 1.410 um2; FuseTop/M1 3.804 um2; FuseTop/M2 4.268 um2; M5/poly 1.410 um2; M5/M1 4.096 um2; M5/M2 4.268 um2
+VKDN                0.000         17.944           0.00   FuseTop/M1 8.872 um2; M5/M1 9.072 um2
+VKUP                0.000         17.944           0.00   FuseTop/M1 8.872 um2; M5/M1 9.072 um2
+-- supplies (shields) --
+VDD                 4.136         80.431           0.00   M2/M1 4.136 um2; FuseTop/poly 7.513 um2; FuseTop/M1 32.702 um2; M5/poly 7.513 um2; M5/M1 32.702 um2
+VSS               498.743        583.835          22.94   poly side 0.36 um; poly/M4 0.489 um2; M1 side 0.40 um; M1/M4 0.594 um2; M2/poly 0.359 um2; M2/M1 6.791 um2; M2/M4 0.604 um2; FuseTop/poly 8.323 um2; FuseTop/M1 33.586 um2; FuseTop/M2 2.860 um2; FuseTop/M4 491.952 um2; M5/poly 8.323 um2; M5/M1 33.586 um2; M5/M2 2.860 um2; M5/M4 492.252 um2; M5 side 22.18 um
