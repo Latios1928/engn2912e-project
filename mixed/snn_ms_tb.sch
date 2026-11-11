@@ -8,8 +8,8 @@ E {}
 C {snn_analog.sym} 0 0 0 0 {name=x1}
 C {lab_pin.sym} -150 -140 0 0 {name=l0 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} -150 -120 0 0 {name=l1 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} -150 -100 0 0 {name=l2 sig_type=std_logic lab=w[91:0]}
-C {lab_pin.sym} -150 -80 0 0 {name=l3 sig_type=std_logic lab=pulse[2:0]}
+C {lab_pin.sym} -150 -100 0 0 {name=l2 sig_type=std_logic lab=w[31:0]}
+C {lab_pin.sym} -150 -80 0 0 {name=l3 sig_type=std_logic lab=pulse[1:0]}
 C {lab_pin.sym} -150 -60 0 0 {name=l4 sig_type=std_logic lab=Vb}
 C {lab_pin.sym} -150 -40 0 0 {name=l5 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} -150 -20 0 0 {name=l6 sig_type=std_logic lab=VT_dpi}
@@ -21,7 +21,7 @@ C {lab_pin.sym} -150 80 0 0 {name=l11 sig_type=std_logic lab=VKup}
 C {lab_pin.sym} -150 100 0 0 {name=l12 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} -150 120 0 0 {name=l13 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} -150 140 0 0 {name=l14 sig_type=std_logic lab=VT}
-C {lab_pin.sym} 150 0 0 1 {name=lsp sig_type=std_logic lab=spike[8:0]}
+C {lab_pin.sym} 150 0 0 1 {name=lsp sig_type=std_logic lab=spike[4:0]}
 C {devices/code_shown.sym} -700 -300 0 0 {name=MODELS only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -64,69 +64,8 @@ Vw[28] w[28] 0 0 external
 Vw[29] w[29] 0 0 external
 Vw[30] w[30] 0 0 external
 Vw[31] w[31] 0 0 external
-Vw[32] w[32] 0 0 external
-Vw[33] w[33] 0 0 external
-Vw[34] w[34] 0 0 external
-Vw[35] w[35] 0 0 external
-Vw[36] w[36] 0 0 external
-Vw[37] w[37] 0 0 external
-Vw[38] w[38] 0 0 external
-Vw[39] w[39] 0 0 external
-Vw[40] w[40] 0 0 external
-Vw[41] w[41] 0 0 external
-Vw[42] w[42] 0 0 external
-Vw[43] w[43] 0 0 external
-Vw[44] w[44] 0 0 external
-Vw[45] w[45] 0 0 external
-Vw[46] w[46] 0 0 external
-Vw[47] w[47] 0 0 external
-Vw[48] w[48] 0 0 external
-Vw[49] w[49] 0 0 external
-Vw[50] w[50] 0 0 external
-Vw[51] w[51] 0 0 external
-Vw[52] w[52] 0 0 external
-Vw[53] w[53] 0 0 external
-Vw[54] w[54] 0 0 external
-Vw[55] w[55] 0 0 external
-Vw[56] w[56] 0 0 external
-Vw[57] w[57] 0 0 external
-Vw[58] w[58] 0 0 external
-Vw[59] w[59] 0 0 external
-Vw[60] w[60] 0 0 external
-Vw[61] w[61] 0 0 external
-Vw[62] w[62] 0 0 external
-Vw[63] w[63] 0 0 external
-Vw[64] w[64] 0 0 external
-Vw[65] w[65] 0 0 external
-Vw[66] w[66] 0 0 external
-Vw[67] w[67] 0 0 external
-Vw[68] w[68] 0 0 external
-Vw[69] w[69] 0 0 external
-Vw[70] w[70] 0 0 external
-Vw[71] w[71] 0 0 external
-Vw[72] w[72] 0 0 external
-Vw[73] w[73] 0 0 external
-Vw[74] w[74] 0 0 external
-Vw[75] w[75] 0 0 external
-Vw[76] w[76] 0 0 external
-Vw[77] w[77] 0 0 external
-Vw[78] w[78] 0 0 external
-Vw[79] w[79] 0 0 external
-Vw[80] w[80] 0 0 external
-Vw[81] w[81] 0 0 external
-Vw[82] w[82] 0 0 external
-Vw[83] w[83] 0 0 external
-Vw[84] w[84] 0 0 external
-Vw[85] w[85] 0 0 external
-Vw[86] w[86] 0 0 external
-Vw[87] w[87] 0 0 external
-Vw[88] w[88] 0 0 external
-Vw[89] w[89] 0 0 external
-Vw[90] w[90] 0 0 external
-Vw[91] w[91] 0 0 external
 Vpulse[0] pulse[0] 0 0 external
 Vpulse[1] pulse[1] 0 0 external
-Vpulse[2] pulse[2] 0 0 external
 "}
 C {devices/code_shown.sym} 300 -300 0 0 {name=SOURCES only_toplevel=true
 value="
@@ -156,11 +95,11 @@ C {devices/code_shown.sym} 300 250 0 0 {name=TRAN only_toplevel=true
 value="
 * Gear integration: trap makes the DPI output current ring after each reset (entry 46)
 .options method=gear
-.save v(spike[0]) v(spike[1]) v(spike[2]) v(spike[3]) v(spike[4]) v(spike[5]) v(spike[6]) v(spike[7]) v(spike[8]) v(pulse[0]) v(pulse[1]) v(pulse[2]) v(scen[0]) v(scen[1]) v(scen[2]) v(running) v(done) v(x1.VMEM_0) v(x1.VMEM_1) v(x1.VMEM_2) v(x1.VMEM_3) v(x1.VMEM_4) v(x1.VMEM_5) v(x1.VMEM_6) v(x1.VMEM_7) v(x1.VMEM_8)
+.save v(spike[0]) v(spike[1]) v(spike[2]) v(spike[3]) v(spike[4]) v(pulse[0]) v(pulse[1]) v(x1.VMEM_0) v(x1.VMEM_1) v(x1.VMEM_2) v(x1.VMEM_3) v(x1.VMEM_4)
 * Runs until the Verilog testbench calls $finish. ngspice reserves memory for tstop/step
 * points, so a huge bound crashes it (1 s did): keep this just above the longest run.
 .tran 0.1u 100m 0 0.1u
 "}
 T {Mixed-signal testbench: rf and pulse generators (Verilog, snn_ms_tb.v) drive the analog
-3-5-1 network snn_analog through SpiceBind. The Verilog testbench prints PASS/FAIL.
+2-2-1 network snn_analog through SpiceBind. The Verilog testbench prints PASS/FAIL.
 Run with make -C mixed run (see mixed/README.md).} -700 -500 0 0 0.4 0.4 {}

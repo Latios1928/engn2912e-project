@@ -1,8 +1,8 @@
 # Mixed-signal simulation of the SNN: rf and pulse generators in Icarus Verilog,
-# the analog 3-5-1 network (analog/snn/snn_analog.sch) in ngspice, coupled by
+# the analog 2-2-1 network (analog/snn/snn_analog.sch) in ngspice, coupled by
 # SpiceBind. See README.md.
 #
-#   make run                             all scenarios (1-4, about 20 ms simulated)
+#   make run                             all scenarios (1-5, about 25 ms simulated)
 #   make run SCEN_FIRST=3 SCEN_LAST=3    one scenario
 #   make run SETTLE=500 RUN=1500         shorter windows (us)
 #   make vcd                             snn_ms_tb.raw -> snn_ms_tb.vcd

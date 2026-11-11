@@ -20,8 +20,8 @@ module tb_pulse_gen #(
 );
   reg        clk = 1'b0;
   reg        rst = 1'b1;
-  reg  [2:0] en = 3'b000;
-  wire [2:0] pulse;
+  reg  [1:0] en = 2'b00;
+  wire [1:0] pulse;
 
   pulse_gen #(
       .PERIOD(PERIOD),
@@ -40,17 +40,17 @@ module tb_pulse_gen #(
 
   // Reference model, updated on the same edge as the DUT.
   integer e = 0;  // edges since reset
-  reg [2:0] en_s = 3'b000;  // en as sampled at the last multiple of PERIOD
-  reg [2:0] exp_pulse = 3'b000;
+  reg [1:0] en_s = 2'b00;  // en as sampled at the last multiple of PERIOD
+  reg [1:0] exp_pulse = 2'b00;
   always @(posedge clk) begin
     if (rst) begin
       e = 0;
-      en_s = 3'b000;
-      exp_pulse = 3'b000;
+      en_s = 2'b00;
+      exp_pulse = 2'b00;
     end else begin
       e = e + 1;
       if (e % PERIOD == 0) en_s = en;
-      exp_pulse = (e % PERIOD < WIDTH) ? en_s : 3'b000;
+      exp_pulse = (e % PERIOD < WIDTH) ? en_s : 2'b00;
     end
   end
 
@@ -80,7 +80,7 @@ module tb_pulse_gen #(
 
     // Steady en on channel 0: after the first period boundary, every period
     // must contain exactly WIDTH high cycles.
-    en = 3'b001;
+    en = 2'b01;
     repeat (PERIOD) @(negedge clk);  // reach a period boundary
     repeat (3) begin
       high = 0;
@@ -96,7 +96,7 @@ module tb_pulse_gen #(
     end
 
     // First pulse after en rises: starts within PERIOD cycles, WIDTH long.
-    en = 3'b000;
+    en = 2'b00;
     repeat (2 * PERIOD) @(negedge clk);
     en[1] = 1'b1;
     waited = 0;
@@ -128,7 +128,7 @@ module tb_pulse_gen #(
     // Random en changes against the model, with a reset in the middle.
     for (n = 0; n < 40 * PERIOD; n = n + 1) begin
       @(negedge clk);
-      if ($urandom % 3 == 0) en = 3'($urandom);
+      if ($urandom % 3 == 0) en = 2'($urandom);
       if (n == 20 * PERIOD + 3) rst = 1'b1;
       if (n == 20 * PERIOD + 5) rst = 1'b0;
     end

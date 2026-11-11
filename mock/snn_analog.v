@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-// Behavioral stand-in for the analog 3-5-1 spiking neural network
+// Behavioral stand-in for the analog 2-2-1 spiking neural network
 // (analog/snn/snn_analog.sch): the same module name and ports, so
 // snn_top.v works with either. The pure-digital build (mock/) compiles
 // this file; the mixed-signal build (mixed/) compiles an empty module of the
@@ -13,26 +13,27 @@
 //
 // pulse[i] reaches input neuron i through a DAC. Adjacent layers are fully
 // connected through DACs. Every synapse has its own 4-bit weight, packed in w
-// as 23 words of 4 bits:
+// as 8 words of 4 bits. Weights are sign-magnitude (see dac.v): bit 3 is the
+// sign (1 = inhibitory) and bits 2:0 the magnitude, -7..+7.
 //
-//   word 0..2    pulse[i]  -> input i      (word i)
-//   word 3..17   input i   -> hidden j     (word 3 + 3*j + i)
-//   word 18..22  hidden j  -> output       (word 18 + j)
+//   word 0..1    pulse[i]  -> input i      (word i)
+//   word 2..5    input i   -> hidden j     (word 2 + 2*j + i)
+//   word 6..7    hidden j  -> output       (word 6 + j)
 //
-// spike = {output, hidden[4:0], input[2:0]} (active of every neuron).
+// spike = {output, hidden[1:0], input[1:0]} (active of every neuron).
 module snn_analog #(
     parameter DURATION     = 4,
     parameter THRESHOLD    = 1000,
-    parameter GAIN         = 16,
+    parameter GAIN         = 32,  // per unit of weight and cycle; arbitrary
     parameter LEAK         = 1,
     parameter CLK_PERIOD   = 14   // ns, even; arbitrary, and unrelated to the digital clock on purpose
 ) (
-    input  wire [23*4-1:0] w,
-    input  wire [     2:0] pulse,
-    output wire [     8:0] spike
+    input  wire [8*4-1:0] w,
+    input  wire [    1:0] pulse,
+    output wire [    4:0] spike
 );
-  localparam NI = 3;  // input neurons
-  localparam NH = 5;  // hidden neurons
+  localparam NI = 2;  // input neurons
+  localparam NH = 2;  // hidden neurons
   localparam WW = 4;  // weight width
   localparam W_IN = 0;  // word offsets into w
   localparam W_IH = NI;
