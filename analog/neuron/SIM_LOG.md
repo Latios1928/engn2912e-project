@@ -96,7 +96,7 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
    delay). Hold the reset on for a fixed time that doesn't depend on VTH−:
    a one-shot pulse (delay chain + gate, or `pulse_gen`) or an SR latch
    that is cleared after a delay. That also sets the spike width, like
-   `DURATION` in `../mock/comparator.v`.
+   `DURATION` in `../../mock/comparator.v`.
 2. **Number of input pulses per fire depends on the starting point.**
    Because the reset level varies (0.74–1.01 V), the number of pulses
    needed to fire again varies too. Fixing (1) should make this regular.

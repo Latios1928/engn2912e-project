@@ -3,8 +3,8 @@
 # file normally loads.
 source $env(PDK_ROOT)/$env(PDK)/libs.tech/xschem/xschemrc
 
-# Put the project root and analog/neuron on the symbol search path, so both
-# "analog/neuron/X.sym" and bare "X.sym" references resolve, whichever of the
-# two folders xschem is started from.
+# Put the project root, analog/neuron and analog/snn on the symbol search
+# path, so both "analog/neuron/X.sym" and bare "X.sym" references resolve,
+# whichever folder xschem is started from.
 set proj_root [file dirname [file normalize [info script]]]
-append XSCHEM_LIBRARY_PATH :$proj_root:$proj_root/analog/neuron
+append XSCHEM_LIBRARY_PATH :$proj_root:$proj_root/analog/neuron:$proj_root/analog/snn
