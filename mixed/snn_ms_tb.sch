@@ -21,6 +21,12 @@ C {lab_pin.sym} -150 80 0 0 {name=l11 sig_type=std_logic lab=VKup}
 C {lab_pin.sym} -150 100 0 0 {name=l12 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} -150 120 0 0 {name=l13 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} -150 140 0 0 {name=l14 sig_type=std_logic lab=VT}
+C {lab_pin.sym} -150 160 0 0 {name=l15 sig_type=std_logic lab=s[4:0]}
+C {lab_pin.sym} -150 180 0 0 {name=l16 sig_type=std_logic lab=VT_inh}
+C {lab_pin.sym} -150 200 0 0 {name=l17 sig_type=std_logic lab=Vthr_in}
+C {lab_pin.sym} -150 220 0 0 {name=l18 sig_type=std_logic lab=VT_in}
+C {lab_pin.sym} -150 240 0 0 {name=l19 sig_type=std_logic lab=Vthr_hid}
+C {lab_pin.sym} -150 260 0 0 {name=l20 sig_type=std_logic lab=VT_hid}
 C {lab_pin.sym} 150 0 0 1 {name=lsp sig_type=std_logic lab=spike[8:0]}
 C {devices/code_shown.sym} -700 -300 0 0 {name=MODELS only_toplevel=true
 format="tcleval( @value )"
@@ -133,9 +139,13 @@ value="
 * Supplies and biases, as in analog/neuron/DACs-DPI-neuron.sch
 * Parameter names start with p_: a .param with the same name as a net made ngspice
 * rename that net to \{name\} on the long x1 line, leaving the biases unconnected.
-.param p_vdd=3.3 p_vtau=0.40 p_iref=14.42n
-.param p_vthr=2.909
-.param p_vlk=0.425 p_vamp_bias=0.535 p_vip=0.573 p_vna=1.93 p_vkup=2.35 p_vk=1.22 p_vkdn=0.588 p_vt=1.66
+* DPIs are DPI_sized (W 0.88u, L 1.12u); biases per layer from the Monte Carlo runs in
+* analog/testbenches/xor (README.md): output keeps the old gain and tau, input relays fire one
+* spike per pulse, hidden layer in threshold mode, Vlk 0.48
+.param p_vdd=3.3 p_vtau=0.5096 p_iref=14.42n
+.param p_vthr=2.7703
+.param p_vthr_in=2.4 p_vtau_in=0.72 p_vthr_hid=2.5 p_vtau_hid=0.6225
+.param p_vlk=0.48 p_vamp_bias=0.535 p_vip=0.573 p_vna=1.93 p_vkup=2.35 p_vk=1.22 p_vkdn=0.588 p_vt=1.66
 Vdd VDD 0 \{p_vdd\}
 Vss VSS 0 0
 * DAC unit current: Iref into a diode-connected unit current source (w[0] = 15 nA)
@@ -143,6 +153,18 @@ Iref VDD Vb \{p_iref\}
 XMref Vb Vb 0 0 nfet_03v3 L=8u W=1u nf=1
 Vthr Vthr 0 \{p_vthr\}
 Vtau VDD VT_dpi \{p_vtau\}
+* Output inhibitory synapse (DPI_inh): same tau. The scenarios use no inhibition, so the
+* sign bits s[4:0] of the hidden -> output synapses are 0 (not driven from Verilog yet).
+Vtau_i VDD VT_inh \{p_vtau\}
+Vthr_in Vthr_in 0 \{p_vthr_in\}
+Vtau_in VDD VT_in \{p_vtau_in\}
+Vthr_hid Vthr_hid 0 \{p_vthr_hid\}
+Vtau_hid VDD VT_hid \{p_vtau_hid\}
+Vs0 s[0] 0 0
+Vs1 s[1] 0 0
+Vs2 s[2] 0 0
+Vs3 s[3] 0 0
+Vs4 s[4] 0 0
 Vlk Vlk VSS \{p_vlk\}
 VK VK VSS \{p_vk\}
 VNA VNA VSS \{p_vna\}
@@ -154,6 +176,9 @@ Vamp_bias Vamp_bias VSS \{p_vamp_bias\}
 "}
 C {devices/code_shown.sym} 300 250 0 0 {name=TRAN only_toplevel=true
 value="
+* Start every membrane and spike output at 0 V: without this the DC operating point of the
+* sized network does not converge (gmin and source stepping both fail) and the run hangs
+.ic v(x1.VMEM_0)=0 v(x1.VMEM_1)=0 v(x1.VMEM_2)=0 v(x1.VMEM_3)=0 v(x1.VMEM_4)=0 v(x1.VMEM_5)=0 v(x1.VMEM_6)=0 v(x1.VMEM_7)=0 v(x1.VMEM_8)=0 v(spike[0])=0 v(spike[1])=0 v(spike[2])=0 v(spike[3])=0 v(spike[4])=0 v(spike[5])=0 v(spike[6])=0 v(spike[7])=0 v(spike[8])=0
 * Gear integration: trap makes the DPI output current ring after each reset (entry 46)
 .options method=gear
 .save v(spike[0]) v(spike[1]) v(spike[2]) v(spike[3]) v(spike[4]) v(spike[5]) v(spike[6]) v(spike[7]) v(spike[8]) v(pulse[0]) v(pulse[1]) v(pulse[2]) v(scen[0]) v(scen[1]) v(scen[2]) v(running) v(done) v(x1.VMEM_0) v(x1.VMEM_1) v(x1.VMEM_2) v(x1.VMEM_3) v(x1.VMEM_4) v(x1.VMEM_5) v(x1.VMEM_6) v(x1.VMEM_7) v(x1.VMEM_8)

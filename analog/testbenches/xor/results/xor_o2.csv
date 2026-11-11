@@ -1,0 +1,5 @@
+A,B,corner,mc,n0,n1,n3,n4,n8,n_spurious,name,ok,t_out_us,temp,vmax_out
+0,0,tt,False,0,0,0,0,0,0,xor_tt_27_00,True,,27,7.57285686e-05
+0,1,tt,False,0,20,106,0,43,0,xor_tt_27_01,True,255.840721,27,3.24059234
+1,0,tt,False,20,0,106,0,43,0,xor_tt_27_10,True,255.789864,27,3.2478214
+1,1,tt,False,20,20,139,34,7,0,xor_tt_27_11,True,219.325199,27,3.24694493

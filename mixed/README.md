@@ -85,6 +85,13 @@ Known limitations:
   still 1:2:3:4. The scenarios only use codes 0 and 15.
 - Only typical corner, 27 °C, nominal biases. SpiceBind itself is early-stage.
 
+## Status 2026-11-11 (network with inhibition, `analog/testbenches/xor/README.md`)
+
+- `snn_analog` has new pins: sign bits `s[4:0]` (hidden → output synapse is inhibitory when 1) and DPI bias pins per layer (`VT_inh`, `Vthr_in`, `VT_in`, `Vthr_hid`, `VT_hid`). `snn_ms_tb.sch` drives them from fixed sources; `s[4:0]` = 0, so the scenarios use no inhibition. The sign bits are not in the register file or `snn_analog.v` yet.
+- Biases changed with the sized DPIs (`DPI_sized`): output `Vthr` 2.909 → 2.7703 V, `VT_dpi` 0.40 → 0.5096 V, `Vlk` 0.425 → 0.48 V, new relay and hidden biases. They are no longer the biases of `analog/neuron/DACs-DPI-neuron.sch`.
+- `.ic` sets the 9 membranes and spike outputs to 0 V. Without it the DC operating point does not converge and `make run` hangs with an empty log.
+- In the AI's container `make run` currently fails scenarios 2–4, with the new network and with the committed one alike (same neurons), and SpiceBind writes no `dump.raw`, so the `mv` step errors even when the testbench passes. The same netlist in plain ngspice with scenario 3's weights works. Re-check on the machine where the 2026-11-09 results were made before trusting either result.
+
 ## Files
 
 | File | Purpose |
