@@ -12,9 +12,12 @@
 //   2. only pulse->input weights, in = 01   -> only input neuron 0
 //   3. one path in1 -> hid1 -> out, in = 11 -> input 1, hidden 1, output
 //   4. as 3 but hid1 -> out weight 0        -> input 1, hidden 1 only
+//   5. as 3 plus in0 -> hid1 at -max, in = 11: the two inputs fire together
+//      and cancel at hid1                   -> inputs 0 and 1 only
 // clk (10 ns) and the network's own clock (14 ns) are unrelated.
-// "Max" weight is 4'hF. The same scenarios run on the transistor-level
-// network in ../mixed/snn_ms_tb.v.
+// Weights are sign-magnitude: "max" is 4'h7 (+7) and "-max" 4'hF (-7).
+// The same scenarios run on the transistor-level network in
+// ../mixed/snn_ms_tb.v.
 //
 // Run (from this folder):
 //   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp -f sim.f && vvp sim.vvp
@@ -80,25 +83,31 @@ module tb_snn_top;
       $display("rf: weights=%h, expected %h", dut.w, ws);
     end
 
-    ws = {32{1'b1}};
+    ws = {8{4'h7}};
     load(ws);
     run(2'b00, 5'b0_00_00, "in = 0");
 
     ws = 0;
-    for (w = 0; w < 2; w = w + 1) ws[w_pulse(w)*4+:4] = 4'hF;
+    for (w = 0; w < 2; w = w + 1) ws[w_pulse(w)*4+:4] = 4'h7;
     load(ws);
     run(2'b01, 5'b0_00_01, "pulse weights only");
 
     ws = 0;
-    ws[w_pulse(1)*4+:4] = 4'hF;
-    ws[w_ih(1, 1)*4+:4] = 4'hF;
-    ws[w_ho(1)*4+:4] = 4'hF;
+    ws[w_pulse(1)*4+:4] = 4'h7;
+    ws[w_ih(1, 1)*4+:4] = 4'h7;
+    ws[w_ho(1)*4+:4] = 4'h7;
     load(ws);
     run(2'b11, 5'b1_10_10, "path in1->hid1->out");
 
     ws[w_ho(1)*4+:4] = 4'h0;
     load(ws);
     run(2'b11, 5'b0_10_10, "hid1->out weight 0");
+
+    ws[w_ho(1)*4+:4] = 4'h7;
+    ws[w_pulse(0)*4+:4] = 4'h7;
+    ws[w_ih(0, 1)*4+:4] = 4'hF;  // -7
+    load(ws);
+    run(2'b11, 5'b0_00_11, "in0 inhibits hid1");
 
     if (errors == 0) $display("PASS: snn_top, %0d checks", checks);
     else $display("FAIL: snn_top, %0d errors in %0d checks", errors, checks);

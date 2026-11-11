@@ -3,9 +3,9 @@
 // Behavioral model of an integrate-and-fire neuron (analog/neuron/DPI.sch and
 // neuron_sized.sch); part of the behavioral snn_analog (snn_analog.v).
 //
-// Every clk_analog cycle, voltage increases by the sum of the INDEGREE input
-// currents, saturating at 16'hFFFF (the mock supply rail), and then drops by
-// LEAK (not below 0). While active, voltage is held at 0 instead.
+// Every clk_analog cycle, voltage changes by the sum of the INDEGREE input
+// currents (signed; negative ones are inhibitory), clamped to 0..16'hFFFF
+// (the mock ground and supply rail), and then drops by LEAK (not below 0). While active, voltage is held at 0 instead.
 //
 // active comes from the internal comparator. Timing: if voltage exceeds
 // THRESHOLD after edge e, active rises at e+1 and voltage is cleared at e+2
@@ -19,13 +19,15 @@ module neuron #(
 ) (
     input  wire                   clk_analog,
     input  wire                   rst,         // synchronous, active high
-    input  wire [INDEGREE*16-1:0] currents,    // INDEGREE 16-bit currents, packed
+    input  wire [INDEGREE*16-1:0] currents,    // INDEGREE signed 16-bit currents, packed
     output wire                   active
 );
-  // voltage plus INDEGREE currents: INDEGREE+1 16-bit terms
-  localparam SW = 16 + $clog2(INDEGREE + 1);
+  // voltage (0..65535) plus INDEGREE signed 16-bit currents, as a signed sum
+  localparam SW = 18 + $clog2(INDEGREE + 1);
 
   localparam [15:0] LEAK_V = LEAK[15:0];
+  localparam signed [SW-1:0] LEAK_S = LEAK;
+  localparam signed [SW-1:0] MAX_V = 65535;
 
   initial begin
     if (INDEGREE < 1 || LEAK < 0 || LEAK > 65535) begin
@@ -35,18 +37,19 @@ module neuron #(
   end
 
   reg     [  15:0] voltage;
-  reg     [SW-1:0] sum;
+  reg signed [SW-1:0] sum;
   integer          i;
 
   always @(*) begin
-    sum = {{(SW - 16) {1'b0}}, voltage};
-    for (i = 0; i < INDEGREE; i = i + 1) sum = sum + {{(SW - 16) {1'b0}}, currents[i*16+:16]};
+    sum = $signed({{(SW - 16) {1'b0}}, voltage});
+    for (i = 0; i < INDEGREE; i = i + 1)
+      sum = sum + $signed({{(SW - 16) {currents[i*16+15]}}, currents[i*16+:16]});
   end
 
   always @(posedge clk_analog) begin
     if (rst || active) voltage <= 16'd0;
-    else if (|sum[SW-1:16]) voltage <= 16'hFFFF;
-    else if (sum[15:0] > LEAK_V) voltage <= sum[15:0] - LEAK_V;
+    else if (sum > MAX_V) voltage <= 16'hFFFF;
+    else if (sum > LEAK_S) voltage <= sum[15:0] - LEAK_V;
     else voltage <= 16'd0;
   end
 

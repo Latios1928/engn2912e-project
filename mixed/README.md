@@ -23,7 +23,7 @@ with `snn_digital`.
 From this folder:
 
 ```bash
-make run                              # scenarios 1-4, about 20 ms simulated
+make run                              # scenarios 1-5, about 25 ms simulated
 make run SCEN_FIRST=3 SCEN_LAST=3     # one scenario
 make run SETTLE=500 RUN=1500          # shorter windows (us)
 make vcd                              # snn_ms_tb.raw -> snn_ms_tb.vcd
@@ -37,10 +37,11 @@ so `spike[0..4]` are separate traces), digital in `snn_ms_tb_digital.vcd`.
 
 | # | Weights | `in` | Must fire (`{out, hid[1:0], in[1:0]}`) |
 |---|---|---|---|
-| 1 | all max (code 15) | 00 | nothing |
+| 1 | all max (+7) | 00 | nothing |
 | 2 | pulse → input only, max | 01 | `0_00_01` |
 | 3 | path in1 → hid1 → out, max | 11 | `1_10_10` |
 | 4 | as 3, hid1 → out = 0 | 11 | `0_10_10` |
+| 5 | as 3, plus pulse 0 → in0 at +7 and in0 → hid1 at −7 | 11 | `0_00_11` |
 
 Each scenario loads its 8 words (16 µs), waits `SETTLE` µs with `in = 0`
 (the analog network has no reset pin), then applies `in` for `RUN` µs.
@@ -51,16 +52,21 @@ block SOURCES in `snn_ms_tb.sch`). Maximum time step is 0.1 µs.
 
 ## Results (2026-11-11, tt, 27 °C)
 
-`make run` (all scenarios, about 20 ms simulated) took 96 s and all 4 passed.
-First spike after `in` is applied (these include the wait for the next
-`pulse_gen` period, up to 200 µs):
+Scenarios 1–4 (about 20 ms simulated) took 90 s and passed; scenario 5 run on
+its own fails, as expected until the analog DAC has a sign. First spike after
+`in` is applied (these include the wait for the next `pulse_gen` period, up to
+200 µs):
 
 | Scenario | First spikes |
 |---|---|
 | 1 | none |
-| 2 | in0: 555 µs |
-| 3 | in1: 540 µs → hid1: 839 µs → out: 1118 µs |
-| 4 | in1: 321 µs → hid1: 495 µs; out silent |
+| 2 | in0: 826 µs |
+| 3 | in1: 774 µs → hid1: 1456 µs → out: 2223 µs |
+| 4 | in1: 566 µs → hid1: 1091 µs; out silent |
+| 5 | in0, in1: 806 µs → hid1: 1000 µs → out: 1448 µs (FAIL: −7 excites) |
+
+With +7 (code `0111`) the analog DAC gives 6 units of current, so the output in
+scenario 3 fires late in the 3 ms window.
 
 Accuracy of the coupling, measured earlier on the 3-5-1 network with a pulse
 generator that started its first pulse the moment `in` rose: scenario 3 run
@@ -81,8 +87,13 @@ Known limitations:
   VMEM would make scenarios independent.
 - **Start-up.** Unused membranes start far from 0 at the operating point and
   take a few ms to leak away.
-- **Mock vs analog DAC.** The mock DAC is binary (1:2:4:8) but `DAC.sch` is
-  still 1:2:3:4. The scenarios only use codes 0 and 15.
+- **Scenario 5 fails until the analog side has negative weights.** The
+  testbench assumes sign-magnitude weights (bit 3 = sign, 1 = inhibitory), but
+  `DAC.sch` is unsigned with four branches sized 1:2:3:4, so bit 3 just drives
+  its fourth branch: −7 (`1111`) becomes strong excitation, and hidden 1 and
+  the output fire. `make run` reports FAIL for it until then; scenarios 1–4
+  pass. The scenario also expects −w to cancel +w, so the inhibitory path
+  should be about as strong as the excitatory one.
 - Only typical corner, 27 °C, nominal biases. SpiceBind itself is early-stage.
 
 ## Files

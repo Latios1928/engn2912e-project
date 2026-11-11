@@ -5,8 +5,10 @@
 // A reference model of the neuron spec runs alongside the DUT; voltage and
 // active must match it every cycle. The stimulus covers a normal fire, the
 // DURATION+1-cycle active window with voltage held at 0, zero input, the
-// leak down to 0, and saturation at 16'hFFFF. The first fire is also checked against a
-// hand-computed cycle and window length. The dac is checked exhaustively.
+// leak down to 0, an inhibitory (negative) current clamping at 0, and
+// saturation at 16'hFFFF. The first fire is also checked against a
+// hand-computed cycle and window length. The dac is checked exhaustively
+// against its sign-magnitude formula.
 //
 // Run:
 //   iverilog -g2012 -Wall -o sim.vvp comparator.v dac.v neuron.v tb_neuron.v && vvp sim.vvp
@@ -52,11 +54,15 @@ module tb_neuron;
   integer mv;  // voltage
   integer mc;  // comparator countdown
   integer sum;
+  integer cur;
   integer k;
 
   always @(posedge clk) begin
     sum = mv;
-    for (k = 0; k < INDEGREE; k = k + 1) sum = sum + $signed({16'd0, currents[k*16+:16]});
+    for (k = 0; k < INDEGREE; k = k + 1) begin
+      cur = 32'($signed(currents[k*16+:16]));  // sign-extends
+      sum = sum + cur;
+    end
     if (rst || mc > 0) mv <= 0;
     else mv <= (sum > 65535) ? 65535 : (sum > LEAK) ? sum - LEAK : 0;
     if (rst) mc <= 0;
@@ -114,8 +120,24 @@ module tb_neuron;
     end
     expect_int("leaked to 0", $signed({16'd0, dut.voltage}), 0);
 
-    // Sum of voltage and two max currents overflows 16 bits: must saturate.
-    currents = {16'hFFFF, 16'hFFFF};
+    // Inhibition: charge to 4 * 20, then apply a negative current larger than
+    // the charge. The voltage must stop at 0, not wrap around.
+    currents = {16'd0, 16'd20 + LEAK[15:0]};
+    repeat (4) begin
+      check();
+      @(negedge clk);
+    end
+    expect_int("charged again", $signed({16'd0, dut.voltage}), 4 * 20);
+    currents = {-16'd100, 16'd0};
+    repeat (3) begin
+      check();
+      @(negedge clk);
+    end
+    expect_int("inhibited to 0", $signed({16'd0, dut.voltage}), 0);
+    currents = 0;
+
+    // Sum of voltage and two max positive currents overflows 16 bits: must saturate.
+    currents = {16'h7FFF, 16'h7FFF};
     repeat (10) begin
       check();
       if (dut.voltage == 16'hFFFF) saturated = 1;
@@ -127,7 +149,8 @@ module tb_neuron;
       {dac_active, dac_weight} = d[4:0];
       #1;
       checks = checks + 1;
-      if (dac_current !== (dac_active ? {12'd0, dac_weight} * GAIN[15:0] : 16'd0)) begin
+      if (dac_current !== (!dac_active ? 16'd0 : dac_weight[3] ? -({13'd0, dac_weight[2:0]} * GAIN[15:0])
+                                                       : {13'd0, dac_weight[2:0]} * GAIN[15:0])) begin
         errors = errors + 1;
         $display("dac: active=%b weight=%0d current=%0d", dac_active, dac_weight, dac_current);
       end

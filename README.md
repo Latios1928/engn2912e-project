@@ -22,8 +22,8 @@
 ### Mixed-signal ([mixed/README.md](mixed/README.md))
 - [ ] Calibrate the behavioral `snn_analog` in `mock/` (clock period, `GAIN`, `DURATION`, `LEAK`) so first-spike timing is close to the analog results, if the mock should be quantitatively comparable.
 - [ ] The analog network has no reset: membranes keep 1.0–1.2 V after a 2 ms settle, so scenario latencies depend on the previous one. Add a reset (switch on VMEM) or lengthen `SETTLE`.
-- [ ] Resize [analog/neuron/DAC.sch](analog/neuron/DAC.sch) to binary 1:2:4:8 (m = 4 and 8 on the last two branches) so it matches the mock.
-- [ ] Add scenarios with intermediate weights once the DAC is binary; run corners.
+- [ ] Negative weights in the analog network. Weights are sign-magnitude (bit 3 = sign, bits 2:0 = magnitude). [analog/neuron/DAC.sch](analog/neuron/DAC.sch) needs three binary magnitude branches (1:2:4, replacing 1:2:3:4) and a sign-controlled switch that steers the current to an excitatory or an inhibitory input, and each neuron needs that inhibitory input (for example a second DPI that pulls VMEM down). `mixed/` already runs the inhibition scenario (scenario 5), which fails until this is done.
+- [ ] Add scenarios with intermediate weights; run corners.
 
 ### Digital
 - [ ] Pick the chip clock frequency. `pulse_gen`'s defaults (`PERIOD` 200, `WIDTH` 10) assume a 1 MHz `clk` for 10 µs pulses every 200 µs; a faster clock needs larger values and a wider counter.

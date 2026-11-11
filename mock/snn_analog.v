@@ -13,7 +13,8 @@
 //
 // pulse[i] reaches input neuron i through a DAC. Adjacent layers are fully
 // connected through DACs. Every synapse has its own 4-bit weight, packed in w
-// as 8 words of 4 bits:
+// as 8 words of 4 bits. Weights are sign-magnitude (see dac.v): bit 3 is the
+// sign (1 = inhibitory) and bits 2:0 the magnitude, -7..+7.
 //
 //   word 0..1    pulse[i]  -> input i      (word i)
 //   word 2..5    input i   -> hidden j     (word 2 + 2*j + i)
@@ -23,7 +24,7 @@
 module snn_analog #(
     parameter DURATION     = 4,
     parameter THRESHOLD    = 1000,
-    parameter GAIN         = 16,
+    parameter GAIN         = 32,  // per unit of weight and cycle; arbitrary
     parameter LEAK         = 1,
     parameter CLK_PERIOD   = 14   // ns, even; arbitrary, and unrelated to the digital clock on purpose
 ) (

@@ -16,7 +16,7 @@ The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
 - Writes `data` to word `addr` on the rising edge while `wren` is high. Writes to addresses ≥ NUM_WORDS are ignored.
 - Word `w` is at `weights[w*WIDTH +: WIDTH]`; every word is visible at once.
 - **No reset**: every word must be written before it is used.
-- The defaults match the 2-2-1 SNN's 8 synapses, each with a 4-bit binary weight (map from `../mock/snn_analog.v`):
+- The defaults match the 2-2-1 SNN's 8 synapses, each with a 4-bit sign-magnitude weight: bit 3 is the sign (1 = inhibitory), bits 2:0 the magnitude, so −7…+7 (map from `../mock/snn_analog.v`):
   - words 0–1: input pulse generator i → input neuron i
   - words 2–5: input i → hidden j (word 2 + 2j + i)
   - words 6–7: hidden j → output (word 6 + j)

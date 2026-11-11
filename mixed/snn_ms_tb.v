@@ -6,17 +6,21 @@
 //   2. only pulse->input weights, in = 01   -> only input neuron 0
 //   3. one path in1 -> hid1 -> out, in = 11 -> input 1, hidden 1, output
 //   4. as 3 but hid1 -> out weight 0        -> input 1, hidden 1 only
+//   5. as 3 plus in0 -> hid1 at -max, in = 11: the two inputs fire together
+//      and cancel at hid1                   -> inputs 0 and 1 only
 // The analog network has no reset pin, so each run is preceded by SETTLE us
 // with in = 0. Prints PASS/FAIL and the time of each neuron's first spike.
 `timescale 1ns / 1ns
 
 module snn_ms_tb #(
     parameter SCEN_FIRST = 1,
-    parameter SCEN_LAST  = 4,
+    parameter SCEN_LAST  = 5,
     parameter SETTLE     = 2000,  // us
     parameter RUN        = 3000   // us
 );
-  localparam [3:0] MAX = 4'hF;
+  // Weights are sign-magnitude: MAX is +7, NEG_MAX is -7.
+  localparam [3:0] MAX = 4'h7;
+  localparam [3:0] NEG_MAX = 4'hF;
 
   reg        clk = 1'b0;  // 1 us
   reg        rst = 1'b1;
@@ -106,7 +110,7 @@ module snn_ms_tb #(
     for (scen = SCEN_FIRST; scen <= SCEN_LAST; scen = scen + 1)
       case (scen)
         1: begin
-          ws = {32{1'b1}};
+          ws = {8{MAX}};
           check_run(2'b00, 5'b0_00_00);
         end
         2: begin
@@ -120,6 +124,15 @@ module snn_ms_tb #(
           ws[(2+2*1+1)*4+:4] = MAX;  // input 1 -> hidden 1
           ws[(6+1)*4+:4] = (scen == 3) ? MAX : 4'h0;  // hidden 1 -> output
           check_run(2'b11, (scen == 3) ? 5'b1_10_10 : 5'b0_10_10);
+        end
+        5: begin
+          ws = 0;
+          ws[0*4+:4] = MAX;  // pulse 0 -> input 0
+          ws[1*4+:4] = MAX;  // pulse 1 -> input 1
+          ws[(2+2*1+0)*4+:4] = NEG_MAX;  // input 0 -> hidden 1, inhibitory
+          ws[(2+2*1+1)*4+:4] = MAX;  // input 1 -> hidden 1
+          ws[(6+1)*4+:4] = MAX;  // hidden 1 -> output
+          check_run(2'b11, 5'b0_00_11);
         end
         default: ;
       endcase
