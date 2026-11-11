@@ -1,0 +1,206 @@
+v {xschem version=3.4.8RC file_version=1.3}
+G {}
+K {}
+V {}
+S {}
+F {}
+E {}
+N 100 -120 270 -120 {lab=X}
+N 270 -120 450 -120 {lab=X}
+N 450 -120 620 -120 {lab=X}
+N 620 -60 620 -10 {lab=#net1}
+N 450 80 620 80 {lab=GND}
+N 270 80 450 80 {lab=GND}
+N 100 80 270 80 {lab=GND}
+N 360 80 360 130 {lab=GND}
+N 30 20 60 20 {lab=Vb}
+N 30 20 30 60 {lab=Vb}
+N 0 60 560 60 {lab=Vb}
+N 560 20 560 60 {lab=Vb}
+N 560 20 580 20 {lab=Vb}
+N 620 50 620 80 {lab=GND}
+N 450 50 450 80 {lab=GND}
+N 270 50 270 80 {lab=GND}
+N 100 50 100 80 {lab=GND}
+N 230 20 230 60 {lab=Vb}
+N 410 20 410 60 {lab=Vb}
+N 270 -60 270 -10 {lab=#net2}
+N 450 -60 450 -10 {lab=#net3}
+N 100 -60 100 -10 {lab=#net4}
+N 20 -90 60 -90 {lab=w[0]}
+N 190 -90 230 -90 {lab=w[1]}
+N 370 -90 410 -90 {lab=w[2]}
+N 530 -90 580 -90 {lab=w[3]}
+N 100 -90 120 -90 {lab=#net4}
+N 120 -90 120 -50 {lab=#net4}
+N 100 -50 120 -50 {lab=#net4}
+N 100 50 120 50 {lab=GND}
+N 100 20 120 20 {lab=GND}
+N 120 20 120 50 {lab=GND}
+N 270 50 290 50 {lab=GND}
+N 270 20 290 20 {lab=GND}
+N 290 20 290 50 {lab=GND}
+N 450 50 470 50 {lab=GND}
+N 450 20 470 20 {lab=GND}
+N 470 20 470 50 {lab=GND}
+N 620 50 640 50 {lab=GND}
+N 620 20 640 20 {lab=GND}
+N 640 20 640 50 {lab=GND}
+N 357.5 -210 357.5 -180 {lab=Isum}
+N 297.5 -150 317.5 -150 {lab=en}
+N 357.5 -150 480 -150 {lab=GND}
+N 270 -90 290 -90 {lab=#net2}
+N 290 -90 290 -57.5 {lab=#net2}
+N 270 -57.5 290 -57.5 {lab=#net2}
+N 450 -90 472.5 -90 {lab=#net3}
+N 472.5 -90 472.5 -55 {lab=#net3}
+N 450 -55 472.5 -55 {lab=#net3}
+N 620 -90 635 -90 {lab=#net1}
+N 635 -90 635 -52.5 {lab=#net1}
+N 620 -52.5 635 -52.5 {lab=#net1}
+C {symbols/nfet_03v3.sym} 80 -90 0 0 {name=M1
+L=0.28u
+W=0.22u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 80 20 0 0 {name=M2
+L=8u
+W=1u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 250 -90 0 0 {name=M3
+L=0.28u
+W=0.44u
+nf=2
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 250 20 0 0 {name=M4
+L=8u
+W=2u
+nf=2
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 430 -90 0 0 {name=M5
+L=0.28u
+W=0.88u
+nf=4
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 430 20 0 0 {name=M6
+L=8u
+W=4u
+nf=4
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 600 -90 0 0 {name=M7
+L=0.28u
+W=1.76u
+nf=8
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {symbols/nfet_03v3.sym} 600 20 0 0 {name=M8
+L=8u
+W=8u
+nf=8
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {iopin.sym} -162.5 -117.5 0 0 {name=p1 lab=Vb}
+C {ipin.sym} -122.5 -17.5 0 0 {name=p3 lab=w[3:0]}
+C {lab_wire.sym} 30 -90 0 0 {name=p7 sig_type=std_logic lab=w[0]}
+C {lab_wire.sym} 200 -90 0 0 {name=p8 sig_type=std_logic lab=w[1]}
+C {lab_wire.sym} 380 -90 0 0 {name=p9 sig_type=std_logic lab=w[2]}
+C {lab_wire.sym} 540 -90 0 0 {name=p10 sig_type=std_logic lab=w[3]}
+C {gnd.sym} 360 130 0 0 {name=l1 lab=GND}
+T {Binary branch weights 1:2:4:8 for w[0]..w[3].
+Each branch is one multi-finger device: switch W = k x 0.22u (L 0.28u), current source
+W = k x 1u (L 8u), with nf = k fingers of the unit width (k = 1, 2, 4, 8; m = 1).
+Electrically the same as k unit cells in parallel; the layout may still split the fingers
+into a common-centroid array (LVS combines parallel fingers). Men (gate en) passes the branch
+currents to Isum only while en is high. Vb comes from a diode-connected 1u/8u device fed by
+the reference current (see DACs-DPI.sch). Derived from DAC.sch (1:2:3:4, m = 1..4).} -160 170 0 0 0.3 0.3 {}
+C {lab_wire.sym} 7.5 60 0 0 {name=p11 sig_type=std_logic lab=Vb}
+C {ipin.sym} 357.5 -210 0 0 {name=p2 lab=Isum}
+C {ipin.sym} -122.5 22.5 0 0 {name=p4 lab=en}
+C {lab_wire.sym} 297.5 -150 0 0 {name=p12 sig_type=std_logic lab=en}
+C {lab_wire.sym} 480 -150 0 0 {name=p13 sig_type=std_logic lab=GND}
+C {lab_wire.sym} 200 -120 0 0 {name=p14 sig_type=std_logic lab=X}
+C {symbols/nfet_03v3.sym} 337.5 -150 0 0 {name=Men
+L=0.28u
+W=0.22u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}

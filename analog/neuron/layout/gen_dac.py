@@ -33,6 +33,9 @@ Layout (user requirements):
     row (switch gates are contacted at the bottom), separated from it by a GND shield
     track. X and Isum run above the switch row between GND shield tracks. The branch nodes
     reach the array in their own channel.
+  * Neighbouring horizontal tracks alternate between Metal1 and Metal3 in every channel:
+    the signals X, Isum and the branch nodes are on Metal3 with the GND shields on Metal1
+    between them; the digital tracks alternate M3/M1. (No MIM cap here, so Via2 is fine.)
   * Pins are labelled (Metal2 at the cell edge): left Isum, en, w[0]..w[3]; right Vb, VDD,
     GND; GND also on the Metal1 substrate ring.
 """
@@ -50,7 +53,8 @@ OUT = globals().get("out", "DAC.gds")
 L = {
     "dnwell": (12, 0), "comp": (22, 0), "poly": (30, 0),
     "pplus": (31, 0), "nplus": (32, 0), "cont": (33, 0), "m1": (34, 0),
-    "via1": (35, 0), "m2": (36, 0), "lvpwell": (204, 0), "bnd": (0, 0),
+    "via1": (35, 0), "m2": (36, 0), "via2": (38, 0), "m3": (42, 0),
+    "lvpwell": (204, 0), "bnd": (0, 0),
     "m1_lbl": (34, 10), "m2_lbl": (36, 10),
 }
 ly = pya.Layout()
@@ -79,6 +83,19 @@ def via12(cx, cy):
         return
     _vias.append((cx, cy))
     sq("via1", cx, cy, VIA)
+
+
+_vias2 = []
+
+
+def via23(cx, cy):
+    """Via2 with 0.4 um M2 and M3 pads; merges with an existing via at the same spot."""
+    sq("m2", cx, cy, 0.4)
+    sq("m3", cx, cy, 0.4)
+    if any(abs(cx - x) < 0.52 and abs(cy - y) < 0.52 for (x, y) in _vias2):
+        return
+    _vias2.append((cx, cy))
+    sq("via2", cx, cy, VIA)
 
 
 def contacts(x1, y1, x2, y2, pitch=0.5):
@@ -201,11 +218,23 @@ def gate_tie(d, up):
     box("m1", s.right - 0.01, g.bottom, g.center().x, g.top)
 
 
-def stub(x, y0, y1):
-    """Via1 at both ends with an M2 vertical between them."""
+def stub(x, y0, y1, top="m1"):
+    """M2 vertical from an M1 pad at y0 to a track at y1 on M1 (via1) or M3 (via2)."""
     via12(x, y0)
     vbar(x, y0, y1, "m2")
-    via12(x, y1)
+    if top == "m1":
+        via12(x, y1)
+    else:
+        via23(x, y1)
+
+
+def escape(y, layer):
+    """Pin escape at ESC_L: from an M1 or M3 track down/up to the M2 pin stub."""
+    if layer == "m1":
+        via12(ESC_L, y)
+    else:
+        via23(ESC_L, y)
+    box("m2", 0.0, y - 0.2, ESC_L, y + 0.2)
 
 
 # ------------------------------------------------------------------ circuit data
@@ -221,6 +250,13 @@ UPPER = "CDADC"            # common-centroid array (columns 1..5; 0 and 6 are du
 LOWER = "DBCBD"
 TRACK_ORDER = ["net2", "net1", "net3", "net4"]   # branch tracks bottom -> top (B < D < C < A)
 DIG = ["en", "w[0]", "w[1]", "w[2]", "w[3]"]     # digital tracks, top -> bottom
+# Horizontal tracks alternate between Metal1 and Metal3 in every channel, so that two
+# neighbouring tracks are never on the same layer:
+#   branch channel   net2 M3 | shield M1 | net1 M3 | shield M1 | net3 M3 | shield M1 | net4 M3
+#   switch channel   shield M1 | X M3 | shield M1 | Isum M3 | shield M1
+#   digital channel  shield M1 | en M3 | w[0] M1 | w[1] M3 | w[2] M1 | w[3] M3
+SIG_LAYER = "m3"                                 # X, Isum and the branch nodes
+DIG_LAYER = {"en": "m3", "w[0]": "m1", "w[1]": "m3", "w[2]": "m1", "w[3]": "m3"}
 TP, TW = 0.8, 0.4                                # track pitch / width
 
 # ------------------------------------------------------------------ x floorplan
@@ -418,22 +454,18 @@ for c in range(1, 6):
     a, b = grid[(c, "1")]["nets"]["D"], grid[(c, "2")]["nets"]["D"]
     assert a == b or TRACK_ORDER.index(a) < TRACK_ORDER.index(b), (c, a, b)
 
-JUMP0, JUMP1 = A_RING_X0 - 0.7, A_RING_X0 + RW + 0.7   # M2 jumper over the array ring side
 for isl in islands[1:]:
     net = isl["body"]
     yt = Y["T"][net]
     # riser from the island ring top side to the branch track, at the ring's left end
     x_r = isl["ring"][0] + 0.25
-    stub(x_r, Y["s_ring1"] - RW / 2, yt)
+    stub(x_r, Y["s_ring1"] - RW / 2, yt, SIG_LAYER)
     ys = ARR_STUBS[net]
     for (xx, yy) in ys:
-        stub(xx, yy, yt)
+        stub(xx, yy, yt, SIG_LAYER)
     x_hi = max(xx for xx, _ in ys)
-    box("m1", x_r - 0.2, yt - TW / 2, JUMP0 + 0.2, yt + TW / 2)        # outside the ring
-    via12(JUMP0, yt)
-    box("m2", JUMP0, yt - 0.2, JUMP1, yt + 0.2)
-    via12(JUMP1, yt)
-    box("m1", JUMP1 - 0.2, yt - TW / 2, x_hi + 0.2, yt + TW / 2)       # inside the array
+    # M3 track: passes over the array ring (M1) without a jumper
+    box(SIG_LAYER, x_r - 0.2, yt - TW / 2, x_hi + 0.2, yt + TW / 2)
 
 # GND shields between the branch tracks: from the first island riser, across the array
 # ring left side (merging with it), through the array channel to the ring right side
@@ -445,12 +477,11 @@ for y in Y["bsh"]:
 x_X = [x for (x, _, n) in X_STUBS if n == "X"]
 x_I = [x for (x, _, n) in X_STUBS if n == "Isum"]
 for (x, y, n) in X_STUBS:
-    stub(x, y, Y[n])
+    stub(x, y, Y[n], SIG_LAYER)
 X_LO, X_HI = min(x_x - 0.5 for x_x in x_X), max(x_x + 0.5 for x_x in x_X)
-box("m1", X_LO, Y["X"] - TW / 2, X_HI, Y["X"] + TW / 2)
-box("m1", ESC_L - 0.2, Y["Isum"] - TW / 2, max(x_I) + 0.5, Y["Isum"] + TW / 2)
-via12(ESC_L, Y["Isum"])
-box("m2", 0.0, Y["Isum"] - 0.2, ESC_L, Y["Isum"] + 0.2)
+box(SIG_LAYER, X_LO, Y["X"] - TW / 2, X_HI, Y["X"] + TW / 2)
+box(SIG_LAYER, ESC_L - 0.2, Y["Isum"] - TW / 2, max(x_I) + 0.5, Y["Isum"] + TW / 2)
+escape(Y["Isum"], SIG_LAYER)
 # GND shields t0, t2, t4: from the left end of X / Isum to the array ring left side (GND)
 for i in (0, 2, 4):
     y = Y["sh"][i]
@@ -462,13 +493,12 @@ for i in (0, 2, 4):
 # GND shield between the switch islands and the digital tracks, tied to the substrate ring
 box("m1", OR_O + OR_W - 0.01, Y["dsh"] - TW / 2, SW_X1, Y["dsh"] + TW / 2)
 for (x, y, n) in GATE_STUBS:
-    stub(x, y, Y["dig"][n])
+    stub(x, y, Y["dig"][n], DIG_LAYER[n])
 for n in DIG:
     xs = [x for (x, _, nn) in GATE_STUBS if nn == n]
     yd = Y["dig"][n]
-    box("m1", ESC_L - 0.2, yd - TW / 2, max(xs) + 0.5, yd + TW / 2)
-    via12(ESC_L, yd)
-    box("m2", 0.0, yd - 0.2, ESC_L, yd + 0.2)
+    box(DIG_LAYER[n], ESC_L - 0.2, yd - TW / 2, max(xs) + 0.5, yd + TW / 2)
+    escape(yd, DIG_LAYER[n])
 
 # ------------------------------------------------------------------ pins
 PIN = 0.6

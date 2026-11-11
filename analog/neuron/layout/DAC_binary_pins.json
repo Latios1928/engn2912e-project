@@ -1,0 +1,183 @@
+{
+  "cell": "DAC_binary",
+  "units": "um",
+  "origin": "lower-left of PR boundary",
+  "bbox": [
+    0.0,
+    0.0,
+    187.88,
+    40.7
+  ],
+  "pins": [
+    {
+      "name": "GND",
+      "layer": "Metal1",
+      "label_x": 93.94,
+      "label_y": 0.55,
+      "access": [
+        {
+          "side": "inside",
+          "x1": 0.3,
+          "y1": 0.3,
+          "x2": 187.58,
+          "y2": 40.4,
+          "cx": 93.94,
+          "cy": 20.35
+        }
+      ]
+    },
+    {
+      "name": "GND",
+      "layer": "Metal2",
+      "label_x": 187.58,
+      "label_y": 10.385,
+      "access": [
+        {
+          "side": "right",
+          "x1": 187.28,
+          "y1": 10.135,
+          "x2": 187.88,
+          "y2": 10.635,
+          "cx": 187.58,
+          "cy": 10.385
+        }
+      ]
+    },
+    {
+      "name": "Isum",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 13.99,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 13.79,
+          "x2": 0.6,
+          "y2": 14.19,
+          "cx": 0.3,
+          "cy": 13.99
+        }
+      ]
+    },
+    {
+      "name": "VDD",
+      "layer": "Metal2",
+      "label_x": 187.58,
+      "label_y": 35.95,
+      "access": [
+        {
+          "side": "right",
+          "x1": 187.28,
+          "y1": 35.7,
+          "x2": 187.88,
+          "y2": 36.2,
+          "cx": 187.58,
+          "cy": 35.95
+        }
+      ]
+    },
+    {
+      "name": "Vb",
+      "layer": "Metal2",
+      "label_x": 187.58,
+      "label_y": 22.79,
+      "access": [
+        {
+          "side": "right",
+          "x1": 187.28,
+          "y1": 22.59,
+          "x2": 187.88,
+          "y2": 22.99,
+          "cx": 187.58,
+          "cy": 22.79
+        }
+      ]
+    },
+    {
+      "name": "en",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 5.0,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 4.8,
+          "x2": 0.6,
+          "y2": 5.2,
+          "cx": 0.3,
+          "cy": 5.0
+        }
+      ]
+    },
+    {
+      "name": "w[0]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 4.2,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 4.0,
+          "x2": 0.6,
+          "y2": 4.4,
+          "cx": 0.3,
+          "cy": 4.2
+        }
+      ]
+    },
+    {
+      "name": "w[1]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 3.4,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 3.2,
+          "x2": 0.6,
+          "y2": 3.6,
+          "cx": 0.3,
+          "cy": 3.4
+        }
+      ]
+    },
+    {
+      "name": "w[2]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 2.6,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 2.4,
+          "x2": 0.6,
+          "y2": 2.8,
+          "cx": 0.3,
+          "cy": 2.6
+        }
+      ]
+    },
+    {
+      "name": "w[3]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 1.8,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 1.6,
+          "x2": 0.6,
+          "y2": 2.0,
+          "cx": 0.3,
+          "cy": 1.8
+        }
+      ]
+    }
+  ]
+}

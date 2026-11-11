@@ -1,0 +1,50 @@
+* LVS reference for the DAC_binary layout.
+* Devices and nets as in analog/neuron/DAC_binary.sch (multi-finger devices, W = total width),
+* with these layout-only changes:
+*   - GND (a global in the schematic) and VDD (DNWELL tie, new) are ports
+*   - dummy transistors: DA_* ring around the current-source array (all GND),
+*     *_DL / *_DR at the ends of each switch row (all terminals on that well's body net)
+* The layout draws each finger as a separate unit device; LVS combines parallel devices.
+.subckt DAC_binary Isum Vb w[3] w[2] w[1] w[0] en VDD GND
+XMen Isum en X GND nfet_03v3 L=0.28u W=0.22u nf=1
+XM1 X w[0] net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XM2 net4 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+XM3 X w[1] net2 net2 nfet_03v3 L=0.28u W=0.44u nf=2
+XM4 net2 Vb GND GND nfet_03v3 L=8u W=2u nf=2
+XM5 X w[2] net3 net3 nfet_03v3 L=0.28u W=0.88u nf=4
+XM6 net3 Vb GND GND nfet_03v3 L=8u W=4u nf=4
+XM7 X w[3] net1 net1 nfet_03v3 L=0.28u W=1.76u nf=8
+XM8 net1 Vb GND GND nfet_03v3 L=8u W=8u nf=8
+* dummies at the ends of the switch rows
+XMEN_DL GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_DR GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XA_DL net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_DR net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_DL net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_DR net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_DL net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_DR net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_DL net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_DR net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy ring around the current-source array (20 devices, all GND)
+XDA_b0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_10 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_16 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_20 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_26 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_30 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_36 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+.ends

@@ -5,7 +5,7 @@ analog integrate-and-fire neuron in this folder. Newest run entries are at the
 bottom of the **Run log**; the **Current status** section is always kept in
 sync with the latest results.
 
-Last updated: 2026-11-05
+Last updated: 2026-11-11
 
 > **Note (2026-11-03):** the sections below up to the run log describe the
 > earlier Schmitt-trigger neuron (`neuron_old.sch`). The current `neuron.sch`
@@ -163,3 +163,23 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 
 - t_spike and t_refr come from the same C1 discharge, so they move together (t_refr ≈ t_spike + 5.4 µs). This leaves ≈ 0.3 µs of margin on each.
 - Corners and temperature were not run.
+
+### 2026-11-11: `DAC_binary` (1:2:4:8, multi-finger) vs `DAC` (1:2:3:4), run by the AI
+Static characterisation in the container (script and decks outside the repo, `/tmp/dacbin_sim3`). Conditions as in `DACs-DPI.sch`: Iref = 14.42 nA into a diode-connected 1u/8u NMOS for Vb, V(Isum) held at 2.5 V, en = 3.3 V, all 16 codes. The old DAC's m = k devices were expanded into k unit instances, because the PDK mismatch model scales with W·L but ignores m.
+
+| Result (tt, 27 °C) | `DAC_binary` | `DAC` (1:2:3:4) |
+|---|---|---|
+| LSB (least-squares) | 15.02 nA | 15.03 nA |
+| Full scale (code 15) | 225.2 nA (15 LSB) | 150.2 nA (10 LSB) |
+| Code 0 (off leakage) | 20.8 pA | 33.9 pA |
+| INL / DNL max | 0.005 / 0.002 LSB | 0.005 / 0.002 LSB |
+| Branch error vs ideal | +0.31 / +0.20 / +0.12 / +0.04 % | +0.32 / +0.18 / +0.11 / +0.07 % |
+| Full scale within 1 % for V(Isum) ≥ | 2.04 V | 2.06 V |
+| MC mismatch, 200 runs: branch σ | ×1 3.3 %, ×2 2.5 %, ×4 1.5 %, ×8 0.77 % | ×1 3.3 %, ×2 2.2 %, ×3 1.8 %, ×4 1.3 % |
+| MC: DNL max (mean / p95), INL max p95 | 0.14 / 0.27 LSB, 0.17 LSB | 0.13 / 0.26 LSB, 0.15 LSB |
+| MC: monotonic | 200 / 200 | 200 / 200 |
+| MC: full scale σ (incl. reference mismatch) | 7.8 nA (3.4 %) | — |
+
+- Corners (tt/ss/ff/sf/fs × 0/27/85 °C): LSB 14.89–15.14 nA, DNL ≤ 0.015 LSB everywhere. At ff/85 °C and fs/85 °C the off switches leak (code 0: 2.34 nA and 1.26 nA; 2.3 nA is 0.16 LSB), so code 1 reads 17.2 nA at ff/85 °C. This is an offset while en is high, not a linearity error. The binary DAC leaks more than the old one (15 vs 10 switch fingers).
+- **Simulator setting:** multi-finger devices need `set ngbehavior=hsa` (the container's default `~/.spiceinit`). A run-directory `.spiceinit` without it makes nf devices bin by total width, and the ×2/×4/×8 branches then read about 3.7 % low (code 15 = 217.7 nA instead of 225.2 nA).
+

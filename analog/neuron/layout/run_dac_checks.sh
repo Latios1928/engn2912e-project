@@ -29,8 +29,8 @@ LVSDB=$RUN/lvs/DAC.lvsdb klayout -b -r lvs_xref.py
 
 echo "=== pins, coupling, image"
 klayout -b -r extract_pins.py -rd gds=DAC.gds -rd jout=DAC_pins.json -rd png=DAC.png > /dev/null
-for n in Vb X Isum net1 net2 net3 net4; do
+for n in Vb X Isum net1 net2 net3 net4 en 'w[0]' 'w[1]' 'w[2]' 'w[3]'; do
     LVSDB=$RUN/lvs/DAC.lvsdb klayout -b -r coupling.py -rd gds=DAC.gds -rd net=$n \
-        -rd out=DAC_coupling_$n.txt > /dev/null
+        -rd out="DAC_coupling_$(echo $n | tr -d '[]')".txt > /dev/null
 done
-echo "wrote DAC_pins.json DAC.png DAC_coupling_{Vb,X,Isum,net1..net4}.txt"
+echo "wrote DAC_pins.json DAC.png DAC_coupling_{Vb,X,Isum,net1..net4,en,w0..w3}.txt"
