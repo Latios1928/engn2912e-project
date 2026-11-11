@@ -656,7 +656,8 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
   - Replacing only the τ biases and `Vlk` gave 1 / 7 corners (the other fixed biases then made the relays burst at ff).
   - All biases replaced: **7 / 7 corners pass** (output 6–9 spikes, relays locked everywhere).
   - Master current −15 %: 7 / 7; +15 %: 4 / 7; −30 %: 5 / 7; +30 %: 1 / 7. The digital pulse timing does not scale with the analog currents, and too high a current loses the (1,1) race.
-  - Mismatch with the replicas: running when this entry was written.
+  - Mismatch with the replicas (30 samples, tt): 20 / 30 pass, against 27 / 30 with ideal voltages. The shared single-device replicas add their own mismatch to every neuron of a layer: AND dead when the generated VSG of `VT_hid` is high (4 samples), AND on one input when low (1), (1,1) race (5).
+  - Replicas from 16 parallel unit copies (`--replica-n 16`): 25 / 30. The replica spread falls from 0.613–0.632 V to 0.620–0.625 V and no failure comes from it; the remaining 5 are the (1,1) race (3), an output too weak for one input (1) and one AND neuron's own mismatch (1).
 - **Not done:** bias-generator schematic, reference trimming, the (1,1) race.
 
 ---

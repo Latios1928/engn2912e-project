@@ -210,7 +210,17 @@ plain-`DPI` testbenches (`hidden_tb`) to other sizes, `--tag` names the result f
 - The (1,1) race: make the output's first spike later (lower output gain) or the
   inhibition earlier, and check on the same 30 samples.
 - The (1,1) race now limits the mismatch yield and the tolerance to the reference current.
-- Mismatch with the replicas included (`bias_replica.py --mc 30`): running at the time of writing.
+- Mismatch with the replicas included (`bias_replica.py --mc 30`, `results/bias_replica_mc.md`):
+  20 / 30 pass, against 27 / 30 with ideal bias voltages. Each replica is one transistor shared
+  by a whole layer, so its mismatch (the generated `VSG` of `VT_hid` spreads 0.613–0.632 V) moves
+  the threshold of every hidden neuron at once: at 0.627–0.632 V the AND never fires (4 samples),
+  at 0.616 V it fires on one input (1), and 5 lose the (1,1) race.
+- With each replica built from 16 unit copies in parallel (`--replica-n 16`,
+  `results/bias_replica_mc16.md`): **25 / 30**. The generated `VSG` of `VT_hid` spreads only
+  0.620–0.625 V, and no sample fails from the replica any more. The 5 failures: 3 lose the
+  (1,1) race (1–2 output spikes), 1 has an output too weak to fire for one input (code 1 from
+  the OR is marginal), 1 has an AND neuron that fires on one input (its own mismatch). The race
+  and the weak output are the two ends of one trade-off, the strength of the OR -> output path.
 - A bias-generator schematic with realizable mirror ratios; per-chip trim or an external
   reference pin for the master current.
 - `Vlk` has not been re-swept since the switch to option 2 (0.48 V is from option 1's window,
