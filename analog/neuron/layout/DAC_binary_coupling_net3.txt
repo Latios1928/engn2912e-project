@@ -1,14 +1,14 @@
 Geometric coupling report for net NET3  (window 1.0 um; not a capacitance extraction)
-Target area per layer: poly 0.7 um2, M1 28.7 um2, M2 10.9 um2, M3 66.2 um2
+Target area per layer: poly 5.0 um2, M1 55.1 um2, M2 16.1 um2, M3 58.7 um2
 
 net           adj-overlap    far-overlap       side-run   detail
                       um2            um2             um
 -- signals --
-X                   0.960          0.000          18.75   M1 side 18.75 um; M1/M2 0.800 um2; M2/M3 0.160 um2
-W[2]                0.800          0.000          12.54   M1 side 12.54 um; M1/M2 0.800 um2
-NET1                1.120          0.000          10.37   M2 side 10.37 um; M2/M3 0.320 um2; M3/M2 0.800 um2
+NET1                1.120          0.000          23.64   M2 side 23.64 um; M2/M3 0.480 um2; M3/M2 0.640 um2
+X                   3.472          0.000          12.21   M1 side 12.21 um; M1/M2 3.312 um2; M2/M3 0.160 um2
+W[2]                2.290          1.437          13.38   poly side 2.24 um; poly/M2 1.437 um2; M1 side 11.14 um; M1/M2 2.290 um2
+NET4                0.480          0.000           4.47   M2 side 4.47 um; M2/M3 0.320 um2; M3/M2 0.160 um2
 VB                  0.000          0.000           4.24   M1 side 2.64 um; M2 side 1.60 um
-NET4                0.160          0.000           0.00   M2/M3 0.160 um2
-NET2                0.160          0.000           0.00   M2/M3 0.160 um2
+NET2                0.480          0.000           0.00   M2/M3 0.320 um2; M3/M2 0.160 um2
 -- supplies (shields) --
-GND                 1.440          0.400          20.58   M1 side 20.58 um; M2/M1 1.440 um2; M3/M1 0.400 um2
+GND                 2.080          0.400          20.58   M1 side 20.58 um; M2/M1 2.080 um2; M3/M1 0.400 um2

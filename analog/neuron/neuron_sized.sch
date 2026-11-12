@@ -73,7 +73,7 @@ N 380 -150 410 -150 {lab=VDD}
 N 310 -150 340 -150 {lab=VKup}
 N 380 -230 380 -180 {lab=VDD}
 N -540 40 -490 40 {lab=VSS}
-C {spike_amplifier.sym} -20 0 0 0 {name=x1}
+C {analog/neuron/spike_amplifier.sym} -20 0 0 0 {name=x1}
 C {lab_wire.sym} -100 0 0 0 {name=p1 sig_type=std_logic lab=VT}
 C {lab_wire.sym} -100 20 0 0 {name=p2 sig_type=std_logic lab=Vamp_bias}
 C {lab_wire.sym} 0 80 0 0 {name=p3 sig_type=std_logic lab=VSS}

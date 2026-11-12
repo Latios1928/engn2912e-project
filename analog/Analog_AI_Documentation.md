@@ -840,6 +840,29 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **Remaining adjacency (geometric):** only device-level proximity, scaled by the larger branch D: net1–X 36.9 µm and w[3]–X 21.5 µm in the ×8 switch row, and Vb–net1 21.7 µm (unit drain stubs ending at the Vb gate lines). No long horizontal signal-to-signal runs.
 - **Not done:** no parasitic extraction or post-layout simulation; the DAC users still instantiate `DAC.sym`.
 
+**69. Binary DAC: full dummy rings around the switch rows** *(Analysed / tool-verified)*
+- **Asked:** the weighted switch transistors only had dummies at the row ends; put rings around them, trading area for matching.
+- **AI did:** changed `gen_dac_binary.py` so that each switch well (the ×1/×2/×4/×8 switches, and Men) holds a dummy ring: an identical 0.22/0.28 µm dummy directly above and below every device of the row plus the end dummies (3 × (k + 2) positions per branch; 52 new dummies). All are tied to the well's body net (branch node, or GND for Men). Each switch's source/body joins the dummy above it; its X (drain) and gate stubs cross the dummy rows on Metal2.
+- **Checks:** DRC clean (incl. off-grid). LVS matched with the extended reference (`DAC_binary_lvs_ref.spice`, `--combine`).
+- **Size and pins:** the cell grew in height only, 187.88 × 40.70 → 187.88 × 44.08 µm. Pins moved: Isum y 13.99 → 17.37, Vb 22.79 → 26.17, VDD 35.95 → 39.33, GND (M2) 10.39 → 13.77; w[3:0] and en unchanged.
+- **Side effect:** net1–X same-layer adjacency fell from 36.9 to 23.8 µm, because the switch sources now strap to the dummy above instead of running beside the next switch's drain.
+- **Not done:** no parasitic extraction or post-layout simulation; not committed.
+
+### 2026-11-11
+
+**DAC_binary layout: current sources moved under the switches** *(Layout, DRC/LVS run)*
+- **Asked:** the Vb current-source array sat to the right of the w[3:0] switch islands, which wasted area; move it under them.
+- **AI did:** changed the floorplan in `layout/gen_dac_binary.py`:
+  - the array is stacked directly below the switch row, right-aligned with island D;
+  - a new shielded channel C between the X/Isum channel and the array carries the four branch nodes;
+  - one M2 riser per node, left of the array, joins channels C, A and B;
+  - an M1 GND spine ties the X/Isum and channel C shields to the array ring, and the array ring is strapped to the substrate ring on the right;
+  - the cell is built with the islands below the array and mirrored in y at the end.
+  Device placement, the common-centroid pattern and the dummy rings are unchanged.
+- **Result:** 187.88 × 44.08 µm (8282 µm²) → 106.58 × 57.12 µm (6088 µm², −26 %). DRC (variant D) clean; LVS match (`--combine`, substrate GND).
+  - Pin sides are unchanged: Isum, en and w[3:0] on the left; Vb, VDD and GND on the right. Their y positions moved; see `DAC_binary_pins.json`.
+  - Geometric coupling is unchanged for X, Isum, Vb, en and w[3:0]. Each branch node gains 0.64 µm² of overlap where its riser crosses the X/Isum channel.
+
 ---
 
 ## Notes on reliability

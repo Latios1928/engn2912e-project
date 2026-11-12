@@ -27,12 +27,21 @@ Layout (same rules as gen_dac.py for the 1:2:3:4 DAC):
         middle  B D A D B
         bottom  D C D C D
     No two units of the same branch touch. A full ring of identical dummies surrounds it
-    (5 x 7 positions, 20 dummies). Each switch row and Men also have end dummies.
+    (5 x 7 positions, 20 dummies). Each switch row (and Men) also sits in a full dummy
+    ring: identical dummies above and below every switch plus one at each row end, all on
+    the well's body net (3 x (k+2) positions per branch).
+  * Floorplan: the switch islands (Men, A..D) form one row along the top; the current-source
+    array sits directly below them, right-aligned with island D. (The generator builds the
+    islands below the array and mirrors the finished cell in y.)
   * Routing: channel A (bottom/middle rows) carries all four branch nodes; branches C and D
-    also use channel B (middle/top rows) and join on M2 just left of the array. Signals are
-    on Metal3 with GND shields on Metal1 between them (alternating layers); the middle row's
-    GND sources strap onto the top shield of channel A. Vb stays inside the array. The
-    digital lines run below the switches, X and Isum above them, both shielded.
+    also use channel B (middle/top rows). Channel C, between the X/Isum channel and the
+    array, carries the four branch nodes from the island rings to one M2 riser per node in
+    the free space left of the array, which joins channels C, A (and B). Signals are on
+    Metal3 with GND shields on Metal1 between them (alternating layers); the middle row's
+    GND sources strap onto the top shield of channel A. The X/Isum and channel C shields
+    are tied to the array ring by an M1 GND spine at the right end; the array ring goes to
+    the substrate ring on the right. Vb stays inside the array. The digital lines run above
+    the switches, X and Isum between the switches and the array, both shielded.
   * Pins (Metal2 at the edge, labelled): left Isum, en, w[0]..w[3]; right Vb, VDD, GND;
     GND also on the Metal1 substrate ring.
 """
@@ -265,7 +274,8 @@ WELL_GAP = 1.8                             # LVPWELL spacing between islands (LP
 
 # switch islands: Men island first (next to the Isum / en pins), then A..D
 ISL = [("MEN", "GND", 1, "en")] + [(k, BR[k][4], BR[k][2], BR[k][3]) for k in "ABCD"]
-sl, sr, srel_lo, srel_hi = extent(SW, SL, "bottom")
+sl, sr, srel_lo, srel_hi = extent(SW, SL, "bottom")    # switch row / bottom dummy row
+_, _, trel_lo, trel_hi = extent(SW, SL, "top")          # top dummy row (gate contact on top)
 SPITCH = (sr - sl) + GAP
 islands = []
 x = DN_X0 + 2.5                            # first LVPWELL edge
@@ -286,45 +296,63 @@ SW_X1 = islands[-1]["lpw"][1]
 ul, ur, urel_lo_t, urel_hi_t = extent(UW, UL, "top")
 _, _, urel_lo_b, urel_hi_b = extent(UW, UL, "bottom")
 UPITCH = (ur - ul) + GAP
-JOIN_X = {"net1": SW_X1 + 1.3, "net3": SW_X1 + 2.3}   # channel A <-> B joins (M2)
-A_LPW_X0 = SW_X1 + 3.6                     # array LVPWELL (GND) vs island D (net1): >= 1.4
+# The array sits directly above the switch row (below it after the final mirror), right-
+# aligned with it, so that its LVPWELL ends where island D's does.
+A_W = 0.4 + RW + 0.8 + 7 * UPITCH - GAP + 0.6 + 0.2 + 0.8 + RW + 0.4
+A_LPW_X0 = SW_X1 - A_W
 A_RING_X0 = A_LPW_X0 + 0.4
 A_DEV_X0 = A_RING_X0 + RW + 0.8
 col_ox = [A_DEV_X0 - ul + i * UPITCH for i in range(7)]
 VB_X = A_DEV_X0 + 7 * UPITCH - GAP + 0.6   # Vb riser, right of the dummy column
 A_RING_X1 = VB_X + 0.2 + 0.8 + RW
 A_LPW_X1 = A_RING_X1 + 0.4
+assert abs(A_LPW_X1 - SW_X1) < 1e-6
+# one M2 riser per branch node, channel C <-> A (<-> B). The array is narrower than the
+# switch row, so the risers go in the free space left of the array, just left of island A's
+# ring riser (nothing else runs vertically there in channel C).
+X_RISER_A = islands[1]["ring"][0] + 0.25
+JOIN_X = {n: X_RISER_A - 0.9 - i * 0.8 for i, n in enumerate(TRACK_ORDER)}
+assert max(JOIN_X.values()) + 0.2 < A_RING_X0 and min(JOIN_X.values()) - 0.8 > ESC_L
+GSPINE_X = SW_X1 - 1.0                     # M1 GND spine: channel shields -> array ring
 DN_X1 = A_LPW_X1 + 2.5
 CW = DN_X1 + 2.7 + OR_W + OR_O
 
 # ------------------------------------------------------------------ y floorplan
-# Everything is placed relative to T5, the lowest branch track, then shifted.
+# Built bottom -> top as: digital channel, switch islands, X/Isum channel, branch channel C,
+# array (with channels A and B inside). The finished cell is mirrored in y at the end, so
+# the array ends up below the switches.
+C_ORDER = TRACK_ORDER                      # channel C (switch side of the array), bottom -> top
 
 
-def layout_y(T5):
+def layout_y(base):
     y = {}
-    # channel A: four branch tracks with a GND shield above each (the top one takes the
-    # middle row's GND straps)
+    # switch islands: bottom dummy row / switch row / top dummy row in a dummy ring
+    y["s_ring0"] = base                                            # island ring outer bottom
+    y["sb"] = y["s_ring0"] + RW + 0.6 - srel_lo                    # bottom dummy row
+    y["sw"] = y["sb"] + (srel_hi - srel_lo + ROWGAP)               # switch S/D centre line
+    y["st"] = y["sw"] + (srel_hi - trel_lo + ROWGAP)               # top dummy row
+    y["s_ring1"] = y["st"] + RW + 0.6 + trel_hi                    # island ring outer top
+    # analog channel t0..t4 (shield, X, shield, Isum, shield) above the islands
+    y["sh"] = [y["s_ring1"] + TW / 2 + 0.9 + i * TP for i in range(5)]
+    y["X"], y["Isum"] = y["sh"][1], y["sh"][3]
+    # channel C: the four branch nodes, each with a GND shield above it
+    y["C"] = {n: y["sh"][4] + (2 * i + 1) * TP for i, n in enumerate(C_ORDER)}
+    y["csh"] = [y["sh"][4] + (2 * i + 2) * TP for i in range(len(C_ORDER))]
+    # array: ring, bottom dummy row, row 1 (gate bottom), channel A, row 2, channel B, row 3
+    y["a_ring0"] = y["csh"][-1] + TW / 2 + 0.9                     # array ring outer bottom
+    y["rb"] = y["a_ring0"] + RW + 0.6 - urel_lo_b                  # bottom dummy row
+    y["r1"] = y["rb"] + (urel_hi_b - urel_lo_b) + ROWGAP
+    T5 = y["r1"] + urel_hi_b + 0.6 + TW / 2                        # lowest channel A track
     y["T"] = {n: T5 + 2 * i * TP for i, n in enumerate(TRACK_ORDER)}
     y["bsh"] = [T5 + (2 * i + 1) * TP for i in range(len(TRACK_ORDER))]
-    # array: row 1 (gate bottom) below channel A, row 2 (gate top) above it
-    y["r1"] = T5 - TW / 2 - 0.6 - urel_hi_b
-    y["rb"] = y["r1"] - (urel_hi_b - urel_lo_b) - ROWGAP          # bottom dummy row
     y["r2"] = y["bsh"][-1] + TW / 2 + 0.6 - urel_lo_t
-    # channel B between row 2 and row 3: shield, net1, shield, net3, shield
     B0 = y["r2"] + urel_hi_t + 0.6 + TW / 2
     y["TB"] = {n: B0 + (2 * i + 1) * TP for i, n in enumerate(CHB_ORDER)}
     y["bshB"] = [B0 + 2 * i * TP for i in range(len(CHB_ORDER) + 1)]
     y["r3"] = y["bshB"][-1] + TW / 2 + 0.6 - urel_lo_t
     y["rt"] = y["r3"] + (urel_hi_t - urel_lo_t) + ROWGAP          # top dummy row
-    y["a_ring0"] = y["rb"] + urel_lo_b - 0.6 - RW                  # array ring outer bottom
     y["a_ring1"] = y["rt"] + urel_hi_t + 0.6 + RW                  # array ring outer top
-    # switch side: analog channel t0..t4 (shield, X, shield, Isum, shield) below T5
-    y["sh"] = [T5 - (5 - i) * TP for i in range(5)]               # t0..t4
-    y["X"], y["Isum"] = y["sh"][1], y["sh"][3]
-    y["s_ring1"] = y["sh"][0] - TW / 2 - 0.9                       # island ring outer top
-    y["sw"] = y["s_ring1"] - RW - 0.6 - srel_hi                    # switch S/D centre line
-    y["s_ring0"] = y["sw"] + srel_lo - 0.6 - RW                    # island ring outer bottom
+    # digital channel below the islands
     y["dsh"] = y["s_ring0"] - 0.4 - 0.9                            # digital GND shield
     y["dig"] = {n: y["dsh"] - (i + 1) * TP for i, n in enumerate(DIG)}
     return y
@@ -332,14 +360,15 @@ def layout_y(T5):
 
 y0 = layout_y(0.0)
 DN_Y0 = OR_O + OR_W + 2.7
-T5 = DN_Y0 - min(y0["a_ring0"] - 0.4 - 2.5, y0["s_ring0"] - 0.4 - 2.5)
-T5 = max(T5, OR_O + OR_W + 0.8 + TW / 2 - min(y0["dig"].values()))
-Y = layout_y(T5)
+BASE = max(DN_Y0 + 0.4 + 2.5,                                       # LVPWELL 2.5 inside DNWELL
+           OR_O + OR_W + 0.8 + TW / 2 - min(y0["dig"].values()))   # digital tracks above ring
+Y = layout_y(BASE)
 A_LPW_Y1 = Y["a_ring1"] + 0.4
 VDD_Y = A_LPW_Y1 + 1.25                     # N+ tap strip (DNWELL tie) centre
 DN_Y1 = A_LPW_Y1 + 2.5
 CH = DN_Y1 + 2.7 + OR_W + OR_O
 assert Y["a_ring1"] + 0.4 < VDD_Y - 0.25
+assert Y["a_ring0"] - 0.4 - (Y["s_ring1"] + 0.4) >= 1.4          # LVPWELL spacing (LPW.2a)
 
 # ------------------------------------------------------------------ wells, rings, taps
 box("dnwell", DN_X0, DN_Y0, DN_X1, DN_Y1)
@@ -352,13 +381,16 @@ for isl in islands:
     isl["sides"] = ring(isl["ring"][0], Y["s_ring0"], isl["ring"][1], Y["s_ring1"], "pplus")
 
 # GND connections: array ring -> substrate ring; Men ring -> substrate ring (left)
-for xs in (A_RING_X0 + 2.0, (A_RING_X0 + A_RING_X1) / 2, A_RING_X1 - 2.0):
-    box("m1", xs - 0.5, OR_O + OR_W - 0.01, xs + 0.5, Y["a_ring0"] + 0.01)
+for ys in (Y["a_ring0"] + 3.0, (Y["a_ring0"] + Y["a_ring1"]) / 2, Y["a_ring1"] - 3.0):
+    box("m1", A_RING_X1 - 0.01, ys - 0.5, CW - OR_O - OR_W + 0.01, ys + 0.5)
 men = islands[0]
 ym = (Y["s_ring0"] + Y["s_ring1"]) / 2
 box("m1", OR_O + OR_W - 0.01, ym - 0.5, men["ring"][0] + 0.01, ym + 0.5)
 
 # ------------------------------------------------------------------ switch islands
+# Each island is a dummy ring around its switch row: an identical dummy directly above and
+# below every device of the row, plus a dummy at each row end. All dummies are tied to the
+# island's body net (the P+ ring): the branch node, or GND for Men.
 S_TOP_IN = Y["s_ring1"] - RW           # inner edge of the island ring top side
 S_BOT_IN = Y["s_ring0"] + RW
 X_STUBS, GATE_STUBS = [], []           # (x, from_y, net)
@@ -368,6 +400,17 @@ for isl in islands:
     names = ["%s_DL" % k] + ([("Men" if k == "MEN" else "%s_%d" % (BR[k][1], i + 1))
                               for i in range(isl["m"])]) + ["%s_DR" % k]
     for i, (nm, ox) in enumerate(zip(names, isl["origins"])):
+        # dummy rows: everything to the ring outside
+        dt = place("%s_T%d" % (k, i), SW, SL, "top", ox, Y["st"], (body,) * 3)
+        db = place("%s_B%d" % (k, i), SW, SL, "bottom", ox, Y["sb"], (body,) * 3)
+        for t in "SD":
+            vbar(tab(dt, t), dt[t].center().y, S_TOP_IN + 0.01)
+            vbar(tab(db, t), S_BOT_IN - 0.01, db[t].center().y)
+        g = dt["gates"][-1]
+        box("m1", g.left, g.bottom, g.right, S_TOP_IN + 0.01)
+        g = db["gates"][0]
+        box("m1", g.left, S_BOT_IN - 0.01, g.right, g.top)
+        # switch row
         dummy = i in (0, len(names) - 1)
         if dummy:
             nets = (body, body, body)
@@ -378,18 +421,18 @@ for isl in islands:
         d = place(nm, SW, SL, "bottom", ox, Y["sw"], nets)
         devs[nm] = d
         if dummy:
-            for t in "SD":                                   # everything to the ring top
-                vbar(tab(d, t), d[t].center().y, S_TOP_IN + 0.01)
+            for t in "SD":                                   # join the dummy above
+                vbar(tab(d, t), d[t].center().y, dt[t].center().y)
             gate_tie(d, False)
             continue
         g = d["gates"][0]
-        GATE_STUBS.append((g.center().x, g.center().y, nets[1]))
+        GATE_STUBS.append((g.center().x, g.center().y, nets[1]))   # down, over the dummy row
         if k == "MEN":
             X_STUBS.append((tab(d, "S"), d["S"].center().y, "X"))
             X_STUBS.append((tab(d, "D"), d["D"].center().y, "Isum"))
         else:
-            vbar(tab(d, "S"), d["S"].center().y, S_TOP_IN + 0.01)   # S = body = ring
-            X_STUBS.append((tab(d, "D"), d["D"].center().y, "X"))
+            vbar(tab(d, "S"), d["S"].center().y, dt["S"].center().y)  # S = body: join dummy above
+            X_STUBS.append((tab(d, "D"), d["D"].center().y, "X"))      # up, over the dummy row
 
 # ------------------------------------------------------------------ current-source array
 A_TOP_IN = Y["a_ring1"] - RW
@@ -463,40 +506,53 @@ for c in range(1, 6):
     assert a_ == b_ or TRACK_ORDER.index(a_) < TRACK_ORDER.index(b_), (c, a_, b_)
 
 
-def join(x, ya, yb):
-    """M2 riser between two M3 tracks."""
-    via23(x, ya)
-    vbar(x, ya, yb, "m2")
-    via23(x, yb)
-
-
+# Each branch node: island ring -> channel C (M2 riser through the X/Isum channel), along
+# channel C to its join riser left of the array, up to channel A (and channel B for the
+# top-row branches C and D), and along those channels to the source drains.
 for isl in islands[1:]:
     net = isl["body"]
-    yt = Y["T"][net]
+    yc = Y["C"][net]
     x_r = isl["ring"][0] + 0.25                       # riser from the island ring top side
-    stub(x_r, Y["s_ring1"] - RW / 2, yt, SIG_LAYER)
+    isl["x_r"] = x_r
+    stub(x_r, Y["s_ring1"] - RW / 2, yc, SIG_LAYER)
+    xj = JOIN_X[net]
+    box(SIG_LAYER, min(x_r, xj) - 0.2, yc - TW / 2, max(x_r, xj) + 0.2, yc + TW / 2)
+    ys = [yc, Y["T"][net]] + ([Y["TB"][net]] if net in CHB_ORDER else [])
+    for yy in ys:
+        via23(xj, yy)
+    vbar(xj, ys[0], ys[-1], "m2")
+    yt = Y["T"][net]
     for (xx, yy) in ARR_A[net]:
         stub(xx, yy, yt, SIG_LAYER)
     x_hi = max(xx for xx, _ in ARR_A[net])
-    box(SIG_LAYER, x_r - 0.2, yt - TW / 2, x_hi + 0.2, yt + TW / 2)   # M3 over the ring
+    box(SIG_LAYER, xj - 0.2, yt - TW / 2, x_hi + 0.2, yt + TW / 2)    # M3 over the ring
     if net in CHB_ORDER:
         yb = Y["TB"][net]
-        xj = JOIN_X[net]
-        join(xj, yt, yb)
         for (xx, yy) in ARR_B[net]:
             stub(xx, yy, yb, SIG_LAYER)
         x_hiB = max(xx for xx, _ in ARR_B[net])
         box(SIG_LAYER, xj - 0.2, yb - TW / 2, x_hiB + 0.2, yb + TW / 2)
 
+# join risers must not run into an island riser (both M2) inside channel C
+for isl in islands[1:]:
+    for n, xj in JOIN_X.items():
+        if Y["C"][isl["body"]] > Y["C"][n] - 0.5:
+            assert abs(isl["x_r"] - xj) >= 0.8, (isl["key"], n, isl["x_r"], xj)
+
 # channel B shields: inside the array, from ring side to ring side
 for y in Y["bshB"]:
     box("m1", A_RING_X0, y - TW / 2, A_RING_X1, y + TW / 2)
 
-# channel A GND shields: from the first island riser, across the array ring left side
+# channel A GND shields: from left of the join risers, across the array ring left side
 # (merging with it), through the array to the ring right side
-BSH_X0 = min(isl["ring"][0] for isl in islands[1:]) - 0.6
+BSH_X0 = min(JOIN_X.values()) - 0.6
 for y in Y["bsh"]:
     box("m1", BSH_X0, y - TW / 2, A_RING_X1, y + TW / 2)
+
+# channel C GND shields: from left of the leftmost riser to the GND spine
+CSH_X0 = min([isl["x_r"] for isl in islands[1:]] + list(JOIN_X.values())) - 0.6
+for y in Y["csh"]:
+    box("m1", CSH_X0, y - TW / 2, GSPINE_X + 0.2, y + TW / 2)
 
 # ------------------------------------------------------------------ X / Isum channel (shielded)
 x_X = [x for (x, _, n) in X_STUBS if n == "X"]
@@ -507,12 +563,14 @@ X_LO, X_HI = min(x_x - 0.5 for x_x in x_X), max(x_x + 0.5 for x_x in x_X)
 box(SIG_LAYER, X_LO, Y["X"] - TW / 2, X_HI, Y["X"] + TW / 2)
 box(SIG_LAYER, ESC_L - 0.2, Y["Isum"] - TW / 2, max(x_I) + 0.5, Y["Isum"] + TW / 2)
 escape(Y["Isum"], SIG_LAYER)
-# GND shields t0, t2, t4: from the left end of X / Isum to the array ring left side (GND)
+# GND shields t0, t2, t4: from the left end of X / Isum to the GND spine
 for i in (0, 2, 4):
     y = Y["sh"][i]
     lo = ESC_L + 0.6 if i >= 2 else X_LO - 0.6
-    box("m1", lo, y - TW / 2, A_RING_X0 + RW, y + TW / 2)
-    assert Y["a_ring0"] < y - TW / 2 and y + TW / 2 < Y["a_ring1"], "shield misses the array ring"
+    box("m1", lo, y - TW / 2, GSPINE_X + 0.2, y + TW / 2)
+# GND spine (M1): ties the t0/t2/t4 and channel C shields to the array ring bottom side
+assert X_HI + 0.2 < GSPINE_X - 0.2 and A_RING_X0 + RW < GSPINE_X < A_RING_X1 - RW
+vbar(GSPINE_X, Y["sh"][0] - TW / 2, Y["a_ring0"] + RW)
 
 # ------------------------------------------------------------------ digital channel
 # GND shield between the switch islands and the digital tracks, tied to the substrate ring
@@ -548,5 +606,8 @@ top.shapes(li["m1_lbl"]).insert(pya.DText("GND", pya.DTrans(CW / 2, OR_O + OR_W 
 
 box("bnd", 0, 0, CW, CH)
 top.flatten(-1, True)
+# mirror in y so that the current-source array (gate Vb) sits below the switches (gates w[3:0])
+top.transform(pya.DTrans(pya.DTrans.M0))
+top.transform(pya.DTrans(0, CH))
 ly.write(OUT)
 print("wrote %s  %.2f x %.2f um" % (OUT, CW, CH))

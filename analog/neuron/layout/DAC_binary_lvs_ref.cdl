@@ -3,7 +3,8 @@
 * with these layout-only changes:
 *   - GND (a global in the schematic) and VDD (DNWELL tie, new) are ports
 *   - dummy transistors: DA_* ring around the current-source array (all GND),
-*     *_DL / *_DR at the ends of each switch row (all terminals on that well's body net)
+*     *_DL / *_DR at the ends of each switch row and *_T* / *_B* dummy rows above and below it
+*     (all terminals on that well's body net)
 * The layout draws each finger as a separate unit device; LVS combines parallel devices.
 .subckt DAC_binary Isum Vb w[3] w[2] w[1] w[0] en VDD GND
 MMen Isum en X GND nfet_03v3 L=0.28u W=0.22u nf=1
@@ -26,6 +27,59 @@ MC_DL net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
 MC_DR net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
 MD_DL net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
 MD_DR net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy rows above (_T) and below (_B) each switch row (all terminals on that well's body net)
+MMEN_T0 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_T1 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_T2 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_B0 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_B1 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_B2 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MA_T0 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_T1 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_T2 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_B0 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_B1 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_B2 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T0 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T1 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T2 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T3 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B0 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B1 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B2 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B3 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T0 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T1 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T2 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T3 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T4 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T5 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B0 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B1 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B2 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B3 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B4 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B5 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T0 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T1 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T2 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T3 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T4 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T5 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T6 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T7 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T8 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T9 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B0 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B1 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B2 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B3 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B4 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B5 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B6 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B7 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B8 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B9 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
 * dummy ring around the current-source array (20 devices, all GND)
 MDA_b0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
 MDA_b1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
