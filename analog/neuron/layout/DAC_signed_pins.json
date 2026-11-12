@@ -1,0 +1,217 @@
+{
+  "cell": "DAC_signed",
+  "units": "um",
+  "origin": "lower-left of PR boundary",
+  "bbox": [
+    0.0,
+    0.0,
+    116.58,
+    57.120000000000005
+  ],
+  "pins": [
+    {
+      "name": "GND",
+      "layer": "Metal1",
+      "label_x": 5.0,
+      "label_y": 56.57,
+      "access": [
+        {
+          "side": "inside",
+          "x1": 0.3,
+          "y1": 0.3,
+          "x2": 116.28,
+          "y2": 56.82,
+          "cx": 58.29,
+          "cy": 28.56
+        }
+      ]
+    },
+    {
+      "name": "GND",
+      "layer": "Metal2",
+      "label_x": 116.28,
+      "label_y": 30.315,
+      "access": [
+        {
+          "side": "right",
+          "x1": 115.98,
+          "y1": 30.065,
+          "x2": 116.58,
+          "y2": 30.565,
+          "cx": 116.28,
+          "cy": 30.315
+        }
+      ]
+    },
+    {
+      "name": "Isum_e",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 36.75,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 36.55,
+          "x2": 0.6,
+          "y2": 36.95,
+          "cx": 0.3,
+          "cy": 36.75
+        }
+      ]
+    },
+    {
+      "name": "Isum_i",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 35.95,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 35.75,
+          "x2": 0.6,
+          "y2": 36.15,
+          "cx": 0.3,
+          "cy": 35.95
+        }
+      ]
+    },
+    {
+      "name": "VDD",
+      "layer": "Metal2",
+      "label_x": 116.28,
+      "label_y": 4.75,
+      "access": [
+        {
+          "side": "right",
+          "x1": 115.98,
+          "y1": 4.5,
+          "x2": 116.58,
+          "y2": 5.0,
+          "cx": 116.28,
+          "cy": 4.75
+        }
+      ]
+    },
+    {
+      "name": "Vb",
+      "layer": "Metal2",
+      "label_x": 116.28,
+      "label_y": 17.91,
+      "access": [
+        {
+          "side": "right",
+          "x1": 115.98,
+          "y1": 17.71,
+          "x2": 116.58,
+          "y2": 18.11,
+          "cx": 116.28,
+          "cy": 17.91
+        }
+      ]
+    },
+    {
+      "name": "en",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 52.12,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 51.92,
+          "x2": 0.6,
+          "y2": 52.32,
+          "cx": 0.3,
+          "cy": 52.12
+        }
+      ]
+    },
+    {
+      "name": "s",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 35.15,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 34.95,
+          "x2": 0.6,
+          "y2": 35.35,
+          "cx": 0.3,
+          "cy": 35.15
+        }
+      ]
+    },
+    {
+      "name": "w[0]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 52.92,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 52.72,
+          "x2": 0.6,
+          "y2": 53.12,
+          "cx": 0.3,
+          "cy": 52.92
+        }
+      ]
+    },
+    {
+      "name": "w[1]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 53.72,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 53.52,
+          "x2": 0.6,
+          "y2": 53.92,
+          "cx": 0.3,
+          "cy": 53.72
+        }
+      ]
+    },
+    {
+      "name": "w[2]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 54.52,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 54.32,
+          "x2": 0.6,
+          "y2": 54.72,
+          "cx": 0.3,
+          "cy": 54.52
+        }
+      ]
+    },
+    {
+      "name": "w[3]",
+      "layer": "Metal2",
+      "label_x": 0.3,
+      "label_y": 55.32,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 55.12,
+          "x2": 0.6,
+          "y2": 55.52,
+          "cx": 0.3,
+          "cy": 55.32
+        }
+      ]
+    }
+  ]
+}

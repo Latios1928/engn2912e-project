@@ -1,0 +1,11 @@
+* LVS reference for the DPI_sized layout (gen_dpi.py -rd name=DPI_sized -rd w=0.88 -rd l=1.12).
+* Built from the xschem netlist of analog/neuron/DPI_sized.sch with two layout-only changes:
+*   1. C4 (ideal 1 pF in the schematic) -> GF180 MIM cap cap_mim_2f0fF (LVS device name), 22.36 x 22.36 um = 1.000 pF
+*   2. port VSS added: the substrate guard ring that rule DN.3 requires
+.subckt DPI_sized VDD Vthr Isyn Isum VT VSS
+XM1 VDD Vthr Isum Isum nfet_03v3 L=1.12u W=0.88u nf=1
+XM2 net1 net1 Isum Isum nfet_03v3 L=1.12u W=0.88u nf=1
+XM3 net1 VT VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
+XM4 Isyn net1 VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
+XC4 VDD net1 cap_mim_2f0fF c_width=22.36e-6 c_length=22.36e-6 m=1
+.ends

@@ -1,0 +1,12 @@
+Geometric coupling report for net ISUM_E  (window 1.0 um; not a capacitance extraction)
+Target area per layer: M1 0.3 um2, M2 1.6 um2, M3 2.6 um2
+
+net           adj-overlap    far-overlap       side-run   detail
+                      um2            um2             um
+-- signals --
+ISUM_I              0.160          0.000           4.96   M2 side 1.80 um; M3/M2 0.160 um2; M3 side 3.16 um
+SB                  0.160          0.000           3.43   M1 side 1.13 um; M2 side 2.30 um; M3/M2 0.160 um2
+Y                   0.000          0.000           0.78   M1 side 0.38 um; M2 side 0.40 um
+S                   0.160          0.000           0.00   M3/M2 0.160 um2
+-- supplies (shields) --
+GND                 0.200          0.000           0.00   M2/M1 0.200 um2

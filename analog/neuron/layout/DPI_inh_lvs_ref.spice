@@ -1,0 +1,21 @@
+* LVS reference for the DPI_inh layout (gen_dpi_inh.py).
+* Devices and nets as in analog/neuron/DPI_inh.sch, with these layout-only changes:
+*   - x1 is the DPI_sized layout cell; its reference is DPI_sized_lvs_ref.spice (1 pF C4 as a
+*     MIM cap, substrate port VSS), copied below
+*   - GND (a global in the schematic) is a port; the DPI's substrate ring VSS is GND
+*   - dummy transistors MD_L / MD_R at the ends of the mirror row (all terminals GND)
+.subckt DPI_sized VDD Vthr Isyn Isum VT VSS
+XM1 VDD Vthr Isum Isum nfet_03v3 L=1.12u W=0.88u nf=1
+XM2 net1 net1 Isum Isum nfet_03v3 L=1.12u W=0.88u nf=1
+XM3 net1 VT VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
+XM4 Isyn net1 VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
+XC4 VDD net1 cap_mim_2f0fF c_width=22.36e-6 c_length=22.36e-6 m=1
+.ends
+
+.subckt DPI_inh VDD Vthr VT Isum Iout GND
+x1 VDD Vthr Im Isum VT GND DPI_sized
+XMi1 Im Im GND GND nfet_03v3 L=8u W=2u nf=1
+XMi2 Iout Im GND GND nfet_03v3 L=8u W=2u nf=1
+XMD_L GND GND GND GND nfet_03v3 L=8u W=2u nf=1
+XMD_R GND GND GND GND nfet_03v3 L=8u W=2u nf=1
+.ends

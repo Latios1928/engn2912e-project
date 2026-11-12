@@ -1,0 +1,231 @@
+* LVS reference for the SNN top-level layout (gen_snn.py), written by make_snn_lvs_ref.py.
+* Instances and nets as in analog/snn/snn_analog_inh.sch (xschem netlist), with these
+* layout-only changes:
+*   - the six plain DACs are DAC_binary (weights 1:2:4:8, not the schematic's 1:2:3:4 DAC.sym); DAC_signed contains the binary DAC
+*   - every block is its layout cell; the subcircuits below are copied from the blocks'
+*     own LVS references (*_lvs_ref.spice: dummies, MIM caps, substrate / DNWELL ports)
+*   - the blocks' GND (DACs, DAC_signed, DPI_inh) and the substrate are the top-level VSS
+
+.subckt neuron_sized VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
+* spike amplifier (x1): A1/A2 diff pair, A3 tail, A4/A5 mirror
+MA1 amp_n2 VMEM tail VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MA2 net1 VT tail VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MA3 tail Vamp_bias VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MA4 amp_n2 amp_n2 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MA5 net1 amp_n2 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+* neuron
+MM1 net2 net1 net4 VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MM2 spike net2 net5 VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MM3 net2 net1 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM4 spike net2 net3 VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM5 VMEM net2 net7 VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM6 VMEM spike net6 VSS nfet_03v3 L=5u W=0.22u nf=1
+MM7 net5 VKdn VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM8 net4 VIp VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM9 net7 VNA VDD VDD pfet_03v3 L=1u W=1u nf=1
+MM10 net6 VK VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM11 VMEM Vlk VSS VSS nfet_03v3 L=1u W=1u nf=1
+MM12 net3 VKup VDD VDD pfet_03v3 L=1u W=1u nf=1
+C1 spike VSS cap_mim_2f0fF W=10e-6 L=10e-6 m=1
+C2 VMEM VSS cap_mim_2f0fF W=22.18e-6 L=22.18e-6 m=1
+* dummies in the critical rows
+MEN1 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MFN1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MFN2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MEN2 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MEP1 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MFP1 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MFP2 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MEP2 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+* NMOS dummy rows (below / above the critical row)
+MDB_EN1 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_M11 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_M10 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_FN1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_A1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_A2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_FN2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_A3 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDB_M8 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_M7 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDB_EN2 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_EN1 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_M11 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_M10 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_FN1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_A1 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_A2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_FN2 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_A3 VSS VSS VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1
+MDT_M8 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_M7 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+MDT_EN2 VSS VSS VSS VSS nfet_03v3 L=1u W=1u nf=1
+* PMOS dummy rows (below / above the critical row)
+MPB_EP1 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPB_M9 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPB_FP1 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_A4 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_A5 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_FP2 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPB_M12 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPB_EP2 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_EP1 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_M9 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_FP1 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_A4 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_A5 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_FP2 VDD VDD VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MPT_M12 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+MPT_EP2 VDD VDD VDD VDD pfet_03v3 L=1u W=1u nf=1
+.ends
+
+.subckt DPI VDD Vthr Isyn Isum VT VSS
+MM1 VDD Vthr Isum Isum nfet_03v3 L=0.28u W=0.22u nf=1
+MM2 net1 net1 Isum Isum nfet_03v3 L=0.28u W=0.22u nf=1
+MM3 net1 VT VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+MM4 Isyn net1 VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1
+C4 VDD net1 cap_mim_2f0fF W=22.36e-6 L=22.36e-6 m=1
+.ends
+
+.subckt DAC_binary Isum Vb w[3] w[2] w[1] w[0] en VDD GND
+MMen Isum en X GND nfet_03v3 L=0.28u W=0.22u nf=1
+MM1 X w[0] net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MM2 net4 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+MM3 X w[1] net2 net2 nfet_03v3 L=0.28u W=0.44u nf=2
+MM4 net2 Vb GND GND nfet_03v3 L=8u W=2u nf=2
+MM5 X w[2] net3 net3 nfet_03v3 L=0.28u W=0.88u nf=4
+MM6 net3 Vb GND GND nfet_03v3 L=8u W=4u nf=4
+MM7 X w[3] net1 net1 nfet_03v3 L=0.28u W=1.76u nf=8
+MM8 net1 Vb GND GND nfet_03v3 L=8u W=8u nf=8
+* dummies at the ends of the switch rows
+MMEN_DL GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_DR GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MA_DL net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_DR net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_DL net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_DR net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_DL net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_DR net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_DL net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_DR net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy rows above (_T) and below (_B) each switch row (all terminals on that well's body net)
+MMEN_T0 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_T1 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_T2 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_B0 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_B1 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMEN_B2 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+MA_T0 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_T1 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_T2 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_B0 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_B1 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MA_B2 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T0 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T1 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T2 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_T3 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B0 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B1 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B2 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MB_B3 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T0 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T1 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T2 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T3 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T4 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_T5 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B0 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B1 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B2 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B3 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B4 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MC_B5 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T0 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T1 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T2 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T3 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T4 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T5 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T6 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T7 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T8 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_T9 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B0 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B1 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B2 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B3 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B4 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B5 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B6 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B7 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B8 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+MD_B9 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy ring around the current-source array (20 devices, all GND)
+MDA_b0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_b6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_t6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_10 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_16 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_20 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_26 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_30 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+MDA_36 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+.ends
+
+.subckt DAC_signed Isum_e Isum_i s Vb w[3] w[2] w[1] w[0] en VDD GND
+x1 Y Vb w[3] w[2] w[1] w[0] en VDD GND DAC_binary
+MMse Isum_e sb Y GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMsi Isum_i s Y GND nfet_03v3 L=0.28u W=0.22u nf=1
+MMpi sb s VDD VDD pfet_03v3 L=0.28u W=0.44u nf=1
+MMni sb s GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+.ends
+
+.subckt DPI_sized VDD Vthr Isyn Isum VT VSS
+MM1 VDD Vthr Isum Isum nfet_03v3 L=1.12u W=0.88u nf=1
+MM2 net1 net1 Isum Isum nfet_03v3 L=1.12u W=0.88u nf=1
+MM3 net1 VT VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
+MM4 Isyn net1 VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
+C4 VDD net1 cap_mim_2f0fF W=22.36e-6 L=22.36e-6 m=1
+.ends
+
+.subckt DPI_inh VDD Vthr VT Isum Iout GND
+x1 VDD Vthr Im Isum VT GND DPI_sized
+MMi1 Im Im GND GND nfet_03v3 L=8u W=2u nf=1
+MMi2 Iout Im GND GND nfet_03v3 L=8u W=2u nf=1
+MMD_L GND GND GND GND nfet_03v3 L=8u W=2u nf=1
+MMD_R GND GND GND GND nfet_03v3 L=8u W=2u nf=1
+.ends
+
+.subckt SNN VDD VSS Vb w[0] w[1] w[2] w[3] w[4] w[5] w[6] w[7] w[8] w[9] w[10] w[11] w[12] w[13] w[14] w[15] w[16] w[17] w[18] w[19] w[20] w[21] w[22] w[23] w[24] w[25] w[26] w[27] w[28] w[29] w[30] w[31] pulse[0] pulse[1] s[0] s[1] Vthr VT_dpi VT_inh VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[0] spike[1] spike[2] spike[3] spike[4]
+xdac0_0 Isum_0 Vb w[3] w[2] w[1] w[0] pulse[0] VDD VSS DAC_binary
+xdac1_0 Isum_1 Vb w[7] w[6] w[5] w[4] pulse[1] VDD VSS DAC_binary
+xdac2_0 Isum_2 Vb w[11] w[10] w[9] w[8] spike[0] VDD VSS DAC_binary
+xdac2_1 Isum_2 Vb w[15] w[14] w[13] w[12] spike[1] VDD VSS DAC_binary
+xdac3_0 Isum_3 Vb w[19] w[18] w[17] w[16] spike[0] VDD VSS DAC_binary
+xdac3_1 Isum_3 Vb w[23] w[22] w[21] w[20] spike[1] VDD VSS DAC_binary
+xdac4_0 Isum_4 Isum_5 s[0] Vb w[27] w[26] w[25] w[24] spike[2] VDD VSS DAC_signed
+xdac4_1 Isum_4 Isum_5 s[1] Vb w[31] w[30] w[29] w[28] spike[3] VDD VSS DAC_signed
+xdpi0 VDD Vthr VMEM_0 Isum_0 VT_dpi VSS DPI
+xdpi1 VDD Vthr VMEM_1 Isum_1 VT_dpi VSS DPI
+xdpi2 VDD Vthr VMEM_2 Isum_2 VT_dpi VSS DPI
+xdpi3 VDD Vthr VMEM_3 Isum_3 VT_dpi VSS DPI
+xdpi4 VDD Vthr VMEM_4 Isum_4 VT_dpi VSS DPI
+xdpi5 VDD Vthr VT_inh Isum_5 VMEM_4 VSS DPI_inh
+xneu0 VSS VDD VMEM_0 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[0] neuron_sized
+xneu1 VSS VDD VMEM_1 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[1] neuron_sized
+xneu2 VSS VDD VMEM_2 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[2] neuron_sized
+xneu3 VSS VDD VMEM_3 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[3] neuron_sized
+xneu4 VSS VDD VMEM_4 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[4] neuron_sized
+.ends

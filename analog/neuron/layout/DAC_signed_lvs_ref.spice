@@ -1,0 +1,109 @@
+* LVS reference for the DAC_signed layout (gen_dac_signed.py, default dac=DAC_binary).
+* Devices and nets as in analog/neuron/DAC_signed.sch, with these layout-only changes:
+*   - x1 is the binary DAC layout cell (DAC_binary.gds, weights 1:2:4:8) instead of DAC.sym
+*     (1:2:3:4); its reference is DAC_binary_lvs_ref.spice, copied below
+*   - GND (a global in the schematic) is a port; VDD is shared with the DAC's DNWELL tie
+.subckt DAC_binary Isum Vb w[3] w[2] w[1] w[0] en VDD GND
+XMen Isum en X GND nfet_03v3 L=0.28u W=0.22u nf=1
+XM1 X w[0] net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XM2 net4 Vb GND GND nfet_03v3 L=8u W=1u nf=1
+XM3 X w[1] net2 net2 nfet_03v3 L=0.28u W=0.44u nf=2
+XM4 net2 Vb GND GND nfet_03v3 L=8u W=2u nf=2
+XM5 X w[2] net3 net3 nfet_03v3 L=0.28u W=0.88u nf=4
+XM6 net3 Vb GND GND nfet_03v3 L=8u W=4u nf=4
+XM7 X w[3] net1 net1 nfet_03v3 L=0.28u W=1.76u nf=8
+XM8 net1 Vb GND GND nfet_03v3 L=8u W=8u nf=8
+* dummies at the ends of the switch rows
+XMEN_DL GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_DR GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XA_DL net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_DR net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_DL net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_DR net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_DL net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_DR net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_DL net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_DR net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy rows above (_T) and below (_B) each switch row (all terminals on that well's body net)
+XMEN_T0 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_T1 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_T2 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_B0 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_B1 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMEN_B2 GND GND GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+XA_T0 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_T1 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_T2 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_B0 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_B1 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XA_B2 net4 net4 net4 net4 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_T0 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_T1 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_T2 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_T3 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_B0 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_B1 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_B2 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XB_B3 net2 net2 net2 net2 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_T0 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_T1 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_T2 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_T3 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_T4 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_T5 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_B0 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_B1 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_B2 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_B3 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_B4 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XC_B5 net3 net3 net3 net3 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T0 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T1 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T2 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T3 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T4 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T5 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T6 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T7 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T8 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_T9 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B0 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B1 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B2 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B3 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B4 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B5 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B6 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B7 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B8 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+XD_B9 net1 net1 net1 net1 nfet_03v3 L=0.28u W=0.22u nf=1
+* dummy ring around the current-source array (20 devices, all GND)
+XDA_b0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_b6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t0 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t1 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t2 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t3 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t4 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t5 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_t6 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_10 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_16 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_20 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_26 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_30 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+XDA_36 GND GND GND GND nfet_03v3 L=8u W=1u nf=1
+.ends
+
+.subckt DAC_signed Isum_e Isum_i s Vb w[3] w[2] w[1] w[0] en VDD GND
+x1 Y Vb w[3] w[2] w[1] w[0] en VDD GND DAC_binary
+XMse Isum_e sb Y GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMsi Isum_i s Y GND nfet_03v3 L=0.28u W=0.22u nf=1
+XMpi sb s VDD VDD pfet_03v3 L=0.28u W=0.44u nf=1
+XMni sb s GND GND nfet_03v3 L=0.28u W=0.22u nf=1
+.ends

@@ -3,6 +3,11 @@ DPI synapse layout generator for GF180MCU (gf180mcuD, variant D: 5LM, MIM-B M4-M
 
 Run inside the iic-osic-tools container:
     klayout -b -r gen_dpi.py -rd out=DPI.gds
+    klayout -b -r gen_dpi.py -rd out=DPI_sized.gds -rd name=DPI_sized -rd w=0.88 -rd l=1.12
+
+Options (-rd): w, l = size of all four transistors (default 0.22 / 0.28 um, DPI.sch);
+name = top cell name (default DPI). Larger devices widen the cell; at the default
+sizes the layout is exactly the original DPI.gds. DPI_sized.sch uses w=0.88, l=1.12.
 
 Circuit (analog/neuron/DPI.sch):
     M1 nfet_03v3 D=VDD  G=Vthr S=Isum B=Isum   W=0.22 L=0.28
@@ -22,6 +27,7 @@ Floorplan:
     deck ignores Via2/Via3 under FuseTop. Via2..Via4 appear only in two stacks outside it.
   * Pins: Metal2 at the cell edges, VSS on the Metal1 guard ring.
 """
+import math
 import sys
 import pya
 
@@ -32,6 +38,7 @@ from cells.draw_fet import draw_nfet, draw_pfet  # noqa: E402
 cells.gf180mcu()  # registers the PCell library "gf180mcu"
 
 OUT = globals().get("out", "DPI.gds")
+NAME = globals().get("name", "DPI")
 
 # ---------------------------------------------------------------- layers
 L = {
@@ -45,7 +52,7 @@ L = {
 
 ly = pya.Layout()
 ly.dbu = 0.001
-top = ly.create_cell("DPI")
+top = ly.create_cell(NAME)
 li = {k: ly.layer(*v) for k, v in L.items()}
 
 
@@ -87,12 +94,14 @@ def contacts_col(x, y1, y2, pitch=0.5):
 
 
 # ----------------------------------------------------------- device helpers
-W, LG, LD = 0.22, 0.28, 0.80   # LD: S/D diffusion length (spreads the pads apart)
+W = float(globals().get("w", 0.22))
+LG = float(globals().get("l", 0.28))
+LD = 0.80                      # S/D diffusion length (spreads the pads apart)
 
 
 def make_fet(kind, gate_pos):
     fn = draw_nfet if kind == "n" else draw_pfet
-    c = fn(ly, l_gate=LG, w_gate=W, inter_sd_l=LD, nf=1, con_bet_fin=0,
+    c = fn(ly, l_gate=LG, w_gate=W, inter_sd_l=LD, nf=1, con_bet_fin=0 if W < 0.36 else 1,
            gate_con_pos=gate_pos, bulk="None")
     c.flatten(True)
     if kind == "p":                       # PFETs live in DNWELL: no NWELL of their own
@@ -107,8 +116,9 @@ def make_fet(kind, gate_pos):
         c.shapes(li[k]).insert(r.snapped(5, 5))
     # find the terminal pads on M1: S/D share a y, the gate pad sits above/below
     pads = [s.dbbox() for s in c.shapes(li["m1"]).each()]
-    sd = sorted([p for p in pads if p.bottom < 0.1 < p.top], key=lambda b: b.center().x)
-    g = [p for p in pads if not (p.bottom < 0.1 < p.top)]
+    mid = W / 2                          # S/D pads straddle the channel centre line
+    sd = sorted([p for p in pads if p.bottom < mid < p.top], key=lambda b: b.center().x)
+    g = [p for p in pads if not (p.bottom < mid < p.top)]
     assert len(sd) == 2 and len(g) == 1, (kind, pads)
     return c, {"S": sd[0], "D": sd[1], "G": g[0]}
 
@@ -121,12 +131,30 @@ def place(cell_pads, x, y):
 
 nfet_cell = make_fet("n", "top")
 pfet_cell = make_fet("p", "bottom")
+# growth over the minimum-size devices (all zero at W = 0.22, L = 0.28), rounded up to
+# 0.05 um so that everything placed from it stays on the 5 nm grid
+
+
+def grow(x):
+    return max(0.0, math.ceil(round(x / 0.05, 6)) * 0.05)
+
+
+DX_N = grow(nfet_cell[0].dbbox().right - 1.25)   # NFET width growth
+DY_N = grow(nfet_cell[0].dbbox().top - 0.891)    # NFET height growth (gate pad on top)
+DX_P = grow(pfet_cell[0].dbbox().right - 1.56)
+DY_P = grow(pfet_cell[0].dbbox().top - 0.74)
 
 # ------------------------------------------------------------- floorplan
-CW, CH = 28.0, 26.0                        # cell size
 RING_O, RING_W = 0.3, 0.5                  # guard ring outer offset and COMP width
 RI = RING_O + RING_W                       # ring inner offset (0.8)
-DN = (RI + 2.7, RI + 2.7, 24.6, CH - RI - 2.7)   # DNWELL box
+# x of the transistors, relative to the DNWELL left edge (3.5)
+DN_X0 = RI + 2.7
+LPW_X1 = DN_X0 + 9.0 + 2 * DX_N            # LVPWELL right edge: two NFETs
+P_X3 = LPW_X1 + 2.6                        # M3 origin
+P_PITCH = 3.2 + DX_P
+DN_X1 = max(24.6, P_X3 + P_PITCH + pfet_cell[0].dbbox().right + 1.4)
+CW, CH = DN_X1 + 3.4, 26.0                 # cell size (28 x 26 at minimum size)
+DN = (DN_X0, RI + 2.7, DN_X1, CH - RI - 2.7)   # DNWELL box
 
 # --- guard ring (P+ to substrate, VSS)
 for (x1, y1, x2, y2) in [
@@ -157,7 +185,7 @@ contacts_col(CW - rc, RING_O, CH - RING_O)
 box("dnwell", *DN)
 
 # --- LVPWELL island (NFET body = Isum) with its P+ tap
-LPW = (DN[0] + 2.5, DN[1] + 2.5, DN[0] + 9.0, DN[1] + 7.0)
+LPW = (DN[0] + 2.5, DN[1] + 2.5, LPW_X1, DN[1] + 7.0 + DY_N)
 box("lvpwell", *LPW)
 ptap = (LPW[0] + 0.8, LPW[1] + 0.6, LPW[2] - 0.8, LPW[1] + 1.1)
 box("comp", *ptap)
@@ -178,13 +206,14 @@ VDD_Y = (ntap[1] + ntap[3]) / 2
 NY = ptap[3] + 1.4                         # NMOS row origin y
 x_n1 = LPW[0] + 1.6
 p_M1 = place(nfet_cell, x_n1, NY)
-p_M2 = place(nfet_cell, x_n1 + 3.2, NY)
-PY = ntap[1] - 1.6                         # PMOS row origin y
-p_M3 = place(pfet_cell, LPW[2] + 2.6, PY)
-p_M4 = place(pfet_cell, LPW[2] + 5.8, PY)
+p_M2 = place(nfet_cell, x_n1 + 3.2 + DX_N, NY)
+PY = ntap[1] - 1.6 - DY_P                  # PMOS row origin y
+p_M3 = place(pfet_cell, P_X3, PY)
+p_M4 = place(pfet_cell, P_X3 + P_PITCH, PY)
 # NWELL (inside DNWELL) around the PFETs and the VDD tap: the DRC deck only
 # counts an N-tap inside NWELL for the tap-distance rule DF.13
-box("nwell", ntap[0] - 0.6, PY - 1.4, ntap[2] + 0.6, ntap[3] + 0.6)
+box("nwell", min(ntap[0] - 0.6, P_X3 - 1.0), PY - 1.4,
+    max(ntap[2] + 0.6, P_X3 + P_PITCH + pfet_cell[0].dbbox().right + 0.6), ntap[3] + 0.6)
 
 
 def ctr(b):
@@ -203,7 +232,8 @@ for p in (p_M3, p_M4):                     # PMOS S up to VDD tap
 # Under the MIM cap only M1, M2 and Via1 are used: the LVS deck drops any
 # Via2/Via3 under FuseTop (via2_n_cap = via2.not(fusetop)), so Via2+ appear only
 # in the two stacks outside the cap.
-TRK = {"Vthr": NY + 1.9, "net1": NY + 2.7, "VT": NY + 3.5, "Isyn": NY + 4.3}
+TRK = {"Vthr": NY + 1.9 + DY_N, "net1": NY + 2.7 + DY_N, "VT": NY + 3.5 + DY_N,
+       "Isyn": NY + 4.3 + DY_N}
 assert TRK["Isyn"] + 0.6 < PY - 0.7, "channel too small"
 TW = 0.40                                   # track width
 STACK_X = CW - 1.9                          # x of the two Via2..Via4 stacks
