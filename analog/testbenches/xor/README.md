@@ -121,7 +121,10 @@ OR +7 from each input, AND +2 from each, OR → output +1, AND → output −7.
 | Mismatch, 30 samples, fixed voltages | **Output correct 30 / 30**; strict 27 / 30. The 3 strict misses are the AND firing 2–8 times on one input (its own mismatch); the output stays right. Relays count right in all 30 | `mc_fixed_final` |
 | 5 corners + 0 / 85 °C, fixed voltages | 1 / 7 (tt only) | `xor_fixed_final` |
 | 5 corners + 0 / 85 °C, 16-unit replicas | **7 / 7**; strict 6 / 7 (ss: relays fire every third pulse, output still right) | `bias_replica_n16` |
-| Mismatch with replicas (16 and 1 unit copies), master current ±15 % / ±30 % | running when this was written; results will be `bias_replica_mc16`, `_mc1`, `_iref15`, `_iref30` | |
+| Mismatch, 16-unit replicas (replica mismatch included) | **Output correct 30 / 30**, strict 27 / 30: no loss against ideal voltages. Generated `VT_hid` spreads 0.654–0.656 V | `bias_replica_mc16` |
+| Mismatch, single-device replicas | 28 / 30, strict 24 / 30; `VT_hid` spreads 0.650–0.661 V (one replica moves a whole layer) | `bias_replica_mc1` |
+| Master current −15 % / +15 %, 7 corners | −15 %: 4 / 7 (ss, fs and 0 °C fail, relays go silent). +15 %: **7 / 7** (strict misses are relays firing extra spikes) | `bias_replica_iref15` |
+| Master current −30 % / +30 %, tt | −30 % fails (relays silent), +30 % passes | `bias_replica_iref30` |
 | Register file → network (`mixed/`, SpiceBind) | Scenarios 1–9 pass, including inhibition (5) and the XOR cases (6–9); output first spike 470–690 µs after `in` | `../../../mixed/README.md` |
 
 ## Running
@@ -166,6 +169,10 @@ every relay fires once per input pulse, and the AND is silent for one input and 
 
 ## Open
 
+- **Reference current tolerance is lopsided:** a low master current silences the relays (the input
+  pulses are 10 µs from the digital clock, so less current means less charge per pulse), a high
+  one only adds relay spikes. Measured: −15 % fails at ss/fs/0 °C, +15 % passes all 7 corners,
+  +30 % passes at tt. Centre the on-chip reference about 10 % high, or trim it.
 - **Bias generator**: mirrors from one master current to the replica currents (ratios about
   0.1×–1200× Iref), with the mirrors' own mismatch; an external reference pin or trim for the
   master current. The strong-inversion replicas (`VK`, `VNA`) could use a smaller W/L at a

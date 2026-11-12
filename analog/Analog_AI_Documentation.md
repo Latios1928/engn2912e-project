@@ -1014,6 +1014,7 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
   - Final operating point: mismatch 30/30 (strict 27/30, AND firing 2–8 times on one input); corners with fixed voltages 1/7; with 16-unit replicas 7/7 (strict 6/7: ss relays every third pulse); `mixed/` scenarios 1–9 pass (first time for scenario 5).
 - **Mistakes found and fixed during the work:** the replica devices were left at the ×4 size after the resize; the first pass criterion checked only the output and hid an AND firing on one input; a grid with a wrong fixed weight (`grid_sh2`, deleted).
 - **Not done by AI:** the bias generator (mirrors from one master current; the replicas are fed by ideal sources, as on the branch); layouts (`SNN.gds`, `DPI_sized.gds`, `DPI_inh.gds` are out of date, `DAC_sm` has none); `snn_analog_inh.sch` unchanged. Replica mismatch and master-current tolerance runs were still running at the time of the first commit.
+- **Added after the first commit:** replica mismatch with 16 unit copies 30/30 (strict 27/30, no loss against ideal voltages) vs. single-device replicas 28/30 (strict 24/30); master current −15 % fails at ss/fs/0 °C (relays silent), +15 % passes 7/7, +30 % passes at tt, −30 % fails: the reference should be centred high or trimmed.
 
 ---
 
