@@ -15,8 +15,8 @@ al. 2011), then checks each proposal against a target spec by running ngspice.
 > `tools/analog_API_infrastructure/`, plus the changes used to size the bias
 > generator: an `evaluator` option in `sim.yaml`, a `--proposer grid`, and
 > `configs_bias/`. The original folder is unchanged. Run it from this folder in
-> the same way. `configs_bias` calls `analog/bias/sim/sweep_point.py`, which is
-> not in this branch.
+> the same way. `configs_bias` calls `analog/bias/sim/sweep_point.py`, which uses
+> `analog/bias/bias_gen.py`, `sim/stack_corr.py` and `sim/bias_tb.py`.
 
 ## Quick start
 
@@ -61,12 +61,11 @@ runs `python3 <script> --params params.json --dir pNNNN` and reads its
 `constraints`.
 
 `configs_bias/` sizes the unit mirror device of the bias generator (`analog/bias`).
-Each point runs `analog/bias/sim/sweep_point.py`, and
-`analog/bias/sim/sweep_report.py` summarizes the run:
+Each point runs `analog/bias/sim/sweep_point.py`. The results of every point
+are in `runs/<run>/history.jsonl` and `runs/<run>/pNNNN/metrics.json`:
 
 ```bash
 python3 loop.py --configs configs_bias --proposer grid --budget 40 --batch 2 --jobs 2 --keep-going
-python3 ../sim/sweep_report.py   # not in this branch
 ```
 
 ---
