@@ -1,0 +1,4 @@
+iref_scale,corner,temp,sample,out_00,out_01,out_10,out_11,in_01,in_11,OR_01,OR_11,AND_01,AND_10,AND_11,t_out_01,t_and_11,t_out_11,spurious,pass,strict,V_VT_in,V_Vthr_in,V_VT_hid,V_VT_dpi,V_Vthr,V_Vlk
+1.0,ss,27,,0,0,0,0,5,7/7,10,13,7,7,13,,446.1,,0,False,False,0.8389,2.062,0.7779,0.6299,2.5781,
+1.0,ff,27,,0,0,0,0,84,84/84,20,104,0,0,0,,,,0,False,False,0.591,2.3377,0.5321,0.3893,2.8219,
+1.0,fs,27,,0,0,0,0,0,0/0,0,0,0,0,0,,,,0,False,False,0.8048,2.1021,0.7442,0.5975,2.6113,

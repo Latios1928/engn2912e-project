@@ -4,7 +4,7 @@
 chip top (`../snn_top.v`, with `../digital/snn_digital.v`: weight register file
 and input pulse generator) runs as Verilog in Icarus.
 The 2-2-1 network is transistor-level in ngspice
-(`analog/snn/snn_analog.sch`: 8 `DAC`, 5 `DPI`, 5 `neuron_sized`).
+(`analog/snn/snn_analog.sch`: 8 `DAC_sm`, 5 `DPI_sized`, 3 `DPI_inh`, 5 `neuron_sized`).
 [SpiceBind](https://themperek.github.io/spicebind) couples the two through VPI:
 an empty Verilog module, `../analog/snn/snn_analog.v`, stands in for the analog block.
 The top instantiates `snn_analog` without defining it, so this build compiles the
@@ -12,8 +12,8 @@ black box where `../mock/` compiles its behavioral model.
 
 | In `../mock/snn_analog.v` | In this simulation |
 |---|---|
-| `dac.v` | `analog/neuron/DAC.sch` (weights 1:2:3:4, 15 nA unit) |
-| `neuron.v` + `comparator.v` | `analog/neuron/DPI.sch` → `analog/neuron/neuron_sized.sch` |
+| `dac.v` | `analog/neuron/DAC_sm.sch` (sign-magnitude: 1:2:4 magnitude, 15 nA unit, sign steers to the inhibitory DPI) |
+| `neuron.v` + `comparator.v` | `analog/neuron/DPI_sized.sch` (+ `DPI_inh` for negative weights) → `analog/neuron/neuron_sized.sch` |
 
 Everything else is Verilog and shared with `../mock/`: the top `../snn_top.v`
 with `snn_digital`.
@@ -23,7 +23,7 @@ with `snn_digital`.
 From this folder:
 
 ```bash
-make run                              # scenarios 1-5, about 25 ms simulated
+make run                              # scenarios 1-9, about 45 ms simulated, ~16 min
 make run SCEN_FIRST=3 SCEN_LAST=3     # one scenario
 make run SETTLE=500 RUN=1500          # shorter windows (us)
 make vcd                              # snn_ms_tb.raw -> snn_ms_tb.vcd
@@ -42,31 +42,34 @@ so `spike[0..4]` are separate traces), digital in `snn_ms_tb_digital.vcd`.
 | 3 | path in1 → hid1 → out, max | 11 | `1_10_10` |
 | 4 | as 3, hid1 → out = 0 | 11 | `0_10_10` |
 | 5 | as 3, plus pulse 0 → in0 at +7 and in0 → hid1 at −7 | 11 | `0_00_11` |
+| 6–9 | XOR (`analog/testbenches/xor/README.md`): relays +7, hid0 = OR (+7, +7), hid1 = AND (+2, +2), hid0 → out +1, hid1 → out −7 | 00, 01, 10, 11 | `0_00_00`, `1_01_01`, `1_01_10`, `0_11_11` |
 
 Each scenario loads its 8 words (16 µs), waits `SETTLE` µs with `in = 0`
 (the analog network has no reset pin), then applies `in` for `RUN` µs.
 `clk` is 1 µs; `pulse_gen` makes one 10 µs pulse (10 cycles) every 200 µs
 (200 cycles). It samples `in` at period boundaries, so the first pulse starts
-up to 200 µs after `in` is applied, and the first-spike times below include that. Biases are copied from `analog/neuron/DACs-DPI-neuron.sch` (code
-block SOURCES in `snn_ms_tb.sch`). Maximum time step is 0.1 µs.
+up to 200 µs after `in` is applied, and the first-spike times below include that. Biases are the XOR operating point of `analog/testbenches/xor/` as fixed
+voltages, with separate DPI biases per layer (code block SOURCES in `snn_ms_tb.sch`). Maximum time step is 0.1 µs.
 
-## Results (2026-11-11, tt, 27 °C)
+## Results (2026-11-12, tt, 27 °C)
 
-Scenarios 1–4 (about 20 ms simulated) took 90 s and passed; scenario 5 run on
-its own fails, as expected until the analog DAC has a sign. First spike after
+All 9 scenarios pass (`make run`, 985 s in this container). First spike after
 `in` is applied (these include the wait for the next `pulse_gen` period, up to
 200 µs):
 
 | Scenario | First spikes |
 |---|---|
-| 1 | none |
-| 2 | in0: 826 µs |
-| 3 | in1: 774 µs → hid1: 1456 µs → out: 2223 µs |
-| 4 | in1: 566 µs → hid1: 1091 µs; out silent |
-| 5 | in0, in1: 806 µs → hid1: 1000 µs → out: 1448 µs (FAIL: −7 excites) |
+| 1, 6 | none |
+| 2 | in0: 184 µs |
+| 3 | in1: 169 µs → hid1: 186 µs → out: 261 µs |
+| 4 | in1: 154 µs → hid1: 171 µs; out silent |
+| 5 | in0, in1: 138 µs; hid1 silent (−7 cancels +7) |
+| 7 (A) | in0: 109 µs → hid0 (OR): 126 µs → out: 686 µs; AND silent |
+| 8 (B) | in1: 94 µs → hid0: 111 µs → out: 467 µs; AND silent |
+| 9 (A, B) | in0, in1: 78 µs → OR: 88 µs, AND: 291 µs; out silent |
 
-With +7 (code `0111`) the analog DAC gives 6 units of current, so the output in
-scenario 3 fires late in the 3 ms window.
+Earlier results (2026-11-11, unsigned 1:2:3:4 `DAC` network, biases of
+`DACs-DPI-neuron.sch`): scenarios 1–4 passed, 5 failed because −7 excited.
 
 Accuracy of the coupling, measured earlier on the 3-5-1 network with a pulse
 generator that started its first pulse the moment `in` rose: scenario 3 run
@@ -87,14 +90,11 @@ Known limitations:
   VMEM would make scenarios independent.
 - **Start-up.** Unused membranes start far from 0 at the operating point and
   take a few ms to leak away.
-- **Scenario 5 fails until the analog side has negative weights.** The
-  testbench assumes sign-magnitude weights (bit 3 = sign, 1 = inhibitory), but
-  `DAC.sch` is unsigned with four branches sized 1:2:3:4, so bit 3 just drives
-  its fourth branch: −7 (`1111`) becomes strong excitation, and hidden 1 and
-  the output fire. `make run` reports FAIL for it until then; scenarios 1–4
-  pass. The scenario also expects −w to cancel +w, so the inhibitory path
-  should be about as strong as the excitatory one.
-- Only typical corner, 27 °C, nominal biases. SpiceBind itself is early-stage.
+- **`dump.raw`.** In this container SpiceBind writes no `dump.raw`, so there are
+  no analog waveforms; the Makefile reports it and still passes on the testbench
+  result.
+- Only typical corner, 27 °C, fixed bias voltages (which fail at other corners:
+  `analog/testbenches/xor/README.md`). SpiceBind itself is early-stage.
 
 ## Files
 

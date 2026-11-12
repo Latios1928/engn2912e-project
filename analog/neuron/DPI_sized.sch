@@ -42,8 +42,8 @@ N 355 -80 355 -75 {lab=#net1}
 N 10 27.5 10 37.5 {lab=Isum}
 N 10 37.5 10 60 {lab=Isum}
 C {symbols/nfet_03v3.sym} -10 -2.5 0 0 {name=M1
-L=1.12u
-W=0.88u
+L=2.24u
+W=1.76u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -56,8 +56,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 260 10 0 1 {name=M2
-L=1.12u
-W=0.88u
+L=2.24u
+W=1.76u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -70,8 +70,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 220 -130 0 0 {name=M3
-L=1.12u
-W=0.88u
+L=2.24u
+W=1.76u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -84,8 +84,8 @@ model=pfet_03v3
 spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 467.5 -60 0 0 {name=M4
-L=1.12u
-W=0.88u
+L=2.24u
+W=1.76u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -112,8 +112,9 @@ m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-T {DPI_sized: DPI.sch with all four transistors at W = 0.88u, L = 1.12u (4x W and L, 16x area).
-Chosen by Monte Carlo (analog/testbenches/dpi/size_dpi.py, xor/size_option2.py, xor/run_xor.py):
-mismatch spread of the gain falls from 1.01 to 0.20 (ln), and in threshold mode the AND neuron
-works in 98/100 samples with every relay locked to one spike per pulse (minimum size: 36-38 % DPI-only).
-Biases move with the size: see analog/testbenches/xor/README.md.} -170 120 0 0 0.3 0.3 {}
+T {DPI_sized: DPI.sch with all four transistors at W = 1.76u, L = 2.24u (8x W and L, 64x area).
+History: 4x (0.88u/1.12u) was chosen on the 3-5-1 network (branch xor-inhibition: gain spread
+1.01 -> 0.20 ln, AND 98/100). On the 2-2-1 network with DAC_sm weights, XOR under mismatch passes
+22/30 samples at 4x and 27/30 at 8x (analog/testbenches/xor/run_xor.py mc --dpi-scale); the
+transistors are small next to the 1 pF C4, so 8x costs little area. W/L is unchanged.
+Biases move with the size: see analog/testbenches/xor/README.md. Layout: regenerate with gen_dpi.py -rd w/l.} -170 120 0 0 0.3 0.3 {}

@@ -2,7 +2,7 @@
 # the analog 2-2-1 network (analog/snn/snn_analog.sch) in ngspice, coupled by
 # SpiceBind. See README.md.
 #
-#   make run                             all scenarios (1-5, about 25 ms simulated)
+#   make run                             all scenarios (1-9, about 45 ms simulated)
 #   make run SCEN_FIRST=3 SCEN_LAST=3    one scenario
 #   make run SETTLE=500 RUN=1500         shorter windows (us)
 #   make vcd                             snn_ms_tb.raw -> snn_ms_tb.vcd
@@ -13,7 +13,7 @@ ROOT  := $(abspath $(MIXED)/..)
 export PATH := /foss/tools/bin:$(PATH)
 
 SCEN_FIRST ?= 1
-SCEN_LAST  ?= 4
+SCEN_LAST  ?= 9
 SETTLE     ?= 2000
 RUN        ?= 3000
 
@@ -21,7 +21,7 @@ SPICEBIND := /foss/tools/spicebind
 VSRC := sim.f snn_ms_tb.v $(ROOT)/analog/snn/snn_analog.v $(ROOT)/snn_top.v $(wildcard $(ROOT)/digital/*.v)
 PFX  := -Psnn_ms_tb
 SCHEMATICS := snn_ms_tb.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
-              $(wildcard $(ROOT)/analog/neuron/DAC.s* $(ROOT)/analog/neuron/DPI.s* \
+              $(wildcard $(ROOT)/analog/neuron/DAC_sm.s* $(ROOT)/analog/neuron/DPI_sized.s* $(ROOT)/analog/neuron/DPI_inh.s* \
                          $(ROOT)/analog/neuron/neuron_sized.s* $(ROOT)/analog/neuron/spike_amplifier.s*)
 
 .DEFAULT_GOAL := run
@@ -52,7 +52,8 @@ run: snn_ms_tb.spice no_passwd_shim.so $(VSRC)
 	  LD_PRELOAD=$(MIXED)/no_passwd_shim.so \
 	  vvp -M $(SPICEBIND) -m spicebind_vpi snn_ms_tb.vvp > snn_ms_tb.log 2>&1; \
 	  echo "simulation took $$(( $$(date +%s) - start )) s"
-	@mv -f dump.raw snn_ms_tb.raw
+	@# SpiceBind writes no dump.raw in some containers (README): do not fail the run on that
+	@if [ -f dump.raw ]; then mv -f dump.raw snn_ms_tb.raw; else echo "no dump.raw written (no analog waveforms)"; fi
 	@# ngspice's progress output uses \r, so split on it to find the testbench lines.
 	@tr '\r' '\n' < snn_ms_tb.log | grep -E 'snn_ms_tb: |\*\* Error|singular' | awk '!seen[$$0]++'
 	@tr '\r' '\n' < snn_ms_tb.log | grep -q 'snn_ms_tb: PASS,'

@@ -12,7 +12,7 @@ SpiceBind connects to the SPICE network.
 | File | What it is |
 |---|---|
 | `snn_analog.v` | Behavioral `snn_analog`, with the same ports as the analog network (`w[31:0]`, `pulse[1:0]`, `spike[4:0]`). It has no clock or reset input: it generates its own clock (`CLK_PERIOD` ns) and a power-on reset. Built from the three mocks below. Weight word map: words 0–1 pulse → input, 2–5 input i → hidden j (2 + 2j + i), 6–7 hidden j → output (6 + j). |
-| `dac.v`, `neuron.v`, `comparator.v` | Mocks of the synapse DAC and neuron (with its comparator, and a leak of `LEAK` per cycle). Weights are sign-magnitude: bit 3 is the sign (1 = inhibitory), bits 2:0 a binary magnitude, so −7…+7. The DAC gives a signed current; the membrane is clamped to 0 below. `analog/neuron/DAC.sch` is still unsigned, sized 1:2:3:4. |
+| `dac.v`, `neuron.v`, `comparator.v` | Mocks of the synapse DAC and neuron (with its comparator, and a leak of `LEAK` per cycle). Weights are sign-magnitude: bit 3 is the sign (1 = inhibitory), bits 2:0 a binary magnitude, so −7…+7. The DAC gives a signed current; the membrane is clamped to 0 below. The analog version is `analog/neuron/DAC_sm.sch` (1:2:4, sign steering to an inhibitory `DPI_inh`). |
 | `tb_snn_top.v` | End-to-end test of `../snn_top.v`: rf readback, then 5 firing scenarios (the fifth checks inhibition: a −7 synapse cancels a +7 one). There is no reset, so each scenario is preceded by a settle time with `in = 0`, as in `../mixed/`. |
 | `tb_neuron.v` | Unit test of the neuron (leak included) and the DAC. |
 | `sim.f` | File list of this build. |

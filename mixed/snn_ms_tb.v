@@ -8,19 +8,24 @@
 //   4. as 3 but hid1 -> out weight 0        -> input 1, hidden 1 only
 //   5. as 3 plus in0 -> hid1 at -max, in = 11: the two inputs fire together
 //      and cancel at hid1                   -> inputs 0 and 1 only
+//   6-9. XOR (analog/testbenches/xor/README.md): hidden 0 = OR (+7 from each input),
+//      hidden 1 = AND (+2 from each), hidden 0 -> out +1, hidden 1 -> out -7;
+//      in = 00, 01, 10, 11                  -> out fires for 01 and 10 only
 // The analog network has no reset pin, so each run is preceded by SETTLE us
 // with in = 0. Prints PASS/FAIL and the time of each neuron's first spike.
 `timescale 1ns / 1ns
 
 module snn_ms_tb #(
     parameter SCEN_FIRST = 1,
-    parameter SCEN_LAST  = 5,
+    parameter SCEN_LAST  = 9,
     parameter SETTLE     = 2000,  // us
     parameter RUN        = 3000   // us
 );
   // Weights are sign-magnitude: MAX is +7, NEG_MAX is -7.
   localparam [3:0] MAX = 4'h7;
   localparam [3:0] NEG_MAX = 4'hF;
+  localparam [3:0] ONE = 4'h1;
+  localparam [3:0] TWO = 4'h2;
 
   reg        clk = 1'b0;  // 1 us
   reg        rst = 1'b1;
@@ -133,6 +138,24 @@ module snn_ms_tb #(
           ws[(2+2*1+1)*4+:4] = MAX;  // input 1 -> hidden 1
           ws[(6+1)*4+:4] = MAX;  // hidden 1 -> output
           check_run(2'b11, 5'b0_00_11);
+        end
+        6, 7, 8, 9: begin
+          // XOR weights. in = {B, A}: 6 = 00, 7 = 01 (A), 8 = 10 (B), 9 = 11
+          ws = 0;
+          ws[0*4+:4] = MAX;  // pulse 0 -> input 0
+          ws[1*4+:4] = MAX;  // pulse 1 -> input 1
+          ws[(2+2*0+0)*4+:4] = MAX;  // input 0 -> hidden 0 (OR)
+          ws[(2+2*0+1)*4+:4] = MAX;  // input 1 -> hidden 0 (OR)
+          ws[(2+2*1+0)*4+:4] = TWO;  // input 0 -> hidden 1 (AND)
+          ws[(2+2*1+1)*4+:4] = TWO;  // input 1 -> hidden 1 (AND)
+          ws[(6+0)*4+:4] = ONE;  // hidden 0 -> output, +1
+          ws[(6+1)*4+:4] = NEG_MAX;  // hidden 1 -> output, -7
+          case (scen)
+            6: check_run(2'b00, 5'b0_00_00);
+            7: check_run(2'b01, 5'b1_01_01);
+            8: check_run(2'b10, 5'b1_01_10);
+            default: check_run(2'b11, 5'b0_11_11);
+          endcase
         end
         default: ;
       endcase

@@ -22,7 +22,9 @@
 ### Mixed-signal ([mixed/README.md](mixed/README.md))
 - [ ] Calibrate the behavioral `snn_analog` in `mock/` (clock period, `GAIN`, `DURATION`, `LEAK`) so first-spike timing is close to the analog results, if the mock should be quantitatively comparable.
 - [ ] The analog network has no reset: membranes keep 1.0–1.2 V after a 2 ms settle, so scenario latencies depend on the previous one. Add a reset (switch on VMEM) or lengthen `SETTLE`.
-- [ ] Negative weights in the analog network. Weights are sign-magnitude (bit 3 = sign, bits 2:0 = magnitude). [analog/neuron/DAC.sch](analog/neuron/DAC.sch) needs three binary magnitude branches (1:2:4, replacing 1:2:3:4) and a sign-controlled switch that steers the current to an excitatory or an inhibitory input, and each neuron needs that inhibitory input (for example a second DPI that pulls VMEM down). `mixed/` already runs the inhibition scenario (scenario 5), which fails until this is done.
+- [x] Negative weights in the analog network: `analog/neuron/DAC_sm.sch` (1:2:4 magnitude, sign `w[3]` steers to an excitatory or inhibitory DPI), a `DPI_inh` on every hidden and output neuron, per-layer DPI bias pins. XOR runs on it (`analog/testbenches/xor/README.md`, `mixed/` scenarios 6–9).
+- [ ] Bias generator on chip: the XOR only passes all corners with current-referenced biases (`analog/testbenches/xor/bias_replica.py`); the replicas and the mirrors from one master current are not drawn yet.
+- [ ] Layout: `analog/neuron/layout/SNN.gds` follows `snn_analog_inh.sch`, not the new `snn_analog.sch` (DAC_sm, DPI_sized ×8, 3 DPI_inh, new bias pins); `DPI_sized.gds`/`DPI_inh.gds` are still ×4.
 - [ ] Add scenarios with intermediate weights; run corners.
 
 ### Digital

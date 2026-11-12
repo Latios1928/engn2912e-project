@@ -12,7 +12,7 @@
 // current = active ? +/- weight[2:0] * GAIN : 0, as a 16-bit two's-complement
 // value. Combinational.
 //
-// analog/neuron/DAC.sch is still unsigned, with four branches sized 1:2:3:4.
+// The analog version is analog/neuron/DAC_sm.sch (1:2:4 branches, sign steering).
 module dac #(
     parameter GAIN = 16  // 7 * GAIN must fit in 15 bits, so GAIN <= 4681
 ) (
