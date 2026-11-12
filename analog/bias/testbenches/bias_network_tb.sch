@@ -6,64 +6,77 @@ S {}
 F {}
 E {}
 T {bias_network_tb: main's 2-2-1 network snn_analog with every bias from bias_gen. All 8 weights at 'wcode' (default 7 = +7), both inputs pulsing (10 us every 200 us). Optional coupling 'ccoup' from pulse[0] to every bias net (layout stand-in). RES pp_<net> / sh_<net>: peak-to-peak wobble and shift of the average from the DC value after 0.5 ms; spikes in network.txt (counted by run_bias.py).} -1100 -950 0 0 0.3 0.3 {}
-C {vsource.sym} -1100 -300 0 0 {name=V1 value=\{vdd\} savecurrent=false}
-C {lab_pin.sym} -1100 -330 0 0 {name=l1 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} -1100 -270 0 0 {name=l2 sig_type=std_logic lab=0}
-C {vsource.sym} -1000 -300 0 0 {name=Vss value=0 savecurrent=false}
-C {lab_pin.sym} -1000 -330 0 0 {name=l3 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} -1000 -270 0 0 {name=l4 sig_type=std_logic lab=0}
-C {vsource.sym} -900 -300 0 0 {name=Vtr3 value='vdd*(floor(code/8)-2*floor(code/16))' savecurrent=false}
-C {lab_pin.sym} -900 -330 0 0 {name=l5 sig_type=std_logic lab=tr3}
-C {lab_pin.sym} -900 -270 0 0 {name=l6 sig_type=std_logic lab=0}
-C {vsource.sym} -820 -300 0 0 {name=Vtr2 value='vdd*(floor(code/4)-2*floor(code/8))' savecurrent=false}
-C {lab_pin.sym} -820 -330 0 0 {name=l7 sig_type=std_logic lab=tr2}
-C {lab_pin.sym} -820 -270 0 0 {name=l8 sig_type=std_logic lab=0}
-C {vsource.sym} -740 -300 0 0 {name=Vtr1 value='vdd*(floor(code/2)-2*floor(code/4))' savecurrent=false}
-C {lab_pin.sym} -740 -330 0 0 {name=l9 sig_type=std_logic lab=tr1}
-C {lab_pin.sym} -740 -270 0 0 {name=l10 sig_type=std_logic lab=0}
-C {vsource.sym} -660 -300 0 0 {name=Vtr0 value='vdd*(floor(code/1)-2*floor(code/2))' savecurrent=false}
-C {lab_pin.sym} -660 -330 0 0 {name=l11 sig_type=std_logic lab=tr0}
-C {lab_pin.sym} -660 -270 0 0 {name=l12 sig_type=std_logic lab=0}
-C {vsource.sym} -550 -300 0 0 {name=Vmon value=\{vmon\} savecurrent=false}
-C {lab_pin.sym} -550 -330 0 0 {name=l13 sig_type=std_logic lab=Imon}
-C {lab_pin.sym} -550 -270 0 0 {name=l14 sig_type=std_logic lab=0}
-C {analog/bias/bias_gen.sym} -200 -300 0 0 {name=xbg}
-C {lab_pin.sym} -350 -400.0 0 0 {name=l15 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} -350 -380.0 0 0 {name=l16 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} -350 -360.0 0 0 {name=l17 sig_type=std_logic lab=tr3}
-C {lab_pin.sym} -350 -340.0 0 0 {name=l18 sig_type=std_logic lab=tr2}
-C {lab_pin.sym} -350 -320.0 0 0 {name=l19 sig_type=std_logic lab=tr1}
-C {lab_pin.sym} -350 -300.0 0 0 {name=l20 sig_type=std_logic lab=tr0}
-C {lab_pin.sym} -350 -280.0 0 0 {name=l21 sig_type=std_logic lab=Imon}
-C {lab_pin.sym} -50 -400.0 0 1 {name=l22 sig_type=std_logic lab=Vb}
-C {lab_pin.sym} -50 -380.0 0 1 {name=l23 sig_type=std_logic lab=Vthr}
-C {lab_pin.sym} -50 -360.0 0 1 {name=l24 sig_type=std_logic lab=VT_dpi}
-C {lab_pin.sym} -50 -340.0 0 1 {name=l25 sig_type=std_logic lab=VNA}
-C {lab_pin.sym} -50 -320.0 0 1 {name=l26 sig_type=std_logic lab=Vlk}
-C {lab_pin.sym} -50 -300.0 0 1 {name=l27 sig_type=std_logic lab=VK}
-C {lab_pin.sym} -50 -280.0 0 1 {name=l28 sig_type=std_logic lab=VIp}
-C {lab_pin.sym} -50 -260.0 0 1 {name=l29 sig_type=std_logic lab=VKup}
-C {lab_pin.sym} -50 -240.0 0 1 {name=l30 sig_type=std_logic lab=VKdn}
-C {lab_pin.sym} -50 -220.0 0 1 {name=l31 sig_type=std_logic lab=Vamp_bias}
-C {lab_pin.sym} -50 -200.0 0 1 {name=l32 sig_type=std_logic lab=VT}
-C {snn_analog.sym} 400 -300 0 0 {name=x1}
-C {lab_pin.sym} 250.0 -440.0 0 0 {name=l33 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} 250.0 -420.0 0 0 {name=l34 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} 250.0 -400.0 0 0 {name=l35 sig_type=std_logic lab=w[31:0]}
-C {lab_pin.sym} 250.0 -380.0 0 0 {name=l36 sig_type=std_logic lab=pulse[1:0]}
-C {lab_pin.sym} 250.0 -360.0 0 0 {name=l37 sig_type=std_logic lab=Vb}
-C {lab_pin.sym} 250.0 -340.0 0 0 {name=l38 sig_type=std_logic lab=Vthr}
-C {lab_pin.sym} 250.0 -320.0 0 0 {name=l39 sig_type=std_logic lab=VT_dpi}
-C {lab_pin.sym} 250.0 -300.0 0 0 {name=l40 sig_type=std_logic lab=VNA}
-C {lab_pin.sym} 250.0 -280.0 0 0 {name=l41 sig_type=std_logic lab=Vlk}
-C {lab_pin.sym} 250.0 -260.0 0 0 {name=l42 sig_type=std_logic lab=VK}
-C {lab_pin.sym} 250.0 -240.0 0 0 {name=l43 sig_type=std_logic lab=VIp}
-C {lab_pin.sym} 250.0 -220.0 0 0 {name=l44 sig_type=std_logic lab=VKup}
-C {lab_pin.sym} 250.0 -200.0 0 0 {name=l45 sig_type=std_logic lab=VKdn}
-C {lab_pin.sym} 250.0 -180.0 0 0 {name=l46 sig_type=std_logic lab=Vamp_bias}
-C {lab_pin.sym} 250.0 -160.0 0 0 {name=l47 sig_type=std_logic lab=VT}
-C {lab_pin.sym} 550.0 -300.0 0 1 {name=l48 sig_type=std_logic lab=spike[4:0]}
-C {devices/code_shown.sym} -1100 -700 0 0 {name=MODELS only_toplevel=true
+C {analog/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
+C {vsource.sym} -940 200 0 0 {name=V1 value=\{vdd\} savecurrent=false}
+C {gnd.sym} -940 230 0 0 {name=g1 lab=0}
+N -940 170 -940 -160 {}
+N -940 -160 -200 -160 {}
+C {ammeter.sym} -200 -130 0 0 {name=VIdd savecurrent=true spice_ignore=0}
+N -200 -100 -150 -100.0 {}
+C {lab_wire.sym} -175.0 -100.0 0 0 {name=w2 sig_type=std_logic lab=VDD}
+N -150 -80.0 -820 -80.0 {}
+N -820 -80.0 -820 230 {}
+C {gnd.sym} -820 230 0 0 {name=g3 lab=0}
+C {vsource.sym} -700 200 0 0 {name=Vtr3 value='vdd*b3' savecurrent=false}
+C {gnd.sym} -700 230 0 0 {name=g4 lab=0}
+N -700 170 -700 -60.0 {}
+N -700 -60.0 -150 -60.0 {}
+C {vsource.sym} -590 200 0 0 {name=Vtr2 value='vdd*b2' savecurrent=false}
+C {gnd.sym} -590 230 0 0 {name=g5 lab=0}
+N -590 170 -590 -40.0 {}
+N -590 -40.0 -150 -40.0 {}
+C {vsource.sym} -480 200 0 0 {name=Vtr1 value='vdd*b1' savecurrent=false}
+C {gnd.sym} -480 230 0 0 {name=g6 lab=0}
+N -480 170 -480 -20.0 {}
+N -480 -20.0 -150 -20.0 {}
+C {vsource.sym} -370 200 0 0 {name=Vtr0 value='vdd*b0' savecurrent=false}
+C {gnd.sym} -370 230 0 0 {name=g7 lab=0}
+N -370 170 -370 0.0 {}
+N -370 0.0 -150 0.0 {}
+C {vsource.sym} -260 200 0 0 {name=Vmon value=\{vmon\} savecurrent=false}
+C {gnd.sym} -260 230 0 0 {name=g8 lab=0}
+N -260 170 -260 20.0 {}
+N -260 20.0 -150 20.0 {}
+N 150 -100.0 210 -100.0 {}
+C {lab_wire.sym} 180.0 -100.0 0 0 {name=w9 sig_type=std_logic lab=Vb}
+N 150 -80.0 210 -80.0 {}
+C {lab_wire.sym} 180.0 -80.0 0 0 {name=w10 sig_type=std_logic lab=Vthr}
+N 150 -60.0 210 -60.0 {}
+C {lab_wire.sym} 180.0 -60.0 0 0 {name=w11 sig_type=std_logic lab=VT_dpi}
+N 150 -40.0 210 -40.0 {}
+C {lab_wire.sym} 180.0 -40.0 0 0 {name=w12 sig_type=std_logic lab=VNA}
+N 150 -20.0 210 -20.0 {}
+C {lab_wire.sym} 180.0 -20.0 0 0 {name=w13 sig_type=std_logic lab=Vlk}
+N 150 0.0 210 0.0 {}
+C {lab_wire.sym} 180.0 0.0 0 0 {name=w14 sig_type=std_logic lab=VK}
+N 150 20.0 210 20.0 {}
+C {lab_wire.sym} 180.0 20.0 0 0 {name=w15 sig_type=std_logic lab=VIp}
+N 150 40.0 210 40.0 {}
+C {lab_wire.sym} 180.0 40.0 0 0 {name=w16 sig_type=std_logic lab=VKup}
+N 150 60.0 210 60.0 {}
+C {lab_wire.sym} 180.0 60.0 0 0 {name=w17 sig_type=std_logic lab=VKdn}
+N 150 80.0 210 80.0 {}
+C {lab_wire.sym} 180.0 80.0 0 0 {name=w18 sig_type=std_logic lab=Vamp_bias}
+N 150 100.0 210 100.0 {}
+C {lab_wire.sym} 180.0 100.0 0 0 {name=w19 sig_type=std_logic lab=VT}
+C {snn_analog.sym} 700 0 0 0 {name=x1}
+C {lab_pin.sym} 550.0 -140.0 0 0 {name=l20 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 550.0 -120.0 0 0 {name=l21 sig_type=std_logic lab=0}
+C {lab_pin.sym} 550.0 -100.0 0 0 {name=l22 sig_type=std_logic lab=w[31:0]}
+C {lab_pin.sym} 550.0 -80.0 0 0 {name=l23 sig_type=std_logic lab=pulse[1:0]}
+C {lab_pin.sym} 550.0 -60.0 0 0 {name=l24 sig_type=std_logic lab=Vb}
+C {lab_pin.sym} 550.0 -40.0 0 0 {name=l25 sig_type=std_logic lab=Vthr}
+C {lab_pin.sym} 550.0 -20.0 0 0 {name=l26 sig_type=std_logic lab=VT_dpi}
+C {lab_pin.sym} 550.0 0.0 0 0 {name=l27 sig_type=std_logic lab=VNA}
+C {lab_pin.sym} 550.0 20.0 0 0 {name=l28 sig_type=std_logic lab=Vlk}
+C {lab_pin.sym} 550.0 40.0 0 0 {name=l29 sig_type=std_logic lab=VK}
+C {lab_pin.sym} 550.0 60.0 0 0 {name=l30 sig_type=std_logic lab=VIp}
+C {lab_pin.sym} 550.0 80.0 0 0 {name=l31 sig_type=std_logic lab=VKup}
+C {lab_pin.sym} 550.0 100.0 0 0 {name=l32 sig_type=std_logic lab=VKdn}
+C {lab_pin.sym} 550.0 120.0 0 0 {name=l33 sig_type=std_logic lab=Vamp_bias}
+C {lab_pin.sym} 550.0 140.0 0 0 {name=l34 sig_type=std_logic lab=VT}
+C {lab_pin.sym} 850.0 0.0 0 1 {name=l35 sig_type=std_logic lab=spike[4:0]}
+C {devices/code_shown.sym} -400 -700 0 0 {name=MODELS only_toplevel=true
 format="tcleval( @value )"
 value="
 .include $::180MCU_MODELS/design.ngspice
@@ -71,41 +84,43 @@ value="
 .lib $::180MCU_MODELS/sm141064.ngspice mimcap_typical
 .lib $::180MCU_MODELS/sm141064.ngspice res_typical
 "}
-C {devices/code_shown.sym} -1100 -550 0 0 {name=SOURCES only_toplevel=true
+C {devices/code_shown.sym} -1900 -650 0 0 {name=SOURCES only_toplevel=true
 value="
-* weights: every 4-bit word = wcode; inputs: 10 us pulses every 200 us
-Vw0 w[0] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw1 w[1] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw2 w[2] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw3 w[3] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw4 w[4] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw5 w[5] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw6 w[6] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw7 w[7] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw8 w[8] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw9 w[9] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw10 w[10] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw11 w[11] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw12 w[12] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw13 w[13] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw14 w[14] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw15 w[15] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw16 w[16] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw17 w[17] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw18 w[18] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw19 w[19] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw20 w[20] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw21 w[21] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw22 w[22] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw23 w[23] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw24 w[24] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw25 w[25] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw26 w[26] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw27 w[27] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
-Vw28 w[28] 0 'vdd*(floor(wcode/1)-2*floor(wcode/2))'
-Vw29 w[29] 0 'vdd*(floor(wcode/2)-2*floor(wcode/4))'
-Vw30 w[30] 0 'vdd*(floor(wcode/4)-2*floor(wcode/8))'
-Vw31 w[31] 0 'vdd*(floor(wcode/8)-2*floor(wcode/16))'
+* weights: every 4-bit word = wcode (bit k = wk); inputs: 10 us pulses every 200 us
+.param w3='floor(wcode/8)-2*floor(wcode/16)' w2='floor(wcode/4)-2*floor(wcode/8)'
+.param w1='floor(wcode/2)-2*floor(wcode/4)' w0='wcode-2*floor(wcode/2)'
+Vw0 w[0] 0 'vdd*w0'
+Vw1 w[1] 0 'vdd*w1'
+Vw2 w[2] 0 'vdd*w2'
+Vw3 w[3] 0 'vdd*w3'
+Vw4 w[4] 0 'vdd*w0'
+Vw5 w[5] 0 'vdd*w1'
+Vw6 w[6] 0 'vdd*w2'
+Vw7 w[7] 0 'vdd*w3'
+Vw8 w[8] 0 'vdd*w0'
+Vw9 w[9] 0 'vdd*w1'
+Vw10 w[10] 0 'vdd*w2'
+Vw11 w[11] 0 'vdd*w3'
+Vw12 w[12] 0 'vdd*w0'
+Vw13 w[13] 0 'vdd*w1'
+Vw14 w[14] 0 'vdd*w2'
+Vw15 w[15] 0 'vdd*w3'
+Vw16 w[16] 0 'vdd*w0'
+Vw17 w[17] 0 'vdd*w1'
+Vw18 w[18] 0 'vdd*w2'
+Vw19 w[19] 0 'vdd*w3'
+Vw20 w[20] 0 'vdd*w0'
+Vw21 w[21] 0 'vdd*w1'
+Vw22 w[22] 0 'vdd*w2'
+Vw23 w[23] 0 'vdd*w3'
+Vw24 w[24] 0 'vdd*w0'
+Vw25 w[25] 0 'vdd*w1'
+Vw26 w[26] 0 'vdd*w2'
+Vw27 w[27] 0 'vdd*w3'
+Vw28 w[28] 0 'vdd*w0'
+Vw29 w[29] 0 'vdd*w1'
+Vw30 w[30] 0 'vdd*w2'
+Vw31 w[31] 0 'vdd*w3'
 Vp0 pulse[0] 0 pulse(0 3.3 100u 10n 10n 10u 200u)
 Vp1 pulse[1] 0 pulse(0 3.3 100u 10n 10n 10u 200u)
 Cc_Vb pulse[0] Vb \{ccoup\}
@@ -124,10 +139,14 @@ Esp1 sp1 0 spike[1] 0 1
 Esp2 sp2 0 spike[2] 0 1
 Esp3 sp3 0 spike[3] 0 1
 Esp4 sp4 0 spike[4] 0 1
+.ic v(x1.VMEM_0)=0 v(x1.VMEM_1)=0 v(x1.VMEM_2)=0 v(x1.VMEM_3)=0 v(x1.VMEM_4)=0 v(spike[0])=0 v(spike[1])=0 v(spike[2])=0 v(spike[3])=0 v(spike[4])=0
 "}
-C {devices/code_shown.sym} -1100 -150 0 0 {name=CONTROL only_toplevel=true
+C {devices/code_shown.sym} -1100 330 0 0 {name=CONTROL only_toplevel=true
 value="
 .param vdd=3.3 code=9 vmon=1.65
+* trim bits of 'code' (b3 = MSB), driven by Vtr3..Vtr0
+.param b3='floor(code/8)-2*floor(code/16)' b2='floor(code/4)-2*floor(code/8)'
+.param b1='floor(code/2)-2*floor(code/4)' b0='code-2*floor(code/2)'
 .csparam code_c=\{code\}
 .csparam vdd_c=\{vdd\}
 .param wcode=7 ccoup=0 tstop=3m

@@ -6,60 +6,65 @@ S {}
 F {}
 E {}
 T {bias_dc_tb: operating point of bias_gen at trim code 'code' (per output: pin voltage, probe current / target g, g/m with m = Imon / its target), supply current, VT; VDD swept 2.97-3.63 V; the Imon pad voltage below which Imon drops by more than 1 %. Results print as RES lines.} -1100 -950 0 0 0.3 0.3 {}
-C {vsource.sym} -1100 -300 0 0 {name=V1 value=\{vdd\} savecurrent=false}
-C {lab_pin.sym} -1100 -330 0 0 {name=l1 sig_type=std_logic lab=VDDS}
-C {lab_pin.sym} -1100 -270 0 0 {name=l2 sig_type=std_logic lab=0}
-C {ammeter.sym} -1000 -300 0 0 {name=VIdd savecurrent=true spice_ignore=0}
-C {lab_pin.sym} -1000 -330 0 0 {name=l3 sig_type=std_logic lab=VDDS}
-C {lab_pin.sym} -1000 -270 0 0 {name=l4 sig_type=std_logic lab=VDD}
-C {vsource.sym} -800 -300 0 0 {name=Vtr3 value='vdd*(floor(code/8)-2*floor(code/16))' savecurrent=false}
-C {lab_pin.sym} -800 -330 0 0 {name=l5 sig_type=std_logic lab=tr3}
-C {lab_pin.sym} -800 -270 0 0 {name=l6 sig_type=std_logic lab=0}
-C {vsource.sym} -720 -300 0 0 {name=Vtr2 value='vdd*(floor(code/4)-2*floor(code/8))' savecurrent=false}
-C {lab_pin.sym} -720 -330 0 0 {name=l7 sig_type=std_logic lab=tr2}
-C {lab_pin.sym} -720 -270 0 0 {name=l8 sig_type=std_logic lab=0}
-C {vsource.sym} -640 -300 0 0 {name=Vtr1 value='vdd*(floor(code/2)-2*floor(code/4))' savecurrent=false}
-C {lab_pin.sym} -640 -330 0 0 {name=l9 sig_type=std_logic lab=tr1}
-C {lab_pin.sym} -640 -270 0 0 {name=l10 sig_type=std_logic lab=0}
-C {vsource.sym} -560 -300 0 0 {name=Vtr0 value='vdd*(floor(code/1)-2*floor(code/2))' savecurrent=false}
-C {lab_pin.sym} -560 -330 0 0 {name=l11 sig_type=std_logic lab=tr0}
-C {lab_pin.sym} -560 -270 0 0 {name=l12 sig_type=std_logic lab=0}
-C {vsource.sym} -450 -300 0 0 {name=Vmon value=\{vmon\} savecurrent=false}
-C {lab_pin.sym} -450 -330 0 0 {name=l13 sig_type=std_logic lab=Imon}
-C {lab_pin.sym} -450 -270 0 0 {name=l14 sig_type=std_logic lab=0}
-C {analog/bias/bias_gen.sym} -200 -300 0 0 {name=xbg}
-C {lab_pin.sym} -350 -400.0 0 0 {name=l15 sig_type=std_logic lab=VDD}
-C {lab_pin.sym} -350 -380.0 0 0 {name=l16 sig_type=std_logic lab=0}
-C {lab_pin.sym} -350 -360.0 0 0 {name=l17 sig_type=std_logic lab=tr3}
-C {lab_pin.sym} -350 -340.0 0 0 {name=l18 sig_type=std_logic lab=tr2}
-C {lab_pin.sym} -350 -320.0 0 0 {name=l19 sig_type=std_logic lab=tr1}
-C {lab_pin.sym} -350 -300.0 0 0 {name=l20 sig_type=std_logic lab=tr0}
-C {lab_pin.sym} -350 -280.0 0 0 {name=l21 sig_type=std_logic lab=Imon}
-C {lab_pin.sym} -50 -400.0 0 1 {name=l22 sig_type=std_logic lab=Vb}
-C {lab_pin.sym} -50 -380.0 0 1 {name=l23 sig_type=std_logic lab=Vthr}
-C {lab_pin.sym} -50 -360.0 0 1 {name=l24 sig_type=std_logic lab=VT_dpi}
-C {lab_pin.sym} -50 -340.0 0 1 {name=l25 sig_type=std_logic lab=VNA}
-C {lab_pin.sym} -50 -320.0 0 1 {name=l26 sig_type=std_logic lab=Vlk}
-C {lab_pin.sym} -50 -300.0 0 1 {name=l27 sig_type=std_logic lab=VK}
-C {lab_pin.sym} -50 -280.0 0 1 {name=l28 sig_type=std_logic lab=VIp}
-C {lab_pin.sym} -50 -260.0 0 1 {name=l29 sig_type=std_logic lab=VKup}
-C {lab_pin.sym} -50 -240.0 0 1 {name=l30 sig_type=std_logic lab=VKdn}
-C {lab_pin.sym} -50 -220.0 0 1 {name=l31 sig_type=std_logic lab=Vamp_bias}
-C {lab_pin.sym} -50 -200.0 0 1 {name=l32 sig_type=std_logic lab=VT}
-C {analog/bias/testbenches/bias_probes.sym} 300 -300 0 0 {name=xp}
-C {lab_pin.sym} 150 -410.0 0 0 {name=l33 sig_type=std_logic lab=VDDS}
-C {lab_pin.sym} 150 -390.0 0 0 {name=l34 sig_type=std_logic lab=0}
-C {lab_pin.sym} 150 -370.0 0 0 {name=l35 sig_type=std_logic lab=Vb}
-C {lab_pin.sym} 150 -350.0 0 0 {name=l36 sig_type=std_logic lab=Vthr}
-C {lab_pin.sym} 150 -330.0 0 0 {name=l37 sig_type=std_logic lab=VT_dpi}
-C {lab_pin.sym} 150 -310.0 0 0 {name=l38 sig_type=std_logic lab=VNA}
-C {lab_pin.sym} 150 -290.0 0 0 {name=l39 sig_type=std_logic lab=Vlk}
-C {lab_pin.sym} 150 -270.0 0 0 {name=l40 sig_type=std_logic lab=VK}
-C {lab_pin.sym} 150 -250.0 0 0 {name=l41 sig_type=std_logic lab=VIp}
-C {lab_pin.sym} 150 -230.0 0 0 {name=l42 sig_type=std_logic lab=VKup}
-C {lab_pin.sym} 150 -210.0 0 0 {name=l43 sig_type=std_logic lab=VKdn}
-C {lab_pin.sym} 150 -190.0 0 0 {name=l44 sig_type=std_logic lab=Vamp_bias}
-C {devices/code_shown.sym} -1100 -700 0 0 {name=MODELS only_toplevel=true
+C {analog/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
+C {vsource.sym} -940 200 0 0 {name=V1 value=\{vdd\} savecurrent=false}
+C {gnd.sym} -940 230 0 0 {name=g1 lab=0}
+N -940 170 -940 -160 {}
+N -940 -160 -200 -160 {}
+C {ammeter.sym} -200 -130 0 0 {name=VIdd savecurrent=true spice_ignore=0}
+N -200 -100 -150 -100.0 {}
+C {lab_wire.sym} -175.0 -100.0 0 0 {name=w2 sig_type=std_logic lab=VDD}
+N -150 -80.0 -820 -80.0 {}
+N -820 -80.0 -820 230 {}
+C {gnd.sym} -820 230 0 0 {name=g3 lab=0}
+C {vsource.sym} -700 200 0 0 {name=Vtr3 value='vdd*b3' savecurrent=false}
+C {gnd.sym} -700 230 0 0 {name=g4 lab=0}
+N -700 170 -700 -60.0 {}
+N -700 -60.0 -150 -60.0 {}
+C {vsource.sym} -590 200 0 0 {name=Vtr2 value='vdd*b2' savecurrent=false}
+C {gnd.sym} -590 230 0 0 {name=g5 lab=0}
+N -590 170 -590 -40.0 {}
+N -590 -40.0 -150 -40.0 {}
+C {vsource.sym} -480 200 0 0 {name=Vtr1 value='vdd*b1' savecurrent=false}
+C {gnd.sym} -480 230 0 0 {name=g6 lab=0}
+N -480 170 -480 -20.0 {}
+N -480 -20.0 -150 -20.0 {}
+C {vsource.sym} -370 200 0 0 {name=Vtr0 value='vdd*b0' savecurrent=false}
+C {gnd.sym} -370 230 0 0 {name=g7 lab=0}
+N -370 170 -370 0.0 {}
+N -370 0.0 -150 0.0 {}
+C {vsource.sym} -260 200 0 0 {name=Vmon value=\{vmon\} savecurrent=false}
+C {gnd.sym} -260 230 0 0 {name=g8 lab=0}
+N -260 170 -260 20.0 {}
+N -260 20.0 -150 20.0 {}
+C {analog/bias/testbenches/bias_probes.sym} 450 -30.0 0 0 {name=xp}
+N 150 -100.0 300 -100.0 {}
+C {lab_wire.sym} 225.0 -100.0 0 0 {name=w9 sig_type=std_logic lab=Vb}
+N 150 -80.0 300 -80.0 {}
+C {lab_wire.sym} 225.0 -80.0 0 0 {name=w10 sig_type=std_logic lab=Vthr}
+N 150 -60.0 300 -60.0 {}
+C {lab_wire.sym} 225.0 -60.0 0 0 {name=w11 sig_type=std_logic lab=VT_dpi}
+N 150 -40.0 300 -40.0 {}
+C {lab_wire.sym} 225.0 -40.0 0 0 {name=w12 sig_type=std_logic lab=VNA}
+N 150 -20.0 300 -20.0 {}
+C {lab_wire.sym} 225.0 -20.0 0 0 {name=w13 sig_type=std_logic lab=Vlk}
+N 150 0.0 300 0.0 {}
+C {lab_wire.sym} 225.0 0.0 0 0 {name=w14 sig_type=std_logic lab=VK}
+N 150 20.0 300 20.0 {}
+C {lab_wire.sym} 225.0 20.0 0 0 {name=w15 sig_type=std_logic lab=VIp}
+N 150 40.0 300 40.0 {}
+C {lab_wire.sym} 225.0 40.0 0 0 {name=w16 sig_type=std_logic lab=VKup}
+N 150 60.0 300 60.0 {}
+C {lab_wire.sym} 225.0 60.0 0 0 {name=w17 sig_type=std_logic lab=VKdn}
+N 150 80.0 300 80.0 {}
+C {lab_wire.sym} 225.0 80.0 0 0 {name=w18 sig_type=std_logic lab=Vamp_bias}
+N -200 -160 280 -160 {}
+N 280 -160 280 -140.0 {}
+N 280 -140.0 300 -140.0 {}
+C {gnd.sym} 300 -120.0 1 0 {name=g19 lab=0}
+N 150 100.0 210 100.0 {}
+C {lab_wire.sym} 180.0 100.0 0 0 {name=w20 sig_type=std_logic lab=VT}
+C {devices/code_shown.sym} -400 -700 0 0 {name=MODELS only_toplevel=true
 format="tcleval( @value )"
 value="
 .include $::180MCU_MODELS/design.ngspice
@@ -67,10 +72,13 @@ value="
 .lib $::180MCU_MODELS/sm141064.ngspice mimcap_typical
 .lib $::180MCU_MODELS/sm141064.ngspice res_typical
 "}
-C {devices/code_shown.sym} -1100 -150 0 0 {name=CONTROL only_toplevel=true
+C {devices/code_shown.sym} -1100 330 0 0 {name=CONTROL only_toplevel=true
 value="
 * Reference: tt, 27 C, trim code 9 (see analog/testbenches/README.md)
 .param vdd=3.3 code=9 vmon=1.65
+* trim bits of 'code' (b3 = MSB), driven by Vtr3..Vtr0
+.param b3='floor(code/8)-2*floor(code/16)' b2='floor(code/4)-2*floor(code/8)'
+.param b1='floor(code/2)-2*floor(code/4)' b0='code-2*floor(code/2)'
 .csparam code_c=\{code\}
 .csparam vdd_c=\{vdd\}
 .control
