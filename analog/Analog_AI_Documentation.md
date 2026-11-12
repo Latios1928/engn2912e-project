@@ -71,6 +71,7 @@ and how far its output was checked. It is updated as the work continues.
 | `xschemrc` | Edited | 2026-11-08 | `analog/snn` added to the symbol search path. |
 | `mixed/*` | Created | 2026-11-08 | Mixed-signal flow with SpiceBind: Verilog testbench, SPICE testbench, `libngspice` crash shim, Makefile, README (entry 49a). |
 | `analog/mock/{dac,snn,tb_neuron}.v` | Edited (user request) | 2026-11-08 | Weights widened to 4 bits, binary (entry 49a). |
+| `analog/snn/snn_analog_inh.sch`, `snn_analog_inh.sym` | Created (user request) | 2026-11-11 | Copy of the 2-2-1 `snn_analog` with `DAC_signed` hidden → output synapses, a `DPI_inh` on the output membrane, and new pins `s[1:0]` and `VT_inh` (entry 74). `snn_analog.sch/.sym` unchanged. |
 
 Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edited by the AI. The DPI testbenches (entry 43) only instantiate `DPI.sym`; `DPI.sch` and `DPI.sym` were not changed by the AI. The originals `neuron.sch`, `neuron.sym` and `neuron_testbench.sch` were checksum-verified unchanged after the 5 kHz files were generated.
 
@@ -912,6 +913,85 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **AI recommended:** copy the files with `git checkout origin/xor-inhibition -- <paths>` instead of merging. Check with `inh_cell_tb` (expected charge ratio ≈ 1.007), then commit with credit to b8612ed. After that, hand-edit `snn_analog.sch` for 2-2-1 (2 `DAC_signed` hidden → output DACs, a `DPI_inh` on the output VMEM, `VT_inh`, optionally `DPI_sized`).
   - Agree with the team on the weight format: `DAC_signed` wraps the 1:2:3:4 DAC with a separate sign pin, while `main` plans sign-magnitude (bit 3) and has `DAC_binary`. Check with the branch author about porting to 2-2-1.
 - **Not done by AI:** no git command that changes the repo was run, and no file other than this log was changed.
+
+**74. 2-2-1 SNN schematic with an inhibitory output synapse (`snn_analog_inh`)** *(Analysed / tool-verified by netlisting)*
+- **Asked:** an updated SNN schematic with 2 input DACs and neurons, 4 DAC + DPI pairs into 2 hidden neurons, 2 signed DACs with an inhibitory DPI, and the output neuron. The user chose: a new copy (original untouched), separate sign pins `s[1:0]`, an own `VT_inh` bias with shared `Vthr`, and netlisting in the container.
+- **AI did:**
+  - Created `analog/snn/snn_analog_inh.sch` from `snn_analog.sch` by script.
+    - Input and hidden layers unchanged: `DAC` → `DPI` → `neuron_sized`.
+    - `xdac4_0` and `xdac4_1` are now `DAC_signed` (sign `s[0]`, `s[1]`; excitatory current to `Isum_4`, inhibitory to the new net `Isum_5`).
+    - Added `xdpi5` = `DPI_inh` (Vthr, `VT_inh`, `Isum_5`), whose `Iout` sinks current from `VMEM_4`.
+    - Added pins `s[1:0]` and `VT_inh`, and updated the description text.
+  - Created `snn_analog_inh.sym`: `snn_analog.sym` plus the two pins, with the box extended downwards.
+- **Verified** (netlisting only, in `/tmp/claude_snninh` in the container):
+  - every top-level instance connects to the intended named nets, and nothing is reported missing;
+  - `DAC_signed` steers its inner `DAC` output `Y` through `XMse`/`XMsi` to `Isum_e`/`Isum_i`;
+  - `DPI_inh` is `DPI_sized` plus the 8 µm/2 µm mirror;
+  - a scratch wrapper instance has the same 55 pins as the subcircuit.
+- **Notes:**
+  - The inhibitory path uses `DPI_sized` (inside `DPI_inh`), while the excitatory output DPI is the plain `DPI`, so their nominal gains match but their mismatch differs; `VT_inh` can trim.
+  - `DAC_signed` and `DPI_inh` use an internal `GND` label, not the `VSS` pin (as `DAC` already does). This is fine in ngspice; check it for LVS.
+  - On `origin/xor-inhibition`, the XOR also needed separate input/hidden DPI biases and `DPI_sized` for the AND; these are not in this schematic.
+- **Not done:** no simulation or testbench; `mixed/`, `snn_analog.v`, the digital source of `s[1:0]` and the librelane macro were not updated.
+
+### 2026-11-12
+
+**Layouts for DPI_inh and DAC_signed** *(Layout, DRC/LVS run)*
+- **Asked:** build layouts for the inhibitory DPI (`DPI_inh.sch`) and the signed DAC (`DAC_signed.sch`).
+- **AI did:**
+  - **`gen_dpi.py`:** added `-rd w/l/name` options. At the default sizes the output is the same as before; this was checked polygon by polygon against `DPI.gds`.
+  - **New `DPI_sized.gds`** (`DPI_sized.sch`: all four devices 0.88/1.12 µm): 28 × 26 µm, the same footprint as `DPI.gds`.
+  - **New `gen_dpi_inh.py` → `DPI_inh.gds`**, 30.10 × 37.66 µm:
+    - `DPI_sized` is a subcell, with the Mi1/Mi2 mirror (2/8 µm) below it;
+    - the mirror is one row of four rotated devices (dummy, Mi2, Mi1, dummy) in the P substrate, whose guard ring closes onto the DPI's bottom ring side;
+    - Im runs to the DPI's Isyn pin on an M2 riser right of the DPI;
+    - pins: Vthr, VT, Isum and Iout on the left, VDD on the right, GND on the ring.
+  - **New `gen_dac_signed.py` → `DAC_signed.gds`**, 182.08 × 33.13 µm:
+    - `DAC.gds` (the 1:2:3:4 DAC that the schematic instantiates) is a subcell, with a 10 µm steering block on its left;
+    - Msi/Mse share Y, which goes on M2 to the DAC's Isum stub;
+    - the Mni/Mpi inverter sits above them, with Mpi in an N-well whose tap is tied to the left end of the DAC's VDD tap strip;
+    - Isum_e, Isum_i and s escape on M3;
+    - en and w[3:0] are extended on M2 to the new left edge; Vb, VDD and GND stay on the right.
+  - New LVS references (`*_lvs_ref.spice`, hierarchical) and check scripts (`run_dpi_sized_checks.sh`, `run_dpi_inh_checks.sh`, `run_dac_signed_checks.sh`).
+- **Checks:** DRC (variant D) is clean for all three. LVS matches for all three, with each subcell matched hierarchically (DPI_inh/DPI_sized, DAC_signed/DAC).
+- **Not done by AI:** no post-layout simulation. `DAC_signed` reuses `DAC.gds` unchanged, which still has the side-by-side floorplan that was compacted for `DAC_binary` on 2026-11-11.
+
+**Top-level analog SNN layout (SNN.gds)** *(Layout, DRC/LVS run)*
+- **Asked:** build the top-level layout of the SNN's analog components in `SNN.gds` (which held an empty cell `SNN`).
+- **AI used** `analog/snn/snn_analog_inh.sch` (the newest schematic, with DAC_signed and DPI_inh):
+  - 5 × neuron_sized, 5 × DPI (minimum size, as `DPI.sym`), 1 × DPI_inh, 6 × DAC (1:2:3:4) and 2 × DAC_signed;
+  - all blocks are instances of the existing cells.
+- **New `layout/gen_snn.py` → `SNN.gds`, 349.54 × 308.28 µm:**
+  - one row per neuron (input rows at the bottom, the output row at the top);
+  - each row, left to right: supply column (Vb, VDD, VSS), DAC(s) mirrored so their pins face right, channel A (w, en, s, Vthr/VT, row-local Isum), DPI(s), channel B (DPI supplies, VMEM, neuron biases), neuron, channel C (neuron supplies, spike);
+  - routing is M2 stubs onto M3 tracks, with nothing routed over a block; the generator checks the spacing of every top-level M2/M3 shape;
+  - a bottom channel carries the VDD/VSS M2 buses and the spike[0..3] taps back to the next layer's DAC enables;
+  - DPI_inh's Iout reaches VMEM_4 through the gap between DPI4 and DPI_inh;
+  - all pins are on the bottom edge (M3, labelled). The blocks' GND is VSS.
+- **LVS setup:** block GDS files are read into one layout with SkipNewCell, so that DAC_signed's DAC subcell is the same cell as the plain DACs. Without this, LVS flattened a duplicate `DAC$1` and DAC_signed did not match.
+- **New files:** `SNN_lvs_ref.spice` (hierarchical: every block's own LVS reference plus the top-level netlist) and `run_snn_checks.sh`.
+- **Checks:** DRC (variant D) clean. LVS matches for all 7 circuits (SNN, neuron_sized, DPI, DPI_inh, DPI_sized, DAC, DAC_signed).
+- **Not done by AI:** no coupling or parasitic analysis of the top-level routing (w, spike and the Isum/VMEM nodes share channels A/B), and no post-layout simulation. The DAC column (182 µm) sets the width; `DAC.gds` still has the side-by-side floorplan.
+
+**SNN and DAC_signed layouts switched to the binary DAC** *(Layout, DRC/LVS run)*
+- **Asked:** change the layout so that binary DACs are used.
+- **AI did:**
+  - **`gen_dac_signed.py`:** now uses `DAC_binary.gds` by default (`-rd dac=DAC` gives the old 1:2:3:4 version). DAC_binary is the other way up from DAC (w/en above Isum, VDD tap at the bottom), so the DAC is placed mirrored in y, the steering block is drawn as before and the cell is mirrored back. The inverter rows are now placed relative to the VDD tap. `DAC_signed.gds` is 116.58 × 57.12 µm (was 182.08 × 33.13).
+  - **`gen_snn.py`:** the six plain DACs are `DAC_binary` (`-rd dac=DAC` for the old ones).
+  - **New `make_snn_lvs_ref.py`:** writes `SNN_lvs_ref.spice` and is called from `run_snn_checks.sh`.
+- **Result:** `SNN.gds` is 284.04 × 476.76 µm (0.135 mm², was 349.54 × 308.28 = 0.108 mm²). The binary DAC is narrower but taller (57.1 µm), and two DACs are stacked in rows u2–u4. DRC clean; LVS matches for all 7 circuits.
+- **Layout now differs from the schematics:** `DAC_signed.sch` and `snn_analog_inh.sch` still instantiate `DAC.sym` (1:2:3:4, magnitude 0–10). The LVS references say so explicitly. With 1:2:4:8 weights the 4-bit codes mean 0–15 units, so the weight encoding of the digital side and the simulations would change too.
+
+**SNN: spike lines on alternating metal layers** *(Layout, DRC/LVS run)*
+- **Asked:** the spike outputs all run parallel to each other; alternate them between Metal3, Metal1 and Metal5.
+- **AI did (`gen_snn.py`):**
+  - the vertical spike tracks in channel C (spike[0..4]) and channel A (spike[0..3], to the DAC enables) rotate M1 → M5 → M3 (spike[0] M1, [1] M5, [2] M3, [3] M1, [4] M5). The rotation starts on M1 so the end tracks are not on M3 next to the M3 tracks around them (pulse[1], s[0], VSS);
+  - the bottom-channel taps that join channels C and A cross those verticals, so they cannot use M1/M3/M5; they alternate M4 / M2, with M4 next to the M2 VDD bus;
+  - via stacks connect each M2 stub to its track's layer;
+  - the generator's spacing check now covers M1–M5;
+  - the spike pins are on their track's layer.
+- **Result:** `SNN.gds` is 284.34 × 476.76 µm (+0.3 µm for the 0.5 µm M5 tracks). DRC clean; LVS matches for all 7 circuits.
+- **Not done by AI:** no coupling extraction; the change removes same-layer side-by-side runs between spike lines but does not change their pitch (0.8 µm).
 
 ---
 
