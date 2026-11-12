@@ -1,0 +1,7 @@
+# Bias generator targets (analog/bias/README.md). Errors are relative bias-current errors that
+# the trim cannot remove; see analog/bias/sim/bias_tb.py evaluate().
+pvt_err:   [null, 0.08]     # worst |error| over 5 corners x 0/27/85 C, all outputs
+vdd_err:   [null, 0.05]     # worst |error| over VDD 3.0-3.6 V
+sigma_max: [null, 0.05]     # worst mismatch sigma after trim (Vamp_bias excluded: its tail device sets it)
+i_supply:  [null, 5.0e-6]   # A
+a_total:   [null, 7000]     # um^2: gate area (decaps included) + n-well resistor

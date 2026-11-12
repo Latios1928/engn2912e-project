@@ -1,0 +1,11 @@
+# What the optimizer may change. SI units. init = the hand-sized 5 kHz design
+# (simulated first as a reference point; it fails only the a_cap spec).
+# devices: netlist fields this parameter sets, as "subckt/INSTANCE:field".
+# W_C2 and W_C1 set both sides of a square MIM capacitor.
+W_C2: {lo: 8e-6, hi: 25e-6, step: 0.01e-6, init: 20.52e-6, unit: m,
+       devices: ["neuron_5khz/XC2:c_width", "neuron_5khz/XC2:c_length"]}
+W_C1: {lo: 5e-6, hi: 10e-6, step: 0.01e-6, init: 6.85e-6, unit: m,
+       devices: ["neuron_5khz/XC1:c_width", "neuron_5khz/XC1:c_length"]}
+VT:   {lo: 0.6,  hi: 2.0,  step: 0.005, init: 1.0,   unit: V}
+Vlk:  {lo: 0.30, hi: 0.50, step: 0.001, init: 0.420, unit: V}
+VKdn: {lo: 0.45, hi: 0.70, step: 0.001, init: 0.573, unit: V}

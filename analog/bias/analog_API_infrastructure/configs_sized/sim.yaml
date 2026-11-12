@@ -1,0 +1,48 @@
+# Simulation setup for the sizing_context.txt run. Paths relative to the repo root.
+testbench: analog/neuron/neuron_sized_testbench.sch
+timeout_s: 180
+layout_factor: 1.0
+
+fixed:
+  vdd: 3.3
+  iin: 9.5e-9
+  VT: 1.66
+  Vamp_bias: 0.535
+  VIp: 0.573
+  Vlk: 0.420
+  VNA: 2.0
+  VKup: 2.277
+  VK: 1.1
+  VKdn: 0.573
+
+# A .control block is used (not dot .meas) because t_refr and v_spike_max need
+# windows taken from earlier measurements. Each metric is printed on its own
+# line, so one failed measurement doesn't hide the others. Spikes 1-2 are skipped.
+analysis: |
+  .control
+  save v(spike) v(vmem) i(V1)
+  tran 40n 1.6m 0 40n uic
+  meas tran t3 when v(spike)=1.65 rise=3
+  meas tran t4 when v(spike)=1.65 rise=4
+  meas tran t7 when v(spike)=1.65 rise=7
+  meas tran tf3 when v(spike)=1.65 fall=3
+  let period = (t7 - t3)/4
+  print period
+  let t_spike = tf3 - t3
+  print t_spike
+  meas tran v_spike_max max v(spike) from=$&t3 to=$&t4
+  meas tran v_reset min v(vmem) from=$&t3 to=$&t4
+  let vrel = v_reset + 0.01
+  meas tran trel when v(vmem)=$&vrel rise=1 td=$&tf3
+  let t_refr_post = trel - tf3
+  print t_refr_post
+  meas tran trst when v(vmem)=0.33 fall=1 td=$&t3
+  let t_refr = trel - trst
+  print t_refr
+  meas tran i_avg avg i(V1) from=$&t3 to=$&t7
+  let p_avg = -i_avg*3.3
+  print p_avg
+  .endc
+
+measures: [period, t_spike, t_refr, t_refr_post, v_spike_max, v_reset, p_avg]
+constraints: []

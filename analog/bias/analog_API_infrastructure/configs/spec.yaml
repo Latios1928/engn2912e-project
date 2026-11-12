@@ -1,0 +1,6 @@
+# Targets a design must meet: [min, max] in SI units; null = unbounded.
+# Area metrics are computed in Python and checked before simulating.
+f_spike: [4.9e3, 5.1e3]   # Hz, at iin in sim.yaml (5 nA)
+t_spike: [null, 20e-6]    # s, spike width at VDD/2
+p_avg:   [null, 0.5e-6]   # W, average supply power (includes the 16.5 nW input)
+a_cap:   [null, 300e-12]  # m^2, sum of MIM W*L (hand-sized 5 kHz design: 468 um^2)

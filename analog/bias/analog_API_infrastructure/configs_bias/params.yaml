@@ -1,0 +1,7 @@
+# Bias generator (analog/bias): size of the unit mirror device, in m. Every mirror output, the
+# master (M1-M4), MS2 and Imon are built from it; the replicas keep the size of the devices
+# they copy. init = the current design (2/4 um for both). Grid: --proposer grid.
+unit_wn: {lo: 1.0e-6, hi: 4.0e-6, step: 1.0e-6, init: 2.0e-6, unit: m}
+unit_ln: {lo: 1.0e-6, hi: 8.0e-6, step: 1.0e-6, init: 4.0e-6, unit: m}
+unit_wp: {lo: 1.0e-6, hi: 4.0e-6, step: 1.0e-6, init: 2.0e-6, unit: m}
+unit_lp: {lo: 1.0e-6, hi: 8.0e-6, step: 1.0e-6, init: 4.0e-6, unit: m}

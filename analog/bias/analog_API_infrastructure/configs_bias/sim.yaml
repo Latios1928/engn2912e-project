@@ -1,0 +1,12 @@
+# Bias generator sizing. Each point runs analog/bias/sim/sweep_point.py: stack factors for the
+# unit size, calibration (resistor length, ratios), PVT, supply and a mismatch run.
+evaluator: analog/bias/sim/sweep_point.py
+evaluator_args: [--mc, "40", --jobs, "4"]
+timeout_s: 1200
+fixed: {}
+measures: [pvt_err, vdd_err, sigma_max, sigma_vt_hid, sigma_vamp, m_sigma, i_supply, a_gate, a_res,
+           a_total, cal_err, units]
+# Same unit for both banks in the first sweep; drop these two lines to sweep n and p separately.
+constraints:
+  - "unit_wp == unit_wn"
+  - "unit_lp == unit_ln"
