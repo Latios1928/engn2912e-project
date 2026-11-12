@@ -55,15 +55,21 @@ weights, pin serialization or an SRAM isn't needed.
 
 ## Test
 
-`tb_pulse_gen.v` checks `pulse_gen` against a reference model written from the
-spec, with random `en` changes and a mid-run reset. `rf` and `snn_digital` are
-covered by `../mock/tb_snn_top.v` (including a readback of every `rf` word) and
-by `../mixed/`. From this folder:
+From this folder:
 
 ```bash
+iverilog -g2012 -Wall -o sim.vvp rf.v tb_rf.v && vvp sim.vvp
 iverilog -g2012 -Wall -o sim.vvp pulse_gen.v tb_pulse_gen.v && vvp sim.vvp
 ```
 
-Other shapes: add `-Ptb_pulse_gen.PERIOD=1 -Ptb_pulse_gen.WIDTH=1` and the like.
+- `tb_rf.v`: back-to-back writes, a cycle with `wren` low, and an overwrite,
+  checked against a reference copy on every cycle. Kept short so its waveform
+  fits on a slide.
+- `tb_pulse_gen.v`: checks `pulse_gen` against a reference model written from
+  the spec, with random `en` changes and a mid-run reset. Other shapes: add
+  `-Ptb_pulse_gen.PERIOD=1 -Ptb_pulse_gen.WIDTH=1` and the like.
+- `snn_digital` as a whole is covered by `../mock/tb_snn_top.v` and `../mixed/`.
 
-Open item: a unit testbench for `rf` (back-to-back writes).
+`tb_rf.json` and `tb_pulse_gen.json` are Vaporview views of the slide windows;
+`../slides/make_waves.sh` regenerates both VCDs and draws the same windows as
+PNGs with `../tools/vcd2png.py`.
