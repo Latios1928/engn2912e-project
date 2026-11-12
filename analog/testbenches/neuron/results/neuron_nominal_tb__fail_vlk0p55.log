@@ -1,0 +1,87 @@
+* Source testbench: analog/testbenches/neuron/neuron_nominal_tb.sch (git 3ab1319 + uncommitted)
+* Run: fail_vlk0p55, expected FAIL (leak too strong to fire)
+* Changed from the testbench: p_vlk 0.425 -> 0.55 V
+* Simulated 2026-11-12, tt, 27 C, ngspice batch mode, num_threads=1
+* Waveforms (time, VMEM, spike): neuron_nominal_tb__fail_vlk0p55.txt
+* ------------------------------------------------------------------
+Warning: m=xx on .subckt line will override multiplier m hierarchy!
+
+
+Note: Compatibility modes selected: hs a
+
+
+Circuit: ** sch_path: /foss/designs/engn2912e-project/analog/testbenches/neuron/neuron_nominal_tb.sch
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Operating point simulation skipped by 'uic',
+  now using transient initial conditions.
+ Reference value :  2.27505e-05
+ Reference value :  4.93305e-05
+ Reference value :  8.59305e-05
+ Reference value :  1.20350e-04
+ Reference value :  1.60150e-04
+ Reference value :  2.00630e-04
+ Reference value :  2.41070e-04
+ Reference value :  2.72490e-04
+ Reference value :  3.11010e-04
+ Reference value :  3.49270e-04
+ Reference value :  3.88310e-04
+ Reference value :  4.27670e-04
+ Reference value :  4.68770e-04
+ Reference value :  5.08010e-04
+ Reference value :  5.47210e-04
+ Reference value :  5.88550e-04
+ Reference value :  6.29410e-04
+ Reference value :  6.70690e-04
+ Reference value :  7.12950e-04
+ Reference value :  7.53530e-04
+ Reference value :  7.93250e-04
+ Reference value :  8.34390e-04
+ Reference value :  8.76430e-04
+ Reference value :  9.18110e-04
+ Reference value :  9.60270e-04
+ Reference value :  9.99390e-04
+ Reference value :  1.03861e-03
+ Reference value :  1.08149e-03
+ Reference value :  1.12313e-03
+ Reference value :  1.16425e-03
+ Reference value :  1.20279e-03
+ Reference value :  1.23887e-03
+ Reference value :  1.27903e-03
+ Reference value :  1.32233e-03
+ Reference value :  1.36341e-03
+ Reference value :  1.40511e-03
+ Reference value :  1.44403e-03
+ Reference value :  1.48491e-03
+ Reference value :  1.52645e-03
+ Reference value :  1.55743e-03
+ Reference value :  1.59707e-03
+ Reference value :  1.62773e-03
+ Reference value :  1.67151e-03
+ Reference value :  1.71095e-03
+ Reference value :  1.75089e-03
+ Reference value :  1.79499e-03
+
+No. of Data Rows : 90015
+
+Error: measure  t3  when(WHEN) : out of interval
+ meas tran t3 when v(spike)=1.650000e+00 rise=3 failed!
+
+
+Error: measure  t4  when(WHEN) : out of interval
+ meas tran t4 when v(spike)=1.650000e+00 rise=4 failed!
+
+
+Error: measure  t7  when(WHEN) : out of interval
+ meas tran t7 when v(spike)=1.650000e+00 rise=7 failed!
+
+
+Error: measure  tf3  when(WHEN) : out of interval
+ meas tran tf3 when v(spike)=1.650000e+00 fall=3 failed!
+
+
+neuron_nominal_tb: FAIL fewer than 7 spikes in 0.0018 s nothing measured
+RES fired7=0
+Note: Simulation executed from .control section 

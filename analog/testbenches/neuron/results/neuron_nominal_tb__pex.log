@@ -1,0 +1,217 @@
+* Source testbench: analog/testbenches/neuron/neuron_nominal_tb.sch, run by run_neuron_nominal.py --pex
+* Neuron: post-layout, Extraction: neuron_sized_pex.spice (Magic, RC_extract.sh) of neuron_sized.gds, md5 f8c0e5f946c4151b1e8247031d836878
+* Changed from the testbench: nothing
+* Simulated 2026-11-12 08:59, tt, 27 C, ngspice batch mode, num_threads=1
+* Waveforms (time, VMEM, spike): neuron_nominal_tb__pex.txt
+* ------------------------------------------------------------------
+
+Note: Compatibility modes selected: hs a
+
+
+Circuit: ** sch_path: /foss/designs/engn2912e-project/analog/testbenches/neuron/neuron_nominal_tb.sch
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Operating point simulation skipped by 'uic',
+  now using transient initial conditions.
+ Reference value :  5.18865e-06
+ Reference value :  1.58487e-05
+ Reference value :  2.67687e-05
+ Reference value :  3.79087e-05
+ Reference value :  4.88887e-05
+ Reference value :  5.93287e-05
+ Reference value :  7.02287e-05
+ Reference value :  8.14087e-05
+ Reference value :  9.26887e-05
+ Reference value :  1.03569e-04
+ Reference value :  1.14649e-04
+ Reference value :  1.25709e-04
+ Reference value :  1.36209e-04
+ Reference value :  1.47029e-04
+ Reference value :  1.57909e-04
+ Reference value :  1.67389e-04
+ Reference value :  1.77829e-04
+ Reference value :  1.88669e-04
+ Reference value :  1.99042e-04
+ Reference value :  2.10342e-04
+ Reference value :  2.21422e-04
+ Reference value :  2.30002e-04
+ Reference value :  2.38822e-04
+ Reference value :  2.50042e-04
+ Reference value :  2.60482e-04
+ Reference value :  2.70562e-04
+ Reference value :  2.80562e-04
+ Reference value :  2.91302e-04
+ Reference value :  3.01462e-04
+ Reference value :  3.12042e-04
+ Reference value :  3.21462e-04
+ Reference value :  3.31162e-04
+ Reference value :  3.41522e-04
+ Reference value :  3.52402e-04
+ Reference value :  3.62922e-04
+ Reference value :  3.74062e-04
+ Reference value :  3.84902e-04
+ Reference value :  3.95502e-04
+ Reference value :  4.04323e-04
+ Reference value :  4.15363e-04
+ Reference value :  4.25943e-04
+ Reference value :  4.37043e-04
+ Reference value :  4.48423e-04
+ Reference value :  4.59543e-04
+ Reference value :  4.70683e-04
+ Reference value :  4.81063e-04
+ Reference value :  4.92603e-04
+ Reference value :  5.03603e-04
+ Reference value :  5.14263e-04
+ Reference value :  5.25603e-04
+ Reference value :  5.36023e-04
+ Reference value :  5.47363e-04
+ Reference value :  5.58503e-04
+ Reference value :  5.69663e-04
+ Reference value :  5.80143e-04
+ Reference value :  5.90823e-04
+ Reference value :  6.01863e-04
+ Reference value :  6.12261e-04
+ Reference value :  6.22741e-04
+ Reference value :  6.33661e-04
+ Reference value :  6.44321e-04
+ Reference value :  6.52301e-04
+ Reference value :  6.61441e-04
+ Reference value :  6.73321e-04
+ Reference value :  6.84321e-04
+ Reference value :  6.95021e-04
+ Reference value :  7.04441e-04
+ Reference value :  7.15421e-04
+ Reference value :  7.26361e-04
+ Reference value :  7.36441e-04
+ Reference value :  7.46461e-04
+ Reference value :  7.56261e-04
+ Reference value :  7.66681e-04
+ Reference value :  7.77561e-04
+ Reference value :  7.88181e-04
+ Reference value :  7.98821e-04
+ Reference value :  8.09621e-04
+ Reference value :  8.20033e-04
+ Reference value :  8.31033e-04
+ Reference value :  8.41373e-04
+ Reference value :  8.52333e-04
+ Reference value :  8.63653e-04
+ Reference value :  8.74593e-04
+ Reference value :  8.85533e-04
+ Reference value :  8.96513e-04
+ Reference value :  9.07393e-04
+ Reference value :  9.17993e-04
+ Reference value :  9.28953e-04
+ Reference value :  9.39753e-04
+ Reference value :  9.50253e-04
+ Reference value :  9.60813e-04
+ Reference value :  9.71893e-04
+ Reference value :  9.82453e-04
+ Reference value :  9.93013e-04
+ Reference value :  1.00411e-03
+ Reference value :  1.01429e-03
+ Reference value :  1.02565e-03
+ Reference value :  1.03467e-03
+ Reference value :  1.04417e-03
+ Reference value :  1.05543e-03
+ Reference value :  1.06675e-03
+ Reference value :  1.07497e-03
+ Reference value :  1.08313e-03
+ Reference value :  1.09355e-03
+ Reference value :  1.10277e-03
+ Reference value :  1.11465e-03
+ Reference value :  1.12467e-03
+ Reference value :  1.13533e-03
+ Reference value :  1.14557e-03
+ Reference value :  1.15609e-03
+ Reference value :  1.16709e-03
+ Reference value :  1.17751e-03
+ Reference value :  1.18709e-03
+ Reference value :  1.19783e-03
+ Reference value :  1.20911e-03
+ Reference value :  1.22033e-03
+ Reference value :  1.23157e-03
+ Reference value :  1.24117e-03
+ Reference value :  1.25231e-03
+ Reference value :  1.26395e-03
+ Reference value :  1.27525e-03
+ Reference value :  1.28619e-03
+ Reference value :  1.29727e-03
+ Reference value :  1.30855e-03
+ Reference value :  1.31979e-03
+ Reference value :  1.33057e-03
+ Reference value :  1.34121e-03
+ Reference value :  1.35213e-03
+ Reference value :  1.36351e-03
+ Reference value :  1.37443e-03
+ Reference value :  1.38557e-03
+ Reference value :  1.39675e-03
+ Reference value :  1.40759e-03
+ Reference value :  1.41839e-03
+ Reference value :  1.42945e-03
+ Reference value :  1.44029e-03
+ Reference value :  1.44952e-03
+ Reference value :  1.46012e-03
+ Reference value :  1.47030e-03
+ Reference value :  1.47994e-03
+ Reference value :  1.49016e-03
+ Reference value :  1.49844e-03
+ Reference value :  1.50702e-03
+ Reference value :  1.51850e-03
+ Reference value :  1.52782e-03
+ Reference value :  1.53934e-03
+ Reference value :  1.54928e-03
+ Reference value :  1.56160e-03
+ Reference value :  1.57316e-03
+ Reference value :  1.58424e-03
+ Reference value :  1.59520e-03
+ Reference value :  1.60664e-03
+ Reference value :  1.61744e-03
+ Reference value :  1.62850e-03
+ Reference value :  1.63970e-03
+ Reference value :  1.65100e-03
+ Reference value :  1.66090e-03
+ Reference value :  1.67194e-03
+ Reference value :  1.68302e-03
+ Reference value :  1.69418e-03
+ Reference value :  1.70508e-03
+ Reference value :  1.71618e-03
+ Reference value :  1.72730e-03
+ Reference value :  1.73820e-03
+ Reference value :  1.74862e-03
+ Reference value :  1.75926e-03
+ Reference value :  1.77034e-03
+ Reference value :  1.78148e-03
+ Reference value :  1.79236e-03
+No. of Data Rows : 90025
+t3                  =  6.09217e-04
+t4                  =  8.18093e-04
+t7                  =  1.44456e-03
+tf3                 =  6.19442e-04
+RES fired7=1
+v_spike_max         =  3.27355e+00 at=  6.09983e-04
+v_reset             =  9.01161e-04 at=  6.11301e-04
+trst                =  6.10153e-04
+trel                =  6.26267e-04
+i_avg               =  -1.18804e-07 from=  6.09216e-04 to=  1.44457e-03
+i_in                =  9.50000e-09 from=  6.09216e-04 to=  1.44457e-03
+RES period=0.000208836
+RES t_spike=1.02257E-05
+RES t_refr=1.61145E-05
+RES t_refr_post=6.8249E-06
+RES v_spike_max=3.27355
+RES v_reset=0.000901161
+RES p_avg=3.92055E-07
+RES i_in=9.5E-09
+CHECK period 208.836 us target 190 to 210 us PASS
+CHECK t_spike 10.2257 us target 9 to 11 us PASS
+CHECK t_refr 16.1145 us target 12 to 15 us FAIL
+CHECK v_spike_max 3.27355 V target >= 2.97 V PASS
+CHECK v_reset 0.901161 mV target <= 50 mV PASS
+CHECK p_avg 0.392055 uW target <= 1 uW PASS
+RES n_fail=1
+neuron_nominal_tb: FAIL 1 specs not met
+Note: Simulation executed from .control section 
+Warning: m=xx on .subckt line will override multiplier m hierarchy!
+

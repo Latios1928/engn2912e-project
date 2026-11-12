@@ -1,0 +1,89 @@
+* Source testbench: analog/testbenches/neuron/neuron_nominal_tb.sch, run by run_neuron_nominal.py
+* Neuron: schematic neuron_sized.sch
+* Changed from the testbench: nothing
+* Simulated 2026-11-12 08:58, tt, 27 C, ngspice batch mode, num_threads=1
+* Waveforms (time, VMEM, spike): neuron_nominal_tb.txt
+* ------------------------------------------------------------------
+
+Note: Compatibility modes selected: hs a
+
+
+Circuit: ** sch_path: /foss/designs/engn2912e-project/analog/testbenches/neuron/neuron_nominal_tb.sch
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Operating point simulation skipped by 'uic',
+  now using transient initial conditions.
+ Reference value :  3.15105e-05
+ Reference value :  7.69905e-05
+ Reference value :  1.22410e-04
+ Reference value :  1.68210e-04
+ Reference value :  2.10290e-04
+ Reference value :  2.58050e-04
+ Reference value :  3.04010e-04
+ Reference value :  3.51470e-04
+ Reference value :  3.94850e-04
+ Reference value :  4.37050e-04
+ Reference value :  4.84150e-04
+ Reference value :  5.28010e-04
+ Reference value :  5.72810e-04
+ Reference value :  6.12870e-04
+ Reference value :  6.59730e-04
+ Reference value :  7.07190e-04
+ Reference value :  7.55250e-04
+ Reference value :  7.97450e-04
+ Reference value :  8.39610e-04
+ Reference value :  8.85350e-04
+ Reference value :  9.31810e-04
+ Reference value :  9.78270e-04
+ Reference value :  1.01821e-03
+ Reference value :  1.06331e-03
+ Reference value :  1.09579e-03
+ Reference value :  1.12969e-03
+ Reference value :  1.17669e-03
+ Reference value :  1.21437e-03
+ Reference value :  1.25803e-03
+ Reference value :  1.30423e-03
+ Reference value :  1.34735e-03
+ Reference value :  1.39475e-03
+ Reference value :  1.43767e-03
+ Reference value :  1.48143e-03
+ Reference value :  1.52481e-03
+ Reference value :  1.57077e-03
+ Reference value :  1.61001e-03
+ Reference value :  1.65351e-03
+ Reference value :  1.69823e-03
+ Reference value :  1.73899e-03
+ Reference value :  1.78169e-03
+No. of Data Rows : 90015
+t3                  =  5.89730e-04
+t4                  =  7.91110e-04
+t7                  =  1.39536e-03
+tf3                 =  5.98929e-04
+RES fired7=1
+v_spike_max         =  3.22423e+00 at=  5.90370e-04
+v_reset             =  8.99831e-04 at=  5.91690e-04
+trst                =  5.90551e-04
+trel                =  6.05158e-04
+i_avg               =  -1.15541e-07 from=  5.89730e-04 to=  1.39537e-03
+i_in                =  9.50000e-09 from=  5.89730e-04 to=  1.39537e-03
+RES period=0.000201409
+RES t_spike=9.1995E-06
+RES t_refr=1.46072E-05
+RES t_refr_post=6.2288E-06
+RES v_spike_max=3.22423
+RES v_reset=0.000899831
+RES p_avg=3.81285E-07
+RES i_in=9.5E-09
+CHECK period 201.409 us target 190 to 210 us PASS
+CHECK t_spike 9.1995 us target 9 to 11 us PASS
+CHECK t_refr 14.6072 us target 12 to 15 us PASS
+CHECK v_spike_max 3.22423 V target >= 2.97 V PASS
+CHECK v_reset 0.899831 mV target <= 50 mV PASS
+CHECK p_avg 0.381285 uW target <= 1 uW PASS
+RES n_fail=0
+neuron_nominal_tb: PASS all 6 simulated specs met
+Note: Simulation executed from .control section 
+Warning: m=xx on .subckt line will override multiplier m hierarchy!
+
