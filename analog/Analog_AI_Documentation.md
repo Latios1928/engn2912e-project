@@ -863,6 +863,56 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
   - Pin sides are unchanged: Isum, en and w[3:0] on the left; Vb, VDD and GND on the right. Their y positions moved; see `DAC_binary_pins.json`.
   - Geometric coupling is unchanged for X, Isum, Vb, en and w[3:0]. Each branch node gains 0.64 µm² of overlap where its riser crosses the X/Isum channel.
 
+**70. Purpose of the DPI; is the inhibitory DPI in the repo?** *(Reasoned, from git and file reads)*
+- **Asked:** explain the DPI's purpose, and whether an inhibitory DPI is now present (the user was told it had been pushed).
+- **AI explained the DPI's roles:**
+  - it flips the DAC's sink current into a current sourced into VMEM;
+  - it turns 10 µs charge packets into a smooth current lasting ~0.4 ms, which sets the time window in which inputs add up (the basis of AND);
+  - Vthr scales all of a neuron's weights at once (gain);
+  - its τ current can act as a threshold (the AND "option 2" on the branch);
+  - it isolates the DAC from the VMEM swing;
+  - one DPI per neuron sums all incoming DACs at `Isum`.
+- **AI found:**
+  - `DPI_inh.sch/.sym` (`DPI_sized` plus a 1:1 nFET mirror that sinks its current from VMEM), `DAC_signed` and the XOR testbenches (nominal pass; 27/30 under mismatch) exist only on the remote branch `origin/xor-inhibition` (commits b8612ed, ba1eddc, 2026-11-11, author martinatilla). They are not merged into `main` and not in the local checkout.
+  - That branch started from cbdcec7, before `main` changed to the 2-2-1 network. A trial merge (`git merge-tree`, nothing written) conflicts in `analog/snn/snn_analog.sch`, `snn_analog.sym`, `mixed/snn_ms_tb.sch` and this log.
+  - On `main`, signed weights exist only in the Verilog mock (`mock/dac.v`); the analog `snn_analog.sch` still uses 8 unsigned `DAC`s and 5 `DPI`s. The README TODO lists analog inhibition as open.
+  - Entries 49–56 above described the earlier 3-5-1, unsigned network; `main` is now 2-2-1, and the branch implements the XOR from entry 53.
+- **Not done by AI:** no merge, branch switch or file change other than this log.
+
+**71. Why a DPI instead of wiring the DAC straight to the membrane** *(Reasoned)*
+- **Asked:** an analogy for the DPI's usefulness, and why not connect the DAC current directly to the membrane capacitor.
+- **AI explained:**
+  - On average a direct connection would deliver similar current (once a pFET DAC fixes the polarity), so the DPI is not strictly required.
+  - Analogy: the DAC throws cups of water; the DPI is a rain barrel with a spigot that trickles each cup into the membrane bucket over ~0.4 ms.
+  - What the DPI adds:
+    - a τ-set window in which inputs add up, separate from the leak;
+    - a threshold that rejects one input and passes two (the AND on `origin/xor-inhibition`, 93–96 % yield, against 9–83 % for a leak-only AND in a ~25 mV Vlk window);
+    - a gain knob (Vthr) that scales every weight on a neuron at once;
+    - a fixed `Isum` voltage, so the DAC current sources are not affected by the VMEM swing;
+    - the sink-to-source polarity flip.
+  - Cost: about 728 µm² per neuron, mostly the 1 pF capacitor.
+  - Included a sketch of the direct vs. DPI current for two spikes 0.15 ms apart.
+- **Not done by AI:** no file other than this log was changed.
+
+**72. Illustration of what the DPI does, and a correction to entry 71** *(Reasoned)*
+- **Asked:** the user was still unsure why the DPI helps and asked for an illustration.
+- **AI explained,** with a three-row before/after sketch (DAC straight to the membrane vs. through a DPI):
+  - **Polarity:** the nFET DAC sinks current, so on its own it would pull VMEM down; the DPI sources current into VMEM.
+  - **Stable weights:** wired directly, the DAC's output node would be VMEM, so the charge per spike would change as VMEM rises; the DPI holds `Isum` fixed.
+  - **AND:** directly, two inputs give exactly 2× one input and the leak must sit in that narrow gap. A DPI in threshold mode gives ≈ 0 for one input and a large current for two, which moves the precise decision onto M3 (sized, with its own bias `VT_hid`) and leaves the leak a wide margin.
+  - A pFET DAC wired directly would still integrate, so the DPI's value is reliable weights and a robust AND, not basic function.
+- **Correction to entry 71:** the 9–83 % vs. 93–96 % AND yields on `origin/xor-inhibition` both used DPIs (leak-decided vs. DPI-threshold-decided AND). They do not compare a DPI with a direct DAC connection, which has not been simulated.
+- **Not done by AI:** no file other than this log was changed.
+
+**73. How to bring the inhibitory DAC + DPI into `main`** *(Reasoned, from git reads)*
+- **Asked:** how to pull the inhibiting DAC + DPI from the other branch into the user's.
+- **AI found:**
+  - `DAC_signed` instantiates the existing `DAC.sym`; `DPI_inh` instantiates `DPI_sized.sym`; `DPI_sized` uses only primitives. `DAC.sch/.sym` and `DPI.sch/.sym` are unchanged on `main` since the branch point (cbdcec7), so the six cell files carry over with no conflicts.
+  - `inh_cell_tb` and `hidden_tb` use only those cells plus `DAC`, `DPI` and `neuron_sized`. `xor_tb` uses the branch's 3-5-1 `snn_analog.sym` and does not fit `main`.
+- **AI recommended:** copy the files with `git checkout origin/xor-inhibition -- <paths>` instead of merging. Check with `inh_cell_tb` (expected charge ratio ≈ 1.007), then commit with credit to b8612ed. After that, hand-edit `snn_analog.sch` for 2-2-1 (2 `DAC_signed` hidden → output DACs, a `DPI_inh` on the output VMEM, `VT_inh`, optionally `DPI_sized`).
+  - Agree with the team on the weight format: `DAC_signed` wraps the 1:2:3:4 DAC with a separate sign pin, while `main` plans sign-magnitude (bit 3) and has `DAC_binary`. Check with the branch author about porting to 2-2-1.
+- **Not done by AI:** no git command that changes the repo was run, and no file other than this log was changed.
+
 ---
 
 ## Notes on reliability
