@@ -221,3 +221,17 @@ Copy the layout of `dpi/`:
 
 1. Write one or more `*_tb.sch` files whose `.param` line holds every value the runner may change, and whose `.control` block prints `echo RES name=$&value` lines.
 2. In a `run_<block>.py`, build `tbtools.Case` objects (testbench, corner, temperature, params, seed), run them with `tbtools.run_cases`, and format the results.
+
+## Bias cell (`bias/`)
+
+`analog/neuron/bias_cell.sch` (layout `analog/neuron/layout/bias_cell.gds`, `gen_bias.py`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
+
+| File | Purpose |
+|---|---|
+| `bias/bias_design.py` | Sizing at tt 27 °C: replica currents for the tuned bias voltages, then mirror output widths by iteration; writes `bias_cell_sizes.json` |
+| `bias/run_bias_cell.py` | Suites *biases* (outputs at 15 PVT points), *neuron* (neuron_sized at 9.5 nA, fixed voltages vs the cell), *dpi* (DPI DC gain, fixed vs the cell), *mc* (100 mismatch samples, `m` copies written out); writes `results/bias_cell.md` |
+
+```bash
+python3 analog/testbenches/bias/run_bias_cell.py      # ~2 min
+```
+

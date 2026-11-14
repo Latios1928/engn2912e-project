@@ -11,6 +11,8 @@ Blocks (instances of the existing cells, not copies):
     (the schematic's DAC.sym is the 1:2:3:4 DAC; the layout uses the binary 1:2:4:8 DAC, also
     inside DAC_signed. -rd dac=DAC selects the 1:2:3:4 DAC.gds for the six plain DACs.)
     DPI_inh.gds       xdpi5 (inhibitory synapse of the output neuron)
+    bias_cell.gds     xbias (current-mode bias generator, analog/neuron/bias_cell.sch): makes Vb, Vthr,
+                      VT_dpi, VT_inh and the seven neuron biases from one reference current Iref
 
 Floorplan: one row per neuron, bottom to top u0 (input 0), u1 (input 1), u2, u3 (hidden),
 u4 (output). Each row, left to right:
@@ -33,9 +35,15 @@ u4 (output). Each row, left to right:
     channel A to the DAC enables of the next layer.
   * The output neuron's DPI_inh output (Iout) joins VMEM_4 through the gap between DPI4 and
     DPI_inh.
+  * The bias cell sits above the top row. Its bottom-edge outputs drop into a routing channel
+    between the cell and the top row; its top-edge outputs go over it and down a corridor on its
+    right. In that channel each bias joins the top end of its existing track (column L, channel A
+    or channel B), so the biases are distributed from the top; the tracks no longer reach the
+    bottom edge. The cell's VDD / VSS come from the channel C supply tracks, Iref from a column L
+    track that runs up from the Iref pin.
   * Pins: all on the bottom edge, labelled, Metal3 except spike[i] (on its track's layer:
     spike[0], spike[3] Metal1, spike[1], spike[4] Metal5, spike[2] Metal3): VDD, VSS, Vb, w[31:0], pulse[1:0], s[1:0],
-    Vthr, VT_dpi, VT_inh, VNA, Vlk, VK, VIp, VKup, VKdn, Vamp_bias, VT, spike[4:0].
+    Iref (bias cell reference current, 100 nA into the pin), VT (neuron threshold voltage), spike[4:0].
     The blocks' GND (DAC, DAC_signed, DPI_inh) and VSS are the same net, VSS.
 """
 import json
@@ -61,7 +69,7 @@ li = {k: ly.layer(*v) for k, v in L.items()}
 # plain DACs, and LVS sees one DAC circuit.
 OPT = pya.LoadLayoutOptions()
 OPT.cell_conflict_resolution = pya.LoadLayoutOptions.SkipNewCell
-for n in (DAC, "DPI_sized", "DPI", "neuron_sized", "DAC_signed", "DPI_inh"):
+for n in (DAC, "DPI_sized", "DPI", "neuron_sized", "DAC_signed", "DPI_inh", "bias_cell"):
     ly.read(os.path.join(HERE, n + ".gds"), OPT)
 
 
@@ -149,9 +157,11 @@ class Track:
     def __init__(self, net, x, w=0.4, y_lo=None, layer="m3"):
         self.net, self.x, self.w, self.layer = net, x, w, layer
         self.y_lo, self.y_hi = y_lo, None      # y_lo None -> reaches the bottom edge (pin)
+        self.y_min = None
 
     def need(self, y):
         self.y_hi = y if self.y_hi is None else max(self.y_hi, y)
+        self.y_min = y if self.y_min is None else min(self.y_min, y)
         if self.y_lo is not None and self.y_lo is not True:
             self.y_lo = min(self.y_lo, y)
 
@@ -212,7 +222,7 @@ SPIKE_LAYER = ["m1", "m5", "m3", "m1", "m5"]     # spike[0..4], channel C (and A
 SPIKE_TAP_LAYER = ["m4", "m2", "m4", "m2"]       # spike[0..3] taps, bottom to top
 
 # ------------------------------------------------------------------ x floorplan
-colL, x = column(EDGE, [("Vb", 0.4), ("VDD", SUP), ("VSS", SUP)])
+colL, x = column(EDGE, [("Iref", 0.4), ("Vb", 0.4), ("VDD", SUP), ("VSS", SUP)])
 XD0 = x + EDGE
 XD1 = XD0 + BLK["DAC_signed"][1].width()    # DAC column: original left edges (pins) at XD1
 
@@ -390,6 +400,79 @@ for net, ybus in (("VSS", Y_VSS), ("VDD", Y_VDD)):
         if col is not colL:
             t.y_lo = ybus[0]                        # B / C supply tracks stop on their bus
 
+# ------------------------------------------------------------------ bias cell above the top row
+TP = 0.8                                            # routing track pitch
+BIAS_TRACK = {"Vb": colL["Vb"], "Vthr": chA["Vthr"], "VT_dpi": chA["VT_dpi"], "VT_inh": chA["VT_inh"],
+              **{b: chB[b] for b in ("VNA", "Vlk", "VK", "VIp", "VKup", "VKdn", "Vamp_bias")}}
+BP = {}
+for p_ in json.load(open(os.path.join(HERE, "bias_cell_pins.json")))["pins"]:
+    for a in p_["access"]:
+        BP.setdefault(p_["name"], []).append(a)
+bcell = ly.cell("bias_cell")
+BW, BH = bcell.dbbox().width(), bcell.dbbox().height()
+Y_TOP = CH - EDGE                                   # top of the top row
+n_bot = [b for b in BIAS_TRACK if BP[b][0]["side"] == "bottom"]
+n_top = [b for b in BIAS_TRACK if BP[b][0]["side"] == "top"]
+Y_C1 = Y_TOP + EDGE + 0.8                           # first routing track above the top row
+Y_H = {}
+XC0 = XD0                                           # bias cell lower-left
+YC0 = Y_C1 + len(BIAS_TRACK) * TP + 1.2
+X_COR = XC0 + BW + EDGE + 0.6                       # corridor (M3 verticals) right of the cell
+Y_C2 = YC0 + BH + EDGE                              # routing tracks above the cell
+top.insert(pya.DCellInstArray(bcell.cell_index(), pya.DTrans(XC0, YC0)))
+
+
+def bpin(name, i=0):
+    a = BP[name][i]
+    return XC0 + (a["x1"] + a["x2"]) / 2, YC0 + (a["y1"] + a["y2"]) / 2, a
+
+
+# channel assignment: biases leaving the cell's bottom edge on the lower tracks (sorted by their
+# target x, so the cell-pin drops and the track extensions do not meet), then those that come
+# round the corridor
+order = sorted(n_bot, key=lambda b: BIAS_TRACK[b].x) + sorted(n_top, key=lambda b: BIAS_TRACK[b].x)
+for i, b in enumerate(order):
+    Y_H[b] = Y_C1 + i * TP
+for j, b in enumerate(sorted(n_top, key=lambda b: bpin(b)[0])):
+    x0, y0, a = bpin(b)
+    yc2 = Y_C2 + j * TP
+    xcor = X_COR + j * TP
+    rect("m3", x0 - 0.2, YC0 + a["y1"], x0 + 0.2, yc2 + 0.2, b)        # up from the cell's top edge
+    via23(x0, yc2, b)
+    rect("m2", x0 - 0.2, yc2 - 0.2, xcor + 0.2, yc2 + 0.2, b)        # over the cell to the corridor
+    via23(xcor, yc2, b)
+    rect("m3", xcor - 0.2, Y_H[b] - 0.2, xcor + 0.2, yc2 + 0.2, b)   # down the corridor
+    via23(xcor, Y_H[b], b)
+    BP[b + "_src"] = xcor
+for b in n_bot:
+    x0, y0, a = bpin(b)
+    rect("m3", x0 - 0.2, Y_H[b] - 0.2, x0 + 0.2, YC0 + a["y2"], b)  # down from the cell's bottom edge
+    via23(x0, Y_H[b], b)
+    BP[b + "_src"] = x0
+for b in BIAS_TRACK:
+    t = BIAS_TRACK[b]
+    xs = BP[b + "_src"]
+    rect("m2", min(xs, t.x) - 0.2, Y_H[b] - 0.2, max(xs, t.x) + 0.2, Y_H[b] + 0.2, b)
+    via23(t.x, Y_H[b], b)
+    t.y_lo = t.y_min                                # no bottom pin any more: from the lowest tap ...
+    t.y_hi = Y_H[b]                                 # ... up to the channel
+# supplies of the cell: VDD (two pins) and VSS on its right edge -> channel C supply tracks
+for name, t in (("VDD", chC["VDD"]), ("VSS", chC["VSS"])):
+    for i in range(len(BP[name])):
+        if BP[name][i]["side"] != "right":
+            continue
+        x0, y0, a = bpin(name, i)
+        rect("m2", XC0 + a["x1"], y0 - 0.2, t.x + t.w / 2, y0 + 0.2, name)
+        via23(t.x, y0, name)
+        t.y_hi = max(t.y_hi, y0)
+# Iref: column L track from the bottom pin up to the cell's Iref pin (left edge)
+x0, y0, a = bpin("Iref")
+t = colL["Iref"]
+rect("m2", t.x - 0.2, y0 - 0.2, XC0 + a["x2"], y0 + 0.2, "Iref")
+via23(t.x, y0, "Iref")
+t.need(y0)
+CH = Y_C2 + len(n_top) * TP + EDGE
+
 # draw the global tracks
 for t in TRACKS:
     if t.net is None or t.y_hi is None:
@@ -400,10 +483,10 @@ for t in TRACKS:
     rect(t.layer, t.x - t.w / 2, lo - 0.25 if lo > 0 else 0.0, t.x + t.w / 2, t.y_hi + 0.25, t.net)
 
 # ------------------------------------------------------------------ pins (bottom edge; spike on its track's layer)
-PINS = (["VDD", "VSS", "Vb"] + ["w[%d]" % i for i in range(32)] + ["pulse[0]", "pulse[1]", "s[0]", "s[1]"]
-        + ["Vthr", "VT_dpi", "VT_inh"] + BIAS + ["spike[%d]" % i for i in range(5)])
+PINS = (["VDD", "VSS", "Iref"] + ["w[%d]" % i for i in range(32)] + ["pulse[0]", "pulse[1]", "s[0]", "s[1]"]
+        + ["VT"] + ["spike[%d]" % i for i in range(5)])
 for pn in PINS:
-    t = (colL[pn] if pn in ("VDD", "VSS", "Vb") else chC[pn] if pn.startswith("spike")
+    t = (colL[pn] if pn in ("VDD", "VSS", "Iref") else chC[pn] if pn.startswith("spike")
          else chA.get(pn) or chB.get(pn))
     assert t.y_lo is None and t.y_hi is not None, pn
     top.shapes(li[t.layer + "_lbl"]).insert(pya.DText(pn, pya.DTrans(t.x, 0.3)))

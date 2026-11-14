@@ -3,3 +3,4 @@
 *.vcd
 librelane/*/runs/
 librelane/*/run.log
+.venv-glayout/

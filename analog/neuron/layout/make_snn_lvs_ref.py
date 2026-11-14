@@ -25,7 +25,7 @@ def subckts(f):
 
 
 lib = {}
-for f in ("neuron_sized", "DPI", DAC, "DAC_signed", "DPI_inh"):
+for f in ("neuron_sized", "DPI", DAC, "DAC_signed", "DPI_inh", "bias_cell"):
     for k, v in subckts(f + "_lvs_ref.spice").items():
         assert k not in lib or lib[k] == v, k
         lib[k] = v
@@ -59,9 +59,12 @@ B = ["VNA", "Vlk", "VK", "VIp", "VKup", "VKdn", "Vamp_bias", "VT"]
 for u in range(5):
     L.append(inst("xneu%d" % u, "neuron_sized", {"VSS": "VSS", "VDD": "VDD", "VMEM": "VMEM_%d" % u,
                                                   "spike": "spike[%d]" % u, **{b: b for b in B}}))
-pins = (["VDD", "VSS", "Vb"] + ["w[%d]" % i for i in range(32)]
-        + ["pulse[0]", "pulse[1]", "s[0]", "s[1]", "Vthr", "VT_dpi", "VT_inh"] + B
-        + ["spike[%d]" % i for i in range(5)])
+# bias cell: every bias except VT comes from it (layout-only, see the header)
+L.append(inst("xbias", "bias_cell", {"VDD": "VDD", "VSS": "VSS", "Iref": "Iref", "Vb": "Vb", "Vthr": "Vthr",
+                                     "VT_dpi": "VT_dpi", "VT_inh": "VT_inh",
+                                     **{b: b for b in B if b != "VT"}}))
+pins = (["VDD", "VSS", "Iref"] + ["w[%d]" % i for i in range(32)]
+        + ["pulse[0]", "pulse[1]", "s[0]", "s[1]", "VT"] + ["spike[%d]" % i for i in range(5)])
 with open("SNN_lvs_ref.spice", "w") as f:
     f.write("* LVS reference for the SNN top-level layout (gen_snn.py), written by make_snn_lvs_ref.py.\n"
             "* Instances and nets as in analog/snn/snn_analog_inh.sch (xschem netlist), with these\n"
@@ -70,8 +73,10 @@ with open("SNN_lvs_ref.spice", "w") as f:
             "*   - every block is its layout cell; the subcircuits below are copied from the blocks'\n"
             "*     own LVS references (*_lvs_ref.spice: dummies, MIM caps, substrate / DNWELL ports)\n"
             "*   - the blocks' GND (DACs, DAC_signed, DPI_inh) and the substrate are the top-level VSS\n"
+            "*   - bias_cell (analog/neuron/bias_cell.sch) generates Vb, Vthr, VT_dpi, VT_inh, VNA, Vlk, VK, VIp,\n"
+            "*     VKup, VKdn and Vamp_bias from the pin Iref; these are no longer SNN pins (VT still is)\n"
             % (DAC, " (weights 1:2:4:8, not the schematic's 1:2:3:4 DAC.sym)" if DAC == "DAC_binary" else ""))
-    for k in ("neuron_sized", "DPI", DAC, "DAC_signed", "DPI_sized", "DPI_inh"):
+    for k in ("neuron_sized", "DPI", DAC, "DAC_signed", "DPI_sized", "DPI_inh", "bias_cell"):
         if k in lib:
             f.write("\n" + "".join(lib[k]))
     f.write("\n.subckt SNN " + " ".join(pins) + "\n" + "\n".join(L) + "\n.ends\n")

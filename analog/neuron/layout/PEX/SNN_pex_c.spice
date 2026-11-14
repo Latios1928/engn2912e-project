@@ -1,0 +1,2986 @@
+* NGSPICE file created from SNN.ext - technology: gf180mcuD
+
+X0 neuron_sized_0/a_8270_2214# neuron_sized_0/a_9750_6632# spike[4] VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X1 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.13584n ps=0.45369m w=1u l=1u
+X2 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.13954n ps=0.82992m w=0.22u l=0.28u
+X3 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X4 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X5 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X6 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X7 neuron_sized_0/a_4712_2292# bias_cell_0/Vamp_bias VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X8 neuron_sized_0/a_9750_6632# neuron_sized_0/a_4474_6632# neuron_sized_0/a_7550_2214# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X9 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X10 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X11 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X12 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X13 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X14 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X15 neuron_sized_0/a_4474_6632# neuron_sized_0/a_3704_6616# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X16 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X17 neuron_sized_0/a_5916_6554# bias_cell_0/VKup VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0.65p ps=3.3u w=1u l=1u
+X18 DPI_0/Isyn spike[4] neuron_sized_0/a_3430_2214# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=5u
+X19 DPI_0/Isyn neuron_sized_0/a_9750_6632# neuron_sized_0/a_2722_6554# VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X20 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X21 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X22 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X23 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X24 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X25 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X26 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X27 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X28 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X29 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X30 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X31 neuron_sized_0/a_4712_2292# DPI_0/Isyn neuron_sized_0/a_3704_6616# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X32 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X33 spike[4] VSS cap_mim_2f0_m4m5_noshield c_width=10u c_length=10u
+X34 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X35 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X36 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X37 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X38 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X39 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X40 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X41 neuron_sized_0/a_7550_2214# bias_cell_0/VIp VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=1u
+X42 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X43 neuron_sized_0/a_8270_2214# bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=1u
+X44 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X45 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X46 VDD neuron_sized_0/a_3704_6616# neuron_sized_0/a_3704_6616# VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X47 neuron_sized_0/a_5916_6554# neuron_sized_0/a_9750_6632# spike[4] VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X48 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X49 neuron_sized_0/a_2722_6554# bias_cell_0/VNA VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0.65p ps=3.3u w=1u l=1u
+X50 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X51 neuron_sized_0/a_4474_6632# VT neuron_sized_0/a_4712_2292# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X52 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X53 VDD VDD VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X54 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X55 DPI_0/Isyn bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=1u
+X56 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X57 neuron_sized_0/a_3430_2214# bias_cell_0/VK VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=1u
+X58 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X59 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=1u
+X60 DPI_0/Isyn VSS cap_mim_2f0_m4m5_noshield c_width=22.18u c_length=22.18u
+X61 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X62 VDD VDD VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0 ps=0 w=1u l=1u
+X63 neuron_sized_0/a_9750_6632# neuron_sized_0/a_4474_6632# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X64 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X65 neuron_sized_1/a_8270_2214# neuron_sized_1/a_9750_6632# spike[3] VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X66 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X67 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X68 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X69 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X70 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X71 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X72 neuron_sized_1/a_4712_2292# bias_cell_0/Vamp_bias VSS VSS nfet_03v3 ad=0.6042p pd=5.94u as=0 ps=0 w=0.22u l=0.28u
+X73 neuron_sized_1/a_9750_6632# neuron_sized_1/a_4474_6632# neuron_sized_1/a_7550_2214# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.8114p ps=5.2u w=0.22u l=0.28u
+X74 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X75 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X76 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X77 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X78 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X79 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X80 neuron_sized_1/a_4474_6632# neuron_sized_1/a_3704_6616# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X81 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X82 neuron_sized_1/a_5916_6554# bias_cell_0/VKup VDD VDD pfet_03v3 ad=0.8666p pd=5.36u as=0 ps=0 w=1u l=1u
+X83 DPI_1/Isyn spike[3] neuron_sized_1/a_3430_2214# VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.8114p ps=5.2u w=0.22u l=5u
+X84 DPI_1/Isyn neuron_sized_1/a_9750_6632# neuron_sized_1/a_2722_6554# VDD pfet_03v3 ad=0.4332p pd=4.12u as=0.8666p ps=5.36u w=0.22u l=0.28u
+X85 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X86 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X87 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X88 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X89 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X90 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X91 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X92 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X93 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X94 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X95 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X96 neuron_sized_1/a_4712_2292# DPI_1/Isyn neuron_sized_1/a_3704_6616# VSS nfet_03v3 ad=0 pd=0 as=0.2014p ps=1.98u w=0.22u l=0.28u
+X97 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X98 spike[3] VSS cap_mim_2f0_m4m5_noshield c_width=10u c_length=10u
+X99 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X100 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X101 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X102 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X103 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X104 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X105 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X106 neuron_sized_1/a_7550_2214# bias_cell_0/VIp VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X107 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X108 neuron_sized_1/a_8270_2214# bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X109 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X110 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X111 VDD neuron_sized_1/a_3704_6616# neuron_sized_1/a_3704_6616# VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X112 neuron_sized_1/a_5916_6554# neuron_sized_1/a_9750_6632# spike[3] VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X113 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X114 neuron_sized_1/a_2722_6554# bias_cell_0/VNA VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X115 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X116 neuron_sized_1/a_4474_6632# VT neuron_sized_1/a_4712_2292# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X117 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X118 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X119 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X120 DPI_1/Isyn bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X121 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X122 neuron_sized_1/a_3430_2214# bias_cell_0/VK VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X123 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X124 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X125 DPI_1/Isyn VSS cap_mim_2f0_m4m5_noshield c_width=22.18u c_length=22.18u
+X126 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X127 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X128 neuron_sized_1/a_9750_6632# neuron_sized_1/a_4474_6632# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X129 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X130 neuron_sized_2/a_8270_2214# neuron_sized_2/a_9750_6632# spike[2] VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X131 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X132 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X133 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X134 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X135 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X136 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X137 neuron_sized_2/a_4712_2292# bias_cell_0/Vamp_bias VSS VSS nfet_03v3 ad=0.6042p pd=5.94u as=0 ps=0 w=0.22u l=0.28u
+X138 neuron_sized_2/a_9750_6632# neuron_sized_2/a_4474_6632# neuron_sized_2/a_7550_2214# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.8114p ps=5.2u w=0.22u l=0.28u
+X139 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X140 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X141 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X142 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X143 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X144 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X145 neuron_sized_2/a_4474_6632# neuron_sized_2/a_3704_6616# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X146 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X147 neuron_sized_2/a_5916_6554# bias_cell_0/VKup VDD VDD pfet_03v3 ad=0.8666p pd=5.36u as=0 ps=0 w=1u l=1u
+X148 DPI_2/Isyn spike[2] neuron_sized_2/a_3430_2214# VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.8114p ps=5.2u w=0.22u l=5u
+X149 DPI_2/Isyn neuron_sized_2/a_9750_6632# neuron_sized_2/a_2722_6554# VDD pfet_03v3 ad=0.4332p pd=4.12u as=0.8666p ps=5.36u w=0.22u l=0.28u
+X150 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X151 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X152 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X153 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X154 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X155 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X156 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X157 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X158 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X159 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X160 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X161 neuron_sized_2/a_4712_2292# DPI_2/Isyn neuron_sized_2/a_3704_6616# VSS nfet_03v3 ad=0 pd=0 as=0.2014p ps=1.98u w=0.22u l=0.28u
+X162 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X163 spike[2] VSS cap_mim_2f0_m4m5_noshield c_width=10u c_length=10u
+X164 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X165 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X166 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X167 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X168 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X169 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X170 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X171 neuron_sized_2/a_7550_2214# bias_cell_0/VIp VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X172 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X173 neuron_sized_2/a_8270_2214# bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X174 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X175 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X176 VDD neuron_sized_2/a_3704_6616# neuron_sized_2/a_3704_6616# VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X177 neuron_sized_2/a_5916_6554# neuron_sized_2/a_9750_6632# spike[2] VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X178 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X179 neuron_sized_2/a_2722_6554# bias_cell_0/VNA VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X180 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X181 neuron_sized_2/a_4474_6632# VT neuron_sized_2/a_4712_2292# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X182 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X183 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X184 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X185 DPI_2/Isyn bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X186 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X187 neuron_sized_2/a_3430_2214# bias_cell_0/VK VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X188 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X189 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X190 DPI_2/Isyn VSS cap_mim_2f0_m4m5_noshield c_width=22.18u c_length=22.18u
+X191 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X192 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X193 neuron_sized_2/a_9750_6632# neuron_sized_2/a_4474_6632# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X194 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X195 neuron_sized_3/a_8270_2214# neuron_sized_3/a_9750_6632# spike[1] VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X196 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X197 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X198 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X199 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X200 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X201 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X202 neuron_sized_3/a_4712_2292# bias_cell_0/Vamp_bias VSS VSS nfet_03v3 ad=0.6042p pd=5.94u as=0 ps=0 w=0.22u l=0.28u
+X203 neuron_sized_3/a_9750_6632# neuron_sized_3/a_4474_6632# neuron_sized_3/a_7550_2214# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.8114p ps=5.2u w=0.22u l=0.28u
+X204 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X205 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X206 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X207 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X208 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X209 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X210 neuron_sized_3/a_4474_6632# neuron_sized_3/a_3704_6616# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X211 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X212 neuron_sized_3/a_5916_6554# bias_cell_0/VKup VDD VDD pfet_03v3 ad=0.8666p pd=5.36u as=0 ps=0 w=1u l=1u
+X213 DPI_3/Isyn spike[1] neuron_sized_3/a_3430_2214# VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.8114p ps=5.2u w=0.22u l=5u
+X214 DPI_3/Isyn neuron_sized_3/a_9750_6632# neuron_sized_3/a_2722_6554# VDD pfet_03v3 ad=0.4332p pd=4.12u as=0.8666p ps=5.36u w=0.22u l=0.28u
+X215 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X216 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X217 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X218 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X219 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X220 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X221 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X222 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X223 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X224 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X225 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X226 neuron_sized_3/a_4712_2292# DPI_3/Isyn neuron_sized_3/a_3704_6616# VSS nfet_03v3 ad=0 pd=0 as=0.2014p ps=1.98u w=0.22u l=0.28u
+X227 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X228 spike[1] VSS cap_mim_2f0_m4m5_noshield c_width=10u c_length=10u
+X229 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X230 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X231 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X232 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X233 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X234 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X235 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X236 neuron_sized_3/a_7550_2214# bias_cell_0/VIp VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X237 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X238 neuron_sized_3/a_8270_2214# bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X239 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X240 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X241 VDD neuron_sized_3/a_3704_6616# neuron_sized_3/a_3704_6616# VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X242 neuron_sized_3/a_5916_6554# neuron_sized_3/a_9750_6632# spike[1] VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X243 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X244 neuron_sized_3/a_2722_6554# bias_cell_0/VNA VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X245 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X246 neuron_sized_3/a_4474_6632# VT neuron_sized_3/a_4712_2292# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X247 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X248 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X249 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X250 DPI_3/Isyn bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X251 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X252 neuron_sized_3/a_3430_2214# bias_cell_0/VK VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X253 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X254 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X255 DPI_3/Isyn VSS cap_mim_2f0_m4m5_noshield c_width=22.18u c_length=22.18u
+X256 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X257 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X258 neuron_sized_3/a_9750_6632# neuron_sized_3/a_4474_6632# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X259 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X260 neuron_sized_4/a_8270_2214# neuron_sized_4/a_9750_6632# spike[0] VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X261 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X262 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X263 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X264 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X265 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X266 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X267 neuron_sized_4/a_4712_2292# bias_cell_0/Vamp_bias VSS VSS nfet_03v3 ad=0.6042p pd=5.94u as=0 ps=0 w=0.22u l=0.28u
+X268 neuron_sized_4/a_9750_6632# neuron_sized_4/a_4474_6632# neuron_sized_4/a_7550_2214# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.8114p ps=5.2u w=0.22u l=0.28u
+X269 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X270 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X271 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X272 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X273 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X274 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X275 neuron_sized_4/a_4474_6632# neuron_sized_4/a_3704_6616# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X276 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X277 neuron_sized_4/a_5916_6554# bias_cell_0/VKup VDD VDD pfet_03v3 ad=0.8666p pd=5.36u as=0 ps=0 w=1u l=1u
+X278 DPI_4/Isyn spike[0] neuron_sized_4/a_3430_2214# VSS nfet_03v3 ad=0.8114p pd=5.2u as=0.8114p ps=5.2u w=0.22u l=5u
+X279 DPI_4/Isyn neuron_sized_4/a_9750_6632# neuron_sized_4/a_2722_6554# VDD pfet_03v3 ad=0.4332p pd=4.12u as=0.8666p ps=5.36u w=0.22u l=0.28u
+X280 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X281 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X282 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X283 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X284 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X285 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X286 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X287 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X288 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X289 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X290 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X291 neuron_sized_4/a_4712_2292# DPI_4/Isyn neuron_sized_4/a_3704_6616# VSS nfet_03v3 ad=0 pd=0 as=0.2014p ps=1.98u w=0.22u l=0.28u
+X292 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X293 spike[0] VSS cap_mim_2f0_m4m5_noshield c_width=10u c_length=10u
+X294 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X295 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X296 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X297 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X298 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X299 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X300 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X301 neuron_sized_4/a_7550_2214# bias_cell_0/VIp VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X302 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X303 neuron_sized_4/a_8270_2214# bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X304 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X305 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X306 VDD neuron_sized_4/a_3704_6616# neuron_sized_4/a_3704_6616# VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X307 neuron_sized_4/a_5916_6554# neuron_sized_4/a_9750_6632# spike[0] VDD pfet_03v3 ad=0 pd=0 as=0.2166p ps=2.06u w=0.22u l=0.28u
+X308 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X309 neuron_sized_4/a_2722_6554# bias_cell_0/VNA VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X310 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X311 neuron_sized_4/a_4474_6632# VT neuron_sized_4/a_4712_2292# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X312 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X313 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X314 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X315 DPI_4/Isyn bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X316 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X317 neuron_sized_4/a_3430_2214# bias_cell_0/VK VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X318 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X319 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X320 DPI_4/Isyn VSS cap_mim_2f0_m4m5_noshield c_width=22.18u c_length=22.18u
+X321 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X322 VDD VDD VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=1u
+X323 neuron_sized_4/a_9750_6632# neuron_sized_4/a_4474_6632# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X324 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X325 VDD bias_cell_0/a_1044_1080# bias_cell_0/VK VDD pfet_03v3 ad=0.7315p pd=2.79u as=0.7315p ps=2.79u w=2.09u l=8u
+X326 bias_cell_0/VK bias_cell_0/VK VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=40u
+X327 bias_cell_0/Vlk bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X328 bias_cell_0/VKup Iref VSS VSS nfet_03v3 ad=3.66305p pd=13.23u as=3.66305p ps=13.23u w=6.005u l=8u
+X329 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X330 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X331 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X332 bias_cell_0/VKdn bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0.35p pd=1.7u as=0.61p ps=3.22u w=1u l=1u
+X333 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X334 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X335 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X336 VDD bias_cell_0/a_1044_1080# bias_cell_0/VK VDD pfet_03v3 ad=0.7315p pd=2.79u as=0.7315p ps=2.79u w=2.09u l=8u
+X337 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X338 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X339 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X340 VSS bias_cell_0/VKdn bias_cell_0/VKdn VSS nfet_03v3 ad=0.61p pd=3.22u as=0.35p ps=1.7u w=1u l=1u
+X341 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X342 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X343 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X344 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X345 VDD bias_cell_0/a_1044_1080# bias_cell_0/VKdn VDD pfet_03v3 ad=2.10275p pd=7.77u as=1.13225p ps=3.935u w=3.235u l=8u
+X346 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X347 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X348 bias_cell_0/VKdn bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=1.13225p pd=3.935u as=1.13225p ps=3.935u w=3.235u l=8u
+X349 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X350 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X351 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X352 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X353 bias_cell_0/Vamp_bias bias_cell_0/Vamp_bias VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X354 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X355 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X356 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X357 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X358 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X359 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X360 bias_cell_0/Vlk bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=0.546p pd=2.98u as=0.546p ps=2.98u w=0.84u l=16u
+X361 bias_cell_0/a_1044_1080# bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=1.75p pd=5.7u as=3.25p ps=11.3u w=5u l=8u
+X362 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X363 bias_cell_0/VNA Iref VSS VSS nfet_03v3 ad=3.51055p pd=12.73u as=3.51055p ps=12.73u w=5.755u l=8u
+X364 bias_cell_0/VKdn bias_cell_0/VKdn VSS VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X365 bias_cell_0/VIp bias_cell_0/VIp VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=1u
+X366 bias_cell_0/VNA bias_cell_0/VNA VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=20u
+X367 bias_cell_0/VK bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=1.3585p pd=5.48u as=0.7315p ps=2.79u w=2.09u l=8u
+X368 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X369 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X370 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X371 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X372 bias_cell_0/Vlk bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0.35p pd=1.7u as=0.61p ps=3.22u w=1u l=1u
+X373 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X374 bias_cell_0/Vamp_bias bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=1.5995p pd=5.27u as=2.9705p ps=10.44u w=4.57u l=8u
+X375 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X376 VDD bias_cell_0/a_1044_1080# bias_cell_0/Vamp_bias VDD pfet_03v3 ad=2.9705p pd=10.44u as=1.5995p ps=5.27u w=4.57u l=8u
+X377 DPI_4/VT Iref VSS VSS nfet_03v3 ad=0.71065p pd=3.55u as=0.71065p ps=3.55u w=1.165u l=32u
+X378 bias_cell_0/Vb bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=0.93275p pd=4.17u as=0.93275p ps=4.17u w=1.435u l=8u
+X379 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X380 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X381 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X382 bias_cell_0/a_1044_1080# Iref VSS VSS nfet_03v3 ad=1.75p pd=5.7u as=3.05p ps=11.22u w=5u l=8u
+X383 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X384 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X385 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X386 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X387 VSS bias_cell_0/Vlk bias_cell_0/Vlk VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X388 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X389 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X390 VDD DPI_4/Vthr DPI_4/Vthr VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X391 bias_cell_0/Vb bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=8u
+X392 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X393 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X394 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X395 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X396 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X397 DPI_inh_0/VT Iref VSS VSS nfet_03v3 ad=0.38125p pd=2.47u as=0.38125p ps=2.47u w=0.625u l=32u
+X398 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X399 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.572p pd=3.06u as=0.308p ps=1.58u w=0.88u l=1.12u
+X400 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X401 bias_cell_0/Vlk bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X402 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X403 bias_cell_0/VK bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=0.7315p pd=2.79u as=1.3585p ps=5.48u w=2.09u l=8u
+X404 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X405 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X406 VDD bias_cell_0/a_1044_1080# bias_cell_0/a_1044_1080# VDD pfet_03v3 ad=3.25p pd=11.3u as=1.75p ps=5.7u w=5u l=8u
+X407 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X408 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X409 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X410 VSS bias_cell_0/Vlk bias_cell_0/Vlk VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X411 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X412 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X413 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X414 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X415 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X416 bias_cell_0/VKdn bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=1.13225p pd=3.935u as=2.10275p ps=7.77u w=3.235u l=8u
+X417 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X418 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X419 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X420 bias_cell_0/VK bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=0.7315p pd=2.79u as=0.7315p ps=2.79u w=2.09u l=8u
+X421 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X422 bias_cell_0/Vlk bias_cell_0/Vlk VSS VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X423 VSS Iref bias_cell_0/a_1044_1080# VSS nfet_03v3 ad=3.05p pd=11.22u as=1.75p ps=5.7u w=5u l=8u
+X424 VDD DPI_inh_0/VT DPI_inh_0/VT VDD pfet_03v3 ad=0.308p pd=1.58u as=0.308p ps=1.58u w=0.88u l=1.12u
+X425 VSS bias_cell_0/Vlk bias_cell_0/Vlk VSS nfet_03v3 ad=0.61p pd=3.22u as=0.35p ps=1.7u w=1u l=1u
+X426 VDD bias_cell_0/a_1044_1080# bias_cell_0/VKdn VDD pfet_03v3 ad=1.13225p pd=3.935u as=1.13225p ps=3.935u w=3.235u l=8u
+X427 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X428 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X429 DPI_inh_0/VT DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.308p pd=1.58u as=0.572p ps=3.06u w=0.88u l=1.12u
+X430 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X431 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X432 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X433 Iref Iref VSS VSS nfet_03v3 ad=1.75p pd=5.7u as=3.05p ps=11.22u w=5u l=8u
+X434 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X435 VSS bias_cell_0/VKdn bias_cell_0/VKdn VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X436 VSS Iref Iref VSS nfet_03v3 ad=3.05p pd=11.22u as=1.75p ps=5.7u w=5u l=8u
+X437 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X438 bias_cell_0/VIp bias_cell_0/a_1044_1080# VDD VDD pfet_03v3 ad=1.51775p pd=5.97u as=1.51775p ps=5.97u w=2.335u l=8u
+X439 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X440 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X441 VSS bias_cell_0/Vlk bias_cell_0/Vlk VSS nfet_03v3 ad=0.35p pd=1.7u as=0.35p ps=1.7u w=1u l=1u
+X442 VDD DPI_4/VT DPI_4/VT VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X443 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X444 DPI_4/Vthr Iref VSS VSS nfet_03v3 ad=0.55205p pd=3.03u as=0.55205p ps=3.03u w=0.905u l=32u
+X445 bias_cell_0/VKup bias_cell_0/VKup VDD VDD pfet_03v3 ad=0.65p pd=3.3u as=0.65p ps=3.3u w=1u l=8u
+X446 DPI_4/VT DPI_4/VT VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X447 DPI_4/Vthr DPI_4/Vthr VDD VDD pfet_03v3 ad=0.1074p pd=1.08u as=0.1074p ps=1.08u w=0.22u l=0.28u
+X448 DPI_inh_0/DPI_sized_0/a_2368_1640# DPI_inh_0/VT VDD VDD pfet_03v3 ad=0.572p pd=3.06u as=0.572p ps=3.06u w=0.88u l=1.12u
+X449 VDD DPI_4/Vthr DPI_inh_0/Isum DPI_inh_0/Isum nfet_03v3 ad=0.5368p pd=2.98u as=0.5368p ps=2.98u w=0.88u l=1.12u
+X450 DPI_inh_0/DPI_sized_0/a_2368_1640# DPI_inh_0/DPI_sized_0/a_2368_1640# DPI_inh_0/Isum DPI_inh_0/Isum nfet_03v3 ad=0.5368p pd=2.98u as=0.5368p ps=2.98u w=0.88u l=1.12u
+X451 DPI_inh_0/DPI_sized_0/a_2368_1640# VDD cap_mim_2f0_m4m5_noshield c_width=22.36u c_length=22.36u
+X452 DPI_inh_0/DPI_sized_0/Isyn DPI_inh_0/DPI_sized_0/a_2368_1640# VDD VDD pfet_03v3 ad=0.572p pd=3.06u as=0.572p ps=3.06u w=0.88u l=1.12u
+X453 VSS VSS VSS VSS nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=8u
+X454 VSS DPI_inh_0/DPI_sized_0/Isyn DPI_0/Isyn VSS nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=8u
+X455 VSS VSS VSS VSS nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=8u
+X456 VSS DPI_inh_0/DPI_sized_0/Isyn DPI_inh_0/DPI_sized_0/Isyn VSS nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=8u
+X457 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X458 DAC_binary_0/a_2164_9252# w[22] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X459 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X460 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X461 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X462 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X463 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X464 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X465 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X466 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X467 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X468 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X469 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X470 DAC_binary_0/a_2164_9252# w[22] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X471 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X472 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X473 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X474 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X475 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X476 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X477 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X478 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X479 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X480 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X481 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X482 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X483 DAC_binary_0/a_2164_9252# w[21] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X484 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X485 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X486 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X487 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X488 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X489 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X490 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X491 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X492 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X493 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X494 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X495 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X496 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X497 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X498 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X499 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X500 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X501 DAC_binary_0/a_2164_9252# w[22] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X502 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X503 DAC_binary_0/a_2164_9252# w[21] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X504 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X505 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X506 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X507 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X508 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X509 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X510 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X511 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X512 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X513 DPI_1/Isum spike[1] DAC_binary_0/a_2164_9252# VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X514 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X515 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X516 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X517 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X518 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X519 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X520 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X521 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X522 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X523 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X524 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X525 DAC_binary_0/a_2164_9252# w[22] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X526 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X527 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X528 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X529 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X530 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X531 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X532 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X533 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X534 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X535 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X536 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X537 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X538 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X539 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X540 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X541 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X542 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X543 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X544 DAC_binary_0/a_2164_9252# w[20] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X545 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X546 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X547 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X548 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X549 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X550 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X551 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X552 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X553 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X554 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X555 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X556 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X557 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X558 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X559 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X560 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X561 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X562 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X563 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X564 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X565 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X566 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X567 VSS VSS VSS VSS nfet_03v3 ad=0.61p pd=3.22u as=0 ps=0 w=1u l=8u
+X568 VSS VSS VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X569 DAC_binary_0/a_2164_9252# w[23] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X570 VDD DPI_4/Vthr DPI_0/Isum DPI_0/Isum nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X571 DPI_0/Isyn DPI_0/a_2190_1804# VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X572 DPI_0/a_2190_1804# VDD cap_mim_2f0_m4m5_noshield c_width=22.36u c_length=22.36u
+X573 DPI_0/a_2190_1804# DPI_0/a_2190_1804# DPI_0/Isum DPI_0/Isum nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X574 DPI_0/a_2190_1804# DPI_4/VT VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.28u
+X575 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X576 DAC_binary_1/a_2164_9252# w[18] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X577 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X578 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X579 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X580 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X581 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X582 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X583 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X584 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X585 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X586 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X587 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X588 DAC_binary_1/a_2164_9252# w[18] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X589 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X590 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X591 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X592 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X593 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X594 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X595 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X596 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X597 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X598 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X599 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X600 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X601 DAC_binary_1/a_2164_9252# w[17] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X602 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X603 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X604 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X605 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X606 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X607 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X608 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X609 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X610 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X611 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X612 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X613 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X614 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X615 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X616 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X617 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X618 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X619 DAC_binary_1/a_2164_9252# w[18] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X620 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X621 DAC_binary_1/a_2164_9252# w[17] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X622 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X623 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X624 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X625 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X626 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X627 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X628 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X629 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X630 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X631 DPI_1/Isum spike[0] DAC_binary_1/a_2164_9252# VSS nfet_03v3 ad=0.8056p pd=7.92u as=0 ps=0 w=0.22u l=0.28u
+X632 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X633 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X634 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X635 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X636 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X637 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X638 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X639 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X640 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X641 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X642 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X643 DAC_binary_1/a_2164_9252# w[18] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X644 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X645 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X646 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X647 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X648 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X649 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X650 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X651 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X652 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X653 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X654 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X655 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X656 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X657 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X658 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X659 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X660 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X661 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X662 DAC_binary_1/a_2164_9252# w[16] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X663 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X664 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X665 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X666 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X667 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X668 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X669 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X670 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X671 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X672 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X673 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X674 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X675 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X676 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X677 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X678 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X679 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X680 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X681 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X682 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X683 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X684 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X685 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X686 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X687 DAC_binary_1/a_2164_9252# w[19] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X688 VDD DPI_4/Vthr DPI_1/Isum DPI_1/Isum nfet_03v3 ad=0.95836n pd=3.85617m as=0 ps=0 w=0.22u l=0.28u
+X689 DPI_1/Isyn DPI_1/a_2190_1804# VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X690 DPI_1/a_2190_1804# VDD cap_mim_2f0_m4m5_noshield c_width=22.36u c_length=22.36u
+X691 DPI_1/a_2190_1804# DPI_1/a_2190_1804# DPI_1/Isum DPI_1/Isum nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X692 DPI_1/a_2190_1804# DPI_4/VT VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X693 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X694 DAC_binary_2/a_2164_9252# w[14] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X695 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X696 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X697 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X698 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X699 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X700 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X701 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X702 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X703 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X704 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X705 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X706 DAC_binary_2/a_2164_9252# w[14] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X707 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X708 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X709 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X710 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X711 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X712 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X713 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X714 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X715 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X716 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X717 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X718 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X719 DAC_binary_2/a_2164_9252# w[13] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X720 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X721 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X722 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X723 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X724 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X725 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X726 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X727 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X728 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X729 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X730 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X731 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X732 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X733 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X734 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X735 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X736 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X737 DAC_binary_2/a_2164_9252# w[14] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X738 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X739 DAC_binary_2/a_2164_9252# w[13] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X740 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X741 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X742 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X743 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X744 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X745 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X746 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X747 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X748 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X749 DPI_2/Isum spike[1] DAC_binary_2/a_2164_9252# VSS nfet_03v3 ad=0.8056p pd=7.92u as=0 ps=0 w=0.22u l=0.28u
+X750 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X751 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X752 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X753 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X754 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X755 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X756 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X757 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X758 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X759 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X760 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X761 DAC_binary_2/a_2164_9252# w[14] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X762 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X763 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X764 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X765 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X766 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X767 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X768 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X769 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X770 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X771 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X772 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X773 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X774 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X775 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X776 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X777 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X778 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X779 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X780 DAC_binary_2/a_2164_9252# w[12] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X781 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X782 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X783 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X784 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X785 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X786 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X787 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X788 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X789 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X790 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X791 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X792 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X793 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X794 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X795 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X796 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X797 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X798 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X799 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X800 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X801 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X802 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X803 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X804 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X805 DAC_binary_2/a_2164_9252# w[15] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X806 VDD DPI_4/Vthr DPI_2/Isum DPI_2/Isum nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X807 DPI_2/Isyn DPI_2/a_2190_1804# VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X808 DPI_2/a_2190_1804# VDD cap_mim_2f0_m4m5_noshield c_width=22.36u c_length=22.36u
+X809 DPI_2/a_2190_1804# DPI_2/a_2190_1804# DPI_2/Isum DPI_2/Isum nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X810 DPI_2/a_2190_1804# DPI_4/VT VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X811 VDD DPI_4/Vthr DPI_3/Isum DPI_3/Isum nfet_03v3 ad=0 pd=0 as=0.6042p ps=5.94u w=0.22u l=0.28u
+X812 DPI_3/Isyn DPI_3/a_2190_1804# VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X813 DPI_3/a_2190_1804# VDD cap_mim_2f0_m4m5_noshield c_width=22.36u c_length=22.36u
+X814 DPI_3/a_2190_1804# DPI_3/a_2190_1804# DPI_3/Isum DPI_3/Isum nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X815 DPI_3/a_2190_1804# DPI_4/VT VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X816 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X817 DAC_binary_3/a_2164_9252# w[10] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X818 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X819 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X820 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X821 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X822 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X823 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X824 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X825 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X826 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X827 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X828 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X829 DAC_binary_3/a_2164_9252# w[10] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X830 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X831 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X832 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X833 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X834 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X835 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X836 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X837 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X838 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X839 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X840 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X841 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X842 DAC_binary_3/a_2164_9252# w[9] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X843 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X844 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X845 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X846 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X847 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X848 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X849 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X850 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X851 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X852 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X853 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X854 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X855 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X856 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X857 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X858 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X859 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X860 DAC_binary_3/a_2164_9252# w[10] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X861 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X862 DAC_binary_3/a_2164_9252# w[9] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X863 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X864 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X865 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X866 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X867 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X868 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X869 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X870 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X871 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X872 DPI_2/Isum spike[0] DAC_binary_3/a_2164_9252# VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X873 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X874 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X875 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X876 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X877 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X878 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X879 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X880 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X881 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X882 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X883 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X884 DAC_binary_3/a_2164_9252# w[10] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X885 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X886 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X887 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X888 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X889 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X890 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X891 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X892 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X893 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X894 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X895 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X896 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X897 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X898 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X899 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X900 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X901 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X902 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X903 DAC_binary_3/a_2164_9252# w[8] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X904 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X905 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X906 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X907 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X908 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X909 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X910 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X911 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X912 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X913 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X914 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X915 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X916 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X917 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X918 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X919 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X920 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X921 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X922 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X923 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X924 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X925 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X926 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X927 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X928 DAC_binary_3/a_2164_9252# w[11] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X929 VDD DPI_4/Vthr DPI_4/Isum DPI_4/Isum nfet_03v3 ad=0 pd=0 as=0.6042p ps=5.94u w=0.22u l=0.28u
+X930 DPI_4/Isyn DPI_4/a_2190_1804# VDD VDD pfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X931 DPI_4/a_2190_1804# VDD cap_mim_2f0_m4m5_noshield c_width=22.36u c_length=22.36u
+X932 DPI_4/a_2190_1804# DPI_4/a_2190_1804# DPI_4/Isum DPI_4/Isum nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X933 DPI_4/a_2190_1804# DPI_4/VT VDD VDD pfet_03v3 ad=0.2166p pd=2.06u as=0 ps=0 w=0.22u l=0.28u
+X934 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X935 DAC_binary_4/a_2164_9252# w[6] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X936 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X937 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X938 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X939 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X940 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X941 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X942 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X943 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X944 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X945 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X946 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X947 DAC_binary_4/a_2164_9252# w[6] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X948 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X949 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X950 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X951 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X952 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X953 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X954 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X955 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X956 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X957 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X958 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X959 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X960 DAC_binary_4/a_2164_9252# w[5] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X961 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X962 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X963 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X964 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X965 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X966 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X967 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X968 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X969 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X970 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X971 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X972 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X973 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X974 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X975 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X976 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X977 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X978 DAC_binary_4/a_2164_9252# w[6] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X979 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X980 DAC_binary_4/a_2164_9252# w[5] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X981 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X982 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X983 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X984 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X985 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X986 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X987 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X988 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X989 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X990 DPI_3/Isum pulse[1] DAC_binary_4/a_2164_9252# VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X991 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X992 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X993 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X994 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X995 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X996 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X997 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X998 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X999 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1000 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1001 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1002 DAC_binary_4/a_2164_9252# w[6] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1003 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1004 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1005 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1006 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1007 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1008 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1009 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1010 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1011 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1012 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1013 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1014 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1015 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1016 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1017 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1018 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1019 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1020 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1021 DAC_binary_4/a_2164_9252# w[4] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1022 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1023 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1024 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1025 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1026 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1027 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1028 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1029 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1030 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1031 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1032 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1033 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1034 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1035 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1036 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1037 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1038 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1039 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1040 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1041 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1042 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1043 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1044 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1045 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1046 DAC_binary_4/a_2164_9252# w[7] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1047 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1048 DAC_binary_5/a_2164_9252# w[2] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X1049 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1050 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1051 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1052 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1053 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1054 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1055 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1056 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1057 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1058 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1059 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1060 DAC_binary_5/a_2164_9252# w[2] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1061 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1062 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1063 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1064 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1065 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1066 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1067 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1068 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1069 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1070 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1071 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1072 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1073 DAC_binary_5/a_2164_9252# w[1] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1074 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1075 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1076 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1077 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1078 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1079 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1080 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1081 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1082 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1083 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1084 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1085 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1086 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1087 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1088 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1089 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1090 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1091 DAC_binary_5/a_2164_9252# w[2] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1092 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1093 DAC_binary_5/a_2164_9252# w[1] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1094 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1095 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1096 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1097 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1098 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1099 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1100 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1101 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1102 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1103 DPI_4/Isum pulse[0] DAC_binary_5/a_2164_9252# VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1104 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1105 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1106 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1107 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1108 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1109 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1110 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1111 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1112 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1113 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1114 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1115 DAC_binary_5/a_2164_9252# w[2] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1116 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1117 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1118 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1119 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1120 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1121 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1122 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1123 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1124 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1125 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1126 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1127 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1128 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1129 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1130 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1131 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1132 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1133 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1134 DAC_binary_5/a_2164_9252# w[0] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1135 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1136 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1137 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1138 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1139 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1140 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1141 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1142 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1143 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1144 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1145 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1146 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1147 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1148 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1149 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1150 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1151 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1152 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1153 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1154 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1155 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1156 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1157 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1158 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1159 DAC_binary_5/a_2164_9252# w[3] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1160 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1161 DAC_signed_0/DAC_binary_0/a_2164_9252# w[30] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X1162 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1163 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1164 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1165 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1166 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1167 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1168 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1169 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1170 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1171 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1172 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1173 DAC_signed_0/DAC_binary_0/a_2164_9252# w[30] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1174 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1175 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1176 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1177 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1178 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1179 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1180 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1181 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1182 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1183 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1184 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1185 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1186 DAC_signed_0/DAC_binary_0/a_2164_9252# w[29] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1187 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1188 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1189 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1190 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1191 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1192 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1193 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1194 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1195 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1196 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1197 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1198 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1199 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1200 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1201 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1202 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1203 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1204 DAC_signed_0/DAC_binary_0/a_2164_9252# w[30] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1205 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1206 DAC_signed_0/DAC_binary_0/a_2164_9252# w[29] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1207 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1208 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1209 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1210 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1211 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1212 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1213 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1214 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1215 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1216 DAC_signed_0/DAC_binary_0/Isum spike[3] DAC_signed_0/DAC_binary_0/a_2164_9252# VSS nfet_03v3 ad=0.6042p pd=5.94u as=0 ps=0 w=0.22u l=0.28u
+X1217 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1218 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1219 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1220 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1221 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1222 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1223 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1224 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1225 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1226 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1227 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1228 DAC_signed_0/DAC_binary_0/a_2164_9252# w[30] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1229 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1230 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1231 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1232 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1233 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1234 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1235 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1236 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1237 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1238 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1239 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1240 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1241 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1242 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1243 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1244 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1245 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1246 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1247 DAC_signed_0/DAC_binary_0/a_2164_9252# w[28] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1248 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1249 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1250 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1251 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1252 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1253 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1254 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1255 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1256 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1257 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1258 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1259 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1260 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1261 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1262 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1263 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1264 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1265 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1266 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1267 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1268 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1269 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1270 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1271 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1272 DAC_signed_0/DAC_binary_0/a_2164_9252# w[31] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1273 DAC_signed_0/DAC_binary_0/Isum s[1] DPI_inh_0/Isum VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X1274 DPI_0/Isum DAC_signed_0/a_894_1366# DAC_signed_0/DAC_binary_0/Isum VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X1275 DAC_signed_0/a_894_1366# s[1] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0.2014p ps=1.98u w=0.22u l=0.28u
+X1276 DAC_signed_0/a_894_1366# s[1] VDD VDD pfet_03v3 ad=0.286p pd=2.18u as=0.286p ps=2.18u w=0.44u l=0.28u
+X1277 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1278 DAC_signed_1/DAC_binary_0/a_2164_9252# w[26] VSS VSS nfet_03v3 ad=3.2224p pd=31.68u as=0 ps=0 w=0.22u l=0.28u
+X1279 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1280 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1281 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1282 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1283 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1284 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1285 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1286 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1287 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1288 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1289 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1290 DAC_signed_1/DAC_binary_0/a_2164_9252# w[26] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1291 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1292 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1293 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1294 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1295 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1296 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1297 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1298 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1299 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1300 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1301 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1302 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1303 DAC_signed_1/DAC_binary_0/a_2164_9252# w[25] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1304 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1305 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1306 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1307 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1308 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1309 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1310 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1311 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1312 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1313 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1314 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1315 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1316 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1317 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1318 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1319 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1320 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1321 DAC_signed_1/DAC_binary_0/a_2164_9252# w[26] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1322 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1323 DAC_signed_1/DAC_binary_0/a_2164_9252# w[25] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1324 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1325 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1326 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1327 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1328 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1329 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1330 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1331 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1332 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1333 DAC_signed_1/DAC_binary_0/Isum spike[2] DAC_signed_1/DAC_binary_0/a_2164_9252# VSS nfet_03v3 ad=0.6042p pd=5.94u as=0 ps=0 w=0.22u l=0.28u
+X1334 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1335 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1336 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1337 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1338 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1339 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1340 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1341 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1342 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1343 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1344 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1345 DAC_signed_1/DAC_binary_0/a_2164_9252# w[26] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1346 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1347 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1348 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1349 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1350 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1351 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1352 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1353 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1354 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1355 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1356 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1357 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1358 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1359 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1360 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1361 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1362 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1363 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1364 DAC_signed_1/DAC_binary_0/a_2164_9252# w[24] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1365 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1366 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1367 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1368 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1369 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1370 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1371 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1372 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1373 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1374 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1375 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1376 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1377 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1378 VSS bias_cell_0/Vb VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1379 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1380 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1381 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1382 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1383 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1384 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1385 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1386 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1387 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=1u l=8u
+X1388 VSS VSS VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1389 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] VSS VSS nfet_03v3 ad=0 pd=0 as=0 ps=0 w=0.22u l=0.28u
+X1390 DAC_signed_1/DAC_binary_0/Isum s[0] DPI_inh_0/Isum VSS nfet_03v3 ad=0 pd=0 as=1.4764p ps=9.92u w=0.22u l=0.28u
+X1391 DPI_0/Isum DAC_signed_1/a_894_1366# DAC_signed_1/DAC_binary_0/Isum VSS nfet_03v3 ad=0.8056p pd=7.92u as=0 ps=0 w=0.22u l=0.28u
+X1392 DAC_signed_1/a_894_1366# s[0] VSS VSS nfet_03v3 ad=0.2014p pd=1.98u as=0 ps=0 w=0.22u l=0.28u
+X1393 DAC_signed_1/a_894_1366# s[0] VDD VDD pfet_03v3 ad=0.286p pd=2.18u as=0 ps=0 w=0.44u l=0.28u
+C0 DPI_inh_0/VT bias_cell_0/VKup 0.05593f
+C1 DPI_inh_0/DPI_sized_0/Isyn bias_cell_0/VNA 0.00499f
+C2 bias_cell_0/VNA w[28] 0
+C3 neuron_sized_2/a_8270_2214# bias_cell_0/Vamp_bias 0
+C4 DPI_4/Isum spike[3] 0.10174f
+C5 bias_cell_0/VK bias_cell_0/VKdn 0.25937f
+C6 w[13] w[16] 0
+C7 w[16] DPI_2/Isum 0.09558f
+C8 neuron_sized_3/a_9750_6632# DPI_3/Isyn 0.03443f
+C9 neuron_sized_1/a_2722_6554# bias_cell_0/VNA 0.49118f
+C10 spike[4] neuron_sized_0/a_2722_6554# 0.14379f
+C11 s[1] spike[1] 0.66616f
+C12 DPI_3/Isum w[27] 0.04779f
+C13 neuron_sized_3/a_9750_6632# neuron_sized_3/a_3430_2214# 0.0934f
+C14 DPI_4/Vthr DPI_inh_0/VT 0.36878f
+C15 w[25] spike[1] 0.2497f
+C16 VDD DPI_inh_0/DPI_sized_0/a_2368_1640# 7.70171f
+C17 DPI_0/Isum w[26] 0.03824f
+C18 w[6] DPI_3/Isum 0.04784f
+C19 neuron_sized_1/a_9750_6632# neuron_sized_1/a_5916_6554# 0.43603f
+C20 neuron_sized_1/a_3430_2214# neuron_sized_1/a_4474_6632# 0.09251f
+C21 neuron_sized_0/a_2722_6554# neuron_sized_0/a_9750_6632# 0.39394f
+C22 VDD neuron_sized_0/a_2722_6554# 2.21359f
+C23 pulse[1] w[29] 0.04779f
+C24 w[14] w[10] 0
+C25 spike[2] w[30] 0.04797f
+C26 w[26] w[29] 0
+C27 VT DPI_3/Isyn 0.39927f
+C28 pulse[1] w[9] 0.04779f
+C29 VDD s[1] 0.35234f
+C30 w[18] w[27] 0
+C31 neuron_sized_3/a_7550_2214# neuron_sized_3/a_8270_2214# 0.81727f
+C32 neuron_sized_4/a_5916_6554# bias_cell_0/Vamp_bias 0
+C33 neuron_sized_3/a_3430_2214# VT 0.15694f
+C34 neuron_sized_1/a_8270_2214# spike[3] 0.14308f
+C35 bias_cell_0/VKup w[29] 0
+C36 bias_cell_0/VNA w[30] 0.01794f
+C37 bias_cell_0/Vlk DPI_3/Isyn 0.40379f
+C38 neuron_sized_1/a_2722_6554# neuron_sized_1/a_3430_2214# 0
+C39 VDD w[25] 0.10128f
+C40 spike[2] DPI_4/a_2190_1804# 0.01983f
+C41 DPI_0/Isum DPI_4/Vthr 1.08047f
+C42 neuron_sized_3/a_3430_2214# bias_cell_0/Vlk 0.00509f
+C43 neuron_sized_2/a_4712_2292# bias_cell_0/VKdn 0
+C44 neuron_sized_2/a_4474_6632# bias_cell_0/Vamp_bias 0.13368f
+C45 w[31] spike[1] 1.02673f
+C46 DPI_4/Isyn DPI_4/VT 0
+C47 Iref DPI_4/VT 0.6935f
+C48 neuron_sized_1/a_4712_2292# spike[3] 0.11297f
+C49 w[0] pulse[0] 0.54687f
+C50 neuron_sized_2/a_3704_6616# bias_cell_0/VKdn 0.11969f
+C51 w[10] w[16] 0
+C52 w[9] w[17] 0
+C53 DPI_4/Isum spike[1] 0.07092f
+C54 DPI_4/Vthr w[29] 0.00868f
+C55 neuron_sized_3/a_8270_2214# neuron_sized_3/a_5916_6554# 0
+C56 neuron_sized_3/a_7550_2214# bias_cell_0/VKdn 0.22172f
+C57 DPI_4/Isum w[8] 0.04779f
+C58 bias_cell_0/VNA bias_cell_0/a_1044_1080# 0.01697f
+C59 VDD DPI_1/Isyn 5.90387f
+C60 s[0] spike[2] 16.3132f
+C61 DPI_inh_0/Isum DPI_inh_0/DPI_sized_0/a_2368_1640# 0.92125f
+C62 w[3] w[4] 5.16772f
+C63 VDD w[31] 0.10124f
+C64 w[2] w[5] 0
+C65 spike[0] DPI_3/Isum 0.06677f
+C66 neuron_sized_0/a_2722_6554# bias_cell_0/Vamp_bias 0.00149f
+C67 VDD DPI_4/Isum 0.11437f
+C68 neuron_sized_1/a_4474_6632# spike[3] 0.34277f
+C69 w[20] w[29] 0
+C70 bias_cell_0/VNA neuron_sized_4/a_2722_6554# 0.49118f
+C71 s[1] DPI_inh_0/Isum 2.88492f
+C72 spike[3] DPI_2/Isum 0.22581f
+C73 neuron_sized_3/a_5916_6554# bias_cell_0/VKdn 0
+C74 spike[3] w[28] 2.90662f
+C75 neuron_sized_2/a_2722_6554# bias_cell_0/VKdn 3.14096f
+C76 w[15] w[12] 0.00194f
+C77 w[25] DPI_inh_0/Isum 0.02869f
+C78 w[18] spike[0] 0.11018f
+C79 neuron_sized_3/a_8270_2214# neuron_sized_3/a_4474_6632# 0.04671f
+C80 neuron_sized_3/a_3704_6616# bias_cell_0/VKup 0.1559f
+C81 neuron_sized_1/a_2722_6554# spike[3] 0.14379f
+C82 DPI_1/Isum w[27] 0.09558f
+C83 neuron_sized_3/a_4712_2292# bias_cell_0/VKdn 0
+C84 w[15] w[19] 0
+C85 pulse[1] w[14] 0.04779f
+C86 VDD DPI_2/a_2190_1804# 7.49484f
+C87 bias_cell_0/VIp bias_cell_0/VK 44.36963f
+C88 VT bias_cell_0/Vlk 0.2952f
+C89 DAC_binary_3/a_2164_9252# w[9] 0.01696f
+C90 neuron_sized_0/a_4712_2292# bias_cell_0/VKup 0
+C91 pulse[1] spike[2] 3.12016f
+C92 DPI_2/Isyn DPI_4/VT 0
+C93 DPI_4/Isyn VT 0.47142f
+C94 VDD neuron_sized_1/a_8270_2214# 0.00102f
+C95 DAC_signed_1/DAC_binary_0/a_2164_9252# w[24] 0.00729f
+C96 spike[2] w[26] 0.06245f
+C97 w[2] w[10] 0
+C98 w[3] w[9] 0
+C99 w[4] w[11] 0
+C100 s[0] DAC_signed_1/a_894_1366# 0.72184f
+C101 DPI_4/Isyn bias_cell_0/Vlk 0.35388f
+C102 DPI_1/Isyn bias_cell_0/Vamp_bias 0.24174f
+C103 w[31] DPI_inh_0/Isum 0.08127f
+C104 neuron_sized_3/a_4474_6632# bias_cell_0/VKdn 0.05334f
+C105 spike[2] bias_cell_0/VKup 0.01309f
+C106 w[31] bias_cell_0/Vamp_bias 0.04058f
+C107 w[27] w[24] 0.00194f
+C108 Iref bias_cell_0/Vlk 0.05154f
+C109 DPI_0/Isyn bias_cell_0/VK 0.37176f
+C110 w[14] w[17] 0
+C111 pulse[1] w[16] 0.04779f
+C112 VDD neuron_sized_1/a_4712_2292# 0
+C113 spike[3] w[30] 0.11582f
+C114 neuron_sized_3/a_2722_6554# bias_cell_0/VKup 0.15534f
+C115 bias_cell_0/VNA bias_cell_0/VKup 11.81211f
+C116 w[26] w[16] 0
+C117 DAC_binary_0/a_2164_9252# spike[1] 0.00826f
+C118 VDD neuron_sized_2/a_3430_2214# 0
+C119 pulse[0] w[27] 0.04779f
+C120 w[13] spike[1] 0.39304f
+C121 neuron_sized_0/a_4474_6632# bias_cell_0/VKup 0.13361f
+C122 spike[2] DPI_4/Vthr 0
+C123 spike[1] DPI_2/Isum 0.1792f
+C124 spike[3] DPI_4/a_2190_1804# 0.1436f
+C125 neuron_sized_0/a_5916_6554# bias_cell_0/VKup 0.35765f
+C126 spike[1] w[28] 0.37996f
+C127 neuron_sized_2/a_4712_2292# bias_cell_0/VIp 0.15156f
+C128 DPI_4/Vthr bias_cell_0/VNA 0.78386f
+C129 w[8] w[13] 0
+C130 w[8] DPI_2/Isum 0.06067f
+C131 VDD neuron_sized_2/a_5916_6554# 3.99075f
+C132 neuron_sized_1/a_7550_2214# neuron_sized_1/a_3430_2214# 1.21169f
+C133 pulse[0] w[6] 0.04779f
+C134 w[16] w[17] 24.90055f
+C135 w[8] w[5] 0
+C136 neuron_sized_2/a_3704_6616# bias_cell_0/VIp 0.11998f
+C137 neuron_sized_0/a_7550_2214# bias_cell_0/VKdn 0.22172f
+C138 w[18] DPI_3/Isum 0.04779f
+C139 w[7] w[12] 0
+C140 DAC_signed_1/DAC_binary_0/Isum w[24] 0
+C141 VDD neuron_sized_1/a_4474_6632# 4.15363f
+C142 w[15] w[23] 0
+C143 w[14] w[20] 0
+C144 DPI_1/Isum spike[0] 0.07311f
+C145 w[15] w[21] 0
+C146 VDD w[13] 0.10124f
+C147 w[9] w[11] 1.52393f
+C148 neuron_sized_3/a_7550_2214# bias_cell_0/VIp 0.26988f
+C149 neuron_sized_1/a_3430_2214# bias_cell_0/VKup 0
+C150 neuron_sized_1/a_3704_6616# bias_cell_0/VNA 0
+C151 VDD DPI_2/Isum 0.11203f
+C152 VDD DPI_inh_0/DPI_sized_0/Isyn 0.4276f
+C153 VDD w[28] 0.10124f
+C154 s[0] spike[3] 2.14979f
+C155 neuron_sized_1/a_8270_2214# bias_cell_0/Vamp_bias 0
+C156 VDD w[5] 0.10124f
+C157 neuron_sized_0/a_3430_2214# bias_cell_0/VKdn 0.04997f
+C158 VDD neuron_sized_1/a_2722_6554# 2.21359f
+C159 w[12] w[22] 0
+C160 DPI_2/Isyn VT 0.39927f
+C161 neuron_sized_1/a_3430_2214# neuron_sized_1/a_5916_6554# 0
+C162 spike[1] w[30] 0.56366f
+C163 neuron_sized_1/a_4712_2292# bias_cell_0/Vamp_bias 0.67458f
+C164 spike[0] w[24] 0.14479f
+C165 w[16] w[20] 0
+C166 w[19] w[22] 0
+C167 DPI_2/Isyn bias_cell_0/Vlk 0.40379f
+C168 DPI_0/a_2190_1804# DPI_4/VT 1.57349f
+C169 neuron_sized_3/a_5916_6554# bias_cell_0/VIp 0
+C170 neuron_sized_2/a_3430_2214# bias_cell_0/Vamp_bias 0.04253f
+C171 neuron_sized_2/a_2722_6554# bias_cell_0/VIp 0.0031f
+C172 w[0] w[4] 0
+C173 bias_cell_0/VKdn bias_cell_0/Vb 0.24596f
+C174 DPI_4/a_2190_1804# spike[1] 0.02073f
+C175 neuron_sized_1/a_3704_6616# neuron_sized_1/a_3430_2214# 0.61849f
+C176 DPI_1/Isum DPI_1/a_2190_1804# 0.65893f
+C177 w[8] w[10] 0.73399f
+C178 pulse[0] spike[0] 0.08827f
+C179 neuron_sized_3/a_4712_2292# bias_cell_0/VIp 0.15156f
+C180 neuron_sized_0/a_3704_6616# bias_cell_0/VKdn 0.11969f
+C181 pulse[0] DAC_binary_5/a_2164_9252# 0.00826f
+C182 neuron_sized_2/a_7550_2214# bias_cell_0/VKdn 0.22172f
+C183 neuron_sized_2/a_5916_6554# bias_cell_0/Vamp_bias 0
+C184 VDD w[30] 0.10124f
+C185 pulse[1] spike[3] 0
+C186 neuron_sized_1/a_7550_2214# spike[3] 0.05233f
+C187 neuron_sized_1/a_4474_6632# bias_cell_0/Vamp_bias 0.13368f
+C188 VDD w[10] 0.10161f
+C189 DPI_inh_0/Isum w[28] 0.07015f
+C190 w[25] w[15] 0
+C191 VDD DPI_4/a_2190_1804# 7.53972f
+C192 DPI_inh_0/Isum DPI_inh_0/DPI_sized_0/Isyn 0.00235f
+C193 s[0] spike[1] 0.86828f
+C194 spike[3] bias_cell_0/VKup 0.01309f
+C195 neuron_sized_3/a_4474_6632# bias_cell_0/VIp 0.05738f
+C196 DPI_inh_0/DPI_sized_0/a_2368_1640# DPI_4/VT 0.07818f
+C197 w[1] DPI_4/Isum 0.04814f
+C198 neuron_sized_1/a_2722_6554# bias_cell_0/Vamp_bias 0.00149f
+C199 w[14] w[11] 0
+C200 VDD bias_cell_0/a_1044_1080# 36.0299f
+C201 DPI_4/Vthr spike[3] 0.24415f
+C202 w[0] w[9] 0
+C203 DPI_4/Isyn neuron_sized_4/a_9750_6632# 0.03443f
+C204 neuron_sized_1/a_5916_6554# spike[3] 0.16612f
+C205 s[1] DPI_4/VT 0.00125f
+C206 bias_cell_0/VNA neuron_sized_4/a_3704_6616# 0
+C207 VDD s[0] 0.33244f
+C208 DPI_1/Isum w[18] 0.04784f
+C209 w[22] w[23] 30.11439f
+C210 w[21] w[22] 29.84196f
+C211 DPI_3/Isum w[24] 0.04779f
+C212 VDD neuron_sized_4/a_2722_6554# 2.21359f
+C213 VDD neuron_sized_4/a_4712_2292# 0
+C214 neuron_sized_1/a_3704_6616# spike[3] 0.00157f
+C215 neuron_sized_0/a_7550_2214# bias_cell_0/VIp 0.26988f
+C216 DPI_4/Isum w[15] 0.04779f
+C217 w[16] w[11] 0
+C218 DPI_inh_0/Isum w[30] 0.05737f
+C219 bias_cell_0/Vamp_bias w[30] 0
+C220 pulse[1] spike[1] 0.59747f
+C221 VDD neuron_sized_4/a_8270_2214# 0.00102f
+C222 w[26] spike[1] 0.28156f
+C223 neuron_sized_2/a_4474_6632# VT 0.24678f
+C224 w[18] w[24] 0
+C225 pulse[1] w[8] 0.04779f
+C226 w[2] w[3] 6.03386f
+C227 neuron_sized_0/a_3430_2214# bias_cell_0/VIp 0.08414f
+C228 bias_cell_0/VKup spike[1] 0.01309f
+C229 DPI_4/Isyn neuron_sized_4/a_5916_6554# 0.01577f
+C230 DPI_1/Isyn DPI_4/VT 0
+C231 DPI_0/Isyn neuron_sized_0/a_7550_2214# 0.01311f
+C232 w[31] DPI_4/VT 0
+C233 spike[4] bias_cell_0/VKup 0.01309f
+C234 VDD pulse[1] 0.1464f
+C235 w[17] spike[1] 0.04779f
+C236 pulse[0] w[18] 0.04779f
+C237 neuron_sized_2/a_3704_6616# bias_cell_0/VK 0.02735f
+C238 VDD neuron_sized_1/a_7550_2214# 0
+C239 DPI_4/Isum DPI_4/VT 0.02996f
+C240 bias_cell_0/a_1044_1080# bias_cell_0/Vamp_bias 0.77275f
+C241 VDD neuron_sized_4/a_3430_2214# 0
+C242 w[12] w[19] 0
+C243 VDD w[26] 0.10171f
+C244 DPI_4/Vthr spike[1] 0.2223f
+C245 w[8] w[17] 0
+C246 w[6] w[4] 0.73399f
+C247 DPI_0/Isyn neuron_sized_0/a_3430_2214# 0.27007f
+C248 bias_cell_0/VIp bias_cell_0/Vb 0.11336f
+C249 s[0] DPI_inh_0/Isum 2.77765f
+C250 VDD neuron_sized_4/a_7550_2214# 0
+C251 VDD bias_cell_0/VKup 12.79776f
+C252 neuron_sized_0/a_2722_6554# VT 0
+C253 neuron_sized_0/a_3704_6616# bias_cell_0/VIp 0.11998f
+C254 w[25] w[22] 0
+C255 neuron_sized_4/a_2722_6554# bias_cell_0/Vamp_bias 0.00149f
+C256 neuron_sized_2/a_7550_2214# bias_cell_0/VIp 0.26988f
+C257 w[19] DAC_binary_1/a_2164_9252# 0.06768f
+C258 DPI_2/Isyn neuron_sized_2/a_8270_2214# 0.01311f
+C259 DPI_0/Isum w[27] 0.03824f
+C260 neuron_sized_4/a_4712_2292# bias_cell_0/Vamp_bias 0.67458f
+C261 VDD w[17] 0.10127f
+C262 DPI_2/a_2190_1804# DPI_4/VT 1.57349f
+C263 neuron_sized_0/a_8270_2214# bias_cell_0/VKdn 0.30387f
+C264 w[1] w[5] 0
+C265 VDD DPI_4/Vthr 15.03624f
+C266 neuron_sized_4/a_8270_2214# bias_cell_0/Vamp_bias 0
+C267 neuron_sized_3/a_3704_6616# bias_cell_0/VKdn 0.11969f
+C268 VDD neuron_sized_1/a_5916_6554# 3.99075f
+C269 w[2] w[11] 0
+C270 w[27] w[29] 0.00119f
+C271 w[20] spike[1] 1.74087f
+C272 DAC_binary_4/a_2164_9252# w[5] 0.01696f
+C273 neuron_sized_2/a_2722_6554# bias_cell_0/VK 0
+C274 neuron_sized_3/a_2722_6554# neuron_sized_3/a_8270_2214# 0.06007f
+C275 DPI_0/Isyn neuron_sized_0/a_3704_6616# 1.43869f
+C276 DPI_4/Isum w[7] 0.04779f
+C277 neuron_sized_2/a_4712_2292# neuron_sized_2/a_3704_6616# 0.12841f
+C278 neuron_sized_0/a_4712_2292# bias_cell_0/VKdn 0
+C279 VDD neuron_sized_1/a_3704_6616# 1.58946f
+C280 w[31] w[22] 0
+C281 DPI_1/Isum w[24] 0.09558f
+C282 DPI_2/Isyn neuron_sized_2/a_9750_6632# 0.03443f
+C283 w[6] w[9] 0
+C284 DPI_0/Isum DAC_signed_1/DAC_binary_0/Isum 0.0791f
+C285 neuron_sized_1/a_7550_2214# bias_cell_0/Vamp_bias 0
+C286 DPI_4/Isum w[22] 0.04779f
+C287 VDD w[20] 0.10124f
+C288 w[13] w[15] 1.52393f
+C289 neuron_sized_4/a_3430_2214# bias_cell_0/Vamp_bias 0.04253f
+C290 w[15] DPI_2/Isum 0.09558f
+C291 w[26] DPI_inh_0/Isum 0.02869f
+C292 spike[2] bias_cell_0/VKdn 0.11443f
+C293 DPI_1/Isyn VT 0.39927f
+C294 w[8] DAC_binary_3/a_2164_9252# 0.00729f
+C295 w[15] w[5] 0
+C296 w[12] w[21] 0
+C297 DPI_2/Isyn neuron_sized_2/a_4474_6632# 0.35423f
+C298 neuron_sized_4/a_7550_2214# bias_cell_0/Vamp_bias 0
+C299 DPI_1/Isyn bias_cell_0/Vlk 0.40379f
+C300 bias_cell_0/VKup bias_cell_0/Vamp_bias 10.51781f
+C301 bias_cell_0/VNA bias_cell_0/VKdn 8.98734f
+C302 w[3] w[8] 0
+C303 neuron_sized_3/a_2722_6554# bias_cell_0/VKdn 3.14096f
+C304 neuron_sized_0/a_4474_6632# bias_cell_0/VKdn 0.05334f
+C305 w[19] w[23] 0
+C306 w[1] w[10] 0
+C307 w[19] w[21] 0.00119f
+C308 neuron_sized_2/a_4712_2292# neuron_sized_2/a_2722_6554# 0
+C309 neuron_sized_0/a_5916_6554# bias_cell_0/VKdn 0
+C310 VDD w[3] 0.10124f
+C311 DPI_4/Vthr bias_cell_0/Vamp_bias 0.05453f
+C312 DPI_4/Vthr DPI_inh_0/Isum 2.90764f
+C313 DPI_0/Isum DPI_0/Isyn 0.1429f
+C314 neuron_sized_2/a_2722_6554# neuron_sized_2/a_3704_6616# 0.27251f
+C315 neuron_sized_1/a_5916_6554# bias_cell_0/Vamp_bias 0
+C316 DPI_4/VT DPI_2/Isum 0.09043f
+C317 pulse[0] w[24] 0.04779f
+C318 w[28] DPI_4/VT 0
+C319 neuron_sized_3/a_7550_2214# neuron_sized_3/a_5916_6554# 0
+C320 spike[0] w[29] 0.25613f
+C321 neuron_sized_2/a_8270_2214# neuron_sized_2/a_9750_6632# 0.33343f
+C322 neuron_sized_4/a_5916_6554# neuron_sized_4/a_9750_6632# 0.43603f
+C323 neuron_sized_1/a_3430_2214# bias_cell_0/VKdn 0.04997f
+C324 neuron_sized_1/a_3704_6616# bias_cell_0/Vamp_bias 0.12068f
+C325 w[9] spike[0] 0.39304f
+C326 neuron_sized_3/a_4712_2292# neuron_sized_3/a_7550_2214# 0.02025f
+C327 w[15] w[10] 0
+C328 spike[2] DAC_signed_1/DAC_binary_0/a_2164_9252# 0.00826f
+C329 w[0] w[2] 0.73399f
+C330 neuron_sized_2/a_8270_2214# neuron_sized_2/a_4474_6632# 0.04671f
+C331 w[8] w[11] 0.00194f
+C332 neuron_sized_0/a_3430_2214# bias_cell_0/VK 0.23589f
+C333 spike[2] w[27] 0.0587f
+C334 w[4] DPI_3/Isum 0.06067f
+C335 neuron_sized_1/a_4712_2292# VT 0.51443f
+C336 w[7] w[13] 0
+C337 w[6] w[14] 0
+C338 VDD neuron_sized_4/a_3704_6616# 1.58946f
+C339 neuron_sized_2/a_3430_2214# VT 0.15694f
+C340 w[7] w[5] 1.52393f
+C341 neuron_sized_3/a_4712_2292# neuron_sized_3/a_5916_6554# 0
+C342 neuron_sized_3/a_7550_2214# neuron_sized_3/a_4474_6632# 0.2196f
+C343 neuron_sized_0/a_8270_2214# bias_cell_0/VIp 0
+C344 VDD w[11] 0.15576f
+C345 w[30] DPI_4/VT 0
+C346 neuron_sized_3/a_3704_6616# bias_cell_0/VIp 0.11998f
+C347 w[25] w[19] 0
+C348 w[22] DAC_binary_0/a_2164_9252# 0.0335f
+C349 neuron_sized_2/a_3430_2214# bias_cell_0/Vlk 0.00509f
+C350 w[21] w[23] 1.52393f
+C351 bias_cell_0/VK bias_cell_0/Vb 0.42352f
+C352 w[13] w[22] 0
+C353 neuron_sized_2/a_4474_6632# neuron_sized_2/a_9750_6632# 0.70062f
+C354 w[22] DPI_2/Isum 0.09558f
+C355 w[22] w[28] 0
+C356 DPI_4/a_2190_1804# DPI_4/VT 1.51617f
+C357 neuron_sized_0/a_4712_2292# bias_cell_0/VIp 0.15156f
+C358 neuron_sized_0/a_3704_6616# bias_cell_0/VK 0.02735f
+C359 w[6] w[16] 0
+C360 neuron_sized_1/a_4474_6632# VT 0.24678f
+C361 spike[2] DAC_signed_1/DAC_binary_0/Isum 0.0062f
+C362 DPI_0/Isyn neuron_sized_0/a_8270_2214# 0.01311f
+C363 pulse[1] DAC_binary_4/a_2164_9252# 0.00826f
+C364 neuron_sized_3/a_4474_6632# neuron_sized_3/a_5916_6554# 0.05399f
+C365 DPI_3/Isum w[29] 0.04779f
+C366 spike[3] bias_cell_0/VKdn 0.11443f
+C367 spike[2] bias_cell_0/VIp 0.20429f
+C368 DPI_4/Isum w[12] 0.04779f
+C369 w[9] DPI_3/Isum 0.04779f
+C370 DPI_inh_0/DPI_sized_0/Isyn bias_cell_0/Vlk 0.0039f
+C371 DPI_inh_0/VT bias_cell_0/VK 0.22634f
+C372 neuron_sized_1/a_2722_6554# VT 0
+C373 neuron_sized_3/a_4712_2292# neuron_sized_3/a_4474_6632# 0.09185f
+C374 DPI_0/Isyn neuron_sized_0/a_4712_2292# 0.23666f
+C375 bias_cell_0/VNA bias_cell_0/VIp 0.49047f
+C376 s[0] DPI_4/VT 0
+C377 neuron_sized_3/a_2722_6554# bias_cell_0/VIp 0.0031f
+C378 w[14] spike[0] 0.04779f
+C379 DPI_4/Isum w[19] 0.04779f
+C380 w[7] w[10] 0
+C381 neuron_sized_0/a_4474_6632# bias_cell_0/VIp 0.05738f
+C382 DPI_2/a_2190_1804# DPI_2/Isyn 0.90462f
+C383 neuron_sized_4/a_3704_6616# bias_cell_0/Vamp_bias 0.12068f
+C384 spike[2] spike[0] 6.87524f
+C385 pulse[1] w[15] 0.04779f
+C386 neuron_sized_0/a_5916_6554# bias_cell_0/VIp 0
+C387 DPI_0/Isyn spike[2] 0
+C388 neuron_sized_3/a_8270_2214# spike[1] 0.14308f
+C389 s[1] DPI_0/a_2190_1804# 0.01083f
+C390 w[22] w[30] 0
+C391 w[9] w[18] 0
+C392 neuron_sized_2/a_4712_2292# neuron_sized_2/a_7550_2214# 0.02025f
+C393 DPI_0/Isyn bias_cell_0/VNA 2.08712f
+C394 w[0] w[8] 0
+C395 w[25] w[23] 0.00119f
+C396 w[25] w[21] 0
+C397 w[16] spike[0] 1.51079f
+C398 DPI_0/Isyn neuron_sized_0/a_4474_6632# 0.35423f
+C399 neuron_sized_1/a_3430_2214# bias_cell_0/VIp 0.08414f
+C400 DPI_0/Isyn neuron_sized_0/a_5916_6554# 0.01577f
+C401 DAC_signed_1/a_894_1366# DAC_signed_1/DAC_binary_0/Isum 0.02156f
+C402 w[15] w[17] 0.00119f
+C403 VDD neuron_sized_3/a_8270_2214# 0.00102f
+C404 w[0] VDD 0.15379f
+C405 w[2] w[6] 0
+C406 DPI_2/Isyn neuron_sized_2/a_3430_2214# 0.27007f
+C407 DAC_signed_0/DAC_binary_0/a_2164_9252# DAC_signed_0/DAC_binary_0/Isum 0.36625f
+C408 bias_cell_0/VKdn spike[1] 0.11443f
+C409 spike[3] w[27] 0.01489f
+C410 spike[4] bias_cell_0/VKdn 0.11443f
+C411 s[1] DPI_inh_0/DPI_sized_0/a_2368_1640# 0.01083f
+C412 bias_cell_0/VKup DPI_4/VT 0.05504f
+C413 w[31] w[23] 0
+C414 bias_cell_0/VKup DPI_3/Isyn 0.43145f
+C415 DPI_2/Isyn neuron_sized_2/a_5916_6554# 0.01577f
+C416 w[31] w[21] 0
+C417 DPI_4/a_2190_1804# DPI_4/Isyn 0.90462f
+C418 w[1] w[3] 1.52393f
+C419 neuron_sized_3/a_3430_2214# bias_cell_0/VKup 0
+C420 DPI_4/Isum w[23] 0.04779f
+C421 DPI_4/Isum w[21] 0.04779f
+C422 w[14] DPI_3/Isum 0.04779f
+C423 bias_cell_0/a_1044_1080# bias_cell_0/Vlk 0.36863f
+C424 neuron_sized_2/a_7550_2214# neuron_sized_2/a_2722_6554# 0.00796f
+C425 VDD bias_cell_0/VKdn 1.82665f
+C426 w[15] w[20] 0
+C427 DPI_4/Vthr DPI_4/VT 41.14426f
+C428 spike[2] DPI_3/Isum 0.06385f
+C429 VT neuron_sized_4/a_2722_6554# 0
+C430 VT neuron_sized_4/a_4712_2292# 0.51443f
+C431 DPI_1/Isum w[29] 0.09558f
+C432 pulse[0] w[4] 0.04779f
+C433 w[7] pulse[1] 0.05862f
+C434 w[13] w[12] 20.02795f
+C435 Iref bias_cell_0/a_1044_1080# 4.21036f
+C436 w[12] DPI_2/Isum 0.10846f
+C437 w[5] w[12] 0
+C438 DAC_signed_0/DAC_binary_0/a_2164_9252# w[29] 0.01696f
+C439 neuron_sized_2/a_8270_2214# neuron_sized_2/a_3430_2214# 0.54225f
+C440 w[14] w[18] 0
+C441 w[13] w[19] 0
+C442 w[19] DPI_2/Isum 0.09558f
+C443 spike[3] bias_cell_0/VIp 0.20429f
+C444 DPI_0/Isum w[24] 0.05102f
+C445 w[16] DPI_3/Isum 0.04779f
+C446 w[2] DAC_binary_5/a_2164_9252# 0.0335f
+C447 VDD DPI_3/a_2190_1804# 7.49484f
+C448 DPI_4/Isyn neuron_sized_4/a_2722_6554# 0.47933f
+C449 neuron_sized_3/a_8270_2214# bias_cell_0/Vamp_bias 0
+C450 w[19] w[28] 0
+C451 DPI_4/Isyn neuron_sized_4/a_4712_2292# 0.23666f
+C452 pulse[1] w[22] 0.04779f
+C453 neuron_sized_3/a_3704_6616# bias_cell_0/VK 0.02735f
+C454 w[27] spike[1] 0.32355f
+C455 w[7] w[17] 0
+C456 w[26] w[22] 0
+C457 neuron_sized_2/a_8270_2214# neuron_sized_2/a_5916_6554# 0
+C458 neuron_sized_0/a_3430_2214# neuron_sized_0/a_7550_2214# 1.21169f
+C459 w[24] w[29] 0
+C460 DPI_4/Isyn neuron_sized_4/a_8270_2214# 0.01311f
+C461 w[31] s[1] 0.48269f
+C462 spike[3] spike[0] 6.39642f
+C463 w[1] w[11] 0
+C464 DPI_0/Isyn spike[3] 0.00399f
+C465 VT neuron_sized_4/a_3430_2214# 0.15694f
+C466 w[18] w[16] 0.73399f
+C467 VDD neuron_sized_4/a_4474_6632# 4.15363f
+C468 w[25] w[31] 0
+C469 DPI_4/Isum s[1] 2.66579f
+C470 pulse[0] w[29] 0.04779f
+C471 neuron_sized_2/a_9750_6632# neuron_sized_2/a_3430_2214# 0.0934f
+C472 w[17] w[22] 0
+C473 bias_cell_0/Vlk neuron_sized_4/a_3430_2214# 0.00509f
+C474 bias_cell_0/Vamp_bias bias_cell_0/VKdn 35.63866f
+C475 bias_cell_0/VKup VT 0.24489f
+C476 pulse[0] w[9] 0.04779f
+C477 w[6] w[8] 0.00119f
+C478 DPI_4/Isum w[25] 0.04779f
+C479 VDD w[27] 0.22829f
+C480 w[10] w[12] 0.00119f
+C481 DPI_4/Isyn neuron_sized_4/a_3430_2214# 0.27007f
+C482 bias_cell_0/VKup bias_cell_0/Vlk 0.20771f
+C483 bias_cell_0/VNA bias_cell_0/VK 0.28952f
+C484 neuron_sized_3/a_2722_6554# bias_cell_0/VK 0
+C485 neuron_sized_2/a_5916_6554# neuron_sized_2/a_9750_6632# 0.43603f
+C486 neuron_sized_2/a_4474_6632# neuron_sized_2/a_3430_2214# 0.09251f
+C487 VDD w[6] 0.10124f
+C488 w[10] w[19] 0
+C489 DPI_2/a_2190_1804# s[1] 0.01083f
+C490 DPI_4/Isyn neuron_sized_4/a_7550_2214# 0.01311f
+C491 DPI_4/Isyn bias_cell_0/VKup 0.3696f
+C492 w[15] w[11] 0
+C493 DAC_binary_0/a_2164_9252# w[23] 0.06768f
+C494 w[21] DAC_binary_0/a_2164_9252# 0.01696f
+C495 Iref bias_cell_0/VKup 0.97865f
+C496 bias_cell_0/VIp spike[1] 0.20429f
+C497 neuron_sized_2/a_4474_6632# neuron_sized_2/a_5916_6554# 0.05399f
+C498 neuron_sized_0/a_3430_2214# neuron_sized_0/a_3704_6616# 0.61849f
+C499 w[13] w[23] 0
+C500 w[23] DPI_2/Isum 0.09558f
+C501 w[13] w[21] 0
+C502 DPI_inh_0/DPI_sized_0/Isyn DPI_0/a_2190_1804# 0
+C503 spike[4] bias_cell_0/VIp 0.20429f
+C504 w[23] w[28] 0
+C505 w[21] DPI_2/Isum 0.09558f
+C506 w[20] w[22] 0.73399f
+C507 DPI_4/Isum w[31] 0.04785f
+C508 w[21] w[28] 0
+C509 neuron_sized_1/a_3704_6616# VT 0.64213f
+C510 DPI_4/Vthr Iref 0.64052f
+C511 spike[2] DPI_1/Isum 0.13134f
+C512 w[3] w[7] 0
+C513 spike[0] spike[1] 1.53627f
+C514 neuron_sized_1/a_3430_2214# bias_cell_0/VK 0.23589f
+C515 neuron_sized_2/a_4712_2292# spike[2] 0.11297f
+C516 neuron_sized_4/a_4474_6632# bias_cell_0/Vamp_bias 0.13368f
+C517 VDD bias_cell_0/VIp 1.04537f
+C518 spike[4] spike[0] 0.00109f
+C519 spike[3] DPI_3/Isum 0.10174f
+C520 w[8] spike[0] 1.00283f
+C521 w[14] DAC_binary_2/a_2164_9252# 0.0335f
+C522 neuron_sized_2/a_3704_6616# spike[2] 0.00157f
+C523 spike[4] DPI_0/Isyn 0.06805f
+C524 DPI_inh_0/Isum w[27] 0.02869f
+C525 DPI_1/Isum w[16] 0.06067f
+C526 w[14] w[24] 0
+C527 neuron_sized_2/a_3704_6616# bias_cell_0/VNA 0
+C528 spike[2] w[24] 2.64218f
+C529 w[0] w[1] 5.55135f
+C530 DPI_inh_0/DPI_sized_0/Isyn DPI_inh_0/DPI_sized_0/a_2368_1640# 0.6455f
+C531 VDD spike[0] 5.13693f
+C532 DPI_1/Isyn neuron_sized_1/a_8270_2214# 0.01311f
+C533 DPI_inh_0/VT bias_cell_0/Vb 0.06425f
+C534 VDD DPI_0/Isyn 6.37524f
+C535 DPI_0/Isyn neuron_sized_0/a_9750_6632# 0.03443f
+C536 w[23] w[30] 0
+C537 neuron_sized_3/a_2722_6554# neuron_sized_3/a_7550_2214# 0.00796f
+C538 neuron_sized_3/a_3704_6616# neuron_sized_3/a_4712_2292# 0.12841f
+C539 pulse[0] w[14] 0.04779f
+C540 w[21] w[30] 0
+C541 neuron_sized_4/a_2722_6554# neuron_sized_4/a_9750_6632# 0.39394f
+C542 pulse[1] w[12] 0.04779f
+C543 pulse[0] spike[2] 0
+C544 s[1] DPI_2/Isum 7.21473f
+C545 neuron_sized_1/a_4712_2292# DPI_1/Isyn 0.23666f
+C546 s[1] w[28] 0.05102f
+C547 w[16] w[24] 0
+C548 DPI_2/Isyn bias_cell_0/VKup 0.43145f
+C549 w[7] w[11] 0
+C550 w[25] DPI_2/Isum 0.09558f
+C551 neuron_sized_4/a_8270_2214# neuron_sized_4/a_9750_6632# 0.33343f
+C552 neuron_sized_2/a_2722_6554# spike[2] 0.14379f
+C553 pulse[1] w[19] 0.04779f
+C554 w[25] w[28] 0
+C555 DAC_signed_1/DAC_binary_0/Isum DPI_inh_0/Isum 0.03922f
+C556 DAC_signed_0/a_894_1366# DAC_signed_0/DAC_binary_0/Isum 0.02156f
+C557 w[26] w[19] 0
+C558 neuron_sized_3/a_2722_6554# neuron_sized_3/a_5916_6554# 0.22613f
+C559 neuron_sized_3/a_3704_6616# neuron_sized_3/a_4474_6632# 0.36022f
+C560 neuron_sized_2/a_2722_6554# bias_cell_0/VNA 0.49118f
+C561 pulse[0] w[16] 0.04779f
+C562 VDD DPI_1/a_2190_1804# 7.49484f
+C563 bias_cell_0/VIp bias_cell_0/Vamp_bias 20.98231f
+C564 DPI_3/Isum spike[1] 0.07106f
+C565 w[12] w[17] 0
+C566 neuron_sized_3/a_2722_6554# neuron_sized_3/a_4712_2292# 0
+C567 VT neuron_sized_4/a_3704_6616# 0.64213f
+C568 DPI_1/Isyn neuron_sized_1/a_4474_6632# 0.35423f
+C569 w[8] DPI_3/Isum 0.04779f
+C570 w[19] w[17] 1.52393f
+C571 neuron_sized_4/a_2722_6554# neuron_sized_4/a_5916_6554# 0.22613f
+C572 neuron_sized_4/a_3430_2214# neuron_sized_4/a_9750_6632# 0.0934f
+C573 neuron_sized_4/a_4712_2292# neuron_sized_4/a_5916_6554# 0
+C574 w[31] DPI_2/Isum 0.11822f
+C575 DPI_0/Isum DAC_signed_0/a_894_1366# 0.17374f
+C576 w[17] DAC_binary_1/a_2164_9252# 0.01696f
+C577 w[31] w[28] 0.00194f
+C578 spike[0] bias_cell_0/Vamp_bias 0.17989f
+C579 s[1] w[30] 0.03824f
+C580 DPI_0/Isum DPI_inh_0/VT 0
+C581 DPI_0/Isum DAC_signed_0/DAC_binary_0/Isum 0.0791f
+C582 DPI_0/Isyn bias_cell_0/Vamp_bias 0.27758f
+C583 neuron_sized_0/a_7550_2214# neuron_sized_0/a_8270_2214# 0.81727f
+C584 w[18] spike[1] 0.04779f
+C585 DPI_4/Isum w[13] 0.04779f
+C586 neuron_sized_4/a_8270_2214# neuron_sized_4/a_5916_6554# 0
+C587 neuron_sized_4/a_7550_2214# neuron_sized_4/a_9750_6632# 0.0395f
+C588 neuron_sized_1/a_2722_6554# DPI_1/Isyn 0.47933f
+C589 VDD DPI_3/Isum 0.11203f
+C590 neuron_sized_3/a_8270_2214# DPI_3/Isyn 0.01311f
+C591 DPI_4/Isum w[28] 0.04779f
+C592 DPI_4/Isyn neuron_sized_4/a_3704_6616# 1.43869f
+C593 w[25] w[30] 0
+C594 DPI_4/Isum w[5] 0.04779f
+C595 neuron_sized_3/a_3430_2214# neuron_sized_3/a_8270_2214# 0.54225f
+C596 neuron_sized_3/a_2722_6554# neuron_sized_3/a_4474_6632# 0.09781f
+C597 w[8] w[18] 0
+C598 DPI_4/a_2190_1804# s[1] 0.01244f
+C599 DAC_signed_0/DAC_binary_0/Isum w[29] 0
+C600 w[12] w[20] 0
+C601 spike[3] DPI_1/Isum 0.22808f
+C602 neuron_sized_0/a_3430_2214# neuron_sized_0/a_8270_2214# 0.54225f
+C603 neuron_sized_0/a_4712_2292# neuron_sized_0/a_7550_2214# 0.02025f
+C604 w[4] w[9] 0
+C605 spike[3] DAC_signed_0/DAC_binary_0/a_2164_9252# 0.00826f
+C606 w[19] w[20] 23.5966f
+C607 pulse[1] w[23] 0.04779f
+C608 VDD w[18] 0.10161f
+C609 pulse[1] w[21] 0.04779f
+C610 DPI_2/a_2190_1804# DPI_2/Isum 0.65893f
+C611 neuron_sized_4/a_3430_2214# neuron_sized_4/a_5916_6554# 0
+C612 neuron_sized_0/a_3430_2214# neuron_sized_0/a_4712_2292# 1.24342f
+C613 w[26] w[23] 0
+C614 neuron_sized_1/a_8270_2214# neuron_sized_1/a_4474_6632# 0.04671f
+C615 w[26] w[21] 0
+C616 bias_cell_0/VKdn DPI_3/Isyn 0.24119f
+C617 w[2] pulse[0] 0.0624f
+C618 s[0] s[1] 31.1565f
+C619 w[31] w[30] 40.4374f
+C620 neuron_sized_4/a_7550_2214# neuron_sized_4/a_5916_6554# 0
+C621 bias_cell_0/VKup neuron_sized_4/a_5916_6554# 0.35765f
+C622 neuron_sized_3/a_3430_2214# bias_cell_0/VKdn 0.04997f
+C623 DPI_0/Isum w[29] 0.07647f
+C624 w[1] w[6] 0
+C625 w[0] w[7] 0
+C626 w[3] w[12] 0
+C627 neuron_sized_2/a_5916_6554# neuron_sized_2/a_3430_2214# 0
+C628 w[25] s[0] 0.03824f
+C629 DPI_4/Isum w[30] 0.04783f
+C630 w[6] DAC_binary_4/a_2164_9252# 0.0335f
+C631 neuron_sized_3/a_9750_6632# neuron_sized_3/a_8270_2214# 0.33343f
+C632 neuron_sized_0/a_7550_2214# neuron_sized_0/a_4474_6632# 0.2196f
+C633 neuron_sized_1/a_4712_2292# neuron_sized_1/a_4474_6632# 0.09185f
+C634 neuron_sized_1/a_2722_6554# neuron_sized_1/a_8270_2214# 0.06007f
+C635 neuron_sized_0/a_5916_6554# neuron_sized_0/a_7550_2214# 0
+C636 w[17] w[23] 0
+C637 w[17] w[21] 0
+C638 neuron_sized_2/a_4474_6632# bias_cell_0/VKup 0.13361f
+C639 DPI_4/Isum w[10] 0.04779f
+C640 VDD bias_cell_0/VK 2.84516f
+C641 pulse[0] spike[3] 0
+C642 DPI_4/Vthr DPI_0/a_2190_1804# 0.23618f
+C643 DPI_3/a_2190_1804# DPI_4/VT 1.57349f
+C644 DPI_4/Isum DPI_4/a_2190_1804# 0.66223f
+C645 DPI_3/Isyn DPI_3/a_2190_1804# 0.90462f
+C646 neuron_sized_0/a_4712_2292# neuron_sized_0/a_3704_6616# 0.12841f
+C647 neuron_sized_0/a_3430_2214# neuron_sized_0/a_4474_6632# 0.09251f
+C648 neuron_sized_1/a_4712_2292# neuron_sized_1/a_2722_6554# 0
+C649 neuron_sized_0/a_3430_2214# neuron_sized_0/a_5916_6554# 0
+C650 DPI_1/Isum spike[1] 0.1792f
+C651 w[6] w[15] 0
+C652 s[0] w[31] 0.04953f
+C653 pulse[1] s[1] 0
+C654 bias_cell_0/VNA bias_cell_0/Vb 0.06456f
+C655 neuron_sized_2/a_7550_2214# spike[2] 0.05233f
+C656 neuron_sized_0/a_2722_6554# bias_cell_0/VKup 0.15534f
+C657 w[25] pulse[1] 0.04779f
+C658 DPI_4/Isum s[0] 0.05542f
+C659 w[21] w[20] 29.63185f
+C660 w[20] w[23] 0.00194f
+C661 neuron_sized_0/a_3704_6616# bias_cell_0/VNA 0
+C662 w[12] w[11] 14.4528f
+C663 DAC_binary_2/a_2164_9252# spike[1] 0.00826f
+C664 w[13] DPI_2/Isum 0.09593f
+C665 w[13] w[5] 0
+C666 w[14] w[4] 0
+C667 neuron_sized_3/a_7550_2214# spike[1] 0.05233f
+C668 w[28] DPI_2/Isum 0.09558f
+C669 w[25] w[26] 35.43357f
+C670 w[1] DAC_binary_5/a_2164_9252# 0.01696f
+C671 VDD DPI_1/Isum 0.11203f
+C672 DPI_4/Vthr DPI_inh_0/DPI_sized_0/a_2368_1640# 0.27422f
+C673 neuron_sized_0/a_3704_6616# neuron_sized_0/a_4474_6632# 0.36022f
+C674 spike[1] w[24] 0.09558f
+C675 neuron_sized_1/a_2722_6554# neuron_sized_1/a_4474_6632# 0.09781f
+C676 spike[2] DPI_inh_0/VT 0.00108f
+C677 VDD neuron_sized_2/a_4712_2292# 0
+C678 w[19] w[11] 0
+C679 VT bias_cell_0/VKdn 0.18185f
+C680 DPI_inh_0/VT bias_cell_0/VNA 0.80376f
+C681 VDD neuron_sized_2/a_3704_6616# 1.58946f
+C682 DPI_4/Vthr s[1] 2.2142f
+C683 w[25] w[17] 0
+C684 pulse[0] spike[1] 0.1349f
+C685 bias_cell_0/VK bias_cell_0/Vamp_bias 0.34412f
+C686 bias_cell_0/Vlk bias_cell_0/VKdn 10.46606f
+C687 VDD neuron_sized_3/a_7550_2214# 0
+C688 neuron_sized_3/a_5916_6554# spike[1] 0.16612f
+C689 pulse[1] w[31] 2.51204f
+C690 neuron_sized_1/a_7550_2214# DPI_1/Isyn 0.01311f
+C691 VDD w[24] 0.10124f
+C692 pulse[0] w[8] 0.04779f
+C693 DPI_4/Isyn bias_cell_0/VKdn 0.17963f
+C694 Iref bias_cell_0/VKdn 0.00553f
+C695 w[26] w[31] 0
+C696 w[15] spike[0] 0.04779f
+C697 DPI_4/Isum pulse[1] 0.0572f
+C698 DPI_0/Isum spike[2] 0.05928f
+C699 neuron_sized_3/a_4712_2292# spike[1] 0.11297f
+C700 DPI_1/Isyn bias_cell_0/VKup 0.43145f
+C701 DPI_4/Isum w[26] 0.04779f
+C702 w[31] bias_cell_0/VKup 0.01616f
+C703 w[30] DPI_2/Isum 0.09561f
+C704 VDD pulse[0] 0.10124f
+C705 w[28] w[30] 0.73399f
+C706 bias_cell_0/VIp DPI_4/VT 0.01862f
+C707 w[14] w[9] 0
+C708 w[13] w[10] 0
+C709 spike[2] w[29] 0.04792f
+C710 bias_cell_0/VIp DPI_3/Isyn 0.22734f
+C711 w[10] DPI_2/Isum 0.04784f
+C712 VDD neuron_sized_3/a_5916_6554# 3.99075f
+C713 w[6] w[7] 10.90649f
+C714 neuron_sized_3/a_3430_2214# bias_cell_0/VIp 0.08414f
+C715 VDD neuron_sized_2/a_2722_6554# 2.21359f
+C716 w[5] w[10] 0
+C717 w[25] w[20] 0
+C718 neuron_sized_1/a_9750_6632# neuron_sized_1/a_3430_2214# 0.0934f
+C719 w[22] w[27] 0
+C720 bias_cell_0/VNA w[29] 0.00619f
+C721 VT neuron_sized_4/a_4474_6632# 0.24678f
+C722 DPI_1/Isyn neuron_sized_1/a_5916_6554# 0.01577f
+C723 w[31] DPI_4/Vthr 0.60386f
+C724 DPI_4/Isum w[17] 0.04779f
+C725 neuron_sized_2/a_4712_2292# bias_cell_0/Vamp_bias 0.67458f
+C726 VDD neuron_sized_3/a_4712_2292# 0
+C727 neuron_sized_3/a_4474_6632# spike[1] 0.34277f
+C728 spike[0] DPI_4/VT 0
+C729 DPI_4/Isum DPI_4/Vthr 1.11694f
+C730 DPI_0/Isyn DPI_4/VT 0.11749f
+C731 DAC_binary_4/a_2164_9252# DPI_3/Isum 0.36625f
+C732 w[21] w[11] 0
+C733 neuron_sized_2/a_3704_6616# bias_cell_0/Vamp_bias 0.12068f
+C734 w[9] w[16] 0
+C735 neuron_sized_1/a_7550_2214# neuron_sized_1/a_8270_2214# 0.81727f
+C736 neuron_sized_1/a_3704_6616# DPI_1/Isyn 1.43869f
+C737 DPI_4/Isyn neuron_sized_4/a_4474_6632# 0.35423f
+C738 neuron_sized_3/a_7550_2214# bias_cell_0/Vamp_bias 0
+C739 s[0] DPI_2/Isum 0.10964f
+C740 DPI_inh_0/Isum w[24] 0.04147f
+C741 s[0] w[28] 0.03824f
+C742 DPI_0/Isum DAC_signed_1/a_894_1366# 0.17374f
+C743 VDD neuron_sized_3/a_4474_6632# 4.15363f
+C744 neuron_sized_1/a_4712_2292# neuron_sized_1/a_7550_2214# 0.02025f
+C745 w[2] w[4] 0.00119f
+C746 DPI_2/a_2190_1804# DPI_4/Vthr 0.23618f
+C747 DPI_2/Isyn bias_cell_0/VKdn 0.24119f
+C748 DPI_4/Isum w[20] 0.04779f
+C749 w[15] DPI_3/Isum 0.04779f
+C750 neuron_sized_1/a_4712_2292# bias_cell_0/VKup 0
+C751 DPI_1/a_2190_1804# DPI_4/VT 1.57349f
+C752 spike[4] neuron_sized_0/a_7550_2214# 0.05233f
+C753 neuron_sized_1/a_8270_2214# neuron_sized_1/a_5916_6554# 0
+C754 spike[3] DPI_inh_0/VT 0.0151f
+C755 neuron_sized_3/a_5916_6554# bias_cell_0/Vamp_bias 0
+C756 spike[3] DAC_signed_0/DAC_binary_0/Isum 0.0062f
+C757 neuron_sized_2/a_3430_2214# bias_cell_0/VKup 0
+C758 neuron_sized_2/a_2722_6554# bias_cell_0/Vamp_bias 0.00149f
+C759 neuron_sized_1/a_9750_6632# spike[3] 1.46926f
+C760 bias_cell_0/VIp VT 0.1833f
+C761 neuron_sized_3/a_3704_6616# bias_cell_0/VNA 0
+C762 neuron_sized_3/a_2722_6554# neuron_sized_3/a_3704_6616# 0.27251f
+C763 neuron_sized_3/a_4712_2292# bias_cell_0/Vamp_bias 0.67458f
+C764 neuron_sized_0/a_8270_2214# neuron_sized_0/a_4474_6632# 0.04671f
+C765 spike[4] neuron_sized_0/a_3430_2214# 0.24447f
+C766 w[15] w[18] 0
+C767 w[22] spike[0] 0.09558f
+C768 neuron_sized_1/a_4712_2292# neuron_sized_1/a_5916_6554# 0
+C769 neuron_sized_1/a_7550_2214# neuron_sized_1/a_4474_6632# 0.2196f
+C770 VDD neuron_sized_0/a_7550_2214# 0
+C771 pulse[1] w[13] 0.04779f
+C772 w[3] DPI_4/Isum 0.04779f
+C773 neuron_sized_2/a_5916_6554# bias_cell_0/VKup 0.35765f
+C774 bias_cell_0/VIp bias_cell_0/Vlk 0.28321f
+C775 neuron_sized_0/a_5916_6554# neuron_sized_0/a_8270_2214# 0
+C776 neuron_sized_0/a_9750_6632# neuron_sized_0/a_7550_2214# 0.0395f
+C777 pulse[1] w[28] 0.04779f
+C778 s[0] w[30] 0.03824f
+C779 pulse[1] w[5] 0.39304f
+C780 DPI_3/Isum DPI_4/VT 0.0901f
+C781 w[26] DPI_2/Isum 0.09558f
+C782 w[26] w[28] 0.00119f
+C783 spike[0] VT 0.0792f
+C784 DPI_4/Isyn bias_cell_0/VIp 0.17183f
+C785 neuron_sized_1/a_4474_6632# bias_cell_0/VKup 0.13361f
+C786 neuron_sized_0/a_4712_2292# neuron_sized_0/a_4474_6632# 0.09185f
+C787 neuron_sized_1/a_7550_2214# neuron_sized_1/a_2722_6554# 0.00796f
+C788 neuron_sized_1/a_4712_2292# neuron_sized_1/a_3704_6616# 0.12841f
+C789 w[2] w[9] 0
+C790 Iref bias_cell_0/VIp 0.00426f
+C791 VDD neuron_sized_0/a_3430_2214# 0
+C792 DPI_0/Isyn VT 0.31865f
+C793 DPI_0/Isum spike[3] 0.20315f
+C794 neuron_sized_0/a_3430_2214# neuron_sized_0/a_9750_6632# 0.0934f
+C795 neuron_sized_0/a_4712_2292# neuron_sized_0/a_5916_6554# 0
+C796 neuron_sized_2/a_8270_2214# bias_cell_0/VKdn 0.30387f
+C797 neuron_sized_3/a_4474_6632# bias_cell_0/Vamp_bias 0.13368f
+C798 DPI_0/Isyn bias_cell_0/Vlk 0.40617f
+C799 w[14] w[16] 0.00119f
+C800 w[13] w[17] 0
+C801 w[17] DPI_2/Isum 0.09558f
+C802 neuron_sized_1/a_2722_6554# bias_cell_0/VKup 0.15534f
+C803 spike[3] w[29] 0.43544f
+C804 spike[4] neuron_sized_0/a_3704_6616# 0.00157f
+C805 spike[0] DPI_4/Isyn 0.06805f
+C806 neuron_sized_3/a_2722_6554# bias_cell_0/VNA 0.49118f
+C807 neuron_sized_1/a_4474_6632# neuron_sized_1/a_5916_6554# 0.05399f
+C808 DPI_4/Vthr DPI_2/Isum 2.892f
+C809 DPI_4/Vthr w[28] 0.00927f
+C810 VDD bias_cell_0/Vb 36.20072f
+C811 w[7] DPI_3/Isum 0.04779f
+C812 pulse[1] w[30] 0.04779f
+C813 neuron_sized_1/a_2722_6554# neuron_sized_1/a_5916_6554# 0.22613f
+C814 neuron_sized_1/a_3704_6616# neuron_sized_1/a_4474_6632# 0.36022f
+C815 VDD neuron_sized_0/a_3704_6616# 1.58946f
+C816 VDD neuron_sized_2/a_7550_2214# 0
+C817 neuron_sized_0/a_5916_6554# neuron_sized_0/a_4474_6632# 0.05399f
+C818 DPI_4/Isum w[11] 0.04779f
+C819 w[26] w[30] 0
+C820 w[8] w[4] 0
+C821 pulse[1] w[10] 0.04779f
+C822 w[20] DAC_binary_0/a_2164_9252# 0.00729f
+C823 w[19] w[27] 0
+C824 w[6] w[12] 0
+C825 neuron_sized_4/a_4712_2292# neuron_sized_4/a_2722_6554# 0
+C826 neuron_sized_4/a_5916_6554# bias_cell_0/VKdn 0
+C827 neuron_sized_0/a_7550_2214# bias_cell_0/Vamp_bias 0
+C828 bias_cell_0/VK DPI_4/VT 0.00689f
+C829 bias_cell_0/VKup w[30] 0
+C830 w[13] w[20] 0
+C831 bias_cell_0/VK DPI_3/Isyn 0.37062f
+C832 neuron_sized_1/a_2722_6554# neuron_sized_1/a_3704_6616# 0.27251f
+C833 w[20] DPI_2/Isum 0.09558f
+C834 VDD DAC_signed_0/a_894_1366# 0.13775f
+C835 w[20] w[28] 0
+C836 w[22] DPI_3/Isum 0.04779f
+C837 VDD DPI_inh_0/VT 11.25279f
+C838 neuron_sized_4/a_4474_6632# neuron_sized_4/a_9750_6632# 0.70062f
+C839 neuron_sized_4/a_8270_2214# neuron_sized_4/a_2722_6554# 0.06007f
+C840 neuron_sized_3/a_3430_2214# bias_cell_0/VK 0.23589f
+C841 neuron_sized_2/a_4474_6632# bias_cell_0/VKdn 0.05334f
+C842 VDD w[4] 0.10124f
+C843 neuron_sized_0/a_3430_2214# bias_cell_0/Vamp_bias 0.04253f
+C844 VDD neuron_sized_1/a_9750_6632# 2.72209f
+C845 w[1] pulse[0] 0.39304f
+C846 w[10] w[17] 0
+C847 DPI_4/Vthr w[30] 0.01574f
+C848 DPI_2/Isyn bias_cell_0/VIp 0.22734f
+C849 DAC_binary_3/a_2164_9252# DPI_2/Isum 0.36625f
+C850 spike[1] w[29] 0.45707f
+C851 pulse[1] s[0] 0.10369f
+C852 w[18] w[22] 0
+C853 w[15] DAC_binary_2/a_2164_9252# 0.06768f
+C854 w[3] w[13] 0
+C855 s[0] w[26] 0.03824f
+C856 DPI_4/Vthr DPI_4/a_2190_1804# 0.23039f
+C857 w[3] w[5] 0.00119f
+C858 w[15] w[24] 0
+C859 bias_cell_0/Vamp_bias bias_cell_0/Vb 11.27212f
+C860 neuron_sized_4/a_3430_2214# neuron_sized_4/a_2722_6554# 0
+C861 DPI_1/Isum DPI_4/VT 0.09043f
+C862 VDD DPI_0/Isum 0.11921f
+C863 neuron_sized_4/a_3430_2214# neuron_sized_4/a_4712_2292# 1.24342f
+C864 w[8] w[9] 15.29665f
+C865 neuron_sized_0/a_2722_6554# bias_cell_0/VKdn 3.14096f
+C866 neuron_sized_4/a_7550_2214# neuron_sized_4/a_2722_6554# 0.00796f
+C867 neuron_sized_4/a_4474_6632# neuron_sized_4/a_5916_6554# 0.05399f
+C868 neuron_sized_2/a_7550_2214# bias_cell_0/Vamp_bias 0
+C869 neuron_sized_0/a_3704_6616# bias_cell_0/Vamp_bias 0.12068f
+C870 w[20] w[30] 0
+C871 bias_cell_0/VKup neuron_sized_4/a_2722_6554# 0.15534f
+C872 w[12] spike[0] 0.04779f
+C873 neuron_sized_4/a_8270_2214# neuron_sized_4/a_3430_2214# 0.54225f
+C874 neuron_sized_4/a_7550_2214# neuron_sized_4/a_4712_2292# 0.02025f
+C875 bias_cell_0/VKup neuron_sized_4/a_4712_2292# 0
+C876 pulse[0] w[15] 0.04779f
+C877 VDD w[29] 0.10124f
+C878 w[10] w[20] 0
+C879 spike[2] spike[3] 3.74058f
+C880 w[23] w[27] 0
+C881 VDD w[9] 0.10127f
+C882 DAC_signed_0/a_894_1366# DPI_inh_0/Isum 0
+C883 neuron_sized_4/a_7550_2214# neuron_sized_4/a_8270_2214# 0.81727f
+C884 w[21] w[27] 0
+C885 s[0] DPI_4/Vthr 0.00125f
+C886 w[19] spike[0] 0.10641f
+C887 DPI_inh_0/VT bias_cell_0/Vamp_bias 0.05504f
+C888 DPI_inh_0/Isum DAC_signed_0/DAC_binary_0/Isum 0.03922f
+C889 DPI_inh_0/Isum DPI_inh_0/VT 0.04459f
+C890 DAC_binary_1/a_2164_9252# spike[0] 0.00826f
+C891 neuron_sized_3/a_7550_2214# DPI_3/Isyn 0.01311f
+C892 neuron_sized_2/a_8270_2214# bias_cell_0/VIp 0
+C893 VT bias_cell_0/VK 10.52627f
+C894 w[0] DPI_4/Isum 0.06489f
+C895 neuron_sized_3/a_3430_2214# neuron_sized_3/a_7550_2214# 1.21169f
+C896 DAC_binary_3/a_2164_9252# w[10] 0.0335f
+C897 pulse[1] w[26] 0.04779f
+C898 w[13] w[11] 0.00119f
+C899 s[1] DPI_3/a_2190_1804# 0.01083f
+C900 bias_cell_0/Vlk bias_cell_0/VK 47.39114f
+C901 w[11] DPI_2/Isum 0.04779f
+C902 w[3] w[10] 0
+C903 w[5] w[11] 0
+C904 spike[0] neuron_sized_4/a_9750_6632# 1.46926f
+C905 neuron_sized_3/a_3704_6616# spike[1] 0.00157f
+C906 neuron_sized_4/a_7550_2214# neuron_sized_4/a_3430_2214# 1.21169f
+C907 bias_cell_0/VKup neuron_sized_4/a_3430_2214# 0
+C908 DPI_4/Isyn bias_cell_0/VK 0.31832f
+C909 DPI_1/Isyn bias_cell_0/VKdn 0.24119f
+C910 spike[4] neuron_sized_0/a_8270_2214# 0.14308f
+C911 neuron_sized_3/a_5916_6554# DPI_3/Isyn 0.01577f
+C912 Iref bias_cell_0/VK 0.07177f
+C913 pulse[1] w[17] 0.04779f
+C914 DPI_0/Isum DPI_inh_0/Isum 10.17266f
+C915 DPI_1/Isum w[22] 0.09563f
+C916 neuron_sized_3/a_3430_2214# neuron_sized_3/a_5916_6554# 0
+C917 neuron_sized_1/a_3430_2214# spike[3] 0.24447f
+C918 w[26] w[17] 0
+C919 pulse[1] DPI_4/Vthr 0
+C920 neuron_sized_3/a_4712_2292# DPI_3/Isyn 0.23666f
+C921 spike[4] neuron_sized_0/a_4712_2292# 0.11297f
+C922 bias_cell_0/VIp neuron_sized_4/a_5916_6554# 0
+C923 neuron_sized_1/a_7550_2214# neuron_sized_1/a_5916_6554# 0
+C924 DPI_inh_0/Isum w[29] 0.05737f
+C925 w[14] spike[1] 0.0624f
+C926 neuron_sized_0/a_9750_6632# neuron_sized_0/a_8270_2214# 0.33343f
+C927 VDD neuron_sized_0/a_8270_2214# 0.00102f
+C928 neuron_sized_3/a_9750_6632# neuron_sized_3/a_7550_2214# 0.0395f
+C929 neuron_sized_3/a_3430_2214# neuron_sized_3/a_4712_2292# 1.24342f
+C930 w[25] DAC_signed_1/DAC_binary_0/a_2164_9252# 0.01696f
+C931 VDD neuron_sized_3/a_3704_6616# 1.58946f
+C932 spike[2] spike[1] 3.54711f
+C933 neuron_sized_2/a_4712_2292# VT 0.51443f
+C934 w[12] DPI_3/Isum 0.04779f
+C935 neuron_sized_2/a_4474_6632# bias_cell_0/VIp 0.05738f
+C936 w[8] w[14] 0
+C937 DPI_4/Vthr bias_cell_0/VKup 0.15237f
+C938 neuron_sized_1/a_5916_6554# bias_cell_0/VKup 0.35765f
+C939 pulse[0] w[7] 0.04779f
+C940 spike[4] spike[2] 0.75071f
+C941 w[25] w[27] 1.52393f
+C942 neuron_sized_3/a_2722_6554# spike[1] 0.14379f
+C943 VDD neuron_sized_0/a_4712_2292# 0
+C944 w[23] spike[0] 0.09558f
+C945 w[22] w[24] 0.00119f
+C946 spike[0] neuron_sized_4/a_5916_6554# 0.16612f
+C947 neuron_sized_2/a_3704_6616# VT 0.64213f
+C948 w[19] DPI_3/Isum 0.04779f
+C949 w[21] spike[0] 0.09558f
+C950 DPI_0/Isyn DPI_0/a_2190_1804# 1.01662f
+C951 pulse[1] w[20] 0.04779f
+C952 neuron_sized_3/a_4474_6632# DPI_3/Isyn 0.35423f
+C953 VDD w[14] 0.10124f
+C954 w[16] spike[1] 0.04779f
+C955 w[10] w[11] 15.77919f
+C956 neuron_sized_1/a_3704_6616# bias_cell_0/VKup 0.1559f
+C957 neuron_sized_3/a_9750_6632# neuron_sized_3/a_5916_6554# 0.43603f
+C958 neuron_sized_3/a_3430_2214# neuron_sized_3/a_4474_6632# 0.09251f
+C959 w[26] w[20] 0
+C960 neuron_sized_1/a_8270_2214# bias_cell_0/VKdn 0.30387f
+C961 spike[4] neuron_sized_0/a_4474_6632# 0.34277f
+C962 w[12] w[18] 0
+C963 VDD spike[2] 3.79421f
+C964 pulse[0] w[22] 0.04779f
+C965 spike[4] neuron_sized_0/a_5916_6554# 0.16612f
+C966 w[8] w[16] 0
+C967 VDD bias_cell_0/VNA 9.9497f
+C968 w[18] w[19] 25.38308f
+C969 VDD neuron_sized_3/a_2722_6554# 2.21359f
+C970 neuron_sized_0/a_2722_6554# bias_cell_0/VIp 0.0031f
+C971 w[31] w[27] 0
+C972 neuron_sized_1/a_4712_2292# bias_cell_0/VKdn 0
+C973 w[18] DAC_binary_1/a_2164_9252# 0.0335f
+C974 neuron_sized_0/a_9750_6632# neuron_sized_0/a_4474_6632# 0.70062f
+C975 VDD neuron_sized_0/a_4474_6632# 4.15363f
+C976 w[17] w[20] 0
+C977 w[25] DAC_signed_1/DAC_binary_0/Isum 0
+C978 DPI_2/Isyn bias_cell_0/VK 0.37062f
+C979 VDD w[16] 0.10124f
+C980 VDD neuron_sized_0/a_5916_6554# 3.99075f
+C981 neuron_sized_2/a_3430_2214# bias_cell_0/VKdn 0.04997f
+C982 neuron_sized_0/a_5916_6554# neuron_sized_0/a_9750_6632# 0.43603f
+C983 DPI_4/Isum w[27] 0.04779f
+C984 neuron_sized_2/a_2722_6554# VT 0
+C985 neuron_sized_4/a_3704_6616# neuron_sized_4/a_2722_6554# 0.27251f
+C986 neuron_sized_0/a_8270_2214# bias_cell_0/Vamp_bias 0
+C987 w[1] w[4] 0
+C988 w[0] w[5] 0
+C989 neuron_sized_4/a_4712_2292# neuron_sized_4/a_3704_6616# 0.12841f
+C990 neuron_sized_3/a_3704_6616# bias_cell_0/Vamp_bias 0.12068f
+C991 DAC_binary_4/a_2164_9252# w[4] 0.00729f
+C992 neuron_sized_3/a_4712_2292# VT 0.51443f
+C993 DPI_0/Isyn neuron_sized_0/a_2722_6554# 0.47933f
+C994 neuron_sized_3/a_9750_6632# neuron_sized_3/a_4474_6632# 0.70062f
+C995 DPI_4/Isum w[6] 0.04779f
+C996 neuron_sized_2/a_5916_6554# bias_cell_0/VKdn 0
+C997 s[1] spike[0] 0.05942f
+C998 neuron_sized_0/a_4712_2292# bias_cell_0/Vamp_bias 0.67458f
+C999 DPI_0/Isyn s[1] 0.00114f
+C1000 VDD neuron_sized_1/a_3430_2214# 0
+C1001 neuron_sized_1/a_4474_6632# bias_cell_0/VKdn 0.05334f
+C1002 w[25] spike[0] 0.15537f
+C1003 w[23] DPI_3/Isum 0.04779f
+C1004 w[21] DPI_3/Isum 0.04779f
+C1005 VDD DAC_signed_1/a_894_1366# 0.13775f
+C1006 spike[2] DPI_inh_0/Isum 0.04949f
+C1007 spike[2] bias_cell_0/Vamp_bias 0.17989f
+C1008 DPI_1/Isyn bias_cell_0/VIp 0.22734f
+C1009 neuron_sized_3/a_4474_6632# VT 0.24678f
+C1010 DPI_2/Isyn neuron_sized_2/a_4712_2292# 0.23666f
+C1011 neuron_sized_1/a_2722_6554# bias_cell_0/VKdn 3.14096f
+C1012 bias_cell_0/Vb DPI_4/VT 0.06409f
+C1013 neuron_sized_4/a_3430_2214# neuron_sized_4/a_3704_6616# 0.61849f
+C1014 bias_cell_0/VNA bias_cell_0/Vamp_bias 0.80447f
+C1015 w[2] w[8] 0
+C1016 neuron_sized_3/a_2722_6554# bias_cell_0/Vamp_bias 0.00149f
+C1017 pulse[1] w[11] 0.04779f
+C1018 DPI_2/Isyn neuron_sized_2/a_3704_6616# 1.43869f
+C1019 neuron_sized_0/a_4474_6632# bias_cell_0/Vamp_bias 0.13368f
+C1020 w[1] w[9] 0
+C1021 w[0] w[10] 0
+C1022 w[18] w[23] 0
+C1023 w[18] w[21] 0
+C1024 bias_cell_0/VKup neuron_sized_4/a_3704_6616# 0.1559f
+C1025 neuron_sized_0/a_5916_6554# bias_cell_0/Vamp_bias 0
+C1026 spike[3] spike[1] 4.96058f
+C1027 s[1] DPI_1/a_2190_1804# 0.01083f
+C1028 w[31] spike[0] 0.78179f
+C1029 DPI_1/Isum w[19] 0.04779f
+C1030 VDD w[2] 0.10124f
+C1031 spike[4] spike[3] 0.50609f
+C1032 DPI_1/Isum DAC_binary_1/a_2164_9252# 0.36625f
+C1033 DPI_4/Isum spike[0] 0.06677f
+C1034 w[12] DAC_binary_2/a_2164_9252# 0.00729f
+C1035 DPI_inh_0/VT DPI_4/VT 5.87131f
+C1036 DPI_4/Isum DAC_binary_5/a_2164_9252# 0.36625f
+C1037 w[17] w[11] 0
+C1038 neuron_sized_1/a_3430_2214# bias_cell_0/Vamp_bias 0.04253f
+C1039 s[1] DPI_3/Isum 2.66573f
+C1040 VDD spike[3] 3.61818f
+C1041 neuron_sized_1/a_8270_2214# bias_cell_0/VIp 0
+C1042 w[19] w[24] 0
+C1043 w[15] w[9] 0
+C1044 neuron_sized_0/a_3430_2214# VT 0.15694f
+C1045 DAC_signed_1/a_894_1366# DPI_inh_0/Isum 0
+C1046 DPI_2/Isyn neuron_sized_2/a_2722_6554# 0.47933f
+C1047 w[25] DPI_3/Isum 0.04779f
+C1048 pulse[0] w[12] 0.04779f
+C1049 w[27] DPI_2/Isum 0.09558f
+C1050 w[27] w[28] 32.7404f
+C1051 DPI_1/Isyn DPI_1/a_2190_1804# 0.90462f
+C1052 neuron_sized_0/a_3430_2214# bias_cell_0/Vlk 0.00509f
+C1053 DPI_0/Isum DPI_4/VT 0.09043f
+C1054 neuron_sized_1/a_4712_2292# bias_cell_0/VIp 0.15156f
+C1055 pulse[0] w[19] 0.04779f
+C1056 w[6] w[13] 0
+C1057 bias_cell_0/a_1044_1080# bias_cell_0/VKdn 1.22616f
+C1058 neuron_sized_2/a_3430_2214# bias_cell_0/VIp 0.08414f
+C1059 w[20] w[11] 0
+C1060 w[6] w[5] 10.63406f
+C1061 w[7] w[4] 0.00194f
+C1062 w[29] DPI_4/VT 0
+C1063 w[25] w[18] 0
+C1064 neuron_sized_0/a_3704_6616# VT 0.64213f
+C1065 DPI_1/Isum w[23] 0.09558f
+C1066 spike[4] spike[1] 5.16991f
+C1067 bias_cell_0/Vlk bias_cell_0/Vb 12.4973f
+C1068 neuron_sized_4/a_2722_6554# bias_cell_0/VKdn 3.14096f
+C1069 DPI_1/Isum w[21] 0.09593f
+C1070 neuron_sized_2/a_5916_6554# bias_cell_0/VIp 0
+C1071 w[31] DPI_3/Isum 0.05428f
+C1072 neuron_sized_4/a_4712_2292# bias_cell_0/VKdn 0
+C1073 neuron_sized_0/a_2722_6554# bias_cell_0/VK 0
+C1074 DAC_binary_3/a_2164_9252# w[11] 0.06768f
+C1075 neuron_sized_1/a_4474_6632# bias_cell_0/VIp 0.05738f
+C1076 neuron_sized_4/a_8270_2214# bias_cell_0/VKdn 0.30387f
+C1077 Iref bias_cell_0/Vb 35.77718f
+C1078 w[27] w[30] 0
+C1079 w[3] w[11] 0
+C1080 neuron_sized_2/a_4474_6632# neuron_sized_2/a_4712_2292# 0.09185f
+C1081 neuron_sized_2/a_8270_2214# neuron_sized_2/a_2722_6554# 0.06007f
+C1082 spike[3] DPI_inh_0/Isum 0.13029f
+C1083 VDD spike[1] 7.32374f
+C1084 spike[3] bias_cell_0/Vamp_bias 0.17989f
+C1085 neuron_sized_2/a_4474_6632# neuron_sized_2/a_3704_6616# 0.36022f
+C1086 spike[4] neuron_sized_0/a_9750_6632# 1.46926f
+C1087 VDD spike[4] 3.67025f
+C1088 neuron_sized_1/a_2722_6554# bias_cell_0/VIp 0.0031f
+C1089 VDD w[8] 0.10124f
+C1090 w[23] w[24] 28.0978f
+C1091 w[21] w[24] 0
+C1092 w[13] spike[0] 0.04779f
+C1093 DPI_4/Isum w[18] 0.04779f
+C1094 w[7] w[9] 0.00119f
+C1095 w[6] w[10] 0
+C1096 spike[0] DPI_2/Isum 0.1397f
+C1097 spike[0] w[28] 0.21651f
+C1098 neuron_sized_1/a_7550_2214# bias_cell_0/VKdn 0.22172f
+C1099 w[14] w[15] 20.51048f
+C1100 DPI_0/Isyn DPI_inh_0/DPI_sized_0/Isyn 0.33569f
+C1101 DPI_inh_0/VT Iref 0.39913f
+C1102 neuron_sized_4/a_3430_2214# bias_cell_0/VKdn 0.04997f
+C1103 pulse[0] w[23] 0.04779f
+C1104 pulse[0] w[21] 0.04779f
+C1105 VDD neuron_sized_0/a_9750_6632# 2.72209f
+C1106 w[22] w[29] 0
+C1107 neuron_sized_4/a_4474_6632# neuron_sized_4/a_2722_6554# 0.09781f
+C1108 neuron_sized_2/a_2722_6554# neuron_sized_2/a_9750_6632# 0.39394f
+C1109 neuron_sized_4/a_4712_2292# neuron_sized_4/a_4474_6632# 0.09185f
+C1110 neuron_sized_4/a_7550_2214# bias_cell_0/VKdn 0.22172f
+C1111 neuron_sized_3/a_3704_6616# DPI_3/Isyn 1.43869f
+C1112 DPI_1/Isyn bias_cell_0/VK 0.37062f
+C1113 bias_cell_0/VKup bias_cell_0/VKdn 35.29533f
+C1114 DPI_1/Isum s[1] 7.21473f
+C1115 s[0] w[27] 0.03824f
+C1116 neuron_sized_3/a_3430_2214# neuron_sized_3/a_3704_6616# 0.61849f
+C1117 neuron_sized_4/a_8270_2214# neuron_sized_4/a_4474_6632# 0.04671f
+C1118 w[25] DPI_1/Isum 0.09558f
+C1119 neuron_sized_2/a_4474_6632# neuron_sized_2/a_2722_6554# 0.09781f
+C1120 w[15] w[16] 18.9541f
+C1121 DPI_4/Vthr bias_cell_0/VKdn 0.03054f
+C1122 neuron_sized_1/a_5916_6554# bias_cell_0/VKdn 0
+C1123 bias_cell_0/Vamp_bias spike[1] 0.17989f
+C1124 spike[2] DPI_4/VT 0
+C1125 spike[0] w[30] 0.31407f
+C1126 spike[4] bias_cell_0/Vamp_bias 0.17989f
+C1127 bias_cell_0/VNA DPI_4/VT 1.18111f
+C1128 DPI_2/Isyn neuron_sized_2/a_7550_2214# 0.01311f
+C1129 neuron_sized_1/a_3704_6616# bias_cell_0/VKdn 0.11969f
+C1130 w[10] spike[0] 0.0624f
+C1131 w[25] w[24] 35.22357f
+C1132 bias_cell_0/a_1044_1080# bias_cell_0/VIp 0.43726f
+C1133 neuron_sized_4/a_3430_2214# neuron_sized_4/a_4474_6632# 0.09251f
+C1134 neuron_sized_3/a_2722_6554# DPI_3/Isyn 0.47933f
+C1135 bias_cell_0/VNA DPI_3/Isyn 0.96558f
+C1136 s[0] DAC_signed_1/DAC_binary_0/Isum 0.00642f
+C1137 w[31] DPI_1/Isum 0.11822f
+C1138 DPI_4/a_2190_1804# spike[0] 0.01082f
+C1139 w[26] DAC_signed_1/DAC_binary_0/a_2164_9252# 0.0335f
+C1140 pulse[0] s[1] 0
+C1141 w[1] w[2] 5.7614f
+C1142 w[0] w[3] 0.00194f
+C1143 DPI_4/Vthr DPI_3/a_2190_1804# 0.23618f
+C1144 neuron_sized_3/a_3430_2214# neuron_sized_3/a_2722_6554# 0
+C1145 pulse[1] w[27] 0.04779f
+C1146 w[13] DPI_3/Isum 0.04779f
+C1147 VDD DPI_inh_0/Isum 0.10325f
+C1148 bias_cell_0/VKup neuron_sized_4/a_4474_6632# 0.13361f
+C1149 neuron_sized_4/a_7550_2214# neuron_sized_4/a_4474_6632# 0.2196f
+C1150 w[31] DAC_signed_0/DAC_binary_0/a_2164_9252# 0.06768f
+C1151 VDD bias_cell_0/Vamp_bias 0.32943f
+C1152 pulse[0] w[25] 0.04779f
+C1153 DPI_3/Isum w[28] 0.04779f
+C1154 w[26] w[27] 35.7061f
+C1155 w[5] DPI_3/Isum 0.04814f
+C1156 bias_cell_0/VIp neuron_sized_4/a_2722_6554# 0.0031f
+C1157 bias_cell_0/VIp neuron_sized_4/a_4712_2292# 0.15156f
+C1158 w[7] w[14] 0
+C1159 w[6] pulse[1] 0.0624f
+C1160 w[4] w[12] 0
+C1161 neuron_sized_4/a_8270_2214# bias_cell_0/VIp 0
+C1162 s[0] spike[0] 0.0678f
+C1163 neuron_sized_3/a_3704_6616# VT 0.64213f
+C1164 w[13] w[18] 0
+C1165 w[31] w[24] 0
+C1166 w[17] w[27] 0
+C1167 neuron_sized_2/a_3430_2214# bias_cell_0/VK 0.23589f
+C1168 DPI_0/Isyn s[0] 0
+C1169 w[18] DPI_2/Isum 0.09558f
+C1170 spike[0] neuron_sized_4/a_2722_6554# 0.14379f
+C1171 w[18] w[28] 0
+C1172 spike[0] neuron_sized_4/a_4712_2292# 0.11297f
+C1173 w[14] w[22] 0
+C1174 DPI_4/Isum w[24] 0.04779f
+C1175 neuron_sized_0/a_4712_2292# VT 0.51443f
+C1176 neuron_sized_3/a_9750_6632# neuron_sized_3/a_2722_6554# 0.39394f
+C1177 neuron_sized_2/a_8270_2214# neuron_sized_2/a_7550_2214# 0.81727f
+C1178 w[7] w[16] 0
+C1179 pulse[0] w[31] 4.96127f
+C1180 spike[0] neuron_sized_4/a_8270_2214# 0.14308f
+C1181 w[26] DAC_signed_1/DAC_binary_0/Isum 0
+C1182 DPI_3/Isum w[30] 0.04783f
+C1183 neuron_sized_1/a_7550_2214# bias_cell_0/VIp 0.26988f
+C1184 pulse[0] DPI_4/Isum 0.05407f
+C1185 bias_cell_0/VIp neuron_sized_4/a_3430_2214# 0.08414f
+C1186 spike[2] VT 0.07981f
+C1187 w[10] DPI_3/Isum 0.04779f
+C1188 w[16] w[22] 0
+C1189 DPI_inh_0/DPI_sized_0/Isyn bias_cell_0/VK 0.00313f
+C1190 w[20] w[27] 0
+C1191 neuron_sized_4/a_7550_2214# bias_cell_0/VIp 0.26988f
+C1192 bias_cell_0/VNA VT 0.20675f
+C1193 bias_cell_0/VKup bias_cell_0/VIp 35.22634f
+C1194 neuron_sized_3/a_2722_6554# VT 0
+C1195 pulse[1] spike[0] 0.66288f
+C1196 neuron_sized_1/a_2722_6554# bias_cell_0/VK 0
+C1197 w[9] w[12] 0
+C1198 neuron_sized_0/a_4474_6632# VT 0.24678f
+C1199 neuron_sized_4/a_3704_6616# bias_cell_0/VKdn 0.11969f
+C1200 spike[0] neuron_sized_4/a_3430_2214# 0.24447f
+C1201 neuron_sized_2/a_7550_2214# neuron_sized_2/a_9750_6632# 0.0395f
+C1202 neuron_sized_2/a_4712_2292# neuron_sized_2/a_3430_2214# 1.24342f
+C1203 neuron_sized_0/a_2722_6554# neuron_sized_0/a_7550_2214# 0.00796f
+C1204 bias_cell_0/VNA bias_cell_0/Vlk 35.50827f
+C1205 w[19] w[29] 0
+C1206 w[26] spike[0] 0.16956f
+C1207 neuron_sized_2/a_3704_6616# neuron_sized_2/a_3430_2214# 0.61849f
+C1208 w[9] w[19] 0
+C1209 w[10] w[18] 0
+C1210 spike[0] bias_cell_0/VKup 0.01309f
+C1211 DPI_4/Isyn bias_cell_0/VNA 0.48326f
+C1212 spike[0] neuron_sized_4/a_7550_2214# 0.05233f
+C1213 neuron_sized_1/a_5916_6554# bias_cell_0/VIp 0
+C1214 Iref bias_cell_0/VNA 0.93992f
+C1215 DPI_0/Isyn bias_cell_0/VKup 0.43242f
+C1216 w[1] w[8] 0
+C1217 spike[3] DPI_4/VT 0.14625f
+C1218 neuron_sized_2/a_5916_6554# neuron_sized_2/a_4712_2292# 0
+C1219 neuron_sized_2/a_4474_6632# neuron_sized_2/a_7550_2214# 0.2196f
+C1220 neuron_sized_0/a_3430_2214# neuron_sized_0/a_2722_6554# 0
+C1221 DPI_1/Isum DAC_binary_0/a_2164_9252# 0.36625f
+C1222 s[0] DPI_3/Isum 0.05542f
+C1223 w[17] spike[0] 0.44083f
+C1224 neuron_sized_1/a_3430_2214# VT 0.15694f
+C1225 neuron_sized_1/a_3704_6616# bias_cell_0/VIp 0.11998f
+C1226 DPI_4/Vthr spike[0] 0
+C1227 DPI_1/Isum w[28] 0.09558f
+C1228 w[1] VDD 0.10124f
+C1229 DPI_0/Isyn DPI_4/Vthr 0.35705f
+C1230 w[3] w[6] 0
+C1231 w[2] w[7] 0
+C1232 neuron_sized_1/a_3430_2214# bias_cell_0/Vlk 0.00509f
+C1233 DAC_signed_0/DAC_binary_0/a_2164_9252# w[28] 0.00729f
+C1234 w[15] spike[1] 0.05862f
+C1235 w[13] DAC_binary_2/a_2164_9252# 0.01696f
+C1236 DAC_binary_2/a_2164_9252# DPI_2/Isum 0.36625f
+C1237 neuron_sized_4/a_3704_6616# neuron_sized_4/a_4474_6632# 0.36022f
+C1238 neuron_sized_2/a_2722_6554# neuron_sized_2/a_3430_2214# 0
+C1239 neuron_sized_0/a_2722_6554# neuron_sized_0/a_3704_6616# 0.27251f
+C1240 w[8] w[15] 0
+C1241 DPI_0/Isum DPI_0/a_2190_1804# 0.65893f
+C1242 w[24] DPI_2/Isum 0.09558f
+C1243 w[20] spike[0] 0.09558f
+C1244 w[28] w[24] 0
+C1245 DPI_inh_0/VT DPI_inh_0/DPI_sized_0/a_2368_1640# 1.51222f
+C1246 bias_cell_0/a_1044_1080# bias_cell_0/VK 1.01602f
+C1247 pulse[1] DPI_3/Isum 0.06983f
+C1248 neuron_sized_2/a_5916_6554# neuron_sized_2/a_2722_6554# 0.22613f
+C1249 w[23] w[29] 0
+C1250 VDD w[15] 0.10124f
+C1251 w[26] DPI_3/Isum 0.04779f
+C1252 pulse[0] w[13] 0.04779f
+C1253 w[21] w[29] 0
+C1254 DPI_4/Vthr DPI_1/a_2190_1804# 0.23618f
+C1255 DPI_2/Isyn spike[2] 0.06805f
+C1256 pulse[0] w[28] 0.04779f
+C1257 spike[1] DPI_4/VT 0.17979f
+C1258 DPI_1/Isum w[30] 0.09561f
+C1259 DAC_signed_0/a_894_1366# s[1] 0.72184f
+C1260 pulse[0] w[5] 0.04779f
+C1261 w[14] w[12] 0.73399f
+C1262 s[1] DPI_inh_0/VT 0
+C1263 DPI_3/Isyn spike[1] 0.06805f
+C1264 s[1] DAC_signed_0/DAC_binary_0/Isum 0.00642f
+C1265 DAC_binary_3/a_2164_9252# spike[0] 0.00826f
+C1266 bias_cell_0/VK neuron_sized_4/a_2722_6554# 0
+C1267 DAC_signed_0/DAC_binary_0/a_2164_9252# w[30] 0.0335f
+C1268 DPI_2/Isyn bias_cell_0/VNA 0.96558f
+C1269 neuron_sized_3/a_3430_2214# spike[1] 0.24447f
+C1270 w[6] w[11] 0
+C1271 w[14] w[19] 0
+C1272 pulse[1] w[18] 0.04779f
+C1273 spike[3] VT 0.07958f
+C1274 w[17] DPI_3/Isum 0.04779f
+C1275 w[3] DAC_binary_5/a_2164_9252# 0.06768f
+C1276 neuron_sized_3/a_8270_2214# bias_cell_0/VKdn 0.30387f
+C1277 w[31] bias_cell_0/Vb 0
+C1278 w[26] w[18] 0
+C1279 DPI_0/Isum DPI_inh_0/DPI_sized_0/a_2368_1640# 0.01316f
+C1280 DPI_4/Vthr DPI_3/Isum 1.271f
+C1281 VDD DPI_4/VT 16.75195f
+C1282 w[24] w[30] 0
+C1283 w[12] w[16] 0
+C1284 VDD DPI_3/Isyn 5.90387f
+C1285 VDD neuron_sized_3/a_3430_2214# 0
+C1286 DPI_0/Isum s[1] 6.90185f
+C1287 bias_cell_0/VIp neuron_sized_4/a_3704_6616# 0.11998f
+C1288 w[18] w[17] 25.11066f
+C1289 w[19] w[16] 0.00194f
+C1290 s[0] DPI_1/Isum 0.10964f
+C1291 pulse[0] w[30] 0.04779f
+C1292 DPI_0/Isum w[25] 0.03824f
+C1293 w[16] DAC_binary_1/a_2164_9252# 0.00729f
+C1294 bias_cell_0/VK neuron_sized_4/a_3430_2214# 0.23589f
+C1295 neuron_sized_3/a_9750_6632# spike[1] 1.46926f
+C1296 neuron_sized_2/a_8270_2214# spike[2] 0.14308f
+C1297 s[1] w[29] 0.03824f
+C1298 pulse[0] w[10] 0.04779f
+C1299 w[7] w[8] 9.81028f
+C1300 neuron_sized_1/a_9750_6632# DPI_1/Isyn 0.03443f
+C1301 w[20] DPI_3/Isum 0.04779f
+C1302 spike[0] neuron_sized_4/a_3704_6616# 0.00157f
+C1303 DPI_4/Isum w[4] 0.04779f
+C1304 w[25] w[29] 0
+C1305 bias_cell_0/VKup bias_cell_0/VK 0.18707f
+C1306 w[22] spike[1] 0.11018f
+C1307 spike[0] w[11] 0.05862f
+C1308 VDD w[7] 0.10124f
+C1309 s[0] w[24] 0.05102f
+C1310 VT spike[1] 0.07549f
+C1311 VDD neuron_sized_3/a_9750_6632# 2.72209f
+C1312 w[18] w[20] 0.00119f
+C1313 w[14] w[23] 0
+C1314 DPI_0/Isum w[31] 0.1152f
+C1315 w[14] w[21] 0
+C1316 spike[2] neuron_sized_2/a_9750_6632# 1.46926f
+C1317 spike[4] VT 0.01121f
+C1318 DPI_inh_0/Isum DPI_4/VT 0.06189f
+C1319 pulse[0] s[0] 0
+C1320 bias_cell_0/Vamp_bias DPI_4/VT 0.0547f
+C1321 VDD w[22] 0.10124f
+C1322 bias_cell_0/Vamp_bias DPI_3/Isyn 0.24174f
+C1323 w[26] DPI_1/Isum 0.09558f
+C1324 w[31] w[29] 1.52393f
+C1325 neuron_sized_3/a_3430_2214# bias_cell_0/Vamp_bias 0.04253f
+C1326 w[2] w[12] 0
+C1327 w[0] w[6] 0
+C1328 neuron_sized_1/a_3704_6616# bias_cell_0/VK 0.02735f
+C1329 neuron_sized_2/a_4474_6632# spike[2] 0.34277f
+C1330 neuron_sized_4/a_4474_6632# bias_cell_0/VKdn 0.05334f
+C1331 neuron_sized_2/a_7550_2214# neuron_sized_2/a_3430_2214# 1.21169f
+C1332 VDD VT 0.2377f
+C1333 neuron_sized_0/a_2722_6554# neuron_sized_0/a_8270_2214# 0.06007f
+C1334 DPI_4/Isum w[29] 0.04779f
+C1335 neuron_sized_1/a_9750_6632# neuron_sized_1/a_8270_2214# 0.33343f
+C1336 neuron_sized_2/a_4712_2292# bias_cell_0/VKup 0
+C1337 w[16] w[23] 0
+C1338 w[16] w[21] 0
+C1339 DPI_4/Isum w[9] 0.04779f
+C1340 VDD bias_cell_0/Vlk 1.28343f
+C1341 DPI_1/Isum w[17] 0.04814f
+C1342 pulse[1] w[24] 0.04779f
+C1343 neuron_sized_2/a_5916_6554# neuron_sized_2/a_7550_2214# 0
+C1344 neuron_sized_2/a_3704_6616# bias_cell_0/VKup 0.1559f
+C1345 neuron_sized_0/a_4712_2292# neuron_sized_0/a_2722_6554# 0
+C1346 DPI_4/Vthr DPI_1/Isum 2.892f
+C1347 w[26] w[24] 0.73399f
+C1348 VDD DPI_4/Isyn 5.90387f
+C1349 VDD Iref 1.90288f
+C1350 neuron_sized_3/a_8270_2214# bias_cell_0/VIp 0
+C1351 pulse[0] pulse[1] 4.91643f
+C1352 DPI_3/Isum w[11] 0.04779f
+C1353 pulse[0] w[26] 0.04779f
+C1354 w[17] w[24] 0
+C1355 spike[2] s[1] 0.53868f
+C1356 neuron_sized_0/a_2722_6554# bias_cell_0/VNA 0.49118f
+C1357 DPI_1/Isum w[20] 0.10846f
+C1358 neuron_sized_0/a_2722_6554# neuron_sized_0/a_4474_6632# 0.09781f
+C1359 w[13] w[4] 0
+C1360 w[25] spike[2] 0.39304f
+C1361 w[0] DAC_binary_5/a_2164_9252# 0.00729f
+C1362 DPI_inh_0/VT DPI_inh_0/DPI_sized_0/Isyn 0
+C1363 neuron_sized_3/a_5916_6554# bias_cell_0/VKup 0.35765f
+C1364 neuron_sized_1/a_9750_6632# neuron_sized_1/a_4474_6632# 0.70062f
+C1365 DAC_signed_0/DAC_binary_0/Isum w[28] 0
+C1366 neuron_sized_0/a_2722_6554# neuron_sized_0/a_5916_6554# 0.22613f
+C1367 neuron_sized_2/a_2722_6554# bias_cell_0/VKup 0.15534f
+C1368 pulse[0] w[17] 0.04779f
+C1369 w[18] w[11] 0
+C1370 w[4] w[5] 10.42399f
+C1371 bias_cell_0/VIp bias_cell_0/VKdn 33.7096f
+C1372 VT bias_cell_0/Vamp_bias 44.34642f
+C1373 DAC_signed_1/DAC_binary_0/a_2164_9252# w[27] 0.06768f
+C1374 neuron_sized_3/a_4712_2292# bias_cell_0/VKup 0
+C1375 neuron_sized_1/a_2722_6554# neuron_sized_1/a_9750_6632# 0.39394f
+C1376 w[25] w[16] 0
+C1377 bias_cell_0/Vlk bias_cell_0/Vamp_bias 0.89548f
+C1378 w[12] spike[1] 1.23291f
+C1379 w[20] w[24] 0
+C1380 bias_cell_0/VK neuron_sized_4/a_3704_6616# 0.02735f
+C1381 DPI_4/Isyn bias_cell_0/Vamp_bias 0.17824f
+C1382 spike[0] bias_cell_0/VKdn 0.11443f
+C1383 DPI_0/Isum DPI_inh_0/DPI_sized_0/Isyn 0
+C1384 Iref bias_cell_0/Vamp_bias 0.09525f
+C1385 DPI_0/Isyn bias_cell_0/VKdn 0.24203f
+C1386 DPI_0/Isum w[28] 0.08925f
+C1387 spike[2] w[31] 4.95947f
+C1388 w[19] spike[1] 0.04779f
+C1389 DPI_4/Isum w[14] 0.04779f
+C1390 w[8] w[12] 0
+C1391 VDD DPI_2/Isyn 5.90387f
+C1392 DPI_1/Isyn bias_cell_0/VNA 0.96558f
+C1393 neuron_sized_3/a_4474_6632# bias_cell_0/VKup 0.13361f
+C1394 pulse[0] w[20] 0.04779f
+C1395 DPI_4/Isum spike[2] 0.06385f
+C1396 w[31] bias_cell_0/VNA 0.0345f
+C1397 w[29] DPI_2/Isum 0.09558f
+C1398 w[28] w[29] 39.95486f
+C1399 DAC_signed_0/DAC_binary_0/Isum w[30] 0
+C1400 w[13] w[9] 0
+C1401 bias_cell_0/a_1044_1080# bias_cell_0/Vb 0.35938f
+C1402 VDD w[12] 0.10124f
+C1403 DAC_signed_1/DAC_binary_0/Isum DAC_signed_1/DAC_binary_0/a_2164_9252# 0.36625f
+C1404 w[9] DPI_2/Isum 0.04814f
+C1405 w[5] w[9] 0
+C1406 w[4] w[10] 0
+C1407 bias_cell_0/VIp neuron_sized_4/a_4474_6632# 0.05738f
+C1408 VDD w[19] 0.15576f
+C1409 DPI_4/Isum w[16] 0.04779f
+C1410 w[3] pulse[0] 0.05862f
+C1411 neuron_sized_1/a_3430_2214# DPI_1/Isyn 0.27007f
+C1412 w[1] w[7] 0
+C1413 DPI_0/Isum w[30] 0.07651f
+C1414 spike[0] neuron_sized_4/a_4474_6632# 0.34277f
+C1415 w[7] DAC_binary_4/a_2164_9252# 0.06768f
+C1416 VDD neuron_sized_4/a_9750_6632# 2.72209f
+C1417 VDD neuron_sized_2/a_8270_2214# 0.00102f
+C1418 w[29] w[30] 40.16487f
+C1419 spike[0] w[27] 0.18905f
+C1420 neuron_sized_0/a_3430_2214# bias_cell_0/VKup 0
+C1421 spike[3] s[1] 0.89517f
+C1422 DPI_2/Isyn bias_cell_0/Vamp_bias 0.24174f
+C1423 w[23] spike[1] 0.10641f
+C1424 w[21] spike[1] 0.44083f
+C1425 spike[2] neuron_sized_2/a_3430_2214# 0.24447f
+C1426 w[9] w[10] 15.50666f
+C1427 DPI_3/Isyn DPI_4/VT 0
+C1428 w[7] w[15] 0
+C1429 neuron_sized_3/a_3430_2214# DPI_3/Isyn 0.27007f
+C1430 DPI_0/Isum s[0] 0.09212f
+C1431 bias_cell_0/VKup bias_cell_0/Vb 0.08637f
+C1432 neuron_sized_2/a_5916_6554# spike[2] 0.16612f
+C1433 pulse[0] w[11] 0.04779f
+C1434 VDD neuron_sized_2/a_9750_6632# 2.72209f
+C1435 DPI_3/Isum DPI_3/a_2190_1804# 0.65893f
+C1436 neuron_sized_1/a_3430_2214# neuron_sized_1/a_8270_2214# 0.54225f
+C1437 w[13] w[14] 20.23796f
+C1438 VDD DPI_0/a_2190_1804# 7.49484f
+C1439 neuron_sized_0/a_3704_6616# bias_cell_0/VKup 0.1559f
+C1440 VDD w[23] 0.10342f
+C1441 w[2] DPI_4/Isum 0.04784f
+C1442 w[14] DPI_2/Isum 0.09563f
+C1443 VDD neuron_sized_4/a_5916_6554# 3.99075f
+C1444 VDD w[21] 0.10124f
+C1445 w[14] w[5] 0
+C1446 s[0] w[29] 0.03824f
+C1447 w[15] w[22] 0
+C1448 pulse[1] w[4] 0.77274f
+C1449 spike[2] DPI_2/Isum 0.13134f
+C1450 DPI_4/Vthr bias_cell_0/Vb 0.064f
+C1451 DPI_1/Isyn spike[3] 0.06805f
+C1452 spike[2] w[28] 0.04789f
+C1453 spike[0] bias_cell_0/VIp 0.20429f
+C1454 VDD neuron_sized_2/a_4474_6632# 4.15363f
+C1455 w[31] spike[3] 0.18505f
+C1456 neuron_sized_1/a_7550_2214# neuron_sized_1/a_9750_6632# 0.0395f
+C1457 neuron_sized_1/a_4712_2292# neuron_sized_1/a_3430_2214# 1.24342f
+C1458 DPI_0/Isyn bias_cell_0/VIp 0.22855f
+C1459 DPI_4/Isum VSS 5.63529f
+C1460 DPI_2/Isum VSS 10.59526f
+C1461 DPI_0/Isum VSS 5.81477f
+C1462 DPI_3/Isum VSS 5.86257f
+C1463 DPI_1/Isum VSS 10.65066f
+C1464 s[0] VSS 6.6589f
+C1465 DAC_signed_1/a_894_1366# VSS 2.0144f $ **FLOATING
+C1466 w[27] VSS 15.99236f
+C1467 w[26] VSS 11.61346f
+C1468 w[25] VSS 6.24862f
+C1469 w[24] VSS 7.57058f
+C1470 DAC_signed_1/DAC_binary_0/Isum VSS 2.16603f
+C1471 spike[2] VSS 38.08103f
+C1472 DAC_signed_1/DAC_binary_0/a_2164_9252# VSS 15.09f $ **FLOATING
+C1473 s[1] VSS 8.88489f
+C1474 DAC_signed_0/a_894_1366# VSS 2.0144f $ **FLOATING
+C1475 w[31] VSS 19.68715f
+C1476 w[30] VSS 11.96492f
+C1477 w[29] VSS 6.6017f
+C1478 w[28] VSS 7.87308f
+C1479 DAC_signed_0/DAC_binary_0/Isum VSS 2.16603f
+C1480 spike[3] VSS 76.41957f
+C1481 DAC_signed_0/DAC_binary_0/a_2164_9252# VSS 15.09f $ **FLOATING
+C1482 bias_cell_0/Vb VSS 0.45751p
+C1483 w[3] VSS 12.11502f
+C1484 w[2] VSS 8.80696f
+C1485 w[1] VSS 3.45597f
+C1486 w[0] VSS 5.15684f
+C1487 pulse[0] VSS 3.82745f
+C1488 VDD VSS 1.23681p
+C1489 DAC_binary_5/a_2164_9252# VSS 15.09f $ **FLOATING
+C1490 w[7] VSS 12.66628f
+C1491 w[6] VSS 9.24692f
+C1492 w[5] VSS 3.89744f
+C1493 w[4] VSS 5.29523f
+C1494 pulse[1] VSS 4.98484f
+C1495 DAC_binary_4/a_2164_9252# VSS 15.09f $ **FLOATING
+C1496 DPI_4/Vthr VSS 16.30456f
+C1497 DPI_4/VT VSS 22.9504f
+C1498 DPI_4/a_2190_1804# VSS 7.3256f $ **FLOATING
+C1499 w[11] VSS 13.30621f
+C1500 w[10] VSS 9.67164f
+C1501 w[9] VSS 4.31469f
+C1502 w[8] VSS 5.68445f
+C1503 DAC_binary_3/a_2164_9252# VSS 15.09f $ **FLOATING
+C1504 DPI_3/a_2190_1804# VSS 7.3256f $ **FLOATING
+C1505 DPI_2/a_2190_1804# VSS 7.3256f $ **FLOATING
+C1506 w[15] VSS 13.72937f
+C1507 w[14] VSS 10.10823f
+C1508 w[13] VSS 4.75209f
+C1509 w[12] VSS 6.04076f
+C1510 DAC_binary_2/a_2164_9252# VSS 15.09f $ **FLOATING
+C1511 DPI_1/a_2190_1804# VSS 7.3256f $ **FLOATING
+C1512 w[19] VSS 14.39135f
+C1513 w[18] VSS 10.55989f
+C1514 w[17] VSS 5.20294f
+C1515 w[16] VSS 6.54267f
+C1516 DAC_binary_1/a_2164_9252# VSS 15.09f $ **FLOATING
+C1517 DPI_0/a_2190_1804# VSS 7.32641f $ **FLOATING
+C1518 w[23] VSS 14.8148f
+C1519 w[22] VSS 10.99648f
+C1520 w[21] VSS 5.64034f
+C1521 w[20] VSS 6.92901f
+C1522 DAC_binary_0/a_2164_9252# VSS 15.09f $ **FLOATING
+C1523 DPI_inh_0/Isum VSS 3.47791f
+C1524 DPI_inh_0/DPI_sized_0/Isyn VSS 7.92502f
+C1525 DPI_inh_0/VT VSS 8.4485f
+C1526 DPI_inh_0/DPI_sized_0/a_2368_1640# VSS 7.28445f $ **FLOATING
+C1527 Iref VSS 74.4761f
+C1528 bias_cell_0/a_1044_1080# VSS 16.8732f $ **FLOATING
+C1529 bias_cell_0/VKdn VSS 17.66746f
+C1530 bias_cell_0/Vamp_bias VSS 15.9213f
+C1531 VT VSS 17.2422f
+C1532 bias_cell_0/VIp VSS 15.02193f
+C1533 bias_cell_0/VK VSS 25.6444f
+C1534 bias_cell_0/Vlk VSS 16.53418f
+C1535 DPI_4/Isyn VSS 23.70776f
+C1536 spike[0] VSS 47.78915f
+C1537 bias_cell_0/VKup VSS 16.93336f
+C1538 bias_cell_0/VNA VSS 27.81357f
+C1539 neuron_sized_4/a_8270_2214# VSS 2.67696f $ **FLOATING
+C1540 neuron_sized_4/a_7550_2214# VSS 1.45233f $ **FLOATING
+C1541 neuron_sized_4/a_4712_2292# VSS 1.4805f $ **FLOATING
+C1542 neuron_sized_4/a_3430_2214# VSS 4.85902f $ **FLOATING
+C1543 neuron_sized_4/a_9750_6632# VSS 2.78312f $ **FLOATING
+C1544 neuron_sized_4/a_5916_6554# VSS 2.65127f $ **FLOATING
+C1545 neuron_sized_4/a_4474_6632# VSS 5.85582f $ **FLOATING
+C1546 neuron_sized_4/a_3704_6616# VSS 1.92749f $ **FLOATING
+C1547 neuron_sized_4/a_2722_6554# VSS 6.13033f $ **FLOATING
+C1548 DPI_3/Isyn VSS 23.56985f
+C1549 spike[1] VSS 44.81232f
+C1550 neuron_sized_3/a_8270_2214# VSS 2.67696f $ **FLOATING
+C1551 neuron_sized_3/a_7550_2214# VSS 1.45233f $ **FLOATING
+C1552 neuron_sized_3/a_4712_2292# VSS 1.4805f $ **FLOATING
+C1553 neuron_sized_3/a_3430_2214# VSS 4.85902f $ **FLOATING
+C1554 neuron_sized_3/a_9750_6632# VSS 2.78312f $ **FLOATING
+C1555 neuron_sized_3/a_5916_6554# VSS 2.65127f $ **FLOATING
+C1556 neuron_sized_3/a_4474_6632# VSS 5.85582f $ **FLOATING
+C1557 neuron_sized_3/a_3704_6616# VSS 1.92749f $ **FLOATING
+C1558 neuron_sized_3/a_2722_6554# VSS 6.13033f $ **FLOATING
+C1559 DPI_2/Isyn VSS 23.5885f
+C1560 neuron_sized_2/a_8270_2214# VSS 2.67696f $ **FLOATING
+C1561 neuron_sized_2/a_7550_2214# VSS 1.45233f $ **FLOATING
+C1562 neuron_sized_2/a_4712_2292# VSS 1.4805f $ **FLOATING
+C1563 neuron_sized_2/a_3430_2214# VSS 4.85902f $ **FLOATING
+C1564 neuron_sized_2/a_9750_6632# VSS 2.78312f $ **FLOATING
+C1565 neuron_sized_2/a_5916_6554# VSS 2.65127f $ **FLOATING
+C1566 neuron_sized_2/a_4474_6632# VSS 5.85582f $ **FLOATING
+C1567 neuron_sized_2/a_3704_6616# VSS 1.92749f $ **FLOATING
+C1568 neuron_sized_2/a_2722_6554# VSS 6.13033f $ **FLOATING
+C1569 DPI_1/Isyn VSS 23.57327f
+C1570 neuron_sized_1/a_8270_2214# VSS 2.67696f $ **FLOATING
+C1571 neuron_sized_1/a_7550_2214# VSS 1.45233f $ **FLOATING
+C1572 neuron_sized_1/a_4712_2292# VSS 1.4805f $ **FLOATING
+C1573 neuron_sized_1/a_3430_2214# VSS 4.85902f $ **FLOATING
+C1574 neuron_sized_1/a_9750_6632# VSS 2.78312f $ **FLOATING
+C1575 neuron_sized_1/a_5916_6554# VSS 2.65127f $ **FLOATING
+C1576 neuron_sized_1/a_4474_6632# VSS 5.85582f $ **FLOATING
+C1577 neuron_sized_1/a_3704_6616# VSS 1.92749f $ **FLOATING
+C1578 neuron_sized_1/a_2722_6554# VSS 6.13033f $ **FLOATING
+C1579 DPI_0/Isyn VSS 27.20752f
+C1580 spike[4] VSS 35.2232f
+C1581 neuron_sized_0/a_8270_2214# VSS 2.67696f $ **FLOATING
+C1582 neuron_sized_0/a_7550_2214# VSS 1.45233f $ **FLOATING
+C1583 neuron_sized_0/a_4712_2292# VSS 1.4805f $ **FLOATING
+C1584 neuron_sized_0/a_3430_2214# VSS 4.85902f $ **FLOATING
+C1585 neuron_sized_0/a_9750_6632# VSS 2.78312f $ **FLOATING
+C1586 neuron_sized_0/a_5916_6554# VSS 2.65127f $ **FLOATING
+C1587 neuron_sized_0/a_4474_6632# VSS 5.85582f $ **FLOATING
+C1588 neuron_sized_0/a_3704_6616# VSS 1.92749f $ **FLOATING
+C1589 neuron_sized_0/a_2722_6554# VSS 6.13033f $ **FLOATING

@@ -1,0 +1,289 @@
+{
+  "cell": "bias_cell",
+  "units": "um",
+  "origin": "lower-left of PR boundary",
+  "bbox": [
+    0.0,
+    0.0,
+    167.4,
+    53.475
+  ],
+  "pins": [
+    {
+      "name": "Iref",
+      "layer": "Metal2",
+      "label_x": 0.9,
+      "label_y": 27.275,
+      "access": [
+        {
+          "side": "left",
+          "x1": 0.0,
+          "y1": 27.075,
+          "x2": 0.6,
+          "y2": 27.475,
+          "cx": 0.3,
+          "cy": 27.275
+        }
+      ]
+    },
+    {
+      "name": "VDD",
+      "layer": "Metal1",
+      "label_x": 165.3,
+      "label_y": 51.725,
+      "access": []
+    },
+    {
+      "name": "VDD",
+      "layer": "Metal1",
+      "label_x": 165.3,
+      "label_y": 2.25,
+      "access": []
+    },
+    {
+      "name": "VDD",
+      "layer": "Metal2",
+      "label_x": 166.7,
+      "label_y": 51.725,
+      "access": [
+        {
+          "side": "right",
+          "x1": 166.8,
+          "y1": 51.525,
+          "x2": 167.4,
+          "y2": 51.925,
+          "cx": 167.1,
+          "cy": 51.725
+        }
+      ]
+    },
+    {
+      "name": "VDD",
+      "layer": "Metal2",
+      "label_x": 166.7,
+      "label_y": 2.25,
+      "access": [
+        {
+          "side": "right",
+          "x1": 166.8,
+          "y1": 2.05,
+          "x2": 167.4,
+          "y2": 2.45,
+          "cx": 167.1,
+          "cy": 2.25
+        }
+      ]
+    },
+    {
+      "name": "VIp",
+      "layer": "Metal3",
+      "label_x": 114.84,
+      "label_y": 53.175,
+      "access": [
+        {
+          "side": "top",
+          "x1": 114.64,
+          "y1": 52.875,
+          "x2": 115.04,
+          "y2": 53.475,
+          "cx": 114.84,
+          "cy": 53.175
+        }
+      ]
+    },
+    {
+      "name": "VK",
+      "layer": "Metal3",
+      "label_x": 143.08,
+      "label_y": 53.175,
+      "access": [
+        {
+          "side": "top",
+          "x1": 142.88,
+          "y1": 52.875,
+          "x2": 143.28,
+          "y2": 53.475,
+          "cx": 143.08,
+          "cy": 53.175
+        }
+      ]
+    },
+    {
+      "name": "VKdn",
+      "layer": "Metal3",
+      "label_x": 90.95,
+      "label_y": 53.175,
+      "access": [
+        {
+          "side": "top",
+          "x1": 90.75,
+          "y1": 52.875,
+          "x2": 91.15,
+          "y2": 53.475,
+          "cx": 90.95,
+          "cy": 53.175
+        }
+      ]
+    },
+    {
+      "name": "VKup",
+      "layer": "Metal3",
+      "label_x": 51.6,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 51.4,
+          "y1": 0.0,
+          "x2": 51.8,
+          "y2": 0.6,
+          "cx": 51.6,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "VNA",
+      "layer": "Metal3",
+      "label_x": 34.76,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 34.56,
+          "y1": 0.0,
+          "x2": 34.96,
+          "y2": 0.6,
+          "cx": 34.76,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "VSS",
+      "layer": "Metal1",
+      "label_x": 165.3,
+      "label_y": 27.275,
+      "access": []
+    },
+    {
+      "name": "VSS",
+      "layer": "Metal2",
+      "label_x": 166.2,
+      "label_y": 27.275,
+      "access": [
+        {
+          "side": "right",
+          "x1": 166.8,
+          "y1": 27.075,
+          "x2": 167.4,
+          "y2": 27.475,
+          "cx": 167.1,
+          "cy": 27.275
+        }
+      ]
+    },
+    {
+      "name": "VT_dpi",
+      "layer": "Metal3",
+      "label_x": 109.16,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 108.96,
+          "y1": 0.0,
+          "x2": 109.36,
+          "y2": 0.6,
+          "cx": 109.16,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "VT_inh",
+      "layer": "Metal3",
+      "label_x": 143.92,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 143.72,
+          "y1": 0.0,
+          "x2": 144.12,
+          "y2": 0.6,
+          "cx": 143.92,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "Vamp_bias",
+      "layer": "Metal3",
+      "label_x": 13.57,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 13.37,
+          "y1": 0.0,
+          "x2": 13.77,
+          "y2": 0.6,
+          "cx": 13.57,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "Vb",
+      "layer": "Metal3",
+      "label_x": 48.22,
+      "label_y": 53.175,
+      "access": [
+        {
+          "side": "top",
+          "x1": 48.02,
+          "y1": 52.875,
+          "x2": 48.42,
+          "y2": 53.475,
+          "cx": 48.22,
+          "cy": 53.175
+        }
+      ]
+    },
+    {
+      "name": "Vlk",
+      "layer": "Metal3",
+      "label_x": 63.06,
+      "label_y": 53.175,
+      "access": [
+        {
+          "side": "top",
+          "x1": 62.86,
+          "y1": 52.875,
+          "x2": 63.26,
+          "y2": 53.475,
+          "cx": 63.06,
+          "cy": 53.175
+        }
+      ]
+    },
+    {
+      "name": "Vthr",
+      "layer": "Metal3",
+      "label_x": 74.4,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 74.2,
+          "y1": 0.0,
+          "x2": 74.6,
+          "y2": 0.6,
+          "cx": 74.4,
+          "cy": 0.3
+        }
+      ]
+    }
+  ]
+}

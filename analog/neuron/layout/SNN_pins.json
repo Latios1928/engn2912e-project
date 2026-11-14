@@ -5,199 +5,12 @@
   "bbox": [
     0.0,
     0.0,
-    284.34000000000003,
-    476.76
+    285.14,
+    547.035
   ],
   "pins": [
     {
-      "name": "VDD",
-      "layer": "Metal3",
-      "label_x": 2.3,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 1.8,
-          "y1": 0.0,
-          "x2": 2.8,
-          "y2": 0.6,
-          "cx": 2.3,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VIp",
-      "layer": "Metal3",
-      "label_x": 197.58,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 197.38,
-          "y1": 0.0,
-          "x2": 197.78,
-          "y2": 0.6,
-          "cx": 197.58,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VK",
-      "layer": "Metal3",
-      "label_x": 196.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 196.58,
-          "y1": 0.0,
-          "x2": 196.98,
-          "y2": 0.6,
-          "cx": 196.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VKdn",
-      "layer": "Metal3",
-      "label_x": 199.18,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 198.98,
-          "y1": 0.0,
-          "x2": 199.38,
-          "y2": 0.6,
-          "cx": 199.18,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VKup",
-      "layer": "Metal3",
-      "label_x": 198.38,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 198.18,
-          "y1": 0.0,
-          "x2": 198.58,
-          "y2": 0.6,
-          "cx": 198.38,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VNA",
-      "layer": "Metal3",
-      "label_x": 195.18,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 194.98,
-          "y1": 0.0,
-          "x2": 195.38,
-          "y2": 0.6,
-          "cx": 195.18,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VSS",
-      "layer": "Metal3",
-      "label_x": 3.7,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 3.2,
-          "y1": 0.0,
-          "x2": 4.2,
-          "y2": 0.6,
-          "cx": 3.7,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VT",
-      "layer": "Metal3",
-      "label_x": 200.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 200.58,
-          "y1": 0.0,
-          "x2": 200.98,
-          "y2": 0.6,
-          "cx": 200.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VT_dpi",
-      "layer": "Metal3",
-      "label_x": 158.28,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 158.08,
-          "y1": 0.0,
-          "x2": 158.48,
-          "y2": 0.6,
-          "cx": 158.28,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "VT_inh",
-      "layer": "Metal3",
-      "label_x": 159.08,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 158.88,
-          "y1": 0.0,
-          "x2": 159.28,
-          "y2": 0.6,
-          "cx": 159.08,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "Vamp_bias",
-      "layer": "Metal3",
-      "label_x": 199.98,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 199.78,
-          "y1": 0.0,
-          "x2": 200.18,
-          "y2": 0.6,
-          "cx": 199.98,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "Vb",
+      "name": "Iref",
       "layer": "Metal3",
       "label_x": 1.2,
       "label_y": 0.3,
@@ -214,58 +27,58 @@
       ]
     },
     {
-      "name": "Vlk",
+      "name": "VDD",
       "layer": "Metal3",
-      "label_x": 195.98,
+      "label_x": 3.1,
       "label_y": 0.3,
       "access": [
         {
           "side": "bottom",
-          "x1": 195.78,
+          "x1": 2.6,
           "y1": 0.0,
-          "x2": 196.18,
+          "x2": 3.6,
           "y2": 0.6,
-          "cx": 195.98,
+          "cx": 3.1,
           "cy": 0.3
         }
       ]
     },
     {
-      "name": "Vthr",
+      "name": "VSS",
       "layer": "Metal3",
-      "label_x": 157.48,
+      "label_x": 4.5,
       "label_y": 0.3,
       "access": [
         {
           "side": "bottom",
-          "x1": 157.28,
+          "x1": 4.0,
           "y1": 0.0,
-          "x2": 157.68,
+          "x2": 5.0,
           "y2": 0.6,
-          "cx": 157.48,
+          "cx": 4.5,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "VT",
+      "layer": "Metal3",
+      "label_x": 201.58,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 201.38,
+          "y1": 0.0,
+          "x2": 201.78,
+          "y2": 0.6,
+          "cx": 201.58,
           "cy": 0.3
         }
       ]
     },
     {
       "name": "pulse[0]",
-      "layer": "Metal3",
-      "label_x": 148.58,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 148.38,
-          "y1": 0.0,
-          "x2": 148.78,
-          "y2": 0.6,
-          "cx": 148.58,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "pulse[1]",
       "layer": "Metal3",
       "label_x": 149.38,
       "label_y": 0.3,
@@ -282,24 +95,24 @@
       ]
     },
     {
-      "name": "s[0]",
+      "name": "pulse[1]",
       "layer": "Metal3",
-      "label_x": 153.48,
+      "label_x": 150.18,
       "label_y": 0.3,
       "access": [
         {
           "side": "bottom",
-          "x1": 153.28,
+          "x1": 149.98,
           "y1": 0.0,
-          "x2": 153.68,
+          "x2": 150.38,
           "y2": 0.6,
-          "cx": 153.48,
+          "cx": 150.18,
           "cy": 0.3
         }
       ]
     },
     {
-      "name": "s[1]",
+      "name": "s[0]",
       "layer": "Metal3",
       "label_x": 154.28,
       "label_y": 0.3,
@@ -316,18 +129,35 @@
       ]
     },
     {
-      "name": "spike[0]",
-      "layer": "Metal1",
-      "label_x": 279.74,
+      "name": "s[1]",
+      "layer": "Metal3",
+      "label_x": 155.08,
       "label_y": 0.3,
       "access": [
         {
           "side": "bottom",
-          "x1": 279.54,
+          "x1": 154.88,
           "y1": 0.0,
-          "x2": 279.94,
+          "x2": 155.28,
           "y2": 0.6,
-          "cx": 279.74,
+          "cx": 155.08,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "spike[0]",
+      "layer": "Metal1",
+      "label_x": 280.54,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 280.34,
+          "y1": 0.0,
+          "x2": 280.74,
+          "y2": 0.6,
+          "cx": 280.54,
           "cy": 0.3
         }
       ]
@@ -335,16 +165,16 @@
     {
       "name": "spike[1]",
       "layer": "Metal5",
-      "label_x": 280.59,
+      "label_x": 281.39,
       "label_y": 0.3,
       "access": [
         {
           "side": "bottom",
-          "x1": 280.34,
+          "x1": 281.14,
           "y1": 0.0,
-          "x2": 280.84,
+          "x2": 281.64,
           "y2": 0.6,
-          "cx": 280.59,
+          "cx": 281.39,
           "cy": 0.3
         }
       ]
@@ -352,23 +182,6 @@
     {
       "name": "spike[2]",
       "layer": "Metal3",
-      "label_x": 281.44,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 281.24,
-          "y1": 0.0,
-          "x2": 281.64,
-          "y2": 0.6,
-          "cx": 281.44,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "spike[3]",
-      "layer": "Metal1",
       "label_x": 282.24,
       "label_y": 0.3,
       "access": [
@@ -384,211 +197,41 @@
       ]
     },
     {
-      "name": "spike[4]",
-      "layer": "Metal5",
-      "label_x": 283.09,
+      "name": "spike[3]",
+      "layer": "Metal1",
+      "label_x": 283.04,
       "label_y": 0.3,
       "access": [
         {
           "side": "bottom",
           "x1": 282.84,
           "y1": 0.0,
-          "x2": 283.34,
+          "x2": 283.24,
           "y2": 0.6,
-          "cx": 283.09,
+          "cx": 283.04,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "spike[4]",
+      "layer": "Metal5",
+      "label_x": 283.89,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 283.64,
+          "y1": 0.0,
+          "x2": 284.14,
+          "y2": 0.6,
+          "cx": 283.89,
           "cy": 0.3
         }
       ]
     },
     {
       "name": "w[0]",
-      "layer": "Metal3",
-      "label_x": 122.98,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 122.78,
-          "y1": 0.0,
-          "x2": 123.18,
-          "y2": 0.6,
-          "cx": 122.98,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[10]",
-      "layer": "Metal3",
-      "label_x": 130.98,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 130.78,
-          "y1": 0.0,
-          "x2": 131.18,
-          "y2": 0.6,
-          "cx": 130.98,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[11]",
-      "layer": "Metal3",
-      "label_x": 131.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 131.58,
-          "y1": 0.0,
-          "x2": 131.98,
-          "y2": 0.6,
-          "cx": 131.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[12]",
-      "layer": "Metal3",
-      "label_x": 132.58,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 132.38,
-          "y1": 0.0,
-          "x2": 132.78,
-          "y2": 0.6,
-          "cx": 132.58,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[13]",
-      "layer": "Metal3",
-      "label_x": 133.38,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 133.18,
-          "y1": 0.0,
-          "x2": 133.58,
-          "y2": 0.6,
-          "cx": 133.38,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[14]",
-      "layer": "Metal3",
-      "label_x": 134.18,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 133.98,
-          "y1": 0.0,
-          "x2": 134.38,
-          "y2": 0.6,
-          "cx": 134.18,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[15]",
-      "layer": "Metal3",
-      "label_x": 134.98,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 134.78,
-          "y1": 0.0,
-          "x2": 135.18,
-          "y2": 0.6,
-          "cx": 134.98,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[16]",
-      "layer": "Metal3",
-      "label_x": 135.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 135.58,
-          "y1": 0.0,
-          "x2": 135.98,
-          "y2": 0.6,
-          "cx": 135.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[17]",
-      "layer": "Metal3",
-      "label_x": 136.58,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 136.38,
-          "y1": 0.0,
-          "x2": 136.78,
-          "y2": 0.6,
-          "cx": 136.58,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[18]",
-      "layer": "Metal3",
-      "label_x": 137.38,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 137.18,
-          "y1": 0.0,
-          "x2": 137.58,
-          "y2": 0.6,
-          "cx": 137.38,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[19]",
-      "layer": "Metal3",
-      "label_x": 138.18,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 137.98,
-          "y1": 0.0,
-          "x2": 138.38,
-          "y2": 0.6,
-          "cx": 138.18,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[1]",
       "layer": "Metal3",
       "label_x": 123.78,
       "label_y": 0.3,
@@ -605,7 +248,160 @@
       ]
     },
     {
-      "name": "w[20]",
+      "name": "w[10]",
+      "layer": "Metal3",
+      "label_x": 131.78,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 131.58,
+          "y1": 0.0,
+          "x2": 131.98,
+          "y2": 0.6,
+          "cx": 131.78,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[11]",
+      "layer": "Metal3",
+      "label_x": 132.58,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 132.38,
+          "y1": 0.0,
+          "x2": 132.78,
+          "y2": 0.6,
+          "cx": 132.58,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[12]",
+      "layer": "Metal3",
+      "label_x": 133.38,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 133.18,
+          "y1": 0.0,
+          "x2": 133.58,
+          "y2": 0.6,
+          "cx": 133.38,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[13]",
+      "layer": "Metal3",
+      "label_x": 134.18,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 133.98,
+          "y1": 0.0,
+          "x2": 134.38,
+          "y2": 0.6,
+          "cx": 134.18,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[14]",
+      "layer": "Metal3",
+      "label_x": 134.98,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 134.78,
+          "y1": 0.0,
+          "x2": 135.18,
+          "y2": 0.6,
+          "cx": 134.98,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[15]",
+      "layer": "Metal3",
+      "label_x": 135.78,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 135.58,
+          "y1": 0.0,
+          "x2": 135.98,
+          "y2": 0.6,
+          "cx": 135.78,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[16]",
+      "layer": "Metal3",
+      "label_x": 136.58,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 136.38,
+          "y1": 0.0,
+          "x2": 136.78,
+          "y2": 0.6,
+          "cx": 136.58,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[17]",
+      "layer": "Metal3",
+      "label_x": 137.38,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 137.18,
+          "y1": 0.0,
+          "x2": 137.58,
+          "y2": 0.6,
+          "cx": 137.38,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[18]",
+      "layer": "Metal3",
+      "label_x": 138.18,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 137.98,
+          "y1": 0.0,
+          "x2": 138.38,
+          "y2": 0.6,
+          "cx": 138.18,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[19]",
       "layer": "Metal3",
       "label_x": 138.98,
       "label_y": 0.3,
@@ -622,160 +418,7 @@
       ]
     },
     {
-      "name": "w[21]",
-      "layer": "Metal3",
-      "label_x": 139.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 139.58,
-          "y1": 0.0,
-          "x2": 139.98,
-          "y2": 0.6,
-          "cx": 139.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[22]",
-      "layer": "Metal3",
-      "label_x": 140.58,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 140.38,
-          "y1": 0.0,
-          "x2": 140.78,
-          "y2": 0.6,
-          "cx": 140.58,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[23]",
-      "layer": "Metal3",
-      "label_x": 141.38,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 141.18,
-          "y1": 0.0,
-          "x2": 141.58,
-          "y2": 0.6,
-          "cx": 141.38,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[24]",
-      "layer": "Metal3",
-      "label_x": 142.18,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 141.98,
-          "y1": 0.0,
-          "x2": 142.38,
-          "y2": 0.6,
-          "cx": 142.18,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[25]",
-      "layer": "Metal3",
-      "label_x": 142.98,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 142.78,
-          "y1": 0.0,
-          "x2": 143.18,
-          "y2": 0.6,
-          "cx": 142.98,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[26]",
-      "layer": "Metal3",
-      "label_x": 143.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 143.58,
-          "y1": 0.0,
-          "x2": 143.98,
-          "y2": 0.6,
-          "cx": 143.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[27]",
-      "layer": "Metal3",
-      "label_x": 144.58,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 144.38,
-          "y1": 0.0,
-          "x2": 144.78,
-          "y2": 0.6,
-          "cx": 144.58,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[28]",
-      "layer": "Metal3",
-      "label_x": 145.38,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 145.18,
-          "y1": 0.0,
-          "x2": 145.58,
-          "y2": 0.6,
-          "cx": 145.38,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[29]",
-      "layer": "Metal3",
-      "label_x": 146.18,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 145.98,
-          "y1": 0.0,
-          "x2": 146.38,
-          "y2": 0.6,
-          "cx": 146.18,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[2]",
+      "name": "w[1]",
       "layer": "Metal3",
       "label_x": 124.58,
       "label_y": 0.3,
@@ -792,7 +435,160 @@
       ]
     },
     {
-      "name": "w[30]",
+      "name": "w[20]",
+      "layer": "Metal3",
+      "label_x": 139.78,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 139.58,
+          "y1": 0.0,
+          "x2": 139.98,
+          "y2": 0.6,
+          "cx": 139.78,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[21]",
+      "layer": "Metal3",
+      "label_x": 140.58,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 140.38,
+          "y1": 0.0,
+          "x2": 140.78,
+          "y2": 0.6,
+          "cx": 140.58,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[22]",
+      "layer": "Metal3",
+      "label_x": 141.38,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 141.18,
+          "y1": 0.0,
+          "x2": 141.58,
+          "y2": 0.6,
+          "cx": 141.38,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[23]",
+      "layer": "Metal3",
+      "label_x": 142.18,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 141.98,
+          "y1": 0.0,
+          "x2": 142.38,
+          "y2": 0.6,
+          "cx": 142.18,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[24]",
+      "layer": "Metal3",
+      "label_x": 142.98,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 142.78,
+          "y1": 0.0,
+          "x2": 143.18,
+          "y2": 0.6,
+          "cx": 142.98,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[25]",
+      "layer": "Metal3",
+      "label_x": 143.78,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 143.58,
+          "y1": 0.0,
+          "x2": 143.98,
+          "y2": 0.6,
+          "cx": 143.78,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[26]",
+      "layer": "Metal3",
+      "label_x": 144.58,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 144.38,
+          "y1": 0.0,
+          "x2": 144.78,
+          "y2": 0.6,
+          "cx": 144.58,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[27]",
+      "layer": "Metal3",
+      "label_x": 145.38,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 145.18,
+          "y1": 0.0,
+          "x2": 145.58,
+          "y2": 0.6,
+          "cx": 145.38,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[28]",
+      "layer": "Metal3",
+      "label_x": 146.18,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 145.98,
+          "y1": 0.0,
+          "x2": 146.38,
+          "y2": 0.6,
+          "cx": 146.18,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[29]",
       "layer": "Metal3",
       "label_x": 146.98,
       "label_y": 0.3,
@@ -809,24 +605,7 @@
       ]
     },
     {
-      "name": "w[31]",
-      "layer": "Metal3",
-      "label_x": 147.78,
-      "label_y": 0.3,
-      "access": [
-        {
-          "side": "bottom",
-          "x1": 147.58,
-          "y1": 0.0,
-          "x2": 147.98,
-          "y2": 0.6,
-          "cx": 147.78,
-          "cy": 0.3
-        }
-      ]
-    },
-    {
-      "name": "w[3]",
+      "name": "w[2]",
       "layer": "Metal3",
       "label_x": 125.38,
       "label_y": 0.3,
@@ -843,7 +622,41 @@
       ]
     },
     {
-      "name": "w[4]",
+      "name": "w[30]",
+      "layer": "Metal3",
+      "label_x": 147.78,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 147.58,
+          "y1": 0.0,
+          "x2": 147.98,
+          "y2": 0.6,
+          "cx": 147.78,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[31]",
+      "layer": "Metal3",
+      "label_x": 148.58,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 148.38,
+          "y1": 0.0,
+          "x2": 148.78,
+          "y2": 0.6,
+          "cx": 148.58,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[3]",
       "layer": "Metal3",
       "label_x": 126.18,
       "label_y": 0.3,
@@ -860,7 +673,7 @@
       ]
     },
     {
-      "name": "w[5]",
+      "name": "w[4]",
       "layer": "Metal3",
       "label_x": 126.98,
       "label_y": 0.3,
@@ -877,7 +690,7 @@
       ]
     },
     {
-      "name": "w[6]",
+      "name": "w[5]",
       "layer": "Metal3",
       "label_x": 127.78,
       "label_y": 0.3,
@@ -894,7 +707,7 @@
       ]
     },
     {
-      "name": "w[7]",
+      "name": "w[6]",
       "layer": "Metal3",
       "label_x": 128.58,
       "label_y": 0.3,
@@ -911,7 +724,7 @@
       ]
     },
     {
-      "name": "w[8]",
+      "name": "w[7]",
       "layer": "Metal3",
       "label_x": 129.38,
       "label_y": 0.3,
@@ -928,7 +741,7 @@
       ]
     },
     {
-      "name": "w[9]",
+      "name": "w[8]",
       "layer": "Metal3",
       "label_x": 130.18,
       "label_y": 0.3,
@@ -940,6 +753,23 @@
           "x2": 130.38,
           "y2": 0.6,
           "cx": 130.18,
+          "cy": 0.3
+        }
+      ]
+    },
+    {
+      "name": "w[9]",
+      "layer": "Metal3",
+      "label_x": 130.98,
+      "label_y": 0.3,
+      "access": [
+        {
+          "side": "bottom",
+          "x1": 130.78,
+          "y1": 0.0,
+          "x2": 131.18,
+          "y2": 0.6,
+          "cx": 130.98,
           "cy": 0.3
         }
       ]

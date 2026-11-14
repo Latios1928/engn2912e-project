@@ -1,5 +1,5 @@
 #!/bin/bash -l
-# Regenerate the analog SNN top level (analog/snn/snn_analog_inh.sch, with binary DACs) from the existing block
+# Regenerate the analog SNN top level (analog/snn/snn_analog_inh.sch, with binary DACs and the bias cell) from the existing block
 # layouts, run DRC + LVS, extract pins and render an image. The blocks are read as they are:
 # rerun their own check scripts first if a block changed.
 # Run inside the iic-osic-tools container:
@@ -29,6 +29,9 @@ python3 $TECH/lvs/run_lvs.py --layout=SNN.gds --netlist=SNN_lvs_ref.cdl --varian
     --topcell=SNN --run_dir=$RUN/lvs --lvs_sub=VSS --combine > $RUN/lvs/log.txt 2>&1 || true
 grep -E "Netlists (don.t )?match|Congratulations" $RUN/lvs/log.txt | cut -c1-200
 LVSDB=$RUN/lvs/SNN.lvsdb klayout -b -r lvs_xref.py
+
+echo "=== well bias (isolated P-wells, DNWELL, NWELL, substrate taps)"
+LVSDB=$RUN/lvs/SNN.lvsdb klayout -b -r well_bias_check.py -rd gds=SNN.gds -rd out=SNN_well_bias.md | sed -n '/^## Issues found/,$p'
 
 echo "=== pins, image"
 klayout -b -r extract_pins.py -rd gds=SNN.gds -rd jout=SNN_pins.json -rd png=SNN.png > /dev/null

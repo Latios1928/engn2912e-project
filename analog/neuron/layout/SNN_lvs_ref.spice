@@ -5,6 +5,8 @@
 *   - every block is its layout cell; the subcircuits below are copied from the blocks'
 *     own LVS references (*_lvs_ref.spice: dummies, MIM caps, substrate / DNWELL ports)
 *   - the blocks' GND (DACs, DAC_signed, DPI_inh) and the substrate are the top-level VSS
+*   - bias_cell (analog/neuron/bias_cell.sch) generates Vb, Vthr, VT_dpi, VT_inh, VNA, Vlk, VK, VIp,
+*     VKup, VKdn and Vamp_bias from the pin Iref; these are no longer SNN pins (VT still is)
 
 .subckt neuron_sized VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
 * spike amplifier (x1): A1/A2 diff pair, A3 tail, A4/A5 mirror
@@ -208,7 +210,35 @@ XMD_L GND GND GND GND nfet_03v3 L=8u W=2u nf=1
 XMD_R GND GND GND GND nfet_03v3 L=8u W=2u nf=1
 .ends
 
-.subckt SNN VDD VSS Vb w[0] w[1] w[2] w[3] w[4] w[5] w[6] w[7] w[8] w[9] w[10] w[11] w[12] w[13] w[14] w[15] w[16] w[17] w[18] w[19] w[20] w[21] w[22] w[23] w[24] w[25] w[26] w[27] w[28] w[29] w[30] w[31] pulse[0] pulse[1] s[0] s[1] Vthr VT_dpi VT_inh VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[0] spike[1] spike[2] spike[3] spike[4]
+.subckt bias_cell VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh
+XMN0 Iref Iref VSS VSS nfet_03v3 L=8u W=10u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMNP vgp Iref VSS VSS nfet_03v3 L=8u W=10u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMP0 vgp vgp VDD VDD pfet_03v3 L=8u W=10u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMO_Vb Vb vgp VDD VDD pfet_03v3 L=8u W=1.435u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_Vb Vb Vb VSS VSS nfet_03v3 L=8u W=1u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMO_Vlk Vlk vgp VDD VDD pfet_03v3 L=16u W=0.84u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_Vlk Vlk Vlk VSS VSS nfet_03v3 L=1u W=1u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m=8
+XMO_VKdn VKdn vgp VDD VDD pfet_03v3 L=8u W=12.94u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VKdn VKdn VKdn VSS VSS nfet_03v3 L=1u W=1u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m=4
+XMO_VIp VIp vgp VDD VDD pfet_03v3 L=8u W=2.335u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VIp VIp VIp VSS VSS nfet_03v3 L=1u W=1u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMO_Vamp_bias Vamp_bias vgp VDD VDD pfet_03v3 L=8u W=9.14u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u'  pd='2*int((nf+1)/2) * (W/nf + 0.18u)' ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_Vamp_bias Vamp_bias Vamp_bias VSS VSS nfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u'  pd='2*int((nf+1)/2) * (W/nf + 0.18u)' ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMO_VK VK vgp VDD VDD pfet_03v3 L=8u W=10.45u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VK VK VK VSS VSS nfet_03v3 L=40u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VNA VNA VNA VDD VDD pfet_03v3 L=20u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMO_VNA VNA Iref VSS VSS nfet_03v3 L=8u W=5.755u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VKup VKup VKup VDD VDD pfet_03v3 L=8u W=1u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMO_VKup VKup Iref VSS VSS nfet_03v3 L=8u W=6.005u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_Vthr Vthr Vthr VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m=32
+XMO_Vthr Vthr Iref VSS VSS nfet_03v3 L=32u W=0.905u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VT_dpi VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u'  pd='2*int((nf+1)/2) * (W/nf + 0.18u)' ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m=32
+XMO_VT_dpi VT_dpi Iref VSS VSS nfet_03v3 L=32u W=1.165u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XMR_VT_inh VT_inh VT_inh VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u'  pd='2*int((nf+1)/2) * (W/nf + 0.18u)' ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m=16
+XMO_VT_inh VT_inh Iref VSS VSS nfet_03v3 L=32u W=0.625u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'  ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.subckt SNN VDD VSS Iref w[0] w[1] w[2] w[3] w[4] w[5] w[6] w[7] w[8] w[9] w[10] w[11] w[12] w[13] w[14] w[15] w[16] w[17] w[18] w[19] w[20] w[21] w[22] w[23] w[24] w[25] w[26] w[27] w[28] w[29] w[30] w[31] pulse[0] pulse[1] s[0] s[1] VT spike[0] spike[1] spike[2] spike[3] spike[4]
 xdac0_0 Isum_0 Vb w[3] w[2] w[1] w[0] pulse[0] VDD VSS DAC_binary
 xdac1_0 Isum_1 Vb w[7] w[6] w[5] w[4] pulse[1] VDD VSS DAC_binary
 xdac2_0 Isum_2 Vb w[11] w[10] w[9] w[8] spike[0] VDD VSS DAC_binary
@@ -228,4 +258,5 @@ xneu1 VSS VDD VMEM_1 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[1] neuron_sized
 xneu2 VSS VDD VMEM_2 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[2] neuron_sized
 xneu3 VSS VDD VMEM_3 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[3] neuron_sized
 xneu4 VSS VDD VMEM_4 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[4] neuron_sized
+xbias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh bias_cell
 .ends

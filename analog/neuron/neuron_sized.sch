@@ -73,7 +73,7 @@ N 380 -150 410 -150 {lab=VDD}
 N 310 -150 340 -150 {lab=VKup}
 N 380 -230 380 -180 {lab=VDD}
 N -540 40 -490 40 {lab=VSS}
-C {analog/neuron/spike_amplifier.sym} -20 0 0 0 {name=x1}
+C {analog/neuron/spike_amplifier_sized.sym} -20 0 0 0 {name=x1}
 C {lab_wire.sym} -100 0 0 0 {name=p1 sig_type=std_logic lab=VT}
 C {lab_wire.sym} -100 20 0 0 {name=p2 sig_type=std_logic lab=Vamp_bias}
 C {lab_wire.sym} 0 80 0 0 {name=p3 sig_type=std_logic lab=VSS}
@@ -299,3 +299,5 @@ C {opin.sym} -860 300 0 0 {name=p42 lab=spike}
 C {ipin.sym} -840 230 0 0 {name=p43 lab=Vamp_bias}
 C {ipin.sym} -840 270 0 0 {name=p44 lab=VT}
 C {lab_wire.sym} -490 40 0 0 {name=p45 sig_type=std_logic lab=VSS}
+T {2026-11-14: x1 is spike_amplifier_sized (input pair 4/2 um, mirror 0.5/8 um; was the minimum-size spike_amplifier).
+See analog/testbenches/spike_amp/results/spike_amp_sizing.md. The layout (layout/gen_neuron.py, neuron_sized.gds) still has the minimum-size amplifier.} -860 -520 0 0 0.3 0.3 {}
