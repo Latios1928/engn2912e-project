@@ -1,0 +1,60 @@
+// trim_iref: trimmed reference current for the addr4_trim mixed-signal run.
+// The 4 trim bits (from the trim register) set the current Iref (pin iout),
+// which feeds the bias cell's Iref pin; the bias voltages themselves come from
+// the real bias_cell transistors. The trim law and its default parameters are
+// those of Luz's bias generator (analog/bias/bias_gen.py).
+//
+// Trim law (bias_gen.py): the master current is set by a resistor
+//   R(code) = R15 + (15 - code) (R0 - R15) / 15     (units of the nominal R)
+// and I is proportional to 1/R, so
+//   iout = iref_nom * perr * R(tnom) / R(code)
+// code 0 -> 0.71, code 9 (tnom) -> 1.00, code 15 -> 1.36 of iref_nom.
+//
+// Pins
+//   vdd, vss       supplies
+//   iout           current source output: iout flows from vdd into this pin
+//                  (connect to bias_cell's Iref)
+//   imon           trim monitor: sinks a copy of iout when held above ~0.3 V
+//                  (bias_gen's Imon pad is held at 1.65 V), 0 at 0 V
+//   t3 t2 t1 t0    trim bits, logic 1 above vth; no input current
+//
+// Parameters
+//   iref_nom   current at the nominal code (bias_cell is sized for 100 nA)
+//   perr       process error of the master current, a 'bad chip' for trimming
+//              tests (bias_gen.py: about 0.82 at ss, 1.28 at ff)
+//   r15, r0    R(15), R(0) in units of the nominal R (TRIM_R15, TRIM_R0)
+//   tnom       nominal code (TRIM_NOM)
+//   vth        logic threshold of the trim bits
+//   vs         softness of that threshold: each bit goes 0 -> 1 smoothly over
+//              about vth +- 2 vs, so a bit edge is not a step for the
+//              simulator (OpenVAF has no transition())
+
+`include "disciplines.vams"
+
+module trim_iref(vdd, vss, iout, imon, t3, t2, t1, t0);
+  inout vdd, vss, iout, imon;
+  input t3, t2, t1, t0;
+  electrical vdd, vss, iout, imon, t3, t2, t1, t0;
+
+  parameter real iref_nom = 100e-9 from (0:inf);
+  parameter real perr = 1.0 from (0:inf);
+  parameter real r15 = 0.743 from (0:inf);
+  parameter real r0 = 1.42 from (0:inf);
+  parameter integer tnom = 9 from [0:15];
+  parameter real vth = 1.65;
+  parameter real vs = 0.05 from (0:inf);
+
+  real code, ratio, inom, i;
+
+  analog begin
+    code = 0.5 * (1 + tanh((V(t0, vss) - vth) / vs))
+         + 1.0 * (1 + tanh((V(t1, vss) - vth) / vs))
+         + 2.0 * (1 + tanh((V(t2, vss) - vth) / vs))
+         + 4.0 * (1 + tanh((V(t3, vss) - vth) / vs));
+    inom = iref_nom * perr * (r15 + (15 - tnom) * (r0 - r15) / 15);
+    ratio = 1 / (r15 + (15 - code) * (r0 - r15) / 15);
+    i = inom * ratio;
+    I(vdd, iout) <+ i;
+    I(imon, vss) <+ i * tanh(V(imon, vss) / 0.1);
+  end
+endmodule
