@@ -5,6 +5,10 @@ V {}
 S {}
 F {}
 E {}
+T {spike_amplifier_sized: copy of spike_amplifier.sch. Input pair M1/M2 4/2 um, mirror M4/M5 0.5/8 um,
+tail M3 unchanged (0.22/0.28, so the bias cell's Vamp_bias replica still matches).
+From the sweep in analog/testbenches/spike_amp (results/spike_amp_sizing.md): offset sigma 2.6 mV (was 40.5),
+systematic offset -1.2 mV (was -56), gain 54 dB (was 25), input noise 60 uVrms 1 Hz-100 kHz (was 336).} -320 250 0 0 0.3 0.3 {}
 N -100 0 -60 0 {lab=VSS}
 N 50 0 120 0 {lab=VSS}
 N -100 30 -100 50 {lab=#net1}
@@ -13,15 +17,15 @@ N 120 30 120 50 {lab=#net1}
 N -0 50 -0 90 {lab=#net1}
 N -0 150 0 190 {lab=VSS}
 N -210 -0 -140 -0 {lab=VP}
-N 160 -0 240 0 {lab=VN}
-N -100 -130 -100 -30 {lab=#net2}
+N 150 0 230 0 {lab=#net2}
+N -100 -130 -100 -30 {lab=#net3}
 N 120 -130 120 -30 {lab=spike_out}
-N -170 -160 -140 -160 {lab=#net2}
-N -170 -220 -170 -160 {lab=#net2}
-N -170 -220 160 -220 {lab=#net2}
-N 160 -220 160 -160 {lab=#net2}
-N -170 -160 -170 -120 {lab=#net2}
-N -170 -120 -100 -120 {lab=#net2}
+N -170 -160 -140 -160 {lab=#net3}
+N -170 -220 -170 -160 {lab=#net3}
+N -170 -220 160 -220 {lab=#net3}
+N 160 -220 160 -160 {lab=#net3}
+N -170 -160 -170 -120 {lab=#net3}
+N -170 -120 -100 -120 {lab=#net3}
 N -100 -250 -100 -190 {lab=VDD}
 N 120 -250 120 -190 {lab=VDD}
 N -100 -160 -60 -160 {lab=VDD}
@@ -60,8 +64,8 @@ spiceprefix=X
 C {lab_wire.sym} -60 0 0 0 {name=p1 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} 50 0 0 0 {name=p2 sig_type=std_logic lab=VSS}
 C {symbols/nfet_03v3.sym} -20 120 0 0 {name=M3
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -117,7 +121,3 @@ C {ipin.sym} -300 -70 0 0 {name=p15 lab=VP}
 C {ipin.sym} -300 -30 0 0 {name=p16 lab=VN}
 C {ipin.sym} -300 10 0 0 {name=p17 lab=VB}
 C {opin.sym} -320 50 0 0 {name=p18 lab=spike_out}
-T {spike_amplifier_sized: copy of spike_amplifier.sch. Input pair M1/M2 4/2 um, mirror M4/M5 0.5/8 um,
-tail M3 unchanged (0.22/0.28, so the bias cell's Vamp_bias replica still matches).
-From the sweep in analog/testbenches/spike_amp (results/spike_amp_sizing.md): offset sigma 2.6 mV (was 40.5),
-systematic offset -1.2 mV (was -56), gain 54 dB (was 25), input noise 60 uVrms 1 Hz-100 kHz (was 336).} -320 250 0 0 0.3 0.3 {}

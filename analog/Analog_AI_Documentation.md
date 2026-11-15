@@ -1119,6 +1119,13 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
   - `layout/neuron_sized.gds` and `neuron_sized_lvs_ref.spice` still have the minimum-size amplifier, so the neuron (and SNN) layout no longer matches this schematic;
   - t_refr is ≈ 15.0 µs, at its spec limit (VKdn not retuned).
 
+**75. Using the `floorplan-router` branch of gLayout** *(Reasoned)*
+- **Asked:** how to use https://github.com/martinatilla/gLayout/tree/floorplan-router instead of the installed gLayout.
+- **AI found:** the project uses gLayout 0.2.0 from PyPI, installed with `uv` into `.venv-glayout` (Python 3.11, gdsfactory 7.7.0, klayout 0.30.13; used inside the container). The branch exists (commit 6fa5bca). It installs as the same package name and version (`glayout` 0.2.0, `src/` layout) but pins `klayout<=0.29` and adds `docopt` (needed by its gf180 LVS path).
+- **AI explained:** clone the branch outside the repo and `uv pip install -e` it into `.venv-glayout` (or install `git+…@floorplan-router`, ideally pinned to the commit). Check `glayout.__file__` to confirm which copy is loaded. The reinstall downgrades klayout inside that venv only (the system KLayout used for DRC/LVS is separate). Switch back with `uv pip install --reinstall glayout==0.2.0`.
+- **Follow-up (user hit a syntax error):** reproduced in a throwaway venv in the container. Login shells (`bash -l`) set `PYTHONPATH` to the system Python 3.12 libraries, so the venv's Python 3.11 loaded 3.12's `typing.py` during the build → `SyntaxError`. With `PYTHONPATH` unset, the next failure was the branch's `klayout<=0.29` pin: no prebuilt wheel for this ARM container, and building from source fails (no C++ compiler). The existing `.venv-glayout` already overrides that pin (klayout 0.30.13) and has every other dependency, including `docopt`. Working command: `env -u PYTHONPATH uv pip install --python …/.venv-glayout/bin/python --no-deps -e <clone>`, verified in the throwaway venv (`glayout` loads from the clone's `src/`).
+- **Not done by AI:** nothing installed or changed other than this log.
+
 ---
 
 ## Notes on reliability

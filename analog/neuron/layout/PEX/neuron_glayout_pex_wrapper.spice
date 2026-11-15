@@ -1,0 +1,10 @@
+* neuron_glayout_pex: post-layout gLayout neuron with the pin order of analog/neuron/neuron_sized.sym.
+* Written by hand (2026-11-15): make_pex_wrapper.py needs a neuron_glayout.sym, which
+* does not exist; the glayout cell has the same 12 pins as neuron_sized. Re-create after re-extracting.
+* Extraction: neuron_glayout_pex.spice (Magic, RC_extract.sh) of neuron_glayout.gds, md5 3e9419fc5de1c0f5bd52bfb8f472a8ea
+* Magic's pin order: Vamp_bias VMEM VT VIp VKdn spike VK Vlk VKup VNA VSS VDD
+.include /foss/designs/engn2912e-project/analog/neuron/layout/PEX/neuron_glayout_pex.spice
+
+.subckt neuron_glayout_pex VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
+Xpex Vamp_bias VMEM VT VIp VKdn spike VK Vlk VKup VNA VSS VDD neuron_glayout_flat
+.ends neuron_glayout_pex
