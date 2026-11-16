@@ -1,0 +1,209 @@
+* bias_generator: flat netlist of bias_generator.sch, every unit its own device (n-well R = 292.69 squares)
+.subckt bias_master VDD VSS Iref
+* beta multiplier: I0 = n UT ln(K) / R
+XM1_m0 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m1 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m2 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m3 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m4 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m5 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m6 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM1_m7 Vgn Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m0 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m1 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m2 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m3 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m4 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m5 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m6 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m7 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m8 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m9 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m10 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m11 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m12 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m13 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m14 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m15 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m16 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m17 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m18 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m19 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m20 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m21 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m22 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m23 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m24 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m25 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m26 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m27 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m28 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m29 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m30 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m31 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m32 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m33 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m34 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m35 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m36 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m37 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m38 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m39 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m40 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m41 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m42 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m43 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m44 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m45 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m46 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m47 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m48 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m49 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m50 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m51 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m52 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m53 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m54 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m55 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m56 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m57 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m58 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m59 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m60 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m61 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m62 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m63 Vgp Vgn Vr VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m0 Vgp Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m1 Vgp Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m2 Vgp Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m3 Vgp Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m0 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m1 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m2 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m3 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XR Vr VSS VSS nwell r_length=585.380u r_width=2.0u
+* start-up: MS1 (4 x 0.22/50 series) pulls X up while Vgn = 0, MS3 pulls Vgp down; MS2 holds X low after
+XMS1_0 X VSS s1 VDD pfet_03v3 L=50u W=0.22u nf=1
+XMS1_1 s1 VSS s2 VDD pfet_03v3 L=50u W=0.22u nf=1
+XMS1_2 s2 VSS s3 VDD pfet_03v3 L=50u W=0.22u nf=1
+XMS1_3 s3 VSS VDD VDD pfet_03v3 L=50u W=0.22u nf=1
+XMS2_m0 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m1 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m2 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m3 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m4 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m5 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m6 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m7 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m8 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m9 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m10 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m11 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m12 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m13 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m14 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS2_m15 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMS3 Vgp X VSS VSS nfet_03v3 L=4u W=0.5u nf=1
+* Iref: 4 of the 8 M1 units -> sinks 0.5 x I0
+XMREF_m0 Iref Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMREF_m1 Iref Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMREF_m2 Iref Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+XMREF_m3 Iref Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
+.ends bias_master
+.subckt trim_steer VDD VSS Iref Ibias trim[3] trim[2] trim[1] trim[0] cal
+* M0: diode-connected pFET carrying Iref; R0 + Cg filter its gate to the source gates Vgs
+XM0_m0 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m1 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m2 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m3 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m4 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m5 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m6 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m7 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m8 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m9 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m10 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m11 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m12 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m13 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m14 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m15 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m16 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m17 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m18 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m19 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m20 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m21 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM0_m22 Iref Iref VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XR0 Iref Vgs VSS nwell r_length=150.000u r_width=2.0u
+XMCG VDD Vgs VDD VDD pfet_03v3 L=10.0u W=10.0u nf=1
+* base sources: always on the bias node, through an always-on switch (same drop as the steered ones)
+XMB_m0 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m1 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m2 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m3 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m4 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m5 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m6 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m7 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m8 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m9 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m10 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m11 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m12 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XMB_m13 db Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XSB db VDD Ibias VSS nfet_03v3 L=0.5u W=1.0u nf=1
+* bit 0: 1 units, S0 -> bias node (trim[0] = 1), S0X -> aux node (trim[0] = 0)
+XM1 d0 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XS0 d0 trim[0] Ibias VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XS0X d0 tb0 aux VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XMIP0 tb0 trim[0] VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
+XMIN0 tb0 trim[0] VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1
+* bit 1: 2 units, S1 -> bias node (trim[1] = 1), S1X -> aux node (trim[1] = 0)
+XM2_m0 d1 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM2_m1 d1 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XS1 d1 trim[1] Ibias VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XS1X d1 tb1 aux VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XMIP1 tb1 trim[1] VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
+XMIN1 tb1 trim[1] VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1
+* bit 2: 4 units, S2 -> bias node (trim[2] = 1), S2X -> aux node (trim[2] = 0)
+XM3_m0 d2 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m1 d2 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m2 d2 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM3_m3 d2 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XS2 d2 trim[2] Ibias VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XS2X d2 tb2 aux VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XMIP2 tb2 trim[2] VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
+XMIN2 tb2 trim[2] VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1
+* bit 3: 8 units, S3 -> bias node (trim[3] = 1), S3X -> aux node (trim[3] = 0)
+XM4_m0 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m1 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m2 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m3 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m4 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m5 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m6 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XM4_m7 d3 Vgs VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
+XS3 d3 trim[3] Ibias VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XS3X d3 tb3 aux VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XMIP3 tb3 trim[3] VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
+XMIN3 tb3 trim[3] VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1
+* auxiliary node: M_Aux to VSS; analog control: cal = 1 -> MCAL makes M_Aux a diode (aux node at the
+* bias node's voltage); cal = 0 -> MCAL off, the weak MDIS discharges vaux slowly (C_AUX): I_Aux -> 0
+VAUX aux auxm 0
+XMAUX auxm vaux VSS VSS nfet_03v3 L=8.0u W=10.0u nf=1
+XMCAL auxm cal vaux VSS nfet_03v3 L=0.5u W=1.0u nf=1
+XMDIS vaux calb VSS VSS nfet_03v3 L=20.0u W=0.22u nf=1
+XMCAUX VSS vaux VSS VSS nfet_03v3 L=5.0u W=5.0u nf=1
+XMIPC calb cal VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
+XMINC calb cal VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1
+.ends trim_steer
+.include /foss/designs/engn2912e-ref/analog/neuron/layout/bias_cell_lvs_ref.spice
+.subckt bias_generator VDD VSS trim[3] trim[2] trim[1] trim[0] cal Imon Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh
+Xmaster VDD VSS Iref bias_master
+Xtrim VDD VSS Iref Ibias_s trim[3] trim[2] trim[1] trim[0] cal trim_steer
+VIB Ibias_s Ibias 0
+Xcell VDD VSS Ibias Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh bias_cell
+* Imon: copy of bias_cell's input diode MN0 (W10/L8), sinks a copy of Ibias from the Imon pad
+XMMON Imon Ibias VSS VSS nfet_03v3 L=8.0u W=10.0u nf=1
+.ends bias_generator
