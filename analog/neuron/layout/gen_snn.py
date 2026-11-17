@@ -53,6 +53,16 @@ import pya
 DAC = globals().get("dac", "DAC_binary")    # cell used for the six plain DACs
 HERE = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.getcwd()
 OUT = globals().get("out", os.path.join(HERE, "SNN.gds"))
+# Block layouts live with their schematics: analog/DAC/layout, analog/DPI/layout, else here.
+BLOCK_DIRS = [HERE] + [os.path.normpath(os.path.join(HERE, "..", "..", d, "layout")) for d in ("DAC", "DPI")]
+
+
+def blockfile(name):
+    """Path of a block's GDS / pins file (name = 'DPI.gds', 'DAC_pins.json', ...)."""
+    for d in BLOCK_DIRS:
+        if os.path.exists(os.path.join(d, name)):
+            return os.path.join(d, name)
+    raise FileNotFoundError("%s not in %s" % (name, ", ".join(BLOCK_DIRS)))
 
 ly = pya.Layout()
 ly.dbu = 0.001
@@ -70,7 +80,7 @@ li = {k: ly.layer(*v) for k, v in L.items()}
 OPT = pya.LoadLayoutOptions()
 OPT.cell_conflict_resolution = pya.LoadLayoutOptions.SkipNewCell
 for n in (DAC, "DPI_sized", "DPI", "neuron_sized", "DAC_signed", "DPI_inh", "bias_cell"):
-    ly.read(os.path.join(HERE, n + ".gds"), OPT)
+    ly.read(blockfile(n + ".gds"), OPT)
 
 
 def load(name):
@@ -78,7 +88,7 @@ def load(name):
     c = ly.cell(name)
     assert c is not None, name
     pins = {}
-    for p in json.load(open(os.path.join(HERE, name + "_pins.json")))["pins"]:
+    for p in json.load(open(blockfile(name + "_pins.json")))["pins"]:
         if p["layer"] == "Metal2":
             pins.setdefault(p["name"], []).extend(p["access"])
     return c, c.dbbox(), pins
@@ -405,7 +415,7 @@ TP = 0.8                                            # routing track pitch
 BIAS_TRACK = {"Vb": colL["Vb"], "Vthr": chA["Vthr"], "VT_dpi": chA["VT_dpi"], "VT_inh": chA["VT_inh"],
               **{b: chB[b] for b in ("VNA", "Vlk", "VK", "VIp", "VKup", "VKdn", "Vamp_bias")}}
 BP = {}
-for p_ in json.load(open(os.path.join(HERE, "bias_cell_pins.json")))["pins"]:
+for p_ in json.load(open(blockfile("bias_cell_pins.json")))["pins"]:
     for a in p_["access"]:
         BP.setdefault(p_["name"], []).append(a)
 bcell = ly.cell("bias_cell")

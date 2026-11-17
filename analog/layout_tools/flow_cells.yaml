@@ -1,0 +1,24 @@
+# Cell registry for flow.py: everything a stage needs that is not in the schematic.
+# Paths are relative to this file. Add a cell = add an entry; no code.
+#
+#   schematic   xschem .sch (or a .spice netlist)
+#   connect     explicit schematic fixes {net: to}; remove once the schematic is fixed
+#   symbol      .sym whose pin order the post-layout wrapper uses (optional)
+#   testbench   xschem testbench .sch whose DUT is the top-level instance x1 (optional)
+#   metric      what the sim stage measures: period of a node crossing a threshold
+
+neuron_glayout:
+  schematic: ../neuron/neuron_sized.sch
+  connect: {x1_net2: VT}          # spike_amplifier_sized.sch: VN wire stops short of its label
+  symbol: ../neuron/neuron_sized.sym
+  testbench: ../neuron/neuron_sized_testbench.sch
+  metric: {type: period, node: "v(spike)", threshold: 1.65}
+
+spike_amp_fp:
+  schematic: ../neuron/spike_amplifier_sized.sch
+  connect: {net2: VN}             # same VN-wire bug
+  symbol: ../neuron/spike_amplifier_sized.sym
+
+DAC_binary:
+  schematic: ../DAC/DAC_binary.sch
+  symbol: ../DAC/DAC_binary.sym

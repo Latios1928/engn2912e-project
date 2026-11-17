@@ -146,7 +146,7 @@ def suite_neuron(sub):
 
 
 def suite_dpi(sub):
-    t = netlist(REPO / "analog/neuron/DPI.sch").replace("**.subckt", ".subckt").replace("**.ends", ".ends")
+    t = netlist(REPO / "analog/DPI/DPI.sch").replace("**.subckt", ".subckt").replace("**.ends", ".ends")
     dpi = "\n".join(ln for ln in joined(t) if ln.startswith((".subckt", "XM", "C", ".ends")) and not ln.startswith("C {"))
 
     def run(k):

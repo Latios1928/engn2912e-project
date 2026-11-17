@@ -3,22 +3,28 @@
 #
 #   docker exec gf180-work bash -l /foss/designs/engn2912e-project/analog/neuron/layout/PEX/extract.sh neuron_sized
 #
-# 1. copies analog/neuron/layout/<cell>.gds into this folder (the extraction always
+# 1. copies <cell>.gds from analog/neuron/layout (or analog/DAC/layout,
+#    analog/DPI/layout) into this folder (the extraction always
 #    uses the current layout),
 # 2. runs RC_extract.sh (Magic: flatten, extract devices + R + C, cthresh 0.5f,
 #    rthresh 5) -> <cell>_pex.spice, log in RC_extract_<cell>.log,
 # 3. lists Magic's extraction warnings and the devices it found, so they can be
 #    checked against the schematic,
 # 4. writes <cell>_pex_wrapper.spice (make_pex_wrapper.py), which gives the
-#    extracted cell the pin order of analog/neuron/<cell>.sym.
+#    extracted cell the pin order of <cell>.sym (analog/neuron, DAC or DPI).
 # See README.md in this folder.
 set -e
-cell=${1:?usage: extract.sh <cell>   (e.g. neuron_sized; the GDS is ../<cell>.gds)}
+cell=${1:?usage: extract.sh <cell>   (e.g. neuron_sized, DAC_signed, DPI_sized)}
 HERE=$(cd "$(dirname "$0")" && pwd)
 cd "$HERE"
-[ -f "../$cell.gds" ] || { echo "error: ../$cell.gds not found"; exit 1; }
+# The GDS lives with its block: analog/neuron/layout, analog/DAC/layout or analog/DPI/layout.
+gds=""
+for d in .. ../../../DAC/layout ../../../DPI/layout; do
+    [ -f "$d/$cell.gds" ] && { gds="$d/$cell.gds"; break; }
+done
+[ -n "$gds" ] || { echo "error: $cell.gds not found in analog/{neuron,DAC,DPI}/layout"; exit 1; }
 
-cp "../$cell.gds" .
+cp "$gds" .
 rm -f "${cell}_pex.spice"
 bash RC_extract.sh "$cell.gds" "$cell" > "RC_extract_$cell.log" 2>&1
 [ -s "${cell}_pex.spice" ] || { echo "error: Magic wrote no ${cell}_pex.spice, see RC_extract_$cell.log"; exit 1; }

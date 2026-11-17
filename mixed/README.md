@@ -12,8 +12,8 @@ black box where `../mock/` compiles its behavioral model.
 
 | In `../mock/snn_analog.v` | In this simulation |
 |---|---|
-| `dac.v` | `analog/neuron/DAC.sch` (weights 1:2:3:4, 15 nA unit) |
-| `neuron.v` + `comparator.v` | `analog/neuron/DPI.sch` → `analog/neuron/neuron_sized.sch` |
+| `dac.v` | `analog/DAC/DAC.sch` (weights 1:2:3:4, 15 nA unit) |
+| `neuron.v` + `comparator.v` | `analog/DPI/DPI.sch` → `analog/neuron/neuron_sized.sch` |
 
 Everything else is Verilog and shared with `../mock/`: the top `../snn_top.v`
 with `snn_digital`.

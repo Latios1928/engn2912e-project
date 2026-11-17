@@ -13,9 +13,13 @@ Blocks covered so far: **DPI synapse** (`dpi/`), **neuron** (`neuron/`), **signe
 
 ```
 analog/
-├── neuron/                      schematics and symbols of the blocks (DAC, DPI, neuron_sized, ...)
-│   └── layout/                  layouts (<cell>.gds), their generators and DRC/LVS scripts
-│       └── PEX/                 parasitic extraction: extract.sh <cell> -> <cell>_pex.spice + wrapper
+├── DAC/                         DAC, DAC_binary, DAC_signed schematics and symbols
+│   └── layout/                  their layouts (<cell>.gds), generators and DRC/LVS scripts
+├── DPI/                         DPI, DPI_sized, DPI_inh schematics and symbols
+│   └── layout/                  their layouts, generators and DRC/LVS scripts
+├── neuron/                      neuron_sized, spike amplifier, comparator, bias_cell, DACs-DPI chains
+│   └── layout/                  neuron/SNN layouts and the shared KLayout helpers
+│       └── PEX/                 parasitic extraction (all blocks): extract.sh <cell> -> <cell>_pex.spice + wrapper
 │                                (README.md there: what to do after a layout change)
 └── testbenches/
     ├── README.md                this file
@@ -38,7 +42,7 @@ Rules that keep this traceable:
 
 ## Running
 
-Start xschem from the project root or from `analog/neuron`. The `xschemrc` files in those two folders put both on the symbol search path, so `analog/neuron/DPI.sym` and bare `DPI.sym` references both resolve. Restart xschem after pulling them, because it reads `xschemrc` only at startup.
+Start xschem from the project root or from `analog/neuron`, `analog/DAC` or `analog/DPI`. The `xschemrc` files in those folders all source the root one, which puts every block folder on the symbol search path, so `analog/DPI/DPI.sym` and bare `DPI.sym` references both resolve. Restart xschem after pulling them, because it reads `xschemrc` only at startup.
 
 Batch runs (from any directory):
 
@@ -63,7 +67,7 @@ Notes on the runner:
 
 ## DPI synapse (`dpi/`)
 
-Device under test: `analog/neuron/DPI.sch`.
+Device under test: `analog/DPI/DPI.sch`.
 
 - M1 (gate `Vthr`) and the diode-connected M2 form a differential pair on the tail node `Isum`.
 - M3 (gate `VT`) is the τ leak into `Vsyn` (internal node `net1`).
@@ -189,7 +193,7 @@ Post-layout fails `t_refr`. Spike width and refractory time both come from the d
 
 ## Signed weight DAC (`dac/`)
 
-Device under test: `analog/neuron/DAC_signed.sch`, the 1:2:3:4 `DAC` with a sign switch (`s` = 0: current to `Isum_e`, `s` = 1: to `Isum_i`).
+Device under test: `analog/DAC/DAC_signed.sch`, the 1:2:3:4 `DAC` with a sign switch (`s` = 0: current to `Isum_e`, `s` = 1: to `Isum_i`).
 
 | File | What it does |
 |---|---|

@@ -146,6 +146,58 @@ full PEX sim ≈7 min. The neuron needed 2 such loops and 1 PEX sim.
 
 ---
 
+## Task 5: parser, reusable floorplan, decision engine, 2026-11-15
+
+Result: `glayout_netlist.py` (schematic -> flat table, finds the VN bug by itself),
+`glayout_floorplan.py` (two_row + CLI; neuron generator 350 -> 40 lines; spike amp built
+from the CLI with no code, 17 % smaller than the hand version), `decide.py` +
+`layout_policy.yaml` (wells / dummies / rings / placement with reasons and questions).
+Neuron rebuilt from the floorplan and again from decisions: DRC clean + LVS match each time
+(first try). Corner characterization started (results pending).
+
+| # | Step | Output tok (est.) | Input tok (est.) | Notes |
+|---|------|------------------:|-----------------:|-------|
+| 1 | Parser + 2 fixes (quoted params, x prefix) | 3,300 | 1,200 | |
+| 2 | Floorplan module + thin generator + CLI | 5,500 | 4,500 | read the 350-line generator once to move it |
+| 3 | DRC/LVS of neuron + CLI spike amp | 300 | 150 | both clean first try |
+| 4 | Corner module + decks + launch | 3,500 | 600 | |
+| 5 | Parser on 4 other cells -> generalization plan | 300 | 900 | |
+| 6 | Parser bus/global fixes, policy, decide.py | 6,500 | 1,500 | |
+| 7 | 3 rule fixes found by running on DAC/neuron | 1,200 | 1,800 | |
+| 8 | Decision-driven neuron, DRC/LVS | 200 | 400 | clean first try |
+| | **Subtotal (measured-ish)** | **≈20,800** | **≈11,050** | |
+| | Reasoning (rough) | 25,000–40,000 | | |
+
+A new two_row cell now costs: one `decide.py` run, answering its questions in YAML, one
+`glayout_floorplan.py --decisions` run, one signoff. Expected ≈1–3k tokens if nothing new
+breaks, vs ≈23k for the neuron the first time.
+
+---
+
+## Task 6: extraction feedback + file-based flow for API use, 2026-11-15
+
+Result: per-cell calibration store with history (`parasitic_calib.json` v2, migrated);
+`flow.py` stages (table/decide/answer/build/signoff/sim/status/run) with JSON artifacts in
+flow/<cell>/; `flow_cells.yaml` registry; `AGENT_BRIEF.md` (~900 tokens, replaces the chat
+as context); `api_driver.py` (tool runner, 3 restricted tools, prints measured usage —
+**not run yet**: SDK not installed, paid calls need approval). Neuron end to end through
+`flow.py run`: 90 s, DRC clean, LVS match, calibration fed back (10 nets, factor 1.117).
+
+| # | Step | Output tok (est.) | Input tok (est.) |
+|---|------|------------------:|-----------------:|
+| 1 | Calibration store v2 + feedback | 2,200 | 900 |
+| 2 | build.json / shapes export | 700 | 100 |
+| 3 | flow.py + registry + answer stage | 5,200 | 900 |
+| 4 | Read SDK docs (tool runner), brief, driver | 3,000 | 2,500 |
+| 5 | End-to-end runs (neuron, DAC) + this log | 800 | 900 |
+| | **Subtotal** | **≈11,900** | **≈5,300** |
+| | Reasoning (rough) | 10,000–15,000 | |
+
+Context for a future API call: brief (~900) + status (~150) + request, vs this session's
+context of well over 100k tokens.
+
+---
+
 ## Running totals
 
 | Task | Output tok | Input tok | Reasoning (rough) | DRC/LVS iterations |
@@ -155,5 +207,7 @@ full PEX sim ≈7 min. The neuron needed 2 such loops and 1 PEX sim.
 | Neuron layout + router, 2026-11-15 | ≈9,200 | ≈13,850 | 25k–40k | 3 |
 | Neuron PEX + testbench, 2026-11-15 | ≈4,050 | ≈4,550 | 8k–12k | — (4 sims) |
 | Prediction infrastructure, 2026-11-15 | ≈8,500 | ≈4,600 | 15k–25k | 4 DRC (validation) |
+| Parser + floorplan + decisions, 2026-11-15 | ≈20,800 | ≈11,050 | 25k–40k | 3 (all clean first try) |
+| Feedback + flow.py + API structure, 2026-11-15 | ≈11,900 | ≈5,300 | 10k–15k | 1 (clean) |
 
 *Add a row per task. Keep the method the same so rows stay comparable.*

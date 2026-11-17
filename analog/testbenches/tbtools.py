@@ -4,7 +4,7 @@ Each testbench is an xschem schematic whose .control block prints its results as
 lines of the form "RES name=value". These helpers:
 
   1. netlist a testbench with xschem (run from the project root, so symbols such
-     as analog/neuron/DPI.sym resolve the same way as in the GUI),
+     as analog/DPI/DPI.sym resolve the same way as in the GUI),
   2. make a copy of the netlist for one condition: process corner, temperature,
      .param overrides, and optionally device mismatch with a given seed,
   3. run ngspice in batch mode in its own folder and collect the RES values.

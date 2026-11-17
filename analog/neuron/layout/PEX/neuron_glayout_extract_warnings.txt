@@ -196,165 +196,165 @@ feedback add "device missing 1 terminal;
 box -368 1025 -168 1125
 feedback add "device missing 1 terminal;
  connecting remainder to node VSS" pale
-box 8198 4687 8398 4787
+box 8268 4687 8468 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 7886 4687 8086 4787
+box 7956 4687 8156 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 7574 4687 7774 4787
+box 7644 4687 7844 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 7262 4687 7462 4787
+box 7332 4687 7532 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6950 4687 7150 4787
+box 7020 4687 7220 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6638 4687 6838 4787
+box 6708 4687 6908 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6326 4687 6526 4787
+box 6396 4687 6596 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6014 4687 6214 4787
+box 6084 4687 6284 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 5702 4687 5902 4787
+box 5772 4687 5972 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 5390 4687 5590 4787
+box 5460 4687 5660 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 5078 4687 5278 4787
+box 5148 4687 5348 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 4766 4687 4966 4787
+box 4836 4687 5036 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 4454 4687 4654 4787
+box 4524 4687 4724 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 4142 4687 4342 4787
+box 4212 4687 4412 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 3830 4687 4030 4787
+box 3900 4687 4100 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 3518 4687 3718 4787
+box 3588 4687 3788 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 3206 4687 3406 4787
+box 3276 4687 3476 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 2894 4687 3094 4787
+box 2964 4687 3164 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 2582 4687 2782 4787
+box 2652 4687 2852 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 2270 4687 2470 4787
+box 2340 4687 2540 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1958 4687 2158 4787
+box 2028 4687 2228 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1646 4687 1846 4787
+box 1716 4687 1916 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1334 4687 1534 4787
+box 1404 4687 1604 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1022 4687 1222 4787
+box 1092 4687 1292 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 710 4687 910 4787
+box 780 4687 980 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 398 4687 598 4787
+box 468 4687 668 4787
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 8350 5493 8550 5693
+box 8420 5493 8620 5693
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 246 5493 446 5693
+box 316 5493 516 5693
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 8198 6399 8398 6499
+box 8268 6399 8468 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 7886 6399 8086 6499
+box 7956 6399 8156 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 7574 6399 7774 6499
+box 7644 6399 7844 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 7262 6399 7462 6499
+box 7332 6399 7532 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6950 6399 7150 6499
+box 7020 6399 7220 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6638 6399 6838 6499
+box 6708 6399 6908 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6326 6399 6526 6499
+box 6396 6399 6596 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 6014 6399 6214 6499
+box 6084 6399 6284 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 5702 6399 5902 6499
+box 5772 6399 5972 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 5390 6399 5590 6499
+box 5460 6399 5660 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 5078 6399 5278 6499
+box 5148 6399 5348 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 4766 6399 4966 6499
+box 4836 6399 5036 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 4454 6399 4654 6499
+box 4524 6399 4724 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 4142 6399 4342 6499
+box 4212 6399 4412 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 3830 6399 4030 6499
+box 3900 6399 4100 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 3518 6399 3718 6499
+box 3588 6399 3788 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 3206 6399 3406 6499
+box 3276 6399 3476 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 2894 6399 3094 6499
+box 2964 6399 3164 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 2582 6399 2782 6499
+box 2652 6399 2852 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 2270 6399 2470 6499
+box 2340 6399 2540 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1958 6399 2158 6499
+box 2028 6399 2228 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1646 6399 1846 6499
+box 1716 6399 1916 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1334 6399 1534 6499
+box 1404 6399 1604 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 1022 6399 1222 6499
+box 1092 6399 1292 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 710 6399 910 6499
+box 780 6399 980 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale
-box 398 6399 598 6499
+box 468 6399 668 6499
 feedback add "device missing 1 terminal;
  connecting remainder to node VDD" pale

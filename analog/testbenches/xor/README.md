@@ -21,9 +21,9 @@ A+B runs of a sample).
 
 | Cell | What it is |
 |---|---|
-| `analog/neuron/DAC_signed.sch/.sym` | `DAC` plus two static steering switches: sign `s` = 0 sends the current to `Isum_e`, `s` = 1 to `Isum_i`. Internal inverter for `s̄`. |
-| `analog/neuron/DPI_inh.sch/.sym` | `DPI_sized` plus a 1:1 nFET mirror (2 µm / 8 µm) that sinks its output current from VMEM. |
-| `analog/neuron/DPI_sized.sch/.sym` | Copy of `DPI.sch` with all four transistors at W 0.88 µm, L 1.12 µm (×4 in W and L, see below). `DPI.sch` is unchanged. |
+| `analog/DAC/DAC_signed.sch/.sym` | `DAC` plus two static steering switches: sign `s` = 0 sends the current to `Isum_e`, `s` = 1 to `Isum_i`. Internal inverter for `s̄`. |
+| `analog/DPI/DPI_inh.sch/.sym` | `DPI_sized` plus a 1:1 nFET mirror (2 µm / 8 µm) that sinks its output current from VMEM. |
+| `analog/DPI/DPI_sized.sch/.sym` | Copy of `DPI.sch` with all four transistors at W 0.88 µm, L 1.12 µm (×4 in W and L, see below). `DPI.sch` is unchanged. |
 | `analog/snn/snn_analog.sch/.sym` | All DPIs are `DPI_sized`. The 5 hidden → output DACs are `DAC_signed` (pins `s[4:0]`); their inhibitory currents go to `DPI_inh` on the output membrane (bias `VT_inh`). Separate DPI biases per layer: `Vthr_in`/`VT_in` (inputs), `Vthr_hid`/`VT_hid` (hidden), `Vthr`/`VT_dpi` (output). |
 
 `inh_cell_tb` (old DPI sizes): inhibitory/excitatory charge ratio 1.007, crosstalk

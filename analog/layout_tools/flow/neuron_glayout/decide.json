@@ -1,0 +1,12 @@
+{
+ "stage": "decide",
+ "cell": "neuron_glayout",
+ "time": "2026-11-15 23:07:22",
+ "ok": true,
+ "blockers": [],
+ "mode": "auto",
+ "open_questions": [],
+ "auto_answers": {
+  "Q-dummy_l": "cap 2"
+ }
+}

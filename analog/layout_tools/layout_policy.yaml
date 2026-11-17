@@ -1,0 +1,53 @@
+# Designer layout policy: project-wide defaults that decide.py applies when the netlist
+# alone does not force a choice. Edit here once; every cell's decision file picks it up.
+# Per-cell exceptions go in that cell's <cell>.layout.yaml (set decided_by: designer).
+
+decisions:
+  # auto   : the flow answers every decide.py question with its policy default, reports
+  #          what it chose (answered_by: auto) and keeps going.
+  # manual : the flow stops at open questions until you answer them.
+  # Override per cell in flow_cells.yaml (`decisions: manual`) or per run (--manual / --auto).
+  # Your own answers (flow.py answer, or editing layout.yaml) always win over auto answers.
+  mode: auto
+  defaults:
+    dummy_l_over_cap: cap          # cap | match : dummies longer than dummy_l_cap?
+    body_tied_to_source: keep      # keep | ground : switch bodies tied to their source
+
+rails:
+  ground: [VSS, GND, "0"]
+  supply: [VDD]
+
+wells:
+  # Style choice: every NMOS in a deep n-well, even when its body is ground
+  # (substrate-noise isolation). Bodies that are NOT ground always get an isolated
+  # DNW island regardless of this setting (required, not a preference).
+  nmos_in_dnw: true
+  # A switch whose body is tied to its own source needs its own island. If true,
+  # decide.py proposes tying such bodies to ground instead (saves islands, adds body
+  # effect on the switch) and asks the designer.
+  propose_body_to_ground_for_switches: true
+
+devices:
+  # um; a gate-only pin net driving only devices with L <= this is "digital". 0.8, not 0.5:
+  # legalize() turns min-size 0.22/0.28 switches into 0.5/0.64.
+  switch_max_l: 0.8
+
+dummies:
+  matched_groups: group    # group | row | none : dummy ring for mirrors / diff pairs / arrays
+  switches: none           # switches and inverters get no dedicated dummies
+  dummy_l: match           # match = group L ; or a number in um
+  dummy_l_cap: 2.0         # um; if a matched group's L exceeds this, ask (area vs edge matching)
+
+placement:
+  binary_array: common_centroid   # ratioed current-source arrays (nf/m 1:2:4:8 ...)
+  mirror: adjacent                # diode device in the middle when possible
+  diff_pair: adjacent             # with its tail device next to it
+
+guards:
+  # Optional extra guard ring between switching devices and integrating/matched devices
+  # that share a row (substrate coupling of switching edges).
+  separate_switching_from_sensitive: suggest   # suggest | always | never
+
+priorities:
+  area: medium             # low | medium | high : how hard to push area in trade-offs
+  matching: high

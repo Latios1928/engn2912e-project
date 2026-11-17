@@ -26,7 +26,16 @@ HERE = Path(__file__).resolve().parent          # analog/neuron/layout/PEX
 # a node named gnd as ground, so these connect to GND inside the wrapper.
 # VSUBS is the name Magic gives the substrate when it has no label.
 GLOBAL_PINS = {"gnd": "GND", "vsubs": "GND"}
-SYMDIR = HERE.parents[1]                        # analog/neuron
+ANALOG = HERE.parents[2]                        # analog/
+SYMDIRS = [ANALOG / "neuron", ANALOG / "DAC", ANALOG / "DPI"]
+
+
+def find_sym(cell: str) -> Path:
+    """The cell's symbol, in whichever block folder holds it (first match)."""
+    for d in SYMDIRS:
+        if (d / f"{cell}.sym").exists():
+            return d / f"{cell}.sym"
+    return SYMDIRS[0] / f"{cell}.sym"           # reported as not found below
 
 
 def subckt_pins(spice: Path, name: str) -> list[str]:
@@ -65,7 +74,7 @@ def main():
         raise SystemExit(__doc__)
     cell = sys.argv[1]
     pex = HERE / f"{cell}_pex.spice"
-    sym = SYMDIR / f"{cell}.sym"
+    sym = find_sym(cell)
     gds = HERE / f"{cell}.gds"
     for f in (pex, sym, gds):
         if not f.exists():

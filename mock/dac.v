@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-// Behavioral model of a synapse DAC (analog/neuron/DAC.sch); part of the
+// Behavioral model of a synapse DAC (analog/DAC/DAC.sch); part of the
 // behavioral snn_analog (snn_analog.v).
 //
 // weight is sign-magnitude: weight[3] is the sign (1 = negative, inhibitory)
@@ -12,7 +12,7 @@
 // current = active ? +/- weight[2:0] * GAIN : 0, as a 16-bit two's-complement
 // value. Combinational.
 //
-// analog/neuron/DAC.sch is still unsigned, with four branches sized 1:2:3:4.
+// analog/DAC/DAC.sch is still unsigned, with four branches sized 1:2:3:4.
 module dac #(
     parameter GAIN = 16  // 7 * GAIN must fit in 15 bits, so GAIN <= 4681
 ) (

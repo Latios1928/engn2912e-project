@@ -21,7 +21,7 @@ SPICEBIND := /foss/tools/spicebind
 VSRC := sim.f snn_ms_tb.v $(ROOT)/analog/snn/snn_analog.v $(ROOT)/snn_top.v $(wildcard $(ROOT)/digital/*.v)
 PFX  := -Psnn_ms_tb
 SCHEMATICS := snn_ms_tb.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
-              $(wildcard $(ROOT)/analog/neuron/DAC.s* $(ROOT)/analog/neuron/DPI.s* \
+              $(wildcard $(ROOT)/analog/DAC/DAC.s* $(ROOT)/analog/DPI/DPI.s* \
                          $(ROOT)/analog/neuron/neuron_sized.s* $(ROOT)/analog/neuron/spike_amplifier.s*)
 
 .DEFAULT_GOAL := run

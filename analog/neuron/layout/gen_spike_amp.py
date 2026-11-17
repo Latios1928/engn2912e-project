@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parents[1] / "layout_tools"))   # glayout_* library
 
 from gdsfactory.component import Component
 from glayout import gf180 as pdk, straight_route, via_stack

@@ -81,8 +81,6 @@ def spike_amplifier(pdk,
 
     return spike_amplifier
 
-
-
 if __name__ == "__main__":
     c = spike_amplifier(pdk)
     c.show()

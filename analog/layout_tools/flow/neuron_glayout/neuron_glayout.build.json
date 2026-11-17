@@ -1,0 +1,42 @@
+{
+ "cell": "neuron_glayout",
+ "size_um": [
+  100.71,
+  62.84
+ ],
+ "router_check": "clean",
+ "predrc": "predrc neuron_glayout: 0 rule(s) predicted to fail (20 checked, 0.1 s)",
+ "summary": "neuron_glayout: 10 NMOS + 7 PMOS + 2 caps, tracks bot/mid/top 10/9/5, 5 columns, PMOS shift -0.50",
+ "notes": [
+  "M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M6: 0.22/5 -> 0.5/11.36 (W/L kept)",
+  "net x1_net2 -> VT (1 terminals)"
+ ],
+ "predicted_fF": {
+  "VDD": 24.3,
+  "VIp": 20.6,
+  "VK": 21.7,
+  "VKdn": 18.7,
+  "VKup": 18.3,
+  "VMEM": 52.6,
+  "VNA": 12.8,
+  "VSS": 28.7,
+  "VT": 11.5,
+  "Vamp_bias": 5.8,
+  "Vlk": 18.7,
+  "net1": 50.5,
+  "net2": 62.9,
+  "net3": 8.9,
+  "net4": 15.0,
+  "net5": 14.4,
+  "net6": 17.3,
+  "net7": 6.6,
+  "spike": 56.6,
+  "x1_net1": 9.6,
+  "x1_net3": 32.6
+ }
+}

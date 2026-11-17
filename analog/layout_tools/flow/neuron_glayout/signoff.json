@@ -1,0 +1,25 @@
+{
+ "stage": "signoff",
+ "cell": "neuron_glayout",
+ "time": "2026-11-15 23:09:22",
+ "ok": true,
+ "drc": "clean",
+ "lvs": "match",
+ "pex": {
+  "devices": 97,
+  "C": 64,
+  "R": 4569
+ },
+ "calibration": {
+  "cell": "neuron_glayout",
+  "nets": 10,
+  "mean_factor": 1.117,
+  "spread": [
+   1.014,
+   1.249
+  ],
+  "max_err_before": 0.021,
+  "global_factor": 1.117
+ },
+ "calibration_text": "calibration neuron_glayout: 10 nets, factor 1.117 (range 1.014..1.249), worst error before +2 %, global 1.117\n   Vamp_bias: pred(raw)    5.9 fF  extracted    6.0 fF  was -2 %\n         VNA: pred(raw)   11.3 fF  extracted   13.0 fF  was -2 %\n          VT: pred(raw)   10.1 fF  extracted   11.6 fF  was -2 %\n          VK: pred(raw)   19.7 fF  extracted   22.0 fF  was -2 %\n         VIp: pred(raw)   19.3 fF  extracted   20.8 fF  was -1 %"
+}

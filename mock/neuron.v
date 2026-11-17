@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-// Behavioral model of an integrate-and-fire neuron (analog/neuron/DPI.sch and
+// Behavioral model of an integrate-and-fire neuron (analog/DPI/DPI.sch and
 // neuron_sized.sch); part of the behavioral snn_analog (snn_analog.v).
 //
 // Every clk_analog cycle, voltage changes by the sum of the INDEGREE input

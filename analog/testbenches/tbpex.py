@@ -7,7 +7,7 @@ in analog/neuron/layout/PEX/<cell>_pex_wrapper.spice (written by extract.sh in
 that folder). The testbench schematic itself is not changed.
 
 Before swapping, it checks that the extraction is current: the GDS copy in PEX/
-must be identical to analog/neuron/layout/<cell>.gds, otherwise the layout has
+must be identical to the block's <cell>.gds (analog/{neuron,DAC,DPI}/layout), otherwise the layout has
 changed since the last extraction and this raises with the command to fix it.
 """
 
@@ -18,6 +18,16 @@ from tbtools import ROOT
 
 LAYOUT = ROOT / "analog" / "neuron" / "layout"
 PEX = LAYOUT / "PEX"
+# Block layouts live with their schematics; PEX/ stays shared in analog/neuron/layout.
+LAYOUT_DIRS = [LAYOUT, ROOT / "analog" / "DAC" / "layout", ROOT / "analog" / "DPI" / "layout"]
+
+
+def layout_gds(cell: str):
+    """The cell's current GDS (first block folder that has it)."""
+    for d in LAYOUT_DIRS:
+        if (d / f"{cell}.gds").exists():
+            return d / f"{cell}.gds"
+    raise RuntimeError(f"{cell}.gds not found in " + ", ".join(str(d) for d in LAYOUT_DIRS))
 EXTRACT_CMD = ("docker exec gf180-work bash -l "
                "/foss/designs/engn2912e-project/analog/neuron/layout/PEX/extract.sh {cell}")
 
@@ -25,10 +35,11 @@ EXTRACT_CMD = ("docker exec gf180-work bash -l "
 def check_current(cell: str):
     """Raise unless PEX/<cell>_pex_wrapper.spice exists and matches the current layout."""
     wrapper = PEX / f"{cell}_pex_wrapper.spice"
-    gds, gds_copy = LAYOUT / f"{cell}.gds", PEX / f"{cell}.gds"
+    gds_copy = PEX / f"{cell}.gds"
     fix = "Run the extraction again:\n  " + EXTRACT_CMD.format(cell=cell)
     if not wrapper.exists() or not gds_copy.exists():
         raise RuntimeError(f"no extraction of {cell} in {PEX}. {fix}")
+    gds = layout_gds(cell)
     if not filecmp.cmp(gds, gds_copy, shallow=False):
         raise RuntimeError(f"{gds} has changed since it was extracted ({gds_copy} differs). {fix}")
     pex = PEX / f"{cell}_pex.spice"

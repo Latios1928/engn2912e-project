@@ -28,10 +28,10 @@ exttosim finished.
 Adding  VSS
 Adding  VDD; Tnew = 0.13ns, Told = 0.00ns
 Adding  VKup; Tnew = 0.04ns, Told = 0.00ns
-Adding  VNA; Tnew = 0.08ns, Told = 0.00ns
+Adding  VNA; Tnew = 0.06ns, Told = 0.00ns
 Warning: mimcapcontact at 13876 4599 smaller than extract section allows
-Adding  spike; Tnew = 0.55ns, Told = 0.00ns
-Adding  VMEM; Tnew = 0.48ns, Told = 0.00ns
+Adding  spike; Tnew = 0.53ns, Told = 0.00ns
+Adding  VMEM; Tnew = 0.61ns, Told = 0.00ns
 Adding  VT; Tnew = 0.06ns, Told = 0.00ns
 Adding  Vamp_bias; Tnew = 0.01ns, Told = 0.00ns
 Adding  VIp; Tnew = 0.05ns, Told = 0.00ns

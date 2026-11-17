@@ -6,7 +6,19 @@ Subcircuits are copied from the blocks' own LVS references; the top level follow
 netlist of analog/snn/snn_analog_inh.sch, with the plain DACs as the chosen DAC cell
 (default DAC_binary) and every GND as VSS.
 """
+import os
 import sys
+
+# Block LVS references live with their layouts: analog/DAC/layout, analog/DPI/layout, else here.
+HERE = os.path.dirname(os.path.abspath(__file__))
+BLOCK_DIRS = [HERE] + [os.path.normpath(os.path.join(HERE, "..", "..", d, "layout")) for d in ("DAC", "DPI")]
+
+
+def blockfile(name):
+    for d in BLOCK_DIRS:
+        if os.path.exists(os.path.join(d, name)):
+            return os.path.join(d, name)
+    raise FileNotFoundError("%s not in %s" % (name, ", ".join(BLOCK_DIRS)))
 
 DAC = sys.argv[1] if len(sys.argv) > 1 else "DAC_binary"
 
@@ -26,7 +38,7 @@ def subckts(f):
 
 lib = {}
 for f in ("neuron_sized", "DPI", DAC, "DAC_signed", "DPI_inh", "bias_cell"):
-    for k, v in subckts(f + "_lvs_ref.spice").items():
+    for k, v in subckts(blockfile(f + "_lvs_ref.spice")).items():
         assert k not in lib or lib[k] == v, k
         lib[k] = v
 ports = {k: v[0].split()[2:] for k, v in lib.items()}
