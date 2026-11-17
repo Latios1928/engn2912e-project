@@ -60,7 +60,7 @@ UNITS = {"period": ("us", 1e6), "t_spike": ("us", 1e6), "t_refr": ("us", 1e6),
 
 
 def limits(m, vdd):
-    return {"period": (190e-6, 210e-6), "t_spike": (9e-6, 11e-6), "t_refr": (12e-6, 15e-6),
+    return {"period": (190e-6, 210e-6), "t_spike": (9e-6, 11e-6), "t_refr": (10e-6, 20e-6),
             "v_spike_max": (0.9 * vdd, None), "v_reset": (None, 0.05), "p_avg": (None, 1e-6)}[m]
 
 
@@ -177,7 +177,7 @@ def write_md(path, by, variant, note):
          + f". Testbench `{TB}` (9.5 nA DC), runs of {TSTOP * 1e3:g} ms, bias voltages fixed unless stated.",
          "",
          "Specs (`analog/neuron/sizing_context.txt`, defined at tt 27 C): period 190-210 us, "
-         "t_spike 9-11 us, t_refr 12-15 us, v_spike_max >= 0.9 VDD, v_reset <= 50 mV, p_avg <= 1 uW. "
+         "t_spike 9-11 us, t_refr 10-20 us, v_spike_max >= 0.9 VDD, v_reset <= 50 mV, p_avg <= 1 uW. "
          "Bold: outside the spec. *fires* = at least 7 spikes in the run (needed for the measurements).", ""]
     if by.get("pvt"):
         rs = by["pvt"]

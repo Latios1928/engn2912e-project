@@ -145,13 +145,14 @@ def st_decide(cell, mode: str | None = None):
 
 def st_build(cell):
     import yaml
-    from decide import two_row_args, apply_answers
+    from decide import two_row_args, apply_answers, expand_common_centroid
     from glayout_floorplan import two_row, write_cell
     need(cell, "decide")
     dec = yaml.safe_load((cdir(cell) / "layout.yaml").read_text())
     order_n, order_p, dummy_l = two_row_args(dec)
     nl = _cell(cell)
     apply_answers(nl, dec)              # same netlist changes the decisions assumed
+    order_n, order_p = expand_common_centroid(nl, dec, order_n, order_p)
     res = two_row(nl, cell, order_n, order_p, dummy_l)
     text = write_cell(res, cdir(cell))
     b = json.loads((cdir(cell) / f"{cell}.build.json").read_text())

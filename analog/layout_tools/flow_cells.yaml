@@ -9,7 +9,7 @@
 
 neuron_glayout:
   schematic: ../neuron/neuron_sized.sch
-  connect: {x1_net2: VT}          # spike_amplifier_sized.sch: VN wire stops short of its label
+  # connect {x1_net2: VT} removed 2026-11-17: the VN wire in spike_amplifier_sized.sch is fixed
   symbol: ../neuron/neuron_sized.sym
   testbench: ../neuron/neuron_sized_testbench.sch
   metric: {type: period, node: "v(spike)", threshold: 1.65}
@@ -22,3 +22,15 @@ spike_amp_fp:
 DAC_binary:
   schematic: ../DAC/DAC_binary.sch
   symbol: ../DAC/DAC_binary.sym
+
+DPI:
+  schematic: ../DPI/DPI.sch       # minimum-size DPI: excitatory synapse, and the core of DPI_inh_min
+  symbol: ../DPI/DPI.sym
+
+DAC_signed_binary:
+  schematic: ../DAC/DAC_signed_binary.sch   # signed synapse DAC (1:2:4:8 + sign) of snn_analog_signed
+  symbol: ../DAC/DAC_signed_binary.sym
+
+bias_cell:
+  schematic: ../neuron/bias_cell.sch
+  symbol: ../neuron/bias_cell.sym

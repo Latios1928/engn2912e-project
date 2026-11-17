@@ -1,0 +1,107 @@
+# Layout decisions (decide.py). Edit an item and set decided_by: designer to
+# keep it across re-runs; answer questions with `answer:`.
+cell: DPI
+pins:
+- VDD
+- Vthr
+- Isyn
+- Isum
+- VT
+nets:
+  Isum:
+    class: signal
+    why: ''
+  Isyn:
+    class: signal
+    why: ''
+  VDD:
+    class: rail
+    why: supply
+  VT:
+    class: bias_pin
+    why: gate-only pin driving current sources / long-L devices
+  Vthr:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  net1:
+    class: signal
+    why: ''
+groups:
+- id: G1
+  type: diff_pair
+  devices:
+  - M1
+  - M2
+  decided_by: rule
+  tail: null
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 0.64
+  reason: same W/L, common source Isum, gates Vthr/net1
+wells:
+- id: W1
+  kind: dnw
+  body: Isum
+  devices:
+  - M1
+  - M2
+  required: true
+  decided_by: rule
+  reason: 'NMOS body on Isum (not ground): needs its own isolated p-well in a DNW island'
+  cost_um2: 372
+- id: W2
+  kind: nwell
+  body: VDD
+  devices:
+  - M3
+  - M4
+  required: false
+  decided_by: rule
+  reason: PMOS n-well on VDD (shared)
+  cost_um2: 0
+rings:
+- around: W1
+  type: p+ body ring
+  net: Isum
+  required: true
+  rule: LVPWELL tie
+- around: W1
+  type: n+ DNW tie ring
+  net: VDD
+  required: true
+  rule: DNW bias
+- around: W1
+  type: p+ substrate ring
+  net: ground
+  required: true
+  rule: DN.3
+- around: W2
+  type: n+ tap ring
+  net: VDD
+  required: true
+  rule: DF.13 latch-up (tap within 20 um)
+floorplan:
+  style: two_row
+  order_n:
+  - M1
+  - M2
+  order_p:
+  - M3
+  - M4
+  dummy_l: 0.64
+  dnw_islands: 1
+  decided_by: rule
+questions: []
+caps:
+- name: C2
+  top: VDD
+  bot: net1
+  w: 22.18
+  l: 22.18
+schematic_warnings: []
+schematic_changes:
+- 'M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+- 'M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+- 'M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+- 'M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+mode: auto

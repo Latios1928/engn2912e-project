@@ -1,0 +1,22 @@
+{
+ "best": {
+  "INA": 7.1842,
+  "IKup": 0.7824,
+  "Ik": 22.1359,
+  "IIp": 34.143,
+  "IKdn": 34.2,
+  "I_ampbias": 195.3023,
+  "Vlk": 0.3725
+ },
+ "units": {
+  "INA": "uA",
+  "IKup": "uA",
+  "Ik": "uA",
+  "IIp": "nA",
+  "IKdn": "nA",
+  "I_ampbias": "nA",
+  "Vlk": "V"
+ },
+ "n_pass": 5,
+ "worst_margin": -10.0
+}

@@ -1,0 +1,25 @@
+{
+ "stage": "build",
+ "cell": "DAC_signed_binary",
+ "time": "2026-11-17 15:48:48",
+ "ok": true,
+ "size_um": [
+  304.87,
+  53.74
+ ],
+ "router_check": "clean",
+ "predrc": "predrc DAC_signed_binary: 0 rule(s) predicted to fail (19 checked, 0.1 s)",
+ "notes": [
+  "x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_M7: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_Men: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "Mse: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "Msi: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "Mpi: 0.44/0.28 -> 0.5/0.32 (W/L kept)",
+  "Mni: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "G3 common-centroid, 15 units: D C D B D C D A D C D B D C D (A=x1_M2 x1, B=x1_M4 x2, C=x1_M6 x4, D=x1_M8 x8)",
+  "ground net GND drawn as VSS"
+ ]
+}

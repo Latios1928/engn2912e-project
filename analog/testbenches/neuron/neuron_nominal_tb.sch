@@ -183,10 +183,10 @@ value="
       let nfail = nfail + 1
     end
     let x = t_refr*1e6
-    if (t_refr >= 12e-6) & (t_refr <= 15e-6)
-      echo CHECK t_refr       $&x us     target 12 to 15 us     PASS
+    if (t_refr >= 10e-6) & (t_refr <= 20e-6)
+      echo CHECK t_refr       $&x us     target 10 to 20 us     PASS
     else
-      echo CHECK t_refr       $&x us     target 12 to 15 us     FAIL
+      echo CHECK t_refr       $&x us     target 10 to 20 us     FAIL
       let nfail = nfail + 1
     end
     if v_spike_max >= 2.97

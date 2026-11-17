@@ -14,18 +14,21 @@ Reusable two-row floorplan for GF180 gLayout cells: schematic in, DRC/LVS-ready 
 
 Floorplan (bottom -> top):
     bottom channel   NMOS gate nets + their pins           met4 tracks
-    NMOS row         all NMOS, dummy ring, one shared DNWELL (body VSS)
+    NMOS row         NMOS with body on ground: dummy ring, one shared DNWELL (body VSS);
+                     each other NMOS body net (e.g. body tied to source): its own DNWELL
+                     island with its own dummy ring and p+ body ring on that net, side by side
     mid channel      all source/drain nets, VSS, VDD
     PMOS row         all PMOS rotated 180 deg, dummy ring, n-tap ring (body VDD)
     top channel      PMOS gate nets + their pins
     left             met3 columns for nets in more than one channel; pin labels
-    right            up to 2 MIM caps (bottom plate VSS): met4 spine, met5 top-plate links
+    right            up to 2 MIM caps sharing one bottom-plate net: met4 spine to that net's
+                     mid track, met5 top-plate links
 Layer plan: met2 device buses, met3 vertical, met4 horizontal, met5 cap links.
 Every shape is net-tagged in a Router, so the short checker, the DRC predictor and the
 parasitic predictor all run before the real tools.
 
-Assumptions (checked, with a clear error otherwise): NMOS body = VSS, PMOS body = VDD,
-m = 1, caps have their bottom plate on VSS, at most 2 caps.
+Assumptions (checked, with a clear error otherwise): PMOS body = VDD, m = 1, at most 2 caps,
+all with the same bottom-plate net (any net: VSS, VDD or a signal). NMOS bodies may be any net (islands, see above).
 """
 from __future__ import annotations
 
@@ -47,6 +50,10 @@ GAP = 0.6            # device-to-device gap in a row
 CH_MARGIN = 0.9      # ring metal -> first/last channel track (centre)
 CAP_GAP = 2.0        # spine centre -> MIM plate: 0.25 + MIMTM.1 (1.2) + margin
 CAP_PITCH = 1.6      # met5 link columns: 1.0 wire + 0.44 space + margin
+GROUND = ("VSS", "GND", "0")
+ISLAND_GAP = 0.4     # guard bbox to guard bbox. 0 put neighbouring substrate-ring metal
+                     # < M1.2a 0.23 / M2.2a 0.28 apart where guards of different heights meet;
+                     # DNWELLs end up > 5.7 um apart (DN.2a 2.5, DN.2b 5.42)
 
 
 @dataclass
@@ -65,13 +72,23 @@ def bus(dev, term):
     return min(a[0], b[0]), max(a[0], b[0]), a[1]
 
 
+DBU = 0.005      # GF180 database unit (um)
+
+
+def _snap(v: float) -> float:
+    """Round a move to the database grid. A device whose height is an odd multiple of 5 nm has
+    its centre on 2.5 nm; centring it there puts every shape off-grid, and the GDS writer's
+    rounding then makes 0.225 um contacts, 0.265 um vias and slivers (bias_cell, W = 1.435 um)."""
+    return round(v / DBU) * DBU
+
+
 def _row(top, fets):
     refs, x = {}, 0.0
     for f in fets:
         r = top << fet(pdk, f.kind, f.w, f.l, fingers=f.nf, with_dummy=False)
         if f.kind == "p":
             r.rotate(180)                      # gates on top, S/D buses at the bottom
-        r.move((x - r.xmin, -r.center[1]))
+        r.move((_snap(x - r.xmin), _snap(-r.center[1])))   # stay on the 5 nm grid
         x = r.xmax + GAP
         refs[f.name] = r
     return refs
@@ -99,72 +116,135 @@ def _ring_y(port):
 
 def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -> Result:
     """Build the cell. order_n / order_p: device names left->right (default: netlist order)."""
+    # one ground name: the layout's substrate / guard rings are labelled VSS, so a cell that
+    # calls its ground GND or 0 (DAC, DAC_signed) is drawn and LVS-referenced as VSS
+    alias = [n for n in GROUND if n != "VSS"]
+    hit = set()
+    for obj, terms in [(f, "dgsb") for f in cell.fets] + [(c, ("top", "bot")) for c in cell.caps]:
+        for t in terms:
+            if getattr(obj, t) in alias:
+                hit.add(getattr(obj, t)); setattr(obj, t, "VSS")
+    if hit:
+        cell.pins = ["VSS" if p in alias else p for p in cell.pins]
+        cell.pins = list(dict.fromkeys(cell.pins))
+        cell.log.append(f"ground net {', '.join(sorted(hit))} drawn as VSS")
     nm = [cell.by_name(n) for n in order_n] if order_n else cell.nmos
     pm = [cell.by_name(n) for n in order_p] if order_p else cell.pmos
     if not nm or not pm:
         raise ValueError("two_row needs at least one NMOS and one PMOS")
     for f in nm + pm:
-        want = "VSS" if f.kind == "n" else "VDD"
-        if f.b != want or f.m != 1:
-            raise ValueError(f"{f.name}: need body {want} and m=1 (got {f.b}, m={f.m})")
+        if (f.kind == "p" and f.b != "VDD") or f.m != 1:
+            raise ValueError(f"{f.name}: need {'body VDD and ' if f.kind == 'p' else ''}m=1 "
+                             f"(got body {f.b}, m={f.m})")
     caps = list(cell.caps)
-    if len(caps) > 2 or any(c.bot != "VSS" for c in caps):
-        raise NotImplementedError("two_row supports <= 2 caps with the bottom plate on VSS")
+    if len(caps) > 2 or len({c.bot for c in caps}) > 1:
+        raise NotImplementedError("two_row supports <= 2 caps that share one bottom-plate net "
+                                  f"(got {[(c.name, c.bot) for c in caps]})")
+    cap_bot = caps[0].bot if caps else None      # net of the met4 spine
     pins = list(cell.pins)
+    for rail in ("VSS", "VDD"):          # the layout always has a substrate (VSS) and VDD wells
+        if rail not in pins:
+            pins.append(rail)
     pnames = {f.name for f in pm}
 
     top = Component(f"{name}_build")
     R = Router(pdk, top)
 
-    # ------------------------------------------------------------------ NMOS row in DNW
-    nref = _row(top, nm)
-    dn = dummy_ring(pdk, top, list(nref.values()), "n", length=dummy_l, name="DN")
-    g = dnw_guard(pdk, top, list(nref.values()) + [dn.ref], body="VSS", dnw="VDD", sub="VSS")
-    top << straight_route(pdk, dn.ports["rail_N"], g.ports["body_N_top_met_S"])
+    # ------------------------------------------------------------------ NMOS row in DNW(s)
+    # Ground-body NMOS share one DNW (first); every other body net gets its own island:
+    # dummy ring on that net, p+ body ring on that net, DNW tie to VDD, substrate ring to VSS.
+    by_body = {}
+    for f in nm:
+        by_body.setdefault("VSS" if f.b in GROUND else f.b, []).append(f)
+    bodies = (["VSS"] if "VSS" in by_body else []) + [b for b in by_body if b != "VSS"]
+    nref, wells, cursor = {}, [], 0.0
+    for k, body in enumerate(bodies):
+        refs = _row(top, by_body[body])
+        main = body == "VSS"
+        dn_k = dummy_ring(pdk, top, list(refs.values()), "n", length=dummy_l,
+                          name="DN" if main else f"DNI{k}", rail=body)
+        g_k = dnw_guard(pdk, top, list(refs.values()) + [dn_k.ref], body=body, dnw="VDD", sub="VSS",
+                        name="dnw_guard" if main else f"dnw_guard_{body}")
+        rt = top << straight_route(pdk, dn_k.ports["rail_N"], g_k.ports["body_N_top_met_S"])
+        if k:                            # islands go right of the previous guard
+            dx = _snap(cursor - g_k.ref.xmin)
+            for o in list(refs.values()) + [dn_k.ref, g_k.ref, rt]:
+                o.movex(dx)
+        cursor = g_k.ref.xmax + ISLAND_GAP
+        nref.update(refs)
+        wells.append(dict(body=body, dn=dn_k, g=g_k))
+    g = wells[0]["g"]                    # leftmost guard: VSS pin label
+    n_xmin = min(w["g"].ref.xmin for w in wells)
+    n_xmax = max(w["g"].ref.xmax for w in wells)
+    n_ymin = min(w["g"].ref.ymin for w in wells)
+    n_ymax = max(w["g"].ref.ymax for w in wells)
 
     # ------------------------------------------------------------------ PMOS row (built at y=0)
     ncx = (min(r.xmin for r in nref.values()) + max(r.xmax for r in nref.values())) / 2
     pref = _row(top, pm)
     p0, p1 = min(r.xmin for r in pref.values()), max(r.xmax for r in pref.values())
     for r in pref.values():
-        r.movex(ncx - (p0 + p1) / 2)
+        r.movex(_snap(ncx - (p0 + p1) / 2))
     dp = dummy_ring(pdk, top, list(pref.values()), "p", length=dummy_l, name="DP")
     ng = nwell_guard(pdk, top, list(pref.values()) + [dp.ref], body="VDD")
     p_rail = top << straight_route(pdk, dp.ports["rail_N"], ng.ports["body_N_top_met_S"])
     pmos_objs = list(pref.values()) + [dp.ref, ng.ref, p_rail]
 
-    x_vss = dn.ref.xmin + 0.8          # body ring -> sub ring -> VSS track
-    x_dnw = dn.ref.xmax - 0.8          # DNW tie -> VDD track
+    # supply / body columns (met3, over the dummy side columns): (net, x, ring ys, tag)
+    cols = []
+    for w in wells:
+        d, gw = w["dn"].ref, w["g"]
+        yb_body, yb_sub = _ring_y(gw.ports["body_N_top_met_N"]), _ring_y(gw.ports["sub_N_top_met_S"])
+        y_dnw = _ring_y(gw.ports["dnw_N_top_met_N"])
+        if w["body"] == "VSS":           # body ring -> sub ring -> VSS track; DNW tie -> VDD
+            cols += [("VSS", d.xmin + 0.8, [yb_body, yb_sub], "vss-col"),
+                     ("VDD", d.xmax - 0.8, [y_dnw], "dnw-col")]
+        else:                            # island: body ring -> body net; sub ring -> VSS
+            cols += [(w["body"], d.xmin + 0.8, [yb_body], "isl-body-col"),
+                     ("VSS", d.xmin + 0.8 + PITCH, [yb_sub], "isl-sub-col"),
+                     ("VDD", d.xmax - 0.8, [y_dnw], "isl-dnw-col")]
+    x_vss = next(x for n, x, _y, _t in cols if n == "VSS")
 
     def plan(sh):
         terms = _risers(nref, nm) + [(n, x + sh, y, c, t) for n, x, y, c, t in _risers(pref, pm)]
         chans_of = {}
         for net, *_r, ch, _t in terms:
             chans_of.setdefault(net, set()).add(ch)
-        chans_of.setdefault("VSS", set()).add("mid"); chans_of.setdefault("VDD", set()).add("mid")
+        for net, *_c in cols:
+            chans_of.setdefault(net, set()).add("mid")
+        chans_of.setdefault("VDD", set()).add("mid")
+        if cap_bot:
+            chans_of.setdefault(cap_bot, set()).add("mid")
         cross = sorted(n for n, c in chans_of.items() if len(c) > 1)
-        left = min(g.ref.xmin, ng.ref.xmin + sh) - 1.0
+        left = min(n_xmin, ng.ref.xmin + sh) - 1.0
         col_x = {n: left - i * PITCH for i, n in enumerate(cross)}
         pin_x = left - len(cross) * PITCH - 0.6
-        x_sp = max(g.ref.xmax, ng.ref.xmax + sh) + 2.4
+        x_sp = max(n_xmax, ng.ref.xmax + sh) + 2.4
         cap_x = {c.top: x_sp - 0.8 - i * CAP_PITCH for i, c in enumerate(caps)}
         x_ntap = ng.ref.xmin + sh + 0.8
+        extra = {}                       # mid-channel x points of the supply / body columns
+        for net, x, _ys, _t in cols:
+            extra.setdefault(net, []).append(x)
+        extra.setdefault("VDD", []).append(x_ntap)
+        if cap_bot:
+            extra.setdefault(cap_bot, [])
 
         def spans(ch):
             sp = {}
             for net, x, _y, c, _t in terms:
                 if c == ch:
                     lo, hi = sp.get(net, (x, x)); sp[net] = (min(lo, x), max(hi, x))
-            for net in list(sp) + (["VSS", "VDD"] if ch == "mid" else []):
-                lo, hi = sp.get(net, (x_vss, x_vss) if net == "VSS" else (x_dnw, x_dnw))
+            for net in list(sp) + ([n for n in extra if n not in sp] if ch == "mid" else []):
+                xs = extra.get(net, []) if ch == "mid" else []
+                lo, hi = sp.get(net, (min(xs), max(xs)) if xs else (0.0, 0.0))
+                if xs:
+                    lo, hi = min(lo, *xs), max(hi, *xs)
                 if net in col_x:
                     lo = min(lo, col_x[net])
                 if net in pins and ch != "mid":
                     lo = min(lo, pin_x)
-                if ch == "mid" and net == "VSS":
-                    lo, hi = min(lo, x_vss), max(hi, x_sp if caps else x_vss)
-                if ch == "mid" and net == "VDD":
-                    lo, hi = min(lo, x_dnw, x_ntap), max(hi, x_dnw, x_ntap)
+                if ch == "mid" and net == cap_bot:
+                    hi = max(hi, x_sp)
                 if ch == "mid" and net in cap_x:
                     hi = max(hi, cap_x[net])
                 sp[net] = (lo, hi)
@@ -189,7 +269,7 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
               if c == "mid" and t.split(".")[0] not in pnames]
         pr = [(x, net, mid[net]) for net, x, _y, c, t in terms
               if c == "mid" and t.split(".")[0] in pnames]
-        nr += [(x_dnw, "VDD", mid["VDD"]), (x_vss, "VSS", mid["VSS"])]
+        nr += [(x, net, mid[net]) for net, x, _ys, _t in cols]
         pr += [(x_ntap, "VDD", mid["VDD"])]
         bad = [(a, b) for a in nr for b in pr
                if a[1] != b[1] and abs(a[0] - b[0]) < PITCH and a[2] >= b[2]]
@@ -212,13 +292,13 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
     chans_of, cross, col_x = P["chans_of"], P["cross"], P["col_x"]
     x_sp, cap_x, tracks, x_ntap = P["x_sp"], P["cap_x"], P["tracks"], P["x_ntap"]
 
-    y_mid0 = g.ref.ymax + CH_MARGIN
+    y_mid0 = n_ymax + CH_MARGIN
     n_mid = tracks["mid"][2]
     dy = y_mid0 + (n_mid - 1) * PITCH + CH_MARGIN - ng.ref.ymin
     for o in pmos_objs:
         o.movey(dy)
     y0 = {"mid": y_mid0,
-          "bot": g.ref.ymin - CH_MARGIN - (tracks["bot"][2] - 1) * PITCH,
+          "bot": n_ymin - CH_MARGIN - (tracks["bot"][2] - 1) * PITCH,
           "top": ng.ref.ymax + CH_MARGIN}
     track_y = {(ch, net): y0[ch] + i * PITCH
                for ch, (sp, idx, n) in tracks.items() for net, i in idx.items()}
@@ -247,18 +327,13 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
         R.wire("met3", (x, min(ys)), (x, max(ys)), net, tag="col")
 
     # ------------------------------------------------------------------ supply columns
-    yb_body, yb_sub = _ring_y(g.ports["body_N_top_met_N"]), _ring_y(g.ports["sub_N_top_met_S"])
     y_vss = track_y[("mid", "VSS")]
-    for y in (yb_body, yb_sub):
-        R.via(x_vss, y, "met2", "met3", "VSS", "vss-col")
-    R.via(x_vss, y_vss, "met3", "met4", "VSS", "vss-col")
-    R.wire("met3", (x_vss, yb_body), (x_vss, y_vss), "VSS", tag="vss-col")
-    y_vdd = track_y[("mid", "VDD")]
-    for x, yr, tag in ((x_dnw, _ring_y(g.ports["dnw_N_top_met_N"]), "dnw-col"),
-                       (x_ntap, _ring_y(ng.ports["body_S_top_met_S"]), "ntap-col")):
-        R.via(x, yr, "met2", "met3", "VDD", tag)
-        R.via(x, y_vdd, "met3", "met4", "VDD", tag)
-        R.wire("met3", (x, yr), (x, y_vdd), "VDD", tag=tag)
+    for net, x, ys, tag in cols + [("VDD", x_ntap, [_ring_y(ng.ports["body_S_top_met_S"])], "ntap-col")]:
+        yt = track_y[("mid", net)]
+        for y in ys:
+            R.via(x, y, "met2", "met3", net, tag)
+        R.via(x, yt, "met3", "met4", net, tag)
+        R.wire("met3", (x, min(ys + [yt])), (x, max(ys + [yt])), net, tag=tag)
 
     # ------------------------------------------------------------------ caps (0: above, 1: below)
     placed = []
@@ -273,13 +348,13 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
         hx, hy = c.w / 2 - 0.28, c.l / 2 - 0.28
         R.shapes["met5"].append((m.center[0] - hx, m.center[1] - hy,
                                  m.center[0] + hx, m.center[1] + hy, c.top, c.name))
-        R.shapes["met4"].append((m.xmin, m.ymin, m.xmax, m.ymax, "VSS", c.name))
+        R.shapes["met4"].append((m.xmin, m.ymin, m.xmax, m.ymax, c.bot, c.name))
         placed.append((c, m))
     if placed:
-        ys = [m.center[1] for _, m in placed] + [y_vss]
-        R.wire("met4", (x_sp, min(ys)), (x_sp, max(ys)), "VSS", tag="spine")
+        ys = [m.center[1] for _, m in placed] + [track_y[("mid", cap_bot)]]
+        R.wire("met4", (x_sp, min(ys)), (x_sp, max(ys)), cap_bot, tag="spine")
         for c, m in placed:
-            R.wire("met4", (x_sp, m.center[1]), (m.xmin + 0.3, m.center[1]), "VSS", tag=c.name)
+            R.wire("met4", (x_sp, m.center[1]), (m.xmin + 0.3, m.center[1]), c.bot, tag=c.name)
             x, y, yc = cap_x[c.top], track_y[("mid", c.top)], m.center[1]
             R.via(x, y, "met4", "met5", c.top, "cap")
             R.wire("met5", (x, y), (x, yc), c.top, w=1.0, tag="cap")
@@ -310,8 +385,11 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
     for c in caps:
         ref.append(f"X{c.name} {c.top} {c.bot} cap_mim_2f0fF c_width={c.w:g}e-6 "
                    f"c_length={c.l:g}e-6 m=1")
-    ref += dn.spice + dp.spice
+    ref += [line for w in wells for line in w["dn"].spice] + dp.spice
+    islands = [w["body"] for w in wells if w["body"] != "VSS"]
     summary = (f"{name}: {len(nm)} NMOS + {len(pm)} PMOS + {len(caps)} caps, "
+               + (f"{len(islands)} isolated NMOS body island(s) ({', '.join(islands)}), " if islands else "")
+               + 
                f"tracks bot/mid/top {tracks['bot'][2]}/{n_mid}/{tracks['top'][2]}, "
                f"{len(cross)} columns, PMOS shift {sh:+.2f}")
     return Result(name, top, R, ref, pins, summary, notes + cell.log)

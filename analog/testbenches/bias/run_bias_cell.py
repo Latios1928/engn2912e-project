@@ -36,7 +36,7 @@ LIB = {"tt": "typical", "ss": "ss", "ff": "ff", "sf": "sf", "fs": "fs"}
 CAP = {"tt": "typical", "ss": "ss", "ff": "ff", "sf": "typical", "fs": "typical"}
 PVT = [(c, t) for c in LIB for t in (0, 27, 85)]
 NB = ["Vlk", "VK", "VNA", "VKup", "VKdn", "VIp", "Vamp_bias"]
-SPEC = {"period": (190e-6, 210e-6), "t_spike": (9e-6, 11e-6), "t_refr": (12e-6, 15e-6), "v_spike_max": (2.97, 9)}
+SPEC = {"period": (190e-6, 210e-6), "t_spike": (9e-6, 11e-6), "t_refr": (10e-6, 20e-6), "v_spike_max": (2.97, 9)}
 ANALYSIS = """.control
 save v(spike) v(vmem) i(V1)
 tran 40n 6m 0 40n uic

@@ -163,7 +163,7 @@ def dummy_ring(pdk, top, refs, kind: str, length: float | None = None,
 
 # ----------------------------------------------------------------------------- NMOS guard
 def dnw_guard(pdk, top, refs, body: str = "VSS", dnw: str = "VDD", sub: str = "VSS",
-              body_gap: float = 0.36, tie_gap: float = 0.43) -> Ring:
+              body_gap: float = 0.36, tie_gap: float = 0.43, name: str = "dnw_guard") -> Ring:
     """Smallest DRC-legal deep-n-well enclosure around a group of NMOS (and their dummies).
 
     Inside -> out:
@@ -179,7 +179,7 @@ def dnw_guard(pdk, top, refs, body: str = "VSS", dnw: str = "VDD", sub: str = "V
     x0, y0, x1, y1 = _bbox(refs)
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     hw, hh = (x1 - x0) / 2, (y1 - y0) / 2
-    g = Component("dnw_guard")
+    g = Component(name)          # unique per island (several guards in one cell)
 
     d_body = body_gap                                  # body ring COMP inner edge
     d_lpw = d_body + RING_COMP + RING_IMP              # LVPWELL edge = Pplus outer edge

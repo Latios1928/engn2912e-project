@@ -346,6 +346,7 @@ def _decide(cell, pol, previous):
     dec = dict(cell=cell.name, pins=cell.pins,
                nets={n: {"class": c, "why": r} for n, (c, r) in sorted(nets.items())},
                groups=groups, wells=wells, rings=rings, floorplan=fp, questions=questions,
+               caps=[dict(name=c.name, top=c.top, bot=c.bot, w=c.w, l=c.l) for c in cell.caps],
                schematic_warnings=cell.warnings(), schematic_changes=list(cell.log))
     return merge(previous, dec) if previous else dec
 
@@ -372,17 +373,20 @@ def blockers(dec) -> list:
     if fp["style"] != "two_row":
         out.append(f"floorplan style {fp['style']} (two_row needs NMOS and PMOS)")
     for w in dec["wells"]:
-        if w["kind"] == "dnw" and w["body"] not in ("VSS", "GND", "0"):
-            out.append(f"{w['id']}: separate DNW island for body {w['body']}")
+        # NMOS DNW islands for non-ground bodies (e.g. body tied to source): two_row builds
+        # one island per body net, so they are no longer blockers.
         if w["kind"] == "nwell" and w["body"] != "VDD":
             out.append(f"{w['id']}: separate n-well island for body {w['body']}")
         if w["kind"] == "psub":
             out.append(f"{w['id']}: NMOS without DNW (two_row always draws one)")
     for g in dec["groups"]:
-        if g.get("placement") == "common_centroid":
-            out.append(f"{g['id']} ({g['type']}): common-centroid placement")
+        # common_centroid: built as a 1-D mirror-symmetric unit sequence (expand_common_centroid)
         if g.get("dummy_ring") == "group":
             pass        # two_row puts one ring around each row: satisfied, but shared
+    caps = dec.get("caps") or []
+    if len(caps) > 2 or len({c.get("bot") for c in caps}) > 1:
+        out.append(f"caps: two_row places <= 2 MIM caps sharing one bottom-plate net "
+                   f"(got {[(c.get('name'), c.get('bot')) for c in caps]})")
     for r in dec["rings"]:
         if r.get("enabled"):
             out.append(f"extra guard ring around {r['around']}")
@@ -390,6 +394,64 @@ def blockers(dec) -> list:
         if not q.get("answer"):
             out.append(f"open question {q['id']}")
     return out
+
+
+def centroid_pattern(counts: dict) -> list:
+    """1-D common-centroid order of device names, one entry per unit.
+
+    The row is mirror-symmetric (half + odd units + reversed half), so every device's units
+    are centred on the middle of the row: a linear gradient along x cancels exactly. Inside
+    the half, units are interleaved by largest deficit, so each device is spread along the row.
+    1:2:4:8 (A..D) gives D C D B D C D A D C D B D C D. With more than one odd count the odd
+    units share the middle, so their centroids differ by under one unit pitch.
+    """
+    half = {d: c // 2 for d, c in counts.items()}
+    odd = [d for d, c in sorted(counts.items(), key=lambda x: x[1]) if c % 2]
+    n = sum(half.values())
+    placed = {d: 0 for d in half}
+    seq = []
+    for i in range(n):
+        d = max(half, key=lambda d: (half[d] * (i + 1) / n - placed[d], half[d]))
+        placed[d] += 1
+        seq.append(d)
+    if len(odd) > 1:                    # keep the middle symmetric as far as possible
+        odd = odd[1::2][::-1] + odd[::2]
+    return seq + odd + seq[::-1]
+
+
+def expand_common_centroid(cell, dec, order_n, order_p):
+    """Split every common_centroid group into unit devices (one finger each, same W/L and
+    terminals) and put them in centroid_pattern order in the row. Changes `cell` in place
+    (logged); returns the new device orders."""
+    from glayout_netlist import Fet
+    order = {"n": list(order_n), "p": list(order_p)}
+    for g in dec["groups"]:
+        if g.get("placement") != "common_centroid":
+            continue
+        devs = [cell.by_name(n) for n in g["devices"]]
+        keys = {(f.kind, round(f.w, 4), round(f.l, 4), f.g, f.s, f.b) for f in devs}
+        if len(keys) != 1:
+            raise NotImplementedError(f"{g['id']}: common-centroid needs one unit device (same "
+                                      f"type, W per finger, L, gate, source, body); got {sorted(keys)}")
+        counts = {f.name: f.nf for f in devs}
+        pat = centroid_pattern(counts)
+        made = defaultdict(int)
+        units = []
+        for name in pat:
+            f = cell.by_name(name)
+            units.append(Fet(f"{name}_u{made[name]}", f.kind, f.w, f.l, f.d, f.g, f.s, f.b, nf=1, m=1))
+            made[name] += 1
+        idx = min(i for i, f in enumerate(cell.fets) if f.name in counts)
+        cell.fets = [f for f in cell.fets if f.name not in counts]
+        cell.fets[idx:idx] = units
+        row = order[devs[0].kind]
+        pos = min(row.index(n) for n in counts)
+        row[:] = [n for n in row if n not in counts]
+        row[pos:pos] = [u.name for u in units]
+        letter = {n: chr(65 + i) for i, n in enumerate(sorted(counts, key=lambda n: counts[n]))}
+        cell.log.append(f"{g['id']} common-centroid, {len(units)} units: {' '.join(letter[n] for n in pat)}"
+                        f" ({', '.join(f'{letter[n]}={n} x{counts[n]}' for n in letter)})")
+    return order["n"], order["p"]
 
 
 def two_row_args(dec):

@@ -1,0 +1,53 @@
+* LVS reference for DPI.gds (glayout_floorplan.two_row)
+* note: M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)
+* note: M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)
+* note: M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)
+* note: M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)
+.subckt DPI VDD Vthr Isyn Isum VT VSS
+XM1 VDD Vthr Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XM2 net1 net1 Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XM3 net1 VT VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XM4 Isyn net1 VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XC2 VDD net1 cap_mim_2f0fF c_width=22.18e-6 c_length=22.18e-6 m=1
+XDNI0N0 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N1 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N2 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N3 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N4 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N5 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N6 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0N7 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S0 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S1 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S2 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S3 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S4 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S5 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S6 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0S7 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0W0 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDNI0E0 Isum Isum Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
+XDPN0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN1 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN2 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN3 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN4 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN5 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN6 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPN7 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS1 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS2 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS3 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS4 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS5 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS6 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPS7 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPW0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XDPE0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+Cpred_Isum Isum VSS 8.829e-15
+Cpred_Isyn Isyn VSS 2.049e-15
+Cpred_VT VT VSS 2.947e-15
+Cpred_Vthr Vthr VSS 3.53e-15
+Cpred_net1 net1 VSS 2.178e-14
+.ends

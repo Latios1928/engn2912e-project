@@ -1,0 +1,25 @@
+{
+ "stage": "signoff",
+ "cell": "bias_cell",
+ "time": "2026-11-17 15:41:36",
+ "ok": true,
+ "drc": "clean",
+ "lvs": "match",
+ "pex": {
+  "devices": 538,
+  "C": 116,
+  "R": 24968
+ },
+ "calibration": {
+  "cell": "bias_cell",
+  "nets": 12,
+  "mean_factor": 1.142,
+  "spread": [
+   0.98,
+   1.496
+  ],
+  "max_err_before": 0.0,
+  "global_factor": 1.142
+ },
+ "calibration_text": "calibration bias_cell: 12 nets, factor 1.142 (range 0.98..1.496), worst error before +0 %, global 1.142\n         Vlk: pred(raw)  139.8 fF  extracted  149.0 fF  was +0 %\n        Vthr: pred(raw)  141.5 fF  extracted  155.5 fF  was -0 %\n         VIp: pred(raw)  142.9 fF  extracted  162.3 fF  was +0 %\n      VT_inh: pred(raw)  161.8 fF  extracted  180.2 fF  was -0 %\n        Iref: pred(raw)   75.6 fF  extracted  113.1 fF  was +0 %"
+}

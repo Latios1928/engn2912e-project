@@ -1,2 +1,0 @@
-15-Nov-2026 23:09:18 | INFO    | Your Klayout version is: KLayout 0.30.8
-15-Nov-2026 23:09:18 | INFO    | Running Global Foundries 180nm MCU /foss/pdks/gf180mcuD/libs.tech/klayout/tech/lvs/gf180mcu.lvs checks on design /foss/designs/engn2912e-project/analog/neuron/layout/flow/neuron_glayout/neuron_glayout.gds on cell neuron_glayout

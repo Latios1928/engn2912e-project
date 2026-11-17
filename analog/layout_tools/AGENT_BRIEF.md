@@ -26,7 +26,7 @@ metric). Designer defaults: `layout_policy.yaml`.
   `decisions.mode` in layout_policy.yaml) makes the flow stop at open questions instead.
 - Designer answers (`flow.py answer ...` or a hand edit) always beat auto answers. **Never
   answer a question yourself** unless the user's request states the answer.
-- Auto mode cannot remove capability blockers (single row, extra DNW islands,
+- Auto mode cannot remove capability blockers (single row, PMOS body islands,
   common-centroid); those still stop the flow — report them.
 - `connect` entries are schematic-bug workarounds; report them, never add one silently.
 - Device resizing (W < 0.5 um -> 0.5 um, W/L kept) is automatic and logged in table.json;
@@ -38,9 +38,14 @@ metric). Designer defaults: `layout_policy.yaml`.
   asked or when a parasitic-sensitive change was made.
 
 ## What the floorplanner (two_row) can build today
-NMOS row in one shared DNW (body = ground), PMOS row in one n-well (body = VDD), dummy ring
-per row, <= 2 MIM caps with the bottom plate on ground. `decide` reports anything else as a
-blocker (single-row cells, extra DNW islands, common-centroid, extra guard rings).
+NMOS row: ground-body NMOS in one shared DNW (body = VSS; GND / 0 are drawn as VSS); every other
+NMOS body net (e.g. body tied to source) gets its own DNW island in the same row, with its own
+dummy ring and p+ body ring on that net. PMOS row in one n-well (body = VDD). Dummy ring per
+group, <= 2 MIM caps sharing one bottom-plate net (any net). `m` copies are drawn as fingers;
+widths snap up to the 10 nm grid (logged). `decide` reports anything else as a blocker
+(single-row cells, PMOS bodies other than VDD, common-centroid, extra guard rings).
+The parasitic predictor models metal only: island nets (p-well/DNW junction) come out low
+before calibration (DPI Isum: 7.8 fF predicted, 31 fF extracted).
 
 ## Known gLayout / GF180 facts (already handled in code; useful when diagnosing)
 - FET `width` is per finger; min 0.5 um. LVS extracts one device per finger.

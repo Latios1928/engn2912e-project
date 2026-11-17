@@ -5,10 +5,9 @@
 * note: M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M6: 0.22/5 -> 0.5/11.36 (W/L kept)
-* note: net x1_net2 -> VT (1 terminals)
 .subckt neuron_glayout VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
 Mx1_M3 x1_net1 Vamp_bias VSS VSS nfet_03v3 L=0.64u W=0.5u nf=1
-Mx1_M1 x1_net3 VMEM x1_net1 VSS nfet_03v3 L=2u W=4u nf=1
+Mx1_M1 x1_net2 VMEM x1_net1 VSS nfet_03v3 L=2u W=4u nf=1
 Mx1_M2 net1 VT x1_net1 VSS nfet_03v3 L=2u W=4u nf=1
 MM1 net2 net1 net4 VSS nfet_03v3 L=0.64u W=0.5u nf=1
 MM2 spike net2 net5 VSS nfet_03v3 L=0.64u W=0.5u nf=1
@@ -17,8 +16,8 @@ MM7 net5 VKdn VSS VSS nfet_03v3 L=1u W=1u nf=1
 MM8 net4 VIp VSS VSS nfet_03v3 L=1u W=1u nf=1
 MM10 net6 VK VSS VSS nfet_03v3 L=1u W=1u nf=1
 MM11 VMEM Vlk VSS VSS nfet_03v3 L=1u W=1u nf=1
-Mx1_M4 x1_net3 x1_net3 VDD VDD pfet_03v3 L=8u W=0.5u nf=1
-Mx1_M5 net1 x1_net3 VDD VDD pfet_03v3 L=8u W=0.5u nf=1
+Mx1_M4 x1_net2 x1_net2 VDD VDD pfet_03v3 L=8u W=0.5u nf=1
+Mx1_M5 net1 x1_net2 VDD VDD pfet_03v3 L=8u W=0.5u nf=1
 MM3 net2 net1 VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 MM4 spike net2 net3 VDD pfet_03v3 L=0.64u W=0.5u nf=1
 MM5 VMEM net2 net7 VDD pfet_03v3 L=0.64u W=0.5u nf=1

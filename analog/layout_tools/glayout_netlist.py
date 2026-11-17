@@ -19,6 +19,7 @@ What it does:
 """
 from __future__ import annotations
 
+import math
 import re
 import subprocess
 import sys
@@ -118,10 +119,22 @@ class Cell:
     def legalize(self, min_w: float = MIN_W):
         """Widen FETs below glayout's minimum width, scaling L to keep W/L (logged)."""
         for f in self.fets:
+            w10 = round(f.w / GRID) * GRID
+            if f.w >= min_w and abs(w10 - f.w) > 1e-9:
+                # glayout draws widths on a 10 nm grid (rounds 0.625 -> 0.63); LVS compares W
+                # exactly, so the reference must carry the drawn width
+                w10 = math.ceil(f.w / GRID - 1e-6) * GRID
+                self.log.append(f"{f.name}: W {f.w:g} -> {w10:g} (glayout 10 nm width grid, L kept)")
+                f.w = round(w10, 4)
             if f.w < min_w:
                 l_new = round(f.l * min_w / f.w / GRID) * GRID
                 self.log.append(f"{f.name}: {f.w:g}/{f.l:g} -> {min_w:g}/{l_new:g} (W/L kept)")
                 f.w, f.l = min_w, l_new
+            if f.m > 1:
+                # m parallel copies share every terminal: the same device as nf*m fingers
+                # (the floorplanner builds fingers; LVS extracts one device per finger)
+                self.log.append(f"{f.name}: m={f.m} x nf={f.nf} -> nf={f.nf * f.m}, m=1 (parallel copies as fingers)")
+                f.nf, f.m = f.nf * f.m, 1
         return self
 
     def connect(self, net: str, to: str):

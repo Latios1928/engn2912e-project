@@ -1,0 +1,25 @@
+{
+ "stage": "signoff",
+ "cell": "DAC_signed_binary",
+ "time": "2026-11-17 15:49:51",
+ "ok": true,
+ "drc": "clean",
+ "lvs": "match",
+ "pex": {
+  "devices": 229,
+  "C": 84,
+  "R": 14864
+ },
+ "calibration": {
+  "cell": "DAC_signed_binary",
+  "nets": 9,
+  "mean_factor": 1.037,
+  "spread": [
+   0.582,
+   1.594
+  ],
+  "max_err_before": 0.962,
+  "global_factor": 1.129
+ },
+ "calibration_text": "calibration DAC_signed_binary: 9 nets, factor 1.037 (range 0.582..1.594), worst error before +96 %, global 1.129\n      Isum_i: pred(raw)    3.3 fF  extracted    1.9 fF  was +96 %\n      Isum_e: pred(raw)    3.3 fF  extracted    2.0 fF  was +89 %\n          Vb: pred(raw)   83.8 fF  extracted  133.6 fF  was -28 %\n          en: pred(raw)    5.1 fF  extracted    5.2 fF  was +12 %\n        w[0]: pred(raw)   69.0 fF  extracted   71.1 fF  was +11 %"
+}

@@ -107,8 +107,9 @@ C {opin.sym} -167.5 -52.5 2 0 {name=p6 lab=Isum}
 C {lab_wire.sym} 122.5 102.5 0 0 {name=p7 sig_type=std_logic lab=Isum}
 C {ipin.sym} -170 -17.5 0 0 {name=p8 lab=VT}
 C {lab_wire.sym} 155 -130 0 0 {name=p10 sig_type=std_logic lab=VT}
-C {capa.sym} 355 -110 0 0 {name=C4
-m=1
-value=1p
-footprint=1206
-device="ceramic capacitor"}
+C {symbols/cap_mim_analog.sym} 355 -110 0 0 {name=C2
+W=22.18e-6
+L=22.18e-6
+model=cap_mim_2f0_m3m4_noshield
+spiceprefix=X
+m=1}

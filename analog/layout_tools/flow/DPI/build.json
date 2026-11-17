@@ -1,0 +1,18 @@
+{
+ "stage": "build",
+ "cell": "DPI",
+ "time": "2026-11-17 15:31:45",
+ "ok": true,
+ "size_um": [
+  54.79,
+  54.02
+ ],
+ "router_check": "clean",
+ "predrc": "predrc DPI: 0 rule(s) predicted to fail (20 checked, 0.0 s)",
+ "notes": [
+  "M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)"
+ ]
+}

@@ -2,7 +2,7 @@
 <report-database>
  <description>DRC Run Report at</description>
  <original-file/>
- <generator>drc: script='/foss/designs/engn2912e-project/analog/neuron/layout/flow/neuron_glayout/drc/metal3.drc'</generator>
+ <generator>drc: script='/foss/designs/engn2912e-project/analog/layout_tools/flow/neuron_glayout/drc/metal3.drc'</generator>
  <top-cell>neuron_glayout</top-cell>
  <tags>
  </tags>
