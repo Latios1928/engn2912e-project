@@ -5,6 +5,13 @@ V {}
 S {}
 F {}
 E {}
+T {Binary branch weights 1:2:4:8 for w[0]..w[3].
+Each branch is one multi-finger device: switch W = k x 0.22u (L 0.28u), current source
+W = k x 1u (L 8u), with nf = k fingers of the unit width (k = 1, 2, 4, 8; m = 1).
+Electrically the same as k unit cells in parallel; the layout may still split the fingers
+into a common-centroid array (LVS combines parallel fingers). Men (gate en) passes the branch
+currents to Isum only while en is high. Vb comes from a diode-connected 1u/8u device fed by
+the reference current (see DACs-DPI.sch). Derived from DAC.sch (1:2:3:4, m = 1..4).} -160 170 0 0 0.3 0.3 {}
 N 100 -120 270 -120 {lab=X}
 N 270 -120 450 -120 {lab=X}
 N 450 -120 620 -120 {lab=X}
@@ -31,9 +38,7 @@ N 20 -90 60 -90 {lab=w[0]}
 N 190 -90 230 -90 {lab=w[1]}
 N 370 -90 410 -90 {lab=w[2]}
 N 530 -90 580 -90 {lab=w[3]}
-N 100 -90 120 -90 {lab=#net4}
-N 120 -90 120 -50 {lab=#net4}
-N 100 -50 120 -50 {lab=#net4}
+N 100 -90 120 -90 {lab=GND}
 N 100 50 120 50 {lab=GND}
 N 100 20 120 20 {lab=GND}
 N 120 20 120 50 {lab=GND}
@@ -49,15 +54,9 @@ N 640 20 640 50 {lab=GND}
 N 357.5 -210 357.5 -180 {lab=Isum}
 N 297.5 -150 317.5 -150 {lab=en}
 N 357.5 -150 480 -150 {lab=GND}
-N 270 -90 290 -90 {lab=#net2}
-N 290 -90 290 -57.5 {lab=#net2}
-N 270 -57.5 290 -57.5 {lab=#net2}
-N 450 -90 472.5 -90 {lab=#net3}
-N 472.5 -90 472.5 -55 {lab=#net3}
-N 450 -55 472.5 -55 {lab=#net3}
-N 620 -90 635 -90 {lab=#net1}
-N 635 -90 635 -52.5 {lab=#net1}
-N 620 -52.5 635 -52.5 {lab=#net1}
+N 270 -90 290 -90 {lab=GND}
+N 450 -90 472.5 -90 {lab=GND}
+N 620 -90 635 -90 {lab=GND}
 C {symbols/nfet_03v3.sym} 80 -90 0 0 {name=M1
 L=0.28u
 W=0.22u
@@ -177,13 +176,6 @@ C {lab_wire.sym} 200 -90 0 0 {name=p8 sig_type=std_logic lab=w[1]}
 C {lab_wire.sym} 380 -90 0 0 {name=p9 sig_type=std_logic lab=w[2]}
 C {lab_wire.sym} 540 -90 0 0 {name=p10 sig_type=std_logic lab=w[3]}
 C {gnd.sym} 360 130 0 0 {name=l1 lab=GND}
-T {Binary branch weights 1:2:4:8 for w[0]..w[3].
-Each branch is one multi-finger device: switch W = k x 0.22u (L 0.28u), current source
-W = k x 1u (L 8u), with nf = k fingers of the unit width (k = 1, 2, 4, 8; m = 1).
-Electrically the same as k unit cells in parallel; the layout may still split the fingers
-into a common-centroid array (LVS combines parallel fingers). Men (gate en) passes the branch
-currents to Isum only while en is high. Vb comes from a diode-connected 1u/8u device fed by
-the reference current (see DACs-DPI.sch). Derived from DAC.sch (1:2:3:4, m = 1..4).} -160 170 0 0 0.3 0.3 {}
 C {lab_wire.sym} 7.5 60 0 0 {name=p11 sig_type=std_logic lab=Vb}
 C {ipin.sym} 357.5 -210 0 0 {name=p2 lab=Isum}
 C {ipin.sym} -122.5 22.5 0 0 {name=p4 lab=en}
@@ -204,3 +196,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
+C {lab_wire.sym} 120 -90 0 1 {name=p5 sig_type=std_logic lab=GND}
+C {lab_wire.sym} 290 -90 0 1 {name=p6 sig_type=std_logic lab=GND}
+C {lab_wire.sym} 472.5 -90 0 1 {name=p15 sig_type=std_logic lab=GND}
+C {lab_wire.sym} 635 -90 0 1 {name=p16 sig_type=std_logic lab=GND}

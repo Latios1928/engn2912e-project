@@ -22,18 +22,18 @@
  "bbox": [
   -15.2,
   -28.845,
-  291.77,
+  206.97,
   36.095
  ],
  "size": [
-  306.97,
+  222.17,
   64.94
  ],
  "ports": [
   {
    "net": "Isum_e",
    "layer": "met2",
-   "x": 291.77,
+   "x": 206.97,
    "y": 18.995,
    "orientation": 0,
    "width": 0.5,
@@ -105,7 +105,7 @@
   {
    "net": "Isum_i",
    "layer": "met2",
-   "x": 291.77,
+   "x": 206.97,
    "y": 16.595,
    "orientation": 0,
    "width": 0.5,
@@ -130,5 +130,5 @@
    "side": "W"
   }
  ],
- "signoff": "DRC clean, LVS match (2026-11-18 04:26:22)"
+ "signoff": "DRC clean, LVS match (2026-11-18 16:59:35)"
 }

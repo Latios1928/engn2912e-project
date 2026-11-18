@@ -1,5 +1,5 @@
 
-Magic 8.3 revision 684 - Compiled on Tue Sep 22 03:29:27 PM CEST 2026.
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
 Starting magic under Tcl interpreter
 Using the terminal as the console.
 WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
@@ -16,22 +16,23 @@ The following types are not handled by extraction and will be treated as non-ele
     obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
 Scaled tech values by 10 / 1 to match internal grid scaling
 Loading gf180mcuD Device Generator Menu ...
-Using technology "gf180mcuD", version 1.0.588-62-g1689ac3
+Using technology "gf180mcuD", version 1.0.575-2-g7b70722
 Warning: Calma reading is not undoable!  I hope that's OK.
 Library written using GDS-II Release 6.0
 Library name: library
 Reading "DPI_inh".
 Extracting DPI_inh_flat into DPI_inh_flat.ext:
-Processing DPI_inh_flat
 DPI_inh_flat: 46 warnings
 Total of 46 warnings.
 exttosim finished.
-Note:  This option has been deprecated and is unused.
-Extracting VSS
-Extracting VDD
+Adding  VSS
 Warning: mimcapcontact at 14814 -1829 smaller than extract section allows
-Extracting Isum
+Adding  VDD; Tnew = 0.38ns, Told = 0.00ns
+Adding  Isum; Tnew = 0.27ns, Told = 0.00ns
+Adding  VT; Tnew = 0.36ns, Told = 0.00ns
+Adding  Iout; Tnew = 0.02ns, Told = 0.00ns
+Adding  Vthr
 Total Nets: 8
-Nets extracted: 3 (0.375000)
-Nets output: 1 (0.125000)
+Nets extracted: 6 (0.750000)
+Nets output: 6 (0.750000)
 exttospice finished.

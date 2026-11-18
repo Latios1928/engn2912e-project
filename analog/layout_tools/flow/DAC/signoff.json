@@ -1,25 +1,25 @@
 {
  "stage": "signoff",
  "cell": "DAC",
- "time": "2026-11-18 04:26:22",
+ "time": "2026-11-18 16:59:35",
  "ok": true,
  "drc": "clean",
  "lvs": "match",
  "pex": {
-  "devices": 229,
-  "C": 51,
-  "R": 14864
+  "devices": 203,
+  "C": 41,
+  "R": 12051
  },
  "calibration": {
   "cell": "DAC",
   "nets": 9,
-  "mean_factor": 0.891,
+  "mean_factor": 0.89,
   "spread": [
    0.597,
    1.479
   ],
-  "max_err_before": 0.0,
+  "max_err_before": 0.077,
   "global_factor": 0.925
  },
- "calibration_text": "calibration DAC: 9 nets, factor 0.891 (range 0.597..1.479), worst error before +0 %, global 0.925\n      Isum_e: pred(raw)   65.1 fF  extracted   57.8 fF  was +0 %\n      Isum_i: pred(raw)   84.4 fF  extracted   74.9 fF  was +0 %\n          Vb: pred(raw)   58.1 fF  extracted   85.9 fF  was +0 %\n          en: pred(raw)    4.3 fF  extracted    4.0 fF  was +0 %\n           s: pred(raw)   38.7 fF  extracted   36.5 fF  was +0 %"
+ "calibration_text": "calibration DAC: 9 nets, factor 0.89 (range 0.597..1.479), worst error before +8 %, global 0.925\n      Isum_e: pred(raw)   51.9 fF  extracted   50.0 fF  was -8 %\n        w[1]: pred(raw)   25.2 fF  extracted   15.2 fF  was +6 %\n        w[2]: pred(raw)   25.9 fF  extracted   16.3 fF  was +6 %\n        w[3]: pred(raw)   22.2 fF  extracted   21.3 fF  was +2 %\n           s: pred(raw)   36.2 fF  extracted   34.5 fF  was -1 %"
 }

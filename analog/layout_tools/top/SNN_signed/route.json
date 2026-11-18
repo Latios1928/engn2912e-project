@@ -1,22 +1,22 @@
 {
  "stage": "route",
  "top": "SNN_signed",
- "time": "2026-11-18 08:25:08",
+ "time": "2026-11-18 17:03:19",
  "ok": true,
  "size_um": [
-  616.38,
+  531.58,
   806.52
  ],
- "area_mm2": 0.4971,
- "wirelength_um": 36877.7,
- "vias": 1479,
+ "area_mm2": 0.4287,
+ "wirelength_um": 36114.5,
+ "vias": 1526,
  "failed": [],
  "unreachable": [],
  "attempts": [
   {
    "attempt": 0,
    "size_um": [
-    616.38,
+    531.58,
     806.52
    ],
    "routed": true,
@@ -24,7 +24,7 @@
    "unreachable": [],
    "hotspots": {},
    "growth": {},
-   "seconds": 14
+   "seconds": 36
   }
  ],
  "sensitive": [
@@ -51,10 +51,8 @@
   },
   {
    "net": "VMEM_3",
-   "parallel_um": {
-    "spike[3]": 8.0
-   },
-   "worst_um": 8.0,
+   "parallel_um": {},
+   "worst_um": 0.0,
    "limit_um": 20,
    "ok": true
   },
@@ -81,44 +79,42 @@
   },
   {
    "net": "Isum_2",
-   "parallel_um": {},
-   "worst_um": 0.0,
-   "limit_um": 30,
-   "ok": true
-  },
-  {
-   "net": "Isum_3",
    "parallel_um": {
-    "spike[3]": 3.2
+    "spike[1]": 3.2
    },
    "worst_um": 3.2,
    "limit_um": 30,
    "ok": true
   },
   {
-   "net": "Isum_4",
-   "parallel_um": {
-    "spike[3]": 23.2
-   },
-   "worst_um": 23.2,
+   "net": "Isum_3",
+   "parallel_um": {},
+   "worst_um": 0.0,
    "limit_um": 30,
    "ok": true
   },
   {
-   "net": "Isum_inh2",
+   "net": "Isum_4",
    "parallel_um": {
-    "spike[1]": 1.6
+    "spike[3]": 1.6
    },
    "worst_um": 1.6,
    "limit_um": 30,
    "ok": true
   },
   {
-   "net": "Isum_inh3",
+   "net": "Isum_inh2",
    "parallel_um": {
-    "spike[3]": 2.4
+    "spike[1]": 2.4
    },
    "worst_um": 2.4,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_inh3",
+   "parallel_um": {},
+   "worst_um": 0.0,
    "limit_um": 30,
    "ok": true
   },
@@ -132,34 +128,34 @@
   {
    "net": "VT_dpi",
    "parallel_um": {
-    "spike[3]": 16.8
+    "spike[0]": 27.2
    },
-   "worst_um": 16.8,
+   "worst_um": 27.2,
    "limit_um": 50,
-   "ok": "True"
+   "ok": true
   },
   {
    "net": "Vb",
    "parallel_um": {
-    "spike[3]": 2.0,
-    "spike[1]": 74.1,
-    "pulse[1]": 5.6
+    "spike[3]": 3.2,
+    "pulse[1]": 2.4,
+    "spike[0]": 3.2
    },
-   "worst_um": 74.1,
+   "worst_um": 3.2,
    "limit_um": 50,
-   "ok": "False"
+   "ok": true
   },
   {
    "net": "Vthr",
-   "parallel_um": {},
-   "worst_um": 0.0,
+   "parallel_um": {
+    "spike[0]": 18.4
+   },
+   "worst_um": 18.4,
    "limit_um": 50,
    "ok": true
   }
  ],
- "sensitive_violations": [
-  "Vb"
- ],
+ "sensitive_violations": [],
  "hierarchy": {
   "cells": [
    "DAC",
@@ -171,5 +167,5 @@
   "instances": 22,
   "max_bbox_offset_um": 0.0
  },
- "seconds": 22
+ "seconds": 51
 }

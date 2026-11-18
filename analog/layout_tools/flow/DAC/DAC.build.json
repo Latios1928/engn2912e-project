@@ -1,12 +1,12 @@
 {
  "cell": "DAC",
  "size_um": [
-  306.97,
+  222.17,
   64.94
  ],
  "router_check": "clean",
- "predrc": "predrc DAC: 0 rule(s) predicted to fail (19 checked, 0.1 s)",
- "summary": "DAC: 23 NMOS + 1 PMOS + 0 caps, 4 isolated NMOS body island(s) (x1_net4, x1_net2, x1_net3, x1_net1), tracks bot/mid/top 20/10/1, 2 columns, PMOS shift +0.00",
+ "predrc": "predrc DAC: 0 rule(s) predicted to fail (19 checked, 0.2 s)",
+ "summary": "DAC: 23 NMOS + 1 PMOS + 0 caps, tracks bot/mid/top 20/10/1, 2 columns, PMOS shift +0.00",
  "notes": [
   "x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
@@ -21,23 +21,23 @@
   "ground net GND drawn as VSS"
  ],
  "predicted_fF": {
-  "Isum_e": 57.8,
-  "Isum_i": 74.9,
-  "VDD": 39.1,
-  "VSS": 97.9,
+  "Isum_e": 46.1,
+  "Isum_i": 54.1,
+  "VDD": 30.5,
+  "VSS": 77.1,
   "Vb": 85.9,
   "Y": 8.7,
   "en": 4.0,
-  "s": 36.5,
-  "sb": 42.1,
-  "w[0]": 16.0,
-  "w[1]": 18.9,
-  "w[2]": 21.8,
-  "w[3]": 28.5,
-  "x1_X": 86.1,
-  "x1_net1": 92.3,
-  "x1_net2": 58.8,
-  "x1_net3": 81.2,
-  "x1_net4": 38.1
+  "s": 34.2,
+  "sb": 45.8,
+  "w[0]": 14.8,
+  "w[1]": 16.1,
+  "w[2]": 17.2,
+  "w[3]": 21.8,
+  "x1_X": 64.0,
+  "x1_net1": 69.3,
+  "x1_net2": 46.8,
+  "x1_net3": 61.4,
+  "x1_net4": 32.6
  }
 }

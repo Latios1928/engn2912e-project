@@ -52,22 +52,22 @@ x Isum Isum Isum Isum d=5600,212 l=400 w=100 x=9832 y=675 nfet_03v3
 x a_4290_5175# a_190_n489# VDD VDD s=12000,440 d=12000,440 l=128 w=100 x=5038 y=5175 pfet_03v3
 x Isum Isum Isum Isum d=12000,440 l=400 w=100 x=7784 y=-936 nfet_03v3
 x Isum Isum Isum Isum d=5600,212 l=400 w=100 x=8808 y=-936 nfet_03v3
-C a_4290_5175# a_190_n489# 4.4
-C a_4290_5175# VDD 2.3
-C a_4290_5175# Iout 2.5
-C Isum VDD 4.3
+C a_190_n489# a_4290_5175# 8.6
+C Iout a_4290_5175# 5.0
+C VDD Isum 8.0
+C VDD a_4290_5175# 2.5
 C Vthr0 5.2
 R Vthr 35
-C Iout0 5.1
+C Iout0 6.4
 R Iout 42
 C VT0 6.3
 R VT 38
-C Isum0 20.2
+C Isum0 22.2
 R Isum 5608
-C VDD0 74.4
+C VDD0 80.7
 R VDD 5910
 R VSS 13440
-C a_190_n489#0 14.9
+C a_190_n489#0 15.3
 R a_190_n489# 124
 C a_4290_5175#0 18.2
 R a_4290_5175# 134

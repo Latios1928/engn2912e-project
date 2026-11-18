@@ -1,12 +1,8 @@
 {
  "stage": "signoff",
  "top": "SNN_signed",
- "time": "2026-11-18 08:26:20",
+ "time": "2026-11-18 17:04:37",
  "ok": true,
  "drc": "clean",
- "drc_waived": [
-  "DBU",
-  "DCF.1a"
- ],
  "lvs": "match"
 }
