@@ -1,0 +1,790 @@
+{
+ "stage": "netlist",
+ "top": "SNN_signed",
+ "time": "2026-11-18 02:00:44",
+ "ok": true,
+ "problems": [],
+ "schematic": "/foss/designs/engn2912e-project/analog/snn/snn_analog_signed.sch",
+ "instances": {
+  "xdac0_0": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_0",
+    "w[3]": "w[3]",
+    "w[2]": "w[2]",
+    "w[1]": "w[1]",
+    "w[0]": "w[0]",
+    "en": "pulse[0]",
+    "s": "s[0]",
+    "Vb": "Vb",
+    "Isum_i": "VDD",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi0": {
+   "symbol": "DPI",
+   "cell": "DPI",
+   "source": "flow",
+   "nets": {
+    "VDD": "VDD",
+    "Vthr": "Vthr",
+    "Isyn": "VMEM_0",
+    "Isum": "Isum_0",
+    "VT": "VT_dpi",
+    "VSS": "VSS"
+   }
+  },
+  "xneu0": {
+   "symbol": "neuron_sized",
+   "cell": "neuron_glayout",
+   "source": "flow",
+   "nets": {
+    "VSS": "VSS",
+    "VDD": "VDD",
+    "VMEM": "VMEM_0",
+    "VNA": "VNA",
+    "Vlk": "Vlk",
+    "VK": "VK",
+    "VIp": "VIp",
+    "VKup": "VKup",
+    "VKdn": "VKdn",
+    "Vamp_bias": "Vamp_bias",
+    "VT": "VT",
+    "spike": "spike[0]"
+   }
+  },
+  "xdac1_0": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_1",
+    "w[3]": "w[7]",
+    "w[2]": "w[6]",
+    "w[1]": "w[5]",
+    "w[0]": "w[4]",
+    "en": "pulse[1]",
+    "s": "s[1]",
+    "Vb": "Vb",
+    "Isum_i": "VDD",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi1": {
+   "symbol": "DPI",
+   "cell": "DPI",
+   "source": "flow",
+   "nets": {
+    "VDD": "VDD",
+    "Vthr": "Vthr",
+    "Isyn": "VMEM_1",
+    "Isum": "Isum_1",
+    "VT": "VT_dpi",
+    "VSS": "VSS"
+   }
+  },
+  "xneu1": {
+   "symbol": "neuron_sized",
+   "cell": "neuron_glayout",
+   "source": "flow",
+   "nets": {
+    "VSS": "VSS",
+    "VDD": "VDD",
+    "VMEM": "VMEM_1",
+    "VNA": "VNA",
+    "Vlk": "Vlk",
+    "VK": "VK",
+    "VIp": "VIp",
+    "VKup": "VKup",
+    "VKdn": "VKdn",
+    "Vamp_bias": "Vamp_bias",
+    "VT": "VT",
+    "spike": "spike[1]"
+   }
+  },
+  "xdac2_0": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_2",
+    "w[3]": "w[11]",
+    "w[2]": "w[10]",
+    "w[1]": "w[9]",
+    "w[0]": "w[8]",
+    "en": "spike[0]",
+    "s": "s[2]",
+    "Vb": "Vb",
+    "Isum_i": "Isum_inh2",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdac2_1": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_2",
+    "w[3]": "w[15]",
+    "w[2]": "w[14]",
+    "w[1]": "w[13]",
+    "w[0]": "w[12]",
+    "en": "spike[1]",
+    "s": "s[3]",
+    "Vb": "Vb",
+    "Isum_i": "Isum_inh2",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi2": {
+   "symbol": "DPI",
+   "cell": "DPI",
+   "source": "flow",
+   "nets": {
+    "VDD": "VDD",
+    "Vthr": "Vthr",
+    "Isyn": "VMEM_2",
+    "Isum": "Isum_2",
+    "VT": "VT_dpi",
+    "VSS": "VSS"
+   }
+  },
+  "xneu2": {
+   "symbol": "neuron_sized",
+   "cell": "neuron_glayout",
+   "source": "flow",
+   "nets": {
+    "VSS": "VSS",
+    "VDD": "VDD",
+    "VMEM": "VMEM_2",
+    "VNA": "VNA",
+    "Vlk": "Vlk",
+    "VK": "VK",
+    "VIp": "VIp",
+    "VKup": "VKup",
+    "VKdn": "VKdn",
+    "Vamp_bias": "Vamp_bias",
+    "VT": "VT",
+    "spike": "spike[2]"
+   }
+  },
+  "xdac3_0": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_3",
+    "w[3]": "w[19]",
+    "w[2]": "w[18]",
+    "w[1]": "w[17]",
+    "w[0]": "w[16]",
+    "en": "spike[0]",
+    "s": "s[4]",
+    "Vb": "Vb",
+    "Isum_i": "Isum_inh3",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdac3_1": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_3",
+    "w[3]": "w[23]",
+    "w[2]": "w[22]",
+    "w[1]": "w[21]",
+    "w[0]": "w[20]",
+    "en": "spike[1]",
+    "s": "s[5]",
+    "Vb": "Vb",
+    "Isum_i": "Isum_inh3",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi3": {
+   "symbol": "DPI",
+   "cell": "DPI",
+   "source": "flow",
+   "nets": {
+    "VDD": "VDD",
+    "Vthr": "Vthr",
+    "Isyn": "VMEM_3",
+    "Isum": "Isum_3",
+    "VT": "VT_dpi",
+    "VSS": "VSS"
+   }
+  },
+  "xneu3": {
+   "symbol": "neuron_sized",
+   "cell": "neuron_glayout",
+   "source": "flow",
+   "nets": {
+    "VSS": "VSS",
+    "VDD": "VDD",
+    "VMEM": "VMEM_3",
+    "VNA": "VNA",
+    "Vlk": "Vlk",
+    "VK": "VK",
+    "VIp": "VIp",
+    "VKup": "VKup",
+    "VKdn": "VKdn",
+    "Vamp_bias": "Vamp_bias",
+    "VT": "VT",
+    "spike": "spike[3]"
+   }
+  },
+  "xdac4_0": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_4",
+    "w[3]": "w[27]",
+    "w[2]": "w[26]",
+    "w[1]": "w[25]",
+    "w[0]": "w[24]",
+    "en": "spike[2]",
+    "s": "s[6]",
+    "Vb": "Vb",
+    "Isum_i": "Isum_inh4",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdac4_1": {
+   "symbol": "DAC_signed_binary",
+   "cell": "DAC_signed_binary",
+   "source": "flow",
+   "nets": {
+    "Isum_e": "Isum_4",
+    "w[3]": "w[31]",
+    "w[2]": "w[30]",
+    "w[1]": "w[29]",
+    "w[0]": "w[28]",
+    "en": "spike[3]",
+    "s": "s[7]",
+    "Vb": "Vb",
+    "Isum_i": "Isum_inh4",
+    "VDD": "VDD",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi4": {
+   "symbol": "DPI",
+   "cell": "DPI",
+   "source": "flow",
+   "nets": {
+    "VDD": "VDD",
+    "Vthr": "Vthr",
+    "Isyn": "VMEM_4",
+    "Isum": "Isum_4",
+    "VT": "VT_dpi",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi5": {
+   "symbol": "DPI_inh_min",
+   "cell": "DPI_inh_min",
+   "source": "flow",
+   "nets": {
+    "Vthr": "Vthr",
+    "VT": "VT_dpi",
+    "Isum": "Isum_inh4",
+    "VDD": "VDD",
+    "Iout": "VMEM_4",
+    "VSS": "VSS"
+   }
+  },
+  "xneu4": {
+   "symbol": "neuron_sized",
+   "cell": "neuron_glayout",
+   "source": "flow",
+   "nets": {
+    "VSS": "VSS",
+    "VDD": "VDD",
+    "VMEM": "VMEM_4",
+    "VNA": "VNA",
+    "Vlk": "Vlk",
+    "VK": "VK",
+    "VIp": "VIp",
+    "VKup": "VKup",
+    "VKdn": "VKdn",
+    "Vamp_bias": "Vamp_bias",
+    "VT": "VT",
+    "spike": "spike[4]"
+   }
+  },
+  "xdpi6": {
+   "symbol": "DPI_inh_min",
+   "cell": "DPI_inh_min",
+   "source": "flow",
+   "nets": {
+    "Vthr": "Vthr",
+    "VT": "VT_dpi",
+    "Isum": "Isum_inh2",
+    "VDD": "VDD",
+    "Iout": "VMEM_2",
+    "VSS": "VSS"
+   }
+  },
+  "xdpi7": {
+   "symbol": "DPI_inh_min",
+   "cell": "DPI_inh_min",
+   "source": "flow",
+   "nets": {
+    "Vthr": "Vthr",
+    "VT": "VT_dpi",
+    "Isum": "Isum_inh3",
+    "VDD": "VDD",
+    "Iout": "VMEM_3",
+    "VSS": "VSS"
+   }
+  },
+  "xbias": {
+   "symbol": "bias_cell",
+   "cell": "bias_cell",
+   "source": "flow",
+   "nets": {
+    "Vb": "Vb",
+    "Vlk": "Vlk",
+    "VKdn": "VKdn",
+    "VIp": "VIp",
+    "Vamp_bias": "Vamp_bias",
+    "VK": "VK",
+    "VNA": "VNA",
+    "VKup": "VKup",
+    "Vthr": "Vthr",
+    "VT_dpi": "VT_dpi",
+    "Iref": "Iref",
+    "VT_inh": "xbias_VT_inh_nc",
+    "VSS": "VSS",
+    "VDD": "VDD"
+   },
+   "extra": true
+  }
+ },
+ "ports": [
+  "VDD",
+  "VSS",
+  "Iref",
+  "VT",
+  "w[31]",
+  "w[30]",
+  "w[29]",
+  "w[28]",
+  "w[27]",
+  "w[26]",
+  "w[25]",
+  "w[24]",
+  "w[23]",
+  "w[22]",
+  "w[21]",
+  "w[20]",
+  "w[19]",
+  "w[18]",
+  "w[17]",
+  "w[16]",
+  "w[15]",
+  "w[14]",
+  "w[13]",
+  "w[12]",
+  "w[11]",
+  "w[10]",
+  "w[9]",
+  "w[8]",
+  "w[7]",
+  "w[6]",
+  "w[5]",
+  "w[4]",
+  "w[3]",
+  "w[2]",
+  "w[1]",
+  "w[0]",
+  "s[7]",
+  "s[6]",
+  "s[5]",
+  "s[4]",
+  "s[3]",
+  "s[2]",
+  "s[1]",
+  "s[0]",
+  "pulse[1]",
+  "pulse[0]",
+  "spike[4]",
+  "spike[3]",
+  "spike[2]",
+  "spike[1]",
+  "spike[0]"
+ ],
+ "nets": {
+  "Iref": [
+   "xbias.Iref"
+  ],
+  "Isum_0": [
+   "xdac0_0.Isum_e",
+   "xdpi0.Isum"
+  ],
+  "Isum_1": [
+   "xdac1_0.Isum_e",
+   "xdpi1.Isum"
+  ],
+  "Isum_2": [
+   "xdac2_0.Isum_e",
+   "xdac2_1.Isum_e",
+   "xdpi2.Isum"
+  ],
+  "Isum_3": [
+   "xdac3_0.Isum_e",
+   "xdac3_1.Isum_e",
+   "xdpi3.Isum"
+  ],
+  "Isum_4": [
+   "xdac4_0.Isum_e",
+   "xdac4_1.Isum_e",
+   "xdpi4.Isum"
+  ],
+  "Isum_inh2": [
+   "xdac2_0.Isum_i",
+   "xdac2_1.Isum_i",
+   "xdpi6.Isum"
+  ],
+  "Isum_inh3": [
+   "xdac3_0.Isum_i",
+   "xdac3_1.Isum_i",
+   "xdpi7.Isum"
+  ],
+  "Isum_inh4": [
+   "xdac4_0.Isum_i",
+   "xdac4_1.Isum_i",
+   "xdpi5.Isum"
+  ],
+  "VDD": [
+   "xdac0_0.Isum_i",
+   "xdac0_0.VDD",
+   "xdpi0.VDD",
+   "xneu0.VDD",
+   "xdac1_0.Isum_i",
+   "xdac1_0.VDD",
+   "xdpi1.VDD",
+   "xneu1.VDD",
+   "xdac2_0.VDD",
+   "xdac2_1.VDD",
+   "xdpi2.VDD",
+   "xneu2.VDD",
+   "xdac3_0.VDD",
+   "xdac3_1.VDD",
+   "xdpi3.VDD",
+   "xneu3.VDD",
+   "xdac4_0.VDD",
+   "xdac4_1.VDD",
+   "xdpi4.VDD",
+   "xdpi5.VDD",
+   "xneu4.VDD",
+   "xdpi6.VDD",
+   "xdpi7.VDD",
+   "xbias.VDD"
+  ],
+  "VIp": [
+   "xneu0.VIp",
+   "xneu1.VIp",
+   "xneu2.VIp",
+   "xneu3.VIp",
+   "xneu4.VIp",
+   "xbias.VIp"
+  ],
+  "VK": [
+   "xneu0.VK",
+   "xneu1.VK",
+   "xneu2.VK",
+   "xneu3.VK",
+   "xneu4.VK",
+   "xbias.VK"
+  ],
+  "VKdn": [
+   "xneu0.VKdn",
+   "xneu1.VKdn",
+   "xneu2.VKdn",
+   "xneu3.VKdn",
+   "xneu4.VKdn",
+   "xbias.VKdn"
+  ],
+  "VKup": [
+   "xneu0.VKup",
+   "xneu1.VKup",
+   "xneu2.VKup",
+   "xneu3.VKup",
+   "xneu4.VKup",
+   "xbias.VKup"
+  ],
+  "VMEM_0": [
+   "xdpi0.Isyn",
+   "xneu0.VMEM"
+  ],
+  "VMEM_1": [
+   "xdpi1.Isyn",
+   "xneu1.VMEM"
+  ],
+  "VMEM_2": [
+   "xdpi2.Isyn",
+   "xneu2.VMEM",
+   "xdpi6.Iout"
+  ],
+  "VMEM_3": [
+   "xdpi3.Isyn",
+   "xneu3.VMEM",
+   "xdpi7.Iout"
+  ],
+  "VMEM_4": [
+   "xdpi4.Isyn",
+   "xdpi5.Iout",
+   "xneu4.VMEM"
+  ],
+  "VNA": [
+   "xneu0.VNA",
+   "xneu1.VNA",
+   "xneu2.VNA",
+   "xneu3.VNA",
+   "xneu4.VNA",
+   "xbias.VNA"
+  ],
+  "VSS": [
+   "xdac0_0.VSS",
+   "xdpi0.VSS",
+   "xneu0.VSS",
+   "xdac1_0.VSS",
+   "xdpi1.VSS",
+   "xneu1.VSS",
+   "xdac2_0.VSS",
+   "xdac2_1.VSS",
+   "xdpi2.VSS",
+   "xneu2.VSS",
+   "xdac3_0.VSS",
+   "xdac3_1.VSS",
+   "xdpi3.VSS",
+   "xneu3.VSS",
+   "xdac4_0.VSS",
+   "xdac4_1.VSS",
+   "xdpi4.VSS",
+   "xdpi5.VSS",
+   "xneu4.VSS",
+   "xdpi6.VSS",
+   "xdpi7.VSS",
+   "xbias.VSS"
+  ],
+  "VT": [
+   "xneu0.VT",
+   "xneu1.VT",
+   "xneu2.VT",
+   "xneu3.VT",
+   "xneu4.VT"
+  ],
+  "VT_dpi": [
+   "xdpi0.VT",
+   "xdpi1.VT",
+   "xdpi2.VT",
+   "xdpi3.VT",
+   "xdpi4.VT",
+   "xdpi5.VT",
+   "xdpi6.VT",
+   "xdpi7.VT",
+   "xbias.VT_dpi"
+  ],
+  "Vamp_bias": [
+   "xneu0.Vamp_bias",
+   "xneu1.Vamp_bias",
+   "xneu2.Vamp_bias",
+   "xneu3.Vamp_bias",
+   "xneu4.Vamp_bias",
+   "xbias.Vamp_bias"
+  ],
+  "Vb": [
+   "xdac0_0.Vb",
+   "xdac1_0.Vb",
+   "xdac2_0.Vb",
+   "xdac2_1.Vb",
+   "xdac3_0.Vb",
+   "xdac3_1.Vb",
+   "xdac4_0.Vb",
+   "xdac4_1.Vb",
+   "xbias.Vb"
+  ],
+  "Vlk": [
+   "xneu0.Vlk",
+   "xneu1.Vlk",
+   "xneu2.Vlk",
+   "xneu3.Vlk",
+   "xneu4.Vlk",
+   "xbias.Vlk"
+  ],
+  "Vthr": [
+   "xdpi0.Vthr",
+   "xdpi1.Vthr",
+   "xdpi2.Vthr",
+   "xdpi3.Vthr",
+   "xdpi4.Vthr",
+   "xdpi5.Vthr",
+   "xdpi6.Vthr",
+   "xdpi7.Vthr",
+   "xbias.Vthr"
+  ],
+  "pulse[0]": [
+   "xdac0_0.en"
+  ],
+  "pulse[1]": [
+   "xdac1_0.en"
+  ],
+  "s[0]": [
+   "xdac0_0.s"
+  ],
+  "s[1]": [
+   "xdac1_0.s"
+  ],
+  "s[2]": [
+   "xdac2_0.s"
+  ],
+  "s[3]": [
+   "xdac2_1.s"
+  ],
+  "s[4]": [
+   "xdac3_0.s"
+  ],
+  "s[5]": [
+   "xdac3_1.s"
+  ],
+  "s[6]": [
+   "xdac4_0.s"
+  ],
+  "s[7]": [
+   "xdac4_1.s"
+  ],
+  "spike[0]": [
+   "xneu0.spike",
+   "xdac2_0.en",
+   "xdac3_0.en"
+  ],
+  "spike[1]": [
+   "xneu1.spike",
+   "xdac2_1.en",
+   "xdac3_1.en"
+  ],
+  "spike[2]": [
+   "xneu2.spike",
+   "xdac4_0.en"
+  ],
+  "spike[3]": [
+   "xneu3.spike",
+   "xdac4_1.en"
+  ],
+  "spike[4]": [
+   "xneu4.spike"
+  ],
+  "w[0]": [
+   "xdac0_0.w[0]"
+  ],
+  "w[10]": [
+   "xdac2_0.w[2]"
+  ],
+  "w[11]": [
+   "xdac2_0.w[3]"
+  ],
+  "w[12]": [
+   "xdac2_1.w[0]"
+  ],
+  "w[13]": [
+   "xdac2_1.w[1]"
+  ],
+  "w[14]": [
+   "xdac2_1.w[2]"
+  ],
+  "w[15]": [
+   "xdac2_1.w[3]"
+  ],
+  "w[16]": [
+   "xdac3_0.w[0]"
+  ],
+  "w[17]": [
+   "xdac3_0.w[1]"
+  ],
+  "w[18]": [
+   "xdac3_0.w[2]"
+  ],
+  "w[19]": [
+   "xdac3_0.w[3]"
+  ],
+  "w[1]": [
+   "xdac0_0.w[1]"
+  ],
+  "w[20]": [
+   "xdac3_1.w[0]"
+  ],
+  "w[21]": [
+   "xdac3_1.w[1]"
+  ],
+  "w[22]": [
+   "xdac3_1.w[2]"
+  ],
+  "w[23]": [
+   "xdac3_1.w[3]"
+  ],
+  "w[24]": [
+   "xdac4_0.w[0]"
+  ],
+  "w[25]": [
+   "xdac4_0.w[1]"
+  ],
+  "w[26]": [
+   "xdac4_0.w[2]"
+  ],
+  "w[27]": [
+   "xdac4_0.w[3]"
+  ],
+  "w[28]": [
+   "xdac4_1.w[0]"
+  ],
+  "w[29]": [
+   "xdac4_1.w[1]"
+  ],
+  "w[2]": [
+   "xdac0_0.w[2]"
+  ],
+  "w[30]": [
+   "xdac4_1.w[2]"
+  ],
+  "w[31]": [
+   "xdac4_1.w[3]"
+  ],
+  "w[3]": [
+   "xdac0_0.w[3]"
+  ],
+  "w[4]": [
+   "xdac1_0.w[0]"
+  ],
+  "w[5]": [
+   "xdac1_0.w[1]"
+  ],
+  "w[6]": [
+   "xdac1_0.w[2]"
+  ],
+  "w[7]": [
+   "xdac1_0.w[3]"
+  ],
+  "w[8]": [
+   "xdac2_0.w[0]"
+  ],
+  "w[9]": [
+   "xdac2_0.w[1]"
+  ],
+  "xbias_VT_inh_nc": [
+   "xbias.VT_inh"
+  ]
+ }
+}

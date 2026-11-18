@@ -8,6 +8,29 @@ flow (`flow.py`): every stage reads and writes files under `top/<top>/`, prints 
 status, can be rerun alone, and is checked by fast predictors before the real tools.
 `gen_snn.py` (hand-coded, `snn_analog_inh` only) stays as the reference to match.
 
+## 0. Implementation status (top.py, 2026-11-18)
+
+```
+T="env -u PYTHONPATH PDK_ROOT=/foss/pdks .venv-glayout/bin/python analog/layout_tools/top.py"
+$T run SNN_signed          # or one stage: netlist | abstract | plan | place | route | signoff | status
+```
+Implemented, differences from the design below:
+- **netlist**: xschem with the repo-root xschemrc (analog/snn has none); block VSS/VDD layout
+  pins connected by name; bias cell added from `extra_instances`.
+- **abstract**: refuses a block whose GDS is newer than its signoff, or whose LVS pins have no
+  edge pin. No blockage layers yet: every block bbox is a full obstacle (nothing over blocks).
+- **plan**: rows from the netlist graph as in 3.3; no separate floorplan.yaml (decisions are in
+  top_flow.yaml). Only `above_top_row`, supply `routed`, macro pins on the `bottom` edge.
+- **place**: channel widths from demand (tracks per channel, 3.3); pads (macro pins) are met2
+  blocks on the bottom edge under their net's lowest pin.
+- **route**: glayout.floorplan grid router (met3 H / met4 V, 0.8 um), not the channel router of
+  3.4. On failure the channel holding the failure is widened 1.4x and everything is rerouted
+  (growth.json). VDD / VSS are routed as ordinary 0.5 um nets. `<top>.gds` is hierarchical:
+  one instance per block of its signed-off cell (own labels kept), routing / pads / macro pin
+  labels in the top cell (`write_flat: true` also writes the router's flat view). Sensitive-net rules are
+  *reported* (parallel run per aggressor), not enforced.
+- **signoff**: KLayout DRC + LVS (block LVS refs under one top subckt). No PEX, no sim yet.
+
 ## 1. What exists and what is missing
 
 | | have | missing for a top level |

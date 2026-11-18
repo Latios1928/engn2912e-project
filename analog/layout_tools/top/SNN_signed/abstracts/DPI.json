@@ -1,0 +1,84 @@
+{
+ "cell": "DPI",
+ "symbol": "DPI",
+ "kind": "dpi",
+ "source": "flow",
+ "gds": "/foss/designs/engn2912e-project/analog/layout_tools/top/SNN_signed/abstracts/DPI_nolabels.gds",
+ "gds_src": "/foss/designs/engn2912e-project/analog/layout_tools/flow/DPI/DPI.gds",
+ "lvs_ref": "/foss/designs/engn2912e-project/analog/layout_tools/flow/DPI/DPI_lvs_ref.spice",
+ "lvs_pins": [
+  "VDD",
+  "Vthr",
+  "Isyn",
+  "Isum",
+  "VT",
+  "VSS"
+ ],
+ "bbox": [
+  -13.04,
+  -14.385,
+  34.45,
+  31.845
+ ],
+ "size": [
+  47.49,
+  46.23
+ ],
+ "ports": [
+  {
+   "net": "Vthr",
+   "layer": "met3",
+   "x": 15.82,
+   "y": 31.845,
+   "orientation": 90,
+   "width": 0.5,
+   "side": "N"
+  },
+  {
+   "net": "Isyn",
+   "layer": "met2",
+   "x": 34.45,
+   "y": 15.545,
+   "orientation": 0,
+   "width": 0.5,
+   "side": "E"
+  },
+  {
+   "net": "Isum",
+   "layer": "met2",
+   "x": -13.04,
+   "y": 13.145,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VT",
+   "layer": "met3",
+   "x": 18.22,
+   "y": -14.385,
+   "orientation": 270,
+   "width": 0.5,
+   "side": "S"
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -13.04,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -13.04,
+   "y": 23.17,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  }
+ ],
+ "signoff": "DRC clean, LVS match (2026-11-18 01:57:32)"
+}

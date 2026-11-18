@@ -1,8 +1,8 @@
 {
  "cell": "DPI",
  "size_um": [
-  61.94,
-  55.32
+  47.49,
+  46.23
  ],
  "router_check": "clean",
  "predrc": "predrc DPI: 0 rule(s) predicted to fail (20 checked, 0.0 s)",
@@ -14,12 +14,12 @@
   "M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)"
  ],
  "predicted_fF": {
-  "Isum": 32.0,
-  "Isyn": 5.8,
-  "VDD": 27.7,
-  "VSS": 3.3,
-  "VT": 9.4,
-  "Vthr": 9.1,
-  "net1": 33.9
+  "Isum": 36.2,
+  "Isyn": 7.7,
+  "VDD": 36.2,
+  "VSS": 3.7,
+  "VT": 8.9,
+  "Vthr": 10.4,
+  "net1": 42.3
  }
 }

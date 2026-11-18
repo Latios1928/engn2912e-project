@@ -7,7 +7,7 @@ and how far its output was checked. It is updated as the work continues.
 - **Tool:** Claude Code (desktop app), model Claude Opus 5.5 (Anthropic)
 - **User:** Ray Wu
 - **Started:** 2026-10-25
-- **Last updated:** 2026-11-17
+- **Last updated:** 2026-11-18
 
 ---
 
@@ -72,6 +72,9 @@ and how far its output was checked. It is updated as the work continues.
 | `mixed/*` | Created | 2026-11-08 | Mixed-signal flow with SpiceBind: Verilog testbench, SPICE testbench, `libngspice` crash shim, Makefile, README (entry 49a). |
 | `analog/mock/{dac,snn,tb_neuron}.v` | Edited (user request) | 2026-11-08 | Weights widened to 4 bits, binary (entry 49a). |
 | `analog/snn/snn_analog_inh.sch`, `snn_analog_inh.sym` | Created (user request) | 2026-11-11 | Copy of the 2-2-1 `snn_analog` with `DAC_signed` hidden → output synapses, a `DPI_inh` on the output membrane, and new pins `s[1:0]` and `VT_inh` (entry 74). `snn_analog.sch/.sym` unchanged. |
+| `analog/layout_tools/top.py`, `top/SNN_signed/` | Created | 2026-11-18 | Top-level layout flow (entries 83, 86): stages netlist → abstract → plan → place → route → signoff; first signed-off 2-2-1 macro `SNN_signed.gds` (DRC clean, LVS match). |
+| `analog/layout_tools/glayout_floorplan.py`, `flow.py`, `flow_cells.yaml` | Edited (user request) | 2026-11-18 | `two_row`: VSS/VDD straps on both edges (`pin_sides`), `cap_place: over_devices` (entries 81, 85). New pin sides for bias_cell, DPI_inh_min, neuron_glayout; DPI and DPI_inh_min rebuilt with the cap over the NMOS band. All rebuilt cells DRC clean, LVS match. |
+| `analog/layout_tools/top_flow.yaml`, `TOPLEVEL_FLOW.md` | Edited | 2026-11-18 | Pin notes match the built cells; settings match what `top.py` reads; implementation status section (entries 80, 83). |
 
 Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edited by the AI. The DPI testbenches (entry 43) only instantiate `DPI.sym`; `DPI.sch` and `DPI.sym` were not changed by the AI. The originals `neuron.sch`, `neuron.sym` and `neuron_testbench.sch` were checksum-verified unchanged after the 5 kHz files were generated.
 
@@ -1148,6 +1151,43 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **Cost of the flow itself:** TOKEN_LOG totals ≈66k output + ≈51k input + 104–162k reasoning. The neuron from scratch was ≈23k + 25–40k reasoning, and the log expects ≈1–3k per new cell through the flow, so the flow pays for itself after about 3–4 cells.
 - **Not verified:** the per-cell figure is an estimate. `api_driver.py`, which would print measured usage, has not been run.
 - **Not done by AI:** no code changed; only this log.
+
+**78. How the `table` stage and `table.json` work** *(Analysed, from reading `flow.py`, `glayout_netlist.py` and `flow/DPI/table.json`)*
+- **Asked:** how `table.json` works.
+- **AI explained:**
+  - **What runs:** `st_table` → `_cell()`. It netlists the .sch with xschem, then `parse_spice` flattens subcircuits (`x1.M3` → `x1_M3`). It keeps only `nfet_03v3`, `pfet_03v3` and `cap_mim*` devices and stops on any other model. `legalize()` widens W < 0.5 µm to 0.5 µm and scales L (the DPI's 0.22/0.28 → 0.5/0.64), snaps W to the 10 nm grid, and turns `m` copies into fingers. Then `connect` fixes from `flow_cells.yaml` are applied.
+  - **What it writes:** pins, FETs, caps, warnings (floating gates, dangling nets, unused pins) and changes.
+  - **How it's used:** `decide` and `build` re-parse the schematic through `_cell()` and never read `table.json`. The file is a pass gate (`need()`, always ok), a source for `status`, and a short summary for people and the AI. A hand edit to it has no effect.
+- **Not done by AI:** no code changed; only this log.
+
+### 2026-11-18
+
+**79. Readiness for top-level integration of the 2-2-1 SNN** *(Analysed, from the flow files and signoff results)*
+- **Asked:** whether the top-level integration could be run.
+- **AI found:** all five blocks signed off with edge pins; `top.py` did not exist; `top_flow.yaml` disagreed with the built pins; the `row_111` test predated the pin changes; open DECIDE items still at defaults.
+- **Not done by AI:** nothing changed.
+
+**80. Pin differences between `top_flow.yaml` and the built cells** *(Analysed / tool-verified against every `_pins.json`)*
+- **AI did:** found that pin sides come only from `flow_cells.yaml` and layers from `two_row`; removed the duplicate `pin_sides` from `top_flow.yaml` and wrote the as-built pin table there and in `TOPLEVEL_FLOW.md`.
+
+**81. Three pin changes: bias pins S, DPI_inh_min Vthr N / VT S, neuron supplies on both sides** *(Tool-verified: real DRC + LVS)*
+- **AI did:** `pin_sides` edits in `flow_cells.yaml`; new `VSS/VDD: [W, E]` option in `two_row`; rebuilt and signed off bias_cell, DPI_inh_min, neuron_glayout (DRC clean, LVS match).
+
+**82. What `top.py` is** *(Reasoned)* — explained with a prefab-house analogy (factory = `flow.py`, building site = `top.py`).
+
+**83. `top.py` built; first 2-2-1 macro** *(Tool-verified: real DRC + LVS)*
+- **AI did:** wrote `top.py` (netlist from xschem, block abstracts, rows found from the netlist graph, demand-based channel widths, glayout.floorplan router, pads on the bottom edge, LVS ref from the block refs, sensitive-net report).
+- **Result:** 631 × 807 µm, routed first try in 62 s, DRC clean, LVS match. Supplies routed as 0.5 µm nets; sensitive-net rules reported, not enforced; no PEX or sim. The DRC deck's `mslot` check crashes in every run (also on the blocks), a PDK issue.
+
+**84. Opening the macro in KLayout** *(Reasoned)* — command with the GF180 `.lyt`/`.lyp`, and the LVS database for net cross-probing.
+
+**85. MIM cap over the transistors (`cap_place: over_devices`)** *(Tool-verified: real DRC + LVS)*
+- **AI did:** added the option to `two_row`. First try (plate fully over the NMOS row) was DRC clean but LVS failed: the GF180 LVS deck ignores every via2/via3 under FuseTop (`via2.not(fusetop)`), so the NMOS terminals opened. The plate now covers the NMOS band only right of its last via2.
+- **Result:** DPI 61.9 × 55.3 → 47.5 × 46.2 µm, DPI_inh_min 107.7 × 58.4 → 93.2 × 49.1 µm, both DRC clean, LVS match. Macro 0.509 → 0.497 mm² (row heights are set by the DACs and neurons).
+
+**86. Hierarchical top-level GDS** *(Tool-verified: XOR + real DRC + LVS)*
+- **Asked:** the macro was flat in KLayout (the router library flattens its result).
+- **AI did:** `top.py` writes the GDS itself: one instance per block of its signed-off cell, routing and pads in the top cell. Flattened, it XORs identical to the old flat layout on all 23 layers; DRC clean, LVS match (6 s instead of 14 s).
 
 ---
 

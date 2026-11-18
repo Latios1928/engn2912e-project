@@ -8,6 +8,8 @@
 #   metric      what the sim stage measures: period of a node crossing a threshold
 #   pin_sides   {default: W, <pin>: side}: cell edge each pin leaves on (W/E/N/S); default W.
 #               VSS / VDD: list of W and/or E (met1 strap to each edge); default [W]
+#   cap_place   beside (default: MIM caps in a column right of the rows) | over_devices
+#               (one cap over the NMOS row: narrower cell; two_row supports 1 cap there)
 
 neuron_glayout:
   schematic: ../neuron/neuron_sized.sch
@@ -30,6 +32,7 @@ DPI:
   schematic: ../DPI/DPI.sch       # minimum-size DPI: excitatory synapse, and the core of DPI_inh_min
   symbol: ../DPI/DPI.sym
   pin_sides: {default: W, Isyn: E, Vthr: N, VT: S}
+  cap_place: over_devices        # C2 over the NMOS row (2026-11-18 trial)
 
 DAC_signed_binary:
   schematic: ../DAC/DAC_signed_binary.sch   # signed synapse DAC (1:2:4:8 + sign) of snn_analog_signed
@@ -45,3 +48,4 @@ DPI_inh_min:
   schematic: ../DPI/DPI_inh_min.sch   # inhibitory DPI of snn_analog_signed: DPI core + nFET mirror sinking from VMEM
   symbol: ../DPI/DPI_inh_min.sym
   pin_sides: {default: W, Iout: E, Vthr: N, VT: S}   # same edges as DPI (shared Vthr / VT lines)
+  cap_place: over_devices        # as DPI: cap over the NMOS band, right of its last via2

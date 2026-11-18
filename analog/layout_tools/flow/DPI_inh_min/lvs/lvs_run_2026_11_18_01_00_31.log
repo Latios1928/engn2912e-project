@@ -1,0 +1,2 @@
+18-Nov-2026 02:00:31 | INFO    | Your Klayout version is: KLayout 0.30.8
+18-Nov-2026 02:00:31 | INFO    | Running Global Foundries 180nm MCU /foss/pdks/gf180mcuD/libs.tech/klayout/tech/lvs/gf180mcu.lvs checks on design /foss/designs/engn2912e-project/analog/layout_tools/flow/DPI_inh_min/DPI_inh_min.gds on cell DPI_inh_min

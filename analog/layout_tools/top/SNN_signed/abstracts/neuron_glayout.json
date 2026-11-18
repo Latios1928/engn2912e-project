@@ -1,0 +1,162 @@
+{
+ "cell": "neuron_glayout",
+ "symbol": "neuron_sized",
+ "kind": "neuron",
+ "source": "flow",
+ "gds": "/foss/designs/engn2912e-project/analog/layout_tools/top/SNN_signed/abstracts/neuron_glayout_nolabels.gds",
+ "gds_src": "/foss/designs/engn2912e-project/analog/layout_tools/flow/neuron_glayout/neuron_glayout.gds",
+ "lvs_ref": "/foss/designs/engn2912e-project/analog/layout_tools/flow/neuron_glayout/neuron_glayout_lvs_ref.spice",
+ "lvs_pins": [
+  "VSS",
+  "VDD",
+  "VMEM",
+  "VNA",
+  "Vlk",
+  "VK",
+  "VIp",
+  "VKup",
+  "VKdn",
+  "Vamp_bias",
+  "VT",
+  "spike"
+ ],
+ "bbox": [
+  -17.6,
+  -33.545,
+  85.46,
+  43.695
+ ],
+ "size": [
+  103.06,
+  77.24
+ ],
+ "ports": [
+  {
+   "net": "VMEM",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -30.895,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VNA",
+   "layer": "met2",
+   "x": -17.6,
+   "y": 38.645,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "Vlk",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -18.895,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VK",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -21.295,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VIp",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -23.695,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VKup",
+   "layer": "met2",
+   "x": -17.6,
+   "y": 41.045,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VKdn",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -26.095,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "Vamp_bias",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -33.295,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VT",
+   "layer": "met2",
+   "x": -17.6,
+   "y": -28.495,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "spike",
+   "layer": "met2",
+   "x": 85.46,
+   "y": -16.495,
+   "orientation": 0,
+   "width": 0.5,
+   "side": "E"
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -17.6,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": 85.46,
+   "y": 0.0,
+   "orientation": 0,
+   "width": 1.0,
+   "side": "E"
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -17.6,
+   "y": 30.77,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": 85.46,
+   "y": 30.77,
+   "orientation": 0,
+   "width": 1.0,
+   "side": "E"
+  }
+ ],
+ "signoff": "DRC clean, LVS match (2026-11-18 01:23:32)"
+}

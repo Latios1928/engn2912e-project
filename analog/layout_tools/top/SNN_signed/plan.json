@@ -1,0 +1,88 @@
+{
+ "stage": "plan",
+ "top": "SNN_signed",
+ "time": "2026-11-18 02:00:44",
+ "ok": true,
+ "problems": [],
+ "rows": [
+  {
+   "role": "in0",
+   "neuron": "xneu0",
+   "vmem": "VMEM_0",
+   "dpi": [
+    "xdpi0"
+   ],
+   "dpi_inh": [],
+   "dac": [
+    "xdac0_0"
+   ]
+  },
+  {
+   "role": "in1",
+   "neuron": "xneu1",
+   "vmem": "VMEM_1",
+   "dpi": [
+    "xdpi1"
+   ],
+   "dpi_inh": [],
+   "dac": [
+    "xdac1_0"
+   ]
+  },
+  {
+   "role": "hid0",
+   "neuron": "xneu2",
+   "vmem": "VMEM_2",
+   "dpi": [
+    "xdpi2"
+   ],
+   "dpi_inh": [
+    "xdpi6"
+   ],
+   "dac": [
+    "xdac2_0",
+    "xdac2_1"
+   ]
+  },
+  {
+   "role": "hid1",
+   "neuron": "xneu3",
+   "vmem": "VMEM_3",
+   "dpi": [
+    "xdpi3"
+   ],
+   "dpi_inh": [
+    "xdpi7"
+   ],
+   "dac": [
+    "xdac3_0",
+    "xdac3_1"
+   ]
+  },
+  {
+   "role": "out",
+   "neuron": "xneu4",
+   "vmem": "VMEM_4",
+   "dpi": [
+    "xdpi4"
+   ],
+   "dpi_inh": [
+    "xdpi5"
+   ],
+   "dac": [
+    "xdac4_0",
+    "xdac4_1"
+   ]
+  }
+ ],
+ "bias": "xbias",
+ "mirror": {
+  "dac": false,
+  "dpi": false,
+  "dpi_inh": false,
+  "neuron": false
+ },
+ "bias_position": "above_top_row",
+ "supply": "routed",
+ "pin_edge": "bottom"
+}

@@ -2,8 +2,7 @@
 # Edit by hand. Paths are relative to this file. Every value marked "DECIDE" is one of the
 # open designer decisions; its current value is the default the flow will use.
 #
-# Not implemented yet: this file is the input contract for top.py (milestones 1-5 in
-# TOPLEVEL_FLOW.md). The cell flow (flow.py) does not read it.
+# Read by top.py (stages netlist .. signoff). The cell flow (flow.py) does not read it.
 
 top:
   name: SNN_signed                                # GDS top cell / LVS subckt name
@@ -81,16 +80,21 @@ floorplan:
     hid0: xneu2
     hid1: xneu3
     out: xneu4
-  # Row contents (left -> right), found from the netlist: every DAC whose Isum feeds this
-  # neuron's DPIs, then the excitatory DPI and the inhibitory DPI, then the neuron.
-  row_columns: [dacs, channel_A, dpis, channel_B, neuron, channel_C]
-  dac_stack: vertical            # vertical (DACs of one row stacked) | horizontal
-  mirror:                        # per block kind: mirror so the pins face their channel
-    dac: true
-    dpi: false
-    neuron: false
-  row_gap_um: 2.0                # space between rows (inter-row M4 buses go here)
-  align_columns: true            # same x for every row's DAC / DPI / neuron column
+  # Row contents (left -> right), found from the netlist by top.py plan: every DAC whose Isum
+  # feeds this neuron's DPIs (stacked), the excitatory DPI with the inhibitory DPI above it, the
+  # neuron. Columns are aligned across rows:
+  #   | left channel | DACs | channel A | DPIs | channel B | neuron | channel C |
+  # Every block's pins already face their channel as drawn, so nothing is mirrored.
+  mirror: {dac: false, dpi: false, dpi_inh: false, neuron: false}
+  margin_um: 4.0                 # die edge to the outermost shapes
+  stack_gap_um: 6.0              # between stacked blocks (DAC over DAC, DPI_inh over DPI); DPI N/S pins route here
+  min_block_gap_um: 4.0          # place refuses closer blocks (row_111: 4 um passed DRC)
+  row_gap_tracks: 8              # routing tracks between rows (spikes to the next layer's DACs)
+  channels_um:                   # vertical channel widths: auto = routing demand from the netlist
+    left: auto                   # (tracks x 0.8 um / track_utilisation + 2 x channel_margin_um),
+    A: auto                      # or a number in um. The route stage widens a channel by 1.4x
+    B: auto                      # where routing fails (top/<top>/growth.json; delete it to reset)
+    C: auto
 
   bias_cell:
     position: above_top_row      # DECIDE: above_top_row | left_column | below_bottom_row
@@ -113,26 +117,19 @@ floorplan:
 
 # ----------------------------------------------------------------------------- routing
 routing:
-  over_blocks: [Metal5]          # layers the top router may use over a block (must be free in every block's abstract)
-  layers:                        # direction and use per layer
-    Metal2: {dir: horizontal, use: pin stubs}
-    Metal3: {dir: vertical,   use: channel tracks}
-    Metal4: {dir: horizontal, use: inter-row buses}
-    Metal5: {dir: vertical,   use: supply grid, long spike runs}
-  track_pitch_um: {Metal2: 0.8, Metal3: 0.8, Metal4: 0.8, Metal5: 1.6}
-  wire_um:        {Metal2: 0.4, Metal3: 0.4, Metal4: 0.5, Metal5: 1.0}
-  channel_margin_um: 0.9
-  row_local_nets: true           # a net used only inside one row stays in that row's channels
+  # Router (top.py route): glayout.floorplan grid router, Metal3 horizontal / Metal4 vertical,
+  # 0.8 um pitch, 0.5 um wires; nothing over the blocks (each block bbox is an obstacle). Pins
+  # are reached by a stub on their own layer (Metal1/2 straps and stubs, Metal3 risers).
+  track_utilisation: 0.7         # fraction of a channel's tracks the demand estimate may fill
+  channel_margin_um: 3.0         # free space next to each block edge in a channel (pin landings)
+  detour_ratio: 0.0              # 0: no detour re-landing pass (each pass reroutes everything)
+  max_iterations: 35             # rip-up / reroute rounds
+  grow_attempts: 3               # reroutes with wider channels after a failure
+  write_flat: false              # also write <top>_flat.gds (the router's merged view)
 
   supply:
-    style: edge_buses            # DECIDE: edge_buses (bottom VDD/VSS buses + per-column straps, as SNN.gds) | m5_grid
-    bus_width_um: 2.0
-    m5_grid_pitch_um: 20         # m5_grid only
-    straps_per_row: 2
-
-  spikes:                        # spike lines switch rail-to-rail every spike
-    rotate_layers: [Metal1, Metal5, Metal3]   # neighbouring spike tracks on different layers (as SNN.gds)
-    min_spacing_um: 1.2
+    style: routed                # routed (VDD / VSS routed like signals, 0.5 um, implemented) |
+                                 # edge_buses | m5_grid (DECIDE; not implemented yet)
 
   # DECIDE: sensitive nets and their keep-outs from aggressors (parallel run longer than
   # max_parallel_um closer than min_spacing_um is a violation; shield: VSS track between).
@@ -156,9 +153,9 @@ routing:
 # ----------------------------------------------------------------------------- macro pins
 macro_pins:
   edge: bottom                   # DECIDE: bottom | left | right | top (set by the digital block / pads)
-  layer: Metal3
-  order: [VDD, VSS, Iref, VT, "w[31:0]", "s[7:0]", "pulse[1:0]", "spike[4:0]"]
-  spacing_um: 0.8
+  layer: Metal2                  # 0.5 x 1 um pads on the bottom edge, labelled with the net name
+  order: [VDD, VSS, Iref, VT, "w[31:0]", "s[7:0]", "pulse[1:0]", "spike[4:0]"]   # LVS pin order
+  spacing_um: 1.6                # pad pitch; pads sit under their net's lowest pin (fewest crossings)
   analog_pins: [Iref, VT]        # need analog pads at chip level
   keep_pins: [VT]                # DECIDE: VT stays a macro pin (not made on chip)
 

@@ -2,6 +2,7 @@
 x Isum Isum Isum Isum d=5600,212 l=128 w=100 x=-95 y=675 nfet_03v3
 x Isum Isum Isum Isum d=5600,212 l=128 w=100 x=1104 y=675 nfet_03v3
 x Isum Isum Isum Isum d=12000,440 l=128 w=100 x=-335 y=-936 nfet_03v3
+x VDD a_n90_4665# s=3403480,60780 l=4436 w=4436 x=1884 y=-2236 cap_mim_2f0_m4m5_noshield
 x VDD VDD VDD VDD d=5600,212 l=128 w=100 x=944 y=5309 pfet_03v3
 x VDD VDD VDD VDD d=5600,212 l=128 w=100 x=224 y=3697 pfet_03v3
 x VDD VDD VDD VDD d=5600,212 l=128 w=100 x=1184 y=3697 pfet_03v3
@@ -35,25 +36,23 @@ x Isum Isum Isum Isum d=12000,440 l=128 w=100 x=-335 y=675 nfet_03v3
 x VDD VDD VDD VDD d=5600,212 l=128 w=100 x=704 y=5309 pfet_03v3
 x VDD VDD VDD VDD d=5600,212 l=128 w=100 x=944 y=3697 pfet_03v3
 x Isum Isum Isum Isum d=5600,212 l=128 w=100 x=384 y=-936 nfet_03v3
-x VDD a_n90_4665# s=3166880,56048 l=4436 w=4436 x=4964 y=3409 cap_mim_2f0_m4m5_noshield
 x VDD VDD VDD VDD d=5600,212 l=128 w=100 x=-255 y=3697 pfet_03v3
 x Isum Isum Isum Isum d=5600,212 l=128 w=100 x=144 y=675 nfet_03v3
 x Isum Isum Isum Isum d=5600,212 l=128 w=100 x=624 y=675 nfet_03v3
 x Isum Isum Isum Isum d=5600,212 l=128 w=100 x=624 y=-936 nfet_03v3
-C a_n90_4665# VDD 4.6
 C Isum VDD 7.2
-C a_n90_4665# Isum 2.3
-C VDD Isyn 2.1
-C Vthr0 5.5
-R Vthr 35
-C Isyn0 3.5
-R Isyn 19
+C a_n90_4665# Isum 2.4
+C VDD Isyn 3.1
+C a_n90_4665# VDD 5.6
+C Vthr0 4.9
+R Vthr 34
+R Isyn 17
 C VT0 4.7
 R VT 34
 C Isum0 16.3
 R Isum 5460
-C VDD0 49.1
+C VDD0 49.0
 R VDD 4224
 R VSS 1860
-C a_n90_4665#0 13.3
-R a_n90_4665# 111
+C a_n90_4665#0 13.8
+R a_n90_4665# 113

@@ -1,0 +1,175 @@
+{
+ "stage": "route",
+ "top": "SNN_signed",
+ "time": "2026-11-18 04:06:24",
+ "ok": true,
+ "size_um": [
+  616.38,
+  806.52
+ ],
+ "area_mm2": 0.4971,
+ "wirelength_um": 36875.5,
+ "vias": 1477,
+ "failed": [],
+ "unreachable": [],
+ "attempts": [
+  {
+   "attempt": 0,
+   "size_um": [
+    616.38,
+    806.52
+   ],
+   "routed": true,
+   "failed": [],
+   "unreachable": [],
+   "hotspots": {},
+   "growth": {},
+   "seconds": 23
+  }
+ ],
+ "sensitive": [
+  {
+   "net": "VMEM_0",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 20,
+   "ok": true
+  },
+  {
+   "net": "VMEM_1",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 20,
+   "ok": true
+  },
+  {
+   "net": "VMEM_2",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 20,
+   "ok": true
+  },
+  {
+   "net": "VMEM_3",
+   "parallel_um": {
+    "spike[3]": 8.0
+   },
+   "worst_um": 8.0,
+   "limit_um": 20,
+   "ok": true
+  },
+  {
+   "net": "VMEM_4",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 20,
+   "ok": true
+  },
+  {
+   "net": "Isum_0",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_1",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_2",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_3",
+   "parallel_um": {
+    "spike[3]": 3.2
+   },
+   "worst_um": 3.2,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_4",
+   "parallel_um": {
+    "spike[3]": 23.2
+   },
+   "worst_um": 23.2,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_inh2",
+   "parallel_um": {
+    "spike[1]": 1.6
+   },
+   "worst_um": 1.6,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_inh3",
+   "parallel_um": {
+    "spike[3]": 2.4
+   },
+   "worst_um": 2.4,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "Isum_inh4",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 30,
+   "ok": true
+  },
+  {
+   "net": "VT_dpi",
+   "parallel_um": {
+    "spike[3]": 16.8
+   },
+   "worst_um": 16.8,
+   "limit_um": 50,
+   "ok": "True"
+  },
+  {
+   "net": "Vb",
+   "parallel_um": {
+    "spike[3]": 2.0,
+    "spike[1]": 74.1,
+    "pulse[1]": 5.6
+   },
+   "worst_um": 74.1,
+   "limit_um": 50,
+   "ok": "False"
+  },
+  {
+   "net": "Vthr",
+   "parallel_um": {},
+   "worst_um": 0.0,
+   "limit_um": 50,
+   "ok": true
+  }
+ ],
+ "sensitive_violations": [
+  "Vb"
+ ],
+ "hierarchy": {
+  "cells": [
+   "DAC_signed_binary",
+   "DPI",
+   "DPI_inh_min",
+   "bias_cell",
+   "neuron_glayout"
+  ],
+  "instances": 22,
+  "max_bbox_offset_um": 0.0
+ },
+ "seconds": 37
+}

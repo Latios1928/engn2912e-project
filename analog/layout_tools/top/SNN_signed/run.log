@@ -1,0 +1,149 @@
+netlist SNN_signed: 22 instances (8 DAC_signed_binary, 5 DPI, 5 neuron_glayout, 3 DPI_inh_min, 1 bias_cell), 75 nets, 51 macro pins
+abstract SNN_signed: 5 blocks
+  DAC_signed_binary   306.97 x  64.94 um  pins E2 W9  [DRC clean, LVS match (2026-11-18 01:07:42)]
+  DPI                  47.49 x  46.23 um  pins E1 N1 S1 W3  [DRC clean, LVS match (2026-11-18 01:57:32)]
+  neuron_glayout      103.06 x  77.24 um  pins E3 W11  [DRC clean, LVS match (2026-11-18 01:23:32)]
+  DPI_inh_min          93.21 x  49.14 um  pins E1 N1 S1 W3  [DRC clean, LVS match (2026-11-18 02:00:35)]
+  bias_cell           340.20 x 115.98 um  pins S12 W2  [DRC clean, LVS match (2026-11-18 01:24:39)]
+plan SNN_signed: 5 rows (bottom -> top), bias xbias above_top_row
+  in0   xneu0  DACs xdac0_0          DPI xdpi0  DPI_inh -
+  in1   xneu1  DACs xdac1_0          DPI xdpi1  DPI_inh -
+  hid0  xneu2  DACs xdac2_0,xdac2_1  DPI xdpi2  DPI_inh xdpi6
+  hid1  xneu3  DACs xdac3_0,xdac3_1  DPI xdpi3  DPI_inh xdpi7
+  out   xneu4  DACs xdac4_0,xdac4_1  DPI xdpi4  DPI_inh xdpi5
+place SNN_signed: 616.4 x 806.5 um (0.497 mm2), 22 blocks, 51 pads
+  channels (um): left 62.0, A 10.6, B 18.6, C 14.0; row gap 15.1, bottom 34.6, top 24.3
+  demand (tracks): {'left': 49, 'A': 4, 'B': 11, 'C': 7}
+2026-11-18 02:00:45.792 +01:00 | INFO     | gdsfactory.pdk:activate:337 - 'gf180' PDK is now active
+Realise floorplan SNN_signed  (0.04s)                                                    
+┏━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  # ┃ stage         ┃ status ┃  ms ┃ detail                                            ┃
+┡━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│  1 │ xdac0_0       │ ok     │ 4.0 │ variant 0 at (66.000, 39.570)                     │
+│  2 │ xdpi0         │ ok     │ 0.9 │ variant 0 at (383.540, 39.570)                    │
+│  3 │ xneu0         │ ok     │ 1.9 │ variant 0 at (495.320, 39.570)                    │
+│  4 │ xdac1_0       │ ok     │ 1.2 │ variant 0 at (66.000, 131.950)                    │
+│  5 │ xdpi1         │ ok     │ 0.4 │ variant 0 at (383.540, 131.950)                   │
+│  6 │ xneu1         │ ok     │ 0.8 │ variant 0 at (495.320, 131.950)                   │
+│  7 │ xdac2_0       │ ok     │ 1.7 │ variant 0 at (66.000, 224.330)                    │
+│  8 │ xdac2_1       │ ok     │ 1.3 │ variant 0 at (66.000, 295.270)                    │
+│  9 │ xdpi2         │ ok     │ 0.4 │ variant 0 at (383.540, 224.330)                   │
+│ 10 │ xneu2         │ ok     │ 0.8 │ variant 0 at (495.320, 224.330)                   │
+│ 11 │ xdac3_0       │ ok     │ 1.2 │ variant 0 at (66.000, 375.350)                    │
+│ 12 │ xdac3_1       │ ok     │ 1.3 │ variant 0 at (66.000, 446.290)                    │
+│ 13 │ xdpi3         │ ok     │ 0.5 │ variant 0 at (383.540, 375.350)                   │
+│ 14 │ xneu3         │ ok     │ 0.8 │ variant 0 at (495.320, 375.350)                   │
+│ 15 │ xdac4_0       │ ok     │ 1.2 │ variant 0 at (66.000, 526.370)                    │
+│ 16 │ xdac4_1       │ ok     │ 1.2 │ variant 0 at (66.000, 597.310)                    │
+│ 17 │ xdpi4         │ ok     │ 0.4 │ variant 0 at (383.540, 526.370)                   │
+│ 18 │ xdpi5         │ ok     │ 1.1 │ variant 0 at (383.540, 578.600)                   │
+│ 19 │ xneu4         │ ok     │ 0.9 │ variant 0 at (495.320, 526.370)                   │
+│ 20 │ xdpi6         │ ok     │ 0.7 │ variant 0 at (383.540, 276.560)                   │
+│ 21 │ xdpi7         │ ok     │ 0.7 │ variant 0 at (383.540, 427.580)                   │
+│ 22 │ xbias         │ ok     │ 2.2 │ variant 0 at (159.280, 686.540)                   │
+│ 23 │ pad_w_31_     │ ok     │ 0.2 │ variant 0 at (35.000, 4.000)                      │
+│ 24 │ pad_w_30_     │ ok     │ 0.1 │ variant 0 at (36.600, 4.000)                      │
+│ 25 │ pad_w_29_     │ ok     │ 0.2 │ variant 0 at (38.200, 4.000)                      │
+│ 26 │ pad_w_28_     │ ok     │ 0.2 │ variant 0 at (39.800, 4.000)                      │
+│ 27 │ pad_w_27_     │ ok     │ 0.1 │ variant 0 at (41.400, 4.000)                      │
+│ 28 │ pad_w_26_     │ ok     │ 0.2 │ variant 0 at (43.000, 4.000)                      │
+│ 29 │ pad_w_25_     │ ok     │ 0.1 │ variant 0 at (44.600, 4.000)                      │
+│ 30 │ pad_w_24_     │ ok     │ 0.1 │ variant 0 at (46.200, 4.000)                      │
+│ 31 │ pad_w_23_     │ ok     │ 0.1 │ variant 0 at (47.800, 4.000)                      │
+│ 32 │ pad_w_22_     │ ok     │ 0.1 │ variant 0 at (49.400, 4.000)                      │
+│ 33 │ pad_w_21_     │ ok     │ 0.1 │ variant 0 at (51.000, 4.000)                      │
+│ 34 │ pad_w_20_     │ ok     │ 0.2 │ variant 0 at (52.600, 4.000)                      │
+│ 35 │ pad_w_19_     │ ok     │ 0.2 │ variant 0 at (54.200, 4.000)                      │
+│ 36 │ pad_w_18_     │ ok     │ 0.1 │ variant 0 at (55.800, 4.000)                      │
+│ 37 │ pad_w_17_     │ ok     │ 0.1 │ variant 0 at (57.400, 4.000)                      │
+│ 38 │ pad_w_16_     │ ok     │ 0.1 │ variant 0 at (59.000, 4.000)                      │
+│ 39 │ pad_w_15_     │ ok     │ 0.1 │ variant 0 at (60.600, 4.000)                      │
+│ 40 │ pad_w_14_     │ ok     │ 0.1 │ variant 0 at (62.200, 4.000)                      │
+│ 41 │ pad_w_13_     │ ok     │ 0.1 │ variant 0 at (63.800, 4.000)                      │
+│ 42 │ pad_w_12_     │ ok     │ 0.1 │ variant 0 at (65.400, 4.000)                      │
+│ 43 │ pad_w_11_     │ ok     │ 0.1 │ variant 0 at (67.000, 4.000)                      │
+│ 44 │ pad_w_10_     │ ok     │ 0.1 │ variant 0 at (68.600, 4.000)                      │
+│ 45 │ pad_w_9_      │ ok     │ 0.1 │ variant 0 at (70.200, 4.000)                      │
+│ 46 │ pad_w_8_      │ ok     │ 0.1 │ variant 0 at (71.800, 4.000)                      │
+│ 47 │ pad_w_7_      │ ok     │ 0.1 │ variant 0 at (73.400, 4.000)                      │
+│ 48 │ pad_w_6_      │ ok     │ 0.2 │ variant 0 at (75.000, 4.000)                      │
+│ 49 │ pad_w_5_      │ ok     │ 0.1 │ variant 0 at (76.600, 4.000)                      │
+│ 50 │ pad_w_4_      │ ok     │ 0.2 │ variant 0 at (78.200, 4.000)                      │
+│ 51 │ pad_w_3_      │ ok     │ 0.2 │ variant 0 at (79.800, 4.000)                      │
+│ 52 │ pad_w_2_      │ ok     │ 0.1 │ variant 0 at (81.400, 4.000)                      │
+│ 53 │ pad_w_1_      │ ok     │ 0.1 │ variant 0 at (83.000, 4.000)                      │
+│ 54 │ pad_w_0_      │ ok     │ 0.1 │ variant 0 at (84.600, 4.000)                      │
+│ 55 │ pad_s_7_      │ ok     │ 0.1 │ variant 0 at (86.200, 4.000)                      │
+│ 56 │ pad_s_6_      │ ok     │ 0.1 │ variant 0 at (87.800, 4.000)                      │
+│ 57 │ pad_s_5_      │ ok     │ 0.1 │ variant 0 at (89.400, 4.000)                      │
+│ 58 │ pad_s_4_      │ ok     │ 0.1 │ variant 0 at (91.000, 4.000)                      │
+│ 59 │ pad_s_3_      │ ok     │ 0.1 │ variant 0 at (92.600, 4.000)                      │
+│ 60 │ pad_s_2_      │ ok     │ 0.1 │ variant 0 at (94.200, 4.000)                      │
+│ 61 │ pad_s_1_      │ ok     │ 0.1 │ variant 0 at (95.800, 4.000)                      │
+│ 62 │ pad_s_0_      │ ok     │ 0.1 │ variant 0 at (97.400, 4.000)                      │
+│ 63 │ pad_pulse_1_  │ ok     │ 0.1 │ variant 0 at (99.000, 4.000)                      │
+│ 64 │ pad_pulse_0_  │ ok     │ 0.1 │ variant 0 at (100.600, 4.000)                     │
+│ 65 │ pad_VDD       │ ok     │ 0.1 │ variant 0 at (378.260, 4.000)                     │
+│ 66 │ pad_VSS       │ ok     │ 0.1 │ variant 0 at (379.860, 4.000)                     │
+│ 67 │ pad_Iref      │ ok     │ 0.1 │ variant 0 at (472.830, 4.000)                     │
+│ 68 │ pad_VT        │ ok     │ 0.1 │ variant 0 at (486.040, 4.000)                     │
+│ 69 │ pad_spike_4_  │ ok     │ 0.1 │ variant 0 at (605.380, 4.000)                     │
+│ 70 │ pad_spike_3_  │ ok     │ 0.1 │ variant 0 at (606.980, 4.000)                     │
+│ 71 │ pad_spike_2_  │ ok     │ 0.1 │ variant 0 at (608.580, 4.000)                     │
+│ 72 │ pad_spike_1_  │ ok     │ 0.1 │ variant 0 at (610.180, 4.000)                     │
+│ 73 │ pad_spike_0_  │ ok     │ 0.1 │ variant 0 at (611.780, 4.000)                     │
+│ 74 │ Check spacing │ ok     │ 8.2 │ min block gap 1.100µm (pad_spike_2_/pad_spike_1_) │
+└────┴───────────────┴────────┴─────┴───────────────────────────────────────────────────┘
+Route SNN_signed — 75 nets, pitch 0.8µm on met3/met4  (15.87s)                                                  
+┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ # ┃ stage                  ┃ status ┃      ms ┃ detail                                                       ┃
+┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 1 │ Grid                   │ ok     │  1949.0 │ 770x1008x2 nodes, 842236 blocked by 73 cells                 │
+│ 2 │ Pin access             │ ok     │   349.7 │ 261 pins landed, sides {'E': 29, 'W': 153, 'N': 59, 'S': 20} │
+│ 3 │ Route + rip-up/reroute │ ok     │ 13532.3 │ 11 iteration(s), 0 conflict node(s) left, 0 unroutable       │
+│ 4 │ Result                 │ ok     │     0.1 │ wirelength 36875.50µm, 1477 via stacks                       │
+└───┴────────────────────────┴────────┴─────────┴──────────────────────────────────────────────────────────────┘
+routed=yes  iterations=11  wirelength_um=36875.50  vias=1477                                                    
+Route SNN_signed: rip-up/reroute                    
+┏━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ iteration ┃ conflict nodes ┃ ripped ┃ unroutable ┃
+┡━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ 1         │ 111            │ 39     │ 0          │
+│ 2         │ 23             │ 13     │ 0          │
+│ 3         │ 9              │ 7      │ 0          │
+│ 4         │ 3              │ 2      │ 0          │
+│ 5         │ 3              │ 2      │ 0          │
+│ 6         │ 7              │ 3      │ 0          │
+│ 7         │ 8              │ 5      │ 0          │
+│ 8         │ 4              │ 3      │ 0          │
+│ 9         │ 15             │ 6      │ 0          │
+│ 10        │ 4              │ 3      │ 0          │
+│ 11        │ 0              │ 0      │ 0          │
+└───────────┴────────────────┴────────┴────────────┘
+Routed floorplan SNN_signed — SNN_signed  (21.88s)                                                                      
+┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ # ┃ stage                      ┃ status ┃      ms ┃ detail                                                           ┃
+┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 1 │ Realise                    │ ok     │    76.2 │ 73 cells                                                         │
+│ 2 │ Check placement vs problem │ ok     │     7.4 │ max cell bbox mismatch 0.0000µm                                  │
+│ 3 │ Route                      │ ok     │ 15877.0 │ routed                                                           │
+│ 4 │ Draw                       │ ok     │  5819.2 │ stubs 261, segments 186, vias 1216                               │
+│ 5 │ Labels                     │ skip   │     0.0 │                                                                  │
+│ 6 │ Netlist                    │ ok     │     0.0 │ SNN_SIGNED(VDD, VSS, Iref, VT, w[31], w[30], w[29], w[28],       │
+│   │                            │        │         │ w[27], w[26], w[25], w[24], w[23], w[22], w[21], w[20], w[19],   │
+│   │                            │        │         │ w[18], w[17], w[16], w[15], w[14], w[13], w[12], w[11], w[10],   │
+│   │                            │        │         │ w[9], w[8], w[7], w[6], w[5], w[4], w[3], w[2], w[1], w[0],      │
+│   │                            │        │         │ s[7], s[6], s[5], s[4], s[3], s[2], s[1], s[0], pulse[1],        │
+│   │                            │        │         │ pulse[0], spike[4], spike[3], spike[2], spike[1], spike[0]), 73  │
+│   │                            │        │         │ instances                                                        │
+│ 7 │ Flatten                    │ ok     │    96.9 │ 596.50x798.52µm                                                  │
+└───┴────────────────────────────┴────────┴─────────┴──────────────────────────────────────────────────────────────────┘
+routed=yes  wirelength_um=36875.5  vias=1477                                                                            
+route attempt 0: 616 x 807 um, routed=True, failed 0, unreachable 0, hotspots {} (22 s)
+2026-11-18 02:01:09.733 +01:00 | INFO     | gdsfactory.component:_write_library:1851 - Wrote to '/foss/designs/engn2912e-project/analog/layout_tools/top/SNN_signed/SNN_signed.gds'
+route SNN_signed: routed, 616.4 x 806.5 um (0.4971 mm2), wire 36876 um, 1477 vias, 1 attempt(s), 27 s
+  sensitive nets: 15/16 within their parallel-run limit
+    Vb: 74.1 um next to spike[1] (limit 50)
+  wrote SNN_signed.gds, SNN_signed_lvs_ref.spice
+signoff SNN_signed: DRC clean, LVS match
+signoff SNN_signed: DRC clean, LVS match

@@ -54,6 +54,8 @@ CH_MARGIN = 0.9      # ring metal -> first/last channel track (centre)
 CAP_GAP = 2.0        # spine centre -> MIM plate: 0.25 + MIMTM.1 (1.2) + margin
 CAP_PITCH = 1.6      # met5 link columns: 1.0 wire + 0.44 space + margin
 MIM_KEEPOUT = 1.3    # cell outline past a MIM plate (MIMTM.1 1.2 + margin), for top-level routers
+MIM_TRACK_CLEAR = 1.2 + WIRE / 2 + 0.1   # met4 track centre -> plate edge (MIMTM.1 1.2), over_devices
+MIM_VIA_CLEAR = 1.0  # via2/via3 centre -> plate edge: LVS ignores vias under FuseTop (over_devices)
 GROUND = ("VSS", "GND", "0")
 PIN_BLANK_TRACKS = 2 # empty channel tracks between two edge-pin tracks (pin pitch = (1 + this) x 0.8 um).
                      # 1 (1.6 um) still walled VMEM in on glayout.floorplan's router (row_111 test)
@@ -152,11 +154,17 @@ def _supply_sides(pin_sides, net):
 
 
 def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
-            pin_sides: dict | None = None) -> Result:
+            pin_sides: dict | None = None, cap_place: str = "beside") -> Result:
     """Build the cell. order_n / order_p: device names left->right (default: netlist order).
     pin_sides: {"default": side, <pin net>: side}, side W/E/N/S (left/right/top/bottom); edge
     pins leave the cell on that side (default: every pin on the left, W). VSS / VDD take a list
-    of W and/or E (met1 strap to each listed edge; default [W])."""
+    of W and/or E (met1 strap to each listed edge; default [W]).
+    cap_place: "beside" (MIM caps in a column right of the rows) or "over_devices" (one cap in the
+    NMOS band between the bot and mid channels, overlapping everything right of the band's last
+    via2/via3: guard rings, DNW spacing, the N/S riser strip. The GF180 LVS deck ignores via2 /
+    via3 under a MIM, so the plate cannot cover transistor terminals in this cell style)."""
+    if cap_place not in ("beside", "over_devices"):
+        raise ValueError(f"cap_place {cap_place!r}: use beside or over_devices")
     # one ground name: the layout's substrate / guard rings are labelled VSS, so a cell that
     # calls its ground GND or 0 (DAC, DAC_signed) is drawn and LVS-referenced as VSS
     alias = [n for n in GROUND if n != "VSS"]
@@ -182,6 +190,9 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         raise NotImplementedError("two_row supports <= 2 caps that share one bottom-plate net "
                                   f"(got {[(c.name, c.bot) for c in caps]})")
     cap_bot = caps[0].bot if caps else None      # net of the met4 spine
+    if cap_place == "over_devices" and len(caps) > 1:
+        raise NotImplementedError("cap_place over_devices: one cap only for now "
+                                  f"(got {[c.name for c in caps]}); use beside")
     pins = list(cell.pins)
     for rail in ("VSS", "VDD"):          # the layout always has a substrate (VSS) and VDD wells
         if rail not in pins:
@@ -258,6 +269,11 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
             _pin_side(pin_sides, net), ("bot", "mid", "top"))
         return next((c for c in pref_order if c in have), None)
 
+    cap_comps = [mimcap(pdk, (c.w, c.l), with_extension=False) for c in caps]
+    # over_devices: the GF180 LVS deck drops every via2 / via3 under a MIM (FuseTop), so the
+    # plate may cover the NMOS band only right of its last via2 (NMOS risers, well columns)
+    x_nvia = max([x for _n, x, *_r in _risers(nref, nm)] + [x for _n, x, _y, _t in cols])
+
     def plan(sh):
         terms = _risers(nref, nm) + [(n, x + sh, y, c, t) for n, x, y, c, t in _risers(pref, pm)]
         chans_of = {}
@@ -276,6 +292,8 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         rows_x = max(n_xmax, ng.ref.xmax + sh)
         ns_x = {net: rows_x + 0.8 + k * NS_PITCH for k, net in enumerate(ns_pins)}
         x_sp = rows_x + 2.4 + len(ns_pins) * NS_PITCH
+        if cap_place == "over_devices" and caps:      # plate from x_nvia + VIA_CLEAR, spine after it
+            x_sp = max(x_sp, x_nvia + MIM_VIA_CLEAR + cap_comps[0].xsize + CAP_GAP)
         x_er = x_sp - 1.6                                # E pins: met4 -> met2 turn column
         cap_x = {c.top: x_sp - 0.8 - i * CAP_PITCH for i, c in enumerate(caps)}
         x_ntap = ng.ref.xmin + sh + 0.8
@@ -378,6 +396,14 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
     y0 = {"mid": y_mid0,
           "bot": n_ymin - CH_MARGIN - (tracks["bot"][2] - 1) * PITCH,
           "top": ng.ref.ymax + CH_MARGIN}
+    # over_devices: the plate sits over the NMOS row, in the met4-free band between the bot and
+    # mid channels; the bot channel moves down if the band is too short for plate + keep-outs
+    plate_y = None
+    if cap_place == "over_devices" and caps:
+        mh = cap_comps[0].ysize
+        plate_top = y_mid0 - MIM_TRACK_CLEAR
+        plate_y = plate_top - mh
+        y0["bot"] = min(y0["bot"], plate_y - MIM_TRACK_CLEAR - (tracks["bot"][2] - 1) * PITCH)
     track_y = {(ch, net): y0[ch] + i * PITCH
                for ch, (sp, idx, n) in tracks.items() for net, i in idx.items()}
 
@@ -413,13 +439,17 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         R.via(x, yt, "met3", "met4", net, tag)
         R.wire("met3", (x, min(ys + [yt])), (x, max(ys + [yt])), net, tag=tag)
 
-    # ------------------------------------------------------------------ caps (0: above, 1: below)
+    # ------------------------------------------------------------------ caps
+    # beside: right of the spine (0: next to the PMOS row, 1: next to the NMOS row)
+    # over_devices: left of the spine, over the NMOS row (plate_y, above)
     placed = []
     for i, c in enumerate(caps):
         # no extension tab: glayout lifts the bottom plate to met5 on it, which the met5
         # top-plate links would cross; the met4 spine touches the bottom plate instead.
-        m = top << mimcap(pdk, (c.w, c.l), with_extension=False)
-        if i == 0:
+        m = top << cap_comps[i]
+        if plate_y is not None:
+            m.move((x_sp - CAP_GAP - m.xmax, plate_y - m.ymin))
+        elif i == 0:
             m.move((x_sp + CAP_GAP - m.xmin, ng.ref.ymin - m.ymin))
         else:
             m.move((x_sp + CAP_GAP - m.xmin, y_mid0 - 1.2 - m.ymax))
@@ -437,7 +467,8 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         ys = [m.center[1] for _, m in placed] + [track_y[("mid", cap_bot)]]
         R.wire("met4", (x_sp, min(ys)), (x_sp, max(ys)), cap_bot, tag="spine")
         for c, m in placed:
-            R.wire("met4", (x_sp, m.center[1]), (m.xmin + 0.3, m.center[1]), c.bot, tag=c.name)
+            x_in = m.xmin + 0.3 if m.xmin > x_sp else m.xmax - 0.3      # stub ends inside the plate
+            R.wire("met4", (x_sp, m.center[1]), (x_in, m.center[1]), c.bot, tag=c.name)
             x, y, yc = cap_x[c.top], track_y[("mid", c.top)], m.center[1]
             R.via(x, y, "met4", "met5", c.top, "cap")
             R.wire("met5", (x, y), (x, yc), c.top, w=1.0, tag="cap")
