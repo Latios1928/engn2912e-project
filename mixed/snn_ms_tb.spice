@@ -1,0 +1,76 @@
+* snn_ms_tb: SPICE side of the mixed-signal run. X1 is the analog macro
+* SNN_signed (bias cell + 2-2-1 network), from the netlist its layout is
+* LVS-checked against. Verilog drives pulse, w and s; spike goes back. The
+* Makefile replaces @PDK@ and @MACRO@ to make snn_ms_tb_run.spice.
+
+.include @PDK@/design.ngspice
+.lib @PDK@/sm141064.ngspice typical
+.lib @PDK@/sm141064.ngspice mimcap_typical
+* Simulation copy of the macro's LVS netlist (macro_sim.py)
+.include @MACRO@
+
+* Nets driven from Verilog: SpiceBind sets these external sources (snn_ms_tb.v).
+Vpulse[0] pulse[0] 0 0 external
+Vpulse[1] pulse[1] 0 0 external
+Vw[0] w[0] 0 0 external
+Vw[1] w[1] 0 0 external
+Vw[2] w[2] 0 0 external
+Vw[3] w[3] 0 0 external
+Vw[4] w[4] 0 0 external
+Vw[5] w[5] 0 0 external
+Vw[6] w[6] 0 0 external
+Vw[7] w[7] 0 0 external
+Vw[8] w[8] 0 0 external
+Vw[9] w[9] 0 0 external
+Vw[10] w[10] 0 0 external
+Vw[11] w[11] 0 0 external
+Vw[12] w[12] 0 0 external
+Vw[13] w[13] 0 0 external
+Vw[14] w[14] 0 0 external
+Vw[15] w[15] 0 0 external
+Vw[16] w[16] 0 0 external
+Vw[17] w[17] 0 0 external
+Vw[18] w[18] 0 0 external
+Vw[19] w[19] 0 0 external
+Vw[20] w[20] 0 0 external
+Vw[21] w[21] 0 0 external
+Vw[22] w[22] 0 0 external
+Vw[23] w[23] 0 0 external
+Vw[24] w[24] 0 0 external
+Vw[25] w[25] 0 0 external
+Vw[26] w[26] 0 0 external
+Vw[27] w[27] 0 0 external
+Vw[28] w[28] 0 0 external
+Vw[29] w[29] 0 0 external
+Vw[30] w[30] 0 0 external
+Vw[31] w[31] 0 0 external
+Vs[0] s[0] 0 0 external
+Vs[1] s[1] 0 0 external
+Vs[2] s[2] 0 0 external
+Vs[3] s[3] 0 0 external
+Vs[4] s[4] 0 0 external
+Vs[5] s[5] 0 0 external
+Vs[6] s[6] 0 0 external
+Vs[7] s[7] 0 0 external
+
+* Parameter names start with p_ (a .param named like a net can rename that net).
+.param p_vdd=3.3 p_vt=1.66 p_iref=100n
+Vdd VDD 0 {p_vdd}
+Vss VSS 0 0
+* Chip pins of the macro: neuron threshold, bias current Iref (into the pin)
+VT VT VSS {p_vt}
+IIref VDD Iref {p_iref}
+
+X1 VDD VSS Iref VT w[31] w[30] w[29] w[28] w[27] w[26] w[25] w[24] w[23] w[22] w[21] w[20] w[19] w[18] w[17] w[16] w[15] w[14] w[13] w[12] w[11] w[10] w[9] w[8] w[7] w[6] w[5] w[4] w[3] w[2] w[1] w[0]
++ s[7] s[6] s[5] s[4] s[3] s[2] s[1] s[0] pulse[1] pulse[0]
++ spike[4] spike[3] spike[2] spike[1] spike[0] SNN_signed
+
+* Gear integration: trap makes the DPI output current ring after each reset
+.options method=gear
+.save v(spike[0]) v(spike[1]) v(spike[2]) v(spike[3]) v(spike[4]) v(pulse[0]) v(pulse[1])
++ v(x1.VMEM_0) v(x1.VMEM_1) v(x1.VMEM_2) v(x1.VMEM_3) v(x1.VMEM_4)
+* Runs until the Verilog testbench calls $finish. ngspice reserves memory for
+* tstop/step points, so a huge bound crashes it: keep it above the longest run
+* (5 scenarios need about 36 ms).
+.tran 0.1u 45m 0 0.1u
+.end
