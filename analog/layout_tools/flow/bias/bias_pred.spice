@@ -8,10 +8,8 @@
 * note: MR_VNA: 0.22/20 -> 0.5/45.45 (W/L kept)
 * note: MO_VNA: W 5.755 -> 5.76 (glayout 10 nm width grid, L kept)
 * note: MO_VKup: W 6.005 -> 6.01 (glayout 10 nm width grid, L kept)
-* note: MR_Vthr: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)
 * note: MO_Vthr: W 0.905 -> 0.91 (glayout 10 nm width grid, L kept)
-* note: MR_VT_dpi: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)
 * note: MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)
 * note: MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)
@@ -49,70 +47,70 @@ XMO_VK VK vgp VDD VDD pfet_03v3 L=8u W=10.45u nf=1
 XMO_Vlk Vlk vgp VDD VDD pfet_03v3 L=16u W=0.84u nf=1
 XMR_VNA VNA VNA VDD VDD pfet_03v3 L=45.45u W=0.5u nf=1
 XMR_VKup VKup VKup VDD VDD pfet_03v3 L=8u W=1u nf=1
-XMR_Vthr_f0 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f1 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f2 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f3 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f4 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f5 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f6 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f7 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f8 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f9 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f10 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f11 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f12 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f13 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f14 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f15 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f16 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f17 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f18 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f19 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f20 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f21 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f22 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f23 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f24 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f25 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f26 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f27 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f28 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f29 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f30 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_Vthr_f31 Vthr Vthr VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f0 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f1 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f2 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f3 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f4 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f5 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f6 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f7 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f8 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f9 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f10 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f11 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f12 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f13 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f14 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f15 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f16 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f17 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f18 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f19 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f20 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f21 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f22 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f23 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f24 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f25 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f26 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f27 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f28 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f29 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f30 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-XMR_VT_dpi_f31 VT_dpi VT_dpi VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
+XMR_Vthr_f0 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f1 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f2 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f3 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f4 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f5 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f6 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f7 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f8 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f9 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f10 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f11 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f12 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f13 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f14 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f15 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f16 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f17 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f18 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f19 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f20 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f21 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f22 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f23 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f24 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f25 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f26 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f27 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f28 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f29 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f30 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_Vthr_f31 Vthr Vthr VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f0 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f1 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f2 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f3 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f4 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f5 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f6 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f7 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f8 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f9 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f10 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f11 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f12 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f13 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f14 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f15 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f16 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f17 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f18 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f19 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f20 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f21 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f22 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f23 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f24 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f25 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f26 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f27 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f28 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f29 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f30 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
+XMR_VT_dpi_f31 VT_dpi VT_dpi VDD VDD pfet_03v3 L=5.12u W=4u nf=1
 XMR_VT_inh_f0 VT_inh VT_inh VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
 XMR_VT_inh_f1 VT_inh VT_inh VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
 XMR_VT_inh_f2 VT_inh VT_inh VDD VDD pfet_03v3 L=1.12u W=0.88u nf=1
@@ -453,6 +451,118 @@ XDPN96 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPN97 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPN98 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPN99 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN100 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN101 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN102 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN103 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN104 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN105 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN106 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN107 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN108 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN109 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN110 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN111 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN112 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN113 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN114 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN115 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN116 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN117 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN118 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN119 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN120 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN121 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN122 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN123 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN124 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN125 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN126 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN127 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN128 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN129 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN130 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN131 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN132 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN133 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN134 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN135 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN136 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN137 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN138 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN139 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN140 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN141 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN142 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN143 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN144 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN145 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN146 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN147 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN148 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN149 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN150 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN151 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN152 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN153 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN154 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN155 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN156 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN157 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN158 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN159 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN160 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN161 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN162 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN163 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN164 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN165 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN166 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN167 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN168 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN169 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN170 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN171 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN172 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN173 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN174 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN175 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN176 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN177 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN178 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN179 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN180 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN181 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN182 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN183 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN184 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN185 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN186 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN187 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN188 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN189 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN190 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN191 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN192 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN193 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN194 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN195 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN196 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN197 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN198 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN199 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN200 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN201 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN202 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN203 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN204 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN205 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN206 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN207 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN208 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN209 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN210 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPN211 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS1 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS2 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
@@ -553,19 +663,131 @@ XDPS96 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS97 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS98 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS99 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS100 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS101 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS102 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS103 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS104 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS105 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS106 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS107 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS108 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS109 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS110 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS111 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS112 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS113 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS114 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS115 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS116 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS117 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS118 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS119 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS120 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS121 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS122 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS123 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS124 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS125 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS126 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS127 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS128 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS129 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS130 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS131 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS132 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS133 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS134 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS135 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS136 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS137 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS138 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS139 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS140 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS141 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS142 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS143 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS144 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS145 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS146 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS147 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS148 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS149 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS150 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS151 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS152 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS153 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS154 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS155 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS156 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS157 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS158 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS159 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS160 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS161 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS162 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS163 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS164 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS165 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS166 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS167 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS168 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS169 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS170 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS171 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS172 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS173 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS174 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS175 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS176 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS177 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS178 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS179 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS180 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS181 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS182 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS183 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS184 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS185 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS186 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS187 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS188 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS189 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS190 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS191 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS192 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS193 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS194 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS195 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS196 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS197 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS198 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS199 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS200 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS201 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS202 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS203 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS204 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS205 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS206 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS207 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS208 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS209 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS210 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
+XDPS211 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=12.94u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=12.94u nf=1
-Cpred_Iref Iref VSS 9.53e-14
-Cpred_VIp VIp VSS 8.754e-14
-Cpred_VK VK VSS 1.164e-13
-Cpred_VKdn VKdn VSS 6.074e-14
-Cpred_VKup VKup VSS 6.214e-14
-Cpred_VNA VNA VSS 9.587e-14
-Cpred_VT_dpi VT_dpi VSS 1.01e-13
-Cpred_VT_inh VT_inh VSS 8.565e-14
-Cpred_Vamp_bias Vamp_bias VSS 5.561e-14
-Cpred_Vb Vb VSS 6.463e-14
-Cpred_Vlk Vlk VSS 6.191e-14
-Cpred_Vthr Vthr VSS 1.148e-13
-Cpred_vgp vgp VSS 5.298e-14
+Cpred_Iref Iref VSS 1.342e-13
+Cpred_VIp VIp VSS 1.305e-13
+Cpred_VK VK VSS 1.387e-13
+Cpred_VKdn VKdn VSS 8.267e-14
+Cpred_VKup VKup VSS 7.558e-14
+Cpred_VNA VNA VSS 1.094e-13
+Cpred_VT_dpi VT_dpi VSS 2.286e-13
+Cpred_VT_inh VT_inh VSS 1.176e-13
+Cpred_Vamp_bias Vamp_bias VSS 7.849e-14
+Cpred_Vb Vb VSS 8.695e-14
+Cpred_Vlk Vlk VSS 8.494e-14
+Cpred_Vthr Vthr VSS 2.397e-13
+Cpred_vgp vgp VSS 6.661e-14
 .ends

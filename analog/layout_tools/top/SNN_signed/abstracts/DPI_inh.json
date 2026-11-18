@@ -16,20 +16,20 @@
  ],
  "bbox": [
   -15.2,
-  -15.145,
-  78.01,
-  34.395
+  -15.945,
+  86.97,
+  38.695
  ],
  "size": [
-  93.21,
-  49.54
+  102.17,
+  54.64
  ],
  "ports": [
   {
    "net": "Vthr",
    "layer": "met3",
-   "x": 59.38,
-   "y": 34.395,
+   "x": 68.34,
+   "y": 38.695,
    "orientation": 90,
    "width": 0.5,
    "side": "N"
@@ -37,8 +37,8 @@
   {
    "net": "VT",
    "layer": "met3",
-   "x": 61.78,
-   "y": -15.145,
+   "x": 70.74,
+   "y": -15.945,
    "orientation": 270,
    "width": 0.5,
    "side": "S"
@@ -47,7 +47,7 @@
    "net": "Isum",
    "layer": "met2",
    "x": -15.2,
-   "y": 14.095,
+   "y": 14.895,
    "orientation": 180,
    "width": 0.5,
    "side": "W"
@@ -55,8 +55,8 @@
   {
    "net": "Iout",
    "layer": "met2",
-   "x": 78.01,
-   "y": 15.695,
+   "x": 86.97,
+   "y": 16.495,
    "orientation": 0,
    "width": 0.5,
    "side": "E"
@@ -74,11 +74,11 @@
    "net": "VDD",
    "layer": "met1",
    "x": -15.2,
-   "y": 25.72,
+   "y": 28.27,
    "orientation": 180,
    "width": 1.0,
    "side": "W"
   }
  ],
- "signoff": "DRC clean, LVS match (2026-11-18 17:02:24)"
+ "signoff": "DRC clean, LVS match (2026-11-18 23:25:59)"
 }

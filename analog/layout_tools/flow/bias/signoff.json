@@ -1,25 +1,25 @@
 {
  "stage": "signoff",
  "cell": "bias",
- "time": "2026-11-18 04:30:00",
+ "time": "2026-11-18 23:48:09",
  "ok": true,
  "drc": "clean",
  "lvs": "match",
  "pex": {
-  "devices": 538,
-  "C": 81,
-  "R": 24961
+  "devices": 762,
+  "C": 153,
+  "R": 33415
  },
  "calibration": {
   "cell": "bias",
   "nets": 12,
-  "mean_factor": 0.925,
+  "mean_factor": 0.902,
   "spread": [
-   0.67,
-   1.427
+   0.618,
+   1.452
   ],
   "max_err_before": 0.0,
-  "global_factor": 0.925
+  "global_factor": 0.902
  },
- "calibration_text": "calibration bias: 12 nets, factor 0.925 (range 0.67..1.427), worst error before +0 %, global 0.925\n        Iref: pred(raw)   66.8 fF  extracted   95.3 fF  was +0 %\n         VIp: pred(raw)   95.3 fF  extracted   87.5 fF  was +0 %\n          VK: pred(raw)  114.8 fF  extracted  116.4 fF  was +0 %\n        VKdn: pred(raw)   85.4 fF  extracted   60.7 fF  was +0 %\n        VKup: pred(raw)   78.4 fF  extracted   62.1 fF  was +0 %"
+ "calibration_text": "calibration bias: 12 nets, factor 0.902 (range 0.618..1.452), worst error before +0 %, global 0.902\n        Iref: pred(raw)  110.1 fF  extracted  134.2 fF  was +0 %\n         VIp: pred(raw)  147.0 fF  extracted  130.5 fF  was +0 %\n          VK: pred(raw)  158.8 fF  extracted  138.7 fF  was +0 %\n        VKdn: pred(raw)  129.5 fF  extracted   82.7 fF  was +0 %\n        VKup: pred(raw)  102.2 fF  extracted   75.6 fF  was +0 %"
 }

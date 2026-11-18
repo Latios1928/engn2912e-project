@@ -1,7 +1,7 @@
 {
  "cell": "bias",
  "size_um": [
-  340.2,
+  586.69,
   115.98
  ],
  "router_check": "clean",
@@ -17,30 +17,28 @@
   "MR_VNA: 0.22/20 -> 0.5/45.45 (W/L kept)",
   "MO_VNA: W 5.755 -> 5.76 (glayout 10 nm width grid, L kept)",
   "MO_VKup: W 6.005 -> 6.01 (glayout 10 nm width grid, L kept)",
-  "MR_Vthr: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)",
   "MO_Vthr: W 0.905 -> 0.91 (glayout 10 nm width grid, L kept)",
-  "MR_VT_dpi: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)",
   "MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)",
   "MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)",
   "MO_VT_inh: W 0.625 -> 0.63 (glayout 10 nm width grid, L kept)"
  ],
  "predicted_fF": {
-  "Iref": 95.3,
-  "VDD": 86.9,
-  "VIp": 87.5,
-  "VK": 116.4,
-  "VKdn": 60.7,
-  "VKup": 62.1,
-  "VNA": 95.9,
-  "VSS": 87.2,
-  "VT_dpi": 101.0,
-  "VT_inh": 85.7,
-  "Vamp_bias": 55.6,
-  "Vb": 64.6,
-  "Vlk": 61.9,
-  "Vthr": 114.8,
-  "vgp": 53.0
+  "Iref": 134.2,
+  "VDD": 141.9,
+  "VIp": 130.5,
+  "VK": 138.7,
+  "VKdn": 82.7,
+  "VKup": 75.6,
+  "VNA": 109.4,
+  "VSS": 94.9,
+  "VT_dpi": 228.6,
+  "VT_inh": 117.6,
+  "Vamp_bias": 78.5,
+  "Vb": 87.0,
+  "Vlk": 84.9,
+  "Vthr": 239.7,
+  "vgp": 66.6
  }
 }

@@ -1,19 +1,15 @@
 {
  "stage": "build",
  "cell": "DPI_inh",
- "time": "2026-11-18 08:20:45",
+ "time": "2026-11-18 23:24:23",
  "ok": true,
  "size_um": [
-  93.21,
-  49.54
+  102.17,
+  54.64
  ],
  "router_check": "clean",
- "predrc": "predrc DPI_inh: 0 rule(s) predicted to fail (20 checked, 0.0 s)",
+ "predrc": "predrc DPI_inh: 0 rule(s) predicted to fail (20 checked, 0.1 s)",
  "notes": [
-  "x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
-  "x1_M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
-  "x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
-  "x1_M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "ground net GND drawn as VSS"
  ]
 }

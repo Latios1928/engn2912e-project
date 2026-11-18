@@ -21,8 +21,8 @@ nets:
     class: bias_pin
     why: gate-only pin driving current sources / long-L devices
   Vthr:
-    class: digital_pin
-    why: gate-only pin, short L, drives a series switch
+    class: bias_pin
+    why: gate-only pin driving current sources / long-L devices
   net1:
     class: signal
     why: ''
@@ -36,7 +36,7 @@ groups:
   tail: null
   placement: adjacent
   dummy_ring: group
-  dummy_l: 0.64
+  dummy_l: 5.12
   reason: same W/L, common source Isum, gates Vthr/net1
 wells:
 - id: W1
@@ -48,7 +48,7 @@ wells:
   required: true
   decided_by: rule
   reason: 'NMOS body on Isum (not ground): needs its own isolated p-well in a DNW island'
-  cost_um2: 372
+  cost_um2: 551
 - id: W2
   kind: nwell
   body: VDD
@@ -88,10 +88,20 @@ floorplan:
   order_p:
   - M3
   - M4
-  dummy_l: 0.64
+  dummy_l: 2.0
   dnw_islands: 1
   decided_by: rule
-questions: []
+questions:
+- id: Q-dummy_l
+  about: floorplan.dummy_l
+  question: matched devices have L up to 5.12 um; dummies at L=5.12 cost area, capped at 2 um now. Keep cap?
+  options:
+  - cap 2
+  - match 5.12
+  default: cap 2
+  default_reason: policy decisions.defaults.dummy_l_over_cap
+  answer: cap 2
+  answered_by: auto
 caps:
 - name: C2
   top: VDD
@@ -99,9 +109,5 @@ caps:
   w: 22.18
   l: 22.18
 schematic_warnings: []
-schematic_changes:
-- 'M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+schematic_changes: []
 mode: auto

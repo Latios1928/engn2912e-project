@@ -1212,6 +1212,28 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **Result** (`snn_signed_verification.md`): all 30 corner points 8/8. Post-layout MC: 45 / 100 chips pass all 8 scenarios; scenarios 5 and 7 (the -15 against +15 ties) pass 66 and 67 / 100, every other scenario 100 except one power-up spike in scenario 4. Drawn MC chip yield on 5 and 7: 41 (gain 1.0), 51 (1.2), 60 (1.4), 68 (1.6), 76 (2.0). The failures follow the per-synapse weight mismatch, not the presynaptic rates. An exact tie has no reliable winner from chip to chip.
 - **Not done:** no further design change; the choice between weight margin in the network, a higher gain, or trimmed / larger synapse devices is open (README TODO).
 
+
+**90. Is 5 kHz at 10 nA a reasonable low-power operating point?** *(Reasoned / Estimate)*
+- **Context:** an earlier request in this session, to lay out `DPI_inh` and `DAC_signed`, was interrupted by the user after the AI had probed PCell footprints in `/tmp` in the container. No repo file was written.
+- **Asked:** whether running the SNN at 5 kHz for a 10 nA DC input is reasonable, with the aim of low power.
+- **AI explained:**
+  - The rate is consistent with the sizing: 10 nA / 1 pF = 10 mV/µs, about 190 µs to the ≈ 1.9 V threshold, plus the spike, gives ≈ 200 µs (entry 42: 201 µs at 9.5 nA). The ceiling is ≈ 40 kHz (10 µs spike + 15 µs refractory). Typical subthreshold neuromorphic chips run at 10–1000 Hz.
+  - *(Estimate from logged numbers)* The neuron's 0.38 µW is about 85 % static: the spike amplifier bias (Vamp_bias ≈ 96.5 nA, entry on bias generation) gives ≈ 0.32 µW, the input current ≈ 0.03 µW, and CV² per spike at 5 kHz ≈ 0.04 µW. The shared bias generator idles at 0.72 µA (≈ 2.4 µW).
+  - So lowering the rate saves little power and raises energy per inference, because static power is paid for longer. Going much slower would also bring signal currents near DAC leakage (8.7–96 pA), worsen subthreshold mismatch, and need more capacitor area.
+  - Suggested instead: cut or gate the comparator bias, power-gate the biases between inferences, shorten each inference, and simulate supply current at 0 and 10 nA input to measure the static/dynamic split.
+- **Not done by AI:** no simulation; no file other than this log was changed.
+
+
+**91. Why 5 kHz at 10 nA is the sweet spot** *(Reasoned / Estimate)*
+- **User's rationale:** a 1 pF MIM cap is the largest acceptable for area, and the DC current should sit well above NMOS/PMOS leakage, so 5 kHz falls out.
+- **AI agreed:** rate ≈ I / (C·ΔV) = 10 nA / (1 pF × ≈ 1.9 V) ≈ 5 kHz. With C capped by area, I floored by leakage, and ΔV limited by the 3.3 V supply, 5 kHz is near the slowest rate the constraints allow.
+- **AI added:**
+  - *(Estimate)* Leakage roughly doubles per ~10 °C, so the 27 °C margin of 100–1000× over DAC off-leakage (8.7–96 pA) may fall to ~10–20× at 85 °C; check it at the hot corner.
+  - The power benefit comes from the 10 nA level; the comparator bias still dominates (entry 90).
+  - DPI τ ≈ 0.4 ms ≈ 2 input periods at 5 kHz, which suits summing coincident spikes; scale τ if the rate changes.
+  - Keep input rates well below the ≈ 40 kHz refractory ceiling.
+- **Not done by AI:** no simulation; no file other than this log was changed.
+
 ---
 
 ## Notes on reliability
