@@ -1,0 +1,74 @@
+# ----- ------ ----- ----- ------ ----- ----- ------ -----
+# Chipathon 2026: Project configuration
+# LICENSE: Apache License Version 2.0
+# http://www.apache.org/licenses/
+# ----- ------ ----- ----- ------ ----- ----- ------ -----
+
+# data will be pulled from main branch of the repo.
+# please be sure that the main branch contains the data you want to submit.
+# This file will be updated with more information later
+
+# ======================================================
+# Project metadata (used for documentation / review)
+# ======================================================
+project:
+  title: "Mixed-Signal Spiking Neural Network"   # Project title (e.g. "Simple CPU", "PLL", "ADC")
+  team: "TODO"                      # Your Team name
+  discord: "ema01710"                   # Optional: Discord username (for support / communication)
+  description: "2-2-1 spiking neural network: analog leaky integrate-and-fire neurons, DPI synapses and current-steering weight DACs, with a digital register file for the 4-bit weights and an input pulse generator"
+
+  gf_def_ready: false
+  ws_def_ready: false
+  drc_ready: false
+  lvs_ready: false
+
+  lvs_config: "lvs_config.json"
+  export_control: "docs/Export_Control_GF_Rev8.2_SNN.docx"   # TODO: replace with the signed PDF once the export control office signs it
+
+pins:
+  - name: VDDA
+    io_type: power   # analog supply: SNN macro (neurons, DPIs, DACs, bias cell)
+  - name: VDDD
+    io_type: power   # digital supply: register file, pulse generator
+  - name: VSSA
+    io_type: ground  # analog ground (note: due to a common ground connection, ground pads are generally not needed)
+  - name: VSSD
+    io_type: ground  # digital ground
+  - name: clk
+    io_type: input_schmitt
+  - name: rst
+    io_type: input_cmos
+  - name: data[0]
+    io_type: input_cmos
+  - name: data[1]
+    io_type: input_cmos
+  - name: data[2]
+    io_type: input_cmos
+  - name: data[3]
+    io_type: input_cmos
+  - name: addr[0]
+    io_type: input_cmos
+  - name: addr[1]
+    io_type: input_cmos
+  - name: addr[2]
+    io_type: input_cmos
+  - name: wren
+    io_type: input_cmos
+  - name: in[0]
+    io_type: input_cmos
+  - name: in[1]
+    io_type: input_cmos
+  - name: out[0]
+    io_type: bidirectional
+  - name: out[1]
+    io_type: bidirectional
+  - name: out[2]
+    io_type: bidirectional
+  - name: out[3]
+    io_type: bidirectional
+  - name: out[4]
+    io_type: bidirectional
+  - name: Iref
+    io_type: analog  # bias-cell reference current, 100 nA into the pin
+  - name: VT
+    io_type: analog  # neuron firing threshold, 1.66 V
