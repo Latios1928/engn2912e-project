@@ -1,4 +1,5 @@
-// Repo layout diagram. Compile with:  typst compile layout.typ layout.png --ppi 220
+// Repo layout diagram. Compile with:
+//   typst compile layout.typ layout.png --ppi 220
 // Uses the fletcher package (downloaded automatically on first compile).
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 
@@ -32,7 +33,7 @@
 
   card((1, 0), `snn_top.v`, fill: luma(245), name: <top>),
 
-  node((0, 0), align(left)[`clk, rst, wren, in[1:0],` \ `data[3:0], addr[2:0]`], stroke: none, name: <inpad>),
+  node((0, 0), align(left)[`clk, rst, in[1:0],` \ `data[3:0], addr[3:0]`], stroke: none, name: <inpad>),
   node((2, 0), [`out[4:0]`], stroke: none, name: <outpad>),
   edge(<inpad>, <top>, "-|>"),
   edge(<top>, <outpad>, "-|>"),
@@ -55,7 +56,7 @@
   ),
 
   node((0, 1.7), align(center)[`vdd`#sub[`d`]], stroke: none, name: <dsup>),
-  node((2, 1.7), align(center)[`vdd`#sub[`a`]`, vthr`], stroke: none, name: <asup>),
+  node((2, 1.7), align(center)[`vdd`#sub[`a`]`, VT, Iref`], stroke: none, name: <asup>),
   node((1, 1.7), [`gnd`], stroke: none, name: <gnd>),
   edge(<gnd>, (1, 1.35), (0.3, 1.35), (0.3, 1), "-|>", stroke: pwr + 1.5pt),
   edge(<gnd>, (1, 1.35), (1.7, 1.35), (1.7, 1), "-|>", stroke: pwr + 1.5pt),
@@ -68,11 +69,11 @@
     (0, 0.5),
     <dig>,
     "-|>",
-    label: text(size: 14pt)[`clk, rst, data,` \ `addr, wren, in`],
+    label: text(size: 14pt)[`clk, rst, data,` \ `addr, in`],
     label-side: center,
     label-pos: 0.5,
   ),
-  edge(<dig>, <slot>, "-|>", label: text(size: 14pt)[`w, pulse`], label-side: center),
+  edge(<dig>, <slot>, "-|>", label: text(size: 14pt)[`w, s, pulse`], label-side: center),
   edge(
     <slot>,
     (2, 0.5),

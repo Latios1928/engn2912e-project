@@ -1,32 +1,28 @@
 #!/bin/bash
-# Regenerate the waveform PNGs for the slides. Run from anywhere:
+# Regenerate the waveform PNGs for the slides from digital/tb_snn_digital.v.
+# Run from anywhere:
 #   slides/make_waves.sh
-# The same views can be opened in Vaporview: digital/tb_rf.json and
-# digital/tb_pulse_gen.json (open the matching .vcd after running this).
 set -e
 cd "$(dirname "$0")/.."
 export PATH=/foss/tools/bin:$PATH
 
-# rf: back-to-back writes, an ignored cycle (wren low), then an overwrite.
-(cd digital && iverilog -g2012 -Wall -o sim.vvp rf.v tb_rf.v && vvp -n sim.vvp | grep -E 'PASS|FAIL')
-python3 tools/vcd2png.py digital/tb_rf.vcd --start 0 --end 110 \
-    --sig tb_rf.clk --sig tb_rf.wren --sig tb_rf.addr::dec --sig tb_rf.data \
-    --sig tb_rf.weights \
-    --title "rf: one word per write, all 8 words visible on weights (one hex digit each)" \
-    -o slides/rf_wave.png
+(cd digital && iverilog -g2012 -Wall -o sim.vvp tb_snn_digital.v snn_digital.v regs.v pulse_gen.v &&
+    vvp -n sim.vvp | grep -E 'all checks')
 
-# pulse_gen (PERIOD 7, WIDTH 3, clk 10 ns): en is sampled at period boundaries
-# (dashed lines, cnt = 0), so pulses always have the full width.
-(cd digital && iverilog -g2012 -Wall -o sim.vvp pulse_gen.v tb_pulse_gen.v && vvp -n sim.vvp | grep -E 'PASS|FAIL')
-python3 tools/vcd2png.py digital/tb_pulse_gen.vcd --start 20 --end 560 \
-    --sig tb_pulse_gen.clk --sig tb_pulse_gen.dut.cnt::dec \
-    --sig 'tb_pulse_gen.en[0]' --sig 'tb_pulse_gen.pulse[0]' \
-    --sig 'tb_pulse_gen.en[1]' --sig 'tb_pulse_gen.pulse[1]' \
-    --vline 95 --vline 165 --vline 235 --vline 305 --vline 375 --vline 445 --vline 515 \
-    --title "pulse_gen: en sampled at period boundaries, pulses always full width" \
+# regs: data set while idle (addr F), then addr for one cycle. Magnitudes 0-7
+# (each hex digit of w is one synapse, 7 on the left), then the two sign
+# registers.
+python3 tools/vcd2png.py digital/tb_snn_digital.vcd --start 1000 --end 37000 \
+    --sig tb_snn_digital.clk --sig tb_snn_digital.addr --sig tb_snn_digital.data \
+    --sig tb_snn_digital.w --sig tb_snn_digital.s::bin \
+    --title "regs: write data to the register at addr; addr = F is idle" \
+    -o slides/regs_wave.png
+
+# pulse_gen: period 200 -> 50 and width 10 -> 5 written mid-period (after the
+# pulse at 802 us); the new timing starts at the next period boundary (dashed).
+python3 tools/vcd2png.py digital/tb_snn_digital.vcd --start 780000 --end 1100000 \
+    --sig tb_snn_digital.period::dec \
+    --sig tb_snn_digital.width::dec --sig 'tb_snn_digital.pulse[0]:pulse[0]' \
+    --vline 1001500 \
+    --title "pulse_gen: new period/width take effect at the next period" \
     -o slides/pulse_gen_wave.png
-
-# Vaporview views of the same windows: digital/tb_rf.json and digital/tb_pulse_gen.json.
-# zoomRatio there is pixels per ns for a 1000-pixel-wide waveform area
-# (zoomRatio = width / window length, scrollLeft = window start * zoomRatio);
-# adjust both if your pane is a different width.

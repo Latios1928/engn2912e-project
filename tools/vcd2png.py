@@ -103,7 +103,7 @@ def fmt(v, kind, width):
     if kind == "dec":
         return str(n)
     if kind == "bin":
-        return v
+        return v.rjust(width, "0")  # the VCD drops leading zeros
     return format(n, f"0{(width + 3) // 4}X")  # all hex digits, so each lines up with its bits
 
 
