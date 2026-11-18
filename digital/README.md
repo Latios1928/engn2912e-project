@@ -1,75 +1,73 @@
 # Digital Blocks
 
-The digital part of the chip, as one module, `snn_digital`: the weight register
-file and the input pulse generator. It takes the chip's digital pins and
-produces what the analog network needs (`w`, `pulse`). It has no dependency on
+The digital part of the chip, as one module, `snn_digital`: the register map
+and the input pulse generator. It takes the chip's digital pins and produces
+what the analog macro needs (`w`, `s`, `pulse`). It has no dependency on
 the analog side: the neuron spikes go straight to the chip's output pins, so
 the digital logic can be simulated, linted and synthesized without it.
 
 The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
 
-## `rf` (weight register file)
+## `regs` (register map)
 
-- **Used in:** `snn_digital.v` (`u_rf`).
-- **Parameters:** `NUM_WORDS = 23`, `WIDTH = 4`, `AW = clog2(NUM_WORDS)`.
-- **Ports:** `clk`, `wren`, `addr[AW-1:0]`, `data[WIDTH-1:0]` → `weights[NUM_WORDS*WIDTH-1:0]`.
-- Writes `data` to word `addr` on the rising edge while `wren` is high. Writes to addresses ≥ NUM_WORDS are ignored.
-- Word `w` is at `weights[w*WIDTH +: WIDTH]`; every word is visible at once.
-- **No reset**: every word must be written before it is used.
-- The defaults match the 2-2-1 SNN's 8 synapses, each with a 4-bit sign-magnitude weight: bit 3 is the sign (1 = inhibitory), bits 2:0 the magnitude, so −7…+7 (map from `../mock/snn_analog.v`):
-  - words 0–1: input pulse generator i → input neuron i
-  - words 2–5: input i → hidden j (word 2 + 2j + i)
-  - words 6–7: hidden j → output (word 6 + j)
+- **Ports:** `clk`, `rst`, `addr[3:0]`, `data[3:0]` → `weights[31:0]`,
+  `signs[7:0]`, `period[7:0]`, `width[7:0]`.
+- There is no `wren` pin: `addr = 4'hF` is idle, and any other address writes
+  `data` on every rising clock edge.
 
-Weights are loaded directly through `data`/`addr`/`wren`. With 5 neurons and 8
-weights, pin serialization or an SRAM isn't needed.
+| addr | register | reset |
+|---|---|---|
+| 0–7 | weight magnitudes, synapses 0–7 | none |
+| 8, 9 | signs of synapses 3–0, 7–4 | none |
+| 10, 11 | pulse PERIOD [3:0], [7:4] | 200 |
+| 12, 13 | pulse WIDTH [3:0], [7:4] | 10 |
+| 14 | unused | |
+| 15 | **idle**: no write | |
 
-## `snn_digital`
-
-- **Parameters:** `PULSE_PERIOD = 200`, `PULSE_WIDTH = 10` (passed to `pulse_gen`).
-- **Ports:** `clk`, `rst`, `data[3:0]`, `addr[2:0]`, `wren`, `in[1:0]` →
-  `w[31:0]`, `pulse[1:0]`.
-- `rf` holds the weights (`w` is its `weights` bus) and `pulse_gen` turns `in`
-  into `pulse`. `w` and `pulse` are the inputs of `snn_analog`; its `spike[4:0]`
-  output goes straight to the chip's `out` pins in `../snn_top.v`.
-- The chip's pins are `clk`, `rst`, `data`, `addr`, `wren`, `in` and `out`, plus
-  the analog biases and supplies (which are not Verilog signals).
+- **Write protocol:** rest at `addr = 1111` (with pad pull-ups, an undriven bus
+  is idle). Set `data`, then set `addr` for one clock, then return to 1111.
+  Change `data` only while idle: data that changes while an address is held
+  does get written.
+- Synapse k has magnitude `weights[4k+3:4k]` (0–15) and sign `signs[k]`
+  (1 = inhibitory), as the `SNN_signed` macro takes them (map from
+  `../mock/snn_analog.v`):
+  - k = 0–1: input pulse generator i → input neuron i (inhibitory = off)
+  - k = 2–5: input i → hidden j (k = 2 + 2j + i)
+  - k = 6–7: hidden j → output (k = 6 + j)
+- `rst` resets only the pulse timing, so the chip runs with the default timing
+  before anything is written. Weights and signs must be written before use.
 
 ## `pulse_gen` (input pulse generator)
 
-- **Parameters:** `PERIOD = 200`, `WIDTH = 10` (in `clk` cycles).
-- **Ports:** `clk`, `rst` (synchronous, active high), `en[1:0]` → `pulse[1:0]`.
+- **Ports:** `clk`, `rst` (synchronous, active high), `period[7:0]`,
+  `width[7:0]`, `en[1:0]` → `pulse[1:0]`.
 - Two channels share one counter. Each period, a channel whose `en` bit was
-  high at the end of the previous period outputs a pulse of exactly `WIDTH`
-  cycles. `en` is sampled only at period boundaries, so a pulse is never cut
-  short; the first pulse can start up to `PERIOD` cycles after `en` rises.
+  high at the end of the previous period outputs a pulse of `width` cycles.
+  `en`, `period` and `width` are sampled only at period boundaries, so a pulse
+  is never cut or stretched; the first pulse can start up to one period after
+  `en` rises.
+- `period = 0` means 256 cycles; `width = 0` means no pulses.
 - Outputs come straight from flip-flops, since they drive the analog DAC enables.
-- At a 1 MHz `clk` the defaults give the 10 µs pulses every 200 µs (5 kHz) that
-  `../analog/neuron/DACs-DPI-neuron.sch` is tuned for. For another clock, set
-  `PERIOD` and `WIDTH` to the same times in cycles.
-- It needs a reset, so the chip has a `rst` pin; `rf` and the analog network
-  have none.
-- The chip's package exposes `in[1:0]` (these `en` bits), not `pulse[1:0]`: the
-  pulse timing is fixed on chip, and `pulse` is an internal net between this
-  block and `snn_analog`.
+- At a 1 MHz `clk` the reset values give the 10 µs pulses every 200 µs (5 kHz)
+  that `../analog/neuron/old/DACs-DPI-neuron.sch` is tuned for.
+- The chip's package exposes `in[1:0]` (these `en` bits), not `pulse[1:0]`.
+
+## `snn_digital`
+
+- **Ports:** `clk`, `rst`, `data[3:0]`, `addr[3:0]`, `in[1:0]` → `w[31:0]`,
+  `s[7:0]`, `pulse[1:0]`.
+- The chip's pins are `clk`, `rst`, `data`, `addr`, `in` and `out` (17), plus
+  the analog references and supplies (which are not Verilog signals).
 
 ## Test
 
 From this folder:
 
 ```bash
-iverilog -g2012 -Wall -o sim.vvp rf.v tb_rf.v && vvp sim.vvp
-iverilog -g2012 -Wall -o sim.vvp pulse_gen.v tb_pulse_gen.v && vvp sim.vvp
+iverilog -g2012 -Wall -o sim.vvp tb_snn_digital.v snn_digital.v regs.v pulse_gen.v && vvp sim.vvp
 ```
 
-- `tb_rf.v`: back-to-back writes, a cycle with `wren` low, and an overwrite,
-  checked against a reference copy on every cycle. Kept short so its waveform
-  fits on a slide.
-- `tb_pulse_gen.v`: checks `pulse_gen` against a reference model written from
-  the spec, with random `en` changes and a mid-run reset. Other shapes: add
-  `-Ptb_pulse_gen.PERIOD=1 -Ptb_pulse_gen.WIDTH=1` and the like.
-- `snn_digital` as a whole is covered by `../mock/tb_snn_top.v` and `../mixed/`.
-
-`tb_rf.json` and `tb_pulse_gen.json` are Vaporview views of the slide windows;
-`../slides/make_waves.sh` regenerates both VCDs and draws the same windows as
-PNGs with `../tools/vcd2png.py`.
+`tb_snn_digital.v` (8 checks): reset values, weights and signs, the unused
+and idle addresses write nothing, the data-change rule, and pulse timing changes (taking effect only
+from the next period, `width = 0` = no pulses). The whole chip is covered by
+`../mock/tb_snn_top.v` and `../mixed/`.

@@ -6,7 +6,7 @@
     "VERILOG_FILES": [
         "dir::../../snn_top.v",
         "dir::../../digital/snn_digital.v",
-        "dir::../../digital/rf.v",
+        "dir::../../digital/regs.v",
         "dir::../../digital/pulse_gen.v"
     ],
     "CLOCK_PORT": "clk",
