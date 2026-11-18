@@ -3,7 +3,7 @@
 //   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp -f sim.f && vvp sim.vvp
 ../snn_top.v
 ../digital/snn_digital.v
-../digital/rf.v
+../digital/regs.v
 ../digital/pulse_gen.v
 snn_analog.v
 neuron.v

@@ -2,12 +2,12 @@
 
 // Self-checking testbench for snn_top.
 //
-// First checks that words written through data/addr/wren land in the right
-// place on the internal weights bus. Then, for each scenario, loads a weight
-// set, waits SETTLE analog cycles with in = 0 (the network has no reset; the
-// neuron leak drains what the previous scenario left), applies in for RUN
-// analog cycles, and checks which neurons fired at least once against the
-// expected set:
+// First checks that weights and signs written through data/addr (regs.v
+// protocol) land in the right place on w and s. Then, for each scenario, loads
+// a weight set, waits SETTLE analog cycles with in = 0 (the network has no
+// reset; the neuron leak drains what the previous scenario left), applies in
+// for RUN analog cycles, and checks which neurons fired at least once against
+// the expected set:
 //   1. all weights max, in = 00             -> nothing fires
 //   2. only pulse->input weights, in = 01   -> only input neuron 0
 //   3. one path in1 -> hid1 -> out, in = 11 -> input 1, hidden 1, output
@@ -15,22 +15,23 @@
 //   5. as 3 plus in0 -> hid1 at -max, in = 11: the two inputs fire together
 //      and cancel at hid1                   -> inputs 0 and 1 only
 // clk (10 ns) and the network's own clock (14 ns) are unrelated.
-// Weights are sign-magnitude: "max" is 4'h7 (+7) and "-max" 4'hF (-7).
+// Synapse k has magnitude w[4k+3:4k] (max 15) and sign s[k] (1 = inhibitory).
 // The same scenarios run on the transistor-level network in
 // ../mixed/snn_ms_tb.v.
 //
 // Run (from this folder):
 //   iverilog -g2012 -Wall -s tb_snn_top -o sim.vvp -f sim.f && vvp sim.vvp
 module tb_snn_top;
-  localparam CLK_PERIOD = 14;  // ns; the CLK_PERIOD default of snn_analog (mock/snn_analog.v)
-  localparam SETTLE = 1500;  // analog cycles; the leak drains at most THRESHOLD (1000) at 1 per cycle
+  // CLK_PERIOD: the default of snn_analog (mock/snn_analog.v), ns.
+  // SETTLE: the leak drains at most THRESHOLD (1000) at 1 per cycle.
+  localparam CLK_PERIOD = 14;  // ns
+  localparam SETTLE = 1500;  // analog cycles
   localparam RUN = 1000;  // analog cycles
 
   reg        clk = 1'b0;
   reg        rst = 1'b1;
   reg  [3:0] data = 0;
-  reg  [2:0] addr = 0;
-  reg        wren = 1'b0;
+  reg  [3:0] addr = 4'hF;  // idle
   reg  [1:0] in = 0;
   wire [4:0] out;
 
@@ -39,7 +40,6 @@ module tb_snn_top;
       .rst (rst),
       .data(data),
       .addr(addr),
-      .wren(wren),
       .in  (in),
       .out (out)
   );
@@ -55,6 +55,8 @@ module tb_snn_top;
   integer checks = 0;
   integer w;
   reg [31:0] ws;
+  reg [7:0] ss;
+  localparam [3:0] MAX = 4'hF;
 
   // Word indices (see snn_analog.v).
   function integer w_pulse(input integer i);
@@ -74,39 +76,42 @@ module tb_snn_top;
     repeat (3) @(negedge clk);
     rst = 1'b0;
 
-    // Register file: word w = w.
+    // Registers: word w = w, signs 10100101.
     for (w = 0; w < 8; w = w + 1) ws[w*4+:4] = w[3:0];
-    load(ws);
+    ss = 8'b1010_0101;
+    load(ws, ss);
     checks = checks + 1;
-    if (dut.w !== ws) begin
+    if (dut.w !== ws || dut.s !== ss) begin
       errors = errors + 1;
-      $display("rf: weights=%h, expected %h", dut.w, ws);
+      $display("regs: w=%h s=%b, expected %h %b", dut.w, dut.s, ws, ss);
     end
 
-    ws = {8{4'h7}};
-    load(ws);
+    ws = {8{MAX}};
+    ss = 0;
+    load(ws, ss);
     run(2'b00, 5'b0_00_00, "in = 0");
 
     ws = 0;
-    for (w = 0; w < 2; w = w + 1) ws[w_pulse(w)*4+:4] = 4'h7;
-    load(ws);
+    for (w = 0; w < 2; w = w + 1) ws[w_pulse(w)*4+:4] = MAX;
+    load(ws, ss);
     run(2'b01, 5'b0_00_01, "pulse weights only");
 
     ws = 0;
-    ws[w_pulse(1)*4+:4] = 4'h7;
-    ws[w_ih(1, 1)*4+:4] = 4'h7;
-    ws[w_ho(1)*4+:4] = 4'h7;
-    load(ws);
+    ws[w_pulse(1)*4+:4] = MAX;
+    ws[w_ih(1, 1)*4+:4] = MAX;
+    ws[w_ho(1)*4+:4] = MAX;
+    load(ws, ss);
     run(2'b11, 5'b1_10_10, "path in1->hid1->out");
 
     ws[w_ho(1)*4+:4] = 4'h0;
-    load(ws);
+    load(ws, ss);
     run(2'b11, 5'b0_10_10, "hid1->out weight 0");
 
-    ws[w_ho(1)*4+:4] = 4'h7;
-    ws[w_pulse(0)*4+:4] = 4'h7;
-    ws[w_ih(0, 1)*4+:4] = 4'hF;  // -7
-    load(ws);
+    ws[w_ho(1)*4+:4] = MAX;
+    ws[w_pulse(0)*4+:4] = MAX;
+    ws[w_ih(0, 1)*4+:4] = MAX;
+    ss[w_ih(0, 1)] = 1'b1;  // inhibitory
+    load(ws, ss);
     run(2'b11, 5'b0_00_11, "in0 inhibits hid1");
 
     if (errors == 0) $display("PASS: snn_top, %0d checks", checks);
@@ -114,21 +119,24 @@ module tb_snn_top;
     $finish;
   end
 
-  task write_word(input [2:0] a, input [3:0] d);
+  // regs.v protocol: data while idle, address for one cycle, back to idle
+  task write_word(input [3:0] a, input [3:0] d);
     begin
       @(negedge clk);
-      addr = a;
       data = d;
-      wren = 1'b1;
       @(negedge clk);
-      wren = 1'b0;
+      addr = a;
+      @(negedge clk);
+      addr = 4'hF;
     end
   endtask
 
-  task load(input [31:0] weights);
+  task load(input [31:0] weights, input [7:0] signs);
     integer i;
     begin
-      for (i = 0; i < 8; i = i + 1) write_word(i[2:0], weights[i*4+:4]);
+      for (i = 0; i < 8; i = i + 1) write_word(i[3:0], weights[i*4+:4]);
+      write_word(4'd8, signs[3:0]);
+      write_word(4'd9, signs[7:4]);
     end
   endtask
 

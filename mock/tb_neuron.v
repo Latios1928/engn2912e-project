@@ -8,10 +8,11 @@
 // leak down to 0, an inhibitory (negative) current clamping at 0, and
 // saturation at 16'hFFFF. The first fire is also checked against a
 // hand-computed cycle and window length. The dac is checked exhaustively
-// against its sign-magnitude formula.
+// against its formula (magnitude * GAIN, negated when sign is 1).
 //
 // Run:
-//   iverilog -g2012 -Wall -o sim.vvp comparator.v dac.v neuron.v tb_neuron.v && vvp sim.vvp
+//   iverilog -g2012 -Wall -o sim.vvp comparator.v dac.v neuron.v tb_neuron.v
+//   vvp sim.vvp
 module tb_neuron;
   localparam LEAK = 1;
   localparam INDEGREE = 2;
@@ -38,6 +39,7 @@ module tb_neuron;
 
   reg         dac_active;
   reg  [ 3:0] dac_weight;
+  reg         dac_sign;
   wire [15:0] dac_current;
 
   dac #(
@@ -45,6 +47,7 @@ module tb_neuron;
   ) u_dac (
       .active (dac_active),
       .weight (dac_weight),
+      .sign   (dac_sign),
       .current(dac_current)
   );
 
@@ -136,7 +139,7 @@ module tb_neuron;
     expect_int("inhibited to 0", $signed({16'd0, dut.voltage}), 0);
     currents = 0;
 
-    // Sum of voltage and two max positive currents overflows 16 bits: must saturate.
+    // Voltage plus two max positive currents overflows 16 bits: must saturate.
     currents = {16'h7FFF, 16'h7FFF};
     repeat (10) begin
       check();
@@ -145,14 +148,14 @@ module tb_neuron;
     end
     expect_int("saturated", saturated, 1);
 
-    for (d = 0; d < 32; d = d + 1) begin
-      {dac_active, dac_weight} = d[4:0];
+    for (d = 0; d < 64; d = d + 1) begin
+      {dac_active, dac_sign, dac_weight} = d[5:0];
       #1;
       checks = checks + 1;
-      if (dac_current !== (!dac_active ? 16'd0 : dac_weight[3] ? -({13'd0, dac_weight[2:0]} * GAIN[15:0])
-                                                       : {13'd0, dac_weight[2:0]} * GAIN[15:0])) begin
+      if (dac_current !== (!dac_active ? 16'd0 : dac_sign ? -({12'd0, dac_weight} * GAIN[15:0])
+                                                          : {12'd0, dac_weight} * GAIN[15:0])) begin
         errors = errors + 1;
-        $display("dac: active=%b weight=%0d current=%0d", dac_active, dac_weight, dac_current);
+        $display("dac: active=%b sign=%b weight=%0d current=%0d", dac_active, dac_sign, dac_weight, dac_current);
       end
     end
 
