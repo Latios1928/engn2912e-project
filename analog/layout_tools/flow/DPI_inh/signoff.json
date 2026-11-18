@@ -1,25 +1,28 @@
 {
  "stage": "signoff",
  "cell": "DPI_inh",
- "time": "2026-11-18 04:27:55",
+ "time": "2026-11-18 08:23:58",
  "ok": true,
  "drc": "clean",
+ "drc_waived": [
+  "DBU"
+ ],
  "lvs": "match",
  "pex": {
   "devices": 53,
-  "C": 20,
-  "R": 5318
+  "C": 12,
+  "R": 1759
  },
  "calibration": {
   "cell": "DPI_inh",
   "nets": 4,
-  "mean_factor": 1.303,
+  "mean_factor": 0.398,
   "spread": [
-   1.007,
-   1.959
+   0.167,
+   0.918
   ],
   "max_err_before": 0.0,
-  "global_factor": 0.925
+  "global_factor": 0.891
  },
- "calibration_text": "calibration DPI_inh: 4 nets, factor 1.303 (range 1.007..1.959), worst error before +0 %, global 0.925\n        Vthr: pred(raw)    8.1 fF  extracted    9.0 fF  was +0 %\n        Iout: pred(raw)   16.5 fF  extracted   16.6 fF  was +0 %\n        Isum: pred(raw)   17.4 fF  extracted   34.0 fF  was +0 %\n          VT: pred(raw)    9.2 fF  extracted   10.5 fF  was +0 %"
+ "calibration_text": "calibration DPI_inh: 4 nets, factor 0.398 (range 0.167..0.918), worst error before +0 %, global 0.891\n        Iout: pred(raw)   16.5 fF  extracted   15.1 fF  was +0 %\n        Isum: pred(raw)   17.4 fF  extracted    5.4 fF  was +0 %\n          VT: pred(raw)    9.2 fF  extracted    1.8 fF  was +0 %\n        Vthr: pred(raw)    8.2 fF  extracted    1.4 fF  was +0 %"
 }

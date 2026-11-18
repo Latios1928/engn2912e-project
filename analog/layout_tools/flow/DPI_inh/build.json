@@ -1,11 +1,11 @@
 {
  "stage": "build",
  "cell": "DPI_inh",
- "time": "2026-11-18 04:26:41",
+ "time": "2026-11-18 08:20:45",
  "ok": true,
  "size_um": [
   93.21,
-  49.14
+  49.54
  ],
  "router_check": "clean",
  "predrc": "predrc DPI_inh: 0 rule(s) predicted to fail (20 checked, 0.0 s)",

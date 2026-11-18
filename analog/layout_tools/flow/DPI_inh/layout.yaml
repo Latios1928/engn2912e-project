@@ -86,7 +86,7 @@ wells:
   required: false
   decided_by: policy
   reason: policy nmos_in_dnw (substrate-noise isolation)
-  cost_um2: 491
+  cost_um2: 496
 rings:
 - around: W1
   type: p+ body ring
