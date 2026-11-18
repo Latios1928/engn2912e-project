@@ -11,41 +11,41 @@
 #   cap_place   beside (default: MIM caps in a column right of the rows) | over_devices
 #               (one cap over the NMOS row: narrower cell; two_row supports 1 cap there)
 
-neuron_glayout:
-  schematic: ../neuron/neuron_sized.sch
-  # connect {x1_net2: VT} removed 2026-11-17: the VN wire in spike_amplifier_sized.sch is fixed
-  symbol: ../neuron/neuron_sized.sym
+neuron:
+  schematic: ../neuron/neuron.sch
+  # connect {x1_net2: VT} removed 2026-11-17: the VN wire in spike_amplifier.sch is fixed
+  symbol: ../neuron/neuron.sym
   pin_sides: {default: W, spike: E, VSS: [W, E], VDD: [W, E]}   # row DAC | DPI | neuron; supplies both sides
-  testbench: ../neuron/neuron_sized_testbench.sch
+  testbench: ../neuron/neuron_testbench.sch
   metric: {type: period, node: "v(spike)", threshold: 1.65}
 
-spike_amp_fp:
-  schematic: ../neuron/spike_amplifier_sized.sch
+spike_amplifier:
+  schematic: ../neuron/spike_amplifier.sch
   connect: {net2: VN}             # same VN-wire bug
-  symbol: ../neuron/spike_amplifier_sized.sym
+  symbol: ../neuron/spike_amplifier.sym
 
-DAC_binary:
-  schematic: ../DAC/DAC_binary.sch
-  symbol: ../DAC/DAC_binary.sym
+DAC_magnitude:
+  schematic: ../DAC/DAC_magnitude.sch
+  symbol: ../DAC/DAC_magnitude.sym
 
 DPI:
-  schematic: ../DPI/DPI.sch       # minimum-size DPI: excitatory synapse, and the core of DPI_inh_min
+  schematic: ../DPI/DPI.sch       # minimum-size DPI: excitatory synapse, and the core of DPI_inh
   symbol: ../DPI/DPI.sym
   pin_sides: {default: W, Isyn: E, Vthr: N, VT: S}
   cap_place: over_devices        # C2 over the NMOS row (2026-11-18 trial)
 
-DAC_signed_binary:
-  schematic: ../DAC/DAC_signed_binary.sch   # signed synapse DAC (1:2:4:8 + sign) of snn_analog_signed
-  symbol: ../DAC/DAC_signed_binary.sym
+DAC:
+  schematic: ../DAC/DAC.sch   # signed synapse DAC (1:2:4:8 + sign) of snn_analog_signed
+  symbol: ../DAC/DAC.sym
   pin_sides: {default: W, Isum_e: E, Isum_i: E}
 
-bias_cell:
-  schematic: ../neuron/bias_cell.sch
-  symbol: ../neuron/bias_cell.sym
+bias:
+  schematic: ../neuron/bias.sch
+  symbol: ../neuron/bias.sym
   pin_sides: {default: S}        # sits above the top row: every bias / Iref pin drops straight down
 
-DPI_inh_min:
-  schematic: ../DPI/DPI_inh_min.sch   # inhibitory DPI of snn_analog_signed: DPI core + nFET mirror sinking from VMEM
-  symbol: ../DPI/DPI_inh_min.sym
+DPI_inh:
+  schematic: ../DPI/DPI_inh.sch   # inhibitory DPI of snn_analog_signed: DPI core + nFET mirror sinking from VMEM
+  symbol: ../DPI/DPI_inh.sym
   pin_sides: {default: W, Iout: E, Vthr: N, VT: S}   # same edges as DPI (shared Vthr / VT lines)
   cap_place: over_devices        # as DPI: cap over the NMOS band, right of its last via2

@@ -75,6 +75,7 @@ and how far its output was checked. It is updated as the work continues.
 | `analog/layout_tools/top.py`, `top/SNN_signed/` | Created | 2026-11-18 | Top-level layout flow (entries 83, 86): stages netlist → abstract → plan → place → route → signoff; first signed-off 2-2-1 macro `SNN_signed.gds` (DRC clean, LVS match). |
 | `analog/layout_tools/glayout_floorplan.py`, `flow.py`, `flow_cells.yaml` | Edited (user request) | 2026-11-18 | `two_row`: VSS/VDD straps on both edges (`pin_sides`), `cap_place: over_devices` (entries 81, 85). New pin sides for bias_cell, DPI_inh_min, neuron_glayout; DPI and DPI_inh_min rebuilt with the cap over the NMOS band. All rebuilt cells DRC clean, LVS match. |
 | `analog/layout_tools/top_flow.yaml`, `TOPLEVEL_FLOW.md` | Edited | 2026-11-18 | Pin notes match the built cells; settings match what `top.py` reads; implementation status section (entries 80, 83). |
+| `analog/{DAC,DPI,neuron,snn}/`, `analog/testbenches/`, `analog/layout_tools/`, `mixed/`, `tools/` | Moved / renamed (user request) | 2026-11-18 | Cell cleanup (entry 87). Unused cells, hand layouts and their testbenches moved to `<dir>/old/` (git mv). Renamed: `DAC_signed_binary`→`DAC`, `DAC_binary`→`DAC_magnitude`, old unsigned `DAC`→`DAC_unsigned`, `DPI_inh_min`→`DPI_inh`, `neuron_sized`→`neuron`, `spike_amplifier_sized`→`spike_amplifier`, `bias_cell`→`bias`; layout cells to match. *Exception (user approved):* symbol references (`C {...}` lines) in schematics, including `mixed/addr4_trim/snn_ms_tb_v2.sch`, were edited; nothing else in any schematic. |
 
 Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edited by the AI. The DPI testbenches (entry 43) only instantiate `DPI.sym`; `DPI.sch` and `DPI.sym` were not changed by the AI. The originals `neuron.sch`, `neuron.sym` and `neuron_testbench.sch` were checksum-verified unchanged after the 5 kHz files were generated.
 
@@ -1188,6 +1189,13 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 **86. Hierarchical top-level GDS** *(Tool-verified: XOR + real DRC + LVS)*
 - **Asked:** the macro was flat in KLayout (the router library flattens its result).
 - **AI did:** `top.py` writes the GDS itself: one instance per block of its signed-off cell, routing and pads in the top cell. Flattened, it XORs identical to the old flat layout on all 23 layers; DRC clean, LVS match (6 s instead of 14 s).
+
+**87. Cell cleanup: old cells to `old/`, used cells renamed** *(Tool-verified: netlist comparison + real DRC + LVS)*
+- **Asked:** move old, unused DAC / DPI / neuron / bias cells into `old/` folders and rename the used ones to their function.
+- **Decided by the user:** short names; strict scope (anything depending only on old cells is archived); the old unsigned DAC stays as `DAC_unsigned` because `snn_analog` and the `mixed/` sims use it; references outside `analog/` updated; layout cells renamed and rebuilt; today's work committed first (8c6eb07).
+- **AI did:** 120 `git mv`, 56 files edited (symbol references, configs, scripts, two READMEs, `tbpex.py`). References to archived cells point at `old/<cell>.sym`, because several new names reuse old ones. Rebuilt `neuron`, `DAC`, `DPI_inh`, `bias` and the macro.
+- **Checked:** all 51 schematics (including `old/` and `mixed/`) netlist identically to before apart from the renamed subcircuits, none with a missing symbol; all five blocks and `SNN_signed` DRC clean, LVS match, same sizes and routing.
+- **Not changed:** text notes inside schematics (`T {...}`) still use the old names; `comparator_layout.py` stays in `neuron/layout/`; `--pex` in the testbench runners only finds the archived hand layouts.
 
 ---
 

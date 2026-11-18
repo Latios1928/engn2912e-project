@@ -4,15 +4,15 @@ stage prints a short status and writes <stage>.json. Nothing depends on a conver
 API call (or a new session, or a script) can run, inspect or resume any cell from scratch.
 
     F="env -u PYTHONPATH PDK_ROOT=/foss/pdks .venv-glayout/bin/python analog/layout_tools/flow.py"
-    $F status  neuron_glayout          # what exists, what passed, what blocks the next stage
-    $F table   neuron_glayout          # schematic -> table.json  (devices, pins, warnings)
-    $F decide  neuron_glayout          # -> layout.yaml (edit / answer questions there)
-    $F build   neuron_glayout          # -> GDS, LVS ref, predictions (build.json)
-    $F signoff neuron_glayout          # real DRC + LVS + Magic PEX + predictor feedback
-    $F sim     neuron_glayout          # testbench: predicted-parasitic sim vs PEX sim
-    $F run     neuron_glayout          # table..signoff; decisions auto by default
-    $F run     neuron_glayout --manual # stop at every open decide question instead
-    $F answer  neuron_glayout Q-dummy_l "cap 2"    # answer a decide.py question
+    $F status  neuron          # what exists, what passed, what blocks the next stage
+    $F table   neuron          # schematic -> table.json  (devices, pins, warnings)
+    $F decide  neuron          # -> layout.yaml (edit / answer questions there)
+    $F build   neuron          # -> GDS, LVS ref, predictions (build.json)
+    $F signoff neuron          # real DRC + LVS + Magic PEX + predictor feedback
+    $F sim     neuron          # testbench: predicted-parasitic sim vs PEX sim
+    $F run     neuron          # table..signoff; decisions auto by default
+    $F run     neuron --manual # stop at every open decide question instead
+    $F answer  neuron Q-dummy_l "cap 2"    # answer a decide.py question
 
 Stages and their files (flow/<cell>/):
     table    table.json                       from the schematic (glayout_netlist)

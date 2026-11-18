@@ -28,7 +28,7 @@ def fet(name, k, d, g, s, w, l, m=1):
     return "X%s %s %s %s %s %s W=%.4gu L=%.4gu nf=1 m=%d" % (name, d, g, s, s, model, w, l, m)
 def subckt(W):
     """W: {bias: output width}. Ports: Iref VDD VSS and the bias outputs."""
-    L = [".subckt bias_cell Iref VDD VSS " + " ".join(B)]
+    L = [".subckt bias Iref VDD VSS " + " ".join(B)]
     L.append(fet("MN0", "n", "Iref", "Iref", "VSS", W0, LM))                    # NMOS master diode
     L.append(fet("MNP", "n", "vgp", "Iref", "VSS", W["MNP"], LM))               # -> PMOS master
     L.append(fet("MP0", "p", "vgp", "vgp", "VDD", W0, LM))                      # PMOS master diode
@@ -39,7 +39,7 @@ def subckt(W):
         else:
             L.append(fet("MO_" + b, "n", b, "Iref", "VSS", W[b], lo))
             L.append(fet("MR_" + b, "p", b, b, "VDD", w, l, m))
-    L.append(".ends bias_cell")
+    L.append(".ends bias")
     return "\n".join(L) + "\n"
 def targets():
     """Branch currents that put each replica at its target voltage (tt, 27 C)."""
@@ -57,7 +57,7 @@ def targets():
     return t
 def measure(W, corner="typical", temp=27, extra=""):
     L = ["* cell", LIBH.format(c=corner), ".temp %g" % temp, "VSUP VDD 0 3.3", "Iref VDD Iref %g" % IREF, subckt(W),
-         "X1 Iref VDD 0 " + " ".join(B) + " bias_cell", extra, ".control", "op"]
+         "X1 Iref VDD 0 " + " ".join(B) + " bias", extra, ".control", "op"]
     L += ["let i_%s=abs(@m.x1.xmr_%s.m0[id])" % (b.lower(), b.lower()) for b in B]
     L += ["print " + " ".join("v(%s)" % b.lower() for b in B), "print " + " ".join("i_%s" % b.lower() for b in B),
           "print i(vsup)", ".endc", ".end"]

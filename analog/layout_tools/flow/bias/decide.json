@@ -1,0 +1,12 @@
+{
+ "stage": "decide",
+ "cell": "bias",
+ "time": "2026-11-18 04:27:57",
+ "ok": true,
+ "blockers": [],
+ "mode": "auto",
+ "open_questions": [],
+ "auto_answers": {
+  "Q-dummy_l": "cap 2"
+ }
+}

@@ -9,7 +9,7 @@ top:
   schematic: ../snn/snn_analog_signed.sch         # network to lay out
   symbol: ../snn/snn_analog_signed.sym            # macro pin order for the LVS ref / PEX wrapper
   testbench: ../testbenches/snn/snn_signed_tb.sch # sim stage: DUT is x1
-  reference_layout: ../neuron/layout/SNN.gds      # milestone 2 check (old network, hand blocks)
+  reference_layout: ../neuron/old/layout/SNN.gds      # milestone 2 check (old network, hand blocks)
 
 # ----------------------------------------------------------------------------- blocks
 # symbol in the schematic -> layout source.
@@ -18,41 +18,41 @@ top:
 # DECIDE (block sources / area): flow DAC 305 x 54 um vs hand 182 x 33 um; flow DPI 55 x 54 um
 # vs hand 28 x 26 um. 8 DACs: ~0.13 mm2 (flow) vs ~0.05 mm2 (hand).
 blocks:
-  DAC_signed_binary:
+  DAC:
     source: flow
-    cell: DAC_signed_binary
-    # hand alternative (DAC_signed.gds already contains DAC_binary, same circuit):
+    cell: DAC
+    # hand alternative (DAC_signed.gds already contains DAC_magnitude, same circuit):
     # source: hand
-    # gds: ../DAC/layout/DAC_signed.gds
-    # lvs_ref: ../DAC/layout/DAC_signed_lvs_ref.spice
-    # pins: ../DAC/layout/DAC_signed_pins.json
+    # gds: ../DAC/old/layout/DAC_signed.gds
+    # lvs_ref: ../DAC/old/layout/DAC_signed_lvs_ref.spice
+    # pins: ../DAC/old/layout/DAC_signed_pins.json
   DPI:
     source: flow
     cell: DPI
     # source: hand
-    # gds: ../DPI/layout/DPI.gds
-    # lvs_ref: ../DPI/layout/DPI_lvs_ref.spice
-    # pins: ../DPI/layout/DPI_pins.json
-  DPI_inh_min:
+    # gds: ../DPI/old/layout/DPI.gds
+    # lvs_ref: ../DPI/old/layout/DPI_lvs_ref.spice
+    # pins: ../DPI/old/layout/DPI_pins.json
+  DPI_inh:
     source: flow
-    cell: DPI_inh_min                             # not registered / built yet (milestone 1)
-  neuron_sized:
+    cell: DPI_inh                             # inhibitory synapse (DPI core + mirror into VMEM)
+  neuron:
     source: flow
-    cell: neuron_glayout
-  bias_cell:
+    cell: neuron
+  bias:
     source: flow
-    cell: bias_cell
+    cell: bias
     # source: hand
-    # gds: ../neuron/layout/bias_cell.gds
-    # lvs_ref: ../neuron/layout/bias_cell_lvs_ref.spice
-    # pins: ../neuron/layout/bias_cell_pins.json
+    # gds: ../neuron/old/layout/bias.gds
+    # lvs_ref: ../neuron/old/layout/bias_cell_lvs_ref.spice
+    # pins: ../neuron/old/layout/bias_cell_pins.json
 
 # Instances that are not in the schematic. snn_analog_signed takes its biases as pins; the
 # macro makes them on chip from Iref, as SNN.gds does. Each listed output replaces that top pin
 # with an internal net; the instance's inputs become top pins.
 extra_instances:
   xbias:
-    block: bias_cell
+    block: bias
     outputs: [Vb, Vlk, VKdn, VIp, Vamp_bias, VK, VNA, VKup, Vthr, VT_dpi]   # VT_inh: unused in the signed network
     inputs: [Iref]
     unused_outputs: [VT_inh]                      # left unconnected (label only)
@@ -66,7 +66,7 @@ net_alias:                                        # schematic name -> layout nam
 schematic_prerequisites:
   dac_switch_bodies: source      # DECIDE: source (4 isolated islands per DAC, as drawn now) | VSS
                                  # (VSS: no islands, ~1.5k um2 less per DAC, no measurable effect
-                                 # in snn_signed_tb; needs DAC_binary.sch edit + flow answers
+                                 # in snn_signed_tb; needs DAC_magnitude.sch edit + flow answers
                                  # Q-body-* "body -> ground")
   dpi_pair_bodies: source        # source (as drawn) | VSS (gain -25..-50 %, needs Vthr retune)
 
@@ -96,7 +96,7 @@ floorplan:
     B: auto                      # where routing fails (top/<top>/growth.json; delete it to reset)
     C: auto
 
-  bias_cell:
+  bias:
     position: above_top_row      # DECIDE: above_top_row | left_column | below_bottom_row
     channel_um: auto             # routing channel between the bias cell and the rows
 
@@ -106,12 +106,12 @@ floorplan:
 # is what the top level reads. As built (2026-11-18):
 #   W / E signal pins: Metal2 stub ending on the cell edge
 #   N / S signal pins: Metal3 riser ending on the cell edge
-#   VDD / VSS:         Metal1 straps (1 um), left (W) edge; neuron_glayout also right (E)
-#   DAC_signed_binary  W: w[3:0], en, s, Vb               E: Isum_e, Isum_i
+#   VDD / VSS:         Metal1 straps (1 um), left (W) edge; neuron also right (E)
+#   DAC  W: w[3:0], en, s, Vb               E: Isum_e, Isum_i
 #   DPI                W: Isum   E: Isyn   N: Vthr   S: VT
-#   DPI_inh_min        W: Isum   E: Iout   N: Vthr   S: VT   (same edges as DPI)
-#   neuron_glayout     W: VMEM and all biases             E: spike      supplies W + E
-#   bias_cell          S: every pin (Iref, all bias outputs, VT_inh), drops into the rows below
+#   DPI_inh        W: Isum   E: Iout   N: Vthr   S: VT   (same edges as DPI)
+#   neuron     W: VMEM and all biases             E: spike      supplies W + E
+#   bias          S: every pin (Iref, all bias outputs, VT_inh), drops into the rows below
 # A top-level track reaches a W/E pin with a Metal2 stub (via up to its Metal3 track) and an
 # N/S pin directly on Metal3.
 

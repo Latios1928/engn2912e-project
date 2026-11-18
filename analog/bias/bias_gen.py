@@ -84,7 +84,7 @@ class Out:
 
 
 # Driven devices and nominal voltages of main's 2-2-1 network: analog/snn/snn_analog.sch with
-# DPI.sch, neuron_sized.sch, spike_amplifier.sch; voltages from mixed/snn_ms_tb.sch. i_t = current of
+# DPI.sch, neuron.sch, spike_amplifier.sch; voltages from mixed/snn_ms_tb.sch. i_t = current of
 # one driven device at its nominal voltage (tt, 27 C, drain = gate), from sim/targets.py.
 # DPI.sch uses minimum 0.22/0.28 devices: one replica that small has sigma(V) ~ 25 mV, so Vthr and
 # VT_dpi use 32 copies (the synapse devices themselves keep that spread: see README).

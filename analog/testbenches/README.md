@@ -13,14 +13,15 @@ Blocks covered so far: **DPI synapse** (`dpi/`), **neuron** (`neuron/`), **signe
 
 ```
 analog/
-├── DAC/                         DAC, DAC_binary, DAC_signed schematics and symbols
-│   └── layout/                  their layouts (<cell>.gds), generators and DRC/LVS scripts
-├── DPI/                         DPI, DPI_sized, DPI_inh schematics and symbols
-│   └── layout/                  their layouts, generators and DRC/LVS scripts
-├── neuron/                      neuron_sized, spike amplifier, comparator, bias_cell, DACs-DPI chains
-│   └── layout/                  neuron/SNN layouts and the shared KLayout helpers
-│       └── PEX/                 parasitic extraction (all blocks): extract.sh <cell> -> <cell>_pex.spice + wrapper
+├── DAC/                         DAC (signed synapse DAC), DAC_magnitude (its 1:2:4:8 core),
+│                                DAC_unsigned (used by snn_analog / mixed/)
+├── DPI/                         DPI (excitatory synapse), DPI_inh (inhibitory synapse)
+├── neuron/                      neuron, spike_amplifier, bias
+│   └── layout/PEX/              parasitic extraction (all blocks): extract.sh <cell> -> <cell>_pex.spice + wrapper
 │                                (README.md there: what to do after a layout change)
+├── <dir>/old/                   archived cells, hand-drawn layouts (old/layout/) and testbenches that
+│                                are no longer used; references inside point at old/<cell>.sym
+├── layout_tools/flow/<cell>/    current block layouts (flow.py), layout_tools/top/ the SNN macro
 └── testbenches/
     ├── README.md                this file
     ├── tbtools.py, tbpex.py     shared runner code
@@ -143,13 +144,13 @@ The testbenches above use 5 nA inputs, 100 µs pulses and an output held at 0 V.
 Options on both: `--cell DPI_sized|DPI` (excitatory cell; default `DPI_sized`), `--bias output|hidden|relay|chain` (presets from the XOR README and `DACs-DPI-neuron.sch`; default `output`), `--only`, `--mc N`, `--pex`, `--report-only`. Results: `dpi/results/<tb>[__<cell>][__<bias>][__pex].md/.csv/.png`. The `chain` preset is meant for the min-size `DPI`; the inhibitory `DPI_inh` (a sized cell) is not matched to it.
 
 ```sh
-python3 analog/testbenches/dpi/run_dpi_load.py                          # DPI_sized, output biases, ~20 s
-python3 analog/testbenches/dpi/run_dpi_pulse.py --cell DPI --bias chain # min-size DPI as on main
+python3 analog/testbenches/old/dpi/run_dpi_load.py                          # archived (DPI_sized), ~20 s
+python3 analog/testbenches/old/dpi/run_dpi_pulse.py --cell DPI --bias chain # archived
 ```
 
 ## Neuron (`neuron/`)
 
-Device under test: `analog/neuron/neuron_sized.sch`, targets from `analog/neuron/sizing_context.txt`.
+Device under test: `analog/neuron/neuron.sch`, targets from `analog/neuron/sizing_context.txt`.
 
 | File | What it does |
 |---|---|
@@ -187,7 +188,7 @@ python3 analog/testbenches/neuron/run_neuron_robust.py --only pvt,bias --pex
 | v_reset | ≤ 50 mV | 0.90 mV | 0.90 mV | |
 | p_avg | ≤ 1 µW | 0.381 µW | 0.392 µW | +3 % |
 
-The extraction (2026-11-12) has the 17 transistors of `neuron_sized.sch` with matching sizes and connections, 46 dummies and both MIM caps at their drawn sizes. It adds 27.5 fF on VMEM (+2.7 % on C2 = 1 pF), 17.1 fF on `spike` (+8 % on C1 ≈ 0.21 pF), 11.1 fF on net1 and 7.7 fF on net2; coupling into VMEM from switching nets is at most 0.8 fF.
+The extraction (2026-11-12) has the 17 transistors of `neuron.sch` with matching sizes and connections, 46 dummies and both MIM caps at their drawn sizes. It adds 27.5 fF on VMEM (+2.7 % on C2 = 1 pF), 17.1 fF on `spike` (+8 % on C1 ≈ 0.21 pF), 11.1 fF on net1 and 7.7 fF on net2; coupling into VMEM from switching nets is at most 0.8 fF.
 
 Post-layout fails `t_refr`. Spike width and refractory time both come from the discharge of C1 (the spike node) through the VKdn current, so the 8 % extra capacitance there lengthens both by about 10 %. The period keeps only 1.2 µs of margin, from the 27 fF on VMEM. Ways to recover (not yet tried): raise VKdn by a few mV (sensitive: −28 mV lengthened t_spike and t_refr by 7.9 and 13 µs, `results/neuron_nominal_tb__fail_vkdn0p56.log`), or shrink C1 in schematic and layout by the 17 fF of wiring; pull the period back with Vlk or the input current. Re-run both `run_neuron_nominal.py` and `--pex` after any change.
 
@@ -206,7 +207,7 @@ python3 analog/testbenches/dac/run_dac_signed.py --only nominal
 python3 analog/testbenches/dac/run_dac_signed.py --pex          # once DAC_signed has a layout
 ```
 
-Not covered yet: the charge per input spike when `en` switches (a pulse testbench), and `DAC` / `DAC_binary` on their own.
+Not covered yet: the charge per input spike when `en` switches (a pulse testbench), and `DAC` / `DAC_magnitude` on their own.
 
 ## Post-layout (PEX)
 
@@ -228,12 +229,12 @@ Copy the layout of `dpi/`:
 
 ## Bias cell (`bias/`)
 
-`analog/neuron/bias_cell.sch` (layout `analog/neuron/layout/bias_cell.gds`, `gen_bias.py`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
+`analog/neuron/bias.sch` (layout `analog/layout_tools/flow/bias/bias.gds`; the earlier hand layout is in `analog/neuron/old/layout/`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
 
 | File | Purpose |
 |---|---|
 | `bias/bias_design.py` | Sizing at tt 27 °C: replica currents for the tuned bias voltages, then mirror output widths by iteration; writes `bias_cell_sizes.json` |
-| `bias/run_bias_cell.py` | Suites *biases* (outputs at 15 PVT points), *neuron* (neuron_sized at 9.5 nA, fixed voltages vs the cell), *dpi* (DPI DC gain, fixed vs the cell), *mc* (100 mismatch samples, `m` copies written out); writes `results/bias_cell.md` |
+| `bias/run_bias_cell.py` | Suites *biases* (outputs at 15 PVT points), *neuron* (neuron at 9.5 nA, fixed voltages vs the cell), *dpi* (DPI DC gain, fixed vs the cell), *mc* (100 mismatch samples, `m` copies written out); writes `results/bias.md` |
 
 ```bash
 python3 analog/testbenches/bias/run_bias_cell.py      # ~2 min

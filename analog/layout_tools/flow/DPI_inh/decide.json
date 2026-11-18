@@ -1,0 +1,12 @@
+{
+ "stage": "decide",
+ "cell": "DPI_inh",
+ "time": "2026-11-18 04:26:23",
+ "ok": true,
+ "blockers": [],
+ "mode": "auto",
+ "open_questions": [],
+ "auto_answers": {
+  "Q-dummy_l": "cap 2"
+ }
+}

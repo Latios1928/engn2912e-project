@@ -1,4 +1,4 @@
-* LVS reference for DAC_signed_binary.gds (glayout_floorplan.two_row)
+* LVS reference for DAC.gds (glayout_floorplan.two_row)
 * note: x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: x1_M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)
@@ -10,7 +10,7 @@
 * note: Mni: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: G3 common-centroid, 15 units: D C D B D C D A D C D B D C D (A=x1_M2 x1, B=x1_M4 x2, C=x1_M6 x4, D=x1_M8 x8)
 * note: ground net GND drawn as VSS
-.subckt DAC_signed_binary Isum_e w[3] w[2] w[1] w[0] en s Vb Isum_i VDD VSS
+.subckt DAC Isum_e w[3] w[2] w[1] w[0] en s Vb Isum_i VDD VSS
 Xx1_Men Y en x1_X VSS nfet_03v3 L=0.64u W=0.5u nf=1
 XMse Isum_e sb Y VSS nfet_03v3 L=0.64u W=0.5u nf=1
 XMsi Isum_i s Y VSS nfet_03v3 L=0.64u W=0.5u nf=1
@@ -291,14 +291,14 @@ XDPW0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 .ends
 
-* LVS reference for neuron_glayout.gds (glayout_floorplan.two_row)
+* LVS reference for neuron.gds (glayout_floorplan.two_row)
 * note: M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: M6: 0.22/5 -> 0.5/11.36 (W/L kept)
-.subckt neuron_glayout VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
+.subckt neuron VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
 Xx1_M3 x1_net1 Vamp_bias VSS VSS nfet_03v3 L=0.64u W=0.5u nf=1
 Xx1_M1 x1_net2 VMEM x1_net1 VSS nfet_03v3 L=2u W=4u nf=1
 Xx1_M2 net1 VT x1_net1 VSS nfet_03v3 L=2u W=4u nf=1
@@ -398,13 +398,13 @@ XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=1u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=1u nf=1
 .ends
 
-* LVS reference for DPI_inh_min.gds (glayout_floorplan.two_row)
+* LVS reference for DPI_inh.gds (glayout_floorplan.two_row)
 * note: x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: x1_M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: x1_M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: ground net GND drawn as VSS
-.subckt DPI_inh_min Vthr VT Isum VDD Iout VSS
+.subckt DPI_inh Vthr VT Isum VDD Iout VSS
 Xx1_M1 VDD Vthr Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
 Xx1_M2 x1_net1 x1_net1 Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
 XMi1 Im Im VSS VSS nfet_03v3 L=8u W=2u nf=1
@@ -460,7 +460,7 @@ XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 .ends
 
-* LVS reference for bias_cell.gds (glayout_floorplan.two_row)
+* LVS reference for bias.gds (glayout_floorplan.two_row)
 * note: MO_Vb: W 1.435 -> 1.44 (glayout 10 nm width grid, L kept)
 * note: MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)
 * note: MR_VKdn: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)
@@ -478,7 +478,7 @@ XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 * note: MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)
 * note: MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)
 * note: MO_VT_inh: W 0.625 -> 0.63 (glayout 10 nm width grid, L kept)
-.subckt bias_cell VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh
+.subckt bias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh
 XMNP vgp Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
 XMN0 Iref Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
 XMO_VNA VNA Iref VSS VSS nfet_03v3 L=8u W=5.76u nf=1
@@ -1020,26 +1020,26 @@ XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=12.94u nf=1
 .ends
 
 .subckt SNN_signed VDD VSS Iref VT w[31] w[30] w[29] w[28] w[27] w[26] w[25] w[24] w[23] w[22] w[21] w[20] w[19] w[18] w[17] w[16] w[15] w[14] w[13] w[12] w[11] w[10] w[9] w[8] w[7] w[6] w[5] w[4] w[3] w[2] w[1] w[0] s[7] s[6] s[5] s[4] s[3] s[2] s[1] s[0] pulse[1] pulse[0] spike[4] spike[3] spike[2] spike[1] spike[0]
-XXxdac0_0 Isum_0 w[3] w[2] w[1] w[0] pulse[0] s[0] Vb VDD VDD VSS DAC_signed_binary
+XXxdac0_0 Isum_0 w[3] w[2] w[1] w[0] pulse[0] s[0] Vb VDD VDD VSS DAC
 XXxdpi0 VDD Vthr VMEM_0 Isum_0 VT_dpi VSS DPI
-XXxneu0 VSS VDD VMEM_0 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[0] neuron_glayout
-XXxdac1_0 Isum_1 w[7] w[6] w[5] w[4] pulse[1] s[1] Vb VDD VDD VSS DAC_signed_binary
+XXxneu0 VSS VDD VMEM_0 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[0] neuron
+XXxdac1_0 Isum_1 w[7] w[6] w[5] w[4] pulse[1] s[1] Vb VDD VDD VSS DAC
 XXxdpi1 VDD Vthr VMEM_1 Isum_1 VT_dpi VSS DPI
-XXxneu1 VSS VDD VMEM_1 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[1] neuron_glayout
-XXxdac2_0 Isum_2 w[11] w[10] w[9] w[8] spike[0] s[2] Vb Isum_inh2 VDD VSS DAC_signed_binary
-XXxdac2_1 Isum_2 w[15] w[14] w[13] w[12] spike[1] s[3] Vb Isum_inh2 VDD VSS DAC_signed_binary
+XXxneu1 VSS VDD VMEM_1 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[1] neuron
+XXxdac2_0 Isum_2 w[11] w[10] w[9] w[8] spike[0] s[2] Vb Isum_inh2 VDD VSS DAC
+XXxdac2_1 Isum_2 w[15] w[14] w[13] w[12] spike[1] s[3] Vb Isum_inh2 VDD VSS DAC
 XXxdpi2 VDD Vthr VMEM_2 Isum_2 VT_dpi VSS DPI
-XXxneu2 VSS VDD VMEM_2 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[2] neuron_glayout
-XXxdac3_0 Isum_3 w[19] w[18] w[17] w[16] spike[0] s[4] Vb Isum_inh3 VDD VSS DAC_signed_binary
-XXxdac3_1 Isum_3 w[23] w[22] w[21] w[20] spike[1] s[5] Vb Isum_inh3 VDD VSS DAC_signed_binary
+XXxneu2 VSS VDD VMEM_2 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[2] neuron
+XXxdac3_0 Isum_3 w[19] w[18] w[17] w[16] spike[0] s[4] Vb Isum_inh3 VDD VSS DAC
+XXxdac3_1 Isum_3 w[23] w[22] w[21] w[20] spike[1] s[5] Vb Isum_inh3 VDD VSS DAC
 XXxdpi3 VDD Vthr VMEM_3 Isum_3 VT_dpi VSS DPI
-XXxneu3 VSS VDD VMEM_3 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[3] neuron_glayout
-XXxdac4_0 Isum_4 w[27] w[26] w[25] w[24] spike[2] s[6] Vb Isum_inh4 VDD VSS DAC_signed_binary
-XXxdac4_1 Isum_4 w[31] w[30] w[29] w[28] spike[3] s[7] Vb Isum_inh4 VDD VSS DAC_signed_binary
+XXxneu3 VSS VDD VMEM_3 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[3] neuron
+XXxdac4_0 Isum_4 w[27] w[26] w[25] w[24] spike[2] s[6] Vb Isum_inh4 VDD VSS DAC
+XXxdac4_1 Isum_4 w[31] w[30] w[29] w[28] spike[3] s[7] Vb Isum_inh4 VDD VSS DAC
 XXxdpi4 VDD Vthr VMEM_4 Isum_4 VT_dpi VSS DPI
-XXxdpi5 Vthr VT_dpi Isum_inh4 VDD VMEM_4 VSS DPI_inh_min
-XXxneu4 VSS VDD VMEM_4 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[4] neuron_glayout
-XXxdpi6 Vthr VT_dpi Isum_inh2 VDD VMEM_2 VSS DPI_inh_min
-XXxdpi7 Vthr VT_dpi Isum_inh3 VDD VMEM_3 VSS DPI_inh_min
-XXxbias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi xbias_VT_inh_nc bias_cell
+XXxdpi5 Vthr VT_dpi Isum_inh4 VDD VMEM_4 VSS DPI_inh
+XXxneu4 VSS VDD VMEM_4 VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike[4] neuron
+XXxdpi6 Vthr VT_dpi Isum_inh2 VDD VMEM_2 VSS DPI_inh
+XXxdpi7 Vthr VT_dpi Isum_inh3 VDD VMEM_3 VSS DPI_inh
+XXxbias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi xbias_VT_inh_nc bias
 .ends

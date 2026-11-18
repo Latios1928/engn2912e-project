@@ -28,7 +28,7 @@ import tbtools as tb  # noqa: E402
 import tbpex  # noqa: E402
 
 TB = "neuron_nominal_tb"
-CELL = "neuron_sized"
+CELL = "neuron"
 RESULTS = HERE / "results"
 RUNS = HERE / "runs"
 
@@ -74,7 +74,7 @@ def main():
     header = [
         f"* Source testbench: analog/testbenches/neuron/{TB}.sch, run by run_neuron_nominal.py"
         + (" --pex" if a.pex else ""),
-        "* Neuron: " + ("post-layout, " + tbpex.pex_note(text) if a.pex else "schematic neuron_sized.sch"),
+        "* Neuron: " + ("post-layout, " + tbpex.pex_note(text) if a.pex else "schematic neuron.sch"),
         f"* Changed from the testbench: {changed}",
         f"* Simulated {datetime.datetime.now():%Y-%m-%d %H:%M}, {a.corner}, {a.temp:g} C, "
         "ngspice batch mode, num_threads=1",

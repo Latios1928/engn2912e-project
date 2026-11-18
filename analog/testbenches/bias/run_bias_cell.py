@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Verify the current-mode bias cell (analog/neuron/bias_cell.sch).
+"""Verify the current-mode bias cell (analog/neuron/bias.sch).
 
     python3 analog/testbenches/bias/run_bias_cell.py            # all suites, ~2 min
     python3 analog/testbenches/bias/run_bias_cell.py --only neuron,dpi
 
 Suites (all with Iref = 100 nA):
   biases  the cell's 11 output voltages at 5 corners x 0/27/85 C (schematic netlist)
-  neuron  neuron_sized at 9.5 nA DC, 15 PVT points: biases as fixed voltages (as before) vs from
+  neuron  neuron at 9.5 nA DC, 15 PVT points: biases as fixed voltages (as before) vs from
           the cell (VT stays a voltage). Same measurements as the sizing sweep (spikes 3-7).
   dpi     DPI (DPI.sch, minimum size) DC gain Isyn/Iw at Iw = 15 nA, VMEM = 1 V, 15 PVT points:
           Vthr / VT fixed vs from the cell
   mc      100 mismatch samples of the cell at tt 27 C (parallel copies written out, since the
           PDK mismatch model ignores m)
-Writes results/bias_cell.md. Netlists come from the repo schematics through xschem.
+Writes results/bias.md. Netlists come from the repo schematics through xschem.
 """
 import argparse
 import json
@@ -86,8 +86,8 @@ def spice(f, text):
 
 
 def cell_subckt():
-    """bias_cell as netlisted from analog/neuron/bias_cell.sch."""
-    t = netlist(REPO / "analog/neuron/bias_cell.sch").replace("**.subckt", ".subckt").replace("**.ends", ".ends")
+    """bias as netlisted from analog/neuron/bias.sch."""
+    t = netlist(REPO / "analog/neuron/bias.sch").replace("**.subckt", ".subckt").replace("**.ends", ".ends")
     return "\n".join(ln for ln in joined(t) if ln.startswith((".subckt", "XM", ".ends"))) + "\n"
 
 
@@ -107,7 +107,7 @@ def suite_biases(sub):
         c, t = ct
         txt = "\n".join(["* biases", bd.LIBH.format(c=LIB[c]), ".temp %d" % t, "VSUP VDD 0 3.3",
                          "Iref VDD Iref_n %g" % bd.IREF, sub,
-                         "X1 VDD 0 Iref_n " + " ".join(bd.B) + " bias_cell", ".control", "op",
+                         "X1 VDD 0 Iref_n " + " ".join(bd.B) + " bias", ".control", "op",
                          "print " + " ".join("v(%s)" % b for b in bd.B), "print i(vsup)", ".endc", ".end"])
         out = spice("b_%s_%d.spice" % ct, txt)
         v = {k.lower(): float(x) for k, x in re.findall(r"^v\((\w+)\) = ([-+0-9.eE]+)", out, re.M)}
@@ -118,7 +118,7 @@ def suite_biases(sub):
 
 
 def suite_neuron(sub):
-    tb = netlist(REPO / "analog/neuron/neuron_sized_testbench.sch")
+    tb = netlist(REPO / "analog/neuron/neuron_testbench.sch")
     lines = [ln for ln in joined(tb) if not (ln.lower().startswith(".save") or ln.strip().lower() == ".end")]
     base, ctl = [], False
     for ln in lines:
@@ -129,7 +129,7 @@ def suite_neuron(sub):
         if ln.lower().startswith(".endc"):
             ctl = False
     base = "\n".join(base).replace("iin=5n", "iin=9.5n")
-    # biases from the sizing run (neuron_sized_testbench.sch already holds them)
+    # biases from the sizing run (neuron_testbench.sch already holds them)
 
     def run(k):
         c, t, mode = k
@@ -138,7 +138,7 @@ def suite_neuron(sub):
             for b in NB:
                 txt = re.sub(r"^%s %s VSS \{%s\}\s*$" % (b, b, b), "", txt, flags=re.M | re.I)
             outs = " ".join(b if b in NB else "nc_" + b for b in bd.B)
-            txt += "\nIref_b VDD Iref_n %g\nXbias VDD VSS Iref_n %s bias_cell\n%s" % (bd.IREF, outs, sub)
+            txt += "\nIref_b VDD Iref_n %g\nXbias VDD VSS Iref_n %s bias\n%s" % (bd.IREF, outs, sub)
         txt = corner_lib(txt, c, t) + ANALYSIS + ".end\n"
         return k, num(spice("n_%s_%d_%s.spice" % k, txt), ["period", "t_spike", "t_refr", "v_spike_max"])
     with ThreadPoolExecutor(8) as ex:
@@ -157,7 +157,7 @@ def suite_dpi(sub):
             L += ["Vthr Vthr 0 2.909", "Vtau VDD VT 0.40"]
         else:
             outs = " ".join({"Vthr": "Vthr", "VT_dpi": "VT"}.get(b, "nc_" + b) for b in bd.B)
-            L += ["Iref VDD Iref_n %g" % bd.IREF, sub, "Xb VDD 0 Iref_n %s bias_cell" % outs]
+            L += ["Iref VDD Iref_n %g" % bd.IREF, sub, "Xb VDD 0 Iref_n %s bias" % outs]
         L += [".control", "op", "let g = -i(Vmem)/15n", "print g", ".endc", ".end"]
         return k, num(spice("d_%s_%d_%s.spice" % k, "\n".join(L) + "\n"), ["g"]).get("g")
     with ThreadPoolExecutor(8) as ex:
@@ -181,7 +181,7 @@ def suite_mc(sub):
     def run(seed):
         txt = "\n".join(["* mc", bd.LIBH.format(c="typical"), ".param sw_stat_mismatch=1", ".options seed=%d" % seed,
                          "VSUP VDD 0 3.3", "Iref VDD Iref_n %g" % bd.IREF, sube,
-                         "X1 VDD 0 Iref_n " + " ".join(bd.B) + " bias_cell", ".control", "op",
+                         "X1 VDD 0 Iref_n " + " ".join(bd.B) + " bias", ".control", "op",
                          "print " + " ".join("v(%s)" % b for b in bd.B), ".endc", ".end"])
         out = spice("mc_%d.spice" % seed, txt)
         return {k.lower(): float(x) for k, x in re.findall(r"^v\((\w+)\) = ([-+0-9.eE]+)", out, re.M)}
@@ -196,8 +196,8 @@ def main():
     a = ap.parse_args()
     only = a.only.split(",")
     sub = cell_subckt()
-    md = ["# bias_cell: current-mode bias generator", "",
-          "Generated by `run_bias_cell.py`. Cell `analog/neuron/bias_cell.sch`, Iref = %.0f nA, VDD = 3.3 V. "
+    md = ["# bias: current-mode bias generator", "",
+          "Generated by `run_bias_cell.py`. Cell `analog/neuron/bias.sch`, Iref = %.0f nA, VDD = 3.3 V. "
           "Sizing: `bias_design.py` (`bias_cell_sizes.json`)." % (bd.IREF * 1e9), ""]
     if "biases" in only:
         R = suite_biases(sub)
@@ -208,7 +208,7 @@ def main():
         md.append("")
     if "neuron" in only:
         R = suite_neuron(sub)
-        md += ["## neuron_sized, 9.5 nA DC: biases as fixed voltages vs from the cell", "",
+        md += ["## neuron, 9.5 nA DC: biases as fixed voltages vs from the cell", "",
                "| corner | T (C) | period fixed / cell (us) | t_spike fixed / cell (us) | t_refr fixed / cell (us) | v_spike_max fixed / cell (V) | all specs fixed / cell |",
                "|---|---|---|---|---|---|---|"]
         npass = {"voltage": 0, "cell": 0}
@@ -247,7 +247,7 @@ def main():
             md.append("| %s | %.2f |" % (b, st.pstdev(xs) * 1e3))
         md.append("")
     (HERE / "results").mkdir(exist_ok=True)
-    (HERE / "results" / "bias_cell.md").write_text("\n".join(md) + "\n")
+    (HERE / "results" / "bias.md").write_text("\n".join(md) + "\n")
     print("\n".join(md))
 
 

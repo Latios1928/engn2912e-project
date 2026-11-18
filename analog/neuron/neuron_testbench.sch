@@ -46,7 +46,7 @@ C {lab_wire.sym} -600 -130 0 0 {name=p7 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -660 -130 0 0 {name=p8 sig_type=std_logic lab=VDD}
 C {gnd.sym} -600 0 0 0 {name=l1 lab=0}
 C {lab_wire.sym} -660 0 0 0 {name=p10 sig_type=std_logic lab=VSS}
-C {isource.sym} -470 -70 0 0 {name=Iin value="pulse(0 \{ipk\} \{delay\} \{trise\} \{tfall\} \{pulse_width\} \{per\})" spice_ignore=false}
+C {isource.sym} -470 -70 0 0 {name=Iin value=\{iin\} spice_ignore=false}
 C {lab_wire.sym} -470 0 0 0 {name=p18 sig_type=std_logic lab=preIN}
 C {lab_wire.sym} -470 -130 0 0 {name=p19 sig_type=std_logic lab=VDD}
 C {devices/code_shown.sym} -1310 -140 0 0 {name=MODELS only_toplevel=true
@@ -54,20 +54,24 @@ format="tcleval( @value )"
 value="
 .include $::180MCU_MODELS/design.ngspice
 .lib $::180MCU_MODELS/sm141064.ngspice typical
+.lib $::180MCU_MODELS/sm141064.ngspice mimcap_typical
 "}
-C {code_shown.sym} -1320 230 0 0 {name=TRAN_SIM only_toplevel=false 
+C {code_shown.sym} -1320 230 0 0 {name=TRAN_SIM only_toplevel=false
 
 value="
-.param vdd=3.3 reset_bias=0.2 ipk=20n delay=100u trise=1u tfall=1u pulse_width=50u per=1m
+* Biases from the sizing sweep for sizing_context.txt: iin = 9.5 nA DC (typical corner, 27 C)
+.param vdd=3.3 iin=9.5n
+.param Vlk=0.425 Vamp_bias=0.535 VIp=0.573 VNA=1.93 VKup=2.35 VK=1.22 VKdn=0.588 VT=1.66
+.ic v(VMEM)=0 v(spike)=0
 .control
-	save all 
-	tran 1u 10m 
-	write /foss/designs/engn2912e-project/analog/neuron/neuron_tb.raw
-	wrdata /foss/designs/engn2912e-project/analog/neuron/neuron_tb.txt v(mem) v(vout) i(vmem)
-
-	plot v(mem) v(vout) title 'Membrane and spike' ylabel 'V'
-	plot v(VP) v(VN)
-	plot i(VMEM)
+	save all
+	tran 20n 1.6m 0 20n uic
+	meas tran t3 when v(spike)=1.65 rise=3
+	meas tran t7 when v(spike)=1.65 rise=7
+	let period = (t7-t3)/4
+	print period
+	write /foss/designs/engn2912e-project/analog/neuron/neuron_sized_tb.raw
+	plot v(VMEM) v(spike) title 'Membrane and spike' ylabel 'V'
 .endc
 "}
 C {ammeter.sym} -470 30 0 0 {name=VMEM savecurrent=true spice_ignore=0}

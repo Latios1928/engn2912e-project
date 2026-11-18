@@ -5,7 +5,7 @@ V {}
 S {}
 F {}
 E {}
-C {DPI_sized.sym} 0 0 0 0 {name=x1}
+C {DPI.sym} 0 0 0 0 {name=x1}
 C {lab_pin.sym} -150 -20 0 0 {name=l1 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} -150 0 0 0 {name=l2 sig_type=std_logic lab=VT}
 C {lab_pin.sym} -150 20 0 0 {name=l3 sig_type=std_logic lab=Isum}
@@ -60,7 +60,9 @@ C {ipin.sym} -400 -170 0 0 {name=p_Vthr lab=Vthr}
 C {ipin.sym} -400 -140 0 0 {name=p_VT lab=VT}
 C {opin.sym} -400 -110 2 0 {name=p_Isum lab=Isum}
 C {iopin.sym} -400 -80 0 1 {name=p_Iout lab=Iout}
-T {DPI_inh: inhibitory synapse. DPI_sized.sym (same DPI as the excitatory synapses), but its output current Im goes into the
+T {DPI_inh_min: copy of DPI_inh.sch with the minimum-size DPI.sym core (as the excitatory DPI) instead of DPI_sized.sym,
+so that with the same Vthr and VT its gain matches the excitatory DPI (snn_signed_tb: inhibitory/excitatory charge 0.98;
+DPI_inh with DPI_sized gave 0.07-0.18). DPI_inh: DPI_sized.sym (same DPI as the excitatory synapses), but its output current Im goes into the
 nFET mirror Mi1/Mi2 (2u/8u, 1:1), so Iout sinks it from the membrane instead of sourcing it.
 Same Isum input as DPI.sym; drive it from the Isum_i outputs of DAC_signed.
 Iout must stay above about 0.1 V for Mi2 to stay saturated, so inhibition cannot pull

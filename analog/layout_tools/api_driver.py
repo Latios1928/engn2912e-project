@@ -3,8 +3,8 @@ Drive the layout flow with one Claude API call (tool runner), without this chat'
 
     pip install anthropic pyyaml
     export ANTHROPIC_API_KEY=...            # or `ant auth login`
-    python3 analog/layout_tools/api_driver.py neuron_glayout "build and sign off this cell"
-    python3 analog/layout_tools/api_driver.py DAC_binary "what blocks this cell?"
+    python3 analog/layout_tools/api_driver.py neuron "build and sign off this cell"
+    python3 analog/layout_tools/api_driver.py DAC_magnitude "what blocks this cell?"
 
 Context sent to the model = AGENT_BRIEF.md (system prompt, cached) + `flow.py status` of the
 cell + your request. The model acts only through three tools: run a flow stage, read a flow
@@ -46,7 +46,7 @@ def run_stage(stage: str, cell: str) -> str:
     Args:
         stage: one of status, table, decide, build, signoff, sim, run. decide/run answer
             open questions with policy defaults (auto mode) unless the cell is set to manual.
-        cell: cell name from flow_cells.yaml, e.g. neuron_glayout.
+        cell: cell name from flow_cells.yaml, e.g. neuron.
     """
     if stage not in STAGES:
         return f"error: stage must be one of {sorted(STAGES)}"

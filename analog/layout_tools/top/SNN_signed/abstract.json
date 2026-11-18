@@ -1,14 +1,14 @@
 {
  "stage": "abstract",
  "top": "SNN_signed",
- "time": "2026-11-18 02:00:44",
+ "time": "2026-11-18 04:30:17",
  "ok": true,
  "problems": [],
  "blocks": {
-  "DAC_signed_binary": "DAC_signed_binary",
+  "DAC": "DAC",
   "DPI": "DPI",
-  "neuron_sized": "neuron_glayout",
-  "DPI_inh_min": "DPI_inh_min",
-  "bias_cell": "bias_cell"
+  "neuron": "neuron",
+  "DPI_inh": "DPI_inh",
+  "bias": "bias"
  }
 }

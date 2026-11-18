@@ -2,7 +2,7 @@
  "version": 2,
  "global": 0.9251514643645339,
  "cells": {
-  "neuron_glayout": {
+  "neuron": {
    "factors": {
     "VMEM": 1.0572798986756498,
     "spike": 1.0116082240524948,
@@ -120,10 +120,18 @@
      "mean": 0.8337,
      "err_before": 0.0046,
      "err_after": 0.0
+    },
+    {
+     "date": "2026-11-18",
+     "gds_md5": "594100fced463c7d41301d162f846af7",
+     "nets": 10,
+     "mean": 0.8337,
+     "err_before": 0.0,
+     "err_after": 0.0
     }
    ]
   },
-  "bias_cell": {
+  "bias": {
    "factors": {
     "Iref": 1.427095619970763,
     "VIp": 0.9182439928830246,
@@ -194,6 +202,14 @@
      "nets": 12,
      "mean": 0.9252,
      "err_before": 0.2996,
+     "err_after": 0.0
+    },
+    {
+     "date": "2026-11-18",
+     "gds_md5": "21cd335a405b1ace0b241c5d35c06704",
+     "nets": 12,
+     "mean": 0.9252,
+     "err_before": 0.0,
      "err_after": 0.0
     }
    ]
@@ -281,7 +297,7 @@
     }
    ]
   },
-  "DAC_signed_binary": {
+  "DAC": {
    "factors": {
     "Isum_e": 0.8882386144309431,
     "Isum_i": 0.8880265228857038,
@@ -334,10 +350,18 @@
      "mean": 0.8909,
      "err_before": 0.2925,
      "err_after": 0.0
+    },
+    {
+     "date": "2026-11-18",
+     "gds_md5": "d9e7390d52301d8c16e8cbdce6a3dea7",
+     "nets": 9,
+     "mean": 0.8909,
+     "err_before": 0.0,
+     "err_after": 0.0
     }
    ]
   },
-  "DPI_inh_min": {
+  "DPI_inh": {
    "factors": {
     "Iout": 1.0071896428923368,
     "Isum": 1.9593404981588078,
@@ -384,6 +408,14 @@
      "nets": 4,
      "mean": 1.303,
      "err_before": 0.2173,
+     "err_after": 0.0
+    },
+    {
+     "date": "2026-11-18",
+     "gds_md5": "234ab4ac770745d0b47ae6f7c8696def",
+     "nets": 4,
+     "mean": 1.303,
+     "err_before": 0.0,
      "err_after": 0.0
     }
    ]

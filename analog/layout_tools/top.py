@@ -358,9 +358,9 @@ def st_plan(top):
         problems.append(f"instances in no row: {left}")
     if len(bias) > 1:
         problems.append(f"more than one bias cell: {bias}")
-    pos = fp.get("bias_cell", {}).get("position", "above_top_row")
+    pos = fp.get("bias", {}).get("position", "above_top_row")
     if bias and pos != "above_top_row":
-        problems.append(f"bias_cell.position {pos!r} not implemented (above_top_row only)")
+        problems.append(f"bias.position {pos!r} not implemented (above_top_row only)")
     sup = c["routing"]["supply"]["style"]
     if sup != "routed":
         problems.append(f"routing.supply.style {sup!r} not implemented (routed only)")

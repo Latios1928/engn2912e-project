@@ -1,8 +1,8 @@
 """
 Layout decisions before layout: wells / DNW islands, dummy rings, guard rings, placement.
 
-    env -u PYTHONPATH .venv-glayout/bin/python analog/layout_tools/decide.py analog/DAC/DAC_binary.sch
-        -> analog/layout_tools/DAC_binary.layout.yaml (or --out; + a short review on stdout)
+    env -u PYTHONPATH .venv-glayout/bin/python analog/layout_tools/decide.py analog/DAC/DAC_magnitude.sch
+        -> analog/layout_tools/DAC_magnitude.layout.yaml (or --out; + a short review on stdout)
 
     from decide import decide, review, two_row_args
     dec = decide(cell)                       # cell from glayout_netlist

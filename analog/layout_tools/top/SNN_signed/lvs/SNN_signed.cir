@@ -1,38 +1,32 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 18/11/2026 04:08
+* Extracted by KLayout with GF180MCU LVS runset on : 18/11/2026 04:32
 
 .SUBCKT SNN_signed
-X$1 spike[3] s[7] \$55 w[29] w[28] VDD w[30] w[31] \$73 \$74 VSS
-+ DAC_signed_binary
-X$2 \$53 VT \$56 \$57 \$58 \$59 VDD \$54 spike[0] \$63 \$62 VSS neuron_glayout
-X$3 \$53 VT \$56 \$57 \$58 \$59 VDD \$72 spike[4] \$63 \$62 VSS neuron_glayout
-X$4 \$53 VT \$56 \$57 \$58 \$59 VDD \$64 spike[1] \$63 \$62 VSS neuron_glayout
-X$5 \$53 VT \$56 \$57 \$58 \$59 VDD \$69 spike[3] \$63 \$62 VSS neuron_glayout
-X$6 \$53 VT \$56 \$57 \$58 \$59 VDD \$66 spike[2] \$63 \$62 VSS neuron_glayout
-X$7 spike[2] s[6] \$55 w[25] w[24] VDD w[26] w[27] \$73 \$74 VSS
-+ DAC_signed_binary
-X$8 spike[0] s[4] \$55 w[17] w[16] VDD w[18] w[19] \$70 \$71 VSS
-+ DAC_signed_binary
-X$9 spike[0] s[2] \$55 w[9] w[8] VDD w[10] w[11] \$67 \$68 VSS DAC_signed_binary
-X$10 spike[1] s[5] \$55 w[21] w[20] VDD w[22] w[23] \$70 \$71 VSS
-+ DAC_signed_binary
-X$11 spike[1] s[3] \$55 w[13] w[12] VDD w[14] w[15] \$67 \$68 VSS
-+ DAC_signed_binary
-X$12 pulse[1] s[1] \$55 w[5] w[4] VDD w[6] w[7] \$65 VDD VSS DAC_signed_binary
-X$13 pulse[0] s[0] \$55 w[1] w[0] VDD w[2] w[3] \$60 VDD VSS DAC_signed_binary
+X$1 spike[3] s[7] \$55 w[28] w[29] VDD w[30] w[31] \$73 \$74 VSS DAC
+X$2 \$53 VT \$56 \$57 \$58 \$59 VDD \$54 spike[0] \$63 \$62 VSS neuron
+X$3 \$53 VT \$56 \$57 \$58 \$59 VDD \$72 spike[4] \$63 \$62 VSS neuron
+X$4 \$53 VT \$56 \$57 \$58 \$59 VDD \$64 spike[1] \$63 \$62 VSS neuron
+X$5 \$53 VT \$56 \$57 \$58 \$59 VDD \$69 spike[3] \$63 \$62 VSS neuron
+X$6 \$53 VT \$56 \$57 \$58 \$59 VDD \$66 spike[2] \$63 \$62 VSS neuron
+X$7 spike[2] s[6] \$55 w[24] w[25] VDD w[26] w[27] \$73 \$74 VSS DAC
+X$8 spike[0] s[4] \$55 w[16] w[17] VDD w[18] w[19] \$70 \$71 VSS DAC
+X$9 spike[0] s[2] \$55 w[8] w[9] VDD w[10] w[11] \$67 \$68 VSS DAC
+X$10 spike[1] s[5] \$55 w[20] w[21] VDD w[22] w[23] \$70 \$71 VSS DAC
+X$11 spike[1] s[3] \$55 w[12] w[13] VDD w[14] w[15] \$67 \$68 VSS DAC
+X$12 pulse[1] s[1] \$55 w[4] w[5] VDD w[6] w[7] \$65 VDD VSS DAC
+X$13 pulse[0] s[0] \$55 w[0] w[1] VDD w[2] w[3] \$60 VDD VSS DAC
 X$14 \$61 VDD \$60 \$54 \$52 VSS DPI
-X$15 \$61 VDD \$68 \$66 \$52 VSS DPI_inh_min
-X$16 \$53 \$57 Iref \$63 \$55 \$59 \$56 \$58 VDD \$62 \$61 \$52 \$75 VSS
-+ bias_cell
-X$17 \$61 VDD \$71 \$69 \$52 VSS DPI_inh_min
-X$18 \$61 VDD \$74 \$72 \$52 VSS DPI_inh_min
+X$15 \$61 VDD \$68 \$66 \$52 VSS DPI_inh
+X$16 \$53 \$57 Iref \$63 \$55 \$59 \$56 \$58 VDD \$62 \$61 \$52 \$75 VSS bias
+X$17 \$61 VDD \$71 \$69 \$52 VSS DPI_inh
+X$18 \$61 VDD \$74 \$72 \$52 VSS DPI_inh
 X$19 \$61 VDD \$65 \$64 \$52 VSS DPI
 X$20 \$61 VDD \$67 \$66 \$52 VSS DPI
 X$21 \$61 VDD \$70 \$69 \$52 VSS DPI
 X$22 \$61 VDD \$73 \$72 \$52 VSS DPI
 .ENDS SNN_signed
 
-.SUBCKT bias_cell Vamp_bias VIp Iref VKup Vb Vlk VKdn VK VDD VNA Vthr VT_dpi
-+ VT_inh VSS
+.SUBCKT bias Vamp_bias VIp Iref VKup Vb Vlk VKdn VK VDD VNA Vthr VT_dpi VT_inh
++ VSS
 M$1 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.3P AD=0.14P PS=2.2U PD=1.06U
 M$2 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
 M$3 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
@@ -665,9 +659,9 @@ M$536 Vamp_bias Vamp_bias VSS VSS nfet_03v3 L=0.64U W=0.5U AS=0.3P AD=0.3P
 + PS=2.2U PD=2.2U
 M$537 VK VK VSS VSS nfet_03v3 L=90.91U W=0.5U AS=0.3P AD=0.3P PS=2.2U PD=2.2U
 M$538 VSS VSS VSS VSS nfet_03v3 L=2U W=10U AS=6P AD=6P PS=21.2U PD=21.2U
-.ENDS bias_cell
+.ENDS bias
 
-.SUBCKT DPI_inh_min Vthr VDD Isum Iout VT VSS
+.SUBCKT DPI_inh Vthr VDD Isum Iout VT VSS
 M$1 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.3P AD=0.14P PS=2.2U PD=1.06U
 M$2 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
 M$3 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
@@ -727,9 +721,9 @@ M$50 VDD Vthr Isum Isum nfet_03v3 L=0.64U W=0.5U AS=0.3P AD=0.3P PS=2.2U PD=2.2U
 M$51 Isum Isum Isum Isum nfet_03v3 L=2U W=0.5U AS=0.3P AD=0.3P PS=2.2U PD=2.2U
 M$52 \$223 \$223 VSS VSS nfet_03v3 L=8U W=2U AS=1.2P AD=1.2P PS=5.2U PD=5.2U
 C$53 \$1 VDD 9.839048e-13 cap_mim_2f0fF A=491.9524P P=88.72U
-.ENDS DPI_inh_min
+.ENDS DPI_inh
 
-.SUBCKT neuron_glayout Vamp_bias VT VKdn VIp VK Vlk VDD VMEM spike VKup VNA VSS
+.SUBCKT neuron Vamp_bias VT VKdn VIp VK Vlk VDD VMEM spike VKup VNA VSS
 M$1 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.3P AD=0.14P PS=2.2U PD=1.06U
 M$2 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
 M$3 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
@@ -832,7 +826,7 @@ M$94 VMEM Vlk VSS VSS nfet_03v3 L=1U W=1U AS=0.6P AD=0.6P PS=3.2U PD=3.2U
 M$95 VSS VSS VSS VSS nfet_03v3 L=2U W=4U AS=2.4P AD=2.4P PS=9.2U PD=9.2U
 C$96 VSS VMEM 9.839048e-13 cap_mim_2f0fF A=491.9524P P=88.72U
 C$97 VSS spike 2e-13 cap_mim_2f0fF A=100P P=40U
-.ENDS neuron_glayout
+.ENDS neuron
 
 .SUBCKT DPI Vthr VDD Isum Isyn VT VSS
 M$1 VDD VDD VDD VDD pfet_03v3 L=0.64U W=0.5U AS=0.3P AD=0.14P PS=2.2U PD=1.06U
@@ -902,7 +896,7 @@ M$40 Isum Isum Isum Isum nfet_03v3 L=0.64U W=0.5U AS=0.3P AD=0.3P PS=2.2U
 C$41 \$1 VDD 9.839048e-13 cap_mim_2f0fF A=491.9524P P=88.72U
 .ENDS DPI
 
-.SUBCKT DAC_signed_binary en s Vb w[1] w[0] VDD w[2] w[3] Isum_e Isum_i VSS
+.SUBCKT DAC en s Vb w[0] w[1] VDD w[2] w[3] Isum_e Isum_i VSS
 M$1 VDD s \$6 VDD pfet_03v3 L=0.32U W=0.5U AS=0.3P AD=0.3P PS=2.2U PD=2.2U
 M$2 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.3P AD=0.14P PS=2.2U PD=1.06U
 M$3 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U
@@ -1186,4 +1180,4 @@ M$228 \$17 \$17 \$17 \$17 nfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U
 + PD=1.06U
 M$229 \$17 \$17 \$17 \$17 nfet_03v3 L=2U W=0.5U AS=0.14P AD=0.3P PS=1.06U
 + PD=2.2U
-.ENDS DAC_signed_binary
+.ENDS DAC

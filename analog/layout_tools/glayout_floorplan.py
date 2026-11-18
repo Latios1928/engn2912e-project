@@ -3,14 +3,14 @@ Reusable two-row floorplan for GF180 gLayout cells: schematic in, DRC/LVS-ready 
 
     from glayout_netlist import from_schematic
     from glayout_floorplan import two_row, write_cell
-    cell = from_schematic("analog/neuron/spike_amplifier_sized.sch").legalize()
+    cell = from_schematic("analog/neuron/spike_amplifier.sch").legalize()
     cell.connect("net2", "VN")                       # explicit schematic fix, if any
-    res = two_row(cell, "spike_amp_fp")
+    res = two_row(cell, "spike_amplifier")
     print(write_cell(res, "analog/neuron/layout"))   # GDS, LVS ref, predictions
 
   CLI (no code needed for a new cell):
     env -u PYTHONPATH PDK_ROOT=/foss/pdks .venv-glayout/bin/python glayout_floorplan.py \\
-        analog/neuron/spike_amplifier_sized.sch --name spike_amp_fp --connect net2=VN
+        analog/neuron/spike_amplifier.sch --name spike_amplifier --connect net2=VN
 
 Floorplan (bottom -> top):
     bottom channel   NMOS gate nets + their pins           met4 tracks
@@ -87,7 +87,7 @@ DBU = 0.005      # GF180 database unit (um)
 def _snap(v: float) -> float:
     """Round a move to the database grid. A device whose height is an odd multiple of 5 nm has
     its centre on 2.5 nm; centring it there puts every shape off-grid, and the GDS writer's
-    rounding then makes 0.225 um contacts, 0.265 um vias and slivers (bias_cell, W = 1.435 um)."""
+    rounding then makes 0.225 um contacts, 0.265 um vias and slivers (bias, W = 1.435 um)."""
     return round(v / DBU) * DBU
 
 

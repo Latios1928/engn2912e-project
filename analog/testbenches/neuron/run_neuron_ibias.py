@@ -15,7 +15,7 @@ of the cycle, so the source would drive its node to +-infinity). Each current is
 way an external bias generator would feed it: an ideal reference current into a
 diode-connected device, mirrored 1:1 by an identical output device on the pin. The
 devices are the type and size of the transistor that used to bias that pin inside
-neuron_sized (1/1 um; 0.22/0.28 um nFET for the amplifier tail), so the starting
+neuron (1/1 um; 0.22/0.28 um nFET for the amplifier tail), so the starting
 currents reproduce the old voltage-biased operating point. The reference branches run
 from a separate 3.3 V supply and are not in p_avg (the bias generator is shared by many
 neurons); the mirror output devices are. The reference currents are held constant over
@@ -55,7 +55,7 @@ RUNS = HERE / "runs"
 
 # name -> (start value, unit, lower bound, upper bound). Start = the current each
 # old bias transistor carried at the passing tt 27 C point (Analog_AI_Documentation.md,
-# bias_cell study); Vlk = the old voltage.
+# bias study); Vlk = the old voltage.
 BIAS = {
     "p_ina":  (5.05e-6, "uA", 0.2e-6, 50e-6),
     "p_ikup": (0.55e-6, "uA", 20e-9, 10e-6),

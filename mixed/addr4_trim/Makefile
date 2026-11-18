@@ -41,9 +41,9 @@ SPICEBIND := /foss/tools/spicebind
 VSRC := sim.f $(shell grep -v '^//' sim.f)
 PFX  := -Psnn_ms_tb_v2
 SCHEMATICS := snn_ms_tb_v2.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
-              $(wildcard $(ROOT)/analog/DAC/DAC.s* $(ROOT)/analog/DPI/DPI.s* \
-                         $(ROOT)/analog/neuron/neuron_sized.s* $(ROOT)/analog/neuron/spike_amplifier.s* \
-                         $(ROOT)/analog/neuron/bias_cell.s*)
+              $(wildcard $(ROOT)/analog/DAC/DAC_unsigned.s* $(ROOT)/analog/DPI/DPI.s* \
+                         $(ROOT)/analog/neuron/neuron.s* $(ROOT)/analog/neuron/spike_amplifier.s* \
+                         $(ROOT)/analog/neuron/bias.s*)
 
 .DEFAULT_GOAL := run
 .PHONY: run regs vcd clean
@@ -59,7 +59,7 @@ snn_ms_tb_v2.spice: $(SCHEMATICS)
 	rm -f $@
 	cd $(ROOT) && xschem --rcfile xschemrc -n -q -x -o $(HERE) -N $@ mixed/addr4_trim/snn_ms_tb_v2.sch || true
 	@grep -q 'snn_analog$$' $@ || { echo "netlisting failed"; exit 1; }
-	@grep -q 'bias_cell$$' $@ || { echo "netlist has no bias_cell"; exit 1; }
+	@grep -q 'bias$$' $@ || { echo "netlist has no bias"; exit 1; }
 	@grep -q '^\.param p_perr=1$$' $@ || { echo "netlist has no '.param p_perr=1' line"; exit 1; }
 	@! grep -n 'IS MISSING' $@ || { echo "netlist has missing symbols"; exit 1; }
 	@d=$$(grep -i '^\.subckt' $@ | awk '{print tolower($$2)}' | sort | uniq -d); \

@@ -5,60 +5,34 @@ V {}
 S {}
 F {}
 E {}
-N 100 -120 270 -120 {lab=X}
-N 270 -120 450 -120 {lab=X}
-N 450 -120 620 -120 {lab=X}
-N 620 -60 620 -10 {lab=#net1}
-N 450 80 620 80 {lab=GND}
-N 270 80 450 80 {lab=GND}
-N 100 80 270 80 {lab=GND}
-N 360 80 360 130 {lab=GND}
-N 30 20 60 20 {lab=Vb}
-N 30 20 30 60 {lab=Vb}
-N 0 60 560 60 {lab=Vb}
-N 560 20 560 60 {lab=Vb}
-N 560 20 580 20 {lab=Vb}
-N 620 50 620 80 {lab=GND}
-N 450 50 450 80 {lab=GND}
-N 270 50 270 80 {lab=GND}
-N 100 50 100 80 {lab=GND}
-N 230 20 230 60 {lab=Vb}
-N 410 20 410 60 {lab=Vb}
-N 270 -60 270 -10 {lab=#net2}
-N 450 -60 450 -10 {lab=#net3}
-N 100 -60 100 -10 {lab=#net4}
-N 20 -90 60 -90 {lab=w[0]}
-N 190 -90 230 -90 {lab=w[1]}
-N 370 -90 410 -90 {lab=w[2]}
-N 530 -90 580 -90 {lab=w[3]}
-N 100 -90 120 -90 {lab=#net4}
-N 120 -90 120 -50 {lab=#net4}
-N 100 -50 120 -50 {lab=#net4}
-N 100 50 120 50 {lab=GND}
-N 100 20 120 20 {lab=GND}
-N 120 20 120 50 {lab=GND}
-N 270 50 290 50 {lab=GND}
-N 270 20 290 20 {lab=GND}
-N 290 20 290 50 {lab=GND}
-N 450 50 470 50 {lab=GND}
-N 450 20 470 20 {lab=GND}
-N 470 20 470 50 {lab=GND}
-N 620 50 640 50 {lab=GND}
-N 620 20 640 20 {lab=GND}
-N 640 20 640 50 {lab=GND}
-N 357.5 -210 357.5 -180 {lab=Isum}
-N 297.5 -150 317.5 -150 {lab=en}
-N 357.5 -150 480 -150 {lab=GND}
-N 270 -90 290 -90 {lab=#net2}
-N 290 -90 290 -57.5 {lab=#net2}
-N 270 -57.5 290 -57.5 {lab=#net2}
-N 450 -90 472.5 -90 {lab=#net3}
-N 472.5 -90 472.5 -55 {lab=#net3}
-N 450 -55 472.5 -55 {lab=#net3}
-N 620 -90 635 -90 {lab=#net1}
-N 635 -90 635 -52.5 {lab=#net1}
-N 620 -52.5 635 -52.5 {lab=#net1}
-C {symbols/nfet_03v3.sym} 80 -90 0 0 {name=M1
+T {DAC_signed_binary: copy of DAC_signed.sch with the binary DAC_binary.sym (1:2:4:8, magnitude 0-15) instead of DAC.sym (1:2:3:4).
+DAC_signed: DAC.sym with a static sign bit s. The DAC output (Y) is steered by
+Mse (gate sb = not s) to Isum_e, the tail of the excitatory DPI, or by Msi (gate s)
+to Isum_i, the tail of the inhibitory DPI (DPI_inh). s is a static weight bit, so the
+steering adds no charge per spike; with the gate at VDD each switch is a cascode in
+series with Men, like Men itself. Mpi/Mni make sb from s.} -400 300 0 0 0.3 0.3 {}
+N 310 -270 310 -250 {lab=Isum_e}
+N 240 -220 270 -220 {lab=sb}
+N 310 -190 310 -170 {lab=Y}
+N 310 -220 350 -220 {lab=GND}
+N -110 -280 -110 -260 {lab=Isum_i}
+N -180 -230 -150 -230 {lab=s}
+N -110 -200 -110 -180 {lab=Y}
+N -110 -230 -70 -230 {lab=GND}
+N 100 -260 100 -240 {lab=sb}
+N 30 -290 60 -290 {lab=s}
+N 100 -340 100 -320 {lab=VDD}
+N 100 -290 140 -290 {lab=VDD}
+N 100 -200 100 -180 {lab=sb}
+N 30 -150 60 -150 {lab=s}
+N 100 -120 100 -100 {lab=GND}
+N 100 -150 140 -150 {lab=GND}
+C {DAC_magnitude.sym} 0 0 0 0 {name=x1}
+C {lab_pin.sym} -150 -40 0 0 {name=l1 sig_type=std_logic lab=Y}
+C {lab_pin.sym} -150 -20 0 0 {name=l2 sig_type=std_logic lab=w[3:0]}
+C {lab_pin.sym} -150 0 0 0 {name=l3 sig_type=std_logic lab=en}
+C {lab_pin.sym} 50 -40 0 1 {name=l4 sig_type=std_logic lab=Vb}
+C {symbols/nfet_03v3.sym} 290 -220 0 0 {name=Mse
 L=0.28u
 W=0.22u
 nf=1
@@ -72,122 +46,11 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {symbols/nfet_03v3.sym} 80 20 0 0 {name=M2
-L=8u
-W=1u
-nf=1
-m=1
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {symbols/nfet_03v3.sym} 250 -90 0 0 {name=M3
-L=0.28u
-W=0.22u
-nf=1
-m=2
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {symbols/nfet_03v3.sym} 250 20 0 0 {name=M4
-L=8u
-W=1u
-nf=1
-m=2
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {symbols/nfet_03v3.sym} 430 -90 0 0 {name=M5
-L=0.28u
-W=0.22u
-nf=1
-m=3
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {symbols/nfet_03v3.sym} 430 20 0 0 {name=M6
-L=8u
-W=1u
-nf=1
-m=3
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {symbols/nfet_03v3.sym} 600 -90 0 0 {name=M7
-L=0.28u
-W=0.22u
-nf=1
-m=4
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {symbols/nfet_03v3.sym} 600 20 0 0 {name=M8
-L=8u
-W=1u
-nf=1
-m=4
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {iopin.sym} -162.5 -117.5 0 0 {name=p1 lab=Vb}
-C {ipin.sym} -122.5 -17.5 0 0 {name=p3 lab=w[3:0]}
-C {lab_wire.sym} 30 -90 0 0 {name=p7 sig_type=std_logic lab=w[0]}
-C {lab_wire.sym} 200 -90 0 0 {name=p8 sig_type=std_logic lab=w[1]}
-C {lab_wire.sym} 380 -90 0 0 {name=p9 sig_type=std_logic lab=w[2]}
-C {lab_wire.sym} 540 -90 0 0 {name=p10 sig_type=std_logic lab=w[3]}
-C {gnd.sym} 360 130 0 0 {name=l1 lab=GND}
-T {Branch weights 1:2:3:4 for w[0]..w[3] (m = 1..4 unit cells).
-Unit: switch 0.22u/0.28u, current source 1u/8u. Men (gate en) passes the branch
-currents to Isum only while en is high (the previous section's spike). Vb comes from a diode-connected
-1u/8u device fed by the reference current (see DACs-DPI.sch).} -160 170 0 0 0.3 0.3 {}
-C {lab_wire.sym} 7.5 60 0 0 {name=p11 sig_type=std_logic lab=Vb}
-C {ipin.sym} 357.5 -210 0 0 {name=p2 lab=Isum}
-C {ipin.sym} -122.5 22.5 0 0 {name=p4 lab=en}
-C {lab_wire.sym} 297.5 -150 0 0 {name=p12 sig_type=std_logic lab=en}
-C {lab_wire.sym} 480 -150 0 0 {name=p13 sig_type=std_logic lab=GND}
-C {lab_wire.sym} 200 -120 0 0 {name=p14 sig_type=std_logic lab=X}
-C {symbols/nfet_03v3.sym} 337.5 -150 0 0 {name=Men
+C {lab_pin.sym} 310 -270 0 1 {name=l5 sig_type=std_logic lab=Isum_e}
+C {lab_pin.sym} 240 -220 0 0 {name=l6 sig_type=std_logic lab=sb}
+C {lab_pin.sym} 310 -170 0 1 {name=l7 sig_type=std_logic lab=Y}
+C {lab_pin.sym} 350 -220 0 1 {name=l8 sig_type=std_logic lab=GND}
+C {symbols/nfet_03v3.sym} -130 -230 0 0 {name=Msi
 L=0.28u
 W=0.22u
 nf=1
@@ -201,3 +64,50 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
+C {lab_pin.sym} -110 -280 0 1 {name=l9 sig_type=std_logic lab=Isum_i}
+C {lab_pin.sym} -180 -230 0 0 {name=l10 sig_type=std_logic lab=s}
+C {lab_pin.sym} -110 -180 0 1 {name=l11 sig_type=std_logic lab=Y}
+C {lab_pin.sym} -70 -230 0 1 {name=l12 sig_type=std_logic lab=GND}
+C {symbols/pfet_03v3.sym} 80 -290 0 0 {name=Mpi
+L=0.28u
+W=0.44u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=pfet_03v3
+spiceprefix=X
+}
+C {lab_pin.sym} 100 -240 0 1 {name=l13 sig_type=std_logic lab=sb}
+C {lab_pin.sym} 30 -290 0 0 {name=l14 sig_type=std_logic lab=s}
+C {lab_pin.sym} 100 -340 0 1 {name=l15 sig_type=std_logic lab=VDD}
+C {lab_pin.sym} 140 -290 0 1 {name=l16 sig_type=std_logic lab=VDD}
+C {symbols/nfet_03v3.sym} 80 -150 0 0 {name=Mni
+L=0.28u
+W=0.22u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {lab_pin.sym} 100 -200 0 1 {name=l17 sig_type=std_logic lab=sb}
+C {lab_pin.sym} 30 -150 0 0 {name=l18 sig_type=std_logic lab=s}
+C {lab_pin.sym} 100 -100 0 1 {name=l19 sig_type=std_logic lab=GND}
+C {lab_pin.sym} 140 -150 0 1 {name=l20 sig_type=std_logic lab=GND}
+C {ipin.sym} -400 -200 0 0 {name=p_w lab=w[3:0]}
+C {ipin.sym} -400 -170 0 0 {name=p_en lab=en}
+C {ipin.sym} -400 -140 0 0 {name=p_s lab=s}
+C {iopin.sym} -400 -110 0 1 {name=p_Vb lab=Vb}
+C {iopin.sym} -400 -80 0 1 {name=p_VDD lab=VDD}
+C {iopin.sym} -400 -50 0 1 {name=p_Isum_e lab=Isum_e}
+C {iopin.sym} -400 -20 0 1 {name=p_Isum_i lab=Isum_i}

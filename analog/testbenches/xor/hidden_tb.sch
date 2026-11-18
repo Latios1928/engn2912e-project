@@ -11,7 +11,7 @@ Relays: pulse train -> DAC (code_in) -> DPI -> neuron_sized, for input A (ina = 
 (codes ca, cb), as in the network; a third DAC (input 2, code 0, never enabled) is on the same tail.
 Used for the OR neuron (one input fires it) and the AND neuron (one input must lose to the leak,
 two must fire it). run_xor.py counts the spikes of all three neurons from the wrdata file.} -900 -1000 0 0 0.3 0.3 {}
-C {DAC.sym} -300 -600 0 0 {name=xda}
+C {DAC_unsigned.sym} -300 -600 0 0 {name=xda}
 C {lab_pin.sym} -450 -640 0 0 {name=l1 sig_type=std_logic lab=Isum_a}
 C {lab_pin.sym} -450 -620 0 0 {name=l2 sig_type=std_logic lab=wr[3:0]}
 C {lab_pin.sym} -450 -600 0 0 {name=l3 sig_type=std_logic lab=pa}
@@ -22,7 +22,7 @@ C {lab_pin.sym} 0 -600 0 0 {name=l6 sig_type=std_logic lab=VT_in}
 C {lab_pin.sym} 0 -580 0 0 {name=l7 sig_type=std_logic lab=Isum_a}
 C {lab_pin.sym} 300 -620 0 1 {name=l8 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 300 -600 0 1 {name=l9 sig_type=std_logic lab=VMEM_a}
-C {neuron_sized.sym} 600 -500 0 0 {name=xna}
+C {neuron.sym} 600 -500 0 0 {name=xna}
 C {lab_pin.sym} 450 -580 0 0 {name=l10 sig_type=std_logic lab=VMEM_a}
 C {lab_pin.sym} 750 -580 0 1 {name=l11 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 750 -560 0 1 {name=l12 sig_type=std_logic lab=VDD}
@@ -35,7 +35,7 @@ C {lab_pin.sym} 450 -480 0 0 {name=l18 sig_type=std_logic lab=VKup}
 C {lab_pin.sym} 450 -460 0 0 {name=l19 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} 450 -440 0 0 {name=l20 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} 450 -420 0 0 {name=l21 sig_type=std_logic lab=VT}
-C {DAC.sym} -300 -150 0 0 {name=xdb}
+C {DAC_unsigned.sym} -300 -150 0 0 {name=xdb}
 C {lab_pin.sym} -450 -190 0 0 {name=l22 sig_type=std_logic lab=Isum_b}
 C {lab_pin.sym} -450 -170 0 0 {name=l23 sig_type=std_logic lab=wr[3:0]}
 C {lab_pin.sym} -450 -150 0 0 {name=l24 sig_type=std_logic lab=pb}
@@ -46,7 +46,7 @@ C {lab_pin.sym} 0 -150 0 0 {name=l27 sig_type=std_logic lab=VT_in}
 C {lab_pin.sym} 0 -130 0 0 {name=l28 sig_type=std_logic lab=Isum_b}
 C {lab_pin.sym} 300 -170 0 1 {name=l29 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 300 -150 0 1 {name=l30 sig_type=std_logic lab=VMEM_b}
-C {neuron_sized.sym} 600 -50 0 0 {name=xnb}
+C {neuron.sym} 600 -50 0 0 {name=xnb}
 C {lab_pin.sym} 450 -130 0 0 {name=l31 sig_type=std_logic lab=VMEM_b}
 C {lab_pin.sym} 750 -130 0 1 {name=l32 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 750 -110 0 1 {name=l33 sig_type=std_logic lab=VDD}
@@ -59,17 +59,17 @@ C {lab_pin.sym} 450 -30 0 0 {name=l39 sig_type=std_logic lab=VKup}
 C {lab_pin.sym} 450 -10 0 0 {name=l40 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} 450 10 0 0 {name=l41 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} 450 30 0 0 {name=l42 sig_type=std_logic lab=VT}
-C {DAC.sym} 1300 -600 0 0 {name=xha}
+C {DAC_unsigned.sym} 1300 -600 0 0 {name=xha}
 C {lab_pin.sym} 1150 -640 0 0 {name=l43 sig_type=std_logic lab=Isum_h}
 C {lab_pin.sym} 1150 -620 0 0 {name=l44 sig_type=std_logic lab=wa[3:0]}
 C {lab_pin.sym} 1150 -600 0 0 {name=l45 sig_type=std_logic lab=spk_a}
 C {lab_pin.sym} 1350 -640 0 1 {name=l46 sig_type=std_logic lab=Vb}
-C {DAC.sym} 1300 -480 0 0 {name=xhb}
+C {DAC_unsigned.sym} 1300 -480 0 0 {name=xhb}
 C {lab_pin.sym} 1150 -520 0 0 {name=l47 sig_type=std_logic lab=Isum_h}
 C {lab_pin.sym} 1150 -500 0 0 {name=l48 sig_type=std_logic lab=wb[3:0]}
 C {lab_pin.sym} 1150 -480 0 0 {name=l49 sig_type=std_logic lab=spk_b}
 C {lab_pin.sym} 1350 -520 0 1 {name=l50 sig_type=std_logic lab=Vb}
-C {DAC.sym} 1300 -360 0 0 {name=xhc}
+C {DAC_unsigned.sym} 1300 -360 0 0 {name=xhc}
 C {lab_pin.sym} 1150 -400 0 0 {name=l51 sig_type=std_logic lab=Isum_h}
 C {lab_pin.sym} 1150 -380 0 0 {name=l52 sig_type=std_logic lab=w0[3:0]}
 C {lab_pin.sym} 1150 -360 0 0 {name=l53 sig_type=std_logic lab=VSS}
@@ -80,7 +80,7 @@ C {lab_pin.sym} 1600 -480 0 0 {name=l56 sig_type=std_logic lab=VT_hid}
 C {lab_pin.sym} 1600 -460 0 0 {name=l57 sig_type=std_logic lab=Isum_h}
 C {lab_pin.sym} 1900 -500 0 1 {name=l58 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1900 -480 0 1 {name=l59 sig_type=std_logic lab=VMEM_h}
-C {neuron_sized.sym} 2200 -380 0 0 {name=xnh}
+C {neuron.sym} 2200 -380 0 0 {name=xnh}
 C {lab_pin.sym} 2050 -460 0 0 {name=l60 sig_type=std_logic lab=VMEM_h}
 C {lab_pin.sym} 2350 -460 0 1 {name=l61 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 2350 -440 0 1 {name=l62 sig_type=std_logic lab=VDD}

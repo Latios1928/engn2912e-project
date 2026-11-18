@@ -1,0 +1,20 @@
+{
+ "stage": "build",
+ "cell": "neuron",
+ "time": "2026-11-18 04:24:03",
+ "ok": true,
+ "size_um": [
+  103.06,
+  77.24
+ ],
+ "router_check": "clean",
+ "predrc": "predrc neuron: 0 rule(s) predicted to fail (20 checked, 0.0 s)",
+ "notes": [
+  "M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "M6: 0.22/5 -> 0.5/11.36 (W/L kept)"
+ ]
+}

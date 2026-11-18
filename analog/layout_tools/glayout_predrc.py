@@ -2,7 +2,7 @@
 Fast DRC prediction for GF180 gLayout cells (KLayout geometry engine, ~1 s).
 
     from glayout_predrc import predrc
-    print(predrc("neuron_glayout.gds"))          # or predrc(component)
+    print(predrc("neuron.gds"))          # or predrc(component)
 
     env -u PYTHONPATH PDK_ROOT=/foss/pdks .venv-glayout/bin/python glayout_predrc.py cell.gds
 

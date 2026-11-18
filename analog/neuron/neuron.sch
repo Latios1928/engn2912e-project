@@ -5,6 +5,9 @@ V {}
 S {}
 F {}
 E {}
+T {neuron_sized: copy of neuron_5khz.sch, sized by sweep for sizing_context.txt (Iin = 9.5 nA DC, tt, 27 C).
+Cmem (C2) 22.18 x 22.18 um = 1.00 pF. C_K (C1) 10 x 10 um = 0.21 pF. Biases are set in neuron_sized_testbench.sch.
+M6 L = 5 um; bias devices M7-M12 W/L = 1u/1u.} -860 -420 0 0 0.3 0.3 {}
 N -100 -0 -40 -0 {lab=VT}
 N -100 20 -40 20 {lab=Vamp_bias}
 N 0 -80 0 -50 {lab=VDD}
@@ -152,7 +155,7 @@ spiceprefix=X
 }
 C {lab_wire.sym} -290 -180 0 0 {name=p11 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} -200 140 0 1 {name=M6
-L=0.28u
+L=5u
 W=0.22u
 nf=1
 m=1
@@ -167,16 +170,16 @@ spiceprefix=X
 }
 C {lab_wire.sym} -280 140 0 0 {name=p12 sig_type=std_logic lab=VSS}
 C {symbols/cap_mim_analog.sym} 610 30 0 0 {name=C1
-W=1e-6
-L=1e-6
+W=10e-6
+L=10e-6
 model=cap_mim_2f0_m3m4_noshield
 spiceprefix=X
 m=1}
 C {lab_wire.sym} 610 110 0 0 {name=p13 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} 590 0 0 0 {name=p14 sig_type=std_logic lab=spike}
 C {symbols/nfet_03v3.sym} 360 190 0 0 {name=M7
-L=0.28u
-W=0.22u
+L=1u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -189,8 +192,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 190 190 0 0 {name=M8
-L=0.28u
-W=0.22u
+L=1u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -203,8 +206,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} -200 -270 0 1 {name=M9
-L=0.28u
-W=0.22u
+L=1u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -217,8 +220,8 @@ model=pfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -200 230 0 1 {name=M10
-L=0.28u
-W=0.22u
+L=1u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -239,16 +242,16 @@ C {lab_wire.sym} 210 250 0 0 {name=p20 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -280 230 0 0 {name=p21 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -220 280 0 0 {name=p22 sig_type=std_logic lab=VSS}
 C {symbols/cap_mim_analog.sym} -370 30 0 0 {name=C2
-W=1e-6
-L=1e-6
+W=22.18e-6
+L=22.18e-6
 model=cap_mim_2f0_m3m4_noshield
 spiceprefix=X
 m=1}
 C {lab_wire.sym} -370 90 0 0 {name=p23 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -290 -20 0 0 {name=p24 sig_type=std_logic lab=VMEM}
 C {symbols/nfet_03v3.sym} -560 40 0 0 {name=M11
-L=0.28u
-W=0.22u
+L=1u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -266,8 +269,8 @@ C {lab_wire.sym} -130 230 0 0 {name=p27 sig_type=std_logic lab=VK}
 C {lab_wire.sym} 120 190 0 0 {name=p28 sig_type=std_logic lab=VIp}
 C {lab_wire.sym} 290 190 0 0 {name=p29 sig_type=std_logic lab=VKdn}
 C {symbols/pfet_03v3.sym} 360 -150 0 0 {name=M12
-L=0.28u
-W=0.22u
+L=1u
+W=1u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -296,3 +299,5 @@ C {opin.sym} -860 300 0 0 {name=p42 lab=spike}
 C {ipin.sym} -840 230 0 0 {name=p43 lab=Vamp_bias}
 C {ipin.sym} -840 270 0 0 {name=p44 lab=VT}
 C {lab_wire.sym} -490 40 0 0 {name=p45 sig_type=std_logic lab=VSS}
+T {2026-11-14: x1 is spike_amplifier_sized (input pair 4/2 um, mirror 0.5/8 um; was the minimum-size spike_amplifier).
+See analog/testbenches/spike_amp/results/spike_amp_sizing.md. The layout (layout/gen_neuron.py, neuron_sized.gds) still has the minimum-size amplifier.} -860 -520 0 0 0.3 0.3 {}

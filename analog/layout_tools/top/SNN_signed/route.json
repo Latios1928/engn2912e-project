@@ -1,7 +1,7 @@
 {
  "stage": "route",
  "top": "SNN_signed",
- "time": "2026-11-18 04:06:24",
+ "time": "2026-11-18 04:31:02",
  "ok": true,
  "size_um": [
   616.38,
@@ -24,7 +24,7 @@
    "unreachable": [],
    "hotspots": {},
    "growth": {},
-   "seconds": 23
+   "seconds": 28
   }
  ],
  "sensitive": [
@@ -162,14 +162,14 @@
  ],
  "hierarchy": {
   "cells": [
-   "DAC_signed_binary",
+   "DAC",
    "DPI",
-   "DPI_inh_min",
-   "bias_cell",
-   "neuron_glayout"
+   "DPI_inh",
+   "bias",
+   "neuron"
   ],
   "instances": 22,
   "max_bbox_offset_um": 0.0
  },
- "seconds": 37
+ "seconds": 43
 }

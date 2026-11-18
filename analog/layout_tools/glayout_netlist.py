@@ -2,12 +2,12 @@
 Schematic netlist -> flat device table for the gLayout floorplanner.
 
     from glayout_netlist import from_schematic
-    cell = from_schematic("analog/neuron/neuron_sized.sch")
+    cell = from_schematic("analog/neuron/neuron.sch")
     print(cell.summary())          # devices, caps, pins, warnings
     cell.legalize()                # W < 0.5 um -> 0.5 um, L scaled to keep W/L
     cell.connect("x1_net2", "VT")  # explicit fix for a schematic wiring bug
 
-    env -u PYTHONPATH .venv-glayout/bin/python glayout_netlist.py analog/neuron/neuron_sized.sch
+    env -u PYTHONPATH .venv-glayout/bin/python glayout_netlist.py analog/neuron/neuron.sch
 
 What it does:
   * netlists the .sch with xschem (or reads a .spice you give it),
@@ -15,7 +15,7 @@ What it does:
   * keeps nfet_03v3 / pfet_03v3 / cap_mim_* devices with W, L, nf, m and c_width/c_length,
   * reads the top-level pin order from the "**.subckt <cell> pins" header line,
   * warns about nets that touch only gates (floating gates) and pins that connect to nothing,
-    which is exactly how the VN-wire bug in spike_amplifier_sized.sch shows up.
+    which is exactly how the VN-wire bug in spike_amplifier.sch shows up.
 """
 from __future__ import annotations
 

@@ -1,0 +1,16 @@
+{
+ "stage": "decide",
+ "cell": "DAC",
+ "time": "2026-11-18 04:24:44",
+ "ok": true,
+ "blockers": [],
+ "mode": "auto",
+ "open_questions": [],
+ "auto_answers": {
+  "Q-body-x1_net4": "keep isolated island",
+  "Q-body-x1_net2": "keep isolated island",
+  "Q-body-x1_net3": "keep isolated island",
+  "Q-body-x1_net1": "keep isolated island",
+  "Q-dummy_l": "cap 2"
+ }
+}

@@ -1,7 +1,7 @@
 # Simulation setup for loop.py. Paths are relative to the repo root.
 # The loop netlists the testbench once with xschem, removes its .control block,
 # and runs the analysis below in ngspice batch mode.
-testbench: analog/neuron/neuron_5khz_testbench.sch
+testbench: analog/neuron/old/neuron_5khz_testbench.sch
 # base_netlist: path/to/netlist.spice   # use instead of testbench to skip xschem
 
 timeout_s: 120        # per simulation

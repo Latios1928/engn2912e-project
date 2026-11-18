@@ -35,7 +35,7 @@ Implemented, differences from the design below:
 
 | | have | missing for a top level |
 |---|---|---|
-| blocks | 5 flow cells signed off with edge pins and `<cell>_pins.json` (neuron_glayout, bias_cell, DPI, DPI_inh_min, DAC_signed_binary); hand GDS for DPI, DPI_inh, DAC_binary, DAC_signed, neuron_sized, bias_cell | one abstract format for both kinds (blockages, LVS ref, PEX) |
+| blocks | 5 flow cells signed off with edge pins and `<cell>_pins.json` (neuron, bias, DPI, DPI_inh, DAC); hand GDS for DPI, DPI_inh, DAC_magnitude, DAC_signed, neuron, bias | one abstract format for both kinds (blockages, LVS ref, PEX) |
 | netlist | xschem netlists the top schematic | a block map (symbol -> layout) and pin mapping by name |
 | placement | gen_snn.py's fixed row plan | placement derived from the network, editable decisions |
 | routing | cell router (tracks, pack_tracks, short check); gen_snn.py hand tracks | a channel router over blocks |
@@ -64,21 +64,21 @@ side, access box) plus `blockage` per metal layer (rectangles the top router mus
 1. **edge pins** (done): every pin net gets a stub ending on the cell boundary. W / E pins
    are Metal2 stubs (a vertical Metal3 channel track reaches them with a via, as in
    gen_snn.py); N / S pins are Metal3 risers; VDD / VSS are 1 um Metal1 straps on the left
-   edge, and on the right too where `pin_sides` lists `VSS: [W, E]` (neuron_glayout). Pin side per pin from `pin_sides` in flow_cells.yaml (the only place it is
+   edge, and on the right too where `pin_sides` lists `VSS: [W, E]` (neuron). Pin side per pin from `pin_sides` in flow_cells.yaml (the only place it is
    set), so a block can face its channel.
 2. (done) write `<cell>_pins.json` in the abstract format during `build`.
 
 ### 3.2 Block map (`blocks:` in `top_flow.yaml`)
 ```yaml
-DAC_signed_binary: {source: flow, cell: DAC_signed_binary}      # or {source: hand, gds: ../DAC/layout/DAC_signed.gds}
+DAC: {source: flow, cell: DAC}      # or {source: hand, gds: ../DAC/old/layout/DAC_signed.gds}
 DPI:               {source: flow, cell: DPI}
-DPI_inh_min:       {source: flow, cell: DPI_inh_min}            # not built yet
-neuron_sized:      {source: flow, cell: neuron_glayout}
-bias_cell:         {source: flow, cell: bias_cell}
+DPI_inh:       {source: flow, cell: DPI_inh}            # not built yet
+neuron:      {source: flow, cell: neuron}
+bias:         {source: flow, cell: bias}
 pin_alias: {GND: VSS}                                           # schematic ground name -> layout
 ```
 The bias cell is not in `snn_analog_signed.sch` (biases are pins there): the map can add
-`extra_instances: {xbias: bias_cell}` whose outputs replace the bias pins, as gen_snn.py does.
+`extra_instances: {xbias: bias}` whose outputs replace the bias pins, as gen_snn.py does.
 
 ### 3.3 Floorplan (`plan`)
 Default template = gen_snn.py's, derived from the netlist instead of hard-coded: one **row per
@@ -118,12 +118,12 @@ Channel router, nothing over blocks except declared layers (M5 if no block uses 
 ## 4. Milestones (each ends with real DRC + LVS)
 
 1. **Edge pins + abstracts.** two_row edge pins, `<cell>_pins.json`; abstracts for all
-   blocks. Rerun the 4 flow cells (DRC/LVS must stay clean). Build `DPI_inh_min`.
+   blocks. Rerun the 4 flow cells (DRC/LVS must stay clean). Build `DPI_inh`.
 2. **Reproduce the known top.** netlist + plan + place + route on `snn_analog_inh` with the
    hand blocks; acceptance: DRC clean, LVS match, area within ~10 % of SNN.gds (285 x 547 um).
    This validates the flow against a layout that is known to work.
-3. **Signed network.** `snn_analog_signed` with flow blocks (8 DAC_signed_binary, 5 DPI,
-   3 DPI_inh_min, 5 neurons, bias cell); DRC / LVS.
+3. **Signed network.** `snn_analog_signed` with flow blocks (8 DAC, 5 DPI,
+   3 DPI_inh, 5 neurons, bias cell); DRC / LVS.
 4. **Post-layout check.** C-only PEX, island-short check, `snn_signed_tb` scenarios on the
    extraction vs schematic; coupling report on VMEM / Isum.
 5. **Speed.** predictors on the top level (short check, predrc, coupling) so a plan change

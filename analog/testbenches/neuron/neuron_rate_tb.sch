@@ -58,7 +58,7 @@ C {lab_wire.sym} -470 0 0 0 {name=p18 sig_type=std_logic lab=preIN}
 C {lab_wire.sym} -470 -130 0 0 {name=p19 sig_type=std_logic lab=VDD}
 C {ammeter.sym} -470 30 0 0 {name=VMEM savecurrent=true spice_ignore=0}
 C {lab_wire.sym} -470 90 0 0 {name=p9 sig_type=std_logic lab=VMEM}
-C {neuron_sized.sym} 140 -40 0 0 {name=x1}
+C {neuron.sym} 140 -40 0 0 {name=x1}
 C {lab_wire.sym} 370 -120 0 0 {name=p1 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} 370 -100 0 0 {name=p2 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 370 -80 0 0 {name=p3 sig_type=std_logic lab=spike}

@@ -1,0 +1,192 @@
+18-Nov-2026 04:28:48 | INFO    | Your Klayout version is: KLayout 0.30.8
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dnwell_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['lvpwell.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metal1.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metal5.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_poly2.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metal3.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dualgate.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['ldpmos.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['comp.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['sram_3p3.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['hres.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['mim_a.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['drc_bjt.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['sram_5p0.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metaltop_30k.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['sab.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['mcell.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via3_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metal2.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_metal2.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['lres.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via1.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['guard_ring.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metaltop.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metal1_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['lvs_bjt.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_metal1.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via1_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via3.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['nwell_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_metal3.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via4_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via2_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['lvpwell_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['nat_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['nwell.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['cup.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dnwell.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via5.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['metal4.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via4.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['ldnmos.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['esd.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['nat.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['pres.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['contact_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['contact.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_exclude.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_metal4.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['geom.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['pplus.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['nplus.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['mim_b.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['poly2.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['ymtp_mk.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['ldnmos_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['via2.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_comp.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['otp_mk.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['dummy_metal5.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['ldpmos_split.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['mslot.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | ## Generating template with for the following rule tables: ['efuse.drc']
+18-Nov-2026 04:28:48 | INFO    | ## Your run dir located at: /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc
+18-Nov-2026 04:28:48 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dnwell_split on cell bias:
+18-Nov-2026 04:28:48 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design lvpwell on cell bias:
+18-Nov-2026 04:28:48 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metal1 on cell bias:
+18-Nov-2026 04:28:48 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metal5 on cell bias:
+18-Nov-2026 04:28:52 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_poly2 on cell bias:
+18-Nov-2026 04:28:52 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metal3 on cell bias:
+18-Nov-2026 04:28:53 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dualgate on cell bias:
+18-Nov-2026 04:28:53 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design ldpmos on cell bias:
+18-Nov-2026 04:28:55 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design comp on cell bias:
+18-Nov-2026 04:28:55 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design sram_3p3 on cell bias:
+18-Nov-2026 04:28:55 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design hres on cell bias:
+18-Nov-2026 04:28:56 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design mim_a on cell bias:
+18-Nov-2026 04:28:58 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design drc_bjt on cell bias:
+18-Nov-2026 04:28:59 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design sram_5p0 on cell bias:
+18-Nov-2026 04:28:59 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metaltop_30k on cell bias:
+18-Nov-2026 04:28:59 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design sab on cell bias:
+18-Nov-2026 04:29:04 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design mcell on cell bias:
+18-Nov-2026 04:29:04 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via3_split on cell bias:
+18-Nov-2026 04:29:04 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metal2 on cell bias:
+18-Nov-2026 04:29:04 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_metal2 on cell bias:
+18-Nov-2026 04:29:07 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design lres on cell bias:
+18-Nov-2026 04:29:07 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via1 on cell bias:
+18-Nov-2026 04:29:07 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design guard_ring on cell bias:
+18-Nov-2026 04:29:07 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metaltop on cell bias:
+18-Nov-2026 04:29:09 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metal1_split on cell bias:
+18-Nov-2026 04:29:09 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design lvs_bjt on cell bias:
+18-Nov-2026 04:29:10 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_metal1 on cell bias:
+18-Nov-2026 04:29:11 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via1_split on cell bias:
+18-Nov-2026 04:29:14 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via3 on cell bias:
+18-Nov-2026 04:29:14 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design nwell_split on cell bias:
+18-Nov-2026 04:29:14 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_metal3 on cell bias:
+18-Nov-2026 04:29:15 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via4_split on cell bias:
+18-Nov-2026 04:29:18 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via2_split on cell bias:
+18-Nov-2026 04:29:18 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design lvpwell_split on cell bias:
+18-Nov-2026 04:29:19 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design nat_split on cell bias:
+18-Nov-2026 04:29:19 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design nwell on cell bias:
+18-Nov-2026 04:29:24 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design cup on cell bias:
+18-Nov-2026 04:29:24 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dnwell on cell bias:
+18-Nov-2026 04:29:24 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via5 on cell bias:
+18-Nov-2026 04:29:26 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design metal4 on cell bias:
+18-Nov-2026 04:29:26 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via4 on cell bias:
+18-Nov-2026 04:29:27 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design ldnmos on cell bias:
+18-Nov-2026 04:29:27 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design esd on cell bias:
+18-Nov-2026 04:29:28 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design nat on cell bias:
+18-Nov-2026 04:29:30 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design pres on cell bias:
+18-Nov-2026 04:29:30 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design contact_split on cell bias:
+18-Nov-2026 04:29:31 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design contact on cell bias:
+18-Nov-2026 04:29:33 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_exclude on cell bias:
+18-Nov-2026 04:29:34 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_metal4 on cell bias:
+18-Nov-2026 04:29:34 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design geom on cell bias:
+18-Nov-2026 04:29:35 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design pplus on cell bias:
+18-Nov-2026 04:29:36 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design nplus on cell bias:
+18-Nov-2026 04:29:36 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design mim_b on cell bias:
+18-Nov-2026 04:29:38 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design poly2 on cell bias:
+18-Nov-2026 04:29:38 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design ymtp_mk on cell bias:
+18-Nov-2026 04:29:39 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design ldnmos_split on cell bias:
+18-Nov-2026 04:29:39 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design via2 on cell bias:
+18-Nov-2026 04:29:40 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_comp on cell bias:
+18-Nov-2026 04:29:42 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design otp_mk on cell bias:
+18-Nov-2026 04:29:43 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design dummy_metal5 on cell bias:
+18-Nov-2026 04:29:44 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design ldpmos_split on cell bias:
+18-Nov-2026 04:29:45 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design mslot on cell bias:
+18-Nov-2026 04:29:46 | INFO    | Running Global Foundries 180nm MCU /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds checks on design efuse on cell bias:
+18-Nov-2026 04:29:48 | ERROR   | mslot generated an exception: Command 'klayout -b -r /foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc/mslot.drc -rd thr=2 -rd metal_top=11K -rd mim_option=B -rd metal_level=5LM -rd verbose=false -rd feol=true -rd beol=true -rd offgrid=true -rd conn_drc=true -rd density=false -rd split_deep=false -rd slow_via=false -rd topcell=bias -rd input=/foss/designs/engn2912e-project/analog/layout_tools/flow/bias/bias.gds -rd report=/foss/designs/engn2912e-project/analog/layout_tools/flow/bias/drc/bias_mslot.lyrdb -rd run_mode=flat -rd table_name=mslot' returned non-zero exit status 1.
+18-Nov-2026 04:29:48 | INFO    | Klayout DRC run is clean. GDS has no DRC violations.

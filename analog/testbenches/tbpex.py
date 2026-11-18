@@ -18,8 +18,9 @@ from tbtools import ROOT
 
 LAYOUT = ROOT / "analog" / "neuron" / "layout"
 PEX = LAYOUT / "PEX"
-# Block layouts live with their schematics; PEX/ stays shared in analog/neuron/layout.
-LAYOUT_DIRS = [LAYOUT, ROOT / "analog" / "DAC" / "layout", ROOT / "analog" / "DPI" / "layout"]
+# Hand-drawn block layouts (archived 2026-11-18 in <dir>/old/layout); PEX/ stays in analog/neuron/layout.
+# The current block layouts are built by layout_tools/flow.py (flow/<cell>/<cell>.gds).
+LAYOUT_DIRS = [ROOT / "analog" / d / "old" / "layout" for d in ("neuron", "DAC", "DPI")]
 
 
 def layout_gds(cell: str):

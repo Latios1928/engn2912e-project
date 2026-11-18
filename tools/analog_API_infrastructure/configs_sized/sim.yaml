@@ -1,5 +1,5 @@
 # Simulation setup for the sizing_context.txt run. Paths relative to the repo root.
-testbench: analog/neuron/neuron_sized_testbench.sch
+testbench: analog/neuron/neuron_testbench.sch
 timeout_s: 180
 layout_factor: 1.0
 

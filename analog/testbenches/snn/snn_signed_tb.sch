@@ -23,7 +23,7 @@ C {lab_pin.sym} -150 120 0 0 {name=l14 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} -150 140 0 0 {name=l15 sig_type=std_logic lab=VT}
 C {lab_pin.sym} -150 160 0 0 {name=l16 sig_type=std_logic lab=s[7:0]}
 C {lab_pin.sym} 150 0 0 1 {name=l18 sig_type=std_logic lab=spike[4:0]}
-C {bias_cell.sym} -600 0 0 0 {name=xbias}
+C {bias.sym} -600 0 0 0 {name=xbias}
 C {lab_pin.sym} -750 -100 0 0 {name=l19 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} -750 -80 0 0 {name=l20 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} -750 -60 0 0 {name=l21 sig_type=std_logic lab=Iref}

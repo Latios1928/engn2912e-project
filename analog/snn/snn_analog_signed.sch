@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 T {Input 0} 200 -1340 0 0 0.4 0.4 {}
-C {DAC_signed_binary.sym} 400 -1200 0 0 {name=xdac0_0}
+C {DAC.sym} 400 -1200 0 0 {name=xdac0_0}
 C {lab_pin.sym} 250 -1180 0 0 {name=l200 sig_type=std_logic lab=s[0]}
 C {lab_pin.sym} 450 -1220 0 1 {name=l201 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 450 -1200 0 1 {name=l202 sig_type=std_logic lab=VDD}
@@ -20,7 +20,7 @@ C {lab_pin.sym} 250 -1090 0 0 {name=l6 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 550 -1070 0 1 {name=l7 sig_type=std_logic lab=VMEM_0}
 C {lab_pin.sym} 250 -1050 0 0 {name=l8 sig_type=std_logic lab=Isum_0}
 C {lab_pin.sym} 250 -1070 0 0 {name=l9 sig_type=std_logic lab=VT_dpi}
-C {neuron_sized.sym} 400 -870 0 0 {name=xneu0}
+C {neuron.sym} 400 -870 0 0 {name=xneu0}
 C {lab_pin.sym} 550 -950 0 1 {name=l10 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 550 -930 0 1 {name=l11 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 550 -910 0 1 {name=l12 sig_type=std_logic lab=spike[0]}
@@ -34,7 +34,7 @@ C {lab_pin.sym} 250 -830 0 0 {name=l19 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} 250 -810 0 0 {name=l20 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} 250 -790 0 0 {name=l21 sig_type=std_logic lab=VT}
 T {Input 1} 900 -1340 0 0 0.4 0.4 {}
-C {DAC_signed_binary.sym} 1100 -1200 0 0 {name=xdac1_0}
+C {DAC.sym} 1100 -1200 0 0 {name=xdac1_0}
 C {lab_pin.sym} 950 -1180 0 0 {name=l203 sig_type=std_logic lab=s[1]}
 C {lab_pin.sym} 1150 -1220 0 1 {name=l204 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1150 -1200 0 1 {name=l205 sig_type=std_logic lab=VDD}
@@ -48,7 +48,7 @@ C {lab_pin.sym} 950 -1090 0 0 {name=l27 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1250 -1070 0 1 {name=l28 sig_type=std_logic lab=VMEM_1}
 C {lab_pin.sym} 950 -1050 0 0 {name=l29 sig_type=std_logic lab=Isum_1}
 C {lab_pin.sym} 950 -1070 0 0 {name=l30 sig_type=std_logic lab=VT_dpi}
-C {neuron_sized.sym} 1100 -870 0 0 {name=xneu1}
+C {neuron.sym} 1100 -870 0 0 {name=xneu1}
 C {lab_pin.sym} 1250 -950 0 1 {name=l31 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 1250 -930 0 1 {name=l32 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1250 -910 0 1 {name=l33 sig_type=std_logic lab=spike[1]}
@@ -62,7 +62,7 @@ C {lab_pin.sym} 950 -830 0 0 {name=l40 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} 950 -810 0 0 {name=l41 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} 950 -790 0 0 {name=l42 sig_type=std_logic lab=VT}
 T {Hidden 0} 200 -440 0 0 0.4 0.4 {}
-C {DAC_signed_binary.sym} 400 -300 0 0 {name=xdac2_0}
+C {DAC.sym} 400 -300 0 0 {name=xdac2_0}
 C {lab_pin.sym} 250 -280 0 0 {name=l206 sig_type=std_logic lab=s[2]}
 C {lab_pin.sym} 450 -320 0 1 {name=l207 sig_type=std_logic lab=Isum_inh2}
 C {lab_pin.sym} 450 -300 0 1 {name=l208 sig_type=std_logic lab=VDD}
@@ -70,7 +70,7 @@ C {lab_pin.sym} 250 -340 0 0 {name=l43 sig_type=std_logic lab=Isum_2}
 C {lab_pin.sym} 450 -340 0 1 {name=l44 sig_type=std_logic lab=Vb}
 C {lab_pin.sym} 250 -320 0 0 {name=l45 sig_type=std_logic lab=w[11:8]}
 C {lab_pin.sym} 250 -300 0 0 {name=l46 sig_type=std_logic lab=spike[0]}
-C {DAC_signed_binary.sym} 400 -210 0 0 {name=xdac2_1}
+C {DAC.sym} 400 -210 0 0 {name=xdac2_1}
 C {lab_pin.sym} 250 -190 0 0 {name=l209 sig_type=std_logic lab=s[3]}
 C {lab_pin.sym} 450 -230 0 1 {name=l210 sig_type=std_logic lab=Isum_inh2}
 C {lab_pin.sym} 450 -210 0 1 {name=l211 sig_type=std_logic lab=VDD}
@@ -84,7 +84,7 @@ C {lab_pin.sym} 250 -100 0 0 {name=l52 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 550 -80 0 1 {name=l53 sig_type=std_logic lab=VMEM_2}
 C {lab_pin.sym} 250 -60 0 0 {name=l54 sig_type=std_logic lab=Isum_2}
 C {lab_pin.sym} 250 -80 0 0 {name=l55 sig_type=std_logic lab=VT_dpi}
-C {neuron_sized.sym} 400 120 0 0 {name=xneu2}
+C {neuron.sym} 400 120 0 0 {name=xneu2}
 C {lab_pin.sym} 550 40 0 1 {name=l56 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 550 60 0 1 {name=l57 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 550 80 0 1 {name=l58 sig_type=std_logic lab=spike[2]}
@@ -98,7 +98,7 @@ C {lab_pin.sym} 250 160 0 0 {name=l65 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} 250 180 0 0 {name=l66 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} 250 200 0 0 {name=l67 sig_type=std_logic lab=VT}
 T {Hidden 1} 900 -440 0 0 0.4 0.4 {}
-C {DAC_signed_binary.sym} 1100 -300 0 0 {name=xdac3_0}
+C {DAC.sym} 1100 -300 0 0 {name=xdac3_0}
 C {lab_pin.sym} 950 -280 0 0 {name=l212 sig_type=std_logic lab=s[4]}
 C {lab_pin.sym} 1150 -320 0 1 {name=l213 sig_type=std_logic lab=Isum_inh3}
 C {lab_pin.sym} 1150 -300 0 1 {name=l214 sig_type=std_logic lab=VDD}
@@ -106,7 +106,7 @@ C {lab_pin.sym} 950 -340 0 0 {name=l68 sig_type=std_logic lab=Isum_3}
 C {lab_pin.sym} 1150 -340 0 1 {name=l69 sig_type=std_logic lab=Vb}
 C {lab_pin.sym} 950 -320 0 0 {name=l70 sig_type=std_logic lab=w[19:16]}
 C {lab_pin.sym} 950 -300 0 0 {name=l71 sig_type=std_logic lab=spike[0]}
-C {DAC_signed_binary.sym} 1100 -210 0 0 {name=xdac3_1}
+C {DAC.sym} 1100 -210 0 0 {name=xdac3_1}
 C {lab_pin.sym} 950 -190 0 0 {name=l215 sig_type=std_logic lab=s[5]}
 C {lab_pin.sym} 1150 -230 0 1 {name=l216 sig_type=std_logic lab=Isum_inh3}
 C {lab_pin.sym} 1150 -210 0 1 {name=l217 sig_type=std_logic lab=VDD}
@@ -120,7 +120,7 @@ C {lab_pin.sym} 950 -100 0 0 {name=l77 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1250 -80 0 1 {name=l78 sig_type=std_logic lab=VMEM_3}
 C {lab_pin.sym} 950 -60 0 0 {name=l79 sig_type=std_logic lab=Isum_3}
 C {lab_pin.sym} 950 -80 0 0 {name=l80 sig_type=std_logic lab=VT_dpi}
-C {neuron_sized.sym} 1100 120 0 0 {name=xneu3}
+C {neuron.sym} 1100 120 0 0 {name=xneu3}
 C {lab_pin.sym} 1250 40 0 1 {name=l81 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 1250 60 0 1 {name=l82 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1250 80 0 1 {name=l83 sig_type=std_logic lab=spike[3]}
@@ -134,7 +134,7 @@ C {lab_pin.sym} 950 160 0 0 {name=l90 sig_type=std_logic lab=VKdn}
 C {lab_pin.sym} 950 180 0 0 {name=l91 sig_type=std_logic lab=Vamp_bias}
 C {lab_pin.sym} 950 200 0 0 {name=l92 sig_type=std_logic lab=VT}
 T {Output} 200 760 0 0 0.4 0.4 {}
-C {DAC_signed_binary.sym} 400 900 0 0 {name=xdac4_0}
+C {DAC.sym} 400 900 0 0 {name=xdac4_0}
 C {lab_pin.sym} 250 920 0 0 {name=l218 sig_type=std_logic lab=s[6]}
 C {lab_pin.sym} 450 880 0 1 {name=l219 sig_type=std_logic lab=Isum_inh4}
 C {lab_pin.sym} 450 900 0 1 {name=l220 sig_type=std_logic lab=VDD}
@@ -142,7 +142,7 @@ C {lab_pin.sym} 250 860 0 0 {name=l93 sig_type=std_logic lab=Isum_4}
 C {lab_pin.sym} 450 860 0 1 {name=l94 sig_type=std_logic lab=Vb}
 C {lab_pin.sym} 250 880 0 0 {name=l95 sig_type=std_logic lab=w[27:24]}
 C {lab_pin.sym} 250 900 0 0 {name=l96 sig_type=std_logic lab=spike[2]}
-C {DAC_signed_binary.sym} 400 1010 0 0 {name=xdac4_1}
+C {DAC.sym} 400 1010 0 0 {name=xdac4_1}
 C {lab_pin.sym} 250 1030 0 0 {name=l221 sig_type=std_logic lab=s[7]}
 C {lab_pin.sym} 450 990 0 1 {name=l222 sig_type=std_logic lab=Isum_inh4}
 C {lab_pin.sym} 450 1010 0 1 {name=l223 sig_type=std_logic lab=VDD}
@@ -157,13 +157,13 @@ C {lab_pin.sym} 550 1120 0 1 {name=l103 sig_type=std_logic lab=VMEM_4}
 C {lab_pin.sym} 250 1140 0 0 {name=l104 sig_type=std_logic lab=Isum_4}
 C {lab_pin.sym} 250 1120 0 0 {name=l105 sig_type=std_logic lab=VT_dpi}
 T {Inhibitory} 750 1040 0 0 0.3 0.3 {}
-C {DPI_inh_min.sym} 900 1120 0 0 {name=xdpi5}
+C {DPI_inh.sym} 900 1120 0 0 {name=xdpi5}
 C {lab_pin.sym} 750 1100 0 0 {name=l124 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 750 1120 0 0 {name=l125 sig_type=std_logic lab=VT_dpi}
 C {lab_pin.sym} 750 1140 0 0 {name=l126 sig_type=std_logic lab=Isum_inh4}
 C {lab_pin.sym} 1050 1100 0 1 {name=l127 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1050 1120 0 1 {name=l128 sig_type=std_logic lab=VMEM_4}
-C {neuron_sized.sym} 400 1320 0 0 {name=xneu4}
+C {neuron.sym} 400 1320 0 0 {name=xneu4}
 C {lab_pin.sym} 550 1240 0 1 {name=l106 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 550 1260 0 1 {name=l107 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 550 1280 0 1 {name=l108 sig_type=std_logic lab=spike[4]}
@@ -193,13 +193,13 @@ C {ipin.sym} -400 -810 0 0 {name=p_Vamp_bias lab=Vamp_bias}
 C {ipin.sym} -400 -780 0 0 {name=p_VT lab=VT}
 C {ipin.sym} -400 -750 0 0 {name=p_s lab=s[7:0]}
 C {opin.sym} -300 -690 0 0 {name=p_spike lab=spike[4:0]}
-C {DPI_inh_min.sym} 1700 -160 0 0 {name=xdpi6}
+C {DPI_inh.sym} 1700 -160 0 0 {name=xdpi6}
 C {lab_pin.sym} 1550 -180 0 0 {name=l224 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1550 -160 0 0 {name=l225 sig_type=std_logic lab=VT_dpi}
 C {lab_pin.sym} 1550 -140 0 0 {name=l226 sig_type=std_logic lab=Isum_inh2}
 C {lab_pin.sym} 1850 -180 0 1 {name=l227 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1850 -160 0 1 {name=l228 sig_type=std_logic lab=VMEM_2}
-C {DPI_inh_min.sym} 1700 -40 0 0 {name=xdpi7}
+C {DPI_inh.sym} 1700 -40 0 0 {name=xdpi7}
 C {lab_pin.sym} 1550 -60 0 0 {name=l229 sig_type=std_logic lab=Vthr}
 C {lab_pin.sym} 1550 -40 0 0 {name=l230 sig_type=std_logic lab=VT_dpi}
 C {lab_pin.sym} 1550 -20 0 0 {name=l231 sig_type=std_logic lab=Isum_inh3}

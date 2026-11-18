@@ -160,7 +160,7 @@ def load_store() -> dict:
     d = json.loads(CALIB.read_text())
     if d.get("version") != 2:            # v1: one flat {net: factor} dict from the neuron
         d = {"version": 2, "global": d.get("*", 1.0),
-             "cells": {"neuron_glayout": {"factors": {k: v for k, v in d.items() if k != "*"},
+             "cells": {"neuron": {"factors": {k: v for k, v in d.items() if k != "*"},
                                           "default": d.get("*", 1.0), "history": []}}}
     return d
 
