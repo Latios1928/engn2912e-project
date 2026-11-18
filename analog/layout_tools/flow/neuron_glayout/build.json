@@ -1,14 +1,14 @@
 {
  "stage": "build",
  "cell": "neuron_glayout",
- "time": "2026-11-17 15:29:30",
+ "time": "2026-11-18 01:20:46",
  "ok": true,
  "size_um": [
-  100.71,
-  62.84
+  103.06,
+  77.24
  ],
  "router_check": "clean",
- "predrc": "predrc neuron_glayout: 0 rule(s) predicted to fail (20 checked, 0.1 s)",
+ "predrc": "predrc neuron_glayout: 0 rule(s) predicted to fail (20 checked, 0.2 s)",
  "notes": [
   "M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",

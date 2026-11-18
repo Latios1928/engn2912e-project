@@ -1,14 +1,14 @@
 {
  "stage": "build",
  "cell": "bias_cell",
- "time": "2026-11-17 15:40:45",
+ "time": "2026-11-18 01:21:44",
  "ok": true,
  "size_um": [
-  311.7,
-  83.98
+  340.2,
+  115.98
  ],
  "router_check": "clean",
- "predrc": "predrc bias_cell: 0 rule(s) predicted to fail (19 checked, 0.2 s)",
+ "predrc": "predrc bias_cell: 0 rule(s) predicted to fail (19 checked, 0.1 s)",
  "notes": [
   "MO_Vb: W 1.435 -> 1.44 (glayout 10 nm width grid, L kept)",
   "MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",

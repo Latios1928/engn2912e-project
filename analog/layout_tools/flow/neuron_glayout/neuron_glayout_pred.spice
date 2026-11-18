@@ -103,23 +103,23 @@ XDPS15 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS16 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=1u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=1u nf=1
-Cpred_VIp VIp VSS 2.084e-14
-Cpred_VK VK VSS 2.202e-14
-Cpred_VKdn VKdn VSS 1.897e-14
-Cpred_VKup VKup VSS 1.84e-14
-Cpred_VMEM VMEM VSS 5.299e-14
-Cpred_VNA VNA VSS 1.3e-14
-Cpred_VT VT VSS 1.164e-14
-Cpred_Vamp_bias Vamp_bias VSS 5.956e-15
-Cpred_Vlk Vlk VSS 1.873e-14
-Cpred_net1 net1 VSS 5.112e-14
-Cpred_net2 net2 VSS 6.363e-14
-Cpred_net3 net3 VSS 8.983e-15
-Cpred_net4 net4 VSS 1.513e-14
-Cpred_net5 net5 VSS 1.46e-14
-Cpred_net6 net6 VSS 1.747e-14
-Cpred_net7 net7 VSS 6.676e-15
-Cpred_spike spike VSS 5.684e-14
-Cpred_x1_net1 x1_net1 VSS 9.736e-15
-Cpred_x1_net2 x1_net2 VSS 3.296e-14
+Cpred_VIp VIp VSS 6.125e-15
+Cpred_VK VK VSS 6.178e-15
+Cpred_VKdn VKdn VSS 6.074e-15
+Cpred_VKup VKup VSS 1.112e-14
+Cpred_VMEM VMEM VSS 3.887e-14
+Cpred_VNA VNA VSS 5.427e-15
+Cpred_VT VT VSS 5.046e-15
+Cpred_Vamp_bias Vamp_bias VSS 4.534e-15
+Cpred_Vlk Vlk VSS 6.229e-15
+Cpred_net1 net1 VSS 3.722e-14
+Cpred_net2 net2 VSS 4.352e-14
+Cpred_net3 net3 VSS 5.859e-15
+Cpred_net4 net4 VSS 1.128e-14
+Cpred_net5 net5 VSS 1.035e-14
+Cpred_net6 net6 VSS 1.156e-14
+Cpred_net7 net7 VSS 4.807e-15
+Cpred_spike spike VSS 4.53e-14
+Cpred_x1_net1 x1_net1 VSS 7.26e-15
+Cpred_x1_net2 x1_net2 VSS 2.36e-14
 .ends

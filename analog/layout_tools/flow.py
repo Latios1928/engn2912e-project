@@ -153,7 +153,7 @@ def st_build(cell):
     nl = _cell(cell)
     apply_answers(nl, dec)              # same netlist changes the decisions assumed
     order_n, order_p = expand_common_centroid(nl, dec, order_n, order_p)
-    res = two_row(nl, cell, order_n, order_p, dummy_l)
+    res = two_row(nl, cell, order_n, order_p, dummy_l, pin_sides=conf(cell).get("pin_sides"))
     text = write_cell(res, cdir(cell))
     b = json.loads((cdir(cell) / f"{cell}.build.json").read_text())
     ok = b["router_check"] == "clean" and " 0 rule(s) predicted to fail" in b["predrc"]

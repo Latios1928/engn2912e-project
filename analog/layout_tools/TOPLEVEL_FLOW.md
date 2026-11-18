@@ -1,5 +1,7 @@
 # Top-level layout flow: design draft (2026-11-17)
 
+All settings live in one hand-edited file, `top_flow.yaml` (open decisions marked DECIDE).
+
 Goal: build the analog SNN macro (first target `analog/snn/snn_analog_signed.sch`) from its
 schematic and its block layouts with the same file-based, stage-by-stage style as the cell
 flow (`flow.py`): every stage reads and writes files under `top/<top>/`, prints one short
@@ -10,7 +12,7 @@ status, can be rerun alone, and is checked by fast predictors before the real to
 
 | | have | missing for a top level |
 |---|---|---|
-| blocks | 4 flow cells signed off (neuron_glayout, bias_cell, DPI, DAC_signed_binary); hand GDS for DPI, DPI_inh, DAC_binary, DAC_signed, neuron_sized, bias_cell | edge pins on flow cells (now M4 labels at the left end of internal tracks, M2 rail labels inside); one abstract format for both kinds |
+| blocks | 5 flow cells signed off with edge pins and `<cell>_pins.json` (neuron_glayout, bias_cell, DPI, DPI_inh_min, DAC_signed_binary); hand GDS for DPI, DPI_inh, DAC_binary, DAC_signed, neuron_sized, bias_cell | one abstract format for both kinds (blockages, LVS ref, PEX) |
 | netlist | xschem netlists the top schematic | a block map (symbol -> layout) and pin mapping by name |
 | placement | gen_snn.py's fixed row plan | placement derived from the network, editable decisions |
 | routing | cell router (tracks, pack_tracks, short check); gen_snn.py hand tracks | a channel router over blocks |
@@ -20,9 +22,9 @@ status, can be rerun alone, and is checked by fast predictors before the real to
 
 | stage | does | writes | passes when |
 |---|---|---|---|
-| netlist | xschem netlist of the top schematic -> instances {name, symbol, pin -> net}, top pins; map each symbol to a block via `top_blocks.yaml` | netlist.json | every instance has a block, every block pin is in the symbol |
+| netlist | xschem netlist of the top schematic -> instances {name, symbol, pin -> net}, top pins; map each symbol to a block via `top_flow.yaml` (blocks:) | netlist.json | every instance has a block, every block pin is in the symbol |
 | abstract | for every block used: bbox, pins (name, layer, side, access box), blockages per metal layer, LVS ref file, PEX file | abstracts/<block>.json | every pin has an edge access box |
-| plan | floorplan decisions (like `decide`): rows / columns, orientation, channel order, supply style, sensitive nets, bias position; asks questions, auto-answers from `top_policy.yaml` | floorplan.yaml, plan.json | no open questions, no blockers |
+| plan | floorplan decisions (like `decide`): rows / columns, orientation, channel order, supply style, sensitive nets, bias position; asks questions, auto-answers from `top_flow.yaml` | floorplan.yaml, plan.json | no open questions, no blockers |
 | place | coordinates from the plan; channel widths from routing demand (iterates with route's estimate) | placement.json | no overlaps, channels wide enough |
 | route | global (net -> channel sequence) + detailed (track assignment) + supply | <top>.gds, shapes.json, route.json | every net routed, short check clean, predrc 0 |
 | signoff | DRC, hierarchical LVS, Magic PEX (C-only first), island-short check | drc/ lvs/ pex/ signoff.json | DRC clean, LVS match |
@@ -36,14 +38,14 @@ status, can be rerun alone, and is checked by fast predictors before the real to
 side, access box) plus `blockage` per metal layer (rectangles the top router must avoid),
 `lvs_ref`, `pex`, `source: flow | hand`, and the block's own signoff status. Hand blocks: from
 `extract_pins.py` (already edge pins). Flow cells: two changes in `two_row`:
-1. **edge pins**: every pin net gets a stub to the cell boundary on a pin layer. Default
-   Metal3 on the left or right edge (vertical top-level tracks in the channels reach them
-   with a Metal2/Metal3 stub, as in gen_snn.py); VDD / VSS on Metal2 straps to the left and
-   right edges. Pin side per pin from the plan (`pin_sides` in the block's layout.yaml), so a
-   block can face its channel.
-2. write `<cell>_pins.json` in the abstract format during `build`.
+1. **edge pins** (done): every pin net gets a stub ending on the cell boundary. W / E pins
+   are Metal2 stubs (a vertical Metal3 channel track reaches them with a via, as in
+   gen_snn.py); N / S pins are Metal3 risers; VDD / VSS are 1 um Metal1 straps on the left
+   edge, and on the right too where `pin_sides` lists `VSS: [W, E]` (neuron_glayout). Pin side per pin from `pin_sides` in flow_cells.yaml (the only place it is
+   set), so a block can face its channel.
+2. (done) write `<cell>_pins.json` in the abstract format during `build`.
 
-### 3.2 Block map `top_blocks.yaml`
+### 3.2 Block map (`blocks:` in `top_flow.yaml`)
 ```yaml
 DAC_signed_binary: {source: flow, cell: DAC_signed_binary}      # or {source: hand, gds: ../DAC/layout/DAC_signed.gds}
 DPI:               {source: flow, cell: DPI}

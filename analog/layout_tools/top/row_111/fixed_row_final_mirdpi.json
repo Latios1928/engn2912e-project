@@ -1,0 +1,68 @@
+{
+ "order": [
+  [
+   "DAC",
+   true
+  ],
+  [
+   "DPI",
+   true
+  ],
+  [
+   "NEU",
+   false
+  ]
+ ],
+ "margin_um": 6.0,
+ "runs": [
+  {
+   "gap_um": 4.0,
+   "routed": true,
+   "failed": [],
+   "size_um": [
+    486.1,
+    89.2
+   ],
+   "area_um2": 43381,
+   "wirelength_um": 414.5,
+   "vias": 61,
+   "placement_kept": true,
+   "nets": {
+    "Isum": {
+     "wire_um": 112.0,
+     "shortest_um": 76.5,
+     "detour_ratio": 1.46,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VMEM": {
+     "wire_um": 32.4,
+     "shortest_um": 29.5,
+     "detour_ratio": 1.1,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VDD": {
+     "wire_um": 104.7,
+     "shortest_um": 89.4,
+     "detour_ratio": 1.17,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    },
+    "VSS": {
+     "wire_um": 137.8,
+     "shortest_um": 82.5,
+     "detour_ratio": 1.67,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    }
+   }
+  }
+ ],
+ "signed_off": {
+  "gap_um": 4.0,
+  "drc": "clean",
+  "lvs": "match"
+ },
+ "total_s": 59
+}

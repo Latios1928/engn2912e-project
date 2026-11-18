@@ -1,0 +1,96 @@
+timestamp 0
+version 8.3
+tech gf180mcuD
+style ngspice()
+scale 1000 1 0.5
+resistclasses 1000000 3250000 6300 7000 6300 7000 7300 1000000 60000 185000 60000 185000 6300 7000 6300 7000 6800 7300 350000 310000 1000000 90 90 90 90 40
+parameters nfet_03v3_dss l=l w=w a1=as p1=ps a2=ad p2=pd l1=s_sab l2=d_sab
+parameters nfet_03v3 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters pfet_03v3_dss l=l w=w a1=as p1=ps a2=ad p2=pd l1=s_sab l2=d_sab
+parameters pfet_03v3 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters cap_mim_2f0_m4m5_noshield l=c_length w=c_width
+port "Vthr" 1 8714 -2779 8714 -2779 m4
+port "Iout" 3 3966 3099 3966 3099 m4
+port "VT" 4 4494 6789 4494 6789 m4
+port "Isum" 2 -2760 2779 -2760 2779 m4
+port "VDD" 6 4788 6381 4788 6381 m2
+port "VSS" 5 2040 -2531 2040 -2531 m2
+node "Vthr" 36 5795.98 8714 -2779 m4 0 0 0 0 0 0 0 0 0 0 0 0 45568 968 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10000 400 12800 456 1411400 28628 328200 6764 0 0
+node "Iout" 40 7894.39 3966 3099 m4 0 0 0 0 48000 1040 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 73720 1756 791800 16436 286000 6120 899000 18180 0 0
+node "a_190_n489#" 125 15276 190 -489 p 0 0 0 0 48000 1040 12000 440 0 0 0 0 2099200 9024 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 298560 10112 585200 12904 1575400 32508 1319200 26784 0 0
+node "a_4290_5135#" 131 17701.7 4290 5135 pdif 0 0 0 0 12000 440 12000 440 0 0 0 0 91136 1936 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 109680 3112 113600 3472 1848000 37960 6043680 96240 0 0
+node "VT" 38 6239.08 4494 6789 m4 0 0 0 0 0 0 0 0 0 0 0 0 45568 968 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10000 400 12800 456 1132400 23048 798200 16164 0 0
+node "Isum" 5608 22120.9 -2760 2779 m4 0 0 15527520 15796 209600 7792 810432 22512 0 0 0 0 1798400 18336 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2023456 53296 6410240 25656 720200 15204 1208200 24364 0 0
+node "VDD" 5895 79707.4 4788 6381 m2 8535408 11732 0 0 3128736 87016 209600 7792 0 0 0 0 1798400 18336 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6309208 130216 8429640 67044 1100400 23208 20653296 19704 19367776 24004
+substrate "VSS" 0 0 2040 -2531 m2 0 0 28536480 22284 537600 15632 4636512 128792 0 0 0 0 3574400 34896 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8092832 186516 14470040 107100 779000 16380 870000 17600 0 0
+cap "Vthr" "VT" 44.573
+cap "VDD" "Isum" 7999.57
+cap "Iout" "VT" 41.6343
+cap "Iout" "Vthr" 41.6343
+cap "VT" "a_4290_5135#" 411.559
+cap "Vthr" "a_4290_5135#" 398.713
+cap "Iout" "a_4290_5135#" 3919.39
+cap "Vthr" "Isum" 489.851
+cap "VDD" "a_190_n489#" 1669.41
+cap "Iout" "Isum" 41.6343
+cap "Isum" "a_4290_5135#" 1037.72
+cap "Iout" "a_190_n489#" 38.3998
+cap "a_190_n489#" "a_4290_5135#" 8600.86
+cap "VDD" "VT" 566.741
+cap "a_190_n489#" "Isum" 83.754
+cap "VDD" "Vthr" 102.914
+cap "VDD" "Iout" 167.46
+cap "VDD" "a_4290_5135#" 2406.32
+device csubckt cap_mim_2f0_m4m5_noshield 13676 3879 13677 3880 l=4436 w=4436 "None" "VDD" 151424 0 "a_4290_5135#" 17744 4081280,74336
+device msubckt nfet_03v3 9832 -937 9833 -936 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 9320 -937 9321 -936 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 8808 -937 8809 -936 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 8296 -937 8297 -936 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 7784 -937 7785 -936 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 12000,440
+device msubckt nfet_03v3 9846 -131 9847 -130 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 12000,440
+device msubckt nfet_03v3 9258 -131 9259 -130 l=128 w=100 "Isum" "a_4290_5135#" 256 0 "Isum" 100 12000,440 "a_4290_5135#" 100 12000,440
+device msubckt nfet_03v3 8630 -131 8631 -130 l=128 w=100 "Isum" "Vthr" 256 0 "Isum" 100 12000,440 "VDD" 100 12000,440
+device msubckt nfet_03v3 7770 -131 7771 -130 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 12000,440
+device msubckt nfet_03v3 9832 675 9833 676 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 9320 675 9321 676 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 8808 675 8809 676 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 8296 675 8297 676 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 5600,212
+device msubckt nfet_03v3 7784 675 7785 676 l=400 w=100 "Isum" "Isum" 800 0 "Isum" 0 0 "Isum" 200 12000,440
+device msubckt nfet_03v3 4144 -1087 4145 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 3632 -1087 3633 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 3120 -1087 3121 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 2608 -1087 2609 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 2096 -1087 2097 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 1584 -1087 1585 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 1072 -1087 1073 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 560 -1087 561 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 48 -1087 49 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 -464 -1087 -463 -1086 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 12000,440
+device msubckt nfet_03v3 4350 -281 4351 -280 l=400 w=400 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 800 48000,1040
+device msubckt nfet_03v3 2290 -281 2291 -280 l=1600 w=400 "VSS" "a_190_n489#" 3200 0 "VSS" 400 48000,1040 "Iout" 400 48000,1040
+device msubckt nfet_03v3 190 -281 191 -280 l=1600 w=400 "VSS" "a_190_n489#" 3200 0 "VSS" 400 48000,1040 "a_190_n489#" 400 48000,1040
+device msubckt nfet_03v3 -670 -281 -669 -280 l=400 w=400 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 800 48000,1040
+device msubckt nfet_03v3 4144 825 4145 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 3632 825 3633 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 3120 825 3121 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 2608 825 2609 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 2096 825 2097 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 1584 825 1585 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 1072 825 1073 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 560 825 561 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 48 825 49 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 5600,212
+device msubckt nfet_03v3 -464 825 -463 826 l=400 w=100 "VSS" "VSS" 800 0 "VSS" 0 0 "VSS" 200 12000,440
+device msubckt pfet_03v3 5612 4167 5613 4168 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 5100 4167 5101 4168 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 4588 4167 4589 4168 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 4076 4167 4077 4168 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 3564 4167 3565 4168 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 12000,440
+device msubckt pfet_03v3 5626 4973 5627 4974 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 12000,440
+device msubckt pfet_03v3 3550 4973 3551 4974 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 12000,440
+device msubckt pfet_03v3 5038 5135 5039 5136 l=128 w=100 "VDD" "a_4290_5135#" 256 0 "a_190_n489#" 100 12000,440 "VDD" 100 12000,440
+device msubckt pfet_03v3 4410 5135 4411 5136 l=128 w=100 "VDD" "VT" 256 0 "a_4290_5135#" 100 12000,440 "VDD" 100 12000,440
+device msubckt pfet_03v3 5612 5779 5613 5780 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 5100 5779 5101 5780 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 4588 5779 4589 5780 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 4076 5779 4077 5780 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 5600,212
+device msubckt pfet_03v3 3564 5779 3565 5780 l=400 w=100 "VDD" "VDD" 800 0 "VDD" 0 0 "VDD" 200 12000,440

@@ -26,12 +26,12 @@ DPI_flat: 36 warnings
 Total of 36 warnings.
 exttosim finished.
 Adding  VSS
-Warning: mimcapcontact at 8222 3627 smaller than extract section allows
-Adding  VDD; Tnew = 0.27ns, Told = 0.00ns
-Adding  Isum; Tnew = 0.12ns, Told = 0.00ns
-Adding  VT; Tnew = 0.01ns, Told = 0.00ns
-Adding  Isyn; Tnew = 0.01ns, Told = 0.00ns
-Adding  Vthr; Tnew = 0.01ns, Told = 0.00ns
+Warning: mimcapcontact at 9182 3627 smaller than extract section allows
+Adding  VDD; Tnew = 0.32ns, Told = 0.00ns
+Adding  Isum; Tnew = 0.14ns, Told = 0.00ns
+Adding  VT
+Adding  Isyn
+Adding  Vthr
 Total Nets: 7
 Nets extracted: 6 (0.857143)
 Nets output: 6 (0.857143)

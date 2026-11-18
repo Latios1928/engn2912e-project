@@ -1,0 +1,27 @@
+{
+ "cell": "DPI_inh_min",
+ "size_um": [
+  107.66,
+  58.42
+ ],
+ "router_check": "clean",
+ "predrc": "predrc DPI_inh_min: 0 rule(s) predicted to fail (20 checked, 0.1 s)",
+ "summary": "DPI_inh_min: 4 NMOS + 2 PMOS + 1 caps, 1 isolated NMOS body island(s) (Isum), tracks bot/mid/top 2/6/2, 2 columns, PMOS shift +0.00",
+ "notes": [
+  "x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "x1_M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
+  "ground net GND drawn as VSS"
+ ],
+ "predicted_fF": {
+  "Im": 35.7,
+  "Iout": 15.8,
+  "Isum": 34.6,
+  "VDD": 62.9,
+  "VSS": 27.3,
+  "VT": 12.4,
+  "Vthr": 9.9,
+  "x1_net1": 90.5
+ }
+}

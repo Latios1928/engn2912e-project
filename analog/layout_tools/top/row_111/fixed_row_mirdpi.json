@@ -1,0 +1,68 @@
+{
+ "order": [
+  [
+   "DAC",
+   true
+  ],
+  [
+   "DPI",
+   true
+  ],
+  [
+   "NEU",
+   false
+  ]
+ ],
+ "margin_um": 6.0,
+ "runs": [
+  {
+   "gap_um": 8.0,
+   "routed": false,
+   "failed": [
+    "VMEM"
+   ],
+   "size_um": [
+    491.5,
+    74.8
+   ],
+   "area_um2": 36785,
+   "wirelength_um": 396.0,
+   "vias": 49,
+   "placement_kept": true,
+   "nets": null
+  },
+  {
+   "gap_um": 6.0,
+   "routed": false,
+   "failed": [
+    "VMEM"
+   ],
+   "size_um": [
+    487.5,
+    74.8
+   ],
+   "area_um2": 36486,
+   "wirelength_um": 388.8,
+   "vias": 49,
+   "placement_kept": true,
+   "nets": null
+  },
+  {
+   "gap_um": 4.0,
+   "routed": false,
+   "failed": [
+    "VMEM"
+   ],
+   "size_um": [
+    483.5,
+    74.8
+   ],
+   "area_um2": 36187,
+   "wirelength_um": 363.2,
+   "vias": 49,
+   "placement_kept": true,
+   "nets": null
+  }
+ ],
+ "total_s": 6
+}

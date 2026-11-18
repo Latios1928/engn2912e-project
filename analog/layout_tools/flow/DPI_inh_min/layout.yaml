@@ -1,0 +1,162 @@
+# Layout decisions (decide.py). Edit an item and set decided_by: designer to
+# keep it across re-runs; answer questions with `answer:`.
+cell: DPI_inh_min
+pins:
+- Vthr
+- VT
+- Isum
+- VDD
+- Iout
+nets:
+  GND:
+    class: rail
+    why: ground
+  Im:
+    class: signal
+    why: ''
+  Iout:
+    class: signal
+    why: ''
+  Isum:
+    class: signal
+    why: ''
+  VDD:
+    class: rail
+    why: supply
+  VT:
+    class: bias_pin
+    why: gate-only pin driving current sources / long-L devices
+  Vthr:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  x1_net1:
+    class: signal
+    why: ''
+groups:
+- id: G1
+  type: diff_pair
+  devices:
+  - x1_M1
+  - x1_M2
+  decided_by: rule
+  tail: null
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 0.64
+  reason: same W/L, common source Isum, gates Vthr/x1_net1
+- id: G2
+  type: mirror
+  devices:
+  - Mi1
+  - Mi2
+  decided_by: rule
+  diode:
+  - Mi1
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 8.0
+  reason: common gate Im / source GND, diode ['Mi1']
+wells:
+- id: W1
+  kind: dnw
+  body: Isum
+  devices:
+  - x1_M1
+  - x1_M2
+  required: true
+  decided_by: rule
+  reason: 'NMOS body on Isum (not ground): needs its own isolated p-well in a DNW island'
+  cost_um2: 372
+- id: W2
+  kind: nwell
+  body: VDD
+  devices:
+  - x1_M3
+  - x1_M4
+  required: false
+  decided_by: rule
+  reason: PMOS n-well on VDD (shared)
+  cost_um2: 0
+- id: W3
+  kind: dnw
+  body: GND
+  devices:
+  - Mi1
+  - Mi2
+  required: false
+  decided_by: policy
+  reason: policy nmos_in_dnw (substrate-noise isolation)
+  cost_um2: 491
+rings:
+- around: W1
+  type: p+ body ring
+  net: Isum
+  required: true
+  rule: LVPWELL tie
+- around: W1
+  type: n+ DNW tie ring
+  net: VDD
+  required: true
+  rule: DNW bias
+- around: W1
+  type: p+ substrate ring
+  net: ground
+  required: true
+  rule: DN.3
+- around: W2
+  type: n+ tap ring
+  net: VDD
+  required: true
+  rule: DF.13 latch-up (tap within 20 um)
+- around: W3
+  type: p+ body ring
+  net: GND
+  required: true
+  rule: LVPWELL tie
+- around: W3
+  type: n+ DNW tie ring
+  net: VDD
+  required: true
+  rule: DNW bias
+- around: W3
+  type: p+ substrate ring
+  net: ground
+  required: true
+  rule: DN.3
+floorplan:
+  style: two_row
+  order_n:
+  - x1_M1
+  - x1_M2
+  - Mi1
+  - Mi2
+  order_p:
+  - x1_M3
+  - x1_M4
+  dummy_l: 2.0
+  dnw_islands: 2
+  decided_by: rule
+questions:
+- id: Q-dummy_l
+  about: floorplan.dummy_l
+  question: matched devices have L up to 8 um; dummies at L=8 cost area, capped at 2 um now. Keep cap?
+  options:
+  - cap 2
+  - match 8
+  default: cap 2
+  default_reason: policy decisions.defaults.dummy_l_over_cap
+  answer: cap 2
+  answered_by: auto
+caps:
+- name: x1_C2
+  top: VDD
+  bot: x1_net1
+  w: 22.18
+  l: 22.18
+schematic_warnings: []
+schematic_changes:
+- 'x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+- 'x1_M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+- 'x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+- 'x1_M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+mode: auto

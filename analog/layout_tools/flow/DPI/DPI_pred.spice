@@ -45,9 +45,9 @@ XDPS6 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 XDPS7 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 XDPW0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
-Cpred_Isum Isum VSS 8.829e-15
-Cpred_Isyn Isyn VSS 2.049e-15
-Cpred_VT VT VSS 2.947e-15
-Cpred_Vthr Vthr VSS 3.53e-15
-Cpred_net1 net1 VSS 2.178e-14
+Cpred_Isum Isum VSS 3.205e-14
+Cpred_Isyn Isyn VSS 5.8e-15
+Cpred_VT VT VSS 9.449e-15
+Cpred_Vthr Vthr VSS 9.119e-15
+Cpred_net1 net1 VSS 3.395e-14
 .ends

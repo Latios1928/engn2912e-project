@@ -240,20 +240,20 @@ XDPS1 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS2 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
-Cpred_Isum_e Isum_e VSS 3.766e-15
-Cpred_Isum_i Isum_i VSS 3.745e-15
-Cpred_Vb Vb VSS 9.565e-14
-Cpred_Y Y VSS 1.076e-14
-Cpred_en en VSS 5.865e-15
-Cpred_s s VSS 6.811e-14
-Cpred_sb sb VSS 5.109e-14
-Cpred_w[0] w[0] VSS 7.879e-14
-Cpred_w[1] w[1] VSS 8.546e-14
-Cpred_w[2] w[2] VSS 8.187e-14
-Cpred_w[3] w[3] VSS 6.604e-14
-Cpred_x1_X x1_X VSS 1.026e-13
-Cpred_x1_net1 x1_net1 VSS 1.137e-13
-Cpred_x1_net2 x1_net2 VSS 7.159e-14
-Cpred_x1_net3 x1_net3 VSS 9.641e-14
-Cpred_x1_net4 x1_net4 VSS 4.356e-14
+Cpred_Isum_e Isum_e VSS 4.089e-14
+Cpred_Isum_i Isum_i VSS 5.931e-14
+Cpred_Vb Vb VSS 8.589e-14
+Cpred_Y Y VSS 8.232e-15
+Cpred_en en VSS 4.017e-15
+Cpred_s s VSS 3.652e-14
+Cpred_sb sb VSS 3.979e-14
+Cpred_w[0] w[0] VSS 1.596e-14
+Cpred_w[1] w[1] VSS 1.892e-14
+Cpred_w[2] w[2] VSS 2.176e-14
+Cpred_w[3] w[3] VSS 2.848e-14
+Cpred_x1_X x1_X VSS 8.132e-14
+Cpred_x1_net1 x1_net1 VSS 8.715e-14
+Cpred_x1_net2 x1_net2 VSS 5.553e-14
+Cpred_x1_net3 x1_net3 VSS 7.673e-14
+Cpred_x1_net4 x1_net4 VSS 3.602e-14
 .ends

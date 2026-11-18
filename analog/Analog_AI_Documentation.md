@@ -7,7 +7,7 @@ and how far its output was checked. It is updated as the work continues.
 - **Tool:** Claude Code (desktop app), model Claude Opus 5.5 (Anthropic)
 - **User:** Ray Wu
 - **Started:** 2026-10-25
-- **Last updated:** 2026-11-11
+- **Last updated:** 2026-11-17
 
 ---
 
@@ -1125,6 +1125,29 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **AI explained:** clone the branch outside the repo and `uv pip install -e` it into `.venv-glayout` (or install `git+…@floorplan-router`, ideally pinned to the commit). Check `glayout.__file__` to confirm which copy is loaded. The reinstall downgrades klayout inside that venv only (the system KLayout used for DRC/LVS is separate). Switch back with `uv pip install --reinstall glayout==0.2.0`.
 - **Follow-up (user hit a syntax error):** reproduced in a throwaway venv in the container. Login shells (`bash -l`) set `PYTHONPATH` to the system Python 3.12 libraries, so the venv's Python 3.11 loaded 3.12's `typing.py` during the build → `SyntaxError`. With `PYTHONPATH` unset, the next failure was the branch's `klayout<=0.29` pin: no prebuilt wheel for this ARM container, and building from source fails (no C++ compiler). The existing `.venv-glayout` already overrides that pin (klayout 0.30.13) and has every other dependency, including `docopt`. Working command: `env -u PYTHONPATH uv pip install --python …/.venv-glayout/bin/python --no-deps -e <clone>`, verified in the throwaway venv (`glayout` loads from the clone's `src/`).
 - **Not done by AI:** nothing installed or changed other than this log.
+
+### 2026-11-17
+
+**76. Block diagrams of the cell-level and top-level layout flows** *(Analysed, from reading the code and docs)*
+- **Asked:** block diagrams of the cell-level and top-level layout flows in `analog/layout_tools`.
+- **AI did:** read `flow.py`, `AGENT_BRIEF.md`, `flow_cells.yaml`, `TOPLEVEL_FLOW.md`, `top_flow.yaml` and the section headers of `glayout_floorplan.py`. Drew two diagrams in the chat only (no file written):
+  - **Cell flow (`flow.py`):** table → decide → build → signoff → sim (optional). Inputs: the schematic with `flow_cells.yaml`, `layout_policy.yaml` defaults, and designer answers or edits to decide. Each stage's files go to `flow/<cell>/`. Signoff's Magic extraction is fed back through `parasitic_calib.json` into build's parasitic predictor.
+  - **Top flow (planned `top.py`):** netlist → abstract → plan → place ⇄ route → signoff → sim. Route's channel-width demand goes back to place.
+- **Noted:** the top flow is a design draft only. `top.py` does not exist yet; `top/row_111/` is a hand-scripted single-row prototype.
+- **Not done by AI:** no code or layout changed; only this log.
+
+**77. Token efficiency: layout flow vs asking the AI to build from scratch** *(Analysed, from TOKEN_LOG.md and artifact sizes; token figures are chars/4 estimates)*
+- **Asked:** where the flow (especially the gLayout parts) costs fewer tokens than asking the AI to build a layout from scratch with no infrastructure.
+- **AI found:**
+  - **Tool output:** the DPI's `drc.log` is 705,579 chars (≈176k tokens). Its `signoff.json` is 726 chars (≈180 tokens). `lvs.log` is ≈6k tokens.
+  - **gLayout port dumps:** one FET has ~800 ports (≈8k tokens to list). `ports_brief`, `bus()` and `describe()` avoid that. A mimcap port dump cost ≈6k tokens in Task 2.
+  - **gLayout/GF180 problems already solved in code:** rings and DNW stack, MIM tab and MIMTM.1, 0.5 µm minimum FET width. Each cost about one DRC/LVS loop (≈3–4k tokens plus reasoning) to find the first time.
+  - **Checks before real signoff:** `Router.check()` short finder, `predrc` (20 rules, ~0 s), and the calibrated parasitic predictor, which replaces a ~7 min PEX sim.
+  - **Generated code and decisions:** `two_row` plus a `flow_cells.yaml` entry replace a hand generator of ~350 lines (≈2.8k output tokens), and `decide.py` replaces most of the floorplan reasoning, the largest cost in TOKEN_LOG.
+  - **Context size:** brief + status ≈1k tokens vs a >100k-token chat.
+- **Cost of the flow itself:** TOKEN_LOG totals ≈66k output + ≈51k input + 104–162k reasoning. The neuron from scratch was ≈23k + 25–40k reasoning, and the log expects ≈1–3k per new cell through the flow, so the flow pays for itself after about 3–4 cells.
+- **Not verified:** the per-cell figure is an estimate. `api_driver.py`, which would print measured usage, has not been run.
+- **Not done by AI:** no code changed; only this log.
 
 ---
 

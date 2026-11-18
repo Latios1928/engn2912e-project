@@ -21,23 +21,24 @@ Warning: Calma reading is not undoable!  I hope that's OK.
 Library written using GDS-II Release 6.0
 Library name: library
 Reading "neuron_glayout".
+Error while reading cell "neuron_glayout" (byte position 595296): Warning:  Cell neuron_glayout boundary was redefined.
 Extracting neuron_glayout_flat into neuron_glayout_flat.ext:
 neuron_glayout_flat: 78 warnings
 Total of 78 warnings.
 exttosim finished.
 Adding  VSS
 Adding  VDD; Tnew = 0.12ns, Told = 0.00ns
-Adding  VNA; Tnew = 0.04ns, Told = 0.00ns
-Adding  VKup; Tnew = 0.07ns, Told = 0.00ns
-Warning: mimcapcontact at 14076 4759 smaller than extract section allows
-Adding  spike; Tnew = 0.55ns, Told = 0.00ns
-Adding  VMEM; Tnew = 0.57ns, Told = 0.00ns
-Adding  VT; Tnew = 0.06ns, Told = 0.00ns
-Adding  Vamp_bias; Tnew = 0.01ns, Told = 0.00ns
-Adding  VKdn; Tnew = 0.08ns, Told = 0.00ns
-Adding  VIp; Tnew = 0.09ns, Told = 0.00ns
-Adding  VK; Tnew = 0.09ns, Told = 0.00ns
-Adding  Vlk; Tnew = 0.08ns, Told = 0.00ns
+Adding  VNA; Tnew = 0.01ns, Told = 0.00ns
+Adding  VKup; Tnew = 0.03ns, Told = 0.00ns
+Warning: mimcapcontact at 14076 5079 smaller than extract section allows
+Adding  spike; Tnew = 0.32ns, Told = 0.00ns
+Adding  VMEM; Tnew = 0.29ns, Told = 0.00ns
+Adding  VT; Tnew = 0.01ns, Told = 0.00ns
+Adding  Vamp_bias; Tnew = 0.00ns, Told = 0.00ns
+Adding  VKdn; Tnew = 0.00ns, Told = 0.00ns
+Adding  VIp; Tnew = 0.00ns, Told = 0.00ns
+Adding  VK; Tnew = 0.00ns, Told = 0.00ns
+Adding  Vlk; Tnew = 0.00ns, Told = 0.00ns
 Total Nets: 21
 Nets extracted: 12 (0.571429)
 Nets output: 12 (0.571429)

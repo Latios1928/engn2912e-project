@@ -6,11 +6,14 @@
 #   symbol      .sym whose pin order the post-layout wrapper uses (optional)
 #   testbench   xschem testbench .sch whose DUT is the top-level instance x1 (optional)
 #   metric      what the sim stage measures: period of a node crossing a threshold
+#   pin_sides   {default: W, <pin>: side}: cell edge each pin leaves on (W/E/N/S); default W.
+#               VSS / VDD: list of W and/or E (met1 strap to each edge); default [W]
 
 neuron_glayout:
   schematic: ../neuron/neuron_sized.sch
   # connect {x1_net2: VT} removed 2026-11-17: the VN wire in spike_amplifier_sized.sch is fixed
   symbol: ../neuron/neuron_sized.sym
+  pin_sides: {default: W, spike: E, VSS: [W, E], VDD: [W, E]}   # row DAC | DPI | neuron; supplies both sides
   testbench: ../neuron/neuron_sized_testbench.sch
   metric: {type: period, node: "v(spike)", threshold: 1.65}
 
@@ -26,11 +29,19 @@ DAC_binary:
 DPI:
   schematic: ../DPI/DPI.sch       # minimum-size DPI: excitatory synapse, and the core of DPI_inh_min
   symbol: ../DPI/DPI.sym
+  pin_sides: {default: W, Isyn: E, Vthr: N, VT: S}
 
 DAC_signed_binary:
   schematic: ../DAC/DAC_signed_binary.sch   # signed synapse DAC (1:2:4:8 + sign) of snn_analog_signed
   symbol: ../DAC/DAC_signed_binary.sym
+  pin_sides: {default: W, Isum_e: E, Isum_i: E}
 
 bias_cell:
   schematic: ../neuron/bias_cell.sch
   symbol: ../neuron/bias_cell.sym
+  pin_sides: {default: S}        # sits above the top row: every bias / Iref pin drops straight down
+
+DPI_inh_min:
+  schematic: ../DPI/DPI_inh_min.sch   # inhibitory DPI of snn_analog_signed: DPI core + nFET mirror sinking from VMEM
+  symbol: ../DPI/DPI_inh_min.sym
+  pin_sides: {default: W, Iout: E, Vthr: N, VT: S}   # same edges as DPI (shared Vthr / VT lines)

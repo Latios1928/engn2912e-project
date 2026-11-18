@@ -1,0 +1,31 @@
+{
+ "routed": true,
+ "failed": [],
+ "wirelength_um": 401.2,
+ "vias": 63,
+ "size_um": [
+  313.08,
+  174.21
+ ],
+ "placement": {
+  "DAC": {
+   "x": 0.0,
+   "y": 0.0,
+   "mirrored": false
+  },
+  "DPI": {
+   "x": 0.0,
+   "y": 55.14,
+   "mirrored": false
+  },
+  "NEU": {
+   "x": 0.0,
+   "y": 111.36,
+   "mirrored": false
+  }
+ },
+ "build_s": 10,
+ "drc": "clean",
+ "lvs": "match",
+ "total_s": 59
+}

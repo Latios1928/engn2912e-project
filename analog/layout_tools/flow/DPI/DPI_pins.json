@@ -1,0 +1,61 @@
+{
+ "cell": "DPI",
+ "units": "um",
+ "origin": "GDS coordinates",
+ "bbox": [
+  -13.04,
+  -14.195,
+  48.9,
+  41.125
+ ],
+ "ports": [
+  {
+   "net": "Vthr",
+   "layer": "met3",
+   "x": 15.82,
+   "y": 41.125,
+   "orientation": 90,
+   "width": 0.5
+  },
+  {
+   "net": "Isyn",
+   "layer": "met2",
+   "x": 48.9,
+   "y": 15.545,
+   "orientation": 0,
+   "width": 0.5
+  },
+  {
+   "net": "Isum",
+   "layer": "met2",
+   "x": -13.04,
+   "y": 13.145,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "VT",
+   "layer": "met3",
+   "x": 18.22,
+   "y": -14.195,
+   "orientation": 270,
+   "width": 0.5
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -13.04,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -13.04,
+   "y": 23.17,
+   "orientation": 180,
+   "width": 1.0
+  }
+ ]
+}

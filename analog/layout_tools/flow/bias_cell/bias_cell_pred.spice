@@ -555,17 +555,17 @@ XDPS98 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS99 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=12.94u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=12.94u nf=1
-Cpred_Iref Iref VSS 1.131e-13
-Cpred_VIp VIp VSS 1.623e-13
-Cpred_VK VK VSS 1.905e-13
-Cpred_VKdn VKdn VSS 1.531e-13
-Cpred_VKup VKup VSS 1.366e-13
-Cpred_VNA VNA VSS 1.418e-13
-Cpred_VT_dpi VT_dpi VSS 1.922e-13
-Cpred_VT_inh VT_inh VSS 1.802e-13
-Cpred_Vamp_bias Vamp_bias VSS 1.593e-13
-Cpred_Vb Vb VSS 1.486e-13
-Cpred_Vlk Vlk VSS 1.49e-13
-Cpred_Vthr Vthr VSS 1.555e-13
-Cpred_vgp vgp VSS 7.982e-14
+Cpred_Iref Iref VSS 9.914e-14
+Cpred_VIp VIp VSS 6.131e-14
+Cpred_VK VK VSS 1.196e-13
+Cpred_VKdn VKdn VSS 5.531e-14
+Cpred_VKup VKup VSS 5.369e-14
+Cpred_VNA VNA VSS 1.066e-13
+Cpred_VT_dpi VT_dpi VSS 9.05e-14
+Cpred_VT_inh VT_inh VSS 9.249e-14
+Cpred_Vamp_bias Vamp_bias VSS 4.862e-14
+Cpred_Vb Vb VSS 6.089e-14
+Cpred_Vlk Vlk VSS 5.192e-14
+Cpred_Vthr Vthr VSS 9.347e-14
+Cpred_vgp vgp VSS 4.94e-14
 .ends

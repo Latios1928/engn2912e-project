@@ -26,19 +26,19 @@ bias_cell_flat: 426 warnings
 Total of 426 warnings.
 exttosim finished.
 Adding  VSS
-Adding  VDD; Tnew = 0.99ns, Told = 0.00ns
-Adding  VKdn; Tnew = 1.46ns, Told = 0.00ns
-Adding  Vb; Tnew = 1.19ns, Told = 0.00ns
-Adding  VK; Tnew = 1.60ns, Told = 0.00ns
-Adding  Vamp_bias; Tnew = 1.50ns, Told = 0.00ns
-Adding  VIp; Tnew = 1.58ns, Told = 0.00ns
-Adding  VKup; Tnew = 1.02ns, Told = 0.00ns
-Adding  VNA; Tnew = 1.35ns, Told = 0.00ns
-Adding  Vlk; Tnew = 1.36ns, Told = 0.00ns
-Adding  VT_inh; Tnew = 2.03ns, Told = 0.00ns
-Adding  Vthr; Tnew = 1.56ns, Told = 0.00ns
-Adding  VT_dpi; Tnew = 2.16ns, Told = 0.00ns
-Adding  Iref; Tnew = 0.30ns, Told = 0.00ns
+Adding  VDD; Tnew = 1.02ns, Told = 0.00ns
+Adding  VKdn; Tnew = 0.16ns, Told = 0.00ns
+Adding  Vb; Tnew = 0.18ns, Told = 0.00ns
+Adding  VK; Tnew = 0.36ns, Told = 0.00ns
+Adding  Vamp_bias; Tnew = 0.14ns, Told = 0.00ns
+Adding  VIp; Tnew = 0.49ns, Told = 0.00ns
+Adding  VKup; Tnew = 0.14ns, Told = 0.00ns
+Adding  VNA; Tnew = 0.50ns, Told = 0.00ns
+Adding  Vlk; Tnew = 0.14ns, Told = 0.00ns
+Adding  VT_inh; Tnew = 0.38ns, Told = 0.00ns
+Adding  Vthr; Tnew = 0.72ns, Told = 0.00ns
+Adding  VT_dpi; Tnew = 0.55ns, Told = 0.00ns
+Adding  Iref; Tnew = 0.10ns, Told = 0.00ns
 Total Nets: 15
 Nets extracted: 14 (0.933333)
 Nets output: 14 (0.933333)

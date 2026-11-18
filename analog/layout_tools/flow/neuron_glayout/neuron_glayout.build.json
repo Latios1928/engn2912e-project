@@ -1,12 +1,12 @@
 {
  "cell": "neuron_glayout",
  "size_um": [
-  100.71,
-  62.84
+  103.06,
+  77.24
  ],
  "router_check": "clean",
- "predrc": "predrc neuron_glayout: 0 rule(s) predicted to fail (20 checked, 0.1 s)",
- "summary": "neuron_glayout: 10 NMOS + 7 PMOS + 2 caps, tracks bot/mid/top 10/9/5, 5 columns, PMOS shift -0.50",
+ "predrc": "predrc neuron_glayout: 0 rule(s) predicted to fail (20 checked, 0.2 s)",
+ "summary": "neuron_glayout: 10 NMOS + 7 PMOS + 2 caps, tracks bot/mid/top 24/11/7, 5 columns, PMOS shift -0.50",
  "notes": [
   "M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
@@ -16,26 +16,26 @@
   "M6: 0.22/5 -> 0.5/11.36 (W/L kept)"
  ],
  "predicted_fF": {
-  "VDD": 24.6,
-  "VIp": 20.8,
-  "VK": 22.0,
-  "VKdn": 19.0,
-  "VKup": 18.4,
-  "VMEM": 53.0,
-  "VNA": 13.0,
-  "VSS": 29.0,
-  "VT": 11.6,
-  "Vamp_bias": 6.0,
-  "Vlk": 18.7,
-  "net1": 51.1,
-  "net2": 63.6,
-  "net3": 9.0,
-  "net4": 15.1,
-  "net5": 14.6,
-  "net6": 17.5,
-  "net7": 6.7,
-  "spike": 56.8,
-  "x1_net1": 9.7,
-  "x1_net2": 33.0
+  "VDD": 23.5,
+  "VIp": 6.1,
+  "VK": 6.2,
+  "VKdn": 6.1,
+  "VKup": 11.1,
+  "VMEM": 38.9,
+  "VNA": 5.4,
+  "VSS": 25.1,
+  "VT": 5.0,
+  "Vamp_bias": 4.5,
+  "Vlk": 6.2,
+  "net1": 37.2,
+  "net2": 43.5,
+  "net3": 5.9,
+  "net4": 11.3,
+  "net5": 10.4,
+  "net6": 11.6,
+  "net7": 4.8,
+  "spike": 45.3,
+  "x1_net1": 7.3,
+  "x1_net2": 23.6
  }
 }

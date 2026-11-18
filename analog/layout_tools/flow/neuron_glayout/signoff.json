@@ -1,25 +1,25 @@
 {
  "stage": "signoff",
  "cell": "neuron_glayout",
- "time": "2026-11-17 15:30:24",
+ "time": "2026-11-18 01:23:32",
  "ok": true,
  "drc": "clean",
  "lvs": "match",
  "pex": {
   "devices": 97,
-  "C": 64,
-  "R": 4569
+  "C": 45,
+  "R": 4568
  },
  "calibration": {
   "cell": "neuron_glayout",
   "nets": 10,
-  "mean_factor": 1.117,
+  "mean_factor": 0.834,
   "spread": [
-   1.014,
-   1.249
+   0.664,
+   1.057
   ],
-  "max_err_before": 0.0,
-  "global_factor": 1.129
+  "max_err_before": 0.005,
+  "global_factor": 0.891
  },
- "calibration_text": "calibration neuron_glayout: 10 nets, factor 1.117 (range 1.014..1.249), worst error before +0 %, global 1.129\n         Vlk: pred(raw)   17.4 fF  extracted   18.7 fF  was -0 %\n          VK: pred(raw)   19.7 fF  extracted   22.0 fF  was -0 %\n          VT: pred(raw)   10.1 fF  extracted   11.6 fF  was +0 %\n   Vamp_bias: pred(raw)    5.9 fF  extracted    6.0 fF  was +0 %\n         VNA: pred(raw)   11.3 fF  extracted   13.0 fF  was +0 %"
+ "calibration_text": "calibration neuron_glayout: 10 nets, factor 0.834 (range 0.664..1.057), worst error before +0 %, global 0.891\n       spike: pred(raw)   45.0 fF  extracted   45.5 fF  was -0 %\n        VMEM: pred(raw)   36.9 fF  extracted   39.0 fF  was -0 %\n         VIp: pred(raw)    9.0 fF  extracted    6.1 fF  was +0 %\n          VK: pred(raw)    9.3 fF  extracted    6.2 fF  was -0 %\n        VKdn: pred(raw)    8.1 fF  extracted    6.1 fF  was +0 %"
 }

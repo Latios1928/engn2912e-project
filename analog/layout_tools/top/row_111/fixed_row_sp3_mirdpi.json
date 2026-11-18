@@ -1,0 +1,149 @@
+{
+ "order": [
+  [
+   "DAC",
+   true
+  ],
+  [
+   "DPI",
+   true
+  ],
+  [
+   "NEU",
+   false
+  ]
+ ],
+ "margin_um": 6.0,
+ "runs": [
+  {
+   "gap_um": 8.0,
+   "routed": true,
+   "failed": [],
+   "size_um": [
+    491.5,
+    89.2
+   ],
+   "area_um2": 43863,
+   "wirelength_um": 435.9,
+   "vias": 60,
+   "placement_kept": true,
+   "nets": {
+    "Isum": {
+     "wire_um": 112.8,
+     "shortest_um": 78.9,
+     "detour_ratio": 1.43,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VMEM": {
+     "wire_um": 36.4,
+     "shortest_um": 33.5,
+     "detour_ratio": 1.09,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VDD": {
+     "wire_um": 109.8,
+     "shortest_um": 95.8,
+     "detour_ratio": 1.15,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    },
+    "VSS": {
+     "wire_um": 147.4,
+     "shortest_um": 89.0,
+     "detour_ratio": 1.66,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    }
+   }
+  },
+  {
+   "gap_um": 6.0,
+   "routed": true,
+   "failed": [],
+   "size_um": [
+    487.5,
+    89.2
+   ],
+   "area_um2": 43506,
+   "wirelength_um": 423.0,
+   "vias": 57,
+   "placement_kept": true,
+   "nets": {
+    "Isum": {
+     "wire_um": 109.6,
+     "shortest_um": 77.3,
+     "detour_ratio": 1.42,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VMEM": {
+     "wire_um": 34.0,
+     "shortest_um": 31.1,
+     "detour_ratio": 1.09,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VDD": {
+     "wire_um": 105.8,
+     "shortest_um": 91.8,
+     "detour_ratio": 1.15,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    },
+    "VSS": {
+     "wire_um": 141.8,
+     "shortest_um": 85.0,
+     "detour_ratio": 1.67,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    }
+   }
+  },
+  {
+   "gap_um": 4.0,
+   "routed": true,
+   "failed": [],
+   "size_um": [
+    483.5,
+    89.2
+   ],
+   "area_um2": 43149,
+   "wirelength_um": 403.8,
+   "vias": 53,
+   "placement_kept": true,
+   "nets": {
+    "Isum": {
+     "wire_um": 107.2,
+     "shortest_um": 74.9,
+     "detour_ratio": 1.43,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VMEM": {
+     "wire_um": 32.4,
+     "shortest_um": 29.5,
+     "detour_ratio": 1.1,
+     "outside_row_um": 0,
+     "next_to_switching_um": 0.0
+    },
+    "VDD": {
+     "wire_um": 100.2,
+     "shortest_um": 87.8,
+     "detour_ratio": 1.14,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    },
+    "VSS": {
+     "wire_um": 134.6,
+     "shortest_um": 81.0,
+     "detour_ratio": 1.66,
+     "outside_row_um": 0,
+     "next_to_switching_um": null
+    }
+   }
+  }
+ ],
+ "total_s": 3
+}

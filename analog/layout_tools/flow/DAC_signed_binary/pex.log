@@ -26,16 +26,16 @@ DAC_signed_binary_flat: 194 warnings
 Total of 194 warnings.
 exttosim finished.
 Adding  VSS
-Adding  VDD; Tnew = 1.13ns, Told = 0.00ns
-Adding  s; Tnew = 0.28ns, Told = 0.00ns
-Adding  Vb; Tnew = 0.62ns, Told = 0.00ns
-Adding  en; Tnew = 0.01ns, Told = 0.00ns
-Adding  Isum_e; Tnew = 0.00ns, Told = 0.00ns
-Adding  Isum_i; Tnew = 0.00ns, Told = 0.00ns
-Adding  w[0]; Tnew = 0.71ns, Told = 0.00ns
-Adding  w[1]; Tnew = 0.92ns, Told = 0.00ns
-Adding  w[2]; Tnew = 1.18ns, Told = 0.00ns
-Adding  w[3]; Tnew = 0.83ns, Told = 0.00ns
+Adding  VDD; Tnew = 1.05ns, Told = 0.00ns
+Adding  s; Tnew = 0.06ns, Told = 0.00ns
+Adding  Vb; Tnew = 0.07ns, Told = 0.00ns
+Adding  en; Tnew = 0.00ns, Told = 0.00ns
+Adding  Isum_e; Tnew = 0.01ns, Told = 0.00ns
+Adding  Isum_i; Tnew = 0.02ns, Told = 0.00ns
+Adding  w[0]; Tnew = 0.03ns, Told = 0.00ns
+Adding  w[1]; Tnew = 0.04ns, Told = 0.00ns
+Adding  w[2]; Tnew = 0.06ns, Told = 0.00ns
+Adding  w[3]; Tnew = 0.15ns, Told = 0.00ns
 Total Nets: 18
 Nets extracted: 11 (0.611111)
 Nets output: 11 (0.611111)

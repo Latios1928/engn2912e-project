@@ -1,0 +1,182 @@
+# Top-level layout configuration for the analog SNN macro (design: TOPLEVEL_FLOW.md).
+# Edit by hand. Paths are relative to this file. Every value marked "DECIDE" is one of the
+# open designer decisions; its current value is the default the flow will use.
+#
+# Not implemented yet: this file is the input contract for top.py (milestones 1-5 in
+# TOPLEVEL_FLOW.md). The cell flow (flow.py) does not read it.
+
+top:
+  name: SNN_signed                                # GDS top cell / LVS subckt name
+  schematic: ../snn/snn_analog_signed.sch         # network to lay out
+  symbol: ../snn/snn_analog_signed.sym            # macro pin order for the LVS ref / PEX wrapper
+  testbench: ../testbenches/snn/snn_signed_tb.sch # sim stage: DUT is x1
+  reference_layout: ../neuron/layout/SNN.gds      # milestone 2 check (old network, hand blocks)
+
+# ----------------------------------------------------------------------------- blocks
+# symbol in the schematic -> layout source.
+#   source: flow -> cell built by flow.py (flow/<cell>/<cell>.gds, must have passed signoff)
+#   source: hand -> existing GDS + its LVS ref and pins file
+# DECIDE (block sources / area): flow DAC 305 x 54 um vs hand 182 x 33 um; flow DPI 55 x 54 um
+# vs hand 28 x 26 um. 8 DACs: ~0.13 mm2 (flow) vs ~0.05 mm2 (hand).
+blocks:
+  DAC_signed_binary:
+    source: flow
+    cell: DAC_signed_binary
+    # hand alternative (DAC_signed.gds already contains DAC_binary, same circuit):
+    # source: hand
+    # gds: ../DAC/layout/DAC_signed.gds
+    # lvs_ref: ../DAC/layout/DAC_signed_lvs_ref.spice
+    # pins: ../DAC/layout/DAC_signed_pins.json
+  DPI:
+    source: flow
+    cell: DPI
+    # source: hand
+    # gds: ../DPI/layout/DPI.gds
+    # lvs_ref: ../DPI/layout/DPI_lvs_ref.spice
+    # pins: ../DPI/layout/DPI_pins.json
+  DPI_inh_min:
+    source: flow
+    cell: DPI_inh_min                             # not registered / built yet (milestone 1)
+  neuron_sized:
+    source: flow
+    cell: neuron_glayout
+  bias_cell:
+    source: flow
+    cell: bias_cell
+    # source: hand
+    # gds: ../neuron/layout/bias_cell.gds
+    # lvs_ref: ../neuron/layout/bias_cell_lvs_ref.spice
+    # pins: ../neuron/layout/bias_cell_pins.json
+
+# Instances that are not in the schematic. snn_analog_signed takes its biases as pins; the
+# macro makes them on chip from Iref, as SNN.gds does. Each listed output replaces that top pin
+# with an internal net; the instance's inputs become top pins.
+extra_instances:
+  xbias:
+    block: bias_cell
+    outputs: [Vb, Vlk, VKdn, VIp, Vamp_bias, VK, VNA, VKup, Vthr, VT_dpi]   # VT_inh: unused in the signed network
+    inputs: [Iref]
+    unused_outputs: [VT_inh]                      # left unconnected (label only)
+
+net_alias:                                        # schematic name -> layout name
+  GND: VSS
+  "0": VSS
+
+# Schematic changes the layout assumes, to be made before LVS against the schematic
+# (the flow checks they are present; it does not edit schematics).
+schematic_prerequisites:
+  dac_switch_bodies: source      # DECIDE: source (4 isolated islands per DAC, as drawn now) | VSS
+                                 # (VSS: no islands, ~1.5k um2 less per DAC, no measurable effect
+                                 # in snn_signed_tb; needs DAC_binary.sch edit + flow answers
+                                 # Q-body-* "body -> ground")
+  dpi_pair_bodies: source        # source (as drawn) | VSS (gain -25..-50 %, needs Vthr retune)
+
+# ----------------------------------------------------------------------------- floorplan
+floorplan:
+  template: neuron_rows          # one row per neuron (gen_snn.py style); the only template planned
+  row_order: [in0, in1, hid0, hid1, out]          # bottom -> top; names = neuron roles below
+  roles:                                          # neuron instance -> role (from the schematic)
+    in0: xneu0
+    in1: xneu1
+    hid0: xneu2
+    hid1: xneu3
+    out: xneu4
+  # Row contents (left -> right), found from the netlist: every DAC whose Isum feeds this
+  # neuron's DPIs, then the excitatory DPI and the inhibitory DPI, then the neuron.
+  row_columns: [dacs, channel_A, dpis, channel_B, neuron, channel_C]
+  dac_stack: vertical            # vertical (DACs of one row stacked) | horizontal
+  mirror:                        # per block kind: mirror so the pins face their channel
+    dac: true
+    dpi: false
+    neuron: false
+  row_gap_um: 2.0                # space between rows (inter-row M4 buses go here)
+  align_columns: true            # same x for every row's DAC / DPI / neuron column
+
+  bias_cell:
+    position: above_top_row      # DECIDE: above_top_row | left_column | below_bottom_row
+    channel_um: auto             # routing channel between the bias cell and the rows
+
+# Block edge pins: NOT set here. Flow cells take their pin sides from `pin_sides` in
+# flow_cells.yaml (one source; change a side there and rebuild the cell), and the layers are
+# fixed by two_row. The real pins of every built block are in flow/<cell>/<cell>_pins.json, which
+# is what the top level reads. As built (2026-11-18):
+#   W / E signal pins: Metal2 stub ending on the cell edge
+#   N / S signal pins: Metal3 riser ending on the cell edge
+#   VDD / VSS:         Metal1 straps (1 um), left (W) edge; neuron_glayout also right (E)
+#   DAC_signed_binary  W: w[3:0], en, s, Vb               E: Isum_e, Isum_i
+#   DPI                W: Isum   E: Isyn   N: Vthr   S: VT
+#   DPI_inh_min        W: Isum   E: Iout   N: Vthr   S: VT   (same edges as DPI)
+#   neuron_glayout     W: VMEM and all biases             E: spike      supplies W + E
+#   bias_cell          S: every pin (Iref, all bias outputs, VT_inh), drops into the rows below
+# A top-level track reaches a W/E pin with a Metal2 stub (via up to its Metal3 track) and an
+# N/S pin directly on Metal3.
+
+# ----------------------------------------------------------------------------- routing
+routing:
+  over_blocks: [Metal5]          # layers the top router may use over a block (must be free in every block's abstract)
+  layers:                        # direction and use per layer
+    Metal2: {dir: horizontal, use: pin stubs}
+    Metal3: {dir: vertical,   use: channel tracks}
+    Metal4: {dir: horizontal, use: inter-row buses}
+    Metal5: {dir: vertical,   use: supply grid, long spike runs}
+  track_pitch_um: {Metal2: 0.8, Metal3: 0.8, Metal4: 0.8, Metal5: 1.6}
+  wire_um:        {Metal2: 0.4, Metal3: 0.4, Metal4: 0.5, Metal5: 1.0}
+  channel_margin_um: 0.9
+  row_local_nets: true           # a net used only inside one row stays in that row's channels
+
+  supply:
+    style: edge_buses            # DECIDE: edge_buses (bottom VDD/VSS buses + per-column straps, as SNN.gds) | m5_grid
+    bus_width_um: 2.0
+    m5_grid_pitch_um: 20         # m5_grid only
+    straps_per_row: 2
+
+  spikes:                        # spike lines switch rail-to-rail every spike
+    rotate_layers: [Metal1, Metal5, Metal3]   # neighbouring spike tracks on different layers (as SNN.gds)
+    min_spacing_um: 1.2
+
+  # DECIDE: sensitive nets and their keep-outs from aggressors (parallel run longer than
+  # max_parallel_um closer than min_spacing_um is a violation; shield: VSS track between).
+  sensitive:
+    - nets: ["VMEM_*"]
+      aggressors: ["spike[*]", "pulse[*]", "w[*]", "s[*]"]
+      min_spacing_um: 2.0
+      max_parallel_um: 20
+      shield: false
+    - nets: ["Isum_*", "Isum_inh*"]
+      aggressors: ["spike[*]", "pulse[*]"]
+      min_spacing_um: 1.2
+      max_parallel_um: 30
+      shield: false
+    - nets: [Vb, Vthr, VT_dpi]   # shared bias lines: coupling moves every synapse at once
+      aggressors: ["spike[*]", "pulse[*]"]
+      min_spacing_um: 1.2
+      max_parallel_um: 50
+      shield: false
+
+# ----------------------------------------------------------------------------- macro pins
+macro_pins:
+  edge: bottom                   # DECIDE: bottom | left | right | top (set by the digital block / pads)
+  layer: Metal3
+  order: [VDD, VSS, Iref, VT, "w[31:0]", "s[7:0]", "pulse[1:0]", "spike[4:0]"]
+  spacing_um: 0.8
+  analog_pins: [Iref, VT]        # need analog pads at chip level
+  keep_pins: [VT]                # DECIDE: VT stays a macro pin (not made on chip)
+
+# ----------------------------------------------------------------------------- checks
+signoff:
+  drc_variant: D
+  lvs:
+    hierarchical: true           # top netlist + each block's own LVS ref
+  pex:
+    mode: c_only                 # c_only | rc  (rc: Magic extresist merged isolated p-wells into
+                                 # the substrate in SNN.gds and shorted Isum to VSS)
+    island_short_check: true     # fail if an Isum* / island net extracts as shorted to VSS
+predict:                         # fast checks before the real tools (seconds)
+  short_check: true
+  predrc: true
+  coupling: true                 # coupling estimate on the sensitive nets above
+
+sim:
+  scenarios: all                 # snn_signed_tb scenarios (run_snn_signed.py)
+  corners: [[tt, 27]]            # add e.g. [ss, 0], [ff, 70]
+  pass: same_firing_set          # every neuron fires / stays silent as in the schematic run

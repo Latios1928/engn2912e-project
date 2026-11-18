@@ -20,7 +20,9 @@ Floorplan (bottom -> top):
     mid channel      all source/drain nets, VSS, VDD
     PMOS row         all PMOS rotated 180 deg, dummy ring, n-tap ring (body VDD)
     top channel      PMOS gate nets + their pins
-    left             met3 columns for nets in more than one channel; pin labels
+    left             met3 columns for nets in more than one channel; pin labels; edge pins:
+                     every pin track ends in a met2 stub at the left cell edge, VSS / VDD in
+                     met1 straps from the substrate / n-tap rings (ports in <cell>_pins.json)
     right            up to 2 MIM caps sharing one bottom-plate net: met4 spine to that net's
                      mid track, met5 top-plate links
 Layer plan: met2 device buses, met3 vertical, met4 horizontal, met5 cap links.
@@ -40,6 +42,7 @@ HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
 
 from gdsfactory.component import Component
+from gdsfactory.components import rectangle
 from glayout import gf180 as pdk, straight_route, mimcap
 
 from glayout_helpers import fet
@@ -50,7 +53,10 @@ GAP = 0.6            # device-to-device gap in a row
 CH_MARGIN = 0.9      # ring metal -> first/last channel track (centre)
 CAP_GAP = 2.0        # spine centre -> MIM plate: 0.25 + MIMTM.1 (1.2) + margin
 CAP_PITCH = 1.6      # met5 link columns: 1.0 wire + 0.44 space + margin
+MIM_KEEPOUT = 1.3    # cell outline past a MIM plate (MIMTM.1 1.2 + margin), for top-level routers
 GROUND = ("VSS", "GND", "0")
+PIN_BLANK_TRACKS = 2 # empty channel tracks between two edge-pin tracks (pin pitch = (1 + this) x 0.8 um).
+                     # 1 (1.6 um) still walled VMEM in on glayout.floorplan's router (row_111 test)
 ISLAND_GAP = 0.4     # guard bbox to guard bbox. 0 put neighbouring substrate-ring metal
                      # < M1.2a 0.23 / M2.2a 0.28 apart where guards of different heights meet;
                      # DNWELLs end up > 5.7 um apart (DN.2a 2.5, DN.2b 5.42)
@@ -65,6 +71,7 @@ class Result:
     pins: list
     summary: str
     notes: list
+    edge_ports: list = None      # [{net, layer, x, y, orientation, width}] at the cell's left edge
 
 
 def bus(dev, term):
@@ -114,8 +121,42 @@ def _ring_y(port):
     return port.center[1] + (-WIRE / 2 if round(port.orientation) == 90 else WIRE / 2)
 
 
-def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -> Result:
-    """Build the cell. order_n / order_p: device names left->right (default: netlist order)."""
+SIDE = {"W": "W", "E": "E", "N": "N", "S": "S", "LEFT": "W", "RIGHT": "E", "TOP": "N", "BOTTOM": "S"}
+NS_PITCH = 2.4       # N/S pin riser columns (same spacing rule as edge pins, see PIN_BLANK_TRACKS)
+
+
+def _pin_side(pin_sides, net):
+    """Edge side of a pin net from {"default": "W", net: side}; VSS / VDD stay on the left."""
+    if net in ("VSS", "VDD") or not pin_sides:
+        return "W"
+    side = pin_sides.get(net, pin_sides.get("default", "W"))
+    out = SIDE.get(str(side).upper())
+    if out is None:
+        raise ValueError(f"pin_sides: {net}: side {side!r} (use W/E/N/S or left/right/top/bottom)")
+    return out
+
+
+def _supply_sides(pin_sides, net):
+    """Edges the VSS / VDD met1 strap reaches: pin_sides {VSS: [W, E]} (or "WE"); default W."""
+    raw = (pin_sides or {}).get(net, "W")
+    items = list(raw) if isinstance(raw, str) and raw.upper() in ("WE", "EW") else (
+        [raw] if isinstance(raw, str) else list(raw))
+    out = []
+    for s in items:
+        side = SIDE.get(str(s).upper())
+        if side not in ("W", "E"):
+            raise ValueError(f"pin_sides: {net}: supply side {s!r} (use W and/or E)")
+        if side not in out:
+            out.append(side)
+    return out
+
+
+def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
+            pin_sides: dict | None = None) -> Result:
+    """Build the cell. order_n / order_p: device names left->right (default: netlist order).
+    pin_sides: {"default": side, <pin net>: side}, side W/E/N/S (left/right/top/bottom); edge
+    pins leave the cell on that side (default: every pin on the left, W). VSS / VDD take a list
+    of W and/or E (met1 strap to each listed edge; default [W])."""
     # one ground name: the layout's substrate / guard rings are labelled VSS, so a cell that
     # calls its ground GND or 0 (DAC, DAC_signed) is drawn and LVS-referenced as VSS
     alias = [n for n in GROUND if n != "VSS"]
@@ -205,6 +246,18 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
                      ("VDD", d.xmax - 0.8, [y_dnw], "isl-dnw-col")]
     x_vss = next(x for n, x, _y, _t in cols if n == "VSS")
 
+    ns_pins = [n for n in pins if _pin_side(pin_sides, n) in "NS"]
+    _chans0 = {}
+    for net, *_r, ch, _t in _risers(nref, nm) + _risers(pref, pm):
+        _chans0.setdefault(net, set()).add(ch)
+
+    def pin_ch(net):
+        """Channel whose track carries the pin out: N prefers top, S bot, E/W the first."""
+        have = _chans0.get(net, set()) | ({"mid"} if net == cap_bot else set())
+        pref_order = {"N": ("top", "mid", "bot"), "S": ("bot", "mid", "top")}.get(
+            _pin_side(pin_sides, net), ("bot", "mid", "top"))
+        return next((c for c in pref_order if c in have), None)
+
     def plan(sh):
         terms = _risers(nref, nm) + [(n, x + sh, y, c, t) for n, x, y, c, t in _risers(pref, pm)]
         chans_of = {}
@@ -219,7 +272,11 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
         left = min(n_xmin, ng.ref.xmin + sh) - 1.0
         col_x = {n: left - i * PITCH for i, n in enumerate(cross)}
         pin_x = left - len(cross) * PITCH - 0.6
-        x_sp = max(n_xmax, ng.ref.xmax + sh) + 2.4
+        # strip right of the rows (before the cap spine): N/S pin risers, then the E turn column
+        rows_x = max(n_xmax, ng.ref.xmax + sh)
+        ns_x = {net: rows_x + 0.8 + k * NS_PITCH for k, net in enumerate(ns_pins)}
+        x_sp = rows_x + 2.4 + len(ns_pins) * NS_PITCH
+        x_er = x_sp - 1.6                                # E pins: met4 -> met2 turn column
         cap_x = {c.top: x_sp - 0.8 - i * CAP_PITCH for i, c in enumerate(caps)}
         x_ntap = ng.ref.xmin + sh + 0.8
         extra = {}                       # mid-channel x points of the supply / body columns
@@ -241,8 +298,16 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
                     lo, hi = min(lo, *xs), max(hi, *xs)
                 if net in col_x:
                     lo = min(lo, col_x[net])
-                if net in pins and ch != "mid":
-                    lo = min(lo, pin_x)
+                if net in pins and net not in ("VSS", "VDD") and pin_ch(net) == ch:
+                    side = _pin_side(pin_sides, net)
+                    if side == "W":
+                        lo = min(lo, pin_x)      # left edge-pin column
+                    elif side == "E":
+                        hi = max(hi, x_er)       # right turn column (stops before the cap spine)
+                    else:
+                        hi = max(hi, ns_x[net])  # own N/S riser column
+                elif net in pins and net not in ("VSS", "VDD") and _pin_side(pin_sides, net) == "W":
+                    lo = min(lo, pin_x)          # (left pins: every channel reaches the column)
                 if ch == "mid" and net == cap_bot:
                     hi = max(hi, x_sp)
                 if ch == "mid" and net in cap_x:
@@ -262,6 +327,18 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
                 order = sorted(range(n), key=lambda t: score[t])
                 remap = {old: new for new, old in enumerate(order)}
                 idx = {k: remap[v] for k, v in idx.items()}
+            # edge pins at least 2 tracks apart: a top-level router lands a via just outside
+            # the cell for every pin; at 1 track pitch a middle pin is walled in by its
+            # neighbours' landings (row_111 test: VMEM between Vamp_bias and VT)
+            pin_tr = {i for net, i in idx.items() if net in pins and net not in ("VSS", "VDD")}
+            if pin_tr:
+                new, k, prev = {}, 0, False
+                for t in range(n):
+                    if t in pin_tr and prev:
+                        k += PIN_BLANK_TRACKS        # blank tracks between two pin tracks
+                    new[t], k, prev = k, k + 1, t in pin_tr
+                idx = {net: new[i] for net, i in idx.items()}
+                n = k
             tracks[ch] = (sp, idx, n)
 
         mid = tracks["mid"][1]
@@ -273,7 +350,8 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
         pr += [(x_ntap, "VDD", mid["VDD"])]
         bad = [(a, b) for a in nr for b in pr
                if a[1] != b[1] and abs(a[0] - b[0]) < PITCH and a[2] >= b[2]]
-        return len(bad), dict(terms=terms, chans_of=chans_of, cross=cross, col_x=col_x,
+        return len(bad), dict(terms=terms, chans_of=chans_of, cross=cross, col_x=col_x, pin_x=pin_x,
+                              ns_x=ns_x, x_er=x_er, pin_ch={n: pin_ch(n) for n in pins},
                               x_sp=x_sp, cap_x=cap_x, x_ntap=x_ntap, tracks=tracks, bad=bad)
 
     best = None
@@ -349,6 +427,11 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
         R.shapes["met5"].append((m.center[0] - hx, m.center[1] - hy,
                                  m.center[0] + hx, m.center[1] + hy, c.top, c.name))
         R.shapes["met4"].append((m.xmin, m.ymin, m.xmax, m.ymax, c.bot, c.name))
+        # MIMTM.1 keep-out on the PR boundary layer (0/0, not checked by DRC/LVS): the cell
+        # outline then reaches 1.3 um past the plate, so a top-level router that only sees cell
+        # outlines keeps other met4 >= 1.2 um away (row_111: router met4 0.87 um from DPI's cap)
+        kb = top << rectangle(size=(m.xsize + 2 * MIM_KEEPOUT, m.ysize + 2 * MIM_KEEPOUT), layer=(0, 0))
+        kb.move((m.xmin - MIM_KEEPOUT - kb.xmin, m.ymin - MIM_KEEPOUT - kb.ymin))
         placed.append((c, m))
     if placed:
         ys = [m.center[1] for _, m in placed] + [track_y[("mid", cap_bot)]]
@@ -375,6 +458,58 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
         if p not in labelled | {"VSS", "VDD"}:
             notes.append(f"pin {p} has no metal in this cell (unconnected in the netlist?)")
 
+    # ------------------------------------------------------------------ edge pins
+    # top-level routers reach a block from outside on met1/met2/met3: every pin net gets a stub
+    # that ends exactly on the cell edge of its side (pin_sides):
+    #   W  met2 stub from the left pin column          E  met2 stub from the right turn column
+    #   N  met3 riser up from the top-most use          S  met3 riser down
+    # (E runs on met4 only up to x_er, before the cap spine and the MIM plates, then on met2)
+    pin_x, x_er, ns_x = P["pin_x"], P["x_er"], P["ns_x"]
+    x_edge = pin_x - 1.3          # the cell's left edge: every stub's metal ends exactly here
+    (bx0, by0), (bx1, by1) = top.bbox
+    x_redge, y_top, y_bot = float(bx1), float(by1), float(by0)
+    edge_ports = []
+    for net in pins:
+        if net in ("VSS", "VDD"):
+            continue
+        ch = P["pin_ch"].get(net)
+        if ch is None or (ch, net) not in track_y:
+            continue
+        y = track_y[(ch, net)]
+        side = _pin_side(pin_sides, net)
+        if side == "W":
+            R.via(pin_x, y, "met3", "met4", net, "edge-pin")
+            R.via(pin_x, y, "met2", "met3", net, "edge-pin")
+            R.wire("met2", (x_edge + WIRE / 2, y), (pin_x, y), net, tag="edge-pin")   # wire() adds w/2 caps
+            edge_ports.append(dict(net=net, layer="met2", x=round(x_edge, 4), y=round(y, 4),
+                                   orientation=180, width=WIRE))
+        elif side == "E":
+            R.via(x_er, y, "met3", "met4", net, "edge-pin")
+            R.via(x_er, y, "met2", "met3", net, "edge-pin")
+            R.wire("met2", (x_er, y), (x_redge - WIRE / 2, y), net, tag="edge-pin")
+            edge_ports.append(dict(net=net, layer="met2", x=round(x_redge, 4), y=round(y, 4),
+                                   orientation=0, width=WIRE))
+        else:
+            x = ns_x[net]
+            R.via(x, y, "met3", "met4", net, "edge-pin")
+            ye = y_top if side == "N" else y_bot
+            R.wire("met3", (x, y), (x, ye - WIRE / 2 if side == "N" else ye + WIRE / 2), net, tag="edge-pin")
+            edge_ports.append(dict(net=net, layer="met3", x=round(x, 4), y=round(ye, 4),
+                                   orientation=90 if side == "N" else 270, width=WIRE))
+    # supply straps: met1 from the substrate (VSS) / n-tap (VDD) ring side to each listed edge
+    g_e = max((w["g"] for w in wells), key=lambda gw: gw.ref.xmax)   # rightmost guard (VSS sub ring)
+    for net, ring_w, ring_e in (("VSS", g.ports["sub_W_top_met_W"], g_e.ports["sub_E_top_met_E"]),
+                                ("VDD", ng.ports["body_W_top_met_W"], ng.ports["body_E_top_met_E"])):
+        for side in _supply_sides(pin_sides, net):
+            port = ring_w if side == "W" else ring_e
+            x_r, y_r = float(port.center[0]), float(port.center[1])
+            if side == "W":
+                R.wire("met1", (x_edge + 0.5, y_r), (x_r + 0.3, y_r), net, w=1.0, tag="edge-pin")
+            else:
+                R.wire("met1", (x_r - 0.3, y_r), (x_redge - 0.5, y_r), net, w=1.0, tag="edge-pin")
+            edge_ports.append(dict(net=net, layer="met1", x=round(x_edge if side == "W" else x_redge, 4),
+                                   y=round(y_r, 4), orientation=180 if side == "W" else 0, width=1.0))
+
     # ------------------------------------------------------------------ LVS reference
     ref = []
     for f in nm + pm:
@@ -383,7 +518,10 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
             sfx = f"_f{k}" if f.nf > 1 else ""
             ref.append(f"X{f.name}{sfx} {f.d} {f.g} {f.s} {f.b} {model} L={f.l:g}u W={f.w:g}u nf=1")
     for c in caps:
-        ref.append(f"X{c.name} {c.top} {c.bot} cap_mim_2f0fF c_width={c.w:g}e-6 "
+        # the PDK's spice->CDL converter strips one leading X; what is left must start with C
+        # to be read as a capacitor (a cap from a subcell, x1_C2, would become a subckt call)
+        cname = c.name if c.name.upper().startswith("C") else f"C{c.name}"
+        ref.append(f"X{cname} {c.top} {c.bot} cap_mim_2f0fF c_width={c.w:g}e-6 "
                    f"c_length={c.l:g}e-6 m=1")
     ref += [line for w in wells for line in w["dn"].spice] + dp.spice
     islands = [w["body"] for w in wells if w["body"] != "VSS"]
@@ -392,7 +530,7 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0) -
                + 
                f"tracks bot/mid/top {tracks['bot'][2]}/{n_mid}/{tracks['top'][2]}, "
                f"{len(cross)} columns, PMOS shift {sh:+.2f}")
-    return Result(name, top, R, ref, pins, summary, notes + cell.log)
+    return Result(name, top, R, ref, pins, summary, notes + cell.log, edge_ports)
 
 
 def write_cell(res: Result, out_dir: str | Path, report_nets=None) -> str:
@@ -413,6 +551,10 @@ def write_cell(res: Result, out_dir: str | Path, report_nets=None) -> str:
     caps = predict_caps(res.router.shapes, cell=res.name)
     n = inject_caps(ref, out / f"{res.name}_pred.spice", caps, subckt=res.name)
     save_shapes(res.router.shapes, out / f"{res.name}.shapes.json")
+    (out / f"{res.name}_pins.json").write_text(json.dumps(dict(
+        cell=res.name, units="um", origin="GDS coordinates",
+        bbox=[round(flat.xmin, 4), round(flat.ymin, 4), round(flat.xmax, 4), round(flat.ymax, 4)],
+        ports=res.edge_ports or []), indent=1))
     nets = report_nets or [p for p in res.pins if p not in ("VSS", "VDD")][:6]
     short = res.router.check()
     pre = predrc(str(gds))
