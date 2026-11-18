@@ -1,7 +1,7 @@
 {
  "stage": "netlist",
  "top": "SNN_signed",
- "time": "2026-11-18 04:30:17",
+ "time": "2026-11-18 08:24:46",
  "ok": true,
  "problems": [],
  "schematic": "/foss/designs/engn2912e-project/analog/snn/snn_analog_signed.sch",

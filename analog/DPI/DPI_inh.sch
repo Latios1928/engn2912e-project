@@ -35,7 +35,7 @@ N 320 160 360 160 {lab=GND}
 C {lab_pin.sym} 360 160 0 1 {name=l9 sig_type=std_logic lab=GND}
 C {symbols/nfet_03v3.sym} 520 160 0 0 {name=Mi2
 L=8u
-W=2u
+W=2.4u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -63,7 +63,9 @@ C {iopin.sym} -400 -80 0 1 {name=p_Iout lab=Iout}
 T {DPI_inh_min: copy of DPI_inh.sch with the minimum-size DPI.sym core (as the excitatory DPI) instead of DPI_sized.sym,
 so that with the same Vthr and VT its gain matches the excitatory DPI (snn_signed_tb: inhibitory/excitatory charge 0.98;
 DPI_inh with DPI_sized gave 0.07-0.18). DPI_inh: DPI_sized.sym (same DPI as the excitatory synapses), but its output current Im goes into the
-nFET mirror Mi1/Mi2 (2u/8u, 1:1), so Iout sinks it from the membrane instead of sourcing it.
+nFET mirror Mi1 2u/8u : Mi2 2.4u/8u (gain 1.2), so Iout sinks it from the membrane instead of sourcing it.
+Gain 1.2 (2026-11-18): with 1:1, a -w against +w tie (snn_signed scenarios 5, 7) is decided by few-% layout
+asymmetries between the two hidden paths and fails post-layout; 1.2 makes equal-magnitude inhibition win.
 Same Isum input as DPI.sym; drive it from the Isum_i outputs of DAC_signed.
 Iout must stay above about 0.1 V for Mi2 to stay saturated, so inhibition cannot pull
 the membrane below ground.} -400 300 0 0 0.3 0.3 {}

@@ -3,6 +3,9 @@
 #   .subckt <top>_flat <macro pins>: all devices + parasitic C >= 0.01 fF, from a flattened copy.
 # No wire R: Magic extresist merges isolated LVPWELL bodies (Isum islands) into the substrate
 # (see neuron/old/layout/run_snn_pex.sh). Usage: top_pex.sh [SNN_signed]
+# Not "ext2spice lvs": with Magic 8.3.684 (open_pdks 1689ac3) it drops every node-to-substrate
+# capacitor (6.7 of 9.6 pF on SNN_signed), while Magic 8.3.636 kept them. The settings below give
+# the same devices and nets, plus those capacitors.
 set -e
 TOP=${1:-SNN_signed}
 HERE=$(cd "$(dirname "$0")" && pwd)
@@ -18,7 +21,9 @@ flatten ${TOP}_flat
 load ${TOP}_flat
 extract style ngspice()
 extract all
-ext2spice lvs
+ext2spice hierarchy off
+ext2spice scale off
+ext2spice subcircuit top on
 ext2spice cthresh 0.01
 ext2spice format ngspice
 ext2spice -o $D/pex/${TOP}_pex.spice

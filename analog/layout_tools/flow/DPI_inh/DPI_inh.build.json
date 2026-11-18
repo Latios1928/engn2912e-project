@@ -2,7 +2,7 @@
  "cell": "DPI_inh",
  "size_um": [
   93.21,
-  49.14
+  49.54
  ],
  "router_check": "clean",
  "predrc": "predrc DPI_inh: 0 rule(s) predicted to fail (20 checked, 0.0 s)",
@@ -15,13 +15,13 @@
   "ground net GND drawn as VSS"
  ],
  "predicted_fF": {
-  "Im": 32.8,
+  "Im": 32.9,
   "Iout": 16.6,
-  "Isum": 34.0,
-  "VDD": 60.4,
-  "VSS": 25.0,
+  "Isum": 34.2,
+  "VDD": 60.5,
+  "VSS": 25.1,
   "VT": 10.5,
   "Vthr": 9.0,
-  "x1_net1": 87.5
+  "x1_net1": 87.6
  }
 }

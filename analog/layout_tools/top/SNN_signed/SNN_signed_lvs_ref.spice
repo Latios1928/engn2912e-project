@@ -408,7 +408,7 @@ XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=1u nf=1
 Xx1_M1 VDD Vthr Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
 Xx1_M2 x1_net1 x1_net1 Isum Isum nfet_03v3 L=0.64u W=0.5u nf=1
 XMi1 Im Im VSS VSS nfet_03v3 L=8u W=2u nf=1
-XMi2 Iout Im VSS VSS nfet_03v3 L=8u W=2u nf=1
+XMi2 Iout Im VSS VSS nfet_03v3 L=8u W=2.4u nf=1
 Xx1_M3 x1_net1 VT VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 Xx1_M4 Im x1_net1 VDD VDD pfet_03v3 L=0.64u W=0.5u nf=1
 XCx1_C2 VDD x1_net1 cap_mim_2f0fF c_width=22.18e-6 c_length=22.18e-6 m=1
@@ -432,8 +432,8 @@ XDNS6 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 XDNS7 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 XDNS8 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 XDNS9 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
-XDNW0 VSS VSS VSS VSS nfet_03v3 L=2u W=2u nf=1
-XDNE0 VSS VSS VSS VSS nfet_03v3 L=2u W=2u nf=1
+XDNW0 VSS VSS VSS VSS nfet_03v3 L=2u W=2.4u nf=1
+XDNE0 VSS VSS VSS VSS nfet_03v3 L=2u W=2.4u nf=1
 XDNI1N0 Isum Isum Isum Isum nfet_03v3 L=2u W=0.5u nf=1
 XDNI1N1 Isum Isum Isum Isum nfet_03v3 L=2u W=0.5u nf=1
 XDNI1N2 Isum Isum Isum Isum nfet_03v3 L=2u W=0.5u nf=1

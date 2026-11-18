@@ -15,6 +15,8 @@
 ## TODO
 
 ### Analog
+- [ ] Post-layout, the DACs over-excite: in0 fires 83–84 times per scenario against 22 in the schematic. The DAC's internal nodes (X and the isolated branch p-wells, ~0.33 pF) drain to 0 V while `en` is low and are refilled from `Isum` at each enable. Candidate fix: steer the current to VDD while `en` is low. See [analog/testbenches/snn/results/snn_signed_pex_diagnosis.md](analog/testbenches/snn/results/snn_signed_pex_diagnosis.md).
+- [ ] Scenarios 5 and 7 (−15 against +15) fail under mismatch: with the `DPI_inh` mirror gain of 1.2 they pass all process corners, but only 45 / 100 post-layout Monte Carlo chips pass all 8 scenarios (gain 2.0 reaches 76 / 100 on 5 and 7). Decide between weight margin in the network (e.g. −15 against +12), a higher gain, or trimmed / larger synapse devices. See [analog/testbenches/snn/results/snn_signed_verification.md](analog/testbenches/snn/results/snn_signed_verification.md).
 - [ ] Neuron reset only pulls MEM down to ~0.74–1.01 V instead of `reset_bias` (0.2 V): the reset stops as soon as the comparator flips back. Hold the reset for a fixed time (one-shot or SR latch). See [analog/neuron/SIM_LOG.md](analog/neuron/SIM_LOG.md).
 - [ ] Number of input pulses per fire varies because the reset level varies; recheck once the reset is fixed.
 - [ ] Finish [tools/analog_API_infrastructure/advisor.py](tools/analog_API_infrastructure/advisor.py): it does not run yet (`os.enrivon`, `tuple{`, missing commas in the JSON schema, wrong body in `meets_spec`).
@@ -29,6 +31,7 @@
 - [ ] Pick the chip clock frequency. `pulse_gen`'s defaults (`PERIOD` 200, `WIDTH` 10) assume a 1 MHz `clk` for 10 µs pulses every 200 µs; a faster clock needs larger values and a wider counter.
 
 ### Physical design
+- [ ] Every flow/glayout GDS uses a 0.005 µm database unit; the PDK's newer DRC deck (`gf180mcu.drc`, rule `DBU`) requires 0.001 µm. `flow.drc()` waives it for now (see [analog/layout_tools/TOPLEVEL_FLOW.md](analog/layout_tools/TOPLEVEL_FLOW.md)). Fix before tape-out, and run the antenna and density checks at chip level.
 - [ ] Build the whole chip with LibreLane, with `snn_analog` as a hardened macro: [librelane/snn_top/config.json](librelane/snn_top/config.json) lists the Verilog of `snn_top` and `digital/` but has no macro yet and cannot run. The macro needs, as in lab 3's `librelane/macros.yaml`: GDS and LEF from the analog layout, a Verilog black-box header (`analog/snn/snn_analog.v` is a start; the macro's bias and supply pins may need adding), a liberty file (hand-written for an analog block), and a placement location; plus its supply and bias pins and a pad-ring top like lab 3's `chip_top`. The checked-in `results/` are from the old design (3-bit weights, mock network synthesized as gates); replace them, and recheck the 57 max-slew violations.
 
 ### Docs
