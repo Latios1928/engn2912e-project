@@ -23,7 +23,7 @@ Library name: library
 Reading "bias".
 Reading "DPI_inh".
 Reading "neuron".
-Error while reading cell "neuron" (byte position 3332056): Warning:  Cell neuron boundary was redefined.
+Error while reading cell "neuron" (byte position 4285784): Warning:  Cell neuron boundary was redefined.
 Reading "DPI".
 Reading "DAC".
 Reading "SNN_signed".
@@ -31,6 +31,6 @@ The following types are not handled by extraction and will be treated as non-ele
     obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
 Extraction style is now "ngspice()"
 Extracting SNN_signed_flat into SNN_signed_flat.ext:
-SNN_signed_flat: 2686 warnings
-Total of 2686 warnings.
+SNN_signed_flat: 2738 warnings
+Total of 2738 warnings.
 exttospice finished.

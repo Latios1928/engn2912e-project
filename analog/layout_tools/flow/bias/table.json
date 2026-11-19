@@ -1,7 +1,7 @@
 {
  "stage": "table",
  "cell": "bias",
- "time": "2026-11-18 04:27:57",
+ "time": "2026-11-18 23:45:39",
  "ok": true,
  "pins": [
   "VDD",
@@ -251,8 +251,8 @@
   {
    "name": "MR_Vthr",
    "kind": "p",
-   "w": 0.5,
-   "l": 0.64,
+   "w": 4.0,
+   "l": 5.12,
    "d": "Vthr",
    "g": "Vthr",
    "s": "VDD",
@@ -275,8 +275,8 @@
   {
    "name": "MR_VT_dpi",
    "kind": "p",
-   "w": 0.5,
-   "l": 0.64,
+   "w": 4.0,
+   "l": 5.12,
    "d": "VT_dpi",
    "g": "VT_dpi",
    "s": "VDD",
@@ -333,10 +333,8 @@
   "MR_VNA: 0.22/20 -> 0.5/45.45 (W/L kept)",
   "MO_VNA: W 5.755 -> 5.76 (glayout 10 nm width grid, L kept)",
   "MO_VKup: W 6.005 -> 6.01 (glayout 10 nm width grid, L kept)",
-  "MR_Vthr: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)",
   "MO_Vthr: W 0.905 -> 0.91 (glayout 10 nm width grid, L kept)",
-  "MR_VT_dpi: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
   "MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)",
   "MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)",
   "MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)",

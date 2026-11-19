@@ -83,6 +83,45 @@ def login(cmd: str, cwd: Path, timeout: int = 1800) -> subprocess.CompletedProce
                           timeout=timeout, env={**os.environ, **ENV})
 
 
+# Rules of the PDK's newer gf180mcu.drc deck that the old run_drc.py never checked, reported but
+# not counted as a failure (see drc()).
+DRC_WAIVED = {"DBU": "database unit must be 0.001 um; every glayout/flow GDS uses 0.005 um",
+              "DCF.1a": "dummy COMP fill (fill is inserted at chip level, like the density decks); "
+                        "the committed SNN_signed macro, clean with run_drc.py, has the same 36 hits"}
+
+
+def drc(gds: Path, cell: str, run_dir: Path, log: Path, variant: str = "D",
+        timeout: int = 1800) -> tuple[str, list[str]]:
+    """KLayout DRC -> ('clean' | violated rules | 'failed to run', waived rules found).
+
+    Uses the PDK's run_drc.py when it exists. Newer open_pdks releases replace it with
+    gf180mcu.drc; that deck is run with the same default rule set (no antenna, no density
+    decks), and rules in DRC_WAIVED are returned separately instead of failing the check."""
+    shutil.rmtree(run_dir, ignore_errors=True)
+    if Path(f"{TECH}/drc/run_drc.py").exists():
+        login(f"python3 {TECH}/drc/run_drc.py --path={gds} --variant={variant} --topcell={cell} "
+              f"--run_dir={run_dir} --mp=4 > {log} 2>&1", run_dir.parent, timeout=timeout)
+        text = log.read_text()
+        m = re.search(r"Violated rules are : (.*)", text)
+        return ("clean" if "is clean" in text else (m.group(1) if m else "failed to run")), []
+    import xml.etree.ElementTree as ET
+    run_dir.mkdir(parents=True)
+    rdb = run_dir / f"{cell}.lyrdb"
+    login(f"klayout -b -r {TECH}/drc/gf180mcu.drc -rd input={gds} -rd report={rdb} -rd topcell={cell} "
+          f"-rd variant={variant} -rd decks=all,-antenna,-density > {log} 2>&1", run_dir.parent,
+          timeout=timeout)
+    if not rdb.exists():
+        return "failed to run", []
+    rules = sorted({(i.findtext("category") or "").strip("'")
+                    for i in ET.parse(rdb).getroot().iter("item")})
+    waived = [r for r in rules if r in DRC_WAIVED]
+    violated = [r for r in rules if r not in DRC_WAIVED]
+    with open(log, "a") as f:
+        f.write(f"\nflow.drc: gf180mcu.drc (decks all,-antenna,-density): violated {violated or 'none'}"
+                + "".join(f"; waived {r} ({DRC_WAIVED[r]})" for r in waived) + "\n")
+    return ("clean" if not violated else " ".join(violated)), waived
+
+
 def _cell(cell: str):
     from glayout_netlist import from_schematic
     c = conf(cell)
@@ -170,12 +209,9 @@ def st_signoff(cell, pex: bool = True):
     gds = d / f"{cell}.gds"
     out = {}
     # DRC
-    shutil.rmtree(d / "drc", ignore_errors=True)
-    login(f"python3 {TECH}/drc/run_drc.py --path={gds} --variant=D --topcell={cell} "
-          f"--run_dir={d}/drc --mp=4 > {d}/drc.log 2>&1", d)
-    log = (d / "drc.log").read_text()
-    m = re.search(r"Violated rules are : (.*)", log)
-    out["drc"] = "clean" if "is clean" in log else (m.group(1) if m else "failed to run")
+    out["drc"], waived = drc(gds, cell, d / "drc", d / "drc.log")
+    if waived:
+        out["drc_waived"] = waived
     # LVS
     shutil.rmtree(d / "lvs", ignore_errors=True)
     login(f"python3 {TECH}/lvs/gf180_xschem_klayout_spice_convert.py {cell}_lvs_ref.spice "

@@ -348,8 +348,8 @@ C {lab_pin.sym} 1980 400 0 0 {name=l74 sig_type=std_logic lab=Iref}
 C {lab_pin.sym} 2020 430 0 1 {name=l75 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 2020 400 0 1 {name=l76 sig_type=std_logic lab=VSS}
 C {symbols/pfet_03v3.sym} 2200 0 0 0 {name=MR_Vthr
-L=0.28u
-W=0.22u
+L=5.12u
+W=4u
 nf=1
 m=32
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -384,8 +384,8 @@ C {lab_pin.sym} 2180 400 0 0 {name=l82 sig_type=std_logic lab=Iref}
 C {lab_pin.sym} 2220 430 0 1 {name=l83 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 2220 400 0 1 {name=l84 sig_type=std_logic lab=VSS}
 C {symbols/pfet_03v3.sym} 2400 0 0 0 {name=MR_VT_dpi
-L=0.28u
-W=0.22u
+L=5.12u
+W=4u
 nf=1
 m=32
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

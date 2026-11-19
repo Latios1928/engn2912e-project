@@ -859,12 +859,9 @@ def st_signoff(top):
     gds = d / f"{top}.gds"
     var = c["signoff"].get("drc_variant", "D")
     out = {}
-    shutil.rmtree(d / "drc", ignore_errors=True)
-    flow.login(f"python3 {flow.TECH}/drc/run_drc.py --path={gds} --variant={var} --topcell={top} "
-               f"--run_dir={d}/drc --mp=4 > {d}/drc.log 2>&1", d, timeout=7200)
-    log = (d / "drc.log").read_text()
-    m = re.search(r"Violated rules are : (.*)", log)
-    out["drc"] = "clean" if "is clean" in log else (m.group(1) if m else "failed to run")
+    out["drc"], waived = flow.drc(gds, top, d / "drc", d / "drc.log", variant=var, timeout=7200)
+    if waived:
+        out["drc_waived"] = waived
     shutil.rmtree(d / "lvs", ignore_errors=True)
     flow.login(f"python3 {flow.TECH}/lvs/gf180_xschem_klayout_spice_convert.py {top}_lvs_ref.spice "
                f"-o {top}_lvs_ref.cdl > /dev/null 2>&1; python3 {flow.TECH}/lvs/run_lvs.py "

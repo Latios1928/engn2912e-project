@@ -30,6 +30,12 @@ Implemented, differences from the design below:
   labels in the top cell (`write_flat: true` also writes the router's flat view). Sensitive-net rules are
   *reported* (parallel run per aggressor), not enforced.
 - **signoff**: KLayout DRC + LVS (block LVS refs under one top subckt). No PEX, no sim yet.
+  DRC goes through `flow.drc()`: the PDK's `run_drc.py` when it exists; newer open_pdks only ship
+  `gf180mcu.drc`, which is then run with the same default rule set (no antenna, no density decks).
+  Its rules that `run_drc.py` never checked (`DBU`: flow GDS use a 0.005 um database unit;
+  `DCF.1a`: dummy COMP fill, a chip-level fill rule) are recorded as `drc_waived` in
+  `signoff.json`, not counted. Run with `env -u PYTHONPATH -u FOSS_INIT_DONE` so the login
+  subshells get klayout / magic on PATH.
 
 ## 1. What exists and what is missing
 

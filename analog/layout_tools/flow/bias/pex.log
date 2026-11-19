@@ -22,23 +22,23 @@ Library written using GDS-II Release 6.0
 Library name: library
 Reading "bias".
 Extracting bias_flat into bias_flat.ext:
-bias_flat: 426 warnings
-Total of 426 warnings.
+bias_flat: 650 warnings
+Total of 650 warnings.
 exttosim finished.
 Adding  VSS
-Adding  VDD; Tnew = 1.02ns, Told = 0.00ns
-Adding  VKdn; Tnew = 0.16ns, Told = 0.00ns
-Adding  Vb; Tnew = 0.18ns, Told = 0.00ns
-Adding  VK; Tnew = 0.36ns, Told = 0.00ns
-Adding  Vamp_bias; Tnew = 0.14ns, Told = 0.00ns
-Adding  VIp; Tnew = 0.49ns, Told = 0.00ns
-Adding  VKup; Tnew = 0.14ns, Told = 0.00ns
-Adding  VNA; Tnew = 0.50ns, Told = 0.00ns
-Adding  Vlk; Tnew = 0.14ns, Told = 0.00ns
-Adding  VT_inh; Tnew = 0.38ns, Told = 0.00ns
-Adding  Vthr; Tnew = 0.72ns, Told = 0.00ns
-Adding  VT_dpi; Tnew = 0.55ns, Told = 0.00ns
-Adding  Iref; Tnew = 0.10ns, Told = 0.00ns
+Adding  VDD; Tnew = 1.79ns, Told = 0.00ns
+Adding  VKdn; Tnew = 0.21ns, Told = 0.00ns
+Adding  Vb; Tnew = 0.30ns, Told = 0.00ns
+Adding  VK; Tnew = 0.50ns, Told = 0.00ns
+Adding  Vamp_bias; Tnew = 0.19ns, Told = 0.00ns
+Adding  VIp; Tnew = 0.89ns, Told = 0.00ns
+Adding  Vthr; Tnew = 4.30ns, Told = 0.00ns
+Adding  VT_dpi; Tnew = 4.78ns, Told = 0.00ns
+Adding  VKup; Tnew = 0.19ns, Told = 0.00ns
+Adding  VNA; Tnew = 0.41ns, Told = 0.00ns
+Adding  Vlk; Tnew = 0.22ns, Told = 0.00ns
+Adding  VT_inh; Tnew = 0.57ns, Told = 0.00ns
+Adding  Iref; Tnew = 0.53ns, Told = 0.00ns
 Total Nets: 15
 Nets extracted: 14 (0.933333)
 Nets output: 14 (0.933333)

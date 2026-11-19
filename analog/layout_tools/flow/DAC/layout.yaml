@@ -140,20 +140,15 @@ groups:
 wells:
 - id: W1
   kind: dnw
-  body: x1_net4
-  devices:
-  - x1_M1
-  required: true
-  decided_by: rule
-  reason: 'NMOS body on x1_net4 (not ground): needs its own isolated p-well in a DNW island'
-  cost_um2: 332
-- id: W2
-  kind: dnw
   body: GND
   devices:
+  - x1_M1
   - x1_M2
+  - x1_M3
   - x1_M4
+  - x1_M5
   - x1_M6
+  - x1_M7
   - x1_M8
   - x1_Men
   - Mse
@@ -162,35 +157,8 @@ wells:
   required: false
   decided_by: policy
   reason: policy nmos_in_dnw (substrate-noise isolation)
-  cost_um2: 2161
-- id: W3
-  kind: dnw
-  body: x1_net2
-  devices:
-  - x1_M3
-  required: true
-  decided_by: rule
-  reason: 'NMOS body on x1_net2 (not ground): needs its own isolated p-well in a DNW island'
-  cost_um2: 352
-- id: W4
-  kind: dnw
-  body: x1_net3
-  devices:
-  - x1_M5
-  required: true
-  decided_by: rule
-  reason: 'NMOS body on x1_net3 (not ground): needs its own isolated p-well in a DNW island'
-  cost_um2: 391
-- id: W5
-  kind: dnw
-  body: x1_net1
-  devices:
-  - x1_M7
-  required: true
-  decided_by: rule
-  reason: 'NMOS body on x1_net1 (not ground): needs its own isolated p-well in a DNW island'
-  cost_um2: 470
-- id: W6
+  cost_um2: 2538
+- id: W2
   kind: nwell
   body: VDD
   devices:
@@ -202,90 +170,31 @@ wells:
 rings:
 - around: W1
   type: p+ body ring
-  net: x1_net4
-  required: true
-  rule: LVPWELL tie
-- around: W1
-  type: n+ DNW tie ring
-  net: VDD
-  required: true
-  rule: DNW bias
-- around: W1
-  type: p+ substrate ring
-  net: ground
-  required: true
-  rule: DN.3
-- around: W2
-  type: p+ body ring
   net: GND
   required: true
   rule: LVPWELL tie
+- around: W1
+  type: n+ DNW tie ring
+  net: VDD
+  required: true
+  rule: DNW bias
+- around: W1
+  type: p+ substrate ring
+  net: ground
+  required: true
+  rule: DN.3
 - around: W2
-  type: n+ DNW tie ring
-  net: VDD
-  required: true
-  rule: DNW bias
-- around: W2
-  type: p+ substrate ring
-  net: ground
-  required: true
-  rule: DN.3
-- around: W3
-  type: p+ body ring
-  net: x1_net2
-  required: true
-  rule: LVPWELL tie
-- around: W3
-  type: n+ DNW tie ring
-  net: VDD
-  required: true
-  rule: DNW bias
-- around: W3
-  type: p+ substrate ring
-  net: ground
-  required: true
-  rule: DN.3
-- around: W4
-  type: p+ body ring
-  net: x1_net3
-  required: true
-  rule: LVPWELL tie
-- around: W4
-  type: n+ DNW tie ring
-  net: VDD
-  required: true
-  rule: DNW bias
-- around: W4
-  type: p+ substrate ring
-  net: ground
-  required: true
-  rule: DN.3
-- around: W5
-  type: p+ body ring
-  net: x1_net1
-  required: true
-  rule: LVPWELL tie
-- around: W5
-  type: n+ DNW tie ring
-  net: VDD
-  required: true
-  rule: DNW bias
-- around: W5
-  type: p+ substrate ring
-  net: ground
-  required: true
-  rule: DN.3
-- around: W6
   type: n+ tap ring
   net: VDD
   required: true
   rule: DF.13 latch-up (tap within 20 um)
-- around: W2
+- around: W1
   type: extra p+ guard between groups
   required: false
   decided_by: policy
   enabled: false
-  reason: switching ['Mni'] share a well with sensitive ['x1_M2', 'x1_M4', 'x1_M6', 'x1_M8', 'Mse', 'Msi']
+  reason: switching ['x1_M1', 'x1_M3', 'x1_M5', 'x1_M7', 'Mni'] share a well with sensitive ['x1_M2', 'x1_M4', 'x1_M6',
+    'x1_M8', 'Mse', 'Msi']
 floorplan:
   style: two_row
   order_n:
@@ -304,53 +213,9 @@ floorplan:
   order_p:
   - Mpi
   dummy_l: 2.0
-  dnw_islands: 5
+  dnw_islands: 1
   decided_by: rule
 questions:
-- id: Q-body-x1_net4
-  about: W1
-  question: 'x1_M1: body tied to source x1_net4 needs its own DNW island (~332 um^2). Tie the body to ground instead?
-    (saves the island; body effect raises the switch Vt/Ron)'
-  options:
-  - keep isolated island
-  - body -> ground
-  default: keep isolated island
-  default_reason: policy decisions.defaults.body_tied_to_source (keep = circuit unchanged)
-  answer: keep isolated island
-  answered_by: auto
-- id: Q-body-x1_net2
-  about: W3
-  question: 'x1_M3: body tied to source x1_net2 needs its own DNW island (~352 um^2). Tie the body to ground instead?
-    (saves the island; body effect raises the switch Vt/Ron)'
-  options:
-  - keep isolated island
-  - body -> ground
-  default: keep isolated island
-  default_reason: policy decisions.defaults.body_tied_to_source (keep = circuit unchanged)
-  answer: keep isolated island
-  answered_by: auto
-- id: Q-body-x1_net3
-  about: W4
-  question: 'x1_M5: body tied to source x1_net3 needs its own DNW island (~391 um^2). Tie the body to ground instead?
-    (saves the island; body effect raises the switch Vt/Ron)'
-  options:
-  - keep isolated island
-  - body -> ground
-  default: keep isolated island
-  default_reason: policy decisions.defaults.body_tied_to_source (keep = circuit unchanged)
-  answer: keep isolated island
-  answered_by: auto
-- id: Q-body-x1_net1
-  about: W5
-  question: 'x1_M7: body tied to source x1_net1 needs its own DNW island (~470 um^2). Tie the body to ground instead?
-    (saves the island; body effect raises the switch Vt/Ron)'
-  options:
-  - keep isolated island
-  - body -> ground
-  default: keep isolated island
-  default_reason: policy decisions.defaults.body_tied_to_source (keep = circuit unchanged)
-  answer: keep isolated island
-  answered_by: auto
 - id: Q-dummy_l
   about: floorplan.dummy_l
   question: matched devices have L up to 8 um; dummies at L=8 cost area, capped at 2 um now. Keep cap?

@@ -34,6 +34,8 @@ all with the same bottom-plate net (any net: VSS, VDD or a signal). NMOS bodies 
 """
 from __future__ import annotations
 
+import math
+
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -534,10 +536,15 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         for side in _supply_sides(pin_sides, net):
             port = ring_w if side == "W" else ring_e
             x_r, y_r = float(port.center[0]), float(port.center[1])
+            # Drawn from the edge with the length rounded up to 10 nm: gdsfactory's rectangle
+            # rounds sizes to 10 nm, so an odd multiple of 5 nm (bias with 4/5.12 um replicas:
+            # 137.455 um) moved the strap end 5 nm off the cell edge. The extra 5 nm overlaps the ring.
             if side == "W":
-                R.wire("met1", (x_edge + 0.5, y_r), (x_r + 0.3, y_r), net, w=1.0, tag="edge-pin")
+                n10 = math.ceil(round((x_r + 0.8 - x_edge) / 0.01, 6))
+                R.rect("met1", x_edge, y_r - 0.5, x_edge + n10 * 0.01, y_r + 0.5, net, tag="edge-pin")
             else:
-                R.wire("met1", (x_r - 0.3, y_r), (x_redge - 0.5, y_r), net, w=1.0, tag="edge-pin")
+                n10 = math.ceil(round((x_redge - (x_r - 0.8)) / 0.01, 6))
+                R.rect("met1", x_redge - n10 * 0.01, y_r - 0.5, x_redge, y_r + 0.5, net, tag="edge-pin")
             edge_ports.append(dict(net=net, layer="met1", x=round(x_edge if side == "W" else x_redge, 4),
                                    y=round(y_r, 4), orientation=180 if side == "W" else 0, width=1.0))
 

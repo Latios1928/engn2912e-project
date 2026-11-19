@@ -3,48 +3,48 @@
  "units": "um",
  "origin": "GDS coordinates",
  "bbox": [
-  -13.04,
-  -14.385,
-  34.45,
-  31.845
+  -14.4,
+  -15.945,
+  44.77,
+  37.095
  ],
  "ports": [
   {
    "net": "Vthr",
    "layer": "met3",
-   "x": 15.82,
-   "y": 31.845,
+   "x": 26.14,
+   "y": 37.095,
    "orientation": 90,
    "width": 0.5
   },
   {
    "net": "Isyn",
    "layer": "met2",
-   "x": 34.45,
-   "y": 15.545,
+   "x": 44.77,
+   "y": 14.895,
    "orientation": 0,
    "width": 0.5
   },
   {
    "net": "Isum",
    "layer": "met2",
-   "x": -13.04,
-   "y": 13.145,
+   "x": -14.4,
+   "y": 14.895,
    "orientation": 180,
    "width": 0.5
   },
   {
    "net": "VT",
    "layer": "met3",
-   "x": 18.22,
-   "y": -14.385,
+   "x": 28.54,
+   "y": -15.945,
    "orientation": 270,
    "width": 0.5
   },
   {
    "net": "VSS",
    "layer": "met1",
-   "x": -13.04,
+   "x": -14.4,
    "y": 0.0,
    "orientation": 180,
    "width": 1.0
@@ -52,8 +52,8 @@
   {
    "net": "VDD",
    "layer": "met1",
-   "x": -13.04,
-   "y": 23.17,
+   "x": -14.4,
+   "y": 26.67,
    "orientation": 180,
    "width": 1.0
   }

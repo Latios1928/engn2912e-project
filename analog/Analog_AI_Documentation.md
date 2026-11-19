@@ -1198,6 +1198,43 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **Checked:** all 51 schematics (including `old/` and `mixed/`) netlist identically to before apart from the renamed subcircuits, none with a missing symbol; all five blocks and `SNN_signed` DRC clean, LVS match, same sizes and routing.
 - **Not changed:** text notes inside schematics (`T {...}`) still use the old names; `comparator_layout.py` stays in `neuron/layout/`; `--pex` in the testbench runners only finds the archived hand layouts.
 
+**88. Post-layout (1,1) failures (scenarios 5, 7): cause and fix** *(Simulated: schematic and PEX ngspice runs; tool-verified: real DRC + LVS + Magic PEX)*
+- **Asked:** why the A=B=1 cases fail post-layout (6/8, `snn_signed_tb__pex.md`), then to implement the fix.
+- **AI found:** scenarios 5 and 7 are a near-exact tie (-15 against +15). In the schematic the two currents into the membrane cancel to 2.5-6 % and the leak holds VMEM at about 0.6 V. Post-layout the residual is about 4x: more total charge (DAC internal-node C kick, wider spikes) and a few-% weaker hid0 -> DAC word 6 path, which scenario 7 puts on the inhibitory side. Mirroring the weights passes post-layout; the extracted `DPI_inh` cell matches `DPI` exactly for the same input. The earlier note that the DAC kick makes inhibition lose was not confirmed (lumped DAC caps in the schematic leave 5 and 7 passing).
+- **Decided by the user:** implement the fix and rebuild; set up the layout environment in this container.
+- **AI did:** `DPI_inh.sch` Mi2 2u/8u -> 2.4u/8u (mirror gain 1.2; 1.1 and 1.2 first tested on the old extraction). Rebuilt `.venv-glayout` (Python 3.11, gLayout fork @6fa5bca, gdsfactory 7.7.0, klayout 0.30.13, gdstk built against a local static Qhull); a rebuilt unchanged `DPI` XORs identical to the committed GDS. This PDK (open_pdks 1689ac3) has no `run_drc.py`: `flow.drc()` runs `gf180mcu.drc` with the old default rule set (no antenna / density decks) and waives `DBU` (flow GDS use a 0.005 um database unit) and `DCF.1a` (dummy COMP fill), both also present on the committed macro; `flow.py` and `top.py` use it. Rebuilt `DPI_inh` and `SNN_signed`, re-extracted (`top_pex.sh`).
+- **Result:** schematic 8/8, post-layout 8/8 (`snn_signed_tb.md`, `snn_signed_tb__pex.md`). Macro 616.4 x 806.5 um as before; DRC clean, LVS match; extraction differs from the old one only in the three Mi2 devices and their six dummies.
+- **Not done:** mismatch and corners with the new gain; the excess input-layer firing (in0 67-71 spikes post-layout against 22 in the schematic, the DAC kick) is still open; `parasitic_calib.json` was left as committed (this container's extraction would have shifted the `DPI_inh` factors). *(The 67-71 figure came from a faulty extraction, see entry 89: 83-84 on the corrected one.)*
+
+**89. Corner and mismatch verification of the gain-1.2 fix** *(Simulated: schematic, drawn and PEX ngspice runs, about 2,000 runs; tool-verified: Magic PEX)*
+- **Asked:** produce verification data for the mismatch and process-corner tests; then commit and push the results.
+- **AI found:** with Magic 8.3.684, `ext2spice lvs` silently drops every node-to-substrate capacitor (3.7 instead of 9.6 pF on `SNN_signed`). A first post-layout corner campaign on that extraction showed hot-corner failures; it was stopped and discarded. `top_pex.sh` now uses `ext2spice hierarchy off / scale off / subcircuit top on` (same devices and nets plus the substrate C) and the macro was re-extracted.
+- **AI did:** `run_snn_signed.py`: `--mc N` (one seed = one chip, per-scenario and chip yield, failing-run table), `--drawn` (macro LVS reference: drawn sizes, no parasitics), `--mi2-w` (override `DPI_inh` Mi2 width), `--seed0`, `--keep`; fully tied dummy FETs are dropped from the drawn / PEX simulation copies (same results, ~9x faster). Ran 15 corner / temperature points for schematic and post-layout, a 100-chip post-layout MC, and a 100-chip drawn MC of scenarios 5 and 7 at Mi2 gains 1.0 / 1.2 / 1.4 / 1.6 / 2.0.
+- **Result** (`snn_signed_verification.md`): all 30 corner points 8/8. Post-layout MC: 45 / 100 chips pass all 8 scenarios; scenarios 5 and 7 (the -15 against +15 ties) pass 66 and 67 / 100, every other scenario 100 except one power-up spike in scenario 4. Drawn MC chip yield on 5 and 7: 41 (gain 1.0), 51 (1.2), 60 (1.4), 68 (1.6), 76 (2.0). The failures follow the per-synapse weight mismatch, not the presynaptic rates. An exact tie has no reliable winner from chip to chip.
+- **Not done:** no further design change; the choice between weight margin in the network, a higher gain, or trimmed / larger synapse devices is open (README TODO).
+
+
+**90. Is 5 kHz at 10 nA a reasonable low-power operating point?** *(Reasoned / Estimate)*
+- **Context:** an earlier request in this session, to lay out `DPI_inh` and `DAC_signed`, was interrupted by the user after the AI had probed PCell footprints in `/tmp` in the container. No repo file was written.
+- **Asked:** whether running the SNN at 5 kHz for a 10 nA DC input is reasonable, with the aim of low power.
+- **AI explained:**
+  - The rate is consistent with the sizing: 10 nA / 1 pF = 10 mV/µs, about 190 µs to the ≈ 1.9 V threshold, plus the spike, gives ≈ 200 µs (entry 42: 201 µs at 9.5 nA). The ceiling is ≈ 40 kHz (10 µs spike + 15 µs refractory). Typical subthreshold neuromorphic chips run at 10–1000 Hz.
+  - *(Estimate from logged numbers)* The neuron's 0.38 µW is about 85 % static: the spike amplifier bias (Vamp_bias ≈ 96.5 nA, entry on bias generation) gives ≈ 0.32 µW, the input current ≈ 0.03 µW, and CV² per spike at 5 kHz ≈ 0.04 µW. The shared bias generator idles at 0.72 µA (≈ 2.4 µW).
+  - So lowering the rate saves little power and raises energy per inference, because static power is paid for longer. Going much slower would also bring signal currents near DAC leakage (8.7–96 pA), worsen subthreshold mismatch, and need more capacitor area.
+  - Suggested instead: cut or gate the comparator bias, power-gate the biases between inferences, shorten each inference, and simulate supply current at 0 and 10 nA input to measure the static/dynamic split.
+- **Not done by AI:** no simulation; no file other than this log was changed.
+
+
+**91. Why 5 kHz at 10 nA is the sweet spot** *(Reasoned / Estimate)*
+- **User's rationale:** a 1 pF MIM cap is the largest acceptable for area, and the DC current should sit well above NMOS/PMOS leakage, so 5 kHz falls out.
+- **AI agreed:** rate ≈ I / (C·ΔV) = 10 nA / (1 pF × ≈ 1.9 V) ≈ 5 kHz. With C capped by area, I floored by leakage, and ΔV limited by the 3.3 V supply, 5 kHz is near the slowest rate the constraints allow.
+- **AI added:**
+  - *(Estimate)* Leakage roughly doubles per ~10 °C, so the 27 °C margin of 100–1000× over DAC off-leakage (8.7–96 pA) may fall to ~10–20× at 85 °C; check it at the hot corner.
+  - The power benefit comes from the 10 nA level; the comparator bias still dominates (entry 90).
+  - DPI τ ≈ 0.4 ms ≈ 2 input periods at 5 kHz, which suits summing coincident spikes; scale τ if the rate changes.
+  - Keep input rates well below the ≈ 40 kHz refractory ceiling.
+- **Not done by AI:** no simulation; no file other than this log was changed.
+
 ---
 
 ## Notes on reliability

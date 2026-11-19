@@ -27,8 +27,8 @@ nets:
     class: bias_pin
     why: gate-only pin driving current sources / long-L devices
   Vthr:
-    class: digital_pin
-    why: gate-only pin, short L, drives a series switch
+    class: bias_pin
+    why: gate-only pin driving current sources / long-L devices
   x1_net1:
     class: signal
     why: ''
@@ -42,7 +42,7 @@ groups:
   tail: null
   placement: adjacent
   dummy_ring: group
-  dummy_l: 0.64
+  dummy_l: 5.12
   reason: same W/L, common source Isum, gates Vthr/x1_net1
 - id: G2
   type: mirror
@@ -66,7 +66,7 @@ wells:
   required: true
   decided_by: rule
   reason: 'NMOS body on Isum (not ground): needs its own isolated p-well in a DNW island'
-  cost_um2: 372
+  cost_um2: 551
 - id: W2
   kind: nwell
   body: VDD
@@ -86,7 +86,7 @@ wells:
   required: false
   decided_by: policy
   reason: policy nmos_in_dnw (substrate-noise isolation)
-  cost_um2: 491
+  cost_um2: 496
 rings:
 - around: W1
   type: p+ body ring
@@ -154,9 +154,5 @@ caps:
   w: 22.18
   l: 22.18
 schematic_warnings: []
-schematic_changes:
-- 'x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+schematic_changes: []
 mode: auto
