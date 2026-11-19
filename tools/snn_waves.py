@@ -82,30 +82,22 @@ def rising(t, v, th=VTH):
 
 
 def pair_vmem(sig, t):
-    """{neuron k: vmem name}: the membrane that drops the most right after spike[k] rises."""
-    vm = sorted(k for k in sig if re.search(r"vmem_\d$", k))
-    pairs = {}
-    if not vm:                                   # run without saved membranes: spikes only
-        return pairs
-    for k in range(5):
-        edges = rising(t, sig[f"spike[{k}]"])
+    """{neuron k: vmem name}. The macro netlists (LVS reference and extraction) name the
+    membrane of neuron k (spike[k]) VMEM_k, so pair by index. As a check, a neuron that spikes
+    should see its own membrane drop right after its spikes; warn if not. (Pairing by that
+    drop alone fails when two neurons fire at the same instants, e.g. the two inputs.)"""
+    vm = {int(re.search(r"vmem_(\d)$", k).group(1)): k for k in sig if re.search(r"vmem_\d$", k)}
+    pairs = {k: vm[k] for k in range(5) if k in vm}
+    for k, name in pairs.items():
+        edges = rising(t, sig[f"spike[{k}]"])[:20]
         if len(edges) == 0:
             continue
-        drop = {}
-        for name in vm:
-            v = sig[name]
-            d = []
-            for e in edges[:20]:
-                i0 = np.searchsorted(t, e - 5e-6)
-                i1 = np.searchsorted(t, e + 40e-6)
-                d.append(v[max(i0, 0)] - v[min(i1, len(v) - 1)])
-            drop[name] = np.mean(d)
-        pairs[k] = max(drop, key=drop.get)
-    # neurons that never spiked get the remaining membranes in index order
-    rest = [n for n in vm if n not in pairs.values()]
-    for k in range(5):
-        if k not in pairs and rest:
-            pairs[k] = rest.pop(0)
+        v = sig[name]
+        d = [v[max(np.searchsorted(t, e - 5e-6), 0)] - v[min(np.searchsorted(t, e + 15e-6), len(v) - 1)]
+             for e in edges]
+        if np.mean(d) < 0.3:
+            print(f"WARNING: {NEURONS[k]} spikes but {name} does not drop after its spikes "
+                  f"({np.mean(d):.2f} V); the VMEM_k = spike[k] naming may not hold for this netlist")
     return pairs
 
 

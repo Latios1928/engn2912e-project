@@ -78,7 +78,11 @@ def main():
         assert len(hits) == 1, f"label {s.text_string}: {len(hits)} Metal2 pads"
         b = hits[0]
         box = db.DBox(b.left * dbu, b.bottom * dbu, b.right * dbu, b.top * dbu)
-        assert abs(box.bottom - body.bottom) < 1e-3, f"{s.text_string} is not on the bottom edge"
+        # The pad must be the lowest Metal2 in its column: the stub runs from the pad straight
+        # down past the body edge (other layers below the pins, e.g. M3/M4 routing, are fine)
+        assert box.bottom - body.bottom < 5.0, f"{s.text_string} is not near the bottom edge"
+        col = db.Box(b.left, round(body.bottom / dbu), b.right, b.bottom)
+        assert (m2 & db.Region(col)).is_empty(), f"Metal2 below the {s.text_string} pad: its stub would short"
         pads[s.text_string] = box
     assert len(pads) == 51, f"{len(pads)} pins, expected 51"
 
@@ -139,7 +143,8 @@ def main():
         else:
             rect("M2", x0, 0.0, x1, ytop, net)
             top.shapes(li["M2_LBL"]).insert(db.DText(net, db.DTrans(um((x0 + x1) / 2), um(0.5))))
-            pins[net] = db.DBox(um(x0), 0.0, um(x1), um(ytop))
+            # LEF pin: the stub up to the body edge (MARGIN); the rest is inside the body obstruction
+            pins[net] = db.DBox(um(x0), 0.0, um(x1), um(min(ytop, MARGIN)))
 
     # GDS: only the wrapper and what it uses, in 1 nm database units (SNN_signed.gds is in
     # 5 nm; KLayout DRC / LVS accept that, but LibreLane's Magic streamout requires 1 nm)
