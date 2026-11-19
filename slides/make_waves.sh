@@ -20,9 +20,13 @@ python3 tools/vcd2png.py digital/tb_snn_digital.vcd --start 1000 --end 37000 \
 
 # pulse_gen: period 200 -> 50 and width 10 -> 5 written mid-period (after the
 # pulse at 802 us); the new timing starts at the next period boundary (dashed).
-python3 tools/vcd2png.py digital/tb_snn_digital.vcd --start 780000 --end 1100000 \
+# Same window, en: en[1] raised mid-period waits for the boundary (pulse[1]
+# starts with pulse[0]); dropped just after the 1052 us boundary it still
+# finishes that pulse and gives none after (tb check 5b).
+python3 tools/vcd2png.py digital/tb_snn_digital.vcd --start 780000 --end 1160000 \
     --sig tb_snn_digital.period::dec \
-    --sig tb_snn_digital.width::dec --sig 'tb_snn_digital.pulse[0]:pulse[0]' \
+    --sig tb_snn_digital.width::dec --sig 'tb_snn_digital.in[0]:en[0]' --sig 'tb_snn_digital.in[1]:en[1]' \
+    --sig 'tb_snn_digital.pulse[0]:pulse[0]' --sig 'tb_snn_digital.pulse[1]:pulse[1]' \
     --vline 1001500 \
-    --title "pulse_gen: new period/width take effect at the next period" \
+    --title "pulse_gen: new period/width and en take effect at the next period" \
     -o slides/pulse_gen_wave.png

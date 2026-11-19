@@ -72,7 +72,11 @@ module tb_snn_digital;
   integer starts[0:63];
   integer widths[0:63];
   reg p0_q = 1'b0;
+  reg p1_q = 1'b0;
+  integer n1 = 0;  // rising edges of pulse[1]
   always @(posedge clk) begin
+    p1_q <= pulse[1];
+    if (pulse[1] && !p1_q) n1 <= n1 + 1;
     p0_q <= pulse[0];
     if (pulse[0] && !p0_q) cur_start <= cyc;
     if (!pulse[0] && p0_q && n_pulses < 64) begin
@@ -82,8 +86,8 @@ module tb_snn_digital;
     end
   end
 
-  integer i, k, n_before;
-  reg ok;
+  integer i, k, n_before, n1_before;
+  reg ok, ok_en;
   reg [31:0] w_before;
   reg [7:0] s_before;
   reg [7:0] p_before, wd_before;
@@ -156,12 +160,22 @@ module tb_snn_digital;
     write_reg(4'd11, 4'h3);
     write_reg(4'd12, 4'h5);  // width 5
     write_reg(4'd13, 4'h0);
+    // en is sampled at period boundaries: raise en[1] mid-period (nothing yet),
+    // drop it just after a boundary (that period's pulse still happens)
+    repeat (80) @(negedge clk);
+    n1_before = n1;
+    in = 2'b11;
+    wait (n_pulses == n_before + 2);
+    wait (pulse[0]);
+    in = 2'b01;
     wait (n_pulses == n_before + 4);
+    ok_en = (n1 - n1_before == 2);
     // pulse n_before is the one running during the change: old timing
     ok = (widths[n_before] == 10) && (starts[n_before+1] - starts[n_before] == 200);
     for (k = n_before + 2; k < n_before + 4; k = k + 1)
       if (widths[k] != 5 || starts[k] - starts[k-1] != 50) ok = 1'b0;
     check("5b new timing (50/5) only from the next period; current pulse untouched", ok);
+    check("5b en[1] raised/dropped mid-period: 2 pulses, from boundary to boundary", ok_en);
 
     // width 0 = no pulses (from the next period)
     write_reg(4'd12, 4'h0);

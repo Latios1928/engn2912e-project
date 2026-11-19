@@ -67,7 +67,9 @@ From this folder:
 iverilog -g2012 -Wall -o sim.vvp tb_snn_digital.v snn_digital.v regs.v pulse_gen.v && vvp sim.vvp
 ```
 
-`tb_snn_digital.v` (8 checks): reset values, weights and signs, the unused
-and idle addresses write nothing, the data-change rule, and pulse timing changes (taking effect only
-from the next period, `width = 0` = no pulses). The whole chip is covered by
+`tb_snn_digital.v` (9 checks): reset values, weights and signs, the unused
+and idle addresses write nothing, the data-change rule, pulse timing changes
+(taking effect only from the next period, `width = 0` = no pulses), and `en`
+(`in`) sampled only at period boundaries (a late `en` waits for the next one; a
+dropped `en` lets the current pulse finish). The whole chip is covered by
 `../mock/tb_snn_top.v` and `../mixed/`.
