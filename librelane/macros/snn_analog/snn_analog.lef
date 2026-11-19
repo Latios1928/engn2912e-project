@@ -1,0 +1,439 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+MACRO snn_analog
+  CLASS BLOCK ;
+  FOREIGN snn_analog 0 0 ;
+  ORIGIN 0 0 ;
+  SIZE 600.500 BY 816.520 ;
+  SYMMETRY X Y ;
+  PIN Iref
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 457.880 0.000 458.380 16.000 ;
+    END
+  END Iref
+  PIN VT
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 471.090 0.000 471.590 16.000 ;
+    END
+  END VT
+  PIN pulse[1]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 84.050 0.000 84.550 16.000 ;
+    END
+  END pulse[1]
+  PIN pulse[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 85.650 0.000 86.150 16.000 ;
+    END
+  END pulse[0]
+  PIN s[7]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 71.250 0.000 71.750 16.000 ;
+    END
+  END s[7]
+  PIN s[6]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 72.850 0.000 73.350 16.000 ;
+    END
+  END s[6]
+  PIN s[5]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 74.450 0.000 74.950 16.000 ;
+    END
+  END s[5]
+  PIN s[4]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 76.050 0.000 76.550 16.000 ;
+    END
+  END s[4]
+  PIN s[3]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 77.650 0.000 78.150 16.000 ;
+    END
+  END s[3]
+  PIN s[2]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 79.250 0.000 79.750 16.000 ;
+    END
+  END s[2]
+  PIN s[1]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 80.850 0.000 81.350 16.000 ;
+    END
+  END s[1]
+  PIN s[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 82.450 0.000 82.950 16.000 ;
+    END
+  END s[0]
+  PIN spike[4]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 590.430 0.000 590.930 16.000 ;
+    END
+  END spike[4]
+  PIN spike[3]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 592.030 0.000 592.530 16.000 ;
+    END
+  END spike[3]
+  PIN spike[2]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 593.630 0.000 594.130 16.000 ;
+    END
+  END spike[2]
+  PIN spike[1]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 595.230 0.000 595.730 16.000 ;
+    END
+  END spike[1]
+  PIN spike[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 596.830 0.000 597.330 16.000 ;
+    END
+  END spike[0]
+  PIN w[31]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 20.050 0.000 20.550 16.000 ;
+    END
+  END w[31]
+  PIN w[30]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 21.650 0.000 22.150 16.000 ;
+    END
+  END w[30]
+  PIN w[29]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 23.250 0.000 23.750 16.000 ;
+    END
+  END w[29]
+  PIN w[28]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 24.850 0.000 25.350 16.000 ;
+    END
+  END w[28]
+  PIN w[27]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 26.450 0.000 26.950 16.000 ;
+    END
+  END w[27]
+  PIN w[26]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 28.050 0.000 28.550 16.000 ;
+    END
+  END w[26]
+  PIN w[25]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 29.650 0.000 30.150 16.000 ;
+    END
+  END w[25]
+  PIN w[24]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 31.250 0.000 31.750 16.000 ;
+    END
+  END w[24]
+  PIN w[23]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 32.850 0.000 33.350 16.000 ;
+    END
+  END w[23]
+  PIN w[22]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 34.450 0.000 34.950 16.000 ;
+    END
+  END w[22]
+  PIN w[21]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 36.050 0.000 36.550 16.000 ;
+    END
+  END w[21]
+  PIN w[20]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 37.650 0.000 38.150 16.000 ;
+    END
+  END w[20]
+  PIN w[19]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 39.250 0.000 39.750 16.000 ;
+    END
+  END w[19]
+  PIN w[18]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 40.850 0.000 41.350 16.000 ;
+    END
+  END w[18]
+  PIN w[17]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 42.450 0.000 42.950 16.000 ;
+    END
+  END w[17]
+  PIN w[16]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 44.050 0.000 44.550 16.000 ;
+    END
+  END w[16]
+  PIN w[15]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 45.650 0.000 46.150 16.000 ;
+    END
+  END w[15]
+  PIN w[14]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 47.250 0.000 47.750 16.000 ;
+    END
+  END w[14]
+  PIN w[13]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 48.850 0.000 49.350 16.000 ;
+    END
+  END w[13]
+  PIN w[12]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 50.450 0.000 50.950 16.000 ;
+    END
+  END w[12]
+  PIN w[11]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 52.050 0.000 52.550 16.000 ;
+    END
+  END w[11]
+  PIN w[10]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 53.650 0.000 54.150 16.000 ;
+    END
+  END w[10]
+  PIN w[9]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 55.250 0.000 55.750 16.000 ;
+    END
+  END w[9]
+  PIN w[8]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 56.850 0.000 57.350 16.000 ;
+    END
+  END w[8]
+  PIN w[7]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 58.450 0.000 58.950 16.000 ;
+    END
+  END w[7]
+  PIN w[6]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 60.050 0.000 60.550 16.000 ;
+    END
+  END w[6]
+  PIN w[5]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 61.650 0.000 62.150 16.000 ;
+    END
+  END w[5]
+  PIN w[4]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 63.250 0.000 63.750 16.000 ;
+    END
+  END w[4]
+  PIN w[3]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 64.850 0.000 65.350 16.000 ;
+    END
+  END w[3]
+  PIN w[2]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 66.450 0.000 66.950 16.000 ;
+    END
+  END w[2]
+  PIN w[1]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 68.050 0.000 68.550 16.000 ;
+    END
+  END w[1]
+  PIN w[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER Metal2 ;
+        RECT 69.650 0.000 70.150 16.000 ;
+    END
+  END w[0]
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER Metal5 ;
+        RECT 0.500 3.200 600.000 5.200 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER Metal5 ;
+        RECT 0.500 0.500 600.000 2.500 ;
+    END
+  END VSS
+  OBS
+    LAYER Metal1 ;
+      RECT 2.000 16.000 598.500 814.520 ;
+    LAYER Metal2 ;
+      RECT 2.000 16.000 598.500 814.520 ;
+      RECT 363.310 3.200 363.810 16.000 ;
+      RECT 364.910 0.500 365.410 16.000 ;
+    LAYER Metal3 ;
+      RECT 2.000 16.000 598.500 814.520 ;
+      RECT 363.310 3.400 363.810 5.000 ;
+      RECT 364.910 0.700 365.410 2.300 ;
+    LAYER Metal4 ;
+      RECT 2.000 16.000 598.500 814.520 ;
+      RECT 363.310 3.400 363.810 5.000 ;
+      RECT 364.910 0.700 365.410 2.300 ;
+    LAYER Metal5 ;
+      RECT 2.000 16.000 598.500 814.520 ;
+  END
+END snn_analog
+
+END LIBRARY

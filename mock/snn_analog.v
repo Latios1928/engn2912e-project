@@ -31,6 +31,13 @@ module snn_analog #(
     // ns, even; arbitrary, and unrelated to the digital clock on purpose
     parameter CLK_PERIOD   = 14
 ) (
+`ifdef ANALOG_PINS
+    // Analog pins of the real macro (see analog/snn/snn_analog.v); unused by the
+    // model. Present only when ANALOG_PINS is defined: the gate-level simulation
+    // (librelane/snn_top/gls) needs them because the LibreLane netlist connects them.
+    inout  wire           Iref,
+    inout  wire           VT,
+`endif
     input  wire [8*4-1:0] w,
     input  wire [    7:0] s,
     input  wire [    1:0] pulse,

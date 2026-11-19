@@ -81,9 +81,11 @@ module tb_snn_top;
     ss = 8'b1010_0101;
     load(ws, ss);
     checks = checks + 1;
-    if (dut.w !== ws || dut.s !== ss) begin
+    // Read at the analog block's inputs (the same nets as dut.w / dut.s), which also
+    // exist in the gate-level netlist (librelane/snn_top/gls)
+    if (dut.u_snn_analog.w !== ws || dut.u_snn_analog.s !== ss) begin
       errors = errors + 1;
-      $display("regs: w=%h s=%b, expected %h %b", dut.w, dut.s, ws, ss);
+      $display("regs: w=%h s=%b, expected %h %b", dut.u_snn_analog.w, dut.u_snn_analog.s, ws, ss);
     end
 
     ws = {8{MAX}};
