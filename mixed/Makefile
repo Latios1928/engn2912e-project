@@ -1,66 +1,81 @@
-# Mixed-signal simulation of the SNN: rf and pulse generators in Icarus Verilog,
-# the analog 2-2-1 network (analog/snn/snn_analog.sch) in ngspice, coupled by
-# SpiceBind. See README.md.
+# Mixed-signal simulation: snn_top (regs, pulse_gen) in Icarus Verilog; the
+# analog macro SNN_signed (its LVS reference netlist) in ngspice; coupled by
+# SpiceBind. Run from this folder in the container.
 #
-#   make run                             all scenarios (1-5, about 25 ms simulated)
-#   make run SCEN_FIRST=3 SCEN_LAST=3    one scenario
-#   make run SETTLE=500 RUN=1500         shorter windows (us)
-#   make vcd                             snn_ms_tb.raw -> snn_ms_tb.vcd
+#   make run                               scenarios 1-5 (about 40 ms simulated)
+#   make run SCEN_FIRST=5 SCEN_LAST=5      one scenario
+#   make run IREF=82n                      other Iref (default 100n)
+#   make run SETTLE=2000 RUN=1500          shorter windows (us)
+#   make regs                              ../digital/tb_snn_digital.v
+#   make vcd                               .raw -> .vcd
 #   make clean
+#
+# Outputs: snn_ms_tb[__iref<IREF>].log/.raw.
 
-MIXED := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-ROOT  := $(abspath $(MIXED)/..)
+HERE := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+ROOT := $(abspath $(HERE)/..)
 export PATH := /foss/tools/bin:$(PATH)
 
 SCEN_FIRST ?= 1
-SCEN_LAST  ?= 4
-SETTLE     ?= 2000
+SCEN_LAST  ?= 5
+SETTLE     ?= 4000
 RUN        ?= 3000
+IREF       ?= 100n
+
+PDK_ROOT ?= /foss/pdks
+PDK      ?= gf180mcuD
+MODELS   := $(PDK_ROOT)/$(PDK)/libs.tech/ngspice
+MACRO    := $(ROOT)/analog/layout_tools/top/SNN_signed/SNN_signed_lvs_ref.spice
+
+TAG  := $(if $(filter 100n,$(IREF)),,__iref$(IREF))
+OUT  := snn_ms_tb$(TAG)
 
 SPICEBIND := /foss/tools/spicebind
-VSRC := sim.f snn_ms_tb.v $(ROOT)/analog/snn/snn_analog.v $(ROOT)/snn_top.v $(wildcard $(ROOT)/digital/*.v)
+VSRC := sim.f $(shell grep -v '^//' sim.f)
 PFX  := -Psnn_ms_tb
-SCHEMATICS := snn_ms_tb.sch $(ROOT)/analog/snn/snn_analog.sch $(ROOT)/analog/snn/snn_analog.sym \
-              $(wildcard $(ROOT)/analog/DAC/DAC_unsigned.s* $(ROOT)/analog/DPI/DPI.s* \
-                         $(ROOT)/analog/neuron/neuron.s* $(ROOT)/analog/neuron/spike_amplifier.s*)
 
 .DEFAULT_GOAL := run
-.PHONY: run vcd clean
+.PHONY: run regs vcd clean
 
-# xschem resolves symbols from the current folder, so netlist from the project
-# root with the project xschemrc. It exits with status 10 even after a good
-# netlist, so check the file instead.
-snn_ms_tb.spice: $(SCHEMATICS)
-	rm -f $@
-	cd $(ROOT) && xschem --rcfile xschemrc -n -q -x -o $(MIXED) -N $@ mixed/snn_ms_tb.sch || true
-	@grep -q 'snn_analog$$' $@ || { echo "netlisting failed"; exit 1; }
-	@! grep -n 'IS MISSING' $@ || { echo "netlist has missing symbols"; exit 1; }
-	@d=$$(grep -i '^\.subckt' $@ | awk '{print tolower($$2)}' | sort | uniq -d); \
-	  [ -z "$$d" ] || { echo "duplicate subckt names: $$d"; exit 1; }
+# Simulation copy of the macro netlist: long FETs split, MIM cap model renamed
+macro_sim.spice: $(MACRO) macro_sim.py
+	python3 macro_sim.py $< $@
+
+# The netlist used for this run: paths and IREF filled in
+$(OUT)_run.spice: snn_ms_tb.spice macro_sim.spice FORCE
+	sed -e 's|@PDK@|$(MODELS)|' -e 's|@MACRO@|$(HERE)/macro_sim.spice|' -e 's/p_iref=100n/p_iref=$(IREF)/' $< > $@
 
 no_passwd_shim.so: no_passwd_shim.c
 	gcc -shared -fPIC -o $@ $<
 
-run: snn_ms_tb.spice no_passwd_shim.so $(VSRC)
-	iverilog -g2012 -Wall -s snn_ms_tb -o snn_ms_tb.vvp \
+run: $(OUT)_run.spice no_passwd_shim.so $(VSRC)
+	iverilog -g2012 -Wall -s snn_ms_tb -o $(OUT).vvp \
 	  $(PFX).SCEN_FIRST=$(SCEN_FIRST) $(PFX).SCEN_LAST=$(SCEN_LAST) \
 	  $(PFX).SETTLE=$(SETTLE) $(PFX).RUN=$(RUN) -f sim.f
 	@rm -f dump.raw
+	@echo "IREF=$(IREF) scenarios $(SCEN_FIRST)-$(SCEN_LAST) SETTLE=$(SETTLE) RUN=$(RUN) -> $(OUT).log"
 	@start=$$(date +%s); \
-	  SPICE_NETLIST=$(MIXED)/snn_ms_tb.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
-	  LOGIC_THRESHOLD_LOW=1.64 LOGIC_THRESHOLD_HIGH=1.66 \
-	  LD_PRELOAD=$(MIXED)/no_passwd_shim.so \
-	  vvp -M $(SPICEBIND) -m spicebind_vpi snn_ms_tb.vvp > snn_ms_tb.log 2>&1; \
+	  { echo "# make run IREF=$(IREF) SCEN_FIRST=$(SCEN_FIRST) SCEN_LAST=$(SCEN_LAST) SETTLE=$(SETTLE) RUN=$(RUN)"; \
+	    SPICE_NETLIST=$(HERE)/$(OUT)_run.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
+	    LOGIC_THRESHOLD_LOW=1.64 LOGIC_THRESHOLD_HIGH=1.66 \
+	    LD_PRELOAD=$(HERE)/no_passwd_shim.so \
+	    vvp -M $(SPICEBIND) -m spicebind_vpi $(OUT).vvp; } > $(OUT).log 2>&1; \
 	  echo "simulation took $$(( $$(date +%s) - start )) s"
-	@mv -f dump.raw snn_ms_tb.raw
+	@mv -f dump.raw $(OUT).raw
 	@# ngspice's progress output uses \r, so split on it to find the testbench lines.
-	@tr '\r' '\n' < snn_ms_tb.log | grep -E 'snn_ms_tb: |\*\* Error|singular' | awk '!seen[$$0]++'
-	@tr '\r' '\n' < snn_ms_tb.log | grep -q 'snn_ms_tb: PASS,'
+	@tr '\r' '\n' < $(OUT).log | grep -E 'snn_ms_tb: |\*\* Error|singular' | awk '!seen[$$0]++'
+	@tr '\r' '\n' < $(OUT).log | grep -q 'snn_ms_tb: PASS,'
 
-vcd: snn_ms_tb.vcd
-snn_ms_tb.vcd: snn_ms_tb.raw
+regs:
+	cd $(ROOT)/digital && iverilog -g2012 -Wall -o sim.vvp tb_snn_digital.v snn_digital.v regs.v pulse_gen.v
+	cd $(ROOT)/digital && vvp -n sim.vvp | grep 'tb_snn_digital:'
+
+vcd: $(OUT).vcd
+$(OUT).vcd: $(OUT).raw
 	rawtovcd $< > $@
 
+FORCE:
+
 clean:
-	rm -f no_passwd_shim.so snn_ms_tb.vvp snn_ms_tb.spice snn_ms_tb.raw snn_ms_tb.log \
-	      snn_ms_tb.vcd snn_ms_tb_digital.vcd dump.raw
+	rm -f no_passwd_shim.so snn_ms_tb*_run.spice snn_ms_tb*.vvp snn_ms_tb*.raw \
+	      snn_ms_tb*.log snn_ms_tb*.vcd snn_ms_tb_digital.vcd dump.raw macro_sim.spice

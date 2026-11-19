@@ -11,7 +11,6 @@
   "displayedSignals": [
     {
       "dataType": "netlist-variable",
-      "netlistId": 20,
       "name": "tb_snn_top.dut.clk",
       "numberFormat": "binary",
       "colorIndex": 0,
@@ -24,20 +23,6 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 25,
-      "name": "tb_snn_top.dut.wren",
-      "numberFormat": "binary",
-      "colorIndex": 0,
-      "rowHeight": 1,
-      "verticalScale": 1,
-      "nameType": "fullPath",
-      "customName": "wren",
-      "renderType": "binary",
-      "valueLinkEnable": false
-    },
-    {
-      "dataType": "netlist-variable",
-      "netlistId": 22,
       "name": "tb_snn_top.dut.data",
       "numberFormat": "hexadecimal",
       "colorIndex": 0,
@@ -50,7 +35,6 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 19,
       "name": "tb_snn_top.dut.addr",
       "numberFormat": "decimal",
       "colorIndex": 0,
@@ -63,7 +47,6 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 26,
       "name": "tb_snn_top.dut.w",
       "numberFormat": "hexadecimal",
       "colorIndex": 0,
@@ -76,7 +59,6 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 23,
       "name": "tb_snn_top.dut.in",
       "numberFormat": "binary",
       "colorIndex": 0,
@@ -89,7 +71,6 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 27,
       "name": "tb_snn_top.dut.out",
       "numberFormat": "binary",
       "colorIndex": 0,

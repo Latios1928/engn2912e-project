@@ -1,11 +1,12 @@
 `timescale 1ns / 1ns
 
 // Behavioral model of an integrate-and-fire neuron (analog/DPI/DPI.sch and
-// neuron_sized.sch); part of the behavioral snn_analog (snn_analog.v).
+// neuron.sch); part of the behavioral snn_analog (snn_analog.v).
 //
 // Every clk_analog cycle, voltage changes by the sum of the INDEGREE input
 // currents (signed; negative ones are inhibitory), clamped to 0..16'hFFFF
-// (the mock ground and supply rail), and then drops by LEAK (not below 0). While active, voltage is held at 0 instead.
+// (the mock ground and supply rail), and then drops by LEAK (not below 0).
+// While active, voltage is held at 0 instead.
 //
 // active comes from the internal comparator. Timing: if voltage exceeds
 // THRESHOLD after edge e, active rises at e+1 and voltage is cleared at e+2
@@ -19,7 +20,7 @@ module neuron #(
 ) (
     input  wire                   clk_analog,
     input  wire                   rst,         // synchronous, active high
-    input  wire [INDEGREE*16-1:0] currents,    // INDEGREE signed 16-bit currents, packed
+    input  wire [INDEGREE*16-1:0] currents,    // INDEGREE signed 16-bit, packed
     output wire                   active
 );
   // voltage (0..65535) plus INDEGREE signed 16-bit currents, as a signed sum

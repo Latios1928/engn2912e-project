@@ -1,7 +1,7 @@
 `timescale 1ns / 1ns
 
 // Behavioral stand-in for the analog 2-2-1 spiking neural network
-// (analog/snn/snn_analog.sch): the same module name and ports, so
+// (the SNN_signed macro): the same module name and ports, so
 // snn_top.v works with either. The pure-digital build (mock/) compiles
 // this file; the mixed-signal build (mixed/) compiles an empty module of the
 // same name instead, which SpiceBind fills with the transistor-level network.
@@ -12,23 +12,34 @@
 // own.
 //
 // pulse[i] reaches input neuron i through a DAC. Adjacent layers are fully
-// connected through DACs. Every synapse has its own 4-bit weight, packed in w
-// as 8 words of 4 bits. Weights are sign-magnitude (see dac.v): bit 3 is the
-// sign (1 = inhibitory) and bits 2:0 the magnitude, -7..+7.
+// connected through DACs. Synapse k has a 4-bit magnitude w[4k+3:4k] (0-15)
+// and a sign s[k] (1 = inhibitory):
 //
-//   word 0..1    pulse[i]  -> input i      (word i)
-//   word 2..5    input i   -> hidden j     (word 2 + 2*j + i)
-//   word 6..7    hidden j  -> output       (word 6 + j)
+//   k 0..1    pulse[i]  -> input i      (k = i)
+//   k 2..5    input i   -> hidden j     (k = 2 + 2*j + i)
+//   k 6..7    hidden j  -> output       (k = 6 + j)
+//
+// As on the chip, an inhibitory pulse -> input synapse does nothing (the
+// membrane is clamped at 0 and input neurons have no other input).
 //
 // spike = {output, hidden[1:0], input[1:0]} (active of every neuron).
 module snn_analog #(
     parameter DURATION     = 4,
     parameter THRESHOLD    = 1000,
-    parameter GAIN         = 32,  // per unit of weight and cycle; arbitrary
+    parameter GAIN         = 16,  // per unit of weight and cycle; arbitrary
     parameter LEAK         = 1,
-    parameter CLK_PERIOD   = 14   // ns, even; arbitrary, and unrelated to the digital clock on purpose
+    // ns, even; arbitrary, and unrelated to the digital clock on purpose
+    parameter CLK_PERIOD   = 14
 ) (
+`ifdef ANALOG_PINS
+    // Analog pins of the real macro (see analog/snn/snn_analog.v); unused by the
+    // model. Present only when ANALOG_PINS is defined: the gate-level simulation
+    // (librelane/snn_top/gls) needs them because the LibreLane netlist connects them.
+    inout  wire           Iref,
+    inout  wire           VT,
+`endif
     input  wire [8*4-1:0] w,
+    input  wire [    7:0] s,
     input  wire [    1:0] pulse,
     output wire [    4:0] spike
 );
@@ -65,6 +76,7 @@ module snn_analog #(
       ) u_dac (
           .active (pulse[i]),
           .weight (w[(W_IN+i)*WW+:WW]),
+          .sign   (s[W_IN+i]),
           .current(cur)
       );
       neuron #(
@@ -88,6 +100,7 @@ module snn_analog #(
         ) u_dac (
             .active (act_in[i]),
             .weight (w[(W_IH+NI*j+i)*WW+:WW]),
+            .sign   (s[W_IH+NI*j+i]),
             .current(cur[i*16+:16])
         );
       end
@@ -112,6 +125,7 @@ module snn_analog #(
         ) u_dac (
             .active (act_hid[j]),
             .weight (w[(W_HO+j)*WW+:WW]),
+            .sign   (s[W_HO+j]),
             .current(cur[j*16+:16])
         );
       end
