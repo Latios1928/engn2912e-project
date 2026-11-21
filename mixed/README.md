@@ -19,7 +19,7 @@ pins are sources in `snn_ms_tb.spice`: `Iref` = 100 nA, `VT` = 1.66 V, VDD 3.3 V
 From this folder:
 
 ```bash
-make run                              # scenarios 1-5, about 36 ms simulated
+make run                              # scenarios 1-8, about 58 ms simulated
 make run SCEN_FIRST=3 SCEN_LAST=3     # one scenario
 make run IREF=82n                     # another reference current (default 100n)
 make run SETTLE=2000 RUN=1500         # shorter windows (us)
@@ -91,4 +91,4 @@ Scenario 5 could not pass on the earlier unsigned network.
 - **`.tran` stop time.** The Verilog `$finish` ends the run, but ngspice
   reserves memory for tstop/step points, so a huge bound segfaults in
   `OUTpData`, at random times (1 s did; so did 100 ms on this macro). It is set
-  to 45 ms: the five scenarios need about 36 ms, so raise it only for longer runs.
+  to 65 ms: the eight scenarios need about 58 ms, so raise it only for longer runs.

@@ -25,13 +25,13 @@ project:
   lvs_config: "lvs_config.json"
   export_control: "docs/Export_Control_GF_Rev8.2_SNN.docx"   # TODO: replace with the signed PDF once the export control office signs it
 
+# Pad order = order of this list. The pad ring is split at each new
+# power/ground pair, so each domain starts with its power pad followed by its
+# ground pad, then that domain's signal pads.
 pins:
-  - name: VDDA
-    io_type: power   # analog supply: SNN macro (neurons, DPIs, DACs, bias cell)
+  # ---- Digital domain: register file, pulse generator ----
   - name: VDDD
-    io_type: power   # digital supply: register file, pulse generator
-  - name: VSSA
-    io_type: ground  # analog ground (note: due to a common ground connection, ground pads are generally not needed)
+    io_type: power   # digital supply
   - name: VSSD
     io_type: ground  # digital ground
   - name: clk
@@ -52,8 +52,8 @@ pins:
     io_type: input_cmos
   - name: addr[2]
     io_type: input_cmos
-  - name: wren
-    io_type: input_cmos
+  - name: addr[3]
+    io_type: input_cmos  # addr = 4'hF is idle (no write); there is no wren
   - name: in[0]
     io_type: input_cmos
   - name: in[1]
@@ -68,6 +68,11 @@ pins:
     io_type: bidirectional
   - name: out[4]
     io_type: bidirectional
+  # ---- Analog domain: SNN macro (neurons, DPIs, DACs, bias cell) ----
+  - name: VDDA
+    io_type: power   # analog supply, 3.3 V
+  - name: VSSA
+    io_type: ground  # analog ground
   - name: Iref
     io_type: analog  # bias-cell reference current, 100 nA into the pin
   - name: VT

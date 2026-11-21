@@ -21,10 +21,10 @@
 		""
 	],
 	"LVS_SPICE_FILES": [
-		"$UPRJ_ROOT/analog/layout_tools/top/SNN_signed/SNN_signed_lvs_ref.spice"
+		"$UPRJ_ROOT/librelane/macros/snn_analog/snn_analog_lvs_ref.spice"
 	],
 	"LVS_VERILOG_FILES": [
-		"$UPRJ_ROOT/verilog/gl/snn_top.nl.v"
+		"$UPRJ_ROOT/verilog/gl/snn_top.v"
 	],
 	"LAYOUT_FILE": "$UPRJ_ROOT/gds/$TOP_LAYOUT.gds"
 }

@@ -38,6 +38,13 @@
     "PDN_MACRO_CONNECTIONS": ["u_snn_analog VDDA VSSA VDD VSS"],
     "PDN_HPITCH": 40,
 
+    "PNR_SDC_FILE": "dir::snn_top.sdc",
+    "SIGNOFF_SDC_FILE": "dir::snn_top.sdc",
+    "EXTRA_EXCLUDED_CELLS": ["gf180mcu_fd_sc_mcu7t5v0__dly*"],
+    "RSZ_DONT_TOUCH_RX": "^(Iref|VT)$",
+    "RUN_POST_GRT_DESIGN_REPAIR": true,
+    "MAX_SLEW_VIOLATION_CORNERS": ["*"],
+
     "MAGIC_GDS_FLATGLOB": ["*"],
 
     "LIB": {

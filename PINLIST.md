@@ -9,7 +9,7 @@ Status 2026-11-18. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin
 
 | Pin | Dir | Domain | Width | Function | Connects to |
 |---|---|---|---|---|---|
-| `clk` | in | digital | 1 | system clock (config: 20 ns period) | digital: `regs`, `pulse_gen` |
+| `clk` | in | digital | 1 | system clock, **1 MHz** (LibreLane `CLOCK_PERIOD` 1000 ns). With the reset pulse timing (period 200, width 10 clk) the inputs spike at the network's **5 kHz** operating rate, 10 µs wide | digital: `regs`, `pulse_gen` |
 | `rst` | in | digital | 1 | synchronous reset, active high: pulse generator and pulse timing (not weights or signs) | digital: `regs`, `pulse_gen` |
 | `data[3:0]` | in | digital | 4 | value to write | digital: `regs` |
 | `addr[3:0]` | in | digital | 4 | register address, written every clock; `4'hF` = idle (no `wren` pin). 0–7 magnitudes (synapse k, see §3), 8–9 signs, 10–13 pulse period/width, 14 unused | digital: `regs` |

@@ -1,13 +1,22 @@
 // Mixed-signal testbench: snn_top runs in Icarus, and its snn_analog is the
 // analog macro SNN_signed in ngspice (snn_ms_tb.spice) through SpiceBind.
 //
-// Scenarios match ../mock/tb_snn_top.v:
+// Scenarios 1-5 match ../mock/tb_snn_top.v; 1-8 match the analog-only runner
+// analog/testbenches/snn/run_snn_signed.py:
 //   1. all weights max, in = 00             -> nothing fires
 //   2. only pulse->input weights, in = 01   -> only input neuron 0
 //   3. one path in1 -> hid1 -> out, in = 11 -> input 1, hidden 1, output
 //   4. as 3 but hid1 -> out weight 0        -> input 1, hidden 1 only
 //   5. as 3 plus in0 -> hid1 at max, inhibitory, in = 11: the two inputs fire
 //      together and cancel at hid1          -> inputs 0 and 1 only
+//   6. pulse 0 -> input 0 at max, inhibitory, in = 01: the input neurons have
+//      no inhibitory synapse, so an inhibitory weight is off -> nothing fires
+//   7. both inputs drive both hidden neurons' paths (in0 -> hid0, in1 -> hid1),
+//      hid0 -> out at max inhibitory against hid1 -> out at max, in = 11
+//                                           -> inputs and hidden, not output
+//   8. control for 7: hid0 -> out = 0      -> all five fire
+// Scenario 7 is a tie (+15 against -15); post-layout Monte Carlo passes 94 / 100
+// chips on it (analog/testbenches/snn/results/snn_signed_tb__pex__mc100.md).
 // Synapse k has magnitude w[4k+3:4k] (max 15) and sign s[k] (1 = inhibitory).
 // The pulse timing (200, 10) is written through regs at the start. The
 // network has no reset pin, so each run is preceded by SETTLE us with in = 0.
@@ -15,7 +24,7 @@
 
 module snn_ms_tb #(
     parameter SCEN_FIRST = 1,
-    parameter SCEN_LAST = 5,
+    parameter SCEN_LAST = 8,
     parameter SETTLE = 4000,  // us
     parameter RUN = 3000  // us
 );
@@ -151,6 +160,23 @@ module snn_ms_tb #(
           ws[(2+2*1+1)*4+:4] = MAX;  // input 1 -> hidden 1
           ws[(6+1)*4+:4] = MAX;  // hidden 1 -> output
           check_run(2'b11, 5'b0_00_11);
+        end
+        6: begin
+          ws = 0;
+          ws[0*4+:4] = MAX;  // pulse 0 -> input 0, inhibitory
+          ss[0] = 1'b1;
+          check_run(2'b01, 5'b0_00_00);
+        end
+        7, 8: begin
+          ws = 0;
+          ws[0*4+:4] = MAX;  // pulse 0 -> input 0
+          ws[1*4+:4] = MAX;  // pulse 1 -> input 1
+          ws[(2+2*0+0)*4+:4] = MAX;  // input 0 -> hidden 0
+          ws[(2+2*1+1)*4+:4] = MAX;  // input 1 -> hidden 1
+          ws[(6+0)*4+:4] = (scen == 7) ? MAX : 4'h0;  // hidden 0 -> output,
+          ss[6+0] = (scen == 7);  // inhibitory in 7
+          ws[(6+1)*4+:4] = MAX;  // hidden 1 -> output
+          check_run(2'b11, (scen == 7) ? 5'b0_11_11 : 5'b1_11_11);
         end
         default: ;
       endcase
