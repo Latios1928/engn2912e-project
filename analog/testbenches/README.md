@@ -19,8 +19,7 @@ analog/
 ├── neuron/                      neuron, spike_amplifier, bias
 │   └── layout/PEX/              parasitic extraction (all blocks): extract.sh <cell> -> <cell>_pex.spice + wrapper
 │                                (README.md there: what to do after a layout change)
-├── <dir>/old/                   archived cells, hand-drawn layouts (old/layout/) and testbenches that
-│                                are no longer used; references inside point at old/<cell>.sym
+│                                (the archived <dir>/old/ folders were deleted 2026-11-22: git 2dd89b5)
 ├── layout_tools/flow/<cell>/    current block layouts (flow.py), layout_tools/top/ the SNN macro
 └── testbenches/
     ├── README.md                this file
@@ -143,10 +142,7 @@ The testbenches above use 5 nA inputs, 100 µs pulses and an output held at 0 V.
 
 Options on both: `--cell DPI_sized|DPI` (excitatory cell; default `DPI_sized`), `--bias output|hidden|relay|chain` (presets from the XOR README and `DACs-DPI-neuron.sch`; default `output`), `--only`, `--mc N`, `--pex`, `--report-only`. Results: `dpi/results/<tb>[__<cell>][__<bias>][__pex].md/.csv/.png`. The `chain` preset is meant for the min-size `DPI`; the inhibitory `DPI_inh` (a sized cell) is not matched to it.
 
-```sh
-python3 analog/testbenches/old/dpi/run_dpi_load.py                          # archived (DPI_sized), ~20 s
-python3 analog/testbenches/old/dpi/run_dpi_pulse.py --cell DPI --bias chain # archived
-```
+Both runners were archived in `analog/testbenches/old/dpi/` and deleted with the `old/` folders on 2026-11-22; restore them from git (commit 2dd89b5) to rerun. Their results stay in `dpi/results/`.
 
 ## Neuron (`neuron/`)
 
@@ -229,7 +225,7 @@ Copy the layout of `dpi/`:
 
 ## Bias cell (`bias/`)
 
-`analog/neuron/bias.sch` (layout `analog/layout_tools/flow/bias/bias.gds`; the earlier hand layout is in `analog/neuron/old/layout/`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
+`analog/neuron/bias.sch` (layout `analog/layout_tools/flow/bias/bias.gds`; the earlier hand layout is in git 2dd89b5, `analog/neuron/old/layout/`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
 
 | File | Purpose |
 |---|---|

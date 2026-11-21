@@ -76,7 +76,7 @@ side, access box) plus `blockage` per metal layer (rectangles the top router mus
 
 ### 3.2 Block map (`blocks:` in `top_flow.yaml`)
 ```yaml
-DAC: {source: flow, cell: DAC}      # or {source: hand, gds: ../DAC/old/layout/DAC_signed.gds}
+DAC: {source: flow, cell: DAC}      # or {source: hand, gds: ...} (hand layouts: git 2dd89b5, analog/DAC/old/layout/)
 DPI:               {source: flow, cell: DPI}
 DPI_inh:       {source: flow, cell: DPI_inh}            # not built yet
 neuron:      {source: flow, cell: neuron}

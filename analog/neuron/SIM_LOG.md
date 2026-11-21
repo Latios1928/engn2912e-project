@@ -91,6 +91,10 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 
 ## Open issues / next steps
 
+> Items 1–4 concern the earlier Schmitt-trigger neuron (`neuron_old.sch`, deleted with the `old/`
+> folders on 2026-11-22; in git at commit 2dd89b5). The current neuron resets to < 1 mV (run log,
+> `neuron_sized`), so they do not apply to the chip.
+
 1. **Reset doesn't reach 0.2 V.** It ends when MEM drops below VTH−
    (≈ 1.3 V; MEM falls a bit further because of the comparator + inverter
    delay). Hold the reset on for a fixed time that doesn't depend on VTH−:
@@ -105,9 +109,6 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
    e.g. `tran 1n <window> 0 1n`.
 4. **`.ic` / `uic` not applied.** MEM starts at ≈ 30 mV, not 0. Add
    `.ic v(mem)=0` and `tran … uic` if an exact starting point matters.
-5. **Housekeeping.** The `analog/schmitt_trigger_comparator/` files are
-   deleted in git and `analog/neuron/` is untracked; commit the move.
-   Consider adding `*.raw` and `*_tb.txt` to `.gitignore`.
 
 ---
 

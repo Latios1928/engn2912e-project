@@ -25,3 +25,4 @@ echo "Copied outputs of $run to results/"
 cp "$run"final/gds/snn_top.gds ../../gds/snn_top.gds
 cp "$run"final/pnl/snn_top.pnl.v ../../verilog/gl/snn_top.v
 echo "Copied snn_top.gds to gds/ and snn_top.pnl.v to verilog/gl/snn_top.v"
+echo "Next: python3 chip_lvs.py (full-chip LVS; LibreLane's own LVS black-boxes the macro)"

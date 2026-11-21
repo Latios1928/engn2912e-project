@@ -9,30 +9,24 @@ top:
   schematic: ../snn/snn_analog_signed.sch         # network to lay out
   symbol: ../snn/snn_analog_signed.sym            # macro pin order for the LVS ref / PEX wrapper
   testbench: ../testbenches/snn/snn_signed_tb.sch # sim stage: DUT is x1
-  reference_layout: ../neuron/old/layout/SNN.gds      # milestone 2 check (old network, hand blocks)
 
 # ----------------------------------------------------------------------------- blocks
 # symbol in the schematic -> layout source.
 #   source: flow -> cell built by flow.py (flow/<cell>/<cell>.gds, must have passed signoff)
-#   source: hand -> existing GDS + its LVS ref and pins file
+#   source: hand -> existing GDS + its LVS ref and pins file. The hand-drawn DAC_signed, DPI and
+#                   bias_cell layouts were in <dir>/old/layout/, deleted 2026-11-22; restore them
+#                   from git (commit 2dd89b5) to use one.
 # DECIDE (block sources / area): flow DAC 305 x 54 um vs hand 182 x 33 um; flow DPI 55 x 54 um
 # vs hand 28 x 26 um. 8 DACs: ~0.13 mm2 (flow) vs ~0.05 mm2 (hand).
 blocks:
   DAC:
     source: flow
     cell: DAC
-    # hand alternative (DAC_signed.gds already contains DAC_magnitude, same circuit):
-    # source: hand
-    # gds: ../DAC/old/layout/DAC_signed.gds
-    # lvs_ref: ../DAC/old/layout/DAC_signed_lvs_ref.spice
-    # pins: ../DAC/old/layout/DAC_signed_pins.json
+    # hand alternative: DAC_signed (git 2dd89b5: analog/DAC/old/layout/DAC_signed.gds, _lvs_ref.spice, _pins.json)
   DPI:
     source: flow
     cell: DPI
-    # source: hand
-    # gds: ../DPI/old/layout/DPI.gds
-    # lvs_ref: ../DPI/old/layout/DPI_lvs_ref.spice
-    # pins: ../DPI/old/layout/DPI_pins.json
+    # hand alternative: DPI (git 2dd89b5: analog/DPI/old/layout/DPI.gds, _lvs_ref.spice, _pins.json)
   DPI_inh:
     source: flow
     cell: DPI_inh                             # inhibitory synapse (DPI core + mirror into VMEM)
@@ -42,10 +36,7 @@ blocks:
   bias:
     source: flow
     cell: bias
-    # source: hand
-    # gds: ../neuron/old/layout/bias.gds
-    # lvs_ref: ../neuron/old/layout/bias_cell_lvs_ref.spice
-    # pins: ../neuron/old/layout/bias_cell_pins.json
+    # hand alternative: bias_cell (git 2dd89b5: analog/neuron/old/layout/bias.gds, bias_cell_lvs_ref.spice, bias_cell_pins.json)
 
 # Instances that are not in the schematic. snn_analog_signed takes its biases as pins; the
 # macro makes them on chip from Iref, as SNN.gds does. Each listed output replaces that top pin
