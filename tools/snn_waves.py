@@ -33,9 +33,14 @@ NEURONS = ["input 0", "input 1", "hidden 0", "hidden 1", "output"]   # spike[0..
 SCENARIOS = {
     1: ("all weights max, no input", 0b00, "00000", "all max", {k: 15 for k in range(8)}),
     2: ("pulse 0 -> input 0 only", 0b01, "00001", "p0→in0", {0: 15, 1: 15}),
-    3: ("path in1 -> hid1 -> out", 0b11, "11010", "in1→hid1→out", {1: 15, 5: 15, 7: 15}),
-    4: ("as 3, hid1 -> out = 0", 0b11, "01010", "in1→hid1", {1: 15, 5: 15}),
-    5: ("as 3 + in0 -| hid1 (inhibitory)", 0b11, "00011", "in0 inh. hid1", {0: 15, 1: 15, 4: -15, 5: 15, 7: 15}),
+    3: ("path in1 -> hid1 -> out", 0b11, "11010", "in1→h1→out", {1: 15, 5: 15, 7: 15}),
+    4: ("as 3, hid1 -> out = 0", 0b11, "01010", "in1→h1", {1: 15, 5: 15}),
+    5: ("as 3 + in0 -| hid1 (inhibitory)", 0b11, "00011", "in0 inh. h1", {0: 15, 1: 15, 4: -15, 5: 15, 7: 15}),
+    6: ("p0 -| in0 (inhibitory = off)", 0b01, "00000", "p0 inh. in0", {0: -15}),
+    7: ("hid0 -| out against hid1 -> out (tie)", 0b11, "01111", "tie ±15",
+        {0: 15, 1: 15, 2: 15, 5: 15, 6: -15, 7: 15}),
+    8: ("control for 7: hid0 -> out = 0", 0b11, "11111", "control",
+        {0: 15, 1: 15, 2: 15, 5: 15, 7: 15}),
 }
 # Synapse k: (source, target neuron index); neurons 0..4 = in0, in1, hid0, hid1, out
 SYNAPSES = {0: ("p0", 0), 1: ("p1", 1), 2: ("in0", 2), 3: ("in1", 2),
@@ -187,7 +192,7 @@ def main():
     sig = read_raw(a.raw)
     t = sig["time"]
     n_scen = 0
-    for k in range(a.first, 6):
+    for k in range(a.first, max(SCENARIOS) + 1):
         # the testbench calls $finish right at the end of the last run window
         if windows(k - a.first + 1, a.first, a.settle, a.run)[-1][3] <= t[-1] + 100e-6:
             n_scen = k - a.first + 1
@@ -222,7 +227,8 @@ def main():
     ms = 1e3
     tt = t * ms
     rows = 2 + 2 + 5
-    w = Wave(rows, a.width, f"{a.title}: scenarios {win[0][0]}-{win[-1][0]} "
+    # about 2.25 in per scenario keeps each run window's label inside its box
+    w = Wave(rows, max(a.width, 2.25 * n_scen), f"{a.title}: scenarios {win[0][0]}-{win[-1][0]} "
              f"(settle {a.settle / 1000:g} ms with in = 00, then run {a.run / 1000:g} ms)", "time (ms)")
     w.ax.set_xlim(0, tt[-1])
     segs, insegs = [], []

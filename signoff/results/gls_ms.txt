@@ -1,0 +1,31 @@
+# Mixed-signal gate-level simulation, schematic macro, scenarios 1-8
+# source: librelane/snn_top/gls_ms/gls_ms.log (written 2026-11-21 23:34)
+# collected 2026-11-23 17:09 at commit c71f49b
+
+# make run PEX=0 IREF=100n SCEN_FIRST=1 SCEN_LAST=8 SETTLE=4000 RUN=3000 NETLIST=librelane/snn_top/results/snn_top.nl.v
+snn_ms_tb: PASS scenario 1: fired 00000
+snn_ms_tb: scenario 2: spike[0] first at 455 us
+snn_ms_tb: PASS scenario 2: fired 00001
+snn_ms_tb: scenario 3: spike[1] first at 419 us
+snn_ms_tb: scenario 3: spike[3] first at 659 us
+snn_ms_tb: scenario 3: spike[4] first at 885 us
+snn_ms_tb: PASS scenario 3: fired 11010
+snn_ms_tb: scenario 4: spike[1] first at 375 us
+snn_ms_tb: scenario 4: spike[3] first at 613 us
+snn_ms_tb: PASS scenario 4: fired 01010
+snn_ms_tb: scenario 5: spike[1] first at 285 us
+snn_ms_tb: scenario 5: spike[0] first at 314 us
+snn_ms_tb: PASS scenario 5: fired 00011
+snn_ms_tb: PASS scenario 6: fired 00000
+snn_ms_tb: scenario 7: spike[0] first at 439 us
+snn_ms_tb: scenario 7: spike[1] first at 439 us
+snn_ms_tb: scenario 7: spike[2] first at 640 us
+snn_ms_tb: scenario 7: spike[3] first at 640 us
+snn_ms_tb: PASS scenario 7: fired 01111
+snn_ms_tb: scenario 8: spike[0] first at 417 us
+snn_ms_tb: scenario 8: spike[1] first at 417 us
+snn_ms_tb: scenario 8: spike[2] first at 622 us
+snn_ms_tb: scenario 8: spike[3] first at 622 us
+snn_ms_tb: scenario 8: spike[4] first at 793 us
+snn_ms_tb: PASS scenario 8: fired 11111
+snn_ms_tb: PASS, all scenarios

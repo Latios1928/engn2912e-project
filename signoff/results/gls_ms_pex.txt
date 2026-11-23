@@ -1,0 +1,44 @@
+# Mixed-signal gate-level simulation, post-layout macro (extracted parasitics), scenarios 1-8
+# source: librelane/snn_top/gls_ms/gls_ms_pex.log (written 2026-11-23 17:08)
+# collected 2026-11-23 17:08 at commit c71f49b
+
+# make run PEX=1 IREF=100n SCEN_FIRST=1 SCEN_LAST=8 SETTLE=4000 RUN=3000 NETLIST=librelane/snn_top/results/snn_top.nl.v
+snn_ms_tb: PASS scenario 1: fired 00000
+snn_ms_tb: scenario 2: spike[0] first at 433 us
+snn_ms_tb: PASS scenario 2: fired 00001
+snn_ms_tb: scenario 3: spike[1] first at 394 us
+snn_ms_tb: scenario 3: spike[3] first at 585 us
+snn_ms_tb: scenario 3: spike[4] first at 760 us
+snn_ms_tb: PASS scenario 3: fired 11010
+snn_ms_tb: scenario 4: spike[1] first at 353 us
+snn_ms_tb: scenario 4: spike[3] first at 545 us
+snn_ms_tb: PASS scenario 4: fired 01010
+snn_ms_tb: scenario 5: spike[1] first at 255 us
+snn_ms_tb: scenario 5: spike[0] first at 309 us
+snn_ms_tb: PASS scenario 5: fired 00011
+snn_ms_tb: PASS scenario 6: fired 00000
+snn_ms_tb: scenario 7: spike[0] first at 438 us
+snn_ms_tb: scenario 7: spike[1] first at 438 us
+snn_ms_tb: scenario 7: spike[2] first at 619 us
+snn_ms_tb: scenario 7: spike[3] first at 621 us
+snn_ms_tb: PASS scenario 7: fired 01111
+snn_ms_tb: scenario 8: spike[0] first at 411 us
+snn_ms_tb: scenario 8: spike[1] first at 411 us
+snn_ms_tb: scenario 8: spike[2] first at 490 us
+snn_ms_tb: scenario 8: spike[3] first at 541 us
+snn_ms_tb: scenario 8: spike[4] first at 622 us
+snn_ms_tb: PASS scenario 8: fired 11111
+snn_ms_tb: PASS, all scenarios
+
+## spike summary (tools/snn_waves.py)
+librelane/snn_top/gls_ms/gls_ms_pex.raw: 56.25 ms simulated, 566692 points, 8 scenario(s)
+membranes: input 0 = x1.vmem_0, input 1 = x1.vmem_1, hidden 0 = x1.vmem_2, hidden 1 = x1.vmem_3, output = x1.vmem_4
+  scenario 1 [all weights max, no input], in=00: pulses 0/0, fired 00000 PASS; no spikes
+  scenario 2 [pulse 0 -> input 0 only], in=01: pulses 15/0, fired 00001 PASS; input 0 29 (433 us)
+  scenario 3 [path in1 -> hid1 -> out], in=11: pulses 15/15, fired 11010 PASS; input 1 29 (392 us); hidden 1 31 (584 us); output 34 (758 us)
+  scenario 4 [as 3, hid1 -> out = 0], in=11: pulses 15/15, fired 01010 PASS; input 1 30 (351 us); hidden 1 32 (542 us)
+  scenario 5 [as 3 + in0 -| hid1 (inhibitory)], in=11: pulses 15/15, fired 00011 PASS; input 0 35 (305 us); input 1 35 (251 us)
+  scenario 6 [p0 -| in0 (inhibitory = off)], in=01: pulses 15/0, fired 00000 PASS; no spikes
+  scenario 7 [hid0 -| out against hid1 -> out (tie)], in=11: pulses 15/15, fired 01111 PASS; input 0 33 (432 us); input 1 33 (433 us); hidden 0 34 (613 us); hidden 1 34 (615 us)
+  scenario 8 [control for 7: hid0 -> out = 0], in=11: pulses 15/15, fired 11111 PASS; input 0 35 (404 us); input 1 35 (405 us); hidden 0 35 (484 us); hidden 1 33 (534 us); output 37 (616 us)
+wrote signoff/img/gls_ms_pex_overview.png and signoff/img/gls_ms_pex_scen<N>.png (all scenarios as expected)
