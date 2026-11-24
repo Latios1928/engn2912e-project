@@ -15,7 +15,6 @@
 //   3. new pulse timing written through the registers (period 20, width 3)
 //   4. one channel enabled: the other stays low; width 0: no pulses
 //   5. rst mid-run clears INPUT EN (no pulses after it) and keeps weights and signs
-// The input channels are enabled by writing register 14, not by pins.
 // The pulse period is measured rising edge to rising edge and the width rising to falling
 // edge, each to 5 ns: both edges come from the same flip-flop, so a period is exact and a
 // width is off only by the rise/fall delay difference.

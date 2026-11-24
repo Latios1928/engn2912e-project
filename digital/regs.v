@@ -15,7 +15,7 @@
 // Synapse k has magnitude weights[4k+3:4k] (0-15) and sign signs[k]
 // (1 = inhibitory); see mock/snn_analog.v for the synapse of each k.
 // INPUT EN bit i enables input pulse channel i (pulse_gen samples it at each
-// period boundary). It replaces the former in[1:0] chip pins.
+// period boundary).
 // rst (synchronous, active high) resets the pulse timing and INPUT EN only, so
 // after a reset no input pulses run and the timing is the default.
 module regs (

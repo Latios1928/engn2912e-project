@@ -37,9 +37,6 @@ The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
 - `rst` resets only the pulse timing and INPUT EN, so after a reset the inputs
   are off and the default timing is set. Weights and signs must be written
   before use.
-- INPUT EN replaced the chip's former `in[1:0]` pins (2026-11-24, 23 → 21 pads).
-  Since `pulse_gen` samples the enables only at period boundaries, a register
-  write behaves like the pins did.
 
 ## `pulse_gen` (input pulse generator)
 
@@ -50,7 +47,8 @@ The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
   `en`, `period` and `width` are sampled only at period boundaries, so a pulse
   is never cut or stretched; the first pulse can start up to one period after
   `en` rises.
-- `period = 0` means 256 cycles; `width = 0` means no pulses.
+- `period = 0` means 256 cycles; `width = 0` means no pulses. The 8-bit period
+  limits `clk` to about 1.3 MHz for 5 kHz pulses (256 cycles per 200 µs).
 - Outputs come straight from flip-flops, since they drive the analog DAC enables.
 - At a 1 MHz `clk` the reset values give the 10 µs pulses every 200 µs (5 kHz)
   that the neuron and the DPI synapses are sized for.

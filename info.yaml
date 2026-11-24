@@ -53,8 +53,7 @@ pins:
   - name: addr[2]
     io_type: input_cmos
   - name: addr[3]
-    io_type: input_cmos  # addr = 4'hF is idle (no write); there is no wren
-  # the input pulse channels are enabled by register 14, not by pins
+    io_type: input_cmos  # addr = 4'hF is idle (no write)
   - name: out[0]
     io_type: bidirectional
   - name: out[1]

@@ -39,7 +39,7 @@ Still open before tape-out: fill, the pad ring, and confirming with the organise
 
 The analog macro takes up most of the die (0.49 of 0.58 mm²). The digital logic is the 400-cell strip along the top edge:
 
-- `regs`: 14 four-bit registers holding the 8 weight magnitudes, the 8 sign bits, and the 8-bit pulse period and width, plus the 2-bit input enable register (address 14), which replaced the former `in[1:0]` pins;
+- `regs`: 14 four-bit registers holding the 8 weight magnitudes, the 8 sign bits, and the 8-bit pulse period and width, plus the 2-bit input enable register (address 14);
 - `pulse_gen`: two input spike trains, by default one 10 µs pulse every 200 µs (5 kHz) from the 1 MHz clock.
 
 The macro is placed flipped (`FS`), so its pin edge faces the digital strip. The 42 control wires (`w[31:0]`, `s[7:0]`, `pulse[1:0]`) enter it at the top left. The five spikes leave at the top right and go straight to the `out[4:0]` pins.
@@ -71,7 +71,8 @@ Plain render without the labels: [`img/snn_top_layout.png`](img/snn_top_layout.p
 
 ## Physical verification
 
-- **DRC.** Magic DRC is clean. KLayout's deck (741 rules, density included) reports 27 errors, all `DCF.1a`, the minimum COMP density, because fill has not been added yet.
+- **DRC.** Magic DRC is clean. KLayout's deck (741 rules, density included) reports 27 errors, all `DCF.1a`, the minimum COMP density, because fill has not been added yet. The flow / glayout cell GDS and `SNN_signed.gds` use a
+  0.005 µm database unit; the macro GDS LibreLane uses (`librelane/macros/snn_analog`) and the chip GDS use 0.001 µm.
 - **LVS.** LibreLane's own LVS treats the analog macro as a black box, so it only checks the digital part. [`librelane/snn_top/chip_lvs.py`](../librelane/snn_top/chip_lvs.py) runs the full check:
   - it extracts the whole chip with Magic, down to every transistor of the macro;
   - it compares that with netgen against the gate-level netlist plus the macro's transistor-level reference;
@@ -128,7 +129,7 @@ The same eight scenarios also pass with the schematic macro ([gls_ms](results/gl
 
 ![Mixed-signal overview, post-layout](img/gls_ms_pex_overview.png)
 
-\* Scenario 8's first output spike (334 µs) is carry-over from scenario 7, not the tested path: the output membrane starts the window still charged and fires once before any input spike. It then fires from about 690 µs on, after hidden 1, as the path drives it ([scenario 8 plot](img/gls_ms_pex_scen8.png)). In the run before the input enables moved to register 14, the carry-over spike fell just before the window; the 3 µs enable writes shift the timing slightly.
+\* Scenario 8's first output spike (334 µs) is carry-over from scenario 7, not the tested path: the output membrane starts the window still charged and fires once before any input spike. It then fires from about 690 µs on, after hidden 1, as the path drives it ([scenario 8 plot](img/gls_ms_pex_scen8.png)).
 
 Dashed lines mark the start of each run window. The network has no reset pin, so neurons can keep firing for a short time after a window ends. That's why the output also fires during the settle periods of scenarios 5 and 8: the hidden neurons are still active when the next scenario's weights are loaded. Every check counts spikes inside the run window only.
 
@@ -144,7 +145,7 @@ Across process and mismatch, the analog-only testbench passes scenarios 5 and 7 
 
 - **Fill** for the 27 KLayout `DCF.1a` density errors. Until fill is added, LibreLane exits non-zero and `run.sh` skips its copy step.
 - **`ISOSUB` marker (23/5):** confirm with the organisers that their precheck accepts it in the submitted GDS.
-- **Pad ring** integration (21 pads since the input enables moved to register 14, [`PINLIST.md`](../PINLIST.md)). Confirm the pad limit.
+- **Pad ring** integration (21 pads, [`PINLIST.md`](../PINLIST.md)). Confirm the pad limit.
 - **Analog behaviour after layout:** the input neurons fire about 2.7× as often as in the schematic. All 8 scenarios still pass ([diagnosis](../analog/testbenches/snn/results/snn_signed_pex_diagnosis.md)). A candidate fix is to steer the DAC current to VDD while the synapse is off, which would need a rebuild of the macro and the chip.
 - **No membrane reset:** wait at least 8 ms with `in = 00` (register 14) between test cases on the chip ([`PINLIST.md`](../PINLIST.md) §5).
 

@@ -13,20 +13,16 @@ top:
 # ----------------------------------------------------------------------------- blocks
 # symbol in the schematic -> layout source.
 #   source: flow -> cell built by flow.py (flow/<cell>/<cell>.gds, must have passed signoff)
-#   source: hand -> existing GDS + its LVS ref and pins file. The hand-drawn DAC_signed, DPI and
-#                   bias_cell layouts were in <dir>/old/layout/, deleted 2026-11-22; restore them
-#                   from git (commit 2dd89b5) to use one.
+#   source: hand -> existing GDS + its LVS ref and pins file
 # DECIDE (block sources / area): flow DAC 305 x 54 um vs hand 182 x 33 um; flow DPI 55 x 54 um
 # vs hand 28 x 26 um. 8 DACs: ~0.13 mm2 (flow) vs ~0.05 mm2 (hand).
 blocks:
   DAC:
     source: flow
     cell: DAC
-    # hand alternative: DAC_signed (git 2dd89b5: analog/DAC/old/layout/DAC_signed.gds, _lvs_ref.spice, _pins.json)
   DPI:
     source: flow
     cell: DPI
-    # hand alternative: DPI (git 2dd89b5: analog/DPI/old/layout/DPI.gds, _lvs_ref.spice, _pins.json)
   DPI_inh:
     source: flow
     cell: DPI_inh                             # inhibitory synapse (DPI core + mirror into VMEM)
@@ -36,7 +32,6 @@ blocks:
   bias:
     source: flow
     cell: bias
-    # hand alternative: bias_cell (git 2dd89b5: analog/neuron/old/layout/bias.gds, bias_cell_lvs_ref.spice, bias_cell_pins.json)
 
 # Instances that are not in the schematic. snn_analog_signed takes its biases as pins; the
 # macro makes them on chip from Iref, as SNN.gds does. Each listed output replaces that top pin

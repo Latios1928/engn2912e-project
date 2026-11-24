@@ -24,10 +24,10 @@ Status 2026-11-24. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin
 Total: 15 digital signal pins (`clk`, `rst`, 4 + 4 inputs, 5 outputs) + `Iref` + `VT` + 4 supplies (`VDDA`, `VSSA`, `VDDD`, `VSSD`) = **21 pads**. Open: confirm the pad limit with the organisers.
 
 **Input enables (register 14).** The two input pulse channels are switched on and off by register 14
-(`INPUT EN`), not by pins: write `data = 4'b00 b1 b0` to `addr = 14`, where bit i enables channel i
+(`INPUT EN`): write `data = 4'b00 b1 b0` to `addr = 14`, where bit i enables channel i
 (`0011` both, `0001` input 0 only, `0000` off; `data[3:2]` are ignored). `rst` clears it to `00`.
 `pulse_gen` samples the enables only at period boundaries (every 200 µs by default), so a 3 µs register
-write behaves like the former `in[1:0]` pins, which this register replaced (23 → 21 pads, 2026-11-24).
+write takes effect at the next one.
 Below, "`in`" means this register.
 The analog biases are internal: the bias cell inside `SNN_signed` makes them from `Iref`.
 

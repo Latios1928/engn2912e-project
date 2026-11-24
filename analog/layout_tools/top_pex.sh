@@ -1,8 +1,8 @@
 #!/bin/bash
 # C-only Magic PEX of a top.py macro: top/<top>/<top>.gds -> top/<top>/pex/<top>_pex.spice
 #   .subckt <top>_flat <macro pins>: all devices + parasitic C >= 0.01 fF, from a flattened copy.
-# No wire R: Magic extresist merges isolated LVPWELL bodies (Isum islands) into the substrate
-# (as found with the hand-layout flow's neuron/old/layout/run_snn_pex.sh, in git 2dd89b5). Usage: top_pex.sh [SNN_signed]
+# No wire R: Magic extresist merges isolated LVPWELL bodies (Isum islands) into the substrate.
+# Usage: top_pex.sh [SNN_signed]
 # Not "ext2spice lvs": with Magic 8.3.684 (open_pdks 1689ac3) it drops every node-to-substrate
 # capacitor (6.7 of 9.6 pF on SNN_signed), while Magic 8.3.636 kept them. The settings below give
 # the same devices and nets, plus those capacitors.

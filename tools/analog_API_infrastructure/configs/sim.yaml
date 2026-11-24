@@ -1,8 +1,6 @@
 # Simulation setup for loop.py. Paths are relative to the repo root.
 # The loop netlists the testbench once with xschem, removes its .control block,
 # and runs the analysis below in ngspice batch mode.
-# The 5 kHz neuron testbench was archived and then deleted with the old/ folders (2026-11-22);
-# restore analog/neuron/old/neuron_5khz*.sch/.sym from git (commit 2dd89b5) to rerun this config.
 testbench: analog/neuron/old/neuron_5khz_testbench.sch
 # base_netlist: path/to/netlist.spice   # use instead of testbench to skip xschem
 

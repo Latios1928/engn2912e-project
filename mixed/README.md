@@ -44,10 +44,10 @@ in `snn_ms_tb_digital.vcd`.
 The testbench writes the pulse timing (200 / 10) through the interface, then
 for each scenario loads the 8 magnitudes and 2 sign registers, waits `SETTLE`
 µs with `in = 0` (the network has no reset pin), and applies `in` for `RUN`
-µs. `in` is the input enable register (address 14), written like the weights;
-the chip has no `in` pins. `clk` is 1 µs; `pulse_gen` makes one 10 µs pulse every 200 µs and samples
-`in` at period boundaries, so first-spike times include up to 200 µs of
-waiting. Maximum time step 0.1 µs.
+µs. `in` is the input enable register (address 14), written like the weights.
+`clk` is 1 µs; `pulse_gen` makes one 10 µs pulse every 200 µs and samples `in`
+at period boundaries, so first-spike times include up to 200 µs of waiting.
+Maximum time step 0.1 µs.
 
 ## Results
 
