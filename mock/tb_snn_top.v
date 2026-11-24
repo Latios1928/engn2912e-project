@@ -7,7 +7,8 @@
 // a weight set, waits SETTLE analog cycles with in = 0 (the network has no
 // reset; the neuron leak drains what the previous scenario left), applies in
 // for RUN analog cycles, and checks which neurons fired at least once against
-// the expected set:
+// the expected set. in is the input enable register (address 14, INPUT EN),
+// written like the weights:
 //   1. all weights max, in = 00             -> nothing fires
 //   2. only pulse->input weights, in = 01   -> only input neuron 0
 //   3. one path in1 -> hid1 -> out, in = 11 -> input 1, hidden 1, output
@@ -32,7 +33,7 @@ module tb_snn_top;
   reg        rst = 1'b1;
   reg  [3:0] data = 0;
   reg  [3:0] addr = 4'hF;  // idle
-  reg  [1:0] in = 0;
+  reg  [1:0] in = 0;  // last value written to INPUT EN (waveform only)
   wire [4:0] out;
 
   snn_top dut (
@@ -40,7 +41,6 @@ module tb_snn_top;
       .rst (rst),
       .data(data),
       .addr(addr),
-      .in  (in),
       .out (out)
   );
 
@@ -142,16 +142,24 @@ module tb_snn_top;
     end
   endtask
 
+  // Input enables: register 14 (INPUT EN), bits [1:0]
+  task set_in(input [1:0] en);
+    begin
+      write_word(4'd14, {2'b00, en});
+      in = en;
+    end
+  endtask
+
   task run(input [1:0] in_v, input [4:0] expected, input [8*24:1] name);
     begin
-      in = 2'b00;
+      set_in(2'b00);
       #(SETTLE * CLK_PERIOD);
-      in = in_v;
+      set_in(in_v);
       seen = out;
       counting = 1'b1;
       #(RUN * CLK_PERIOD);
       counting = 1'b0;
-      in = 2'b00;
+      set_in(2'b00);
       checks = checks + 1;
       if (seen !== expected) begin
         errors = errors + 1;

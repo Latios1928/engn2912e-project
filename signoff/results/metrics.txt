@@ -1,10 +1,10 @@
 # LibreLane signoff metrics
 # source: librelane/snn_top/results/metrics.json (committed 2026-11-21 23:38)
-# collected 2026-11-23 17:09 at commit c71f49b
+# collected 2026-11-24 04:15 at commit 0cd223f (with uncommitted changes)
 
 die area (um^2)                               582400
 analog macro area (um^2)                      486792
-standard cells, logic (count)                 390
+standard cells, logic (count)                 400
 Magic DRC errors                              0
 KLayout DRC errors (all DCF.1a density)       27
 routing DRC errors                            0
@@ -13,17 +13,17 @@ power grid violations                         0
 max slew / cap / fanout violations            0/0/0
 setup violations (all corners)                0
 hold violations (all corners)                 0
-worst setup slack (ns, 1000 ns clock)         790.85
-worst hold slack (ns)                         0.43
+worst setup slack (ns, 1000 ns clock)         792.11
+worst hold slack (ns)                         0.41
 LibreLane LVS errors (macro black-boxed)      0
 
 per corner: setup / hold worst slack (ns)
-  min_ss_125C_3v00       791.13    2.18
-  nom_ss_125C_3v00       791.00    2.19
-  max_ss_125C_3v00       790.85    2.21
-  min_tt_025C_3v30       795.37    0.95
-  nom_tt_025C_3v30       795.31    0.96
-  max_tt_025C_3v30       795.22    0.97
-  min_ff_n40C_3v60       797.20    0.43
-  nom_ff_n40C_3v60       797.16    0.43
-  max_ff_n40C_3v60       797.11    0.44
+  min_ss_125C_3v00       792.31    2.13
+  nom_ss_125C_3v00       792.22    2.14
+  max_ss_125C_3v00       792.11    2.16
+  min_tt_025C_3v30       796.01    0.93
+  nom_tt_025C_3v30       795.96    0.93
+  max_tt_025C_3v30       795.90    0.94
+  min_ff_n40C_3v60       797.59    0.41
+  nom_ff_n40C_3v60       797.56    0.42
+  max_ff_n40C_3v60       797.53    0.42

@@ -3,8 +3,9 @@
 // Chip top level: wires the digital part (digital/snn_digital.v) to the analog
 // 2-2-1 network snn_analog. Wiring only.
 //
-// Pins: clk, rst, data[3:0], addr[3:0] (addr = 4'hF is idle), in[1:0], and
-// out[4:0] = spikes of all 5 neurons {output, hidden[1:0], input[1:0]}.
+// Pins: clk, rst, data[3:0], addr[3:0] (addr = 4'hF is idle), and out[4:0] =
+// spikes of all 5 neurons {output, hidden[1:0], input[1:0]}. The input pulse
+// channels are enabled by register 14 (INPUT EN), not by pins.
 //
 // Analog pins Iref (bias reference current, 100 nA into the pin) and VT
 // (neuron threshold, 1.66 V) go straight to the analog macro. They exist only
@@ -27,7 +28,6 @@ module snn_top (
     input  wire       rst,   // synchronous, active high
     input  wire [3:0] data,
     input  wire [3:0] addr,  // 4'hF = idle (no write)
-    input  wire [1:0] in,
     output wire [4:0] out
 );
   wire [31:0] w;
@@ -39,7 +39,6 @@ module snn_top (
       .rst(rst),
       .data(data),
       .addr(addr),
-      .in(in),
       .w(w),
       .s(s),
       .pulse(pulse)

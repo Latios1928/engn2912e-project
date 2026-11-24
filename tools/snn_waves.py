@@ -10,7 +10,8 @@ window of scenario N: pulses, each neuron's membrane voltage and spikes).
 
 The .raw has no digital testbench signals, so the scenario windows come from the testbench
 timing (mixed/snn_ms_tb.v, 1 us clock): 3 us reset + 4 register writes, then per scenario
-10 register writes (30 us), SETTLE us with in = 0 and RUN us with in applied. The script
+10 register writes (30 us), SETTLE us with in = 0, the write of in to register 14 (3 us),
+RUN us with in applied, and the write of in = 0 (3 us). The script
 checks this against the data: in every scenario with in != 0 the first input pulse must start
 within one pulse period of the run window's start. Needs numpy and matplotlib (the container
 has both).
@@ -110,8 +111,9 @@ def windows(n_scen, first, settle_us, run_us):
     """[(scenario, load_start, run_start, run_end)] in seconds."""
     out, t = [], 15e-6                                   # 3 us reset + 4 writes x 3 us
     for k in range(first, first + n_scen):
-        out.append((k, t, t + 30e-6 + settle_us * 1e-6, t + 30e-6 + (settle_us + run_us) * 1e-6))
-        t += 30e-6 + (settle_us + run_us) * 1e-6
+        run_start = t + 30e-6 + settle_us * 1e-6 + 3e-6   # load, settle, write in
+        out.append((k, t, run_start, run_start + run_us * 1e-6))
+        t = run_start + run_us * 1e-6 + 3e-6              # write in = 0
     return out
 
 
