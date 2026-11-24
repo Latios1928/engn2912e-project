@@ -102,7 +102,7 @@ def simulate(pid: int, values: dict, areas: dict, run_dir: Path, template: str, 
 # ---------------------------------------------------------------- main loop
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--configs", default=HERE / "configs", type=Path)
+    ap.add_argument("--configs", default=HERE / "configs_sized", type=Path)
     ap.add_argument("--proposer", choices=["random", "llm"], default="random")
     ap.add_argument("--model", default=None, help="OpenRouter model slug (llm only)")
     ap.add_argument("--budget", type=int, default=20, help="max simulations")
