@@ -2,14 +2,14 @@
 
 Chip top `snn_top.v` = digital `snn_digital` (LibreLane, `librelane/snn_top`) + analog macro
 `SNN_signed` (`analog/layout_tools/top/SNN_signed/SNN_signed.gds`: `bias` + `analog/snn/snn_analog_signed.sch`).
-Status 2026-11-18. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
+Status 2026-11-22. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
 `SNN_signed_lvs_ref.spice`.
 
 ## 1. Chip pins (external)
 
 | Pin | Dir | Domain | Width | Function | Connects to |
 |---|---|---|---|---|---|
-| `clk` | in | digital | 1 | system clock (config: 20 ns period) | digital: `regs`, `pulse_gen` |
+| `clk` | in | digital | 1 | system clock, **1 MHz** (LibreLane `CLOCK_PERIOD` 1000 ns). With the reset pulse timing (period 200, width 10 clk) the inputs spike at the network's **5 kHz** operating rate, 10 µs wide | digital: `regs`, `pulse_gen` |
 | `rst` | in | digital | 1 | synchronous reset, active high: pulse generator and pulse timing (not weights or signs) | digital: `regs`, `pulse_gen` |
 | `data[3:0]` | in | digital | 4 | value to write | digital: `regs` |
 | `addr[3:0]` | in | digital | 4 | register address, written every clock; `4'hF` = idle (no `wren` pin). 0–7 magnitudes (synapse k, see §3), 8–9 signs, 10–13 pulse period/width, 14 unused | digital: `regs` |
@@ -18,10 +18,11 @@ Status 2026-11-18. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin
 | `Iref` | in (current) | analog | 1 | bias-cell reference current, **100 nA sourced into the pin** (scales every bias; adjusting it off chip replaces a trim) | analog `Iref` |
 | `VT` | in (voltage) | analog | 1 | neuron firing threshold, **1.66 V** (high-impedance gate input) | analog `VT` |
 | `VDDA` | supply | analog | 1 | 3.3 V | analog `VDD` |
+| `VSSA` | ground | analog | 1 | 0 V, analog ground | analog `VSS` |
 | `VDDD` | supply | digital | 1 | 3.3 V, separate from `VDDA` so digital switching noise stays off the analog supply | digital VDD |
-| `VSS` | supply | ground | 1 | 0 V, substrate (shared) | analog `VSS`; digital VSS |
+| `VSSD` | ground | digital | 1 | 0 V, digital ground, separate from `VSSA` for the same reason | digital VSS |
 
-Total: 17 digital signal pins (`clk`, `rst`, 4 + 4 + 2 inputs, 5 outputs) + `Iref` + `VT` + `VDDA` + `VDDD` + `VSS` = all 22 available.
+Total: 17 digital signal pins (`clk`, `rst`, 4 + 4 + 2 inputs, 5 outputs) + `Iref` + `VT` + 4 supplies (`VDDA`, `VSSA`, `VDDD`, `VSSD`) = **23 pads**. Open: confirm the pad limit with the organisers (this list used to assume 22 with one shared `VSS`).
 The analog biases are internal: the bias cell inside `SNN_signed` makes them from `Iref`.
 
 ## 2. Internal top-level nets (digital ↔ analog macro)
@@ -55,22 +56,38 @@ Synapse map (as in `mock/snn_analog.v` and the macro's netlist):
 
 ## 4. Supplies and domains
 
-- Analog macro: 3.3 V devices only (`nfet_03v3`, `pfet_03v3`); VDD = 3.3 V, VSS = 0 V = substrate.
+- Analog macro: 3.3 V devices only (`nfet_03v3`, `pfet_03v3`) on `VDDA` / `VSSA`.
   The bias cell draws ≈ 0.72 µA; the five neurons ≈ 0.3–0.5 µW each.
-- Digital (`librelane/snn_top/config.json`): cell library `gf180mcu_fd_sc_mcu7t5v0`, signed off at the
-  **5 V** corners (`nom_tt_025C_5v00`, `ss_125C_4v50`). See §5.
-- Planned: separate supplies `VDDA` (analog) and `VDDD` (digital), both 3.3 V, shared `VSS`.
+- Digital (`librelane/snn_top/config.json`): cell library `gf180mcu_fd_sc_mcu7t5v0` on `VDDD` / `VSSD`,
+  signed off at the 3.3 V corners (`tt_025C_3v30`, `ss_125C_3v00`, `ff_n40C_3v60`), so the digital
+  outputs `w`, `s`, `pulse` swing 0–3.3 V like the macro's inputs, and no level shifters are needed.
+- The two grounds are separate nets and pads, so digital switching current does not flow in the
+  analog ground. They share the p-substrate; the macro's `ISOSUB` marker (GDS 23/5, extraction / LVS
+  only) keeps them separate nets in chip-level LVS (README, Physical design).
 
-## 5. Open interface issues (to resolve before the final top level)
+## 5. Power-up and operating procedure
 
-1. **Supply voltage.** The digital block is timed at 5 V, the analog macro is 3.3 V. Driving `w`, `s`,
-   `pulse` from a 5 V domain would put 5 V on 3.3 V gates, and the 3.3 V spikes would not reach a 5 V
-   logic high. Run the digital block at 3.3 V on `VDDD` (the library has 3v00 / 3v30 / 3v60 corners),
-   or add level shifters.
-2. **`Iref`, `VT`, `VDD` (→ `VDDA`), `VSS`** of the analog macro are not ports of `snn_top.v` or of the black box;
-   they must be added as chip pins / pads (analog pads for `Iref` and `VT`).
-3. **The committed digital layout is out of date.** `librelane/snn_top/results/snn_top.gds` still has
-   the earlier 3-5-1 interface; re-run `librelane/snn_top/run.sh` on the current RTL.
-4. **Pin placement.** All analog macro pins are on its bottom edge, with `w`, `s` and `pulse` together
-   at the left end; the digital block's outputs should face them, and `out[4:0]` must reach the pads
-   on a layer the pads accept.
+The weight and sign registers (addresses 0–9) have **no reset**: they power up in an arbitrary
+state, and `rst` does not change them. `rst` resets only the pulse timing (200 / 10) and the pulse
+generator. An arbitrary weight set is harmless while `in = 00`: no input pulses means no DAC is ever
+enabled, so nothing fires (scenario 1, all weights at maximum with `in = 00`, passes in every
+simulation, RTL to post-layout). Procedure:
+
+1. Power up with `in = 00` and `addr = 4'hF`. The register file writes on every clock edge while
+   `addr` is not `4'hF` (there is no write-enable pin), so the board must hold `addr` at `4'hF`
+   from power-on (pull-ups), or registers are overwritten continuously.
+2. Run `clk` at 1 MHz and pulse `rst` for at least one clock: pulse timing 200 / 10 (10 µs pulses at
+   5 kHz), no pulses pending.
+3. Write all 10 weight / sign registers (addresses 0–9).
+4. Then raise `in`.
+
+Between test cases, set `in = 00` and wait at least 8 ms: the neurons have no membrane reset, and
+the leak needs about 8 ms to empty any membrane. A mid-run `rst` keeps the weights (no reload needed)
+but does not silence the network; `in = 00` does.
+
+## 6. Interface issues resolved (kept for reference)
+
+The four open issues listed here up to 2026-11-18 are resolved: the digital block is timed at 3.3 V
+(no level shifters); `Iref` and `VT` are chip ports (`ANALOG_PINS`) routed to the macro; the committed
+layout is the current RTL (`results/`, run `RUN_2026-11-21_22-31-59`); and the macro sits flipped (FS)
+at the bottom of the die with its pins facing the logic.

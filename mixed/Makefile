@@ -2,7 +2,7 @@
 # analog macro SNN_signed (its LVS reference netlist) in ngspice; coupled by
 # SpiceBind. Run from this folder in the container.
 #
-#   make run                               scenarios 1-5 (about 40 ms simulated)
+#   make run                               scenarios 1-8 (about 58 ms simulated)
 #   make run SCEN_FIRST=5 SCEN_LAST=5      one scenario
 #   make run IREF=82n                      other Iref (default 100n)
 #   make run SETTLE=2000 RUN=1500          shorter windows (us)
@@ -17,7 +17,7 @@ ROOT := $(abspath $(HERE)/..)
 export PATH := /foss/tools/bin:$(PATH)
 
 SCEN_FIRST ?= 1
-SCEN_LAST  ?= 5
+SCEN_LAST  ?= 8
 SETTLE     ?= 4000
 RUN        ?= 3000
 IREF       ?= 100n
@@ -56,7 +56,7 @@ run: $(OUT)_run.spice no_passwd_shim.so $(VSRC)
 	@echo "IREF=$(IREF) scenarios $(SCEN_FIRST)-$(SCEN_LAST) SETTLE=$(SETTLE) RUN=$(RUN) -> $(OUT).log"
 	@start=$$(date +%s); \
 	  { echo "# make run IREF=$(IREF) SCEN_FIRST=$(SCEN_FIRST) SCEN_LAST=$(SCEN_LAST) SETTLE=$(SETTLE) RUN=$(RUN)"; \
-	    SPICE_NETLIST=$(HERE)/$(OUT)_run.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
+	    SPICE_DUMP_RAW=1 SPICE_NETLIST=$(HERE)/$(OUT)_run.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
 	    LOGIC_THRESHOLD_LOW=1.64 LOGIC_THRESHOLD_HIGH=1.66 \
 	    LD_PRELOAD=$(HERE)/no_passwd_shim.so \
 	    vvp -M $(SPICEBIND) -m spicebind_vpi $(OUT).vvp; } > $(OUT).log 2>&1; \

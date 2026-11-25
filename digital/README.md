@@ -49,7 +49,7 @@ The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
 - `period = 0` means 256 cycles; `width = 0` means no pulses.
 - Outputs come straight from flip-flops, since they drive the analog DAC enables.
 - At a 1 MHz `clk` the reset values give the 10 µs pulses every 200 µs (5 kHz)
-  that `../analog/neuron/old/DACs-DPI-neuron.sch` is tuned for.
+  that the neuron and the DPI synapses are sized for.
 - The chip's package exposes `in[1:0]` (these `en` bits), not `pulse[1:0]`.
 
 ## `snn_digital`

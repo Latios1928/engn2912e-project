@@ -71,6 +71,6 @@ X1 VDD VSS Iref VT w[31] w[30] w[29] w[28] w[27] w[26] w[25] w[24] w[23] w[22] w
 + v(x1.VMEM_0) v(x1.VMEM_1) v(x1.VMEM_2) v(x1.VMEM_3) v(x1.VMEM_4)
 * Runs until the Verilog testbench calls $finish. ngspice reserves memory for
 * tstop/step points, so a huge bound crashes it: keep it above the longest run
-* (5 scenarios need about 36 ms).
-.tran 0.1u 45m 0 0.1u
+* (8 scenarios need about 58 ms; 100 ms has crashed).
+.tran 0.1u 65m 0 0.1u
 .end

@@ -1,0 +1,36 @@
+# Gate-level timing simulation at 1 MHz, zero-delay and SDF corners (gls/tb_gls_timing.v)
+# source: librelane/snn_top/gls/timing_zero.log (written 2026-11-23 16:57)
+# collected 2026-11-23 17:08 at commit c71f49b
+
+## zero
+tb_gls_timing: zero-delay cells
+tb_gls_timing: channel 0: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 1: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 1: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: PASS, 13 checks
+## nom_ff_n40C_3v60
+tb_gls_timing: SDF librelane/snn_top/results/sdf/snn_top__nom_ff_n40C_3v60.sdf
+tb_gls_timing: channel 0: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 1: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 1: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: PASS, 13 checks
+## nom_ss_125C_3v00
+tb_gls_timing: SDF librelane/snn_top/results/sdf/snn_top__nom_ss_125C_3v00.sdf
+tb_gls_timing: channel 0: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 1: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 1: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: PASS, 13 checks
+## nom_tt_025C_3v30
+tb_gls_timing: SDF librelane/snn_top/results/sdf/snn_top__nom_tt_025C_3v30.sdf
+tb_gls_timing: channel 0: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 1: period 200.000 us, width 10.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 1: period 20.000 us, width 3.000 us
+tb_gls_timing: channel 0: period 20.000 us, width 3.000 us
+tb_gls_timing: PASS, 13 checks

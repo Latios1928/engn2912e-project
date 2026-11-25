@@ -39,7 +39,8 @@ CELL, INNER = "snn_analog", "SNN_signed"
 L = dict(M1=(34, 0), M2=(36, 0), M3=(42, 0), M4=(46, 0), M5=(81, 0),
          V2=(38, 0), V3=(40, 0), V4=(41, 0),
          M2_LBL=(36, 10), M4_LBL=(46, 10), M5_LBL=(81, 10),
-         PR_BOUNDARY=(63, 0))   # Magic's PRBOUND (gf180mcuD.tech); LibreLane needs it in a macro GDS
+         PR_BOUNDARY=(63, 0),   # Magic's PRBOUND (gf180mcuD.tech); LibreLane needs it in a macro GDS
+         ISOSUB=(23, 5), DNWELL=(12, 0))
 LEF_LAYER = dict(M1="Metal1", M2="Metal2", M3="Metal3", M4="Metal4", M5="Metal5")
 
 # Geometry (um), from the edge of the wrapper inwards
@@ -93,6 +94,20 @@ def main():
     top = src.create_cell(CELL)
     top.insert(db.DCellInstArray(inner.cell_index(), db.DTrans(dx, dy)))
     top.shapes(li["PR_BOUNDARY"]).insert(db.DBox(0, 0, W, H))
+
+    # Substrate isolation marker (ISOSUB, GDS 23/5). VSSA (this macro's VSS) and the logic's
+    # VSSD are separate nets and pads, so digital switching current does not flow in the
+    # analog ground. They share the p-substrate, though, and without this marker Magic and
+    # KLayout extract the whole substrate as one node, which joins VSSA and VSSD and fails
+    # chip-level LVS. Under the marker the substrate is its own net, tied to VSSA through the
+    # macro's substrate taps. The marker leaves out the deep n-well (the isolated Isum p-wells
+    # of the DPI / DAC cells) plus a 2 um keep-out: in Magic, isosub connects to p-well, and
+    # with no keep-out those isolated wells merge into VSSA. The marker is for extraction and
+    # LVS only (the DRC decks have no rule on it); it adds no physical isolation.
+    dnw = db.Region(inner.begin_shapes_rec(li["DNWELL"])).merged()
+    dnw.transform(db.ICplxTrans(db.DCplxTrans(dx, dy).to_itrans(dbu)))
+    iso = db.Region(db.DBox(0, 0, W, H).to_itype(dbu)) - dnw.sized(round(2.0 / dbu))
+    top.shapes(li["ISOSUB"]).insert(iso)
 
     shapes = []          # (layer key, DBox, net, is LEF pin shape) for the GDS and the LEF
 

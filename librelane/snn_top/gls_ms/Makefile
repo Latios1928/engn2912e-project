@@ -3,10 +3,10 @@
 # ngspice, coupled by SpiceBind. Same testbench, SPICE side and options as ../../../mixed
 # (which runs the RTL); only the digital side differs. Run in the container, from here.
 #
-#   make run                               scenarios 1-5 (about 40 ms simulated)
+#   make run                               scenarios 1-8 (about 58 ms simulated)
 #   make run SCEN_FIRST=2 SCEN_LAST=2      one scenario
 #   make run SETTLE=2000 RUN=1500          shorter windows (us)
-#   make run NETLIST=path/to/x.nl.v        another netlist (default: the latest full run)
+#   make run NETLIST=path/to/x.nl.v        another netlist (default: results/, the published run)
 #   make run PEX=1                         macro with its extracted parasitics (C-only Magic
 #                                          extraction of SNN_signed.gds) instead of its LVS netlist
 #   make clean
@@ -21,11 +21,11 @@ MIXED := $(ROOT)/mixed
 export PATH := /foss/tools/bin:$(PATH)
 
 SCEN_FIRST ?= 1
-SCEN_LAST  ?= 5
+SCEN_LAST  ?= 8
 SETTLE     ?= 4000
 RUN        ?= 3000
 IREF       ?= 100n
-NETLIST    ?= $(ROOT)/librelane/snn_top/runs/full_2/final/nl/snn_top.nl.v
+NETLIST    ?= $(ROOT)/librelane/snn_top/results/snn_top.nl.v
 PEX        ?= 0
 
 PDK_ROOT ?= /foss/pdks
@@ -71,7 +71,7 @@ run: $(OUT)_run.spice no_passwd_shim.so $(VSRC)
 	@echo "GLS + SPICE (PEX=$(PEX)): IREF=$(IREF) scenarios $(SCEN_FIRST)-$(SCEN_LAST) SETTLE=$(SETTLE) RUN=$(RUN) -> $(OUT).log"
 	@start=$$(date +%s); \
 	  { echo "# make run PEX=$(PEX) IREF=$(IREF) SCEN_FIRST=$(SCEN_FIRST) SCEN_LAST=$(SCEN_LAST) SETTLE=$(SETTLE) RUN=$(RUN) NETLIST=$(NETLIST)"; \
-	    SPICE_NETLIST=$(HERE)/$(OUT)_run.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
+	    SPICE_DUMP_RAW=1 SPICE_NETLIST=$(HERE)/$(OUT)_run.spice HDL_INSTANCE=snn_ms_tb.dut.u_snn_analog VCC=3.3 \
 	    LOGIC_THRESHOLD_LOW=1.64 LOGIC_THRESHOLD_HIGH=1.66 \
 	    LD_PRELOAD=$(HERE)/no_passwd_shim.so \
 	    vvp -M $(SPICEBIND) -m spicebind_vpi $(OUT).vvp; } > $(OUT).log 2>&1; \
