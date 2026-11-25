@@ -19,7 +19,6 @@ analog/
 ├── neuron/                      neuron, spike_amplifier, bias
 │   └── layout/PEX/              parasitic extraction (all blocks): extract.sh <cell> -> <cell>_pex.spice + wrapper
 │                                (README.md there: what to do after a layout change)
-│                                (the archived <dir>/old/ folders were deleted 2026-11-22: git 2dd89b5)
 ├── layout_tools/flow/<cell>/    current block layouts (flow.py), layout_tools/top/ the SNN macro
 └── testbenches/
     ├── README.md                this file
@@ -131,19 +130,6 @@ Other things to check in the schematic (not changed here):
 - C4 is an ideal `capa`. It should become a MIM cap like those in `neuron_5khz.sch`; the testbenches already load `mimcap_typical`.
 - The bulks of M1 and M2 are tied to `Isum`. On silicon this needs NMOS in an isolated p-well; otherwise the bulks go to VSS and the pair sees body effect. Check what the PDK offers.
 
-### DPI at the network's operating point (`dpi/`, 2026-11-12)
-
-The testbenches above use 5 nA inputs, 100 µs pulses and an output held at 0 V. These two use the network's conditions: inputs of code × 15 nA for 10 µs (what `DAC_signed` delivers), the output held at a membrane voltage, the sized excitatory cell **and** the inhibitory `DPI_inh` side by side. Shared code: `dpi/dpicommon.py`.
-
-| File | What it does |
-|---|---|
-| `dpi_load_tb.sch` + `run_dpi_load.py` | DC input 15 / 45 / 150 nA, output voltage swept 0–3.3 V: how much output is left as VMEM rises (excitatory) or falls (inhibitory), and the tail voltage V(Isum) the DAC sees. Suites `bias` (the four presets), `pvt`, `mc` |
-| `dpi_pulse_tb.sch` + `run_dpi_pulse.py` | DAC-like current pulses: charge on the membrane per charge in. Suites `code`, `train` (10 pulses at 5 kHz), `pair` (two pulses 20 µs–2 ms apart), `width` (10 vs 16.5 µs), `vmem`, `pvt`, `mc` |
-
-Options on both: `--cell DPI_sized|DPI` (excitatory cell; default `DPI_sized`), `--bias output|hidden|relay|chain` (presets from the XOR README and `DACs-DPI-neuron.sch`; default `output`), `--only`, `--mc N`, `--pex`, `--report-only`. Results: `dpi/results/<tb>[__<cell>][__<bias>][__pex].md/.csv/.png`. The `chain` preset is meant for the min-size `DPI`; the inhibitory `DPI_inh` (a sized cell) is not matched to it.
-
-Both runners were archived in `analog/testbenches/old/dpi/` and deleted with the `old/` folders on 2026-11-22; restore them from git (commit 2dd89b5) to rerun. Their results stay in `dpi/results/`.
-
 ## Neuron (`neuron/`)
 
 Device under test: `analog/neuron/neuron.sch`, targets from `analog/neuron/sizing_context.txt`.
@@ -225,7 +211,7 @@ Copy the layout of `dpi/`:
 
 ## Bias cell (`bias/`)
 
-`analog/neuron/bias.sch` (layout `analog/layout_tools/flow/bias/bias.gds`; the earlier hand layout is in git 2dd89b5, `analog/neuron/old/layout/`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
+`analog/neuron/bias.sch` (layout `analog/layout_tools/flow/bias/bias.gds`) generates every subthreshold bias from one external reference current (Iref = 100 nA into the `Iref` pin) through fixed mirror ratios. Each output is a mirror current into a diode-connected replica of the transistor it drives, so the bias *voltage* follows corner and temperature while the bias *current* stays fixed. VT (the neuron threshold) is not generated: it is a comparison voltage.
 
 | File | Purpose |
 |---|---|

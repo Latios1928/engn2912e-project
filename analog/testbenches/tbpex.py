@@ -18,9 +18,8 @@ from tbtools import ROOT
 
 LAYOUT = ROOT / "analog" / "neuron" / "layout"
 PEX = LAYOUT / "PEX"
-# The current block layouts, built by layout_tools/flow.py (flow/<cell>/<cell>.gds). The hand-drawn
-# layouts this used to read (<dir>/old/layout) were deleted on 2026-11-22 (git 2dd89b5). PEX/ in
-# analog/neuron/layout holds extractions of those hand layouts, so --pex asks for a new extraction.
+# The current block layouts, built by layout_tools/flow.py (flow/<cell>/<cell>.gds). The extractions
+# in analog/neuron/layout/PEX are of other layouts, so --pex asks for a new extraction.
 LAYOUT_DIRS = sorted((ROOT / "analog" / "layout_tools" / "flow").glob("*/"))
 
 

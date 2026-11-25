@@ -1,6 +1,6 @@
 # Full-chip LVS (Magic extraction + netgen) and build-chain checks
-# source: librelane/snn_top/chip_lvs/summary.txt (written 2026-11-23 16:57)
-# collected 2026-11-23 17:08 at commit c71f49b
+# source: librelane/snn_top/chip_lvs/summary.txt (written 2026-11-24 03:32)
+# collected 2026-11-24 04:15 at commit 0cd223f (with uncommitted changes)
 
 PASS  macro signoff: SNN_signed signoff 2026-11-18 23:50:04: drc clean, lvs match
 PASS  macro reference: snn_analog_lvs_ref.spice contains SNN_signed_lvs_ref.spice
@@ -9,5 +9,5 @@ PASS  ISOSUB marker: 1 polygon(s), 419491 um2 on 23/5 in snn_analog.gds
 PASS  chip macro: snn_analog in snn_top.gds equals snn_analog.gds
 PASS  published files: gds/snn_top.gds == librelane/snn_top/results/snn_top.gds
 PASS  published files: verilog/gl/snn_top.v == librelane/snn_top/results/snn_top.pnl.v
-PASS  extraction: hierarchical netlist, 62 subcircuits, 1935 transistor lines (each cell type once); supplies all four separate
+PASS  extraction: hierarchical netlist, 59 subcircuits, 1785 transistor lines (each cell type once); supplies all four separate
 PASS  LVS: top: Circuits match uniquely.; macro compared at transistor level (962 pfet_03v3, 2291 nfet_03v3, 18 cap_mim_2f0_m4m5_noshield); macro port errors: 8 known (isolated Isum wells)

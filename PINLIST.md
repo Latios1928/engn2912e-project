@@ -2,7 +2,7 @@
 
 Chip top `snn_top.v` = digital `snn_digital` (LibreLane, `librelane/snn_top`) + analog macro
 `SNN_signed` (`analog/layout_tools/top/SNN_signed/SNN_signed.gds`: `bias` + `analog/snn/snn_analog_signed.sch`).
-Status 2026-11-22. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
+Status 2026-11-24. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
 `SNN_signed_lvs_ref.spice`.
 
 ## 1. Chip pins (external)
@@ -12,8 +12,7 @@ Status 2026-11-22. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin
 | `clk` | in | digital | 1 | system clock, **1 MHz** (LibreLane `CLOCK_PERIOD` 1000 ns). With the reset pulse timing (period 200, width 10 clk) the inputs spike at the network's **5 kHz** operating rate, 10 µs wide | digital: `regs`, `pulse_gen` |
 | `rst` | in | digital | 1 | synchronous reset, active high: pulse generator and pulse timing (not weights or signs) | digital: `regs`, `pulse_gen` |
 | `data[3:0]` | in | digital | 4 | value to write | digital: `regs` |
-| `addr[3:0]` | in | digital | 4 | register address, written every clock; `4'hF` = idle (no `wren` pin). 0–7 magnitudes (synapse k, see §3), 8–9 signs, 10–13 pulse period/width, 14 unused | digital: `regs` |
-| `in[1:0]` | in | digital | 2 | enables input pulse channel i (period/width from registers, reset 200 / 10 clk cycles) | digital: `pulse_gen` |
+| `addr[3:0]` | in | digital | 4 | register address, written every clock; `4'hF` = idle (no `wren` pin). 0–7 magnitudes (synapse k, see §3), 8–9 signs, 10–13 pulse period/width, 14 input enables (below) | digital: `regs` |
 | `out[4:0]` | out | analog → pin | 5 | spikes `{output, hidden[1:0], input[1:0]}`, full-swing 0 … VDD, ≈ 9–13 µs pulses | analog `spike[4:0]` |
 | `Iref` | in (current) | analog | 1 | bias-cell reference current, **100 nA sourced into the pin** (scales every bias; adjusting it off chip replaces a trim) | analog `Iref` |
 | `VT` | in (voltage) | analog | 1 | neuron firing threshold, **1.66 V** (high-impedance gate input) | analog `VT` |
@@ -22,7 +21,14 @@ Status 2026-11-22. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin
 | `VDDD` | supply | digital | 1 | 3.3 V, separate from `VDDA` so digital switching noise stays off the analog supply | digital VDD |
 | `VSSD` | ground | digital | 1 | 0 V, digital ground, separate from `VSSA` for the same reason | digital VSS |
 
-Total: 17 digital signal pins (`clk`, `rst`, 4 + 4 + 2 inputs, 5 outputs) + `Iref` + `VT` + 4 supplies (`VDDA`, `VSSA`, `VDDD`, `VSSD`) = **23 pads**. Open: confirm the pad limit with the organisers (this list used to assume 22 with one shared `VSS`).
+Total: 15 digital signal pins (`clk`, `rst`, 4 + 4 inputs, 5 outputs) + `Iref` + `VT` + 4 supplies (`VDDA`, `VSSA`, `VDDD`, `VSSD`) = **21 pads**. Open: confirm the pad limit with the organisers.
+
+**Input enables (register 14).** The two input pulse channels are switched on and off by register 14
+(`INPUT EN`): write `data = 4'b00 b1 b0` to `addr = 14`, where bit i enables channel i
+(`0011` both, `0001` input 0 only, `0000` off; `data[3:2]` are ignored). `rst` clears it to `00`.
+`pulse_gen` samples the enables only at period boundaries (every 200 µs by default), so a 3 µs register
+write takes effect at the next one.
+Below, "`in`" means this register.
 The analog biases are internal: the bias cell inside `SNN_signed` makes them from `Iref`.
 
 ## 2. Internal top-level nets (digital ↔ analog macro)
@@ -68,22 +74,24 @@ Synapse map (as in `mock/snn_analog.v` and the macro's netlist):
 ## 5. Power-up and operating procedure
 
 The weight and sign registers (addresses 0–9) have **no reset**: they power up in an arbitrary
-state, and `rst` does not change them. `rst` resets only the pulse timing (200 / 10) and the pulse
-generator. An arbitrary weight set is harmless while `in = 00`: no input pulses means no DAC is ever
+state, and `rst` does not change them. `rst` resets only the pulse timing (200 / 10), the input
+enables (`in = 00`) and the pulse generator. An arbitrary weight set is harmless while `in = 00`: no input pulses means no DAC is ever
 enabled, so nothing fires (scenario 1, all weights at maximum with `in = 00`, passes in every
 simulation, RTL to post-layout). Procedure:
 
-1. Power up with `in = 00` and `addr = 4'hF`. The register file writes on every clock edge while
-   `addr` is not `4'hF` (there is no write-enable pin), so the board must hold `addr` at `4'hF`
-   from power-on (pull-ups), or registers are overwritten continuously.
+1. Power up with `addr = 4'hF`. The register file writes on every clock edge while `addr` is not
+   `4'hF` (there is no write-enable pin), so the board must hold `addr` at `4'hF` from power-on
+   (pull-ups), or registers are overwritten continuously.
 2. Run `clk` at 1 MHz and pulse `rst` for at least one clock: pulse timing 200 / 10 (10 µs pulses at
-   5 kHz), no pulses pending.
+   5 kHz), inputs off (`in = 00`), no pulses pending. Until this reset the input enable register is
+   in an arbitrary state, so apply it right after power-up.
 3. Write all 10 weight / sign registers (addresses 0–9).
-4. Then raise `in`.
+4. Then write the input enables (register 14).
 
-Between test cases, set `in = 00` and wait at least 8 ms: the neurons have no membrane reset, and
-the leak needs about 8 ms to empty any membrane. A mid-run `rst` keeps the weights (no reload needed)
-but does not silence the network; `in = 00` does.
+Between test cases, write `in = 00` (register 14) and wait at least 8 ms: the neurons have no
+membrane reset, and the leak needs about 8 ms to empty any membrane. A mid-run `rst` keeps the
+weights (no reload needed) and also stops the input pulses (it clears `in`), but it does not empty
+the membranes: the 8 ms wait still applies.
 
 ## 6. Interface issues resolved (kept for reference)
 

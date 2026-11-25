@@ -8,10 +8,12 @@
 //
 //   1. reset values
 //   2. weights and signs are written to w and s
-//   3. the unused address and idle (4'hF) write nothing
+//   3. data[3:2] at address 14 and idle (4'hF) write nothing
 //   4. data changed while an address is held is written
 //   5. pulse timing: 10 every 200 at reset; a new period/width takes effect
-//      from the next period; width 0 = no pulses
+//      from the next period; width 0 = no pulses. The input channels are
+//      enabled by writing register 14 (INPUT EN).
+//   6. rst clears INPUT EN (pulses stop) and keeps weights and signs
 // clk is 1 us, as in mixed/.
 module tb_snn_digital;
   localparam [3:0] IDLE = 4'hF;
@@ -20,7 +22,6 @@ module tb_snn_digital;
   reg        rst = 1'b1;
   reg  [3:0] data = 4'h0;
   reg  [3:0] addr = IDLE;
-  reg  [1:0] in = 2'b00;
   wire [31:0] w;
   wire [1:0] pulse;
   wire [7:0] s;
@@ -32,7 +33,6 @@ module tb_snn_digital;
       .rst(rst),
       .data(data),
       .addr(addr),
-      .in(in),
       .w(w),
       .pulse(pulse),
       .s(s)
@@ -40,6 +40,7 @@ module tb_snn_digital;
 
   wire [7:0] period = dut.period;
   wire [7:0] width = dut.width;
+  wire [1:0] in_en = dut.in_en;
 
   integer errors = 0;
 
@@ -63,6 +64,11 @@ module tb_snn_digital;
       @(negedge clk);
       addr = IDLE;
     end
+  endtask
+
+  // Enable input pulse channels: register 14 (INPUT EN), bits [1:0]
+  task set_in(input [1:0] en);
+    write_reg(4'd14, {2'b00, en});
   endtask
 
   // Pulse measurement on channel 0: start cycle and width of each pulse
@@ -104,7 +110,8 @@ module tb_snn_digital;
     rst = 1'b0;
 
     // 1. reset values
-    check("1 reset values (period 200, width 10)", period == 8'd200 && width == 8'd10);
+    check("1 reset values (period 200, width 10, INPUT EN 00)",
+          period == 8'd200 && width == 8'd10 && in_en === 2'b00);
 
     // 2. write every register
     for (i = 0; i < 8; i = i + 1) write_reg(i[3:0], i[3:0] + 4'd3);
@@ -121,15 +128,15 @@ module tb_snn_digital;
     s_before = s;
     p_before = period;
     wd_before = width;
-    write_reg(4'd14, 4'h3);  // unused address
+    write_reg(4'd14, 4'hC);  // INPUT EN: only data[1:0] is stored
     addr = IDLE;
     for (i = 0; i < 40; i = i + 1) begin
       @(negedge clk);
       data = 4'($urandom);
     end
-    check("3 unused (14) and idle (15) addresses write nothing",
-          w === w_before && s === s_before &&
-          period === p_before && width === wd_before);
+    check("3 data[3:2] at addr 14 and idle (15) write nothing",
+          w === w_before && s === s_before && in_en === 2'b00 &&
+          period === p_before && width === wd_before && pulse === 2'b00);
 
     // 4. holding an address while data changes writes the new data
     @(negedge clk);
@@ -146,7 +153,8 @@ module tb_snn_digital;
     write_reg(4'd11, 4'hC);
     write_reg(4'd12, 4'hA);  // width 10 = 8'h0A
     write_reg(4'd13, 4'h0);
-    in = 2'b01;
+    set_in(2'b01);
+    check("5 INPUT EN written by addr 14", in_en === 2'b01);
     wait (n_pulses == 3);
     ok = 1'b1;
     for (k = 1; k < 3; k = k + 1)
@@ -164,10 +172,10 @@ module tb_snn_digital;
     // drop it just after a boundary (that period's pulse still happens)
     repeat (80) @(negedge clk);
     n1_before = n1;
-    in = 2'b11;
+    set_in(2'b11);
     wait (n_pulses == n_before + 2);
     wait (pulse[0]);
-    in = 2'b01;
+    set_in(2'b01);
     wait (n_pulses == n_before + 4);
     ok_en = (n1 - n1_before == 2);
     // pulse n_before is the one running during the change: old timing
@@ -184,7 +192,24 @@ module tb_snn_digital;
     repeat (300) @(negedge clk);
     check("5c width 0 gives no pulses", n_pulses == n_before && pulse == 2'b00);
 
-    in = 2'b00;
+    // 6. rst clears INPUT EN: with channel 0 enabled and normal timing, a
+    // reset stops the pulses; weights and signs survive it
+    write_reg(4'd12, 4'hA);  // width 10 again
+    set_in(2'b11);
+    wait (pulse[0]);
+    w_before = w;
+    s_before = s;
+    @(negedge clk);
+    rst = 1'b1;
+    @(negedge clk);
+    rst = 1'b0;
+    repeat (3) @(negedge clk);  // the monitor logs the pulse reset cut short
+    n_before = n_pulses;
+    repeat (450) @(negedge clk);  // two default periods
+    check("6 rst clears INPUT EN: no pulses after reset",
+          in_en === 2'b00 && pulse === 2'b00 && n_pulses == n_before);
+    check("6 rst keeps weights and signs", w === w_before && s === s_before);
+
     if (errors == 0) $display("tb_snn_digital: PASS, all checks");
     else $display("tb_snn_digital: FAIL, %0d checks failed", errors);
     $finish;

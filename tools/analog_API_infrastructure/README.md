@@ -23,9 +23,9 @@ python3 compare.py                                 # table of all runs in runs/
 
 | File | Role |
 |---|---|
-| `configs/params.yaml` | tunable parameters: `lo`, `hi`, `step`, `init`, and `devices` (netlist fields the parameter sets, `subckt/INSTANCE:field`) |
-| `configs/spec.yaml` | targets, `[min, max]`, `null` = unbounded |
-| `configs/sim.yaml` | testbench `.sch`, fixed `.param` values, analysis/`.meas` block, timeout, constraints |
+| `configs_sized/params.yaml` | tunable parameters: `lo`, `hi`, `step`, `init`, and `devices` (netlist fields the parameter sets, `subckt/INSTANCE:field`) |
+| `configs_sized/spec.yaml` | targets, `[min, max]`, `null` = unbounded |
+| `configs_sized/sim.yaml` | testbench `.sch`, fixed `.param` values, analysis/`.meas` block, timeout, constraints |
 | `params.py` | loads the three YAML files (`Param`, `Spec`) |
 | `netlist.py` | netlists the testbench with xschem once, builds `template.spice` (drops `.control`, overridden `.param`s; device fields → `{PARAM}`), writes `params.spice` |
 | `runner.py` | `ngspice -b` in a per-point folder with a timeout (`num_threads=1`) |
@@ -305,6 +305,6 @@ Build in this order. Each step has a check that tells you it works.
   step.
 - **AI-usage record:** this README was drafted with AI assistance; see
   `analog/Analog_AI_Documentation.md`. `params.py`, `netlist.py`, `runner.py`,
-  `metrics.py`, `loop.py`, `compare.py`, `configs/` and `advisor.py` were
+  `metrics.py`, `loop.py`, `compare.py` and `advisor.py` were
   written by the AI at the user's request (2026-11-04). `advisor_draft.py` is
   the user's own draft, renamed but not edited.

@@ -7,12 +7,14 @@
 // model and clocks at 10 ns to suit that model. With slow-corner delays, a 10 ns clock
 // would report setup failures that cannot happen on the chip. This one leaves the analog
 // macro an empty black box and checks only what the digital part delivers to it:
+//   0. after reset the inputs are off (INPUT EN, register 14, resets to 00): no pulses
 //   1. the reset pulse timing (period 200, width 10 clk = 10 us every 200 us, the 5 kHz
 //      operating rate), measured on the pulse nets into the macro
 //   2. weights and signs written through data/addr reach w[31:0] / s[7:0], for several
 //      patterns, with no X
 //   3. new pulse timing written through the registers (period 20, width 3)
 //   4. one channel enabled: the other stays low; width 0: no pulses
+//   5. rst mid-run clears INPUT EN (no pulses after it) and keeps weights and signs
 // The pulse period is measured rising edge to rising edge and the width rising to falling
 // edge, each to 5 ns: both edges come from the same flip-flop, so a period is exact and a
 // width is off only by the rise/fall delay difference.
@@ -23,6 +25,7 @@ module tb_gls_timing;
   localparam [3:0] A_SIGN_LO = 4'd8, A_SIGN_HI = 4'd9;
   localparam [3:0] A_PER_LO = 4'd10, A_PER_HI = 4'd11;
   localparam [3:0] A_WID_LO = 4'd12, A_WID_HI = 4'd13;
+  localparam [3:0] A_IN_EN = 4'd14;
   localparam real TCLK = 1000.0;  // ns, 1 MHz
   localparam real TOL = 5.0;  // ns
 
@@ -30,7 +33,6 @@ module tb_gls_timing;
   reg rst = 1'b1;
   reg [3:0] addr = IDLE;
   reg [3:0] data = 4'h0;
-  reg [1:0] in = 2'b00;
   wire [4:0] out;
   wire Iref, VT;
 
@@ -43,7 +45,6 @@ module tb_gls_timing;
       .rst (rst),
       .data(data),
       .addr(addr),
-      .in  (in),
       .out (out)
   );
 
@@ -75,6 +76,11 @@ module tb_gls_timing;
       @(negedge clk);
       addr = IDLE;
     end
+  endtask
+
+  // Input enables: register 14 (INPUT EN), bits [1:0]
+  task set_in(input [1:0] en);
+    write_reg(A_IN_EN, {2'b00, en});
   endtask
 
   task load(input [31:0] ws, input [7:0] ss);
@@ -160,8 +166,14 @@ module tb_gls_timing;
     checks = checks + 1;
     if (p !== 2'b00) fail("pulse not 0 after reset");
 
+    // 0. Inputs off after reset: two default periods without pulses
+    fork
+      quiet(0, 400);
+      quiet(1, 400);
+    join
+
     // 1. Reset timing, both channels
-    in = 2'b11;
+    set_in(2'b11);
     fork
       measure(0, 200, 10);
       measure(1, 200, 10);
@@ -182,7 +194,7 @@ module tb_gls_timing;
     join
 
     // 4. One channel only; then width 0
-    in = 2'b01;
+    set_in(2'b01);
     repeat (60) @(negedge clk);  // two periods: en is sampled at period boundaries
     fork
       measure(0, 20, 3);
@@ -191,6 +203,25 @@ module tb_gls_timing;
     timing(8'd20, 8'd0);
     repeat (60) @(negedge clk);
     quiet(0, 60);
+
+    // 5. rst mid-run: both channels running, then a reset clears INPUT EN (and restores
+    // timing 200 / 10); weights and signs are kept
+    timing(8'd20, 8'd3);
+    set_in(2'b11);
+    fork
+      measure(0, 20, 3);
+      measure(1, 20, 3);
+    join
+    @(negedge clk);
+    rst = 1'b1;
+    @(negedge clk);
+    rst = 1'b0;
+    fork
+      quiet(0, 400);
+      quiet(1, 400);
+    join
+    checks = checks + 1;
+    if (w !== 32'h1234_ABCD || s !== 8'b1100_0011) fail("weights / signs changed by rst");
 
     if (errors == 0) $display("tb_gls_timing: PASS, %0d checks", checks);
     else $display("tb_gls_timing: FAIL, %0d of %0d checks", errors, checks);

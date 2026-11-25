@@ -91,9 +91,8 @@ the reset gate) extends the hold a little (bottom went from ≈ 1.2 V to
 
 ## Open issues / next steps
 
-> Items 1–4 concern the earlier Schmitt-trigger neuron (`neuron_old.sch`, deleted with the `old/`
-> folders on 2026-11-22; in git at commit 2dd89b5). The current neuron resets to < 1 mV (run log,
-> `neuron_sized`), so they do not apply to the chip.
+> Items 1–4 concern the earlier Schmitt-trigger neuron (`neuron_old.sch`). The current neuron
+> resets to < 1 mV (run log, `neuron_sized`), so they do not apply to the chip.
 
 1. **Reset doesn't reach 0.2 V.** It ends when MEM drops below VTH−
    (≈ 1.3 V; MEM falls a bit further because of the comparator + inverter

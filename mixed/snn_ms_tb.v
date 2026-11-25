@@ -18,8 +18,11 @@
 // Scenario 7 is a tie (+15 against -15); post-layout Monte Carlo passes 94 / 100
 // chips on it (analog/testbenches/snn/results/snn_signed_tb__pex__mc100.md).
 // Synapse k has magnitude w[4k+3:4k] (max 15) and sign s[k] (1 = inhibitory).
-// The pulse timing (200, 10) is written through regs at the start. The
-// network has no reset pin, so each run is preceded by SETTLE us with in = 0.
+// The pulse timing (200, 10) is written through regs at the start. in is the
+// input enable register (address 14, INPUT EN), written like the weights; rst
+// clears it. The network has no reset pin, so each run is preceded by SETTLE us
+// with in = 0. Per scenario: 10 writes (30 us), SETTLE, write in (3 us), RUN,
+// write in = 0 (3 us); tools/snn_waves.py relies on this timing.
 `timescale 1ns / 1ns
 
 module snn_ms_tb #(
@@ -32,13 +35,14 @@ module snn_ms_tb #(
   localparam [3:0] A_SIGN_LO = 4'd8, A_SIGN_HI = 4'd9;
   localparam [3:0] A_PER_LO = 4'd10, A_PER_HI = 4'd11;
   localparam [3:0] A_WID_LO = 4'd12, A_WID_HI = 4'd13;
+  localparam [3:0] A_IN_EN = 4'd14;
   localparam [3:0] MAX = 4'hF;
 
   reg        clk = 1'b0;  // 1 us
   reg        rst = 1'b1;
   reg  [3:0] addr = IDLE;
   reg  [3:0] data = 0;
-  reg  [1:0] in = 0;
+  reg  [1:0] in = 0;  // last value written to INPUT EN (waveform only)
   wire [4:0] spike;
 
   always #500 clk = ~clk;
@@ -48,7 +52,6 @@ module snn_ms_tb #(
       .rst (rst),
       .data(data),
       .addr(addr),
-      .in  (in),
       .out (spike)
   );
 
@@ -85,6 +88,14 @@ module snn_ms_tb #(
     end
   endtask
 
+  // Input enables: register 14 (INPUT EN), bits [1:0]
+  task set_in(input [1:0] en);
+    begin
+      write_reg(A_IN_EN, {2'b00, en});
+      in = en;
+    end
+  endtask
+
   task load;
     begin
       for (i = 0; i < 8; i = i + 1) write_reg(i[3:0], ws[i*4+:4]);
@@ -93,19 +104,19 @@ module snn_ms_tb #(
     end
   endtask
 
-  // One run: load weights and signs, settle with in = 0, then in_v for RUN us
+  // One run: load weights and signs, settle with in = 0 (rst cleared it, or the
+  // previous run ended with it), then in_v for RUN us
   task check_run(input [1:0] in_v, input [4:0] expected);
     begin
       load;
-      in = 2'b00;
       #(SETTLE * 1000);
-      in = in_v;
+      set_in(in_v);
       seen = 0;
       t_run = $time;
       counting = 1'b1;
       #(RUN * 1000);
       counting = 1'b0;
-      in = 2'b00;
+      set_in(2'b00);
       if (seen === expected) $display("snn_ms_tb: PASS scenario %0d: fired %b", scen, seen);
       else begin
         errors = errors + 1;

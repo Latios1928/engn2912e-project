@@ -1,31 +1,44 @@
 # Mixed-signal gate-level simulation, schematic macro, scenarios 1-8
-# source: librelane/snn_top/gls_ms/gls_ms.log (written 2026-11-21 23:34)
-# collected 2026-11-23 17:09 at commit c71f49b
+# source: librelane/snn_top/gls_ms/gls_ms.log (written 2026-11-24 04:15)
+# collected 2026-11-24 04:15 at commit 0cd223f (with uncommitted changes)
 
 # make run PEX=0 IREF=100n SCEN_FIRST=1 SCEN_LAST=8 SETTLE=4000 RUN=3000 NETLIST=librelane/snn_top/results/snn_top.nl.v
 snn_ms_tb: PASS scenario 1: fired 00000
-snn_ms_tb: scenario 2: spike[0] first at 455 us
+snn_ms_tb: scenario 2: spike[0] first at 448 us
 snn_ms_tb: PASS scenario 2: fired 00001
-snn_ms_tb: scenario 3: spike[1] first at 419 us
-snn_ms_tb: scenario 3: spike[3] first at 659 us
-snn_ms_tb: scenario 3: spike[4] first at 885 us
+snn_ms_tb: scenario 3: spike[1] first at 407 us
+snn_ms_tb: scenario 3: spike[3] first at 648 us
+snn_ms_tb: scenario 3: spike[4] first at 873 us
 snn_ms_tb: PASS scenario 3: fired 11010
-snn_ms_tb: scenario 4: spike[1] first at 375 us
-snn_ms_tb: scenario 4: spike[3] first at 613 us
+snn_ms_tb: scenario 4: spike[1] first at 357 us
+snn_ms_tb: scenario 4: spike[3] first at 595 us
 snn_ms_tb: PASS scenario 4: fired 01010
-snn_ms_tb: scenario 5: spike[1] first at 285 us
-snn_ms_tb: scenario 5: spike[0] first at 314 us
+snn_ms_tb: scenario 5: spike[1] first at 263 us
+snn_ms_tb: scenario 5: spike[0] first at 292 us
 snn_ms_tb: PASS scenario 5: fired 00011
 snn_ms_tb: PASS scenario 6: fired 00000
-snn_ms_tb: scenario 7: spike[0] first at 439 us
-snn_ms_tb: scenario 7: spike[1] first at 439 us
-snn_ms_tb: scenario 7: spike[2] first at 640 us
-snn_ms_tb: scenario 7: spike[3] first at 640 us
+snn_ms_tb: scenario 7: spike[0] first at 407 us
+snn_ms_tb: scenario 7: spike[1] first at 407 us
+snn_ms_tb: scenario 7: spike[2] first at 608 us
+snn_ms_tb: scenario 7: spike[3] first at 608 us
 snn_ms_tb: PASS scenario 7: fired 01111
-snn_ms_tb: scenario 8: spike[0] first at 417 us
-snn_ms_tb: scenario 8: spike[1] first at 417 us
-snn_ms_tb: scenario 8: spike[2] first at 622 us
-snn_ms_tb: scenario 8: spike[3] first at 622 us
-snn_ms_tb: scenario 8: spike[4] first at 793 us
+snn_ms_tb: scenario 8: spike[0] first at 380 us
+snn_ms_tb: scenario 8: spike[1] first at 380 us
+snn_ms_tb: scenario 8: spike[2] first at 588 us
+snn_ms_tb: scenario 8: spike[3] first at 588 us
+snn_ms_tb: scenario 8: spike[4] first at 787 us
 snn_ms_tb: PASS scenario 8: fired 11111
 snn_ms_tb: PASS, all scenarios
+
+## spike summary (tools/snn_waves.py)
+librelane/snn_top/gls_ms/gls_ms.raw: 56.29 ms simulated, 568888 points, 8 scenario(s)
+membranes: input 0 = x1.vmem_0, input 1 = x1.vmem_1, hidden 0 = x1.vmem_2, hidden 1 = x1.vmem_3, output = x1.vmem_4
+  scenario 1 [all weights max, no input], in=00: pulses 0/0, fired 00000 PASS; no spikes
+  scenario 2 [pulse 0 -> input 0 only], in=01: pulses 15/0, fired 00001 PASS; input 0 17 (446 us)
+  scenario 3 [path in1 -> hid1 -> out], in=11: pulses 15/15, fired 11010 PASS; input 1 17 (403 us); hidden 1 24 (643 us); output 27 (869 us)
+  scenario 4 [as 3, hid1 -> out = 0], in=11: pulses 15/15, fired 01010 PASS; input 1 17 (351 us); hidden 1 24 (588 us)
+  scenario 5 [as 3 + in0 -| hid1 (inhibitory)], in=11: pulses 15/15, fired 00011 PASS; input 0 22 (284 us); input 1 22 (255 us)
+  scenario 6 [p0 -| in0 (inhibitory = off)], in=01: pulses 15/0, fired 00000 PASS; no spikes
+  scenario 7 [hid0 -| out against hid1 -> out (tie)], in=11: pulses 15/15, fired 01111 PASS; input 0 21 (395 us); input 1 21 (395 us); hidden 0 30 (596 us); hidden 1 30 (596 us)
+  scenario 8 [control for 7: hid0 -> out = 0], in=11: pulses 15/15, fired 11111 PASS; input 0 20 (365 us); input 1 20 (365 us); hidden 0 28 (573 us); hidden 1 28 (573 us); output 30 (773 us)
+wrote signoff/img/gls_ms_overview.png and signoff/img/gls_ms_scen<N>.png (all scenarios as expected)
