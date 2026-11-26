@@ -40,7 +40,7 @@ Single stages: `flow.py table|decide|build|signoff <cell>`, `top.py
 netlist|abstract|plan|place|route|signoff SNN_signed`.
 
 After a macro change, continue with `librelane/macros/snn_analog/make_macro.py` and the rest of
-the chain in the [main README](../../README.md#after-a-design-change).
+the chain in the [main README](../../README.md#build-and-verification-flow).
 
 `api_driver.py` drives the cell flow with one Claude API call (`AGENT_BRIEF.md` is its system
 prompt): `python3 analog/layout_tools/api_driver.py neuron "build and sign off this cell"`.

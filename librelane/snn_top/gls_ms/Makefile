@@ -51,8 +51,8 @@ snn_top_gls.nl.v snn_ms_tb_gls.v: $(NETLIST) $(MIXED)/snn_ms_tb.v prep.py
 macro_sim.spice: $(MACRO) $(MIXED)/macro_sim.py
 	python3 $(MIXED)/macro_sim.py $< $@
 
-macro_pex.spice: $(MACRO_PEX) $(MACRO) pex_macro.py
-	python3 pex_macro.py $(MACRO_PEX) $(MACRO) $@
+macro_pex.spice: $(MACRO_PEX) $(MACRO) $(MIXED)/pex_macro.py
+	python3 $(MIXED)/pex_macro.py $(MACRO_PEX) $(MACRO) $@
 
 $(OUT)_run.spice: $(MIXED)/snn_ms_tb.spice $(MACRO_SIM) FORCE
 	sed -e 's|@PDK@|$(MODELS)|' -e 's|@MACRO@|$(HERE)/$(MACRO_SIM)|' -e 's/p_iref=100n/p_iref=$(IREF)/' \

@@ -112,4 +112,4 @@ signoff/run_checks.sh --spice     # also the post-layout mixed-signal run, about
 signoff/run_checks.sh --collect   # only refresh signoff/results/ from the last outputs
 ```
 
-The script writes the verdict lines of each check, with the date and commit, to [`results/`](results) and a one-line-per-check summary to [`results/STATUS.txt`](results/STATUS.txt). It also redraws the plots in [`img/`](img) and exits non-zero if anything fails. To rebuild the chip itself after a design change, follow *After a design change* in the [main README](../README.md).
+The script writes the verdict lines of each check, with the date and commit, to [`results/`](results) and a one-line-per-check summary to [`results/STATUS.txt`](results/STATUS.txt). It also redraws the plots in [`img/`](img) and exits non-zero if anything fails. To rebuild the chip itself after a design change, follow *Build and verification flow* in the [main README](../README.md#build-and-verification-flow).
