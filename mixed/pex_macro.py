@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Post-layout macro for the gate-level mixed-signal run (make run PEX=1).
+"""Post-layout macro for the mixed-signal runs (make run PEX=1 here and in librelane/snn_top/gls_ms).
 
     python3 pex_macro.py <SNN_signed_pex_sim.spice> <SNN_signed_lvs_ref.spice> <out.spice>
 
