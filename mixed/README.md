@@ -9,8 +9,9 @@ The SPICE side is the macro in one of two forms:
 - **pre-layout** (default): its LVS reference netlist
   (`analog/layout_tools/top/SNN_signed/SNN_signed_lvs_ref.spice`: drawn device sizes, no
   parasitics). `macro_sim.py` makes a simulation copy: the one FET longer than the models allow
-  (bias `MR_VK`, 0.5/90.91 µm) is split into series segments, and the MIM cap gets its
-  simulation model name;
+  (bias `MR_VK`, 0.5/90.91 µm) is split into series segments, the MIM cap gets its simulation
+  model name, and the layout's dummy FETs (all four terminals on one net, about 80 % of the
+  macro's FETs) are dropped: they carry no current and add no capacitance;
 - **post-layout** (`PEX=1`): its extraction from `SNN_signed.gds`
   (`top/SNN_signed/pex/SNN_signed_pex_sim.spice`, written by
   `analog/testbenches/snn/run_snn_signed.py --pex`). `pex_macro.py` gives it the LVS reference's
@@ -23,7 +24,7 @@ The SPICE side is the macro in one of two forms:
 From this folder, in the container:
 
 ```bash
-make run                              # scenarios 1-8, pre-layout macro, about 30 min
+make run                              # scenarios 1-8, pre-layout macro, about 7 min
 make run PEX=1                        # scenarios 1-8, post-layout macro, about 8 min
 make run SCEN_FIRST=3 SCEN_LAST=3     # one scenario
 make run IREF=82n                     # another reference current (default 100n)
@@ -55,14 +56,15 @@ First spike after the inputs are enabled, in µs (`{out, hid1, hid0, in1, in0}` 
 |---|---|---|---|
 | 1 | `00000` | none | none |
 | 2 | `00001` | in0 449 | in0 410 |
-| 3 | `11010` | in1 406 → hid1 647 → out 872 | in1 378 → hid1 566 → out 741 |
-| 4 | `01010` | in1 358 → hid1 523 | in1 240 → hid1 341 |
+| 3 | `11010` | in1 406 → hid1 644 → out 865 | in1 378 → hid1 566 → out 741 |
+| 4 | `01010` | in1 334 → hid1 559 | in1 240 → hid1 341 |
 | 5 | `00011` | in1 264, in0 292 | in1 197, in0 274 |
 | 6 | `00000` | none | none |
-| 7 | `01111` | in0, in1 407 → hid0, hid1 608 | in0, in1 404 → hid0 583, hid1 585 |
-| 8 | `11111` | in0, in1 338 → hid0, hid1 558 → out 774 | in0, in1 327 → hid0 460, hid1 491 → out 512 |
+| 7 | `01111` | in0, in1 408 → hid0, hid1 608 | in0, in1 404 → hid0 583, hid1 585 |
+| 8 | `11111` | in0, in1 379 → hid0, hid1 567 → out 661 | in0, in1 327 → hid0 460, hid1 491 → out 512 |
 
 The post-layout macro fires at the same time or earlier, as in the gate-level runs (signoff).
+The gate-level pre-layout run (`gls_ms`) gives the same times as the pre-layout column.
 
 ## Pitfalls
 
