@@ -299,5 +299,5 @@ C {opin.sym} -860 300 0 0 {name=p42 lab=spike}
 C {ipin.sym} -840 230 0 0 {name=p43 lab=Vamp_bias}
 C {ipin.sym} -840 270 0 0 {name=p44 lab=VT}
 C {lab_wire.sym} -490 40 0 0 {name=p45 sig_type=std_logic lab=VSS}
-T {2026-11-14: x1 is spike_amplifier_sized (input pair 4/2 um, mirror 0.5/8 um; was the minimum-size spike_amplifier).
-See explore/spike_amp/results/spike_amp_sizing.md. The layout (layout/gen_neuron.py, neuron_sized.gds) still has the minimum-size amplifier.} -860 -520 0 0 0.3 0.3 {}
+T {x1 is the sized spike amplifier (input pair 4/2 um, mirror 0.5/8 um), from the sweep in
+explore/spike_amp/results/spike_amp_sizing.md.} -860 -520 0 0 0.3 0.3 {}

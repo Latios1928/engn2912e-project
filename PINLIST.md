@@ -2,7 +2,7 @@
 
 Chip top `snn_top.v` = digital `snn_digital` (LibreLane, `librelane/snn_top`) + analog macro
 `SNN_signed` (`analog/layout_tools/top/SNN_signed/SNN_signed.gds`: `bias` + `analog/snn/snn_analog_signed.sch`).
-Status 2026-11-24. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
+Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
 `SNN_signed_lvs_ref.spice`.
 
 ## 1. Chip pins (external)

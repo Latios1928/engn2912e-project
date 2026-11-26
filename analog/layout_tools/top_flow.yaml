@@ -89,7 +89,7 @@ floorplan:
 # Block edge pins: NOT set here. Flow cells take their pin sides from `pin_sides` in
 # flow_cells.yaml (one source; change a side there and rebuild the cell), and the layers are
 # fixed by two_row. The real pins of every built block are in flow/<cell>/<cell>_pins.json, which
-# is what the top level reads. As built (2026-11-18):
+# is what the top level reads. As built:
 #   W / E signal pins: Metal2 stub ending on the cell edge
 #   N / S signal pins: Metal3 riser ending on the cell edge
 #   VDD / VSS:         Metal1 straps (1 um), left (W) edge; neuron also right (E)

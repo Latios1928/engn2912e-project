@@ -1,7 +1,7 @@
 
 period:      [190e-6, 210e-6]   # s, at the stimulus below
 t_spike:     [9e-6, 11e-6]      # s, v(spike) above 1.65 V, spikes 3+
-t_refr:      [10e-6, 20e-6]     # s (widened from 12-15 us, 2026-11-17)
+t_refr:      [10e-6, 20e-6]     # s
 v_spike_max: [2.97, null]       # V, ≥ 0.9·VDD
 v_reset:     [null, 0.05]       # V
 p_avg:       [null, 1e-6]       # W
