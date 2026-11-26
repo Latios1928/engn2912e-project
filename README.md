@@ -104,26 +104,38 @@ ngspice), `analog/testbenches/` (cell and network characterization).
 designs went), [`ai/`](ai/README.md) (specs given to the AI and the AI records), `slides/`,
 `docs/` (export-control forms), `tools/` (waveform and power plot scripts).
 
-## After a design change
+## Build and verification flow
 
-Rerun the chain from the step that changed, then all checks (each step's output is the next
-one's input):
+Inside the IIC-OSIC-TOOLS container, from the repo root. Each step's output is the next one's
+input, so after a change rerun from the step that changed, then everything below it. The layout
+steps need the gLayout environment ([analog/layout_tools/](analog/layout_tools/README.md)):
 
-1. Analog cell: `analog/layout_tools/flow.py` (cell DRC / LVS / PEX), then `top.py`
-   (`SNN_signed` signoff) and `top_pex.sh`.
-2. `librelane/macros/snn_analog/make_macro.py` (macro GDS with the `ISOSUB` marker, LEF, LVS
-   reference).
-3. Digital RTL or anything above: `librelane/snn_top/run.sh` (publishes `results/`,
-   `gds/snn_top.gds`, `verilog/gl/snn_top.v`, `results/sdf/`). Until fill is added, LibreLane
-   exits non-zero on the 27 `DCF.1a` errors and `run.sh` skips its copy step: copy the run's
-   `final/` files by hand.
-4. `python3 librelane/snn_top/chip_lvs.py`: full-chip LVS down to transistors, plus checks that
-   each link of the chain is current. It names the step to rerun when one fails; `--layout <gds>`
-   checks a candidate GDS before publishing.
-5. Gate-level: `make` in `librelane/snn_top/gls`; `make run PEX=1` in `librelane/snn_top/gls_ms`
-   (about 11 min; `make run` for the schematic macro, about 34 min).
+```sh
+F="env -u PYTHONPATH PDK_ROOT=/foss/pdks .venv-glayout/bin/python analog/layout_tools/flow.py"
+T="env -u PYTHONPATH PDK_ROOT=/foss/pdks .venv-glayout/bin/python analog/layout_tools/top.py"
+```
 
-`signoff/run_checks.sh` reruns steps 4–5 and collects the results.
+| # | Step | Command | Writes |
+|---|---|---|---|
+| 1 | Digital RTL test | `cd digital && iverilog -g2012 -Wall -o sim.vvp tb_snn_digital.v snn_digital.v regs.v pulse_gen.v && vvp sim.vvp` | 12 checks, PASS |
+| 2 | Cell layouts: DRC, LVS, PEX | `for c in DAC DPI DPI_inh neuron bias; do $F run $c; done` | `analog/layout_tools/flow/<cell>/` |
+| 3 | Macro layout: DRC, LVS | `$T run SNN_signed` | `analog/layout_tools/top/SNN_signed/` |
+| 4 | Macro extraction | `bash analog/layout_tools/top_pex.sh SNN_signed` | `top/SNN_signed/pex/SNN_signed_pex.spice` |
+| 5 | Network, analog only | `python3 analog/testbenches/snn/run_snn_signed.py` and `--pex` | scenario reports in `analog/testbenches/snn/results/`; `--pex` also writes `pex/SNN_signed_pex_sim.spice`, which steps 6 and 10 need |
+| 6 | Mixed-signal, RTL + macro | `make -C mixed run` (pre-layout macro) and `make -C mixed run PEX=1` (post-layout) | `mixed/snn_ms_tb[_pex].log` |
+| 7 | Macro for LibreLane | `cd librelane/macros/snn_analog && python3 make_macro.py` | `snn_analog.gds/.lef`, `snn_analog_lvs_ref.spice` |
+| 8 | Chip place and route | `librelane/snn_top/run.sh` | `librelane/snn_top/results/`, `gds/snn_top.gds`, `verilog/gl/snn_top.v` |
+| 9 | Full-chip LVS | `python3 librelane/snn_top/chip_lvs.py` | `librelane/snn_top/chip_lvs/summary.txt` |
+| 10 | Gate-level simulations | `make -C librelane/snn_top/gls`; `make -C librelane/snn_top/gls_ms run` and `run PEX=1` | timing: 4 × 20 checks; mixed-signal: 8 scenarios each |
+| 11 | Collect signoff results | `signoff/run_checks.sh --spice` (reruns 9–10 except the pre-layout `gls_ms`) | `signoff/results/` |
+
+Notes:
+- Step 8: until fill is added, LibreLane exits non-zero on the 27 `DCF.1a` errors and `run.sh`
+  skips its copy step; copy the run's `final/` files by hand (the paths are in `run.sh`).
+- Step 9 also checks that every link of the chain is current, and names the step to rerun if not;
+  `--layout <gds>` checks a candidate GDS before publishing.
+- Cell characterization (`analog/testbenches/`) is verification, not part of the chain: rerun it
+  when a cell's schematic changes.
 
 ## TODO
 
@@ -152,8 +164,7 @@ one's input):
   ~0.3 V (threshold ~1.6 V). On the chip, wait at least 8 ms with the inputs off between test
   cases ([PINLIST.md](PINLIST.md) §5), or add a reset switch on VMEM (analog change, full
   rebuild).
-- [ ] Rerun `mixed/` (RTL) with scenarios 6–8 (already run at gate level); add intermediate-weight
-  scenarios and mixed-signal corners.
+- [ ] Add intermediate-weight scenarios and mixed-signal corners.
 
 ### Docs
 - [ ] Add the timeline and division of responsibilities.
