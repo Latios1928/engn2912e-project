@@ -92,10 +92,3 @@ Between test cases, write `in = 00` (register 14) and wait at least 8 ms: the ne
 membrane reset, and the leak needs about 8 ms to empty any membrane. A mid-run `rst` keeps the
 weights (no reload needed) and also stops the input pulses (it clears `in`), but it does not empty
 the membranes: the 8 ms wait still applies.
-
-## 6. Interface issues resolved (kept for reference)
-
-The four open issues listed here up to 2026-11-18 are resolved: the digital block is timed at 3.3 V
-(no level shifters); `Iref` and `VT` are chip ports (`ANALOG_PINS`) routed to the macro; the committed
-layout is the current RTL (`results/`, run `RUN_2026-11-21_22-31-59`); and the macro sits flipped (FS)
-at the bottom of the die with its pins facing the logic.

@@ -33,7 +33,7 @@ metric). Designer defaults: `layout_policy.yaml`.
   report it — the schematic must be updated to match before trusting simulations.
 - A stage that fails: read its json, explain the cause in one or two lines, propose the fix.
   Do not loop more than twice on the same failure.
-- Do not edit: the schematics (`*.sch`), `analog/neuron/layout/comparator_layout.py` (the designer's own file).
+- Do not edit: the schematics (`*.sch`), `explore/hand_layout/comparator_layout.py` (the designer's own file).
 - Signoff (DRC ~1 min, LVS ~5 s, PEX ~1 s) is cheap; `sim` takes ~8 min — run it only when
   asked or when a parasitic-sensitive change was made.
 
