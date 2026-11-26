@@ -29,8 +29,7 @@ The chip top, `../snn_top.v`, only wires `snn_digital` to `snn_analog`.
   Change `data` only while idle: data that changes while an address is held
   does get written.
 - Synapse k has magnitude `weights[4k+3:4k]` (0–15) and sign `signs[k]`
-  (1 = inhibitory), as the `SNN_signed` macro takes them (map from
-  `../mock/snn_analog.v`):
+  (1 = inhibitory), as the `SNN_signed` macro takes them:
   - k = 0–1: input pulse generator i → input neuron i (inhibitory = off)
   - k = 2–5: input i → hidden j (k = 2 + 2j + i)
   - k = 6–7: hidden j → output (k = 6 + j)
@@ -77,4 +76,4 @@ pulse timing changes (taking effect only from the next period, `width = 0` = no
 pulses), `en` (register 14) sampled only at period boundaries (a late `en` waits
 for the next one; a dropped `en` lets the current pulse finish), and `rst`
 clearing the enables while keeping weights and signs. The whole chip is covered by
-`../mock/tb_snn_top.v` and `../mixed/`.
+`../mixed/`.

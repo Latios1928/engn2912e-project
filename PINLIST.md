@@ -52,7 +52,7 @@ The analog biases are internal: the bias cell inside `SNN_signed` makes them fro
 | `VT` | 486.29 |
 | `spike[4]` … `spike[0]` | 605.63 … 612.03 |
 
-Synapse map (as in `mock/snn_analog.v` and the macro's netlist):
+Synapse map (as in the macro's netlist):
 
 | k | Magnitude | Sign | Synapse | DAC in the layout |
 |---|---|---|---|---|

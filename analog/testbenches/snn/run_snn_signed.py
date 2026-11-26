@@ -9,7 +9,7 @@
     python3 analog/testbenches/snn/run_snn_signed.py --drawn --mc 50 # drawn sizes, no parasitics
 
 Network: analog/snn/snn_analog_signed.sch. Every synapse is DAC (magnitude 0-15 on
-1:2:4:8, sign s[k]: 0 = excitatory, 1 = inhibitory). Words (as mock/snn_analog.v):
+1:2:4:8, sign s[k]: 0 = excitatory, 1 = inhibitory). Words (as in PINLIST.md):
   0, 1        pulse[i] -> input i        (inhibitory = current to VDD, no input)
   2 + 2j + i  input i  -> hidden j       (inhibitory -> DPI_inh xdpi6 / xdpi7)
   6 + j       hidden j -> output         (inhibitory -> DPI_inh xdpi5)

@@ -11,7 +11,6 @@
 //   synthesize it. Its layout is librelane/macros/snn_analog (SNN_signed with
 //   power rings). LibreLane defines ANALOG_PINS, which adds the analog pins
 //   Iref and VT (see snn_top.v).
-// - mock/ compiles a behavioral module of the same name instead.
 /* verilator lint_off UNUSEDSIGNAL */
 /* verilator lint_off UNDRIVEN */
 (* blackbox *)

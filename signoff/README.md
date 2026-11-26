@@ -26,7 +26,6 @@ This page summarises the signoff state of the full chip, as published on this br
 | Antenna, power grid, max slew / cap / fanout | ✅ 0 violations | [metrics](results/metrics.txt) |
 | Static timing, 9 corners (ss / tt / ff × min / nom / max RC), 1 MHz | ✅ no setup or hold violations | [metrics](results/metrics.txt) |
 | Full-chip LVS, down to transistors | ✅ match, VSSA and VSSD kept separate | [chip_lvs](results/chip_lvs.txt) |
-| Gate-level simulation, behavioral analog | ✅ PASS, 6 checks | [gls](results/gls.txt) |
 | Gate-level timing simulation with SDF (zero-delay, ss, tt, ff) | ✅ PASS, 20 checks each | [gls_timing](results/gls_timing.txt) |
 | Mixed-signal gate-level simulation, **post-layout** analog macro, scenarios 1–8 | ✅ PASS, all 8 | [gls_ms_pex](results/gls_ms_pex.txt) |
 | Mixed-signal gate-level simulation, schematic analog macro, scenarios 1–8 | ✅ PASS, all 8 | [gls_ms](results/gls_ms.txt) |
@@ -104,7 +103,6 @@ Every test runs on the **gate-level netlist from the layout** (`verilog/gl/snn_t
 
 | Test | What it checks | Where |
 |---|---|---|
-| Gate-level, behavioral analog | The RTL end-to-end testbench, unchanged, on the netlist, with a behavioral model of the network: register writes, pulse generation, spikes through to `out` | [`gls/`](../librelane/snn_top/gls) `make` |
 | Gate-level timing | At the real 1 MHz clock: no pulses after reset until the input enables (register 14) are written, the pulse timing after reset and after reprogramming (period/width), that every weight and sign written arrives at the macro pins, and that a mid-run `rst` stops the pulses and keeps the weights. Run with zero delay and with the ss/tt/ff SDF back-annotated | [`gls/`](../librelane/snn_top/gls) `make timing`, [`tb_gls_timing.v`](../librelane/snn_top/gls/tb_gls_timing.v) |
 | Mixed-signal gate-level | The netlist in Icarus Verilog and the analog macro in ngspice, coupled with SpiceBind. Eight network scenarios. Run once with the macro's **extracted layout parasitics** and once with its schematic netlist | [`gls_ms/`](../librelane/snn_top/gls_ms) `make run PEX=1` / `make run`, testbench [`mixed/snn_ms_tb.v`](../mixed/snn_ms_tb.v) |
 
