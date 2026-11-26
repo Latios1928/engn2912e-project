@@ -1,11 +1,6 @@
 # snn_top: chip signoff
 
-`snn_top` is a small mixed-signal spiking neural network for GF180MCU (3.3 V devices). It contains:
-
-- an analog 2-2-1 network of leaky integrate-and-fire neurons with 8 signed synapses (4-bit magnitude plus a sign bit);
-- the digital interface that loads the weights and generates the input spike trains.
-
-The digital part (registers and pulse generator) is placed and routed with LibreLane. The analog network sits inside it as one hard macro (`snn_analog`, which wraps `SNN_signed`).
+Architecture of the chip: [main README](../README.md#architecture).
 
 This page summarises the signoff state of the full chip, as published on this branch, and how to re-run every check.
 
@@ -26,48 +21,11 @@ This page summarises the signoff state of the full chip, as published on this br
 | Antenna, power grid, max slew / cap / fanout | ✅ 0 violations | [metrics](results/metrics.txt) |
 | Static timing, 9 corners (ss / tt / ff × min / nom / max RC), 1 MHz | ✅ no setup or hold violations | [metrics](results/metrics.txt) |
 | Full-chip LVS, down to transistors | ✅ match, VSSA and VSSD kept separate | [chip_lvs](results/chip_lvs.txt) |
-| Gate-level simulation, behavioral analog | ✅ PASS, 6 checks | [gls](results/gls.txt) |
 | Gate-level timing simulation with SDF (zero-delay, ss, tt, ff) | ✅ PASS, 20 checks each | [gls_timing](results/gls_timing.txt) |
 | Mixed-signal gate-level simulation, **post-layout** analog macro, scenarios 1–8 | ✅ PASS, all 8 | [gls_ms_pex](results/gls_ms_pex.txt) |
 | Mixed-signal gate-level simulation, schematic analog macro, scenarios 1–8 | ✅ PASS, all 8 | [gls_ms](results/gls_ms.txt) |
 
 Still open before tape-out: fill, the pad ring, and confirming with the organisers that their precheck accepts the `ISOSUB` marker layer (see [Open items](#open-items)).
-
-## The chip
-
-![snn_top floorplan](img/snn_top_floorplan.png)
-
-The analog macro takes up most of the die (0.49 of 0.58 mm²). The digital logic is the 400-cell strip along the top edge:
-
-- `regs`: 14 four-bit registers holding the 8 weight magnitudes, the 8 sign bits, and the 8-bit pulse period and width, plus the 2-bit input enable register (address 14);
-- `pulse_gen`: two input spike trains, by default one 10 µs pulse every 200 µs (5 kHz) from the 1 MHz clock.
-
-The macro is placed flipped (`FS`), so its pin edge faces the digital strip. The 42 control wires (`w[31:0]`, `s[7:0]`, `pulse[1:0]`) enter it at the top left. The five spikes leave at the top right and go straight to the `out[4:0]` pins.
-
-Inside the macro:
-
-- each synapse has a **DAC** that turns its 4-bit weight into a current while the presynaptic spike is high;
-- each neuron has one **DPI filter** that sums and smooths its excitatory DAC currents. Hidden and output neurons also have an inhibitory DPI that removes charge from the membrane;
-- a **neuron** integrates against a leak and fires when its membrane reaches `VT`;
-- a **bias generator** derives every bias from the one off-chip reference current `Iref`.
-
-```mermaid
-flowchart LR
-  p0([pulse 0]) -- "k0" --> in0((input 0))
-  p1([pulse 1]) -- "k1" --> in1((input 1))
-  in0 -- "k2" --> h0((hidden 0))
-  in1 -- "k3" --> h0
-  in0 -- "k4" --> h1((hidden 1))
-  in1 -- "k5" --> h1
-  h0 -- "k6" --> out((output))
-  h1 -- "k7" --> out
-```
-
-Synapse k has magnitude `w[4k+3:4k]` (0–15) and sign `s[k]` (1 = inhibitory). The input neurons have no inhibitory DPI, so a negative weight on k0 or k1 switches that synapse off.
-
-**Separate analog and digital supplies.** `VDDA`/`VSSA` and `VDDD`/`VSSD` are separate nets and pads, so digital switching noise stays off the analog supply. Both grounds sit on the same p-substrate, and Magic's extraction would merge them through it. To prevent that, the macro carries an `ISOSUB` marker (GDS layer 23/5) over its footprint, kept 2 µm from the deep n-well. Only the PDK's LVS decks read this marker, and no mask is made from it.
-
-Plain render without the labels: [`img/snn_top_layout.png`](img/snn_top_layout.png).
 
 ## Physical verification
 
@@ -104,7 +62,6 @@ Every test runs on the **gate-level netlist from the layout** (`verilog/gl/snn_t
 
 | Test | What it checks | Where |
 |---|---|---|
-| Gate-level, behavioral analog | The RTL end-to-end testbench, unchanged, on the netlist, with a behavioral model of the network: register writes, pulse generation, spikes through to `out` | [`gls/`](../librelane/snn_top/gls) `make` |
 | Gate-level timing | At the real 1 MHz clock: no pulses after reset until the input enables (register 14) are written, the pulse timing after reset and after reprogramming (period/width), that every weight and sign written arrives at the macro pins, and that a mid-run `rst` stops the pulses and keeps the weights. Run with zero delay and with the ss/tt/ff SDF back-annotated | [`gls/`](../librelane/snn_top/gls) `make timing`, [`tb_gls_timing.v`](../librelane/snn_top/gls/tb_gls_timing.v) |
 | Mixed-signal gate-level | The netlist in Icarus Verilog and the analog macro in ngspice, coupled with SpiceBind. Eight network scenarios. Run once with the macro's **extracted layout parasitics** and once with its schematic netlist | [`gls_ms/`](../librelane/snn_top/gls_ms) `make run PEX=1` / `make run`, testbench [`mixed/snn_ms_tb.v`](../mixed/snn_ms_tb.v) |
 
@@ -143,11 +100,7 @@ Across process and mismatch, the analog-only testbench passes scenarios 5 and 7 
 
 ## Open items
 
-- **Fill** for the 27 KLayout `DCF.1a` density errors. Until fill is added, LibreLane exits non-zero and `run.sh` skips its copy step.
-- **`ISOSUB` marker (23/5):** confirm with the organisers that their precheck accepts it in the submitted GDS.
-- **Pad ring** integration (21 pads, [`PINLIST.md`](../PINLIST.md)). Confirm the pad limit.
-- **Analog behaviour after layout:** the input neurons fire about 2.7× as often as in the schematic. All 8 scenarios still pass ([diagnosis](../analog/testbenches/snn/results/snn_signed_pex_diagnosis.md)). A candidate fix is to steer the DAC current to VDD while the synapse is off, which would need a rebuild of the macro and the chip.
-- **No membrane reset:** wait at least 8 ms with `in = 00` (register 14) between test cases on the chip ([`PINLIST.md`](../PINLIST.md) §5).
+Tracked in the [main README's TODO list](../README.md#todo): fill, the `ISOSUB` marker, the pad ring, and the faster post-layout input firing.
 
 ## Re-running the checks
 

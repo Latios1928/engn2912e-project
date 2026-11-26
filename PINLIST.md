@@ -2,7 +2,7 @@
 
 Chip top `snn_top.v` = digital `snn_digital` (LibreLane, `librelane/snn_top`) + analog macro
 `SNN_signed` (`analog/layout_tools/top/SNN_signed/SNN_signed.gds`: `bias` + `analog/snn/snn_analog_signed.sch`).
-Status 2026-11-24. Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
+Sources: `snn_top.v`, `digital/regs.v`, `SNN_signed.gds` (pin labels),
 `SNN_signed_lvs_ref.spice`.
 
 ## 1. Chip pins (external)
@@ -52,7 +52,7 @@ The analog biases are internal: the bias cell inside `SNN_signed` makes them fro
 | `VT` | 486.29 |
 | `spike[4]` … `spike[0]` | 605.63 … 612.03 |
 
-Synapse map (as in `mock/snn_analog.v` and the macro's netlist):
+Synapse map (as in the macro's netlist):
 
 | k | Magnitude | Sign | Synapse | DAC in the layout |
 |---|---|---|---|---|
@@ -92,10 +92,3 @@ Between test cases, write `in = 00` (register 14) and wait at least 8 ms: the ne
 membrane reset, and the leak needs about 8 ms to empty any membrane. A mid-run `rst` keeps the
 weights (no reload needed) and also stops the input pulses (it clears `in`), but it does not empty
 the membranes: the 8 ms wait still applies.
-
-## 6. Interface issues resolved (kept for reference)
-
-The four open issues listed here up to 2026-11-18 are resolved: the digital block is timed at 3.3 V
-(no level shifters); `Iref` and `VT` are chip ports (`ANALOG_PINS`) routed to the macro; the committed
-layout is the current RTL (`results/`, run `RUN_2026-11-21_22-31-59`); and the macro sits flipped (FS)
-at the bottom of the die with its pins facing the logic.

@@ -38,7 +38,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 FLOW = HERE / "flow"
 REG = HERE / "flow_cells.yaml"
-PEX_DIR = HERE.parent / "neuron" / "layout" / "PEX"    # shared Magic extraction scripts
+PEX_DIR = HERE                                         # RC_extract.sh: Magic extraction script
 ENV = {"PDK_ROOT": os.environ.get("PDK_ROOT", "/foss/pdks"), "PDK": os.environ.get("PDK", "gf180mcuD")}
 TECH = f"{ENV['PDK_ROOT']}/{ENV['PDK']}/libs.tech/klayout/tech"
 

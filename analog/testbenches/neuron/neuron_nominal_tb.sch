@@ -8,7 +8,7 @@ E {}
 T {neuron_nominal_tb: nominal check of neuron_sized.sch against analog/neuron/sizing_context.txt.
 Constant input current p_iin (9.5 nA) into VMEM, VDD 3.3 V, tt, 27 C, VMEM and spike start at 0 V.
 Measures period, spike width, refractory time, spike peak, reset level and average power on spikes 3-7
-(definitions as in tools/analog_API_infrastructure/configs_sized/sim.yaml) and prints PASS/FAIL per spec.} -1320 -720 0 0 0.3 0.3 {}
+(definitions as in explore/analog_API_infrastructure/configs_sized/sim.yaml) and prints PASS/FAIL per spec.} -1320 -720 0 0 0.3 0.3 {}
 T {Bias voltages (absolute, to VSS)} -760 -560 0 0 0.25 0.25 {}
 T {Input current into VMEM
 (ammeter VMEM reads it)} -560 -180 0 0 0.25 0.25 {}
@@ -104,7 +104,7 @@ value="
 "}
 C {code_shown.sym} -1320 160 0 0 {name=TRAN_SIM only_toplevel=false
 value="
-* Operating point of neuron_sized (analog/Analog_AI_Documentation.md entry 42).
+* Operating point of neuron_sized (ai/Analog_AI_Documentation.md entry 42).
 * Parameters start with p_ because a .param named like a net (VT, Vlk, ...) can
 * rename that net on the instance line (see mixed/README.md, Pitfalls).
 .param p_vdd=3.3 p_iin=9.5n p_tstop=1.8m

@@ -1,7 +1,7 @@
 // Mixed-signal testbench: snn_top runs in Icarus, and its snn_analog is the
 // analog macro SNN_signed in ngspice (snn_ms_tb.spice) through SpiceBind.
 //
-// Scenarios 1-5 match ../mock/tb_snn_top.v; 1-8 match the analog-only runner
+// Scenarios 1-8 match the analog-only runner
 // analog/testbenches/snn/run_snn_signed.py:
 //   1. all weights max, in = 00             -> nothing fires
 //   2. only pulse->input weights, in = 01   -> only input neuron 0

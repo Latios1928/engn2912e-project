@@ -3,7 +3,7 @@
 use_pex(text, cell) takes a testbench netlist written by tbtools.netlist() and
 makes every instance of the schematic subcircuit <cell> use its parasitic
 extraction instead: the instance's subcircuit name becomes <cell>_pex, defined
-in analog/neuron/layout/PEX/<cell>_pex_wrapper.spice (written by extract.sh in
+in explore/hand_layout/PEX/<cell>_pex_wrapper.spice (written by extract.sh in
 that folder). The testbench schematic itself is not changed.
 
 Before swapping, it checks that the extraction is current: the GDS copy in PEX/
@@ -16,10 +16,10 @@ import re
 
 from tbtools import ROOT
 
-LAYOUT = ROOT / "analog" / "neuron" / "layout"
+LAYOUT = ROOT / "explore" / "hand_layout"
 PEX = LAYOUT / "PEX"
 # The current block layouts, built by layout_tools/flow.py (flow/<cell>/<cell>.gds). The extractions
-# in analog/neuron/layout/PEX are of other layouts, so --pex asks for a new extraction.
+# in explore/hand_layout/PEX are of other layouts, so --pex asks for a new extraction.
 LAYOUT_DIRS = sorted((ROOT / "analog" / "layout_tools" / "flow").glob("*/"))
 
 
@@ -30,7 +30,7 @@ def layout_gds(cell: str):
             return d / f"{cell}.gds"
     raise RuntimeError(f"{cell}.gds not found in " + ", ".join(str(d) for d in LAYOUT_DIRS))
 EXTRACT_CMD = ("docker exec gf180-work bash -l "
-               "/foss/designs/engn2912e-project/analog/neuron/layout/PEX/extract.sh {cell}")
+               "/foss/designs/engn2912e-project/explore/hand_layout/PEX/extract.sh {cell}")
 
 
 def check_current(cell: str):

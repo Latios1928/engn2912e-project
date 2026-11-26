@@ -13,7 +13,6 @@
 
 neuron:
   schematic: ../neuron/neuron.sch
-  # connect {x1_net2: VT} removed 2026-11-17: the VN wire in spike_amplifier.sch is fixed
   symbol: ../neuron/neuron.sym
   pin_sides: {default: W, spike: E, VSS: [W, E], VDD: [W, E]}   # row DAC | DPI | neuron; supplies both sides
   testbench: ../neuron/neuron_testbench.sch
@@ -32,7 +31,7 @@ DPI:
   schematic: ../DPI/DPI.sch       # minimum-size DPI: excitatory synapse, and the core of DPI_inh
   symbol: ../DPI/DPI.sym
   pin_sides: {default: W, Isyn: E, Vthr: N, VT: S}
-  cap_place: over_devices        # C2 over the NMOS row (2026-11-18 trial)
+  cap_place: over_devices        # C2 over the NMOS row
 
 DAC:
   schematic: ../DAC/DAC.sch   # signed synapse DAC (1:2:4:8 + sign) of snn_analog_signed

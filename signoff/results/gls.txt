@@ -1,5 +1,0 @@
-# Gate-level simulation, behavioral analog model (mock/tb_snn_top.v)
-# source: librelane/snn_top/gls/gls.log (written 2026-11-24 03:32)
-# collected 2026-11-24 04:15 at commit 0cd223f (with uncommitted changes)
-
-PASS: snn_top, 6 checks

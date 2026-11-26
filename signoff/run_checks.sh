@@ -64,14 +64,9 @@ verdict "full-chip LVS and build chain (chip_lvs.py)" "$F" "Circuits match uniqu
 
 # ---- 2. digital gate-level simulations
 if [ $RUN = 1 ]; then
-  echo "== gls: make, make timing (about 3 min)"
-  make -C librelane/snn_top/gls > /dev/null 2>&1
+  echo "== gls: make timing (about 3 min)"
   make -C librelane/snn_top/gls timing > /dev/null 2>&1
 fi
-F=$OUT/gls.txt
-header "$F" "Gate-level simulation, behavioral analog model (mock/tb_snn_top.v)" librelane/snn_top/gls/gls.log
-grep -E "PASS|FAIL|ERROR" librelane/snn_top/gls/gls.log >> "$F" 2>/dev/null
-verdict "gate-level, behavioral analog (gls: make)" "$F" "PASS: snn_top" "FAIL|ERROR"
 
 F=$OUT/gls_timing.txt
 header "$F" "Gate-level timing simulation at 1 MHz, zero-delay and SDF corners (gls/tb_gls_timing.v)" \

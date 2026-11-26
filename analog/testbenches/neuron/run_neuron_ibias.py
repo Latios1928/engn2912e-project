@@ -54,7 +54,7 @@ RESULTS = HERE / "results"
 RUNS = HERE / "runs"
 
 # name -> (start value, unit, lower bound, upper bound). Start = the current each
-# old bias transistor carried at the passing tt 27 C point (Analog_AI_Documentation.md,
+# old bias transistor carried at the passing tt 27 C point (ai/Analog_AI_Documentation.md,
 # bias study); Vlk = the old voltage.
 BIAS = {
     "p_ina":  (5.05e-6, "uA", 0.2e-6, 50e-6),

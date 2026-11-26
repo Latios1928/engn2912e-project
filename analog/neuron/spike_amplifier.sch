@@ -7,7 +7,7 @@ F {}
 E {}
 T {spike_amplifier_sized: copy of spike_amplifier.sch. Input pair M1/M2 4/2 um, mirror M4/M5 0.5/8 um,
 tail M3 unchanged (0.22/0.28, so the bias cell's Vamp_bias replica still matches).
-From the sweep in analog/testbenches/spike_amp (results/spike_amp_sizing.md): offset sigma 2.6 mV (was 40.5),
+From the sweep in explore/spike_amp (results/spike_amp_sizing.md): offset sigma 2.6 mV (was 40.5),
 systematic offset -1.2 mV (was -56), gain 54 dB (was 25), input noise 60 uVrms 1 Hz-100 kHz (was 336).} -320 250 0 0 0.3 0.3 {}
 N -100 0 -60 0 {lab=VSS}
 N 50 0 120 0 {lab=VSS}

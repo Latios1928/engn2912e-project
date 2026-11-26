@@ -13,7 +13,7 @@
 //   15       IDLE: no write
 //
 // Synapse k has magnitude weights[4k+3:4k] (0-15) and sign signs[k]
-// (1 = inhibitory); see mock/snn_analog.v for the synapse of each k.
+// (1 = inhibitory); see PINLIST.md for the synapse of each k.
 // INPUT EN bit i enables input pulse channel i (pulse_gen samples it at each
 // period boundary).
 // rst (synchronous, active high) resets the pulse timing and INPUT EN only, so
