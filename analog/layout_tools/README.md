@@ -10,6 +10,7 @@ run if the stage before it has not passed, so any cell or the macro can be resum
 | `top/SNN_signed/` | the macro: `SNN_signed.gds`, `SNN_signed_lvs_ref.spice`, `signoff.json`, `pex/` |
 | `flow_cells.yaml`, `layout_policy.yaml` | cell registry (schematic, symbol, testbench) and designer defaults |
 | `top_flow.yaml` | macro settings: blocks, floorplan, routing, macro pins, signoff |
+| `RC_extract.sh` | Magic extraction (devices + R + C) that `flow.py signoff` runs for every cell |
 
 `drc/` and `lvs/` folders and Magic `*_flat.*` intermediates are rewritten by every signoff and
 are not tracked.

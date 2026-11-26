@@ -26,7 +26,7 @@ done
 
 cp "$gds" .
 rm -f "${cell}_pex.spice"
-bash RC_extract.sh "$cell.gds" "$cell" > "RC_extract_$cell.log" 2>&1
+bash "$HERE/../../../analog/layout_tools/RC_extract.sh" "$cell.gds" "$cell" > "RC_extract_$cell.log" 2>&1
 [ -s "${cell}_pex.spice" ] || { echo "error: Magic wrote no ${cell}_pex.spice, see RC_extract_$cell.log"; exit 1; }
 
 # Magic only counts its warnings in the log. Extract again in a scratch folder
