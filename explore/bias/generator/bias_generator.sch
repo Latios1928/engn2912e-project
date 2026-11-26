@@ -51,8 +51,8 @@ C {ipin.sym} -560 -300 0 0 {name=p5 lab=trim[1]}
 C {ipin.sym} -560 -260 0 0 {name=p6 lab=trim[0]}
 C {ipin.sym} -560 -220 0 0 {name=p7 lab=cal}
 C {iopin.sym} -560 -180 0 0 {name=p8 lab=Imon}
-C {analog/bias/generator/bias_master.sym} -200 -100 0 0 {name=xmaster}
-C {analog/bias/generator/trim_steer.sym} 200 0 0 0 {name=xtrim}
+C {explore/bias/generator/bias_master.sym} -200 -100 0 0 {name=xmaster}
+C {explore/bias/generator/trim_steer.sym} 200 0 0 0 {name=xtrim}
 C {bias.sym} 760 0 0 0 {name=xcell}
 C {lab_pin.sym} 40 -110 0 1 {name=l9 sig_type=std_logic lab=Iref}
 C {lab_pin.sym} -320 -110 0 0 {name=l10 sig_type=std_logic lab=VDD}

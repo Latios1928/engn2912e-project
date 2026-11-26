@@ -1,7 +1,7 @@
 """Evaluate bias_gen for one mirror unit size: stack factors -> calibration -> PVT + mismatch.
 
-    python3 analog/bias/sim/sweep_point.py --wn 2 --ln 4 --wp 2 --lp 4 [--mc 50] [--dir DIR]
-    python3 analog/bias/sim/sweep_point.py --params params.json     # from the sizing loop
+    python3 explore/bias/sim/sweep_point.py --wn 2 --ln 4 --wp 2 --lp 4 [--mc 50] [--dir DIR]
+    python3 explore/bias/sim/sweep_point.py --params params.json     # from the sizing loop
 
 Runs entirely in memory (bias_gen.py, bias_gen.spice and the schematic are not changed) in its own
 folder, so several points can run at once. Prints one 'name = value' line per metric (the format

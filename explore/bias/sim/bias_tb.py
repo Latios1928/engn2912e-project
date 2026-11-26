@@ -1,8 +1,8 @@
-"""Testbench for analog/bias/bias_gen.spice. Run inside the IIC-OSIC container from the project root.
+"""Testbench for explore/bias/bias_gen.spice. Run inside the IIC-OSIC container from the project root.
 
-    python3 analog/bias/sim/bias_tb.py --calibrate   # set SQ8 and the mirror corrections at tt, 27 C
-    python3 analog/bias/sim/bias_tb.py               # corners x temperature, supply, trim, start-up
-    python3 analog/bias/sim/bias_tb.py --mc 100      # mismatch at tt, 27 C
+    python3 explore/bias/sim/bias_tb.py --calibrate   # set SQ8 and the mirror corrections at tt, 27 C
+    python3 explore/bias/sim/bias_tb.py               # corners x temperature, supply, trim, start-up
+    python3 explore/bias/sim/bias_tb.py --mc 100      # mismatch at tt, 27 C
 
 Each output pin drives a probe: one copy of the transistor that pin biases on the chip, with its
 drain held at its gate voltage (a unity VCVS, no load). The probe current divided by the study's
@@ -447,12 +447,12 @@ def mc_global(n, jobs=8):
 
 
 def sch_subckt():
-    """Netlist analog/bias/bias_gen.sch with xschem and return it as a .subckt."""
+    """Netlist explore/bias/bias_gen.sch with xschem and return it as a .subckt."""
     out = RUNS / "sch"
     out.mkdir(parents=True, exist_ok=True)
     root = HERE.parents[2]
     subprocess.run(["xschem", "-q", "-x", "-r", "-n", "-s", "-o", str(out), "-N", "bias_gen_sch.spice",
-                    str(root / "analog/bias/bias_gen.sch")], cwd=root, capture_output=True, text=True, timeout=300)
+                    str(root / "explore/bias/bias_gen.sch")], cwd=root, capture_output=True, text=True, timeout=300)
     t = (out / "bias_gen_sch.spice").read_text()
     t = re.sub(r"^\*\*\.subckt", ".subckt", t, flags=re.M)
     t = re.sub(r"^\*\+", "+", t, flags=re.M)

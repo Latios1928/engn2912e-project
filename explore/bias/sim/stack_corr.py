@@ -1,7 +1,7 @@
 """Stack correction: current of S unit devices in series (gate on the master diode, output at the
 typical pin voltage) times S, divided by one unit's current in the diode. Run in the container:
-    python3 analog/bias/sim/stack_corr.py                  # for the unit sizes in bias_gen.py
-    python3 analog/bias/sim/stack_corr.py --w 2 --l 4      # for another unit size
+    python3 explore/bias/sim/stack_corr.py                  # for the unit sizes in bias_gen.py
+    python3 explore/bias/sim/stack_corr.py --w 2 --l 4      # for another unit size
 """
 import argparse
 import re

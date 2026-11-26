@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 T {bias_startup_tb: VDD ramps from 0 to vdd in 'tramp' with every node at 0 V (uic), i.e. starting in the zero-current state of the beta multiplier. RES m_end (Imon / target at the end), t_settle (time from the end of the ramp until Imon is within 1 % of its final value).} -1100 -950 0 0 0.3 0.3 {}
-C {analog/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
+C {explore/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
 C {vsource.sym} -940 200 0 0 {name=V1 value="pwl(0 0 \{tramp\} \{vdd\})" savecurrent=false}
 C {gnd.sym} -940 230 0 0 {name=g1 lab=0}
 N -940 170 -940 -160 {}

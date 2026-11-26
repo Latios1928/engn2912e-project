@@ -1,6 +1,6 @@
 """
 Top-level layout flow: assemble the analog SNN macro from signed-off blocks, stage by stage
-(design: TOPLEVEL_FLOW.md, settings: top_flow.yaml). Same style as flow.py: every stage reads
+(design: ai/TOPLEVEL_FLOW.md, settings: top_flow.yaml). Same style as flow.py: every stage reads
 and writes files under top/<top>/, prints one short status, writes <stage>.json, and refuses to
 run if the stage before it has not passed.
 
@@ -21,7 +21,7 @@ Stages and their files (top/<top>/):
     place     placement.json
     route     <top>.gds, <top>_lvs_ref.spice, route.json (+ sensitive-net report)
     signoff   drc/ lvs/ signoff.json
-Not implemented yet (TOPLEVEL_FLOW.md): sim, PEX, supply styles other than "routed".
+Not implemented yet (ai/TOPLEVEL_FLOW.md): sim, PEX, supply styles other than "routed".
 """
 from __future__ import annotations
 

@@ -7,4 +7,4 @@ source $env(PDK_ROOT)/$env(PDK)/libs.tech/xschem/xschemrc
 # path, so both "analog/neuron/X.sym" and bare "X.sym" references resolve,
 # whichever folder xschem is started from.
 set proj_root [file dirname [file normalize [info script]]]
-append XSCHEM_LIBRARY_PATH :$proj_root:$proj_root/analog/neuron:$proj_root/analog/DAC:$proj_root/analog/DPI:$proj_root/analog/snn
+append XSCHEM_LIBRARY_PATH :$proj_root:$proj_root/analog/neuron:$proj_root/analog/DAC:$proj_root/analog/DPI:$proj_root/analog/snn:$proj_root/explore/unsigned

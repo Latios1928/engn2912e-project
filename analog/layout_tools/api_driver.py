@@ -9,7 +9,7 @@ Drive the layout flow with one Claude API call (tool runner), without this chat'
 Context sent to the model = AGENT_BRIEF.md (system prompt, cached) + `flow.py status` of the
 cell + your request. The model acts only through three tools: run a flow stage, read a flow
 artifact, answer a decide question. It cannot edit files or run arbitrary commands.
-Token use per call is printed at the end (from the API's usage fields), so TOKEN_LOG.md can
+Token use per call is printed at the end (from the API's usage fields), so ai/TOKEN_LOG.md can
 hold measured numbers instead of estimates.
 """
 from __future__ import annotations

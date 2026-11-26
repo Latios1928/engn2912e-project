@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 T {bias_dc_tb: operating point of bias_gen at trim code 'code' (per output: pin voltage, probe current / target g, g/m with m = Imon / its target), supply current, VT; VDD swept 2.97-3.63 V; the Imon pad voltage below which Imon drops by more than 1 %. Results print as RES lines.} -1100 -950 0 0 0.3 0.3 {}
-C {analog/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
+C {explore/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
 C {vsource.sym} -940 200 0 0 {name=V1 value=\{vdd\} savecurrent=false}
 C {gnd.sym} -940 230 0 0 {name=g1 lab=0}
 N -940 170 -940 -160 {}
@@ -37,7 +37,7 @@ C {vsource.sym} -260 200 0 0 {name=Vmon value=\{vmon\} savecurrent=false}
 C {gnd.sym} -260 230 0 0 {name=g8 lab=0}
 N -260 170 -260 20.0 {}
 N -260 20.0 -150 20.0 {}
-C {analog/bias/testbenches/bias_probes.sym} 450 -30.0 0 0 {name=xp}
+C {explore/bias/testbenches/bias_probes.sym} 450 -30.0 0 0 {name=xp}
 N 150 -100.0 300 -100.0 {}
 C {lab_wire.sym} 225.0 -100.0 0 0 {name=w9 sig_type=std_logic lab=Vb}
 N 150 -80.0 300 -80.0 {}

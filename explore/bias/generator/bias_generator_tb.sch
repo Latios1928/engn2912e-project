@@ -5,9 +5,9 @@ V {}
 S {}
 F {}
 E {}
-T {bias_generator testbench: bias_master -> trim_steer (Apple US 10,938,380 Fig. 2) -> bias_cell (analog/bias/generator/README.md)} -900 -520 0 0 0.45 0.45 {}
+T {bias_generator testbench: bias_master -> trim_steer (Apple US 10,938,380 Fig. 2) -> bias_cell (explore/bias/generator/README.md)} -900 -520 0 0 0.45 0.45 {}
 T {Set the trim code with b3..b0 and cal in the PARAMS block (code 9 = 1001 = nominal). Imon is held at 1.65 V, as on the tester.} -900 -480 0 0 0.3 0.3 {}
-C {analog/bias/generator/bias_generator.sym} 0 0 0 0 {name=xgen}
+C {explore/bias/generator/bias_generator.sym} 0 0 0 0 {name=xgen}
 C {vsource.sym} -820 300 0 0 {name=V1 value=\{vdd\} savecurrent=false}
 C {gnd.sym} -820 330 0 0 {name=g1 lab=0}
 N -820 270 -820 -260 {}

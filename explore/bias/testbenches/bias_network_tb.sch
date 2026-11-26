@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 T {bias_network_tb: main's 2-2-1 network snn_analog with every bias from bias_gen. All 8 weights at 'wcode' (default 7 = +7), both inputs pulsing (10 us every 200 us). Optional coupling 'ccoup' from pulse[0] to every bias net (layout stand-in). RES pp_<net> / sh_<net>: peak-to-peak wobble and shift of the average from the DC value after 0.5 ms; spikes in network.txt (counted by run_bias.py).} -1100 -950 0 0 0.3 0.3 {}
-C {analog/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
+C {explore/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
 C {vsource.sym} -940 200 0 0 {name=V1 value=\{vdd\} savecurrent=false}
 C {gnd.sym} -940 230 0 0 {name=g1 lab=0}
 N -940 170 -940 -160 {}

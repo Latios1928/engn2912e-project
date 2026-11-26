@@ -26,7 +26,7 @@ HERE = Path(__file__).resolve().parent          # analog/neuron/layout/PEX
 # a node named gnd as ground, so these connect to GND inside the wrapper.
 # VSUBS is the name Magic gives the substrate when it has no label.
 GLOBAL_PINS = {"gnd": "GND", "vsubs": "GND"}
-ANALOG = HERE.parents[2]                        # analog/
+ANALOG = HERE.parents[2] / "analog"             # analog/
 SYMDIRS = [ANALOG / "neuron", ANALOG / "DAC", ANALOG / "DPI"]
 
 

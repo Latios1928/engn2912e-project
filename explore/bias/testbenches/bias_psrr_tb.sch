@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 T {bias_psrr_tb: 1 V AC on VDD (both supplies). For each bias, the part of the ripple that reaches the gate drive of the device it biases: VDD - V(pin) for pFET-type biases, V(pin) for nFET-type ones and VT. RES psrr_<pin>_<f> in dB at 1 kHz, 100 kHz, 1 MHz (0 dB = the whole ripple).} -1100 -950 0 0 0.3 0.3 {}
-C {analog/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
+C {explore/bias/bias_gen.sym} 0 0 0 0 {name=xbg}
 C {vsource.sym} -940 200 0 0 {name=V1 value="\{vdd\} ac 1" savecurrent=false}
 C {gnd.sym} -940 230 0 0 {name=g1 lab=0}
 N -940 170 -940 -160 {}

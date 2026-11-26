@@ -1,4 +1,4 @@
-# Top-level layout configuration for the analog SNN macro (design: TOPLEVEL_FLOW.md).
+# Top-level layout configuration for the analog SNN macro (design: ai/TOPLEVEL_FLOW.md).
 # Edit by hand. Paths are relative to this file. Every value marked "DECIDE" is one of the
 # open designer decisions; its current value is the default the flow will use.
 #
