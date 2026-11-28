@@ -62,6 +62,9 @@ nets:
   vgp:
     class: signal
     why: ''
+  vk_mid:
+    class: signal
+    why: ''
 groups:
 - id: G1
   type: mirror
@@ -123,10 +126,11 @@ wells:
   - MO_Vthr
   - MO_VT_dpi
   - MO_VT_inh
+  - MR_VK2
   required: false
   decided_by: policy
   reason: policy nmos_in_dnw (substrate-noise isolation)
-  cost_um2: 3934
+  cost_um2: 3966
 - id: W2
   kind: nwell
   body: VDD
@@ -184,6 +188,7 @@ floorplan:
   - MR_VIp
   - MR_Vamp_bias
   - MR_VK
+  - MR_VK2
   order_p:
   - MO_Vb
   - MO_VKdn
@@ -212,21 +217,12 @@ questions:
   answer: cap 2
   answered_by: auto
 caps: []
+resistors: []
 schematic_warnings: []
 schematic_changes:
-- 'MO_Vb: W 1.435 -> 1.44 (glayout 10 nm width grid, L kept)'
 - 'MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)'
 - 'MR_VKdn: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)'
-- 'MO_VIp: W 2.335 -> 2.34 (glayout 10 nm width grid, L kept)'
-- 'MR_Vamp_bias: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'MR_VK: 0.22/40 -> 0.5/90.91 (W/L kept)'
-- 'MR_VNA: 0.22/20 -> 0.5/45.45 (W/L kept)'
-- 'MO_VNA: W 5.755 -> 5.76 (glayout 10 nm width grid, L kept)'
-- 'MO_VKup: W 6.005 -> 6.01 (glayout 10 nm width grid, L kept)'
 - 'MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)'
-- 'MO_Vthr: W 0.905 -> 0.91 (glayout 10 nm width grid, L kept)'
 - 'MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)'
-- 'MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)'
 - 'MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)'
-- 'MO_VT_inh: W 0.625 -> 0.63 (glayout 10 nm width grid, L kept)'
 mode: auto

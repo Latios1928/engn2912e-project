@@ -145,9 +145,10 @@ def st_table(cell):
     nl = _cell(cell)
     data = dict(ok=True, pins=nl.pins,
                 fets=[f.__dict__ for f in nl.fets], caps=[c.__dict__ for c in nl.caps],
-                warnings=nl.warnings(), changes=nl.log)
+                res=[r.__dict__ for r in nl.res], warnings=nl.warnings(), changes=nl.log)
     save(cell, "table", data)
     return (f"table {cell}: {len(nl.nmos)} NMOS, {len(nl.pmos)} PMOS, {len(nl.caps)} caps, "
+            + (f"{len(nl.res)} resistors, " if nl.res else "") +
             f"{len(nl.pins)} pins; {len(data['warnings'])} warnings, {len(nl.log)} changes"
             + "".join(f"\n  WARNING {w}" for w in data["warnings"]))
 
@@ -193,13 +194,26 @@ def st_build(cell):
     apply_answers(nl, dec)              # same netlist changes the decisions assumed
     order_n, order_p = expand_common_centroid(nl, dec, order_n, order_p)
     res = two_row(nl, cell, order_n, order_p, dummy_l, pin_sides=conf(cell).get("pin_sides"),
-                 cap_place=conf(cell).get("cap_place", "beside"))
+                 cap_place=conf(cell).get("cap_place", "beside"), res_seg=conf(cell).get("res_seg"))
     text = write_cell(res, cdir(cell))
     b = json.loads((cdir(cell) / f"{cell}.build.json").read_text())
     ok = b["router_check"] == "clean" and " 0 rule(s) predicted to fail" in b["predrc"]
     save(cell, "build", dict(ok=ok, size_um=b["size_um"], router_check=b["router_check"],
                              predrc=b["predrc"].splitlines()[0], notes=b["notes"]))
     return text
+
+
+def _magic_rc_script(gds: Path, cell: str, bodies: list) -> str:
+    """RC_extract.sh with `paint rnw` over every n-well resistor body (GDS coordinates, um)."""
+    paint = "".join(f"box {x0:g}um {y0:g}um {x1:g}um {y1:g}um\npaint rnw\n" for x0, y0, x1, y1 in bodies)
+    return (f"magic -rcfile {ENV['PDK_ROOT']}/{ENV['PDK']}/libs.tech/magic/{ENV['PDK']}.magicrc "
+            f"-noconsole -dnull << EOF\n"
+            f"gds read {gds}\nload {cell}\nflatten {cell}_flat -dotoplabels\nload {cell}_flat\n"
+            + paint +
+            "select top cell\nextract do local\nextract halo 0.5um\nextract all\n"
+            "ext2sim labels on\next2sim\nextresist tolerance 25\nextresist\n"
+            "ext2spice lvs\next2spice cthresh 0.5f\next2spice rthresh 5\next2spice extresist on\n"
+            f"ext2spice -o {cell}_pex.spice\nquit\nEOF\n")
 
 
 def st_signoff(cell, pex: bool = True):
@@ -223,7 +237,16 @@ def st_signoff(cell, pex: bool = True):
                   "mismatch" if "don't match" in log else "failed to run")
     # PEX + extraction -> predictor feedback
     if pex:
-        r = login(f"bash {PEX_DIR}/RC_extract.sh {gds} {cell} > {d}/pex.log 2>&1", d)
+        bodies = json.loads((d / f"{cell}.build.json").read_text()).get("res_bodies") or []
+        if bodies:
+            # Magic's GDS import has no rule for the n-well resistor (it reads NWELL + RES_MK as
+            # plain n-well and shorts the two ends), so paint its rnw type over each body first;
+            # Magic then extracts an `nwell` device (r_width, r_length). Same steps as RC_extract.sh.
+            script = d / "pex_res.sh"
+            script.write_text(_magic_rc_script(gds, cell, bodies))
+            r = login(f"bash {script} > {d}/pex.log 2>&1", d)
+        else:
+            r = login(f"bash {PEX_DIR}/RC_extract.sh {gds} {cell} > {d}/pex.log 2>&1", d)
         pspice = d / f"{cell}_pex.spice"
         if pspice.exists():
             txt = pspice.read_text()

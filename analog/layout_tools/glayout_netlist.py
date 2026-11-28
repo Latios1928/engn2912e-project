@@ -12,7 +12,8 @@ Schematic netlist -> flat device table for the gLayout floorplanner.
 What it does:
   * netlists the .sch with xschem (or reads a .spice you give it),
   * flattens subcircuit instances (x1.M3 -> device "x1_M3", internal net "x1_net1"),
-  * keeps nfet_03v3 / pfet_03v3 / cap_mim_* devices with W, L, nf, m and c_width/c_length,
+  * keeps nfet_03v3 / pfet_03v3 / cap_mim_* / nwell (n-well resistor) devices with W, L, nf, m,
+    c_width/c_length and r_width/r_length,
   * reads the top-level pin order from the "**.subckt <cell> pins" header line,
   * warns about nets that touch only gates (floating gates) and pins that connect to nothing,
     which is exactly how the VN-wire bug in spike_amplifier.sch shows up.
@@ -29,6 +30,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 FET_MODELS = {"nfet_03v3": "n", "pfet_03v3": "p"}
+RES_MODELS = ("nwell",)      # 3-terminal resistors the floorplanner can draw (glayout_resistor)
 MIN_W = 0.5          # glayout FET minimum width (um)
 GRID = 0.01          # snap scaled L to this (um)
 
@@ -61,11 +63,23 @@ class Cap:
 
 
 @dataclass
+class Res:
+    name: str
+    model: str           # "nwell"
+    a: str
+    b: str
+    bulk: str
+    w: float             # um
+    l: float
+
+
+@dataclass
 class Cell:
     name: str
     pins: list
     fets: list = field(default_factory=list)
     caps: list = field(default_factory=list)
+    res: list = field(default_factory=list)
     log: list = field(default_factory=list)          # legalize / connect actions
 
     # ------------------------------------------------------------------ queries
@@ -88,6 +102,8 @@ class Cell:
                 use[n][t] += 1
         for c in self.caps:
             use[c.top]["c"] += 1; use[c.bot]["c"] += 1
+        for r in self.res:
+            use[r.a]["r"] += 1; use[r.b]["r"] += 1; use[r.bulk]["r"] += 1
         out = []
         for net, k in use.items():
             if net in self.pins:
@@ -105,12 +121,14 @@ class Cell:
 
     def summary(self) -> str:
         lines = [f"{self.name}: {len(self.nmos)} NMOS, {len(self.pmos)} PMOS, "
-                 f"{len(self.caps)} caps; pins: {' '.join(self.pins)}"]
+                 f"{len(self.caps)} caps, {len(self.res)} resistors; pins: {' '.join(self.pins)}"]
         for f in self.fets:
             lines.append(f"  {f.name:8s} {f.kind} W={f.w:g} L={f.l:g} nf={f.nf} m={f.m}"
                          f"  D={f.d} G={f.g} S={f.s} B={f.b}")
         for c in self.caps:
             lines.append(f"  {c.name:8s} C {c.w:g}x{c.l:g} um  {c.top} - {c.bot}")
+        for r in self.res:
+            lines.append(f"  {r.name:8s} R {r.model} {r.w:g}x{r.l:g} um  {r.a} - {r.b} (bulk {r.bulk})")
         lines += [f"  WARNING {w}" for w in self.warnings()]
         lines += [f"  CHANGED {x}" for x in self.log]
         return "\n".join(lines)
@@ -147,6 +165,10 @@ class Cell:
         for c in self.caps:
             if c.top == net: c.top = to; n += 1
             if c.bot == net: c.bot = to; n += 1
+        for r in self.res:
+            for t in ("a", "b", "bulk"):
+                if getattr(r, t) == net:
+                    setattr(r, t, to); n += 1
         self.log.append(f"net {net} -> {to} ({n} terminals)")
         return self
 
@@ -227,6 +249,11 @@ def parse_spice(text: str, top: str | None = None) -> Cell:
                 cell.caps.append(Cap(prefix + name, net(pos[1]), net(pos[2]),
                                      round(_num(kw["c_width"]) * 1e6, 4),
                                      round(_num(kw["c_length"]) * 1e6, 4)))
+            elif model in RES_MODELS:
+                a, b, bulk = (net(x) for x in pos[1:4])
+                cell.res.append(Res(prefix + name, model, a, b, bulk,
+                                    round(_num(kw["r_width"]) * 1e6, 4),
+                                    round(_num(kw["r_length"]) * 1e6, 4)))
             elif model in subckts:
                 sub = subckts[model]
                 actual = [net(x) for x in pos[1:-1]]

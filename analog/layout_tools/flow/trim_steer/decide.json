@@ -1,0 +1,12 @@
+{
+ "stage": "decide",
+ "cell": "trim_steer",
+ "time": "2026-11-21 22:19:36",
+ "ok": true,
+ "blockers": [],
+ "mode": "auto",
+ "open_questions": [],
+ "auto_answers": {
+  "Q-dummy_l": "cap 2"
+ }
+}

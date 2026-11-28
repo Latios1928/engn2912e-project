@@ -1,0 +1,25 @@
+{
+ "stage": "signoff",
+ "cell": "trim_steer",
+ "time": "2026-11-21 22:29:56",
+ "ok": true,
+ "drc": "clean",
+ "lvs": "match",
+ "pex": {
+  "devices": 477,
+  "C": 106,
+  "R": 18931
+ },
+ "calibration": {
+  "cell": "trim_steer",
+  "nets": 7,
+  "mean_factor": 0.901,
+  "spread": [
+   0.69,
+   1.414
+  ],
+  "max_err_before": 0.0,
+  "global_factor": 0.902
+ },
+ "calibration_text": "calibration trim_steer: 7 nets, factor 0.901 (range 0.69..1.414), worst error before +0 %, global 0.902\n       Ibias: pred(raw)   58.6 fF  extracted   55.9 fF  was +0 %\n        Iref: pred(raw)  198.8 fF  extracted  281.1 fF  was +0 %\n         cal: pred(raw)   78.3 fF  extracted   54.0 fF  was +0 %\n     trim[0]: pred(raw)   69.5 fF  extracted   59.1 fF  was +0 %\n     trim[1]: pred(raw)   84.7 fF  extracted   65.1 fF  was +0 %"
+}

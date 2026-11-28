@@ -1,0 +1,25 @@
+{
+ "stage": "signoff",
+ "cell": "bias_master",
+ "time": "2026-11-22 01:13:12",
+ "ok": true,
+ "drc": "clean",
+ "lvs": "match",
+ "pex": {
+  "devices": 1073,
+  "C": 62,
+  "R": 53712
+ },
+ "calibration": {
+  "cell": "bias_master",
+  "nets": 1,
+  "mean_factor": 1.163,
+  "spread": [
+   1.163,
+   1.163
+  ],
+  "max_err_before": 0.0,
+  "global_factor": 0.902
+ },
+ "calibration_text": "calibration bias_master: 1 nets, factor 1.163 (range 1.163..1.163), worst error before +0 %, global 0.902\n        Iref: pred(raw)   77.9 fF  extracted   90.6 fF  was +0 %"
+}

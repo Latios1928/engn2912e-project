@@ -1,0 +1,22 @@
+{
+ "stage": "build",
+ "cell": "bias_master",
+ "time": "2026-11-22 00:46:23",
+ "ok": true,
+ "size_um": [
+  735.98,
+  49.83
+ ],
+ "router_check": "clean",
+ "predrc": "predrc bias_master: 0 rule(s) predicted to fail (23 checked, 0.4 s)",
+ "notes": [
+  "R: 2 x 585.38 um n-well resistor drawn as 12 bars in series (48.79, 48.79, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78 um; joints R_j<k>)",
+  "M3: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M4: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M2: m=64 x nf=1 -> nf=64, m=1 (parallel copies as fingers)",
+  "M1: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",
+  "MS2: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)",
+  "MREF: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "G2 common-centroid, 28 units: C B C A C B C C B C A C B C C B C A C B C C B C A C B C (A=MREF x4, B=M1 x8, C=MS2 x16)"
+ ]
+}

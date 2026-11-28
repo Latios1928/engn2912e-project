@@ -183,3 +183,7 @@ Static characterisation in the container (script and decks outside the repo, `/t
 - Corners (tt/ss/ff/sf/fs × 0/27/85 °C): LSB 14.89–15.14 nA, DNL ≤ 0.015 LSB everywhere. At ff/85 °C and fs/85 °C the off switches leak (code 0: 2.34 nA and 1.26 nA; 2.3 nA is 0.16 LSB), so code 1 reads 17.2 nA at ff/85 °C. This is an offset while en is high, not a linearity error. The binary DAC leaks more than the old one (15 vs 10 switch fingers).
 - **Simulator setting:** multi-finger devices need `set ngbehavior=hsa` (the container's default `~/.spiceinit`). A run-directory `.spiceinit` without it makes nf devices bin by total width, and the ×2/×4/×8 branches then read about 3.7 % low (code 15 = 217.7 nA instead of 225.2 nA).
 
+
+### 2026-11-22: `neuron.sch` at its drawn sizes (schematic edit, no simulation)
+- M1-M5 0.22/0.28 -> 0.5/0.64 um, M6 0.22/5 -> 0.5/11.36 um: the sizes the layout flow already drew (W/L kept). The layout is unchanged (GDS identical after a rebuild).
+- Schematic simulations from before this date used the 0.22 um devices; mismatch Monte Carlo on the old schematic overstated mismatch about 2.3x. Not rerun yet. Details: `../Analog_AI_Documentation.md` entry 106.

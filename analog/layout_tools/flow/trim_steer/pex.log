@@ -1,0 +1,61 @@
+
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology gf180mcuD ...
+10 Magic internal units = 1 Lambda
+Input style import: scaleFactor=10, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
+Scaled tech values by 10 / 1 to match internal grid scaling
+Loading gf180mcuD Device Generator Menu ...
+Using technology "gf180mcuD", version 1.0.575-2-g7b70722
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: library
+Reading "trim_steer".
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 50.000  ( 253.490, -7.025), ( 255.490,  42.975)  100.000   
+lambda:    40.00 x 1000.00  ( 5069.80, -140.50), ( 5109.80,  859.50)  40000.00  
+internal:    400 x 10000   ( 50698, -1405 ), ( 51098,  8595 )  4000000   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 50.000  ( 256.890, -7.025), ( 258.890,  42.975)  100.000   
+lambda:    40.00 x 1000.00  ( 5137.80, -140.50), ( 5177.80,  859.50)  40000.00  
+internal:    400 x 10000   ( 51378, -1405 ), ( 51778,  8595 )  4000000   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 50.000  ( 260.290, -7.025), ( 262.290,  42.975)  100.000   
+lambda:    40.00 x 1000.00  ( 5205.80, -140.50), ( 5245.80,  859.50)  40000.00  
+internal:    400 x 10000   ( 52058, -1405 ), ( 52458,  8595 )  4000000   
+Extracting trim_steer_flat into trim_steer_flat.ext:
+trim_steer_flat: 400 warnings
+Total of 400 warnings.
+exttosim finished.
+Adding  VSS
+Missing substrate connection of device at (50698 -1405) on net VSS
+Missing substrate connection of device at (51378 -1405) on net VSS
+Missing substrate connection of device at (52058 -1405) on net VSS
+Adding  VDD; Tnew = 0.93ns, Told = 0.00ns
+Adding  Iref; Tnew = 6.75ns, Told = 0.00ns
+Adding  trim[0]; Tnew = 0.29ns, Told = 0.00ns
+Adding  trim[1]; Tnew = 0.36ns, Told = 0.00ns
+Adding  trim[2]; Tnew = 0.37ns, Told = 0.00ns
+Adding  trim[3]; Tnew = 0.67ns, Told = 0.00ns
+Adding  cal; Tnew = 0.23ns, Told = 0.00ns
+Adding  Ibias; Tnew = 0.52ns, Told = 0.00ns
+Total Nets: 27
+Nets extracted: 9 (0.333333)
+Nets output: 9 (0.333333)
+exttospice finished.

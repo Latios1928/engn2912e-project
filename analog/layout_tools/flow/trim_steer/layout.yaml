@@ -1,0 +1,347 @@
+# Layout decisions (decide.py). Edit an item and set decided_by: designer to
+# keep it across re-runs; answer questions with `answer:`.
+cell: trim_steer
+pins:
+- VDD
+- VSS
+- Iref
+- Ibias
+- trim[3]
+- trim[2]
+- trim[1]
+- trim[0]
+- cal
+nets:
+  Ibias:
+    class: signal
+    why: ''
+  Iref:
+    class: signal
+    why: ''
+  VDD:
+    class: rail
+    why: supply
+  VSS:
+    class: rail
+    why: ground
+  Vgs:
+    class: signal
+    why: ''
+  aux:
+    class: signal
+    why: ''
+  cal:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  calb:
+    class: switching
+    why: inverter output
+  net1:
+    class: signal
+    why: ''
+  net2:
+    class: signal
+    why: ''
+  net3:
+    class: signal
+    why: ''
+  net4:
+    class: signal
+    why: ''
+  net5:
+    class: signal
+    why: ''
+  tb0:
+    class: switching
+    why: inverter output
+  tb1:
+    class: switching
+    why: inverter output
+  tb2:
+    class: switching
+    why: inverter output
+  tb3:
+    class: switching
+    why: inverter output
+  trim[0]:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  trim[1]:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  trim[2]:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  trim[3]:
+    class: digital_pin
+    why: gate-only pin, short L, drives a series switch
+  vaux:
+    class: signal
+    why: ''
+groups:
+- id: G1
+  type: inverter
+  devices:
+  - MIN0
+  - MIP0
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: N+P share gate trim[0] and drain tb0
+- id: G2
+  type: inverter
+  devices:
+  - MIN1
+  - MIP1
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: N+P share gate trim[1] and drain tb1
+- id: G3
+  type: inverter
+  devices:
+  - MIN2
+  - MIP2
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: N+P share gate trim[2] and drain tb2
+- id: G4
+  type: inverter
+  devices:
+  - MIN3
+  - MIP3
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: N+P share gate trim[3] and drain tb3
+- id: G5
+  type: inverter
+  devices:
+  - MINC
+  - MIPC
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: N+P share gate cal and drain calb
+- id: G6
+  type: diff_pair
+  devices:
+  - SB
+  - S0
+  decided_by: rule
+  tail: null
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 0.5
+  reason: same W/L, common source Ibias, gates VDD/trim[0]
+- id: G7
+  type: diff_pair
+  devices:
+  - S0X
+  - S1X
+  decided_by: rule
+  tail: MAUX
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 0.5
+  reason: same W/L, common source aux, gates tb0/tb1
+- id: G8
+  type: diff_pair
+  devices:
+  - S1
+  - S2
+  decided_by: rule
+  tail: null
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 0.5
+  reason: same W/L, common source Ibias, gates trim[1]/trim[2]
+- id: G9
+  type: diff_pair
+  devices:
+  - S2X
+  - S3X
+  decided_by: rule
+  tail: MCAL
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 0.5
+  reason: same W/L, common source aux, gates tb2/tb3
+- id: G10
+  type: mirror
+  devices:
+  - MB
+  - M1
+  - M2
+  - M3
+  - M4
+  decided_by: rule
+  diode: null
+  placement: adjacent
+  dummy_ring: group
+  dummy_l: 6.0
+  reason: common gate Vgs / source VDD
+- id: G11
+  type: switch
+  devices:
+  - S3
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: gate on digital pin trim[3]
+- id: G12
+  type: switch
+  devices:
+  - MDIS
+  decided_by: rule
+  placement: free
+  dummy_ring: none
+  reason: gate on switching calb
+wells:
+- id: W1
+  kind: nwell
+  body: VDD
+  devices:
+  - M0
+  - MCG
+  - MB
+  - M1
+  - M2
+  - M3
+  - M4
+  - MIP0
+  - MIP1
+  - MIP2
+  - MIP3
+  - MIPC
+  required: false
+  decided_by: rule
+  reason: PMOS n-well on VDD (shared)
+  cost_um2: 0
+- id: W2
+  kind: dnw
+  body: VSS
+  devices:
+  - SB
+  - S0
+  - S0X
+  - S1
+  - S1X
+  - S2
+  - S2X
+  - S3
+  - S3X
+  - MIN0
+  - MIN1
+  - MIN2
+  - MIN3
+  - MAUX
+  - MCAL
+  - MDIS
+  - MCAUX
+  - MINC
+  required: false
+  decided_by: policy
+  reason: policy nmos_in_dnw (substrate-noise isolation)
+  cost_um2: 1730
+rings:
+- around: W1
+  type: n+ tap ring
+  net: VDD
+  required: true
+  rule: DF.13 latch-up (tap within 20 um)
+- around: W2
+  type: p+ body ring
+  net: VSS
+  required: true
+  rule: LVPWELL tie
+- around: W2
+  type: n+ DNW tie ring
+  net: VDD
+  required: true
+  rule: DNW bias
+- around: W2
+  type: p+ substrate ring
+  net: ground
+  required: true
+  rule: DN.3
+- around: W1
+  type: extra p+ guard between groups
+  required: false
+  decided_by: policy
+  enabled: false
+  reason: switching ['MIP0', 'MIP1', 'MIP2', 'MIP3', 'MIPC'] share a well with sensitive ['MB', 'M1', 'M2', 'M3',
+    'M4']
+- around: W2
+  type: extra p+ guard between groups
+  required: false
+  decided_by: policy
+  enabled: false
+  reason: switching ['S3', 'MIN0', 'MIN1', 'MIN2', 'MIN3', 'MDIS', 'MINC'] share a well with sensitive ['SB', 'S0',
+    'S0X', 'S1', 'S1X', 'S2', 'S2X', 'S3X']
+floorplan:
+  style: two_row
+  order_n:
+  - SB
+  - S0
+  - MAUX
+  - S0X
+  - S1X
+  - S1
+  - S2
+  - MCAL
+  - S2X
+  - S3X
+  - MIN0
+  - MIN1
+  - MIN2
+  - MIN3
+  - MINC
+  - S3
+  - MDIS
+  - MCAUX
+  order_p:
+  - MB
+  - M1
+  - M2
+  - M3
+  - M4
+  - MIP0
+  - MIP1
+  - MIP2
+  - MIP3
+  - MIPC
+  - M0
+  - MCG
+  dummy_l: 2.0
+  dnw_islands: 1
+  decided_by: rule
+questions:
+- id: Q-dummy_l
+  about: floorplan.dummy_l
+  question: matched devices have L up to 6 um; dummies at L=6 cost area, capped at 2 um now. Keep cap?
+  options:
+  - cap 2
+  - match 6
+  default: cap 2
+  default_reason: policy decisions.defaults.dummy_l_over_cap
+  answer: cap 2
+  answered_by: auto
+caps: []
+resistors:
+- name: R0
+  model: nwell
+  a: Iref
+  b: Vgs
+  bulk: VSS
+  w: 2.0
+  l: 150.0
+schematic_warnings: []
+schematic_changes:
+- 'M0: m=23 x nf=1 -> nf=23, m=1 (parallel copies as fingers)'
+- 'MB: m=14 x nf=1 -> nf=14, m=1 (parallel copies as fingers)'
+- 'M2: m=2 x nf=1 -> nf=2, m=1 (parallel copies as fingers)'
+- 'M3: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)'
+- 'M4: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)'
+mode: auto

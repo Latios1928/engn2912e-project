@@ -58,8 +58,8 @@ N 270 -90 290 -90 {lab=GND}
 N 450 -90 472.5 -90 {lab=GND}
 N 620 -90 635 -90 {lab=GND}
 C {symbols/nfet_03v3.sym} 80 -90 0 0 {name=M1
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -86,8 +86,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 250 -90 0 0 {name=M3
-L=0.28u
-W=0.44u
+L=0.64u
+W=1.0u
 nf=2
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -114,8 +114,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 430 -90 0 0 {name=M5
-L=0.28u
-W=0.88u
+L=0.64u
+W=2.0u
 nf=4
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -142,8 +142,8 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 600 -90 0 0 {name=M7
-L=0.28u
-W=1.76u
+L=0.64u
+W=4.0u
 nf=8
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -183,8 +183,8 @@ C {lab_wire.sym} 297.5 -150 0 0 {name=p12 sig_type=std_logic lab=en}
 C {lab_wire.sym} 480 -150 0 0 {name=p13 sig_type=std_logic lab=GND}
 C {lab_wire.sym} 200 -120 0 0 {name=p14 sig_type=std_logic lab=X}
 C {symbols/nfet_03v3.sym} 337.5 -150 0 0 {name=Men
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

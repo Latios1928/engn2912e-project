@@ -82,11 +82,17 @@ XM4_m1 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
 XM4_m2 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
 XM4_m3 Vgn Vgp VDD VDD pfet_03v3 L=6.0u W=1.0u nf=1
 XR Vr VSS VSS nwell r_length=585.380u r_width=2.0u
-* start-up: MS1 (4 x 0.22/50 series) pulls X up while Vgn = 0, MS3 pulls Vgp down; MS2 holds X low after
-XMS1_0 X VSS s1 VDD pfet_03v3 L=50u W=0.22u nf=1
-XMS1_1 s1 VSS s2 VDD pfet_03v3 L=50u W=0.22u nf=1
-XMS1_2 s2 VSS s3 VDD pfet_03v3 L=50u W=0.22u nf=1
-XMS1_3 s3 VSS VDD VDD pfet_03v3 L=50u W=0.22u nf=1
+* start-up: MS1 (10 x 0.5/45.45 series, = 0.22/200) pulls X up while Vgn = 0, MS3 pulls Vgp down; MS2 holds X low after
+XMS1_0 X VSS s1 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_1 s1 VSS s2 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_2 s2 VSS s3 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_3 s3 VSS s4 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_4 s4 VSS s5 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_5 s5 VSS s6 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_6 s6 VSS s7 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_7 s7 VSS s8 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_8 s8 VSS s9 VDD pfet_03v3 L=45.45u W=0.5u nf=1
+XMS1_9 s9 VSS VDD VDD pfet_03v3 L=45.45u W=0.5u nf=1
 XMS2_m0 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
 XMS2_m1 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
 XMS2_m2 X Vgn VSS VSS nfet_03v3 L=6.0u W=1.0u nf=1
@@ -189,11 +195,11 @@ XS3X d3 tb3 aux VSS nfet_03v3 L=0.5u W=1.0u nf=1
 XMIP3 tb3 trim[3] VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
 XMIN3 tb3 trim[3] VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1
 * auxiliary node: M_Aux to VSS; analog control: cal = 1 -> MCAL makes M_Aux a diode (aux node at the
-* bias node's voltage); cal = 0 -> MCAL off, the weak MDIS discharges vaux slowly (C_AUX): I_Aux -> 0
+* bias node's voltage); cal = 0 -> MCAL off, MDIS discharges vaux (C_AUX): I_Aux -> 0
 VAUX aux auxm 0
 XMAUX auxm vaux VSS VSS nfet_03v3 L=8.0u W=10.0u nf=1
 XMCAL auxm cal vaux VSS nfet_03v3 L=0.5u W=1.0u nf=1
-XMDIS vaux calb VSS VSS nfet_03v3 L=20.0u W=0.22u nf=1
+XMDIS vaux calb VSS VSS nfet_03v3 L=45.45u W=0.5u nf=1
 XMCAUX VSS vaux VSS VSS nfet_03v3 L=5.0u W=5.0u nf=1
 XMIPC calb cal VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1
 XMINC calb cal VSS VSS nfet_03v3 L=0.28u W=0.5u nf=1

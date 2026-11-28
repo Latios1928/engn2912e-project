@@ -2,43 +2,35 @@
  "cell": "bias",
  "size_um": [
   586.69,
-  115.98
+  117.58
  ],
  "router_check": "clean",
- "predrc": "predrc bias: 0 rule(s) predicted to fail (19 checked, 0.1 s)",
- "summary": "bias: 13 NMOS + 12 PMOS + 0 caps, tracks bot/mid/top 19/35/14, 13 columns, PMOS shift +0.00",
+ "predrc": "predrc bias: 0 rule(s) predicted to fail (19 checked, 0.2 s)",
+ "summary": "bias: 14 NMOS + 12 PMOS + 0 caps, tracks bot/mid/top 19/37/14, 13 columns, PMOS shift +0.00",
  "notes": [
-  "MO_Vb: W 1.435 -> 1.44 (glayout 10 nm width grid, L kept)",
   "MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",
   "MR_VKdn: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
-  "MO_VIp: W 2.335 -> 2.34 (glayout 10 nm width grid, L kept)",
-  "MR_Vamp_bias: 0.22/0.28 -> 0.5/0.64 (W/L kept)",
-  "MR_VK: 0.22/40 -> 0.5/90.91 (W/L kept)",
-  "MR_VNA: 0.22/20 -> 0.5/45.45 (W/L kept)",
-  "MO_VNA: W 5.755 -> 5.76 (glayout 10 nm width grid, L kept)",
-  "MO_VKup: W 6.005 -> 6.01 (glayout 10 nm width grid, L kept)",
   "MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)",
-  "MO_Vthr: W 0.905 -> 0.91 (glayout 10 nm width grid, L kept)",
   "MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)",
-  "MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)",
-  "MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)",
-  "MO_VT_inh: W 0.625 -> 0.63 (glayout 10 nm width grid, L kept)"
+  "MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)"
  ],
+ "res_bodies": [],
  "predicted_fF": {
-  "Iref": 134.2,
+  "Iref": 130.6,
   "VDD": 141.9,
-  "VIp": 130.5,
-  "VK": 138.7,
-  "VKdn": 82.7,
-  "VKup": 75.6,
-  "VNA": 109.4,
-  "VSS": 94.9,
-  "VT_dpi": 228.6,
-  "VT_inh": 117.6,
-  "Vamp_bias": 78.5,
-  "Vb": 87.0,
-  "Vlk": 84.9,
-  "Vthr": 239.7,
-  "vgp": 66.6
+  "VIp": 130.8,
+  "VK": 133.0,
+  "VKdn": 82.9,
+  "VKup": 75.8,
+  "VNA": 109.7,
+  "VSS": 88.1,
+  "VT_dpi": 229.0,
+  "VT_inh": 117.8,
+  "Vamp_bias": 78.7,
+  "Vb": 87.2,
+  "Vlk": 85.2,
+  "Vthr": 210.2,
+  "vgp": 56.2,
+  "vk_mid": 25.6
  }
 }

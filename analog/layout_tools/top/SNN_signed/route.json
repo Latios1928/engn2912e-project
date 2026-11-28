@@ -1,14 +1,14 @@
 {
  "stage": "route",
  "top": "SNN_signed",
- "time": "2026-11-18 23:48:54",
+ "time": "2026-11-22 02:40:47",
  "ok": true,
  "size_um": [
   594.69,
-  806.52
+  808.12
  ],
- "area_mm2": 0.4796,
- "wirelength_um": 37242.0,
+ "area_mm2": 0.4806,
+ "wirelength_um": 37243.6,
  "vias": 1405,
  "failed": [],
  "unreachable": [],
@@ -17,14 +17,14 @@
    "attempt": 0,
    "size_um": [
     594.69,
-    806.52
+    808.12
    ],
    "routed": true,
    "failed": [],
    "unreachable": [],
    "hotspots": {},
    "growth": {},
-   "seconds": 23
+   "seconds": 22
   }
  ],
  "sensitive": [
@@ -171,5 +171,5 @@
   "instances": 22,
   "max_bbox_offset_um": 0.0
  },
- "seconds": 35
+ "seconds": 34
 }

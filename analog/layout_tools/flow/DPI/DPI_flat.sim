@@ -40,11 +40,11 @@ x VDD VDD VDD VDD d=12000,440 l=400 w=100 x=-697 y=6359 pfet_03v3
 x a_n100_5015# Isyn VDD VDD s=96000,1840 d=96000,1840 l=1024 w=800 x=1544 y=5015 pfet_03v3
 x VDD VDD VDD VDD d=5600,212 l=400 w=100 x=1350 y=4047 pfet_03v3
 x Isum Isum Isum Isum d=12000,440 l=400 w=100 x=-527 y=1025 nfet_03v3
-C a_n100_5015# Isyn 2.9
 C a_n100_5015# VDD 3.9
 C VT VDD 2.8
 C Isum VDD 12.1
 C a_n100_5015# Isum 4.3
+C a_n100_5015# Isyn 2.9
 C Vthr0 6.3
 R Vthr 26
 C Isyn0 2.7

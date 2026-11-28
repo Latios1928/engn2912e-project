@@ -347,6 +347,8 @@ def _decide(cell, pol, previous):
                nets={n: {"class": c, "why": r} for n, (c, r) in sorted(nets.items())},
                groups=groups, wells=wells, rings=rings, floorplan=fp, questions=questions,
                caps=[dict(name=c.name, top=c.top, bot=c.bot, w=c.w, l=c.l) for c in cell.caps],
+               resistors=[dict(name=r.name, model=r.model, a=r.a, b=r.b, bulk=r.bulk, w=r.w, l=r.l)
+                          for r in cell.res],
                schematic_warnings=cell.warnings(), schematic_changes=list(cell.log))
     return merge(previous, dec) if previous else dec
 
@@ -387,6 +389,10 @@ def blockers(dec) -> list:
     if len(caps) > 2 or len({c.get("bot") for c in caps}) > 1:
         out.append(f"caps: two_row places <= 2 MIM caps sharing one bottom-plate net "
                    f"(got {[(c.get('name'), c.get('bot')) for c in caps]})")
+    for r in dec.get("resistors") or []:
+        if r["model"] != "nwell" or r["bulk"] not in ("VSS", "GND", "0"):
+            out.append(f"{r['name']}: two_row draws n-well resistors with the bulk on ground "
+                       f"(got {r['model']}, bulk {r['bulk']})")
     for r in dec["rings"]:
         if r.get("enabled"):
             out.append(f"extra guard ring around {r['around']}")
@@ -476,6 +482,9 @@ def review(dec) -> str:
              + (f", {len(opt)} optional suggestion(s): " + "; ".join(r["reason"] for r in opt) if opt else ""))
     fp = dec["floorplan"]
     L.append(f"  floorplan {fp['style']}: N {fp['order_n']}  P {fp['order_p']}  dummy_l {fp['dummy_l']:g}")
+    for r in dec.get("resistors") or []:
+        L.append(f"  resistor {r['name']} {r['model']} {r['w']:g} x {r['l']:g} um  {r['a']} - {r['b']}"
+                 f" (bulk {r['bulk']}): right of the rows")
     for q in dec["questions"]:
         who = q.get("answered_by", "designer") if q.get("answer") else None
         L.append(f"  QUESTION {q['id']}: {q['question']}  options {q['options']}"

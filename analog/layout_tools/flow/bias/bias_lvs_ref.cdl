@@ -1,19 +1,9 @@
 * LVS reference for bias.gds (glayout_floorplan.two_row)
-* note: MO_Vb: W 1.435 -> 1.44 (glayout 10 nm width grid, L kept)
 * note: MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)
 * note: MR_VKdn: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)
-* note: MO_VIp: W 2.335 -> 2.34 (glayout 10 nm width grid, L kept)
-* note: MR_Vamp_bias: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: MR_VK: 0.22/40 -> 0.5/90.91 (W/L kept)
-* note: MR_VNA: 0.22/20 -> 0.5/45.45 (W/L kept)
-* note: MO_VNA: W 5.755 -> 5.76 (glayout 10 nm width grid, L kept)
-* note: MO_VKup: W 6.005 -> 6.01 (glayout 10 nm width grid, L kept)
 * note: MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)
-* note: MO_Vthr: W 0.905 -> 0.91 (glayout 10 nm width grid, L kept)
 * note: MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)
-* note: MO_VT_dpi: W 1.165 -> 1.17 (glayout 10 nm width grid, L kept)
 * note: MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)
-* note: MO_VT_inh: W 0.625 -> 0.63 (glayout 10 nm width grid, L kept)
 .subckt bias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh
 MMNP vgp Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
 MMN0 Iref Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
@@ -37,7 +27,8 @@ MMR_VKdn_f2 VKdn VKdn VSS VSS nfet_03v3 L=1u W=1u nf=1
 MMR_VKdn_f3 VKdn VKdn VSS VSS nfet_03v3 L=1u W=1u nf=1
 MMR_VIp VIp VIp VSS VSS nfet_03v3 L=1u W=1u nf=1
 MMR_Vamp_bias Vamp_bias Vamp_bias VSS VSS nfet_03v3 L=0.64u W=0.5u nf=1
-MMR_VK VK VK VSS VSS nfet_03v3 L=90.91u W=0.5u nf=1
+MMR_VK VK VK vk_mid VSS nfet_03v3 L=45.45u W=0.5u nf=1
+MMR_VK2 vk_mid VK VSS VSS nfet_03v3 L=45.45u W=0.5u nf=1
 MMO_Vb Vb vgp VDD VDD pfet_03v3 L=8u W=1.44u nf=1
 MMO_VKdn VKdn vgp VDD VDD pfet_03v3 L=8u W=12.94u nf=1
 MMP0 vgp vgp VDD VDD pfet_03v3 L=8u W=10u nf=1
@@ -238,6 +229,7 @@ MDNN107 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNN108 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNN109 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNN110 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNN111 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS0 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS1 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS2 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
@@ -349,6 +341,7 @@ MDNS107 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS108 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS109 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS110 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNS111 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNW0 VSS VSS VSS VSS nfet_03v3 L=2u W=10u nf=1
 MDNE0 VSS VSS VSS VSS nfet_03v3 L=2u W=10u nf=1
 MDPN0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1

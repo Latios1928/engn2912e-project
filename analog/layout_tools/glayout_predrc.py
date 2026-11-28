@@ -26,7 +26,7 @@ import klayout.db as kdb
 # GF180 GDS layers (layers_def.drc)
 L = {"comp": (22, 0), "dnwell": (12, 0), "nwell": (21, 0), "lvpwell": (204, 0),
      "poly2": (30, 0), "nplus": (32, 0), "pplus": (31, 0), "fusetop": (75, 0),
-     "cap_mk": (117, 5), "metal1": (34, 0), "metal2": (36, 0), "metal3": (42, 0),
+     "cap_mk": (117, 5), "res_mk": (110, 5), "metal1": (34, 0), "metal2": (36, 0), "metal3": (42, 0),
      "metal4": (46, 0), "metal5": (81, 0), "via4": (41, 0)}
 LABEL_DT = 10                      # metalN label = (metalN layer, 10)
 METAL_WS = {"metal1": (0.23, 0.23), "metal2": (0.28, 0.28), "metal3": (0.28, 0.28),
@@ -112,6 +112,21 @@ def r_wells(g):
     return out
 
 
+def r_nwell_res(g):
+    # nwell.drc: NW.1b width of n-well under RES_MK >= 2; Magic's rnw rules: NW.2b spacing to
+    # other n-well >= 1.4 (the deck's conn_space uses 1.4 for unconnected n-wells), DN.12
+    mk = g["res_mk"]
+    if mk.is_empty():
+        return []
+    nw = g["nwell"]
+    res = nw.interacting(mk)
+    other = nw - res
+    return [("NW.1b n-well resistor width<2", *_ep((nw & mk).width_check(g.um(2.0)), g.dbu)),
+            ("NW.2b n-well resistor to other n-well<1.4", *_ep(res.separation_check(other, g.um(1.4)), g.dbu)),
+            ("NW.2b n-well resistor bars<1.4", *_ep(res.space_check(g.um(1.4)), g.dbu)),
+            ("DN.12 n-well resistor in DNWELL", *_ep(res & g["dnwell"], g.dbu))]
+
+
 def r_labels(g):
     """LVS: every pin label must sit on metal of its own layer (else the net is unnamed)."""
     bad, first = 0, ""
@@ -133,7 +148,7 @@ def r_labels(g):
     return [("LBL label not on its metal", bad, first)]
 
 
-RULES = [r_metal, r_implant, r_mim, r_wells, r_labels]
+RULES = [r_metal, r_implant, r_mim, r_wells, r_nwell_res, r_labels]
 
 
 # ----------------------------------------------------------------------------- entry

@@ -1,10 +1,4 @@
 * LVS reference for neuron.gds (glayout_floorplan.two_row)
-* note: M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: M6: 0.22/5 -> 0.5/11.36 (W/L kept)
 .subckt neuron VSS VDD VMEM VNA Vlk VK VIp VKup VKdn Vamp_bias VT spike
 Mx1_M3 x1_net1 Vamp_bias VSS VSS nfet_03v3 L=0.64u W=0.5u nf=1
 Mx1_M1 x1_net2 VMEM x1_net1 VSS nfet_03v3 L=2u W=4u nf=1

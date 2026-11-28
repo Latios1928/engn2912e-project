@@ -1,13 +1,4 @@
 * LVS reference for DAC.gds (glayout_floorplan.two_row)
-* note: x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: x1_M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: x1_M7: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: x1_Men: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: Mse: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: Msi: 0.22/0.28 -> 0.5/0.64 (W/L kept)
-* note: Mpi: 0.44/0.28 -> 0.5/0.32 (W/L kept)
-* note: Mni: 0.22/0.28 -> 0.5/0.64 (W/L kept)
 * note: G3 common-centroid, 15 units: D C D B D C D A D C D B D C D (A=x1_M2 x1, B=x1_M4 x2, C=x1_M6 x4, D=x1_M8 x8)
 * note: ground net GND drawn as VSS
 .subckt DAC Isum_e w[3] w[2] w[1] w[0] en s Vb Isum_i VDD VSS
@@ -214,20 +205,20 @@ XDPS1 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPS2 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPW0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
 XDPE0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1
-Cpred_Isum_e Isum_e VSS 4.613e-14
-Cpred_Isum_i Isum_i VSS 5.411e-14
+Cpred_Isum_e Isum_e VSS 4.996e-14
+Cpred_Isum_i Isum_i VSS 5.422e-14
 Cpred_Vb Vb VSS 8.589e-14
-Cpred_Y Y VSS 8.716e-15
+Cpred_Y Y VSS 8.706e-15
 Cpred_en en VSS 4.017e-15
-Cpred_s s VSS 3.422e-14
-Cpred_sb sb VSS 4.577e-14
-Cpred_w[0] w[0] VSS 1.484e-14
-Cpred_w[1] w[1] VSS 1.611e-14
-Cpred_w[2] w[2] VSS 1.718e-14
-Cpred_w[3] w[3] VSS 2.178e-14
-Cpred_x1_X x1_X VSS 6.397e-14
-Cpred_x1_net1 x1_net1 VSS 6.929e-14
-Cpred_x1_net2 x1_net2 VSS 4.683e-14
-Cpred_x1_net3 x1_net3 VSS 6.14e-14
-Cpred_x1_net4 x1_net4 VSS 3.258e-14
+Cpred_s s VSS 3.446e-14
+Cpred_sb sb VSS 4.572e-14
+Cpred_w[0] w[0] VSS 1.483e-14
+Cpred_w[1] w[1] VSS 1.522e-14
+Cpred_w[2] w[2] VSS 1.628e-14
+Cpred_w[3] w[3] VSS 2.13e-14
+Cpred_x1_X x1_X VSS 6.39e-14
+Cpred_x1_net1 x1_net1 VSS 6.921e-14
+Cpred_x1_net2 x1_net2 VSS 4.678e-14
+Cpred_x1_net3 x1_net3 VSS 6.133e-14
+Cpred_x1_net4 x1_net4 VSS 3.254e-14
 .ends

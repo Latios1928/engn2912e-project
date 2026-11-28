@@ -1,7 +1,7 @@
 {
  "stage": "signoff",
  "cell": "DPI",
- "time": "2026-11-18 23:23:53",
+ "time": "2026-11-22 02:39:11",
  "ok": true,
  "drc": "clean",
  "lvs": "match",
@@ -18,8 +18,8 @@
    1.358,
    5.044
   ],
-  "max_err_before": 0.346,
-  "global_factor": 0.925
+  "max_err_before": 0.0,
+  "global_factor": 0.914
  },
- "calibration_text": "calibration DPI: 4 nets, factor 2.397 (range 1.358..5.044), worst error before +35 %, global 0.925\n        Isum: pred(raw)   10.0 fF  extracted   50.5 fF  was -35 %\n        Isyn: pred(raw)    8.0 fF  extracted   10.9 fF  was -23 %\n        Vthr: pred(raw)    8.7 fF  extracted   13.9 fF  was -22 %\n          VT: pred(raw)    8.6 fF  extracted   13.7 fF  was -18 %"
+ "calibration_text": "calibration DPI: 4 nets, factor 2.397 (range 1.358..5.044), worst error before +0 %, global 0.914\n        Isum: pred(raw)   10.0 fF  extracted   50.5 fF  was +0 %\n        Isyn: pred(raw)    8.0 fF  extracted   10.9 fF  was +0 %\n          VT: pred(raw)    8.6 fF  extracted   13.7 fF  was +0 %\n        Vthr: pred(raw)    8.7 fF  extracted   13.9 fF  was +0 %"
 }

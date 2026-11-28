@@ -249,12 +249,7 @@ caps:
   bot: VSS
   w: 22.18
   l: 22.18
+resistors: []
 schematic_warnings: []
-schematic_changes:
-- 'M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M2: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M4: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'M6: 0.22/5 -> 0.5/11.36 (W/L kept)'
+schematic_changes: []
 mode: auto

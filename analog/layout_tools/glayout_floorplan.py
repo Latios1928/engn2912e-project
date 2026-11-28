@@ -23,6 +23,9 @@ Floorplan (bottom -> top):
     left             met3 columns for nets in more than one channel; pin labels; edge pins:
                      every pin track ends in a met2 stub at the left cell edge, VSS / VDD in
                      met1 straps from the substrate / n-tap rings (ports in <cell>_pins.json)
+    resistors        n-well resistors (glayout_resistor), right of the rows: each a folded chain
+                     of vertical bars about as tall as the rows; both ends rise on met3 to their
+                     net's mid track (bulk = substrate = VSS)
     right            up to 2 MIM caps sharing one bottom-plate net: met4 spine to that net's
                      mid track, met5 top-plate links
 Layer plan: met2 device buses, met3 vertical, met4 horizontal, met5 cap links.
@@ -31,6 +34,7 @@ parasitic predictor all run before the real tools.
 
 Assumptions (checked, with a clear error otherwise): PMOS body = VDD, m = 1, at most 2 caps,
 all with the same bottom-plate net (any net: VSS, VDD or a signal). NMOS bodies may be any net (islands, see above).
+Resistors: model nwell, bulk on ground, not with cap_place over_devices.
 """
 from __future__ import annotations
 
@@ -48,6 +52,7 @@ from gdsfactory.components import rectangle
 from glayout import gf180 as pdk, straight_route, mimcap
 
 from glayout_helpers import fet
+from glayout_resistor import nwell_res, moved, NW_RES_EXT
 from glayout_rings import dummy_ring, dnw_guard, nwell_guard
 from glayout_router import Router, pack_tracks, PITCH, WIRE
 
@@ -61,6 +66,10 @@ MIM_VIA_CLEAR = 1.0  # via2/via3 centre -> plate edge: LVS ignores vias under Fu
 GROUND = ("VSS", "GND", "0")
 PIN_BLANK_TRACKS = 2 # empty channel tracks between two edge-pin tracks (pin pitch = (1 + this) x 0.8 um).
                      # 1 (1.6 um) still walled VMEM in on glayout.floorplan's router (row_111 test)
+RES_CLEAR = 1.6      # last N/S riser column -> resistor block (RES_MK edge); >= 2.4 um from the rows,
+                     # so n-well >= 2.9 um from the PMOS n-well (NW.2b 1.4) and the DNWs (NW.3 3.1)
+RES_GAP = 1.4        # resistor block to resistor block (NW.2b)
+RES_RISER = 0.45     # A / B riser offset from the head-pad centre (a one-bar resistor has both)
 ISLAND_GAP = 0.4     # guard bbox to guard bbox. 0 put neighbouring substrate-ring metal
                      # < M1.2a 0.23 / M2.2a 0.28 apart where guards of different heights meet;
                      # DNWELLs end up > 5.7 um apart (DN.2a 2.5, DN.2b 5.42)
@@ -76,6 +85,7 @@ class Result:
     summary: str
     notes: list
     edge_ports: list = None      # [{net, layer, x, y, orientation, width}] at the cell's left edge
+    res_bodies: list = None      # [(x0, y0, x1, y1)] n-well resistor bodies, for Magic PEX (paint rnw)
 
 
 def bus(dev, term):
@@ -156,7 +166,8 @@ def _supply_sides(pin_sides, net):
 
 
 def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
-            pin_sides: dict | None = None, cap_place: str = "beside") -> Result:
+            pin_sides: dict | None = None, cap_place: str = "beside",
+            res_seg: float | None = None) -> Result:
     """Build the cell. order_n / order_p: device names left->right (default: netlist order).
     pin_sides: {"default": side, <pin net>: side}, side W/E/N/S (left/right/top/bottom); edge
     pins leave the cell on that side (default: every pin on the left, W). VSS / VDD take a list
@@ -164,14 +175,16 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
     cap_place: "beside" (MIM caps in a column right of the rows) or "over_devices" (one cap in the
     NMOS band between the bot and mid channels, overlapping everything right of the band's last
     via2/via3: guard rings, DNW spacing, the N/S riser strip. The GF180 LVS deck ignores via2 /
-    via3 under a MIM, so the plate cannot cover transistor terminals in this cell style)."""
+    via3 under a MIM, so the plate cannot cover transistor terminals in this cell style).
+    res_seg: longest bar of an n-well resistor (um); default: about the height of the rows."""
     if cap_place not in ("beside", "over_devices"):
         raise ValueError(f"cap_place {cap_place!r}: use beside or over_devices")
     # one ground name: the layout's substrate / guard rings are labelled VSS, so a cell that
     # calls its ground GND or 0 (DAC, DAC_signed) is drawn and LVS-referenced as VSS
     alias = [n for n in GROUND if n != "VSS"]
     hit = set()
-    for obj, terms in [(f, "dgsb") for f in cell.fets] + [(c, ("top", "bot")) for c in cell.caps]:
+    for obj, terms in ([(f, "dgsb") for f in cell.fets] + [(c, ("top", "bot")) for c in cell.caps]
+                       + [(r, ("a", "b", "bulk")) for r in cell.res]):
         for t in terms:
             if getattr(obj, t) in alias:
                 hit.add(getattr(obj, t)); setattr(obj, t, "VSS")
@@ -195,6 +208,14 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
     if cap_place == "over_devices" and len(caps) > 1:
         raise NotImplementedError("cap_place over_devices: one cap only for now "
                                   f"(got {[c.name for c in caps]}); use beside")
+    res = list(cell.res)
+    for r in res:
+        if r.model != "nwell" or r.bulk != "VSS":
+            raise NotImplementedError(f"{r.name}: two_row draws n-well resistors with the bulk on "
+                                      f"ground (got model {r.model}, bulk {r.bulk})")
+    if res and cap_place == "over_devices":
+        raise NotImplementedError("n-well resistors with cap_place over_devices: use beside")
+    res_nets = {n for r in res for n in (r.a, r.b)}
     pins = list(cell.pins)
     for rail in ("VSS", "VDD"):          # the layout always has a substrate (VSS) and VDD wells
         if rail not in pins:
@@ -266,12 +287,20 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
 
     def pin_ch(net):
         """Channel whose track carries the pin out: N prefers top, S bot, E/W the first."""
-        have = _chans0.get(net, set()) | ({"mid"} if net == cap_bot else set())
+        have = _chans0.get(net, set()) | ({"mid"} if net == cap_bot or net in res_nets else set())
         pref_order = {"N": ("top", "mid", "bot"), "S": ("bot", "mid", "top")}.get(
             _pin_side(pin_sides, net), ("bot", "mid", "top"))
         return next((c for c in pref_order if c in have), None)
 
     cap_comps = [mimcap(pdk, (c.w, c.l), with_extension=False) for c in caps]
+    # resistor blocks, drawn at the origin; plan() puts them right of the N/S riser strip.
+    # Bars about as tall as the rows + mid channel (estimated from the mid-channel nets)
+    mid_nets = {n for n, *_r, ch, _t in _risers(nref, nm) + _risers(pref, pm) if ch == "mid"}
+    mid_nets |= {"VSS", "VDD"} | res_nets
+    rows_h = (n_ymax - n_ymin) + ng.ref.ysize + 2 * CH_MARGIN + (len(mid_nets) - 1) * PITCH
+    seg = res_seg or max(10.0, round(rows_h - 2 * NW_RES_EXT, 1))
+    res_blk = [nwell_res(pdk, top, r.name, r.w, r.l, r.a, r.b, r.bulk, max_seg=seg) for r in res]
+    res_pad = [{k: x - b.ref.xmin for k, (x, _y) in b.pads.items()} for b in res_blk]
     # over_devices: the GF180 LVS deck drops every via2 / via3 under a MIM (FuseTop), so the
     # plate may cover the NMOS band only right of its last via2 (NMOS risers, well columns)
     x_nvia = max([x for _n, x, *_r in _risers(nref, nm)] + [x for _n, x, _y, _t in cols])
@@ -286,6 +315,8 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         chans_of.setdefault("VDD", set()).add("mid")
         if cap_bot:
             chans_of.setdefault(cap_bot, set()).add("mid")
+        for net in res_nets:
+            chans_of.setdefault(net, set()).add("mid")
         cross = sorted(n for n, c in chans_of.items() if len(c) > 1)
         left = min(n_xmin, ng.ref.xmin + sh) - 1.0
         col_x = {n: left - i * PITCH for i, n in enumerate(cross)}
@@ -294,6 +325,14 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         rows_x = max(n_xmax, ng.ref.xmax + sh)
         ns_x = {net: rows_x + 0.8 + k * NS_PITCH for k, net in enumerate(ns_pins)}
         x_sp = rows_x + 2.4 + len(ns_pins) * NS_PITCH
+        res_x, res_pin_x = [], []            # block left edges; (net, riser x) per resistor end
+        if res_blk:
+            x = _snap(rows_x + 0.8 + len(ns_pins) * NS_PITCH + RES_CLEAR)
+            for r, b, loc in zip(res, res_blk, res_pad):
+                res_x.append(x)
+                res_pin_x += [(r.a, x + loc["A"] - RES_RISER), (r.b, x + loc["B"] + RES_RISER)]
+                x = _snap(x + b.xsize + RES_GAP)
+            x_sp = x - RES_GAP + 2.4
         if cap_place == "over_devices" and caps:      # plate from x_nvia + VIA_CLEAR, spine after it
             x_sp = max(x_sp, x_nvia + MIM_VIA_CLEAR + cap_comps[0].xsize + CAP_GAP)
         x_er = x_sp - 1.6                                # E pins: met4 -> met2 turn column
@@ -305,6 +344,8 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         extra.setdefault("VDD", []).append(x_ntap)
         if cap_bot:
             extra.setdefault(cap_bot, [])
+        for net, x in res_pin_x:
+            extra.setdefault(net, []).append(x)
 
         def spans(ch):
             sp = {}
@@ -372,7 +413,8 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
                if a[1] != b[1] and abs(a[0] - b[0]) < PITCH and a[2] >= b[2]]
         return len(bad), dict(terms=terms, chans_of=chans_of, cross=cross, col_x=col_x, pin_x=pin_x,
                               ns_x=ns_x, x_er=x_er, pin_ch={n: pin_ch(n) for n in pins},
-                              x_sp=x_sp, cap_x=cap_x, x_ntap=x_ntap, tracks=tracks, bad=bad)
+                              x_sp=x_sp, cap_x=cap_x, x_ntap=x_ntap, tracks=tracks, bad=bad,
+                              res_x=res_x)
 
     best = None
     for k in sorted(range(-80, 81), key=abs):
@@ -440,6 +482,21 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
             R.via(x, y, "met2", "met3", net, tag)
         R.via(x, yt, "met3", "met4", net, tag)
         R.wire("met3", (x, min(ys + [yt])), (x, max(ys + [yt])), net, tag=tag)
+
+    # ------------------------------------------------------------------ resistors
+    # blocks centred on the rows; each end: via stack met1 -> met3 on its head pad, met3 riser
+    # to its net's mid track (A left of the pad centre, B right: a one-bar resistor has both)
+    y_rows = (n_ymin + ng.ref.ymax) / 2
+    for r, b, x0 in zip(res, res_blk, P["res_x"]):
+        moved(b, _snap(x0 - b.ref.xmin), _snap(y_rows - b.ref.center[1]))
+        for bx0, by0, bx1, by1, net, tag in b.met1:
+            R.record("met1", bx0, by0, bx1, by1, net, tag)
+        for end, net, off in (("A", r.a, -RES_RISER), ("B", r.b, RES_RISER)):
+            px, py = b.pads[end]
+            x, yt = px + off, track_y[("mid", net)]
+            R.via(x, py, "met1", "met3", net, f"{r.name}.{end}")
+            R.via(x, yt, "met3", "met4", net, f"{r.name}.{end}")
+            R.wire("met3", (x, py), (x, yt), net, tag=f"{r.name}.{end}")
 
     # ------------------------------------------------------------------ caps
     # beside: right of the spine (0: next to the PMOS row, 1: next to the NMOS row)
@@ -561,14 +618,21 @@ def two_row(cell, name: str, order_n=None, order_p=None, dummy_l: float = 1.0,
         cname = c.name if c.name.upper().startswith("C") else f"C{c.name}"
         ref.append(f"X{cname} {c.top} {c.bot} cap_mim_2f0fF c_width={c.w:g}e-6 "
                    f"c_length={c.l:g}e-6 m=1")
+    for b in res_blk:
+        ref += b.spice
     ref += [line for w in wells for line in w["dn"].spice] + dp.spice
+    notes += [f"{r.name}: {r.w:g} x {r.l:g} um n-well resistor drawn as {len(b.segments)} bars in "
+              f"series ({', '.join(f'{x:g}' for x in b.segments)} um; joints {r.name}_j<k>)"
+              for r, b in zip(res, res_blk) if len(b.segments) > 1]
     islands = [w["body"] for w in wells if w["body"] != "VSS"]
     summary = (f"{name}: {len(nm)} NMOS + {len(pm)} PMOS + {len(caps)} caps, "
+               + (f"{len(res)} n-well resistor(s), " if res else "")
                + (f"{len(islands)} isolated NMOS body island(s) ({', '.join(islands)}), " if islands else "")
                + 
                f"tracks bot/mid/top {tracks['bot'][2]}/{n_mid}/{tracks['top'][2]}, "
                f"{len(cross)} columns, PMOS shift {sh:+.2f}")
-    return Result(name, top, R, ref, pins, summary, notes + cell.log, edge_ports)
+    return Result(name, top, R, ref, pins, summary, notes + cell.log, edge_ports,
+                  [tuple(round(v, 4) for v in bx) for b in res_blk for bx in b.bodies])
 
 
 def write_cell(res: Result, out_dir: str | Path, report_nets=None) -> str:
@@ -599,6 +663,7 @@ def write_cell(res: Result, out_dir: str | Path, report_nets=None) -> str:
     (out / f"{res.name}.build.json").write_text(json.dumps(dict(
         cell=res.name, size_um=[round(flat.xsize, 2), round(flat.ysize, 2)],
         router_check=short or "clean", predrc=pre, summary=res.summary, notes=res.notes,
+        res_bodies=res.res_bodies or [],
         predicted_fF={k: round(v["total"] * 1e15, 1) for k, v in sorted(caps.items())}), indent=1))
     lines = [res.summary, f"cell {flat.xsize:.2f} x {flat.ysize:.2f} um -> {gds.name}",
              "router check: " + (short or "clean"), pre,

@@ -1,0 +1,119 @@
+
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology gf180mcuD ...
+10 Magic internal units = 1 Lambda
+Input style import: scaleFactor=10, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
+Scaled tech values by 10 / 1 to match internal grid scaling
+Loading gf180mcuD Device Generator Menu ...
+Using technology "gf180mcuD", version 1.0.575-2-g7b70722
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: library
+Reading "bias_master".
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.790  ( 679.280, -14.120), ( 681.280,  34.670)  97.580    
+lambda:    40.00 x 975.80  ( 13585.60, -282.40), ( 13625.60,  693.40)  39032.00  
+internal:    400 x 9758    ( 135856, -2824 ), ( 136256,  6934 )  3903200   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.790  ( 682.680, -14.120), ( 684.680,  34.670)  97.580    
+lambda:    40.00 x 975.80  ( 13653.60, -282.40), ( 13693.60,  693.40)  39032.00  
+internal:    400 x 9758    ( 136536, -2824 ), ( 136936,  6934 )  3903200   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 686.080, -14.120), ( 688.080,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 13721.60, -282.40), ( 13761.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 137216, -2824 ), ( 137616,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 689.480, -14.120), ( 691.480,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 13789.60, -282.40), ( 13829.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 137896, -2824 ), ( 138296,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 692.880, -14.120), ( 694.880,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 13857.60, -282.40), ( 13897.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 138576, -2824 ), ( 138976,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 696.280, -14.120), ( 698.280,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 13925.60, -282.40), ( 13965.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 139256, -2824 ), ( 139656,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 699.680, -14.120), ( 701.680,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 13993.60, -282.40), ( 14033.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 139936, -2824 ), ( 140336,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 703.080, -14.120), ( 705.080,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 14061.60, -282.40), ( 14101.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 140616, -2824 ), ( 141016,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 706.480, -14.120), ( 708.480,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 14129.60, -282.40), ( 14169.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 141296, -2824 ), ( 141696,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 709.880, -14.120), ( 711.880,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 14197.60, -282.40), ( 14237.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 141976, -2824 ), ( 142376,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 713.280, -14.120), ( 715.280,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 14265.60, -282.40), ( 14305.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 142656, -2824 ), ( 143056,  6932 )  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 716.680, -14.120), ( 718.680,  34.660)  97.560    
+lambda:    40.00 x 975.60  ( 14333.60, -282.40), ( 14373.60,  693.20)  39024.00  
+internal:    400 x 9756    ( 143336, -2824 ), ( 143736,  6932 )  3902400   
+Extracting bias_master_flat into bias_master_flat.ext:
+bias_master_flat: 950 warnings
+Total of 950 warnings.
+exttosim finished.
+Adding  VSS
+Missing substrate connection of device at (141296 -2824) on net VSS
+Missing substrate connection of device at (139936 -2824) on net VSS
+Missing substrate connection of device at (137896 -2824) on net VSS
+Missing substrate connection of device at (139256 -2824) on net VSS
+Missing substrate connection of device at (136536 -2824) on net VSS
+Missing substrate connection of device at (141976 -2824) on net VSS
+Missing substrate connection of device at (143336 -2824) on net VSS
+Missing substrate connection of device at (142656 -2824) on net VSS
+Missing substrate connection of device at (135856 -2824) on net VSS
+Missing substrate connection of device at (135856 -2824) on net VSS
+Missing substrate connection of device at (138576 -2824) on net VSS
+Missing substrate connection of device at (140616 -2824) on net VSS
+Missing substrate connection of device at (137216 -2824) on net VSS
+Adding  VDD; Tnew = 1.32ns, Told = 0.00ns
+Adding  Iref; Tnew = 0.88ns, Told = 0.00ns
+Total Nets: 39
+Nets extracted: 3 (0.076923)
+Nets output: 3 (0.076923)
+exttospice finished.

@@ -15,6 +15,7 @@ Environment:
     ADVISOR_MODEL       default model slug from openrouter.ai/models
     ADVISOR_LOG         where prompts/replies are logged (loop.py sets this per run)
 """
+
 from __future__ import annotations
 
 import json

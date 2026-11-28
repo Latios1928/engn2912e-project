@@ -22,24 +22,24 @@ Library written using GDS-II Release 6.0
 Library name: library
 Reading "bias".
 Extracting bias_flat into bias_flat.ext:
-bias_flat: 650 warnings
-Total of 650 warnings.
+bias_flat: 652 warnings
+Total of 652 warnings.
 exttosim finished.
 Adding  VSS
-Adding  VDD; Tnew = 1.79ns, Told = 0.00ns
+Adding  VDD; Tnew = 1.81ns, Told = 0.00ns
 Adding  VKdn; Tnew = 0.21ns, Told = 0.00ns
-Adding  Vb; Tnew = 0.30ns, Told = 0.00ns
-Adding  VK; Tnew = 0.50ns, Told = 0.00ns
+Adding  Vb; Tnew = 0.31ns, Told = 0.00ns
+Adding  VK; Tnew = 0.68ns, Told = 0.00ns
 Adding  Vamp_bias; Tnew = 0.19ns, Told = 0.00ns
 Adding  VIp; Tnew = 0.89ns, Told = 0.00ns
-Adding  Vthr; Tnew = 4.30ns, Told = 0.00ns
+Adding  Vthr; Tnew = 3.65ns, Told = 0.00ns
 Adding  VT_dpi; Tnew = 4.78ns, Told = 0.00ns
 Adding  VKup; Tnew = 0.19ns, Told = 0.00ns
 Adding  VNA; Tnew = 0.41ns, Told = 0.00ns
 Adding  Vlk; Tnew = 0.22ns, Told = 0.00ns
 Adding  VT_inh; Tnew = 0.57ns, Told = 0.00ns
 Adding  Iref; Tnew = 0.53ns, Told = 0.00ns
-Total Nets: 15
-Nets extracted: 14 (0.933333)
-Nets output: 14 (0.933333)
+Total Nets: 16
+Nets extracted: 14 (0.875000)
+Nets output: 14 (0.875000)
 exttospice finished.

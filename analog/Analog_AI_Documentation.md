@@ -7,7 +7,7 @@ and how far its output was checked. It is updated as the work continues.
 - **Tool:** Claude Code (desktop app), model Claude Opus 5.5 (Anthropic)
 - **User:** Ray Wu
 - **Started:** 2026-10-25
-- **Last updated:** 2026-11-18
+- **Last updated:** 2026-11-22
 
 ---
 
@@ -1234,6 +1234,171 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
   - DPI τ ≈ 0.4 ms ≈ 2 input periods at 5 kHz, which suits summing coincident spikes; scale τ if the rate changes.
   - Keep input rates well below the ≈ 40 kHz refractory ceiling.
 - **Not done by AI:** no simulation; no file other than this log was changed.
+
+
+**92. Summary of the analog layout flow (cell and top level)** *(Reasoned, from file reads)*
+- **Asked:** a summary of each stage of the analog layout flow at cell and top level, with inputs and outputs.
+- **AI summarized** from `analog/layout_tools/` (`AGENT_BRIEF.md`, `TOPLEVEL_FLOW.md`, `flow_cells.yaml`, the scripts and the `signoff.json` files):
+  - **Cell flow** (`flow.py`): table → decide/answer → build → signoff (DRC, LVS, Magic PEX, predictor calibration) → sim. Status: neuron, DAC, DPI, DPI_inh and bias are DRC clean, LVS match, PEX done (2026-11-18).
+  - **Top flow** (`top.py SNN_signed`): netlist → abstract → plan → place → route → signoff, then C-only PEX (`top_pex.sh`). Status: DRC clean and LVS match (2026-11-18).
+  - **After layout:** post-layout sim via `run_snn_signed.py`, and librelane integration as a hard macro.
+  - Listed the open decisions from `TOPLEVEL_FLOW.md` §5.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**93. How gLayout is used in the layout flow, and why it is more efficient** *(Analysed, from reading the flow code and entries 75 and 77)*
+- **Asked:** how exactly gLayout is used, and why it makes things more efficient.
+- **AI found:**
+  - gLayout supplies the geometry primitives: `nmos`/`pmos` (via `glayout_helpers.fet`), `tapring` and `via_stack` (in `glayout_rings`), `mimcap`, and `straight/L/c_route`.
+  - At the top level, `top.py` uses `glayout.floorplan` (the floorplan-router branch): `Block`/`Variant`/`extract_pins` wrap signed-off cell GDS; `Circuit`/`Instance`/`FloorplanResult`/`Placed` hold the network; `RouterTech` + `route_flow.draw_routes` run the M3/M4 grid router. Placement comes from `top.py`, not gLayout's anneal.
+  - The cell floorplan (`two_row`), cell router (`Router`, net-tagged shapes), `decide`, `predrc` and the parasitic predictor are project code. DRC/LVS (KLayout), PEX (Magic) and sim (ngspice) are separate tools.
+- **AI explained the efficiency gains:**
+  - a `flow_cells.yaml` entry replaces 325–919-line hand generators;
+  - rule-correct primitives and wrappers carry previously solved DRC issues;
+  - routing connects named ports instead of coordinates;
+  - net-tagged shapes allow a short check, `predrc` (~1 s) and a calibrated capacitance predictor before real signoff;
+  - blocks are reused at the top level, with automatic channel widening;
+  - entry 77's token estimates.
+- **AI explained the costs:**
+  - area: DAC 305 × 54 vs. 182 × 33 µm hand; DPI 55 × 54 vs. 28 × 26 µm;
+  - 0.5 µm minimum FET width forces resizing;
+  - only the `two_row` topology;
+  - sensitive-net rules are reported, not enforced;
+  - the predictor needs calibration;
+  - the branch has version pins.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**94. Analogy for the savings from the gLayout flow** *(Reasoned)*
+- **Asked:** an analogy for how the flow saved effort.
+- **AI explained:** hand generators are like building each house from raw lumber, measured on site, with the building code learned through failed inspections. The flow adds:
+  - code-compliant prefab parts (gLayout primitives);
+  - labelled connection points (named ports);
+  - a standard floor-plan template (`two_row` plus a `flow_cells.yaml` entry);
+  - a site foreman (`decide`);
+  - tagged pipes and wires (net-tagged shapes);
+  - a pre-inspector (short check, `predrc`, parasitic predictor) before the official inspector (DRC/LVS/PEX);
+  - lessons written into the manual (fixes kept in code);
+  - houses as units in a development (`top.py`).
+  - Trade-offs: prefab takes more land (flow DAC ≈ 2.7× the hand area), stock sizes (0.5 µm minimum width), one template, and estimates that need tuning (predictor calibration). Break-even after ~3–4 cells (entry 77).
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**95. Is gLayout's port and routing infrastructure the main saving?** *(Reasoned, from code reads and entry 77)*
+- **Asked:** whether gLayout's port and routing infrastructure is a big source of the saving.
+- **AI explained:**
+  - Partly. gLayout's named ports and rule-correct primitives are a large saving and the foundation.
+  - Cell-level routing is mostly project code (`glayout_router.Router`, using gLayout's `via_stack`, port positions and a few `straight_route` calls); its net tags enable the pre-checks.
+  - Entry 77 put the largest saving in the project's `two_row` template and `decide`, plus the compact check results.
+  - gLayout's own grid router (`glayout.floorplan`) matters mainly at the top level.
+  - The split between pieces is estimated, not measured.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**96. One-line summary of gLayout's contribution** *(Reasoned)*
+- **Asked:** whether gLayout's main contribution is providing port references and building blocks that the other tools use.
+- **AI confirmed** for the cell level: rule-correct primitives with named ports, which the project's floorplanner, router and checks build on. Caveat: at the top level, gLayout's `glayout.floorplan` grid router also does the inter-block routing. Suggested a one-sentence report wording.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**97. Who chose the three-column row arrangement of the top-level layout** *(Reasoned, from the log and `top_flow.yaml`)*
+- **Asked:** whether the user decides the 3-column arrangement or gLayout did.
+- **AI found:**
+  - The arrangement (one row per neuron; DACs | channel | DPI (+ DPI_inh) | channel | neuron | channel) was chosen by the AI when it wrote `gen_snn.py` for `SNN.gds`. The request logged there asked only for the top-level layout, not the arrangement.
+  - `top.py` reproduces it as the `neuron_rows` template and computes the placement itself; gLayout's annealing placer is not used, only its router.
+  - The user controls it through `floorplan:` in `top_flow.yaml`: `row_order`, `mirror`, `channels_um`, `bias.position`, gaps and margins; pin sides are set in `flow_cells.yaml`. A different template would need new code in `top.py`.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**98. Division of work between gLayout and project code, cell vs. top level** *(Reasoned)*
+- **Asked:** whether gLayout does floorplanning and routing at the cell level, while at the top level the script floorplans and gLayout lays out.
+- **AI corrected:** at the cell level the project code does both floorplanning (`decide`, `two_row`) and routing (`glayout_router.Router`); gLayout supplies primitives with ports. At the top level `top.py` floorplans and gLayout's `glayout.floorplan` grid router routes. Checks are project code plus KLayout and Magic at both levels.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**99. Is the current router split better than gLayout routing at both levels?** *(Reasoned, from code comments and `TOPLEVEL_FLOW.md`; no comparison exists)*
+- **Asked:** whether the project-router-in-cells / gLayout-router-at-top split is better than gLayout routing at both levels.
+- **AI explained:**
+  - Probably, but unmeasured: no cell has been routed both ways.
+  - Cells: the project's channel router gives net-tagged shapes (which feed the short check, `predrc` and the parasitic predictor), deterministic track packing and shielding control. Comments in `glayout_floorplan.py` record that in the `row_111` trial gLayout's grid router boxed VMEM in and ran Metal4 0.87 µm from the DPI's MIM cap (MIMTM.1 needs 1.2 µm), fixed with cell-side keep-outs.
+  - Top level: the grid router (rip-up/reroute, channel widening) suits irregular inter-row routing. The original plan (`TOPLEVEL_FLOW.md` §3.4) was a channel router there too; the grid router leaves sensitive-net rules reported only.
+  - Suggested test: route the DPI with gLayout's router and compare area, DRC iterations and extracted VMEM/Isum coupling. At the top level, build the planned channel router if the coupling report shows problems.
+- **Not done by AI:** no tool was run; no file other than this log was changed.
+
+
+**100. Purpose of the refractory period** *(Reasoned, from the neuron_sized netlist and entry 42)*
+- **Asked:** the purpose of the refractory period.
+- **AI explained:**
+  - It caps the firing rate at ≈ 1/(10 µs + 15 µs) ≈ 40 kHz, which gives the activation function its saturation and bounds power.
+  - It guarantees a complete reset to ≈ 0 V (the old Schmitt neuron's reset ended early).
+  - It prevents repeated firing near threshold.
+  - It gives each spike a fixed width and dead time, so downstream DAC charge per spike is predictable.
+  - Mechanism: the spike node (C1 ≈ 0.21 pF) holds reset device M6 on (pull-down strength set by M10 / VK) until C1 discharges through M7 (VKdn), so VKdn sets the duration and VKup the spike rise. Measured t_refr 14.7 µs (entry 42), about 7 % of the 200 µs period at 5 kHz.
+- **Not done by AI:** no simulation; no file other than this log was changed.
+
+
+**101. Trim for the DAC: is there a schematic, is it laid out, can the cell flow lay it out?** *(Analysed, from file reads; tool-checked: the flow's netlist parser and xschem netlisting in the container, output to /tmp only)* (2026-11-21)
+- **Asked:** a project status summary; whether a trim schematic exists for the DAC; whether it has been laid out; then to run the cell-level layout flow on it.
+- **AI found:**
+  - No DAC has trim pins. The 4-bit trim is in the bias path: `analog/Bias/generator/trim_steer.sch` (with `bias_master.sch` and `bias_generator.sch`) trims Iref, so it scales every DAC's LSB together through `Vb`. There is also the earlier `analog/Bias/bias_gen.sch` (resistor-segment trim, no `VT_inh`) and the Verilog-A model `mixed/addr4_trim/trim_iref.va`.
+  - None of these is laid out. `SNN_signed`'s `bias` cell is the team's `bias_cell` with an `Iref` pin; the macro has no `trim`, `cal` or `Imon` pins.
+  - The cell flow cannot build them: `glayout_netlist.py` rejects the n-well resistors (`unknown model 'nwell'`: `R0` 2 x 150 um in `trim_steer`, `R` 2 x 585 um in `bias_master`). gLayout's `resistor` primitive is a sky130 series-pFET resistor, not a GF180 n-well one. Everything else is in reach of `two_row`: pFET bodies all on VDD, nFET bodies all on VSS. The 0.22 um wide devices (`MDIS`, `MS1_*`) would be widened to 0.5 um with W/L kept.
+- **Not done by AI:** no cell was registered in `flow_cells.yaml` and no flow stage was run; no project file other than this log was changed. Waiting for the user to choose how to handle the resistors.
+
+**102. N-well resistors in the cell layout flow; trim cells laid out** *(Tool-verified: real KLayout DRC + LVS, Magic PEX, in the container)* (2026-11-21)
+- **Asked:** adjust the cell-level flow so it can lay down n-well resistors, then lay out the trim circuits.
+- **AI found:** the GF180 KLayout LVS deck extracts `nwell` from NWELL + RES_MK (110/5) with the heads as terminals and the substrate as bulk, compares W and L, and does not combine series resistors. Magic's GDS import has no rule for the resistor (`rnw`), so a plain extraction shorts its two ends.
+- **AI did:**
+  - New `analog/layout_tools/glayout_resistor.py`: the PDK pcell's geometry (`draw_well_res`), with long resistors folded into 2 um bars 1.4 um apart and joined by met1. Checked alone first (150 um in 4 bars): DRC clean, LVS match, and Magic with `rnw` painted gave the same 4-device chain.
+  - `glayout_netlist.py` parses `nwell` resistors; `glayout_floorplan.two_row` places them right of the rows and routes both ends on met3 to their mid-channel tracks; `decide.py` lists them (blocker if the bulk is not ground); `glayout_predrc.py` checks NW.1b / NW.2b / DN.12; `flow.py` signoff paints `rnw` over each body before the Magic extraction (`pex_res.sh`), and `res_seg` in `flow_cells.yaml` sets the bar length. `AGENT_BRIEF.md` updated.
+  - Registered `bias_master` and `trim_steer` in `flow_cells.yaml` and ran the flow (decisions auto: Q-dummy_l -> cap 2 um on both).
+- **Result:**
+  - `bias_master`: 739.4 x 48.6 um; R (585.38 um) in 13 bars; DRC clean, LVS match, PEX with 13 `nwell` devices.
+  - `trim_steer`: 416.7 x 100.2 um; R0 (150 um) in 3 bars; DRC clean, LVS match, PEX with 3 `nwell` devices.
+- **Changes the schematics do not have yet (flow log):** 0.22 um devices widened with W/L kept (`MS1_*` 0.5/113.64, `MDIS` 0.5/45.45); each folded resistor has n - 1 extra heads in series; the flow's auto common-centroid groups `M1`, `MS2`, `MREF` in `bias_master` by unit ratio, although `MS2` is the start-up device.
+- **Not done:** no simulation of the extracted cells; `bias_generator` (the two cells plus `bias_cell` and `MMON`) not assembled at the top level; `top_pex.sh` has no `rnw` paint step yet; existing cells were not rebuilt (the changes add nothing when a cell has no resistor).
+
+
+
+**103. Bias generator simulation, schematic and post-layout** *(Simulated: ngspice in the container, about 60 decks; scratch driver in /tmp/bgsim, nothing in the repo)* (2026-11-21/22)
+- **Asked:** simulate the bias generator now that the trim cells are laid out, and make sure its capabilities work.
+- **AI did:** two versions with the same top wiring (meters on Ibias and on the trim cell's supply): `biasgen.spice` (every unit its own device) with the flow's `bias` reference, and the PEX of `bias_master`, `trim_steer` and `bias`. Checks: all 16 codes, `cal` = 1, supply +-10 %, 5 corners x 0/27/85 C with the code chosen from Imon (target 102.7 nA), code 7 -> 8 glitch with `cal` = 1 / 0, `cal` 1 -> 0, start-up ramps of 10 us and 1 ms from 0 V.
+- **Result (schematic / post-layout, tt 27 C):** Ibias at codes 0/9/15 60.8/99.8/125.8 and 60.1/98.7/124.4 nA, monotonic, within 0.002 LSB of the (14 + code)/23 law; Imon/Ibias 1.0270 / 1.0273; `cal` = 1 leaves Ibias unchanged (0.000 / 0.004 %) and adds 26.0 / 25.8 nA to the trim-cell supply; supply 2.97/3.63 V -1.8/+2.6 % in both; trimmed Ibias error over corners and temperature -2.1..+2.1 % / -2.3..+1.9 %. Schematic glitch 7 -> 8: Vgs swings 0.11 mV with `cal` = 1 and 5.39 mV with `cal` = 0 (the patent's effect); Ibias settles to 95.47 nA either way; Vb overshoots 5.8 / 2.6 mV. `cal` 1 -> 0: the 26 nA aux current is gone within about 1 us (half at 1 us), Ibias does not move, Vb moves 1.0 mV (post-layout: Ibias 98.70 -> 98.69 nA). Start-up: inside +-1 % about 12 us after a 10 us ramp and at the end of a 1 ms ramp, in both versions.
+- **Found on the way:**
+  - The PDK FET models stop at L = 50 um; the flow had widened 0.22 um devices to 0.5 um keeping W/L, giving MR_VK 0.5/90.91 and MS1 0.5/113.64. Simulated with the series split of `run_snn_signed.py` (Magic writes the long L in mm: `l=0.11364m`). Led to entry 106.
+  - The `biasgen.spice` include of `bias_cell` points at a checkout that does not exist here (`/foss/designs/engn2912e-ref`); the flow's `bias_lvs_ref.spice` was used instead.
+  - With ngspice's default integration, the `cal` transient showed a 14 nA aux current that never decayed while no device carried it; gear integration with chgtol = 1e-17 removes it. Every transient above uses gear.
+  - `MDIS` is not weak: with full gate drive it empties `vaux` within about 1 us, so the aux current does not fade slowly as the README said (README corrected, entry 106).
+  - Post-layout transients ran out of memory with every node saved; reran with `.save` of the measured signals only.
+- **Post-layout transients (added 2026-11-23):** glitch 7 -> 8: Ibias 90.12 -> 94.41 nA (code 8 law: 94.40), Vgs swing 2.44 mV with `cal` = 1 and 4.95 mV with `cal` = 0 (schematic 0.11 / 5.39 mV: the benefit falls from about 50x to 2x, presumably coupling from the switching trim / tb lines onto the Vgs wiring; not traced), Vb overshoot 4.4 / 17.7 mV. `cal` 1 -> 0: Vb moves up to 14.8 mV (schematic 1.0 mV) before settling, Ibias 98.70 -> 98.69 nA. Start-up as in the schematic (inside +-1 % about 15 us after the 10 us ramp).
+- **Not done:** Monte Carlo of the generator; tracing the post-layout Vgs coupling; the post-layout runs used the `bias_master` layout from before entry 106 (MS1 as 4 x 0.5/113.64, start-up only).
+
+
+**104. Outstanding analog tasks; mismatch margin for scenarios 5 and 7** *(Reasoned, from the README TODO, verification notes and this session's results)* (2026-11-21)
+- **Asked:** what analog tasks remain; then what mismatch margin for the weights in scenarios 5 and 7 means.
+- **AI explained:** listed the README TODO items and the new ones from entries 101-103 (generator not assembled into the macro, `top_pex.sh` without the rnw paint step, the L > 50 um devices, schematics not matching the layout, MS2 in a common-centroid group, MDIS not weak, ngspice integration settings). For 5 and 7: an exact +15 / -15 tie must leave the target neuron silent, which needs inhibition >= excitation on every chip; the DPI_inh gain of 1.2 gives a nominal 20 % tilt, smaller than the chip-to-chip spread of the effective weights; options are weight margin, more gain, or less spread (area or per-synapse trim; the bias trim cannot help because it moves every weight together).
+- **Not done by AI:** no tool was run for this entry.
+
+
+**105. +13 against -15 in the tie tests** *(Simulated: post-layout Monte Carlo, 200 runs)* (2026-11-21/22)
+- **Asked:** run the test with +13 against -15.
+- **AI did:** a scratch copy of `run_snn_signed.py` (in /tmp, repo script unchanged) with only scenario 5 (in1 -> hid1 = +13) and scenario 7 (hid1 -> out = +13) changed; `--pex --mc 100 --only 5,7`, seeds 1-100, on the macro of commit eb84041 (the same extraction as the 93 / 100 baseline).
+- **Result:** chip yield 100 / 100 (s5 100, s7 100) against 93 / 100 (s5 99, s7 94) for +15 / -15; no stray spike on any chip (baseline: up to 3); the spike rates of the neurons that must fire unchanged. `analog/testbenches/snn/results/snn_signed_tb__w13__pex__mc100.md` (its header names `run_snn_signed.py`; it was the scratch copy).
+
+
+**106. Schematics updated to the drawn sizes; bias_master, bias and the macro rebuilt** *(Tool-verified: flow table / DRC / LVS / PEX, top.py signoff; Simulated: macro corners and Monte Carlo)* (2026-11-21/22)
+- **Asked:** update the schematics to match the layout. Decided by the user: all laid-out cells; devices longer than the 50 um model limit as series stacks.
+- **AI did (schematics):**
+  - `Bias/generator/bias_master.sch`: MS1 4 x 0.22/50 -> 10 x 0.5/45.45 in series (same 0.22/200); MS1_4-MS1_9 in a new column joined by labels (s4, X).
+  - `Bias/generator/trim_steer.sch`: MDIS 0.22/20 -> 0.5/45.45; its note no longer says weak.
+  - `neuron/bias.sch`: MR_VK 0.22/40 -> MR_VK + new MR_VK2, 2 x 0.5/45.45 in series (net vk_mid); MR_VNA 0.22/20 -> 0.5/45.45; MR_Vamp_bias 0.22/0.28 -> 0.5/0.64; MO_Vb, MO_VIp, MO_VNA, MO_VKup, MO_Vthr, MO_VT_dpi, MO_VT_inh widths to the 10 nm grid.
+  - `DAC/DAC.sch`: Mse, Msi, Mni 0.22/0.28 -> 0.5/0.64, Mpi 0.44/0.28 -> 0.5/0.32. `DAC/DAC_magnitude.sch`: 0.5 um per finger at L = 0.64 um (M1, Men 0.5; M3 1.0; M5 2.0; M7 4.0).
+  - `neuron/neuron.sch`: M1-M5 0.22/0.28 -> 0.5/0.64, M6 0.22/5 -> 0.5/11.36.
+  - `Bias/generator/biasgen.spice` and `Bias/generator/README.md` to the same sizes.
+- **AI did (layout):** the flow's table stage reports no size change left for DAC, neuron, bias, trim_steer, bias_master. Rebuilt trim_steer, DAC and neuron: GDS identical to before. Rebuilt bias_master: first LVS mismatch, caused by `glayout_resistor.py` splitting the resistor on the 5 nm grid while gdsfactory rounds rectangle sizes to 10 nm (bars of 48.785 drawn 48.78); fixed to the 10 nm grid; then 736.0 x 49.8 um, DRC clean, LVS match. Rebuilt bias (586.7 x 117.6 um) and the SNN_signed macro (594.7 x 808.1 um, was 806.5; 3274 devices, was 3271), DRC clean, LVS match, re-extracted. DPI and DPI_inh re-signed off unchanged (their checkout time stamps were newer than their signoff records, which top.py treats as stale).
+- **Result (macro, post-layout):** 8 / 8 scenarios at tt 27 C and at all 15 corner / temperature points; nominal spike counts within 1 spike and 1 us of the previous macro. Monte Carlo 5 and 7 (+15 / -15), seeds 1-100: 87 / 100 (s5 98, s7 88), failures 1-2 stray spikes. Not the same chips as the 93 / 100 run: adding MR_VK2 changes the netlist order, so a seed draws another chip; together the two runs give about 90 %. The router now reports Vb (224 um, limit 50) and Vthr (52.8 um) beside spike[3] instead of the three Isum nets of the previous macro.
+- **Results overwritten:** `analog/testbenches/snn/results/snn_signed_tb__pex*.md` now describe the rebuilt macro; the previous files (some uncommitted) are kept in /tmp/results_before.
+- **Not done:** schematic-level reruns (the schematic sizes changed, so `snn_signed_tb.md` and the schematic corner files describe the old schematics); +13 / -15 on the rebuilt macro.
 
 ---
 

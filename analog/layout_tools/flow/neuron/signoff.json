@@ -1,7 +1,7 @@
 {
  "stage": "signoff",
  "cell": "neuron",
- "time": "2026-11-18 04:24:43",
+ "time": "2026-11-22 02:37:13",
  "ok": true,
  "drc": "clean",
  "lvs": "match",
@@ -19,7 +19,7 @@
    1.057
   ],
   "max_err_before": 0.0,
-  "global_factor": 0.925
+  "global_factor": 0.914
  },
- "calibration_text": "calibration neuron: 10 nets, factor 0.834 (range 0.664..1.057), worst error before +0 %, global 0.925\n         VIp: pred(raw)    9.0 fF  extracted    6.1 fF  was +0 %\n          VK: pred(raw)    9.3 fF  extracted    6.2 fF  was -0 %\n        VKdn: pred(raw)    8.1 fF  extracted    6.1 fF  was +0 %\n        VKup: pred(raw)   12.8 fF  extracted   11.1 fF  was +0 %\n        VMEM: pred(raw)   36.9 fF  extracted   39.0 fF  was +0 %"
+ "calibration_text": "calibration neuron: 10 nets, factor 0.834 (range 0.664..1.057), worst error before +0 %, global 0.914\n         VIp: pred(raw)    9.0 fF  extracted    6.1 fF  was +0 %\n          VK: pred(raw)    9.3 fF  extracted    6.2 fF  was -0 %\n        VKdn: pred(raw)    8.1 fF  extracted    6.1 fF  was +0 %\n        VKup: pred(raw)   12.8 fF  extracted   11.1 fF  was +0 %\n        VMEM: pred(raw)   36.9 fF  extracted   39.0 fF  was +0 %"
 }

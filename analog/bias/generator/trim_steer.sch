@@ -21,7 +21,7 @@ T {bias node -> bias_cell} 2160 -25 0 0 0.25 0.25 {}
 T {aux node} 2160 70 0 0 0.25 0.25 {}
 T {trim[k] -> tb_k (gates of S_kX)} 360 220 0 0 0.3 0.3 {}
 T {M_Aux + analog control} 2420 -40 0 0 0.35 0.35 {}
-T {MDIS: weak 0.22/20 pull-down} 2760 350 0 0 0.25 0.25 {}
+T {MDIS: 0.5/45.45 pull-down (W/L of the earlier 0.22/20)} 2760 350 0 0 0.25 0.25 {}
 T {MCAUX: gate cap} 2660 470 0 0 0.25 0.25 {}
 N -120 -300 20 -300 {}
 N 20 -300 260 -300 {}
@@ -633,8 +633,8 @@ C {lab_pin.sym} 2720 150 0 1 {name=l74 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 2640 150 0 0 {name=l75 sig_type=std_logic lab=cal}
 C {lab_pin.sym} 2700 210 0 1 {name=l76 sig_type=std_logic lab=vaux}
 C {symbols/nfet_03v3.sym} 2780 300 0 0 {name=MDIS
-L=20.0u
-W=0.22u
+L=45.45u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

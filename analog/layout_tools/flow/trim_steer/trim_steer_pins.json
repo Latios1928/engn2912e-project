@@ -1,0 +1,85 @@
+{
+ "cell": "trim_steer",
+ "units": "um",
+ "origin": "GDS coordinates",
+ "bbox": [
+  -153.94,
+  -33.345,
+  262.79,
+  66.895
+ ],
+ "ports": [
+  {
+   "net": "Iref",
+   "layer": "met2",
+   "x": -153.94,
+   "y": 28.295,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "Ibias",
+   "layer": "met2",
+   "x": -153.94,
+   "y": 19.495,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "trim[3]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -23.495,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "trim[2]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -28.295,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "trim[1]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -30.695,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "trim[0]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -33.095,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "cal",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -25.895,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -153.94,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -153.94,
+   "y": 41.47,
+   "orientation": 180,
+   "width": 1.0
+  }
+ ]
+}

@@ -1,0 +1,238 @@
+{
+ "stage": "table",
+ "cell": "bias_master",
+ "time": "2026-11-22 00:26:53",
+ "ok": true,
+ "pins": [
+  "VDD",
+  "VSS",
+  "Iref"
+ ],
+ "fets": [
+  {
+   "name": "M3",
+   "kind": "p",
+   "w": 1.0,
+   "l": 6.0,
+   "d": "Vgp",
+   "g": "Vgp",
+   "s": "VDD",
+   "b": "VDD",
+   "nf": 4,
+   "m": 1
+  },
+  {
+   "name": "M4",
+   "kind": "p",
+   "w": 1.0,
+   "l": 6.0,
+   "d": "Vgn",
+   "g": "Vgp",
+   "s": "VDD",
+   "b": "VDD",
+   "nf": 4,
+   "m": 1
+  },
+  {
+   "name": "M2",
+   "kind": "n",
+   "w": 1.0,
+   "l": 6.0,
+   "d": "Vgp",
+   "g": "Vgn",
+   "s": "Vr",
+   "b": "VSS",
+   "nf": 64,
+   "m": 1
+  },
+  {
+   "name": "M1",
+   "kind": "n",
+   "w": 1.0,
+   "l": 6.0,
+   "d": "Vgn",
+   "g": "Vgn",
+   "s": "VSS",
+   "b": "VSS",
+   "nf": 8,
+   "m": 1
+  },
+  {
+   "name": "MS1_0",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net1",
+   "g": "VSS",
+   "s": "VDD",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_1",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net2",
+   "g": "VSS",
+   "s": "net1",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_2",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net3",
+   "g": "VSS",
+   "s": "net2",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_3",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "s4",
+   "g": "VSS",
+   "s": "net3",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS2",
+   "kind": "n",
+   "w": 1.0,
+   "l": 6.0,
+   "d": "X",
+   "g": "Vgn",
+   "s": "VSS",
+   "b": "VSS",
+   "nf": 16,
+   "m": 1
+  },
+  {
+   "name": "MS3",
+   "kind": "n",
+   "w": 0.5,
+   "l": 4.0,
+   "d": "Vgp",
+   "g": "X",
+   "s": "VSS",
+   "b": "VSS",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MREF",
+   "kind": "n",
+   "w": 1.0,
+   "l": 6.0,
+   "d": "Iref",
+   "g": "Vgn",
+   "s": "VSS",
+   "b": "VSS",
+   "nf": 4,
+   "m": 1
+  },
+  {
+   "name": "MS1_4",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net4",
+   "g": "VSS",
+   "s": "s4",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_5",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net5",
+   "g": "VSS",
+   "s": "net4",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_6",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net6",
+   "g": "VSS",
+   "s": "net5",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_7",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net7",
+   "g": "VSS",
+   "s": "net6",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_8",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "net8",
+   "g": "VSS",
+   "s": "net7",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MS1_9",
+   "kind": "p",
+   "w": 0.5,
+   "l": 45.45,
+   "d": "X",
+   "g": "VSS",
+   "s": "net8",
+   "b": "VDD",
+   "nf": 1,
+   "m": 1
+  }
+ ],
+ "caps": [],
+ "res": [
+  {
+   "name": "R",
+   "model": "nwell",
+   "a": "VSS",
+   "b": "Vr",
+   "bulk": "VSS",
+   "w": 2.0,
+   "l": 585.38
+  }
+ ],
+ "warnings": [],
+ "changes": [
+  "M3: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M4: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M2: m=64 x nf=1 -> nf=64, m=1 (parallel copies as fingers)",
+  "M1: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",
+  "MS2: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)",
+  "MREF: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)"
+ ]
+}

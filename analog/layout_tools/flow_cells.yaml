@@ -49,3 +49,11 @@ DPI_inh:
   symbol: ../DPI/DPI_inh.sym
   pin_sides: {default: W, Iout: E, Vthr: N, VT: S}   # same edges as DPI (shared Vthr / VT lines)
   cap_place: over_devices        # as DPI: cap over the NMOS band, right of its last via2
+
+bias_master:
+  schematic: ../Bias/generator/bias_master.sch   # beta-multiplier reference: n-well R 2 x 585 um
+  symbol: ../Bias/generator/bias_master.sym
+
+trim_steer:
+  schematic: ../Bias/generator/trim_steer.sch    # steered-mirror trim: n-well R0 2 x 150 um
+  symbol: ../Bias/generator/trim_steer.sym

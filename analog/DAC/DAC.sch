@@ -33,8 +33,8 @@ C {lab_pin.sym} -150 -20 0 0 {name=l2 sig_type=std_logic lab=w[3:0]}
 C {lab_pin.sym} -150 0 0 0 {name=l3 sig_type=std_logic lab=en}
 C {lab_pin.sym} 50 -40 0 1 {name=l4 sig_type=std_logic lab=Vb}
 C {symbols/nfet_03v3.sym} 290 -220 0 0 {name=Mse
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -51,8 +51,8 @@ C {lab_pin.sym} 240 -220 0 0 {name=l6 sig_type=std_logic lab=sb}
 C {lab_pin.sym} 310 -170 0 1 {name=l7 sig_type=std_logic lab=Y}
 C {lab_pin.sym} 350 -220 0 1 {name=l8 sig_type=std_logic lab=GND}
 C {symbols/nfet_03v3.sym} -130 -230 0 0 {name=Msi
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -69,8 +69,8 @@ C {lab_pin.sym} -180 -230 0 0 {name=l10 sig_type=std_logic lab=s}
 C {lab_pin.sym} -110 -180 0 1 {name=l11 sig_type=std_logic lab=Y}
 C {lab_pin.sym} -70 -230 0 1 {name=l12 sig_type=std_logic lab=GND}
 C {symbols/pfet_03v3.sym} 80 -290 0 0 {name=Mpi
-L=0.28u
-W=0.44u
+L=0.32u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -87,8 +87,8 @@ C {lab_pin.sym} 30 -290 0 0 {name=l14 sig_type=std_logic lab=s}
 C {lab_pin.sym} 100 -340 0 1 {name=l15 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 140 -290 0 1 {name=l16 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 80 -150 0 0 {name=Mni
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

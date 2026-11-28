@@ -1,0 +1,123 @@
+{
+ "cell": "bias_master",
+ "size_um": [
+  735.98,
+  49.83
+ ],
+ "router_check": "clean",
+ "predrc": "predrc bias_master: 0 rule(s) predicted to fail (23 checked, 0.4 s)",
+ "summary": "bias_master: 30 NMOS + 12 PMOS + 0 caps, 1 n-well resistor(s), tracks bot/mid/top 2/7/2, 4 columns, PMOS shift -0.35",
+ "notes": [
+  "R: 2 x 585.38 um n-well resistor drawn as 12 bars in series (48.79, 48.79, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78, 48.78 um; joints R_j<k>)",
+  "M3: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M4: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M2: m=64 x nf=1 -> nf=64, m=1 (parallel copies as fingers)",
+  "M1: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",
+  "MS2: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)",
+  "MREF: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "G2 common-centroid, 28 units: C B C A C B C C B C A C B C C B C A C B C C B C A C B C (A=MREF x4, B=M1 x8, C=MS2 x16)"
+ ],
+ "res_bodies": [
+  [
+   679.28,
+   -14.12,
+   681.28,
+   34.67
+  ],
+  [
+   682.68,
+   -14.12,
+   684.68,
+   34.67
+  ],
+  [
+   686.08,
+   -14.12,
+   688.08,
+   34.66
+  ],
+  [
+   689.48,
+   -14.12,
+   691.48,
+   34.66
+  ],
+  [
+   692.88,
+   -14.12,
+   694.88,
+   34.66
+  ],
+  [
+   696.28,
+   -14.12,
+   698.28,
+   34.66
+  ],
+  [
+   699.68,
+   -14.12,
+   701.68,
+   34.66
+  ],
+  [
+   703.08,
+   -14.12,
+   705.08,
+   34.66
+  ],
+  [
+   706.48,
+   -14.12,
+   708.48,
+   34.66
+  ],
+  [
+   709.88,
+   -14.12,
+   711.88,
+   34.66
+  ],
+  [
+   713.28,
+   -14.12,
+   715.28,
+   34.66
+  ],
+  [
+   716.68,
+   -14.12,
+   718.68,
+   34.66
+  ]
+ ],
+ "predicted_fF": {
+  "Iref": 90.6,
+  "R_j0": 1.1,
+  "R_j1": 1.1,
+  "R_j10": 1.1,
+  "R_j2": 1.1,
+  "R_j3": 1.1,
+  "R_j4": 1.1,
+  "R_j5": 1.1,
+  "R_j6": 1.1,
+  "R_j7": 1.1,
+  "R_j8": 1.1,
+  "R_j9": 1.1,
+  "VDD": 145.8,
+  "VSS": 380.2,
+  "Vgn": 244.8,
+  "Vgp": 316.7,
+  "Vr": 221.0,
+  "X": 347.0,
+  "net1": 21.7,
+  "net2": 21.3,
+  "net3": 20.2,
+  "net4": 20.2,
+  "net5": 20.2,
+  "net6": 20.2,
+  "net7": 20.2,
+  "net8": 20.2,
+  "s4": 20.2
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "stage": "build",
+ "cell": "trim_steer",
+ "time": "2026-11-21 22:21:39",
+ "ok": true,
+ "size_um": [
+  416.73,
+  100.24
+ ],
+ "router_check": "clean",
+ "predrc": "predrc trim_steer: 0 rule(s) predicted to fail (23 checked, 0.3 s)",
+ "notes": [
+  "R0: 2 x 150 um n-well resistor drawn as 3 bars in series (50, 50, 50 um; joints R0_j<k>)",
+  "M0: m=23 x nf=1 -> nf=23, m=1 (parallel copies as fingers)",
+  "MB: m=14 x nf=1 -> nf=14, m=1 (parallel copies as fingers)",
+  "M2: m=2 x nf=1 -> nf=2, m=1 (parallel copies as fingers)",
+  "M3: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M4: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)"
+ ]
+}

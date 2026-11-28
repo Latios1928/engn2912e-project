@@ -227,15 +227,7 @@ questions:
   answer: cap 2
   answered_by: auto
 caps: []
+resistors: []
 schematic_warnings: []
-schematic_changes:
-- 'x1_M1: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_M3: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_M5: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_M7: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'x1_Men: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'Mse: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'Msi: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
-- 'Mpi: 0.44/0.28 -> 0.5/0.32 (W/L kept)'
-- 'Mni: 0.22/0.28 -> 0.5/0.64 (W/L kept)'
+schematic_changes: []
 mode: auto

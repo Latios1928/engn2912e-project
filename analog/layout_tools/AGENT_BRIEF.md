@@ -42,7 +42,12 @@ NMOS row: ground-body NMOS in one shared DNW (body = VSS; GND / 0 are drawn as V
 NMOS body net (e.g. body tied to source) gets its own DNW island in the same row, with its own
 dummy ring and p+ body ring on that net. PMOS row in one n-well (body = VDD). Dummy ring per
 group, <= 2 MIM caps sharing one bottom-plate net (any net). `m` copies are drawn as fingers;
-widths snap up to the 10 nm grid (logged). `decide` reports anything else as a blocker
+widths snap up to the 10 nm grid (logged). N-well resistors (`nwell`, bulk on ground; `glayout_resistor.py`, PDK pcell geometry): a folded
+chain of vertical 2 um bars right of the rows, about as tall as the rows (`res_seg` in
+flow_cells.yaml overrides the bar length); LVS sees one device per bar, so the reference lists
+the chain (joints `<R>_j<k>`). Magic cannot read the resistor from GDS, so signoff paints `rnw`
+over each body before extraction (`flow/<cell>/pex_res.sh`). Not with `cap_place: over_devices`.
+`decide` reports anything else as a blocker
 (single-row cells, PMOS bodies other than VDD, common-centroid, extra guard rings).
 The parasitic predictor models metal only: island nets (p-well/DNW junction) come out low
 before calibration (DPI Isum: 7.8 fF predicted, 31 fF extracted).

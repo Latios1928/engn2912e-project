@@ -1,0 +1,37 @@
+{
+ "cell": "bias_master",
+ "units": "um",
+ "origin": "GDS coordinates",
+ "bbox": [
+  -16.8,
+  -14.64,
+  719.18,
+  35.19
+ ],
+ "ports": [
+  {
+   "net": "Iref",
+   "layer": "met2",
+   "x": -16.8,
+   "y": 14.995,
+   "orientation": 180,
+   "width": 0.5
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -16.8,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -16.8,
+   "y": 26.07,
+   "orientation": 180,
+   "width": 1.0
+  }
+ ]
+}

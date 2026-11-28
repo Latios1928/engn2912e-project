@@ -23,20 +23,20 @@
   "VT_inh"
  ],
  "bbox": [
-  -147.245,
+  -146.0,
   -32.545,
-  439.445,
-  83.435
+  440.69,
+  85.035
  ],
  "size": [
   586.69,
-  115.98
+  117.58
  ],
  "ports": [
   {
    "net": "Iref",
    "layer": "met3",
-   "x": 412.795,
+   "x": 414.04,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -45,7 +45,7 @@
   {
    "net": "Vb",
    "layer": "met3",
-   "x": 415.195,
+   "x": 416.44,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -54,7 +54,7 @@
   {
    "net": "Vlk",
    "layer": "met3",
-   "x": 417.595,
+   "x": 418.84,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -63,7 +63,7 @@
   {
    "net": "VKdn",
    "layer": "met3",
-   "x": 419.995,
+   "x": 421.24,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -72,7 +72,7 @@
   {
    "net": "VIp",
    "layer": "met3",
-   "x": 422.395,
+   "x": 423.64,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -81,7 +81,7 @@
   {
    "net": "Vamp_bias",
    "layer": "met3",
-   "x": 424.795,
+   "x": 426.04,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -90,7 +90,7 @@
   {
    "net": "VK",
    "layer": "met3",
-   "x": 427.195,
+   "x": 428.44,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -99,7 +99,7 @@
   {
    "net": "VNA",
    "layer": "met3",
-   "x": 429.595,
+   "x": 430.84,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -108,7 +108,7 @@
   {
    "net": "VKup",
    "layer": "met3",
-   "x": 431.995,
+   "x": 433.24,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -117,7 +117,7 @@
   {
    "net": "Vthr",
    "layer": "met3",
-   "x": 434.395,
+   "x": 435.64,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -126,7 +126,7 @@
   {
    "net": "VT_dpi",
    "layer": "met3",
-   "x": 436.795,
+   "x": 438.04,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -135,7 +135,7 @@
   {
    "net": "VT_inh",
    "layer": "met3",
-   "x": 439.195,
+   "x": 440.44,
    "y": -32.545,
    "orientation": 270,
    "width": 0.5,
@@ -144,7 +144,7 @@
   {
    "net": "VSS",
    "layer": "met1",
-   "x": -147.245,
+   "x": -146.0,
    "y": 0.0,
    "orientation": 180,
    "width": 1.0,
@@ -153,12 +153,12 @@
   {
    "net": "VDD",
    "layer": "met1",
-   "x": -147.245,
-   "y": 58.94,
+   "x": -146.0,
+   "y": 60.54,
    "orientation": 180,
    "width": 1.0,
    "side": "W"
   }
  ],
- "signoff": "DRC clean, LVS match (2026-11-18 23:48:09)"
+ "signoff": "DRC clean, LVS match (2026-11-22 02:34:15)"
 }

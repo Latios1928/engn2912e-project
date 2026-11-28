@@ -61,7 +61,7 @@ C {lab_pin.sym} 420 -30 0 1 {name=l11 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 420 0 0 1 {name=l12 sig_type=std_logic lab=VDD}
 C {symbols/pfet_03v3.sym} 600 0 0 0 {name=MO_Vb
 L=8u
-W=1.435u
+W=1.44u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -169,7 +169,7 @@ C {lab_pin.sym} 1020 430 0 1 {name=l35 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 1020 400 0 1 {name=l36 sig_type=std_logic lab=VSS}
 C {symbols/pfet_03v3.sym} 1200 0 0 0 {name=MO_VIp
 L=8u
-W=2.335u
+W=2.34u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -222,8 +222,8 @@ C {lab_pin.sym} 1380 0 0 0 {name=l46 sig_type=std_logic lab=vgp}
 C {lab_pin.sym} 1420 -30 0 1 {name=l47 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1420 0 0 1 {name=l48 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 1400 400 0 0 {name=MR_Vamp_bias
-L=0.28u
-W=0.22u
+L=0.64u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -258,8 +258,8 @@ C {lab_pin.sym} 1580 0 0 0 {name=l54 sig_type=std_logic lab=vgp}
 C {lab_pin.sym} 1620 -30 0 1 {name=l55 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1620 0 0 1 {name=l56 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 1600 400 0 0 {name=MR_VK
-L=40u
-W=0.22u
+L=45.45u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -273,11 +273,11 @@ spiceprefix=X
 }
 C {lab_pin.sym} 1620 370 0 1 {name=l57 sig_type=std_logic lab=VK}
 C {lab_pin.sym} 1580 400 0 0 {name=l58 sig_type=std_logic lab=VK}
-C {lab_pin.sym} 1620 430 0 1 {name=l59 sig_type=std_logic lab=VSS}
+C {lab_pin.sym} 1620 430 0 1 {name=l59 sig_type=std_logic lab=vk_mid}
 C {lab_pin.sym} 1620 400 0 1 {name=l60 sig_type=std_logic lab=VSS}
 C {symbols/pfet_03v3.sym} 1800 0 0 0 {name=MR_VNA
-L=20u
-W=0.22u
+L=45.45u
+W=0.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -295,7 +295,7 @@ C {lab_pin.sym} 1820 -30 0 1 {name=l63 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 1820 0 0 1 {name=l64 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 1800 400 0 0 {name=MO_VNA
 L=8u
-W=5.755u
+W=5.76u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -331,7 +331,7 @@ C {lab_pin.sym} 2020 -30 0 1 {name=l71 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 2020 0 0 1 {name=l72 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 2000 400 0 0 {name=MO_VKup
 L=8u
-W=6.005u
+W=6.01u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -367,7 +367,7 @@ C {lab_pin.sym} 2220 -30 0 1 {name=l79 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 2220 0 0 1 {name=l80 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 2200 400 0 0 {name=MO_Vthr
 L=32u
-W=0.905u
+W=0.91u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -403,7 +403,7 @@ C {lab_pin.sym} 2420 -30 0 1 {name=l87 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 2420 0 0 1 {name=l88 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 2400 400 0 0 {name=MO_VT_dpi
 L=32u
-W=1.165u
+W=1.17u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -439,7 +439,7 @@ C {lab_pin.sym} 2620 -30 0 1 {name=l95 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 2620 0 0 1 {name=l96 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 2600 400 0 0 {name=MO_VT_inh
 L=32u
-W=0.625u
+W=0.63u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -476,3 +476,22 @@ corner and temperature and the bias current stays fixed. Replicas: exact copies 
 copies), except VK / VNA / VKup (strong inversion), which use long narrow replicas to save current.
 VT (neuron threshold) is not generated here: it is a comparison voltage, not a bias current.
 Sized at tt 27 C to the tuned voltages (analog/testbenches/bias/bias_design.py); about 0.72 uA from VDD incl. Iref.} -400 -500 0 0 0.3 0.3 {}
+C {symbols/nfet_03v3.sym} 1600 520 0 0 {name=MR_VK2
+L=45.45u
+W=0.5u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {lab_pin.sym} 1620 490 0 1 {name=l101 sig_type=std_logic lab=vk_mid}
+C {lab_pin.sym} 1580 520 0 0 {name=l102 sig_type=std_logic lab=VK}
+C {lab_pin.sym} 1620 550 0 1 {name=l103 sig_type=std_logic lab=VSS}
+C {lab_pin.sym} 1620 520 0 1 {name=l104 sig_type=std_logic lab=VSS}
+T {MR_VK + MR_VK2: 2 x 0.5/45.45 in series (= 0.22/40; the models stop at L = 50 um)} 1500 580 0 0 0.2 0.2 {}

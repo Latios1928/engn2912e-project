@@ -1,0 +1,64 @@
+{
+ "cell": "trim_steer",
+ "size_um": [
+  416.73,
+  100.24
+ ],
+ "router_check": "clean",
+ "predrc": "predrc trim_steer: 0 rule(s) predicted to fail (23 checked, 0.3 s)",
+ "summary": "trim_steer: 18 NMOS + 12 PMOS + 0 caps, 1 n-well resistor(s), tracks bot/mid/top 20/15/17, 14 columns, PMOS shift +0.00",
+ "notes": [
+  "R0: 2 x 150 um n-well resistor drawn as 3 bars in series (50, 50, 50 um; joints R0_j<k>)",
+  "M0: m=23 x nf=1 -> nf=23, m=1 (parallel copies as fingers)",
+  "MB: m=14 x nf=1 -> nf=14, m=1 (parallel copies as fingers)",
+  "M2: m=2 x nf=1 -> nf=2, m=1 (parallel copies as fingers)",
+  "M3: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
+  "M4: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)"
+ ],
+ "res_bodies": [
+  [
+   253.49,
+   -7.025,
+   255.49,
+   42.975
+  ],
+  [
+   256.89,
+   -7.025,
+   258.89,
+   42.975
+  ],
+  [
+   260.29,
+   -7.025,
+   262.29,
+   42.975
+  ]
+ ],
+ "predicted_fF": {
+  "Ibias": 55.9,
+  "Iref": 281.1,
+  "R0_j0": 0.8,
+  "R0_j1": 0.8,
+  "VDD": 179.0,
+  "VSS": 59.8,
+  "Vgs": 169.1,
+  "aux": 23.5,
+  "cal": 54.0,
+  "calb": 144.4,
+  "net1": 30.1,
+  "net2": 26.2,
+  "net3": 25.2,
+  "net4": 19.8,
+  "net5": 21.4,
+  "tb0": 141.8,
+  "tb1": 145.0,
+  "tb2": 142.8,
+  "tb3": 128.7,
+  "trim[0]": 59.1,
+  "trim[1]": 65.1,
+  "trim[2]": 65.0,
+  "trim[3]": 88.5,
+  "vaux": 121.4
+ }
+}
