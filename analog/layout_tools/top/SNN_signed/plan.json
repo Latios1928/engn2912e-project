@@ -1,7 +1,7 @@
 {
  "stage": "plan",
  "top": "SNN_signed",
- "time": "2026-11-22 02:40:12",
+ "time": "2026-11-28 05:08:09",
  "ok": true,
  "problems": [],
  "rows": [
@@ -75,7 +75,11 @@
    ]
   }
  ],
- "bias": "xbias",
+ "bias": [
+  "xbias",
+  "xtrim",
+  "xmaster"
+ ],
  "mirror": {
   "dac": false,
   "dpi": false,

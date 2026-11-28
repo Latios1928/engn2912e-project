@@ -1,7 +1,7 @@
 {
  "stage": "table",
  "cell": "bias",
- "time": "2026-11-22 02:32:07",
+ "time": "2026-11-28 04:54:23",
  "ok": true,
  "pins": [
   "VDD",
@@ -17,7 +17,8 @@
   "VKup",
   "Vthr",
   "VT_dpi",
-  "VT_inh"
+  "VT_inh",
+  "Imon"
  ],
  "fets": [
   {
@@ -327,6 +328,18 @@
    "l": 45.45,
    "d": "vk_mid",
    "g": "VK",
+   "s": "VSS",
+   "b": "VSS",
+   "nf": 1,
+   "m": 1
+  },
+  {
+   "name": "MMON",
+   "kind": "n",
+   "w": 10.0,
+   "l": 8.0,
+   "d": "Imon",
+   "g": "Iref",
    "s": "VSS",
    "b": "VSS",
    "nf": 1,

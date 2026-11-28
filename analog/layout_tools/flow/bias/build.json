@@ -1,14 +1,14 @@
 {
  "stage": "build",
  "cell": "bias",
- "time": "2026-11-22 02:33:17",
+ "time": "2026-11-28 04:56:28",
  "ok": true,
  "size_um": [
-  586.69,
-  117.58
+  589.09,
+  119.18
  ],
  "router_check": "clean",
- "predrc": "predrc bias: 0 rule(s) predicted to fail (19 checked, 0.2 s)",
+ "predrc": "predrc bias: 0 rule(s) predicted to fail (19 checked, 0.4 s)",
  "notes": [
   "MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",
   "MR_VKdn: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",

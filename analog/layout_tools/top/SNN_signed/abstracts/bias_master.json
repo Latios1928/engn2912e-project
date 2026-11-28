@@ -1,0 +1,54 @@
+{
+ "cell": "bias_master",
+ "symbol": "bias_master",
+ "kind": "bias",
+ "source": "flow",
+ "gds": "/foss/designs/engn2912e-project/analog/layout_tools/top/SNN_signed/abstracts/bias_master_nolabels.gds",
+ "gds_src": "/foss/designs/engn2912e-project/analog/layout_tools/flow/bias_master/bias_master.gds",
+ "lvs_ref": "/foss/designs/engn2912e-project/analog/layout_tools/flow/bias_master/bias_master_lvs_ref.spice",
+ "lvs_pins": [
+  "VDD",
+  "VSS",
+  "Iref"
+ ],
+ "bbox": [
+  -16.8,
+  -14.64,
+  719.18,
+  35.19
+ ],
+ "size": [
+  735.98,
+  49.83
+ ],
+ "ports": [
+  {
+   "net": "Iref",
+   "layer": "met2",
+   "x": -16.8,
+   "y": 14.995,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -16.8,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -16.8,
+   "y": 26.07,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  }
+ ],
+ "signoff": "DRC clean, LVS match (2026-11-28 05:08:07)"
+}

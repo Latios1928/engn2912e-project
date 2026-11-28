@@ -1,4 +1,4 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 21/11/2026 22:29
+* Extracted by KLayout with GF180MCU LVS runset on : 28/11/2026 05:05
 
 .SUBCKT trim_steer
 M$1 VDD VDD VDD VDD pfet_03v3 L=2U W=0.5U AS=0.14P AD=0.14P PS=1.06U PD=1.06U

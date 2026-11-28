@@ -32,16 +32,31 @@ blocks:
   bias:
     source: flow
     cell: bias
+  bias_master:
+    source: flow
+    cell: bias_master                         # beta-multiplier reference, n-well R (analog/Bias/generator)
+  trim_steer:
+    source: flow
+    cell: trim_steer                          # 4-bit steered-mirror trim of Iref
 
 # Instances that are not in the schematic. snn_analog_signed takes its biases as pins; the
-# macro makes them on chip from Iref, as SNN.gds does. Each listed output replaces that top pin
-# with an internal net; the instance's inputs become top pins.
+# macro makes them on chip (bias_generator.sch): bias_master -> trim_steer -> bias. Each listed
+# output replaces that top pin with an internal net; inputs become top pins; `nets` ties a pin to
+# an internal net between these instances (neither a schematic pin nor a macro pin).
 extra_instances:
   xbias:
     block: bias
     outputs: [Vb, Vlk, VKdn, VIp, Vamp_bias, VK, VNA, VKup, Vthr, VT_dpi]   # VT_inh: unused in the signed network
-    inputs: [Iref]
+    inputs: [Imon]                                # MMON: copy of Ibias, measured off chip for trimming
+    nets: {Iref: Ibias}                           # the trimmed current from xtrim
     unused_outputs: [VT_inh]                      # left unconnected (label only)
+  xtrim:
+    block: trim_steer
+    inputs: ["trim[3]", "trim[2]", "trim[1]", "trim[0]", cal]
+    nets: {Iref: Iref_m, Ibias: Ibias}
+  xmaster:
+    block: bias_master
+    nets: {Iref: Iref_m}                          # sinks 100 nA from xtrim's M0
 
 net_alias:                                        # schematic name -> layout name
   GND: VSS
@@ -84,6 +99,7 @@ floorplan:
 
   bias:
     position: above_top_row      # DECIDE: above_top_row | left_column | below_bottom_row
+    stack: [xbias, xtrim, xmaster]   # bottom -> top above the rows; the bias cell nearest its loads
     channel_um: auto             # routing channel between the bias cell and the rows
 
 # Block edge pins: NOT set here. Flow cells take their pin sides from `pin_sides` in
@@ -135,14 +151,19 @@ routing:
       min_spacing_um: 1.2
       max_parallel_um: 50
       shield: false
+    - nets: [Ibias, Iref_m]      # generator currents: coupling moves every bias at once
+      aggressors: ["trim[*]", cal, "spike[*]", "pulse[*]"]
+      min_spacing_um: 1.2
+      max_parallel_um: 50
+      shield: false
 
 # ----------------------------------------------------------------------------- macro pins
 macro_pins:
   edge: bottom                   # DECIDE: bottom | left | right | top (set by the digital block / pads)
   layer: Metal2                  # 0.5 x 1 um pads on the bottom edge, labelled with the net name
-  order: [VDD, VSS, Iref, VT, "w[31:0]", "s[7:0]", "pulse[1:0]", "spike[4:0]"]   # LVS pin order
+  order: [VDD, VSS, Imon, VT, "trim[3:0]", cal, "w[31:0]", "s[7:0]", "pulse[1:0]", "spike[4:0]"]   # LVS pin order
   spacing_um: 1.6                # pad pitch; pads sit under their net's lowest pin (fewest crossings)
-  analog_pins: [Iref, VT]        # need analog pads at chip level
+  analog_pins: [Imon, VT]        # need analog pads at chip level (Imon: hold at 1.65 V, measure)
   keep_pins: [VT]                # DECIDE: VT stays a macro pin (not made on chip)
 
 # ----------------------------------------------------------------------------- checks

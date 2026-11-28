@@ -7,7 +7,7 @@ and how far its output was checked. It is updated as the work continues.
 - **Tool:** Claude Code (desktop app), model Claude Opus 5.5 (Anthropic)
 - **User:** Ray Wu
 - **Started:** 2026-10-25
-- **Last updated:** 2026-11-22
+- **Last updated:** 2026-11-28
 
 ---
 
@@ -1399,6 +1399,16 @@ Until entry 44, no existing schematic (`.sch`/`.sym`) or SPICE file had been edi
 - **Result (macro, post-layout):** 8 / 8 scenarios at tt 27 C and at all 15 corner / temperature points; nominal spike counts within 1 spike and 1 us of the previous macro. Monte Carlo 5 and 7 (+15 / -15), seeds 1-100: 87 / 100 (s5 98, s7 88), failures 1-2 stray spikes. Not the same chips as the 93 / 100 run: adding MR_VK2 changes the netlist order, so a seed draws another chip; together the two runs give about 90 %. The router now reports Vb (224 um, limit 50) and Vthr (52.8 um) beside spike[3] instead of the three Isum nets of the previous macro.
 - **Results overwritten:** `analog/testbenches/snn/results/snn_signed_tb__pex*.md` now describe the rebuilt macro; the previous files (some uncommitted) are kept in /tmp/results_before.
 - **Not done:** schematic-level reruns (the schematic sizes changed, so `snn_signed_tb.md` and the schematic corner files describe the old schematics); +13 / -15 on the rebuilt macro.
+
+**107. On-chip reference (bias_master + trim_steer) integrated into the SNN_signed macro** *(Tool-verified: flow + top.py DRC / LVS, Magic PEX; Simulated: post-layout network, 10 runs)* (2026-11-27/28)
+- **Asked:** integrate bias_master and trim into the analog top level. Decided by the user: new macro pins only (chip level later), let the macro grow, MMON into bias.sch.
+- **AI did:**
+  - `neuron/bias.sch` / `bias.sym`: MMON (nFET 10/8 um, gate on the Iref / MN0 node, source VSS) with a new last pin Imon; `Bias/generator/bias_generator.sch`: its own MMON removed, xcell's Imon wired to the Imon pin. bias rebuilt: 589.1 x 119.2 um, DRC clean, LVS match (MMON in MN0's matched group).
+  - `layout_tools/top.py`: several bias blocks stacked above the rows (`floorplan.bias.stack`, bottom -> top) with a side column for their W pins; `extra_instances.<inst>.nets` ties a block pin to an internal net; nets with one connection are reported; route records the n-well resistor bodies in macro coordinates (route.json). `top_pex.sh` paints rnw over them. `top_flow.yaml`: bias_master and trim_steer blocks, xbias / xtrim / xmaster (internal nets Iref_m and Ibias), macro pins Imon, trim[3:0], cal instead of Iref, a sensitive-net rule for Ibias / Iref_m.
+  - `testbenches/snn/run_snn_signed.py`: for a macro with a cal pin, no Iref source, trim bits from `--trim` (default 9), cal = 0, Imon held at 1.65 V, and the resistor model section loaded; `testbenches/tbtools.py` sets that section's corner.
+  - DAC, neuron, trim_steer and bias_master re-signed off on unchanged GDS (their checkout time stamps were newer than their signoff records; trim_steer and bias_master with --no-pex while their extractions were in use).
+- **Result:** SNN_signed 764.8 x 994.6 um (0.761 mm2, was 594.7 x 808.1), 24 blocks, 56 macro pins, routed in one attempt, DRC clean, LVS match; extraction 4833 devices with the 15 n-well resistor bars. Sensitive nets: Vthr 54.4 um next to spike[1] (limit 50), all others within limit. Post-layout network on the on-chip reference, code 9: 8 / 8 scenarios, spike counts within 2 of the ideal-Iref macro (scenario 3 in1 / hid1 / out 50 / 38 / 36 against 49 / 40 / 38). Scenario 3 at code 0: 36 / 23 / 18; at code 15: 56 / 48 / 48.
+- **Not done:** chip level (librelane macro, Iref pad -> Imon, die 640 x 910 um too small, digital drive for trim / cal, chip LVS); corners and Monte Carlo of the integrated macro; `analog/snn/snn_analog_signed.sym` / PINLIST.md still describe the Iref pin. The previous macro is kept in /tmp/macro_pre_trim.
 
 ---
 

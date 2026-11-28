@@ -1,0 +1,114 @@
+{
+ "cell": "trim_steer",
+ "symbol": "trim_steer",
+ "kind": "bias",
+ "source": "flow",
+ "gds": "/foss/designs/engn2912e-project/analog/layout_tools/top/SNN_signed/abstracts/trim_steer_nolabels.gds",
+ "gds_src": "/foss/designs/engn2912e-project/analog/layout_tools/flow/trim_steer/trim_steer.gds",
+ "lvs_ref": "/foss/designs/engn2912e-project/analog/layout_tools/flow/trim_steer/trim_steer_lvs_ref.spice",
+ "lvs_pins": [
+  "VDD",
+  "VSS",
+  "Iref",
+  "Ibias",
+  "trim[3]",
+  "trim[2]",
+  "trim[1]",
+  "trim[0]",
+  "cal"
+ ],
+ "bbox": [
+  -153.94,
+  -33.345,
+  262.79,
+  66.895
+ ],
+ "size": [
+  416.73,
+  100.24
+ ],
+ "ports": [
+  {
+   "net": "Iref",
+   "layer": "met2",
+   "x": -153.94,
+   "y": 28.295,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "Ibias",
+   "layer": "met2",
+   "x": -153.94,
+   "y": 19.495,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "trim[3]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -23.495,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "trim[2]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -28.295,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "trim[1]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -30.695,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "trim[0]",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -33.095,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "cal",
+   "layer": "met2",
+   "x": -153.94,
+   "y": -25.895,
+   "orientation": 180,
+   "width": 0.5,
+   "side": "W"
+  },
+  {
+   "net": "VSS",
+   "layer": "met1",
+   "x": -153.94,
+   "y": 0.0,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  },
+  {
+   "net": "VDD",
+   "layer": "met1",
+   "x": -153.94,
+   "y": 41.47,
+   "orientation": 180,
+   "width": 1.0,
+   "side": "W"
+  }
+ ],
+ "signoff": "DRC clean, LVS match (2026-11-28 05:06:05)"
+}

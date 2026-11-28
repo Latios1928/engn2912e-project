@@ -495,3 +495,23 @@ C {lab_pin.sym} 1580 520 0 0 {name=l102 sig_type=std_logic lab=VK}
 C {lab_pin.sym} 1620 550 0 1 {name=l103 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 1620 520 0 1 {name=l104 sig_type=std_logic lab=VSS}
 T {MR_VK + MR_VK2: 2 x 0.5/45.45 in series (= 0.22/40; the models stop at L = 50 um)} 1500 580 0 0 0.2 0.2 {}
+C {symbols/nfet_03v3.sym} 2800 400 0 0 {name=MMON
+L=8u
+W=10u
+nf=1
+m=1
+ad="'int((nf+1)/2) * W/nf * 0.18u'"
+pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
+as="'int((nf+2)/2) * W/nf * 0.18u'"
+ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
+nrd="'0.18u / W'" nrs="'0.18u / W'"
+sa=0 sb=0 sd=0
+model=nfet_03v3
+spiceprefix=X
+}
+C {lab_pin.sym} 2820 370 0 1 {name=l105 sig_type=std_logic lab=Imon}
+C {lab_pin.sym} 2780 400 0 0 {name=l106 sig_type=std_logic lab=Iref}
+C {lab_pin.sym} 2820 430 0 1 {name=l107 sig_type=std_logic lab=VSS}
+C {lab_pin.sym} 2820 400 0 1 {name=l108 sig_type=std_logic lab=VSS}
+T {MMON: copy of MN0 (10/8 um), sinks a copy of the input current from the Imon pad (trimming)} 2700 470 0 0 0.2 0.2 {}
+C {iopin.sym} -400 120 0 1 {name=p_Imon lab=Imon}

@@ -4,11 +4,12 @@
 * note: MR_Vthr: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)
 * note: MR_VT_dpi: m=32 x nf=1 -> nf=32, m=1 (parallel copies as fingers)
 * note: MR_VT_inh: m=16 x nf=1 -> nf=16, m=1 (parallel copies as fingers)
-.subckt bias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh
+.subckt bias VDD VSS Iref Vb Vlk VKdn VIp Vamp_bias VK VNA VKup Vthr VT_dpi VT_inh Imon
 MMNP vgp Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
-MMN0 Iref Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
 MMO_VNA VNA Iref VSS VSS nfet_03v3 L=8u W=5.76u nf=1
+MMN0 Iref Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
 MMO_VKup VKup Iref VSS VSS nfet_03v3 L=8u W=6.01u nf=1
+MMMON Imon Iref VSS VSS nfet_03v3 L=8u W=10u nf=1
 MMO_Vthr Vthr Iref VSS VSS nfet_03v3 L=32u W=0.91u nf=1
 MMO_VT_dpi VT_dpi Iref VSS VSS nfet_03v3 L=32u W=1.17u nf=1
 MMO_VT_inh VT_inh Iref VSS VSS nfet_03v3 L=32u W=0.63u nf=1
@@ -230,6 +231,10 @@ MDNN108 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNN109 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNN110 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNN111 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNN112 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNN113 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNN114 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNN115 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS0 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS1 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS2 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
@@ -342,6 +347,10 @@ MDNS108 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS109 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS110 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNS111 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNS112 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNS113 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNS114 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
+MDNS115 VSS VSS VSS VSS nfet_03v3 L=2u W=0.5u nf=1
 MDNW0 VSS VSS VSS VSS nfet_03v3 L=2u W=10u nf=1
 MDNE0 VSS VSS VSS VSS nfet_03v3 L=2u W=10u nf=1
 MDPN0 VDD VDD VDD VDD pfet_03v3 L=2u W=0.5u nf=1

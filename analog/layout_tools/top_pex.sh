@@ -14,11 +14,18 @@ RC=$PDK_ROOT/$PDK/libs.tech/magic/gf180mcuD.magicrc
 RUN=/tmp/${TOP}_pex_run
 rm -rf $RUN && mkdir -p $RUN $D/pex
 cd $RUN
+# n-well resistors: Magic's GDS import reads NWELL + RES_MK as plain n-well (both ends shorted);
+# paint its rnw type over every body that top.py route recorded (route.json res_bodies)
+PAINT=$(python3 -c "
+import json, sys
+for x0, y0, x1, y1 in json.load(open(sys.argv[1])).get('res_bodies') or []:
+    print(f'box {x0:g}um {y0:g}um {x1:g}um {y1:g}um'); print('paint rnw')" $D/route.json)
 magic -dnull -noconsole -rcfile $RC > $D/pex/magic.log 2>&1 <<EOT
 gds read $D/$TOP.gds
 load $TOP
 flatten ${TOP}_flat
 load ${TOP}_flat
+$PAINT
 extract style ngspice()
 extract all
 ext2spice hierarchy off

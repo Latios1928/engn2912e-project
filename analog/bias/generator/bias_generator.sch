@@ -7,7 +7,6 @@ F {}
 E {}
 T {bias_generator: on-chip bias generator for the 2-2-1 SNN } -600 -560 0 0 0.5 0.5 {}
 T {bias_master (reference) -> trim_steer (Apple US 10,938,380 Fig. 2 trim) -> bias_cell (11 biases). Imon = copy of Ibias for trimming: hold the pad at 1.65 V; trim target 102.7 nA.} -600 -520 0 0 0.3 0.3 {}
-T {MMON: copy of bias_cell's MN0 (10/8): Imon = copy of Ibias} 560 320 0 0 0.25 0.25 {}
 N -100 -110 40 -110 {}
 N 40 -110 40 -30 {}
 N 40 -30 90 -30 {}
@@ -25,13 +24,6 @@ N 590 -80 610 -80 {}
 N 310 -70 480 -70 {}
 N 480 -70 480 -60 {}
 N 480 -60 610 -60 {}
-N 480 -60 480 200 {}
-N 540 260 560 260 {}
-N 480 200 480 260 {}
-N 480 260 500 260 {}
-N 540 180 540 230 {}
-N 540 180 640 180 {}
-N 540 290 560 290 {}
 N 910 -100 1020 -100 {}
 N 910 -80 1020 -80 {}
 N 910 -60 1020 -60 {}
@@ -67,23 +59,6 @@ C {lab_pin.sym} 70 70 0 0 {name=l18 sig_type=std_logic lab=cal}
 C {lab_pin.sym} 590 -100 0 0 {name=l19 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 590 -80 0 0 {name=l20 sig_type=std_logic lab=VSS}
 C {lab_pin.sym} 480 -70 0 1 {name=l21 sig_type=std_logic lab=Ibias}
-C {symbols/nfet_03v3.sym} 520 260 0 0 {name=MMON
-L=8.0u
-W=10.0u
-nf=1
-m=1
-ad="'int((nf+1)/2) * W/nf * 0.18u'"
-pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
-as="'int((nf+2)/2) * W/nf * 0.18u'"
-ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
-nrd="'0.18u / W'" nrs="'0.18u / W'"
-sa=0 sb=0 sd=0
-model=nfet_03v3
-spiceprefix=X
-}
-C {lab_pin.sym} 560 260 0 1 {name=l22 sig_type=std_logic lab=VSS}
-C {lab_pin.sym} 640 180 0 1 {name=l23 sig_type=std_logic lab=Imon}
-C {lab_pin.sym} 560 290 0 1 {name=l24 sig_type=std_logic lab=VSS}
 C {opin.sym} 1020 -100 2 0 {name=p25 lab=Vb}
 C {opin.sym} 1020 -80 2 0 {name=p26 lab=Vlk}
 C {opin.sym} 1020 -60 2 0 {name=p27 lab=VKdn}
@@ -95,3 +70,6 @@ C {opin.sym} 1020 40 2 0 {name=p32 lab=VKup}
 C {opin.sym} 1020 60 2 0 {name=p33 lab=Vthr}
 C {opin.sym} 1020 80 2 0 {name=p34 lab=VT_dpi}
 C {opin.sym} 1020 100 2 0 {name=p35 lab=VT_inh}
+N 590 -40 610 -40 {}
+C {lab_pin.sym} 590 -40 0 0 {name=l50 sig_type=std_logic lab=Imon}
+T {Imon: MMON, a copy of MN0, is inside the bias cell (2026-11-27)} 560 320 0 0 0.25 0.25 {}

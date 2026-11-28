@@ -107,7 +107,7 @@ def kind_of(cell: str) -> str:
         return "dpi"
     if c.startswith("neuron"):
         return "neuron"
-    if c.startswith("bias"):
+    if c.startswith("bias") or c.startswith("trim"):     # bias cell and the generator above it
         return "bias"
     return "other"
 
@@ -195,6 +195,10 @@ def st_netlist(top):
                 ports.append(i)
         for u in e.get("unused_outputs", []):
             m[u] = f"{name}_{u}_nc"
+        for p, net in (e.get("nets") or {}).items():      # internal nets between extra instances
+            if net in ports:
+                problems.append(f"{name}: internal net {net} is also a macro pin")
+            m[p] = net
         for rail in ("VSS", "VDD"):
             m.setdefault(rail, rail)
         insts[name] = dict(symbol=blk, cell=blocks[blk].get("cell", blk), source=blocks[blk]["source"],
@@ -211,6 +215,9 @@ def st_netlist(top):
     for n, i in insts.items():
         for p, net in i["nets"].items():
             nets.setdefault(net, []).append(f"{n}.{p}")
+    for net, users in nets.items():
+        if len(users) < 2 and net not in ports and not net.endswith("_nc"):
+            problems.append(f"net {net} has one connection only ({users[0]})")
     data = dict(ok=not problems, problems=problems, schematic=str(sch), instances=insts, ports=ports,
                 nets={k: v for k, v in sorted(nets.items())})
     save(top, "netlist", data)
@@ -356,8 +363,10 @@ def st_plan(top):
     left = sorted(set(inst) - used - set(bias))
     if left:
         problems.append(f"instances in no row: {left}")
-    if len(bias) > 1:
-        problems.append(f"more than one bias cell: {bias}")
+    stack = (fp.get("bias") or {}).get("stack") or bias       # bottom -> top above the rows
+    if len(bias) > 1 and sorted(stack) != sorted(bias):
+        problems.append(f"floorplan.bias.stack {stack} must list every bias block {bias}")
+    bias = [n for n in stack if n in bias]
     pos = fp.get("bias", {}).get("position", "above_top_row")
     if bias and pos != "above_top_row":
         problems.append(f"bias.position {pos!r} not implemented (above_top_row only)")
@@ -367,10 +376,10 @@ def st_plan(top):
     edge = c["macro_pins"].get("edge", "bottom")
     if edge != "bottom":
         problems.append(f"macro_pins.edge {edge!r} not implemented (bottom only)")
-    data = dict(ok=not problems, problems=problems, rows=rows, bias=bias[0] if bias else None,
+    data = dict(ok=not problems, problems=problems, rows=rows, bias=bias,
                 mirror=fp.get("mirror") or {}, bias_position=pos, supply=sup, pin_edge=edge)
     save(top, "plan", data)
-    lines = [f"plan {top}: {len(rows)} rows (bottom -> top), bias {data['bias']} {pos}"]
+    lines = [f"plan {top}: {len(rows)} rows (bottom -> top), bias {' < '.join(bias) or '-'} {pos}"]
     for r in rows:
         lines.append(f"  {r['role']:5s} {r['neuron']:6s} DACs {','.join(r['dac']) or '-':16s} "
                      f"DPI {','.join(r['dpi']) or '-':6s} DPI_inh {','.join(r['dpi_inh']) or '-'}")
@@ -486,20 +495,32 @@ def layout_geometry(top: str, growth: dict | None = None) -> dict:
         h = max(h_dac, h_dpi, size(r["neuron"])[1])
         row_box.append((y0, y0 + h))
         y = y0 + h + (row_gap if k < len(rows) - 1 else 0)
+    # bias blocks, stacked above the top row (plan order, bottom -> top): each one above its own
+    # routing gap. With more than one (the generator over the bias cell), all of them sit right of
+    # a side column that carries their W pins down to the rows' left channel.
     top_gap = 0.0
-    if plan["bias"]:
-        b = plan["bias"]
+    stack = plan["bias"] or []
+    stack = [stack] if isinstance(stack, str) else stack
+    side = 0.0
+    if len(stack) > 1:
+        w_pins = max(sum(1 for p in abs_[inst[b]["symbol"]]["ports"] if p["side"] == "W") for b in stack)
+        side = chan_w("top", w_pins + 4)
+    for k, b in enumerate(stack):
         a = abs_[inst[b]["symbol"]]
         s_pins = [p for p in a["ports"] if p["side"] == "S"]
-        top_gap = chan_w("top", max(8, len(s_pins) + 4))
-        cx = sum(p["x"] - a["bbox"][0] for p in s_pins) / len(s_pins) if s_pins else a["size"][0] / 2
-        target = x_neu - cw["B"] / 2               # bias pins drop into channel B (neuron biases)
-        bx = min(max(margin, target - cx), max(margin, width - margin - a["size"][0]))
-        placed[b] = dict(x=bx, y=y + top_gap)
+        gap = chan_w("top", max(8, len(s_pins) + 4))
+        if k == 0:
+            cx = sum(p["x"] - a["bbox"][0] for p in s_pins) / len(s_pins) if s_pins else a["size"][0] / 2
+            target = x_neu - cw["B"] / 2           # bias pins drop into channel B (neuron biases)
+            bx = min(max(margin, target - cx), max(margin, width - margin - a["size"][0]))
+            bx = max(bx, margin + side)
+        else:
+            bx = margin + side
+        placed[b] = dict(x=bx, y=y + gap)
         width = max(width, bx + a["size"][0] + margin)
-        height = y + top_gap + a["size"][1] + margin
-    else:
-        height = y + margin
+        y = y + gap + a["size"][1]
+        top_gap += gap
+    height = y + margin
     snap = lambda v: round(round(v / 0.01) * 0.01, 2)               # noqa: E731  (2x grid, 10 nm)
     for n, p in placed.items():
         p["x"], p["y"] = snap(p["x"]), snap(p["y"])
@@ -546,7 +567,7 @@ def layout_geometry(top: str, growth: dict | None = None) -> dict:
     regions = dict(
         left=(x_left, x_dac), A=(x_dac + w_dac, x_dpi), B=(x_dpi + w_dpi, x_neu), C=(x_neu + w_neu, width),
         bottom=(0.0, row_box[0][0]) if row_box else (0, 0),
-        top=(row_box[-1][1], row_box[-1][1] + top_gap) if row_box else (0, 0),
+        top=(row_box[-1][1], height) if row_box else (0, 0),     # the whole bias stack
         rowgaps=[(row_box[k][1], row_box[k + 1][0]) for k in range(len(row_box) - 1)])
     return dict(width=snap(width), height=snap(height), blocks=placed, pads=pad_pos, channels_um=cw,
                 demand_tracks=dem, row_gap_um=row_gap, bottom_gap_um=bottom_gap, top_gap_um=top_gap,
@@ -735,6 +756,26 @@ def write_hierarchical(top: str, pdk, rr, g: dict, gds: Path) -> dict:
     return dict(cells=sorted(cells), instances=len(nl["instances"]), max_bbox_offset_um=round(max(check), 4))
 
 
+def res_bodies(top: str, g: dict) -> list:
+    """n-well resistor bodies of every flow block, in macro coordinates: Magic's GDS import has no
+    rule for them, so top_pex.sh paints rnw over each before extracting (as flow.py signoff)."""
+    nl, abs_ = load(top, "netlist"), abstracts(top)
+    out = []
+    for n, i in nl["instances"].items():
+        a = abs_[i["symbol"]]
+        bj = flow.FLOW / a["cell"] / f"{a['cell']}.build.json"
+        if a["source"] != "flow" or not bj.exists():
+            continue
+        b, (x0, y0, x1, _y1) = g["blocks"][n], a["bbox"]
+        for bx0, by0, bx1, by1 in json.loads(bj.read_text()).get("res_bodies") or []:
+            if b["mirrored"]:                   # as write_hierarchical: x -> b.x + x1 - x
+                bx0, bx1 = b["x"] + x1 - bx1, b["x"] + x1 - bx0
+            else:
+                bx0, bx1 = bx0 - x0 + b["x"], bx1 - x0 + b["x"]
+            out.append([round(v, 4) for v in (bx0, by0 - y0 + b["y"], bx1, by1 - y0 + b["y"])])
+    return out
+
+
 def lvs_ref(top: str, path: Path) -> None:
     """Top subckt over each block's own LVS reference (pins by name); macro pins in order."""
     nl, abs_ = load(top, "netlist"), abstracts(top)
@@ -834,7 +875,7 @@ def st_route(top):
                 area_mm2=round(g["width"] * g["height"] / 1e6, 4), wirelength_um=round(rr.wirelength, 1),
                 vias=rr.vias, failed=list(rr.failed_nets), unreachable=list(rr.unreachable),
                 attempts=log, sensitive=sens, sensitive_violations=[s["net"] for s in bad],
-                hierarchy=hier,
+                hierarchy=hier, res_bodies=res_bodies(top, g),
                 seconds=round(time.time() - t0))
     save(top, "route", data)
     lines = [f"route {top}: {'routed' if rr.success else 'NOT routed'}, {g['width']:.1f} x {g['height']:.1f} um "

@@ -72,6 +72,7 @@ PEX = MACRO / "pex" / "SNN_signed_pex.spice"
 
 
 LMAX = 50e-6   # longest L the GF180 nfet/pfet_03v3 model bins cover
+TRIM = 9       # trim code for a macro with the on-chip reference (bias_master + trim_steer); --trim
 
 
 def split_long(pex):
@@ -126,8 +127,18 @@ def swap_macro(text, sim, subckt):
             out.append("* xbias: inside the macro")
         else:
             out.append(ln)
+    if "cal" in pins.split():
+        # the macro makes its own reference (bias_master -> trim_steer -> bias): no Iref source;
+        # drive the trim code (TRIM) and cal = 0, hold the Imon pad at 1.65 V (its trim target)
+        out = [f"* {ln} (no Iref pin: on-chip reference)" if ln.split()[:1] == ["IREF"] else ln for ln in out]
+        end = max(i for i, ln in enumerate(out) if ln.strip().lower() == ".end")
+        out[end:end] = [f"Vtrim{b} trim[{b}] 0 {{p_vdd * {(TRIM >> b) & 1}}}" for b in (3, 2, 1, 0)] + [
+            "Vcal cal 0 0", "Vimon Imon 0 1.65"]
     last_lib = max(i for i, ln in enumerate(out) if ln.startswith(".lib"))
     out.insert(last_lib + 1, f".include {sim}")
+    if re.search(r"^X\S* .* nwell ", body, re.M):       # n-well resistors: their model section
+        lib = out[last_lib].split()[1]                   # (tbtools.prepare sets its corner)
+        out.insert(last_lib + 1, f".lib {lib} res_typical")
     return "\n".join(out) + "\n"
 
 
@@ -333,6 +344,7 @@ def main():
     ap.add_argument("--seed0", type=int, default=1, help="first Monte Carlo seed")
     ap.add_argument("--keep", action="store_true", help="--mc: keep the run folders of passing runs too")
     ap.add_argument("--mi2-w", help="schematic or --drawn: override DPI_inh Mi2 W (2u = the old 1:1 mirror)")
+    ap.add_argument("--trim", type=int, default=9, help="--pex / --drawn: trim code of the on-chip reference (0-15)")
     ap.add_argument("--dpi-size", help="schematic or --drawn: DPI M1-M4 and bias Vthr/VT_dpi replicas W/L, e.g. 2u/2.56u")
     a = ap.parse_args()
     if a.dpi_size and a.pex:
@@ -341,6 +353,8 @@ def main():
         ap.error("--mi2-w patches the schematic or --drawn netlist; the extraction has the drawn width")
     if a.pex and a.drawn:
         ap.error("--pex and --drawn are alternatives")
+    global TRIM
+    TRIM = a.trim
     pick = {int(x) for x in a.only.split(",")} if a.only else None
     scen = [s for s in SCENARIOS if pick is None or int(s[0].split()[0]) in pick]
 
@@ -356,7 +370,7 @@ def main():
             text = set_mi2_w(text, a.mi2_w)
         if a.dpi_size:
             text = set_dpi_size(text, a.dpi_size)
-    pfx = ("pex_" if a.pex else "drawn_" if a.drawn else "") + (f"mi2w{a.mi2_w}_" if a.mi2_w else "") + (f"dpi{a.dpi_size.replace('/', '-')}_" if a.dpi_size else "")
+    pfx = (f"trim{a.trim}_" if a.trim != 9 else "") + ("pex_" if a.pex else "drawn_" if a.drawn else "") + (f"mi2w{a.mi2_w}_" if a.mi2_w else "") + (f"dpi{a.dpi_size.replace('/', '-')}_" if a.dpi_size else "")
     seeds = list(range(a.seed0, a.seed0 + a.mc)) if a.mc else [None]
     cases = [tb.Case(name=f"{pfx}{'' if sd is None else f'mc{sd}_'}s{s[0].split()[0]}_{a.corner}{a.temp:g}",
                      tb=TB, corner=a.corner, temp=a.temp, seed=sd, params=params(s[1], s[2]), tags={"scen": s})
@@ -365,6 +379,7 @@ def main():
 
     tag = (("__pex" if a.pex else "__drawn" if a.drawn else "") + (f"__mi2w{a.mi2_w}" if a.mi2_w else "")
            + (f"__dpi{a.dpi_size.replace('/', '-')}" if a.dpi_size else "")
+           + (f"__trim{a.trim}" if a.trim != 9 else "")
            + ("" if (a.corner, a.temp) == ("tt", 27) else f"__{a.corner}_{a.temp:g}")
            + (f"__mc{a.mc}" if a.mc else ""))
     if a.mc:

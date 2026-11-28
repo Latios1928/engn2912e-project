@@ -1,12 +1,12 @@
 {
  "cell": "bias",
  "size_um": [
-  586.69,
-  117.58
+  589.09,
+  119.18
  ],
  "router_check": "clean",
- "predrc": "predrc bias: 0 rule(s) predicted to fail (19 checked, 0.2 s)",
- "summary": "bias: 14 NMOS + 12 PMOS + 0 caps, tracks bot/mid/top 19/37/14, 13 columns, PMOS shift +0.00",
+ "predrc": "predrc bias: 0 rule(s) predicted to fail (19 checked, 0.4 s)",
+ "summary": "bias: 15 NMOS + 12 PMOS + 0 caps, tracks bot/mid/top 19/39/14, 13 columns, PMOS shift +0.00",
  "notes": [
   "MR_Vlk: m=8 x nf=1 -> nf=8, m=1 (parallel copies as fingers)",
   "MR_VKdn: m=4 x nf=1 -> nf=4, m=1 (parallel copies as fingers)",
@@ -16,21 +16,22 @@
  ],
  "res_bodies": [],
  "predicted_fF": {
-  "Iref": 130.6,
-  "VDD": 141.9,
-  "VIp": 130.8,
-  "VK": 133.0,
-  "VKdn": 82.9,
-  "VKup": 75.8,
-  "VNA": 109.7,
-  "VSS": 88.1,
-  "VT_dpi": 229.0,
-  "VT_inh": 117.8,
-  "Vamp_bias": 78.7,
-  "Vb": 87.2,
-  "Vlk": 85.2,
-  "Vthr": 210.2,
-  "vgp": 56.2,
-  "vk_mid": 25.6
+  "Imon": 35.3,
+  "Iref": 126.6,
+  "VDD": 144.3,
+  "VIp": 132.3,
+  "VK": 138.7,
+  "VKdn": 83.8,
+  "VKup": 76.1,
+  "VNA": 109.8,
+  "VSS": 103.8,
+  "VT_dpi": 229.4,
+  "VT_inh": 119.5,
+  "Vamp_bias": 79.3,
+  "Vb": 87.8,
+  "Vlk": 88.1,
+  "Vthr": 222.4,
+  "vgp": 52.6,
+  "vk_mid": 28.6
  }
 }

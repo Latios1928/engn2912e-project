@@ -16,7 +16,11 @@ pins:
 - Vthr
 - VT_dpi
 - VT_inh
+- Imon
 nets:
+  Imon:
+    class: signal
+    why: ''
   Iref:
     class: signal
     why: ''
@@ -73,6 +77,7 @@ groups:
   - MNP
   - MO_VNA
   - MO_VKup
+  - MMON
   decided_by: rule
   diode:
   - MN0
@@ -127,10 +132,11 @@ wells:
   - MO_VT_dpi
   - MO_VT_inh
   - MR_VK2
+  - MMON
   required: false
   decided_by: policy
   reason: policy nmos_in_dnw (substrate-noise isolation)
-  cost_um2: 3966
+  cost_um2: 4101
 - id: W2
   kind: nwell
   body: VDD
@@ -176,9 +182,10 @@ floorplan:
   style: two_row
   order_n:
   - MNP
-  - MN0
   - MO_VNA
+  - MN0
   - MO_VKup
+  - MMON
   - MO_Vthr
   - MO_VT_dpi
   - MO_VT_inh

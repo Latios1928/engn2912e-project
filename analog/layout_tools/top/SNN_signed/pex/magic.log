@@ -20,17 +20,109 @@ Using technology "gf180mcuD", version 1.0.575-2-g7b70722
 Warning: Calma reading is not undoable!  I hope that's OK.
 Library written using GDS-II Release 6.0
 Library name: library
+Reading "bias_master".
+Reading "trim_steer".
 Reading "bias".
 Reading "DPI_inh".
 Reading "neuron".
-Error while reading cell "neuron" (byte position 4299096): Warning:  Cell neuron boundary was redefined.
+Error while reading cell "neuron" (byte position 10808414): Warning:  Cell neuron boundary was redefined.
 Reading "DPI".
 Reading "DAC".
 Reading "SNN_signed".
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 50.000  ( 432.290,  851.750), ( 434.290,  901.750)  100.000   
+lambda:    40.00 x 1000.00  ( 8645.80,  17035.00), ( 8685.80,  18035.00)  40000.00  
+internal:    400 x 10000   ( 86458,  170350), ( 86858,  180350)  4000000   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 50.000  ( 435.690,  851.750), ( 437.690,  901.750)  100.000   
+lambda:    40.00 x 1000.00  ( 8713.80,  17035.00), ( 8753.80,  18035.00)  40000.00  
+internal:    400 x 10000   ( 87138,  170350), ( 87538,  180350)  4000000   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 50.000  ( 439.090,  851.750), ( 441.090,  901.750)  100.000   
+lambda:    40.00 x 1000.00  ( 8781.80,  17035.00), ( 8821.80,  18035.00)  40000.00  
+internal:    400 x 10000   ( 87818,  170350), ( 88218,  180350)  4000000   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.790  ( 720.940,  941.330), ( 722.940,  990.120)  97.580    
+lambda:    40.00 x 975.80  ( 14418.80,  18826.60), ( 14458.80,  19802.40)  39032.00  
+internal:    400 x 9758    ( 144188,  188266), ( 144588,  198024)  3903200   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.790  ( 724.340,  941.330), ( 726.340,  990.120)  97.580    
+lambda:    40.00 x 975.80  ( 14486.80,  18826.60), ( 14526.80,  19802.40)  39032.00  
+internal:    400 x 9758    ( 144868,  188266), ( 145268,  198024)  3903200   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 727.740,  941.330), ( 729.740,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14554.80,  18826.60), ( 14594.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 145548,  188266), ( 145948,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 731.140,  941.330), ( 733.140,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14622.80,  18826.60), ( 14662.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 146228,  188266), ( 146628,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 734.540,  941.330), ( 736.540,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14690.80,  18826.60), ( 14730.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 146908,  188266), ( 147308,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 737.940,  941.330), ( 739.940,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14758.80,  18826.60), ( 14798.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 147588,  188266), ( 147988,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 741.340,  941.330), ( 743.340,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14826.80,  18826.60), ( 14866.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 148268,  188266), ( 148668,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 744.740,  941.330), ( 746.740,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14894.80,  18826.60), ( 14934.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 148948,  188266), ( 149348,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 748.140,  941.330), ( 750.140,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 14962.80,  18826.60), ( 15002.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 149628,  188266), ( 150028,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 751.540,  941.330), ( 753.540,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 15030.80,  18826.60), ( 15070.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 150308,  188266), ( 150708,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 754.940,  941.330), ( 756.940,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 15098.80,  18826.60), ( 15138.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 150988,  188266), ( 151388,  198022)  3902400   
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:   2.000 x 48.780  ( 758.340,  941.330), ( 760.340,  990.110)  97.560    
+lambda:    40.00 x 975.60  ( 15166.80,  18826.60), ( 15206.80,  19802.20)  39024.00  
+internal:    400 x 9756    ( 151668,  188266), ( 152068,  198022)  3902400   
 The following types are not handled by extraction and will be treated as non-electrical types:
     obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
 Extraction style is now "ngspice()"
 Extracting SNN_signed_flat into SNN_signed_flat.ext:
-SNN_signed_flat: 2740 warnings
-Total of 2740 warnings.
+SNN_signed_flat: 4098 warnings
+Total of 4098 warnings.
 exttospice finished.

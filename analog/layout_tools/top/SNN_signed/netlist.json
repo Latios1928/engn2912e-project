@@ -1,7 +1,7 @@
 {
  "stage": "netlist",
  "top": "SNN_signed",
- "time": "2026-11-22 02:40:12",
+ "time": "2026-11-28 05:08:07",
  "ok": true,
  "problems": [],
  "schematic": "/foss/designs/engn2912e-project/analog/snn/snn_analog_signed.sch",
@@ -364,8 +364,37 @@
     "VKup": "VKup",
     "Vthr": "Vthr",
     "VT_dpi": "VT_dpi",
-    "Iref": "Iref",
+    "Imon": "Imon",
     "VT_inh": "xbias_VT_inh_nc",
+    "Iref": "Ibias",
+    "VSS": "VSS",
+    "VDD": "VDD"
+   },
+   "extra": true
+  },
+  "xtrim": {
+   "symbol": "trim_steer",
+   "cell": "trim_steer",
+   "source": "flow",
+   "nets": {
+    "trim[3]": "trim[3]",
+    "trim[2]": "trim[2]",
+    "trim[1]": "trim[1]",
+    "trim[0]": "trim[0]",
+    "cal": "cal",
+    "Iref": "Iref_m",
+    "Ibias": "Ibias",
+    "VSS": "VSS",
+    "VDD": "VDD"
+   },
+   "extra": true
+  },
+  "xmaster": {
+   "symbol": "bias_master",
+   "cell": "bias_master",
+   "source": "flow",
+   "nets": {
+    "Iref": "Iref_m",
     "VSS": "VSS",
     "VDD": "VDD"
    },
@@ -375,8 +404,13 @@
  "ports": [
   "VDD",
   "VSS",
-  "Iref",
+  "Imon",
   "VT",
+  "trim[3]",
+  "trim[2]",
+  "trim[1]",
+  "trim[0]",
+  "cal",
   "w[31]",
   "w[30]",
   "w[29]",
@@ -426,8 +460,16 @@
   "spike[0]"
  ],
  "nets": {
-  "Iref": [
-   "xbias.Iref"
+  "Ibias": [
+   "xbias.Iref",
+   "xtrim.Ibias"
+  ],
+  "Imon": [
+   "xbias.Imon"
+  ],
+  "Iref_m": [
+   "xtrim.Iref",
+   "xmaster.Iref"
   ],
   "Isum_0": [
    "xdac0_0.Isum_e",
@@ -491,7 +533,9 @@
    "xneu4.VDD",
    "xdpi6.VDD",
    "xdpi7.VDD",
-   "xbias.VDD"
+   "xbias.VDD",
+   "xtrim.VDD",
+   "xmaster.VDD"
   ],
   "VIp": [
    "xneu0.VIp",
@@ -578,7 +622,9 @@
    "xneu4.VSS",
    "xdpi6.VSS",
    "xdpi7.VSS",
-   "xbias.VSS"
+   "xbias.VSS",
+   "xtrim.VSS",
+   "xmaster.VSS"
   ],
   "VT": [
    "xneu0.VT",
@@ -636,6 +682,9 @@
    "xdpi7.Vthr",
    "xbias.Vthr"
   ],
+  "cal": [
+   "xtrim.cal"
+  ],
   "pulse[0]": [
    "xdac0_0.en"
   ],
@@ -686,6 +735,18 @@
   ],
   "spike[4]": [
    "xneu4.spike"
+  ],
+  "trim[0]": [
+   "xtrim.trim[0]"
+  ],
+  "trim[1]": [
+   "xtrim.trim[1]"
+  ],
+  "trim[2]": [
+   "xtrim.trim[2]"
+  ],
+  "trim[3]": [
+   "xtrim.trim[3]"
   ],
   "w[0]": [
    "xdac0_0.w[0]"

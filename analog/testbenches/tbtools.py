@@ -33,6 +33,8 @@ CORNERS = {
     "sf": ("sf", "mimcap_typical"),
     "fs": ("fs", "mimcap_typical"),
 }
+# Resistor section (n-well resistors of the on-chip reference): typical/ss/ff only, like the caps.
+RES_CORNERS = {"tt": "res_typical", "ss": "res_ss", "ff": "res_ff", "sf": "res_typical", "fs": "res_typical"}
 
 
 @dataclass
@@ -87,6 +89,7 @@ def prepare(text: str, case: Case) -> str:
     mos, mim = CORNERS[case.corner]
     text = re.sub(r"(sm141064\.ngspice\s+)typical\b", r"\g<1>" + mos, text)
     text = re.sub(r"(sm141064\.ngspice\s+)mimcap_typical\b", r"\g<1>" + mim, text)
+    text = re.sub(r"(sm141064\.ngspice\s+)res_typical\b", r"\g<1>" + RES_CORNERS[case.corner], text)
 
     lines = text.splitlines()
     for name, value in case.params.items():
